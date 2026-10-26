@@ -1,2 +1,68 @@
 /pandafish
 /pandafish.exe
+/AGENTS.md
+/commands.md
+/config-gopandafish.yml
+
+# Go build and test artifacts
+/bin/
+/build/
+/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+/coverage/
+/coverage*.out
+/coverage*.html
+*.prof
+*.pprof
+
+# Local Go workspace files
+/go.work
+/go.work.sum
+
+# Local environment files (keep shareable examples)
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+.envrc
+
+# Editors and IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.history/
+
+# Logs, caches, and temporary files
+*.log
+/.cache/
+/tmp/
+/temp/
+*.tmp
+
+# Local Python tooling
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# macOS, Windows, and Linux desktop files
+.DS_Store
+._*
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.directory
