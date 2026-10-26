@@ -1,0 +1,73 @@
+# Copy to lichess-bot-config.yml before editing; that filename is gitignored.
+# Never put a real API key in this example file.
+token: "YOUR_LICHESS_BOT_API_TOKEN" # Replace in your private copy with a token for your BOT account (bot:play scope).
+url: "https://lichess.org/"
+
+engine:
+  dir: "/absolute/path/to/Pandafish" # 1. Directory containing your compiled engine; change this path.
+  name: "pandafish" # 2. Executable filename inside dir; use pandafish.exe on Windows.
+  working_dir: "/absolute/path/to/Pandafish" # 3. Engine working directory; change this path (normally the same as dir).
+  protocol: "uci"
+  ponder: false # Do not think during the opponent's turn.
+  debug: false
+  uci_options: {} # Pandafish v0.1 advertises no configurable UCI options.
+  polyglot:
+    enabled: false
+  online_moves:
+    chessdb_book:
+      enabled: false
+    lichess_cloud_analysis:
+      enabled: false
+    lichess_opening_explorer:
+      enabled: false
+    online_egtb:
+      enabled: false
+  lichess_bot_tbs:
+    syzygy:
+      enabled: false
+    gaviota:
+      enabled: false
+  draw_or_resign:
+    resign_enabled: false
+    offer_draw_enabled: false
+
+abort_time: 30
+fake_think_time: false
+move_overhead: 1000
+rate_limiting_delay: 0
+
+correspondence:
+  ponder: false # Also disable pondering for correspondence games.
+  move_time: 1
+  checkin_period: 300
+  disconnect_time: 150
+
+challenge:
+  concurrency: 1 # One active game at a time.
+  sort_by: "first"
+  preference: "human"
+  accept_bot: false # Decline challenges from BOT accounts.
+  only_bot: false
+  variants: [standard] # Pandafish v0.1 supports standard chess only.
+  modes: [casual] # Decline rated games: this version plays random moves.
+  # All BOT-supported time controls; Lichess excludes BOTs from UltraBullet.
+  time_controls: [bullet, blitz, rapid, classical, correspondence]
+  min_base: 0
+  max_base: .inf
+  min_increment: 0
+  max_increment: .inf
+  min_days: 1
+  max_days: .inf # Also permit unlimited games.
+  bullet_requires_increment: false
+
+matchmaking:
+  allow_matchmaking: false # Never send automatic outgoing challenges.
+  allow_during_games: false
+  challenge_mode: "casual"
+
+# {me} is replaced with your bot's username. Keep each rendered message under 140 characters.
+greeting:
+  hello: "{me} here, running Pandafish v0.1! My moves are legal. My plans are imaginary. Good luck!"
+  goodbye: "GG! {me}, running Pandafish v0.1: any brilliant moves were purely accidental. Back to bamboo!"
+  hello_spectators: "{me} is running Pandafish v0.1: random legal moves, unreasonable confidence. Bring bamboo!"
+  goodbye_spectators: "Thanks for watching {me}, running Pandafish v0.1. The blunders were a feature. The bamboo was real."
