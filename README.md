@@ -96,6 +96,16 @@ Pandafish is licensed under the [MIT License](LICENSE). The chess library's
 license is reproduced in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 Include both notices when distributing compiled Pandafish binaries.
 
+## Bots using Pandafish
+
+Have you run a Lichess bot with any version of Pandafish? Add it here with a
+pull request, or open an issue with your bot's profile link and the version you
+used. Past and current users are welcome.
+
+| Bot | Pandafish versions used |
+| --- | --- |
+| [GoPandaFish](https://lichess.org/@/GoPandaFish) | v0.1 |
+
 ## Milestones and plans
 
 **v0.1: Get games working (complete).** The first step was to build a minimal
