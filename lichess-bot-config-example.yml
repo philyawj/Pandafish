@@ -10,7 +10,7 @@ engine:
   protocol: "uci"
   ponder: false # Do not think during the opponent's turn.
   debug: false
-  uci_options: {} # Pandafish v0.1 advertises no configurable UCI options.
+  uci_options: {} # Pandafish advertises no configurable UCI options.
   polyglot:
     enabled: false
   online_moves:
@@ -32,13 +32,13 @@ engine:
     offer_draw_enabled: false
 
 abort_time: 30
-fake_think_time: false
-move_overhead: 1000
+fake_think_time: false # Do not add artificial delay; Pandafish v0.2 responds immediately.
+move_overhead: 1000 # lichess-bot clock allowance for communication, not engine search time.
 rate_limiting_delay: 0
 
 correspondence:
   ponder: false # Also disable pondering for correspondence games.
-  move_time: 1
+  move_time: 1 # Requested correspondence search time; v0.2 still responds immediately.
   checkin_period: 300
   disconnect_time: 150
 
@@ -48,8 +48,8 @@ challenge:
   preference: "human"
   accept_bot: false # Decline challenges from BOT accounts.
   only_bot: false
-  variants: [standard] # Pandafish v0.1 supports standard chess only.
-  modes: [casual] # Decline rated games: this version plays random moves.
+  variants: [standard] # Pandafish supports standard chess only.
+  modes: [casual] # Keep games casual while the engine is experimental.
   # All BOT-supported time controls; Lichess excludes BOTs from UltraBullet.
   time_controls: [bullet, blitz, rapid, classical, correspondence]
   min_base: 0
@@ -67,7 +67,7 @@ matchmaking:
 
 # {me} is replaced with your bot's username. Keep each rendered message under 140 characters.
 greeting:
-  hello: "{me} here, running Pandafish v0.1! My moves are legal. My plans are imaginary. Good luck!"
-  goodbye: "GG! {me}, running Pandafish v0.1: any brilliant moves were purely accidental. Back to bamboo!"
-  hello_spectators: "{me} is running Pandafish v0.1: random legal moves, unreasonable confidence. Bring bamboo!"
-  goodbye_spectators: "Thanks for watching {me}, running Pandafish v0.1. The blunders were a feature. The bamboo was real."
+  hello: "{me} here, running Pandafish v0.2! I count material, then confidently guess. Good luck!"
+  goodbye: "GG! {me} was running Pandafish v0.2. Back to counting bamboo!"
+  hello_spectators: "{me} is running Pandafish v0.2: material counted, plans still imaginary. Bring bamboo!"
+  goodbye_spectators: "Thanks for watching {me} run Pandafish v0.2. The bamboo was real!"
