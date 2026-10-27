@@ -30,7 +30,7 @@ func run(in io.Reader, out io.Writer) error {
 		}
 		switch args[0] {
 		case "uci":
-			fmt.Fprintln(out, "id name Pandafish v0.1\nid author philyawj\nuciok")
+			fmt.Fprintln(out, "id name Pandafish v0.2\nid author philyawj\nuciok")
 		case "isready":
 			fmt.Fprintln(out, "readyok")
 		case "ucinewgame":
@@ -43,7 +43,7 @@ func run(in io.Reader, out io.Writer) error {
 			}
 			game, pending = next, ""
 		case "go":
-			pending = randomMove(game, args[1:])
+			pending = bestMaterialMove(game, args[1:])
 			// Infinite searches and pondering wait for the GUI to release the move.
 			if !slices.Contains(args, "infinite") && !slices.Contains(args, "ponder") {
 				fmt.Fprintln(out, "bestmove", pending)
@@ -89,12 +89,22 @@ func parsePosition(args []string) (*chess.Game, error) {
 	return game, nil
 }
 
-func randomMove(game *chess.Game, args []string) string {
+func bestMaterialMove(game *chess.Game, args []string) string {
 	var candidates []string
+	bestScore := -int(^uint(0) >> 1)
 	searchMoves := slices.Index(args, "searchmoves")
 	for _, move := range game.ValidMoves() {
 		uci := (chess.UCINotation{}).Encode(game.Position(), &move)
-		if searchMoves < 0 || slices.Contains(args[searchMoves+1:], uci) {
+		if searchMoves >= 0 && !slices.Contains(args[searchMoves+1:], uci) {
+			continue
+		}
+		nextPosition := game.Position().Update(&move)
+		score := evaluate(nextPosition, game.Position().Turn())
+		if score > bestScore {
+			bestScore = score
+			candidates = candidates[:0]
+		}
+		if score == bestScore {
 			candidates = append(candidates, uci)
 		}
 	}

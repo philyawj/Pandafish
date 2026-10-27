@@ -1,11 +1,16 @@
 # Pandafish
 
-A bare-bones Go chess engine. v0.1 chooses uniformly at random from the legal
-moves and speaks UCI over stdin/stdout. Standard chess only.
+A bare-bones Go chess engine written in Go. Pandafish v0.2 speaks UCI over
+stdin/stdout and chooses a move by looking at the immediate material balance.
+Standard chess only.
 
-All engine code is in `main.go`.
+The engine code is in `main.go` and `evaluation.go`.
 [corentings/chess](https://github.com/corentings/chess) handles chess rules,
-including castling, en passant, and promotions. There is no evaluation or search.
+including castling, en passant, and promotions. The engine assigns values of
+1 to pawns, 3 to knights and bishops, 5 to rooks, and 9 to queens. It picks a
+legal move with the best immediate material balance for the moving side, and
+chooses randomly among equal scores. It does not account for the opponent's
+reply, checkmate, or positional features.
 
 Clone this repository and build with Go 1.25 or newer:
 
@@ -25,12 +30,13 @@ Try it:
 printf 'uci\nisready\nposition startpos moves e2e4\ngo\nquit\n' | ./pandafish
 ```
 
-The last response is `bestmove` followed by a random legal black move. When no
-legal move exists, the engine returns `bestmove 0000`.
+The last response is `bestmove` followed by the selected legal black move.
+When no legal move exists, the engine returns `bestmove 0000`.
 
 The engine accepts `position startpos` or `position fen ...`, optionally followed
 by `moves ...`. Normal `go` commands return immediately; clock/depth limits are
-ignored. `searchmoves` restricts the choices. `go infinite` waits for `stop`;
+ignored, so no maximum move time needs to be configured. `searchmoves` restricts
+the choices. `go infinite` waits for `stop`;
 `go ponder` waits for `stop` or `ponderhit`. Unknown commands and engine options
 are ignored.
 
@@ -70,9 +76,9 @@ the config. On Windows, use `venv\Scripts\python.exe` and clear any existing
 `LICHESS_BOT_TOKEN` environment variable first. Stop the client with Ctrl+C.
 
 The example keeps opening books, online moves, and tablebases disabled so every
-move comes from Pandafish. Keep `uci_options` empty: v0.1 has no Hash, Threads, or
-other configurable engine options. Casual play follows the guidance in the
-[lichess-bot default config](https://github.com/lichess-bot-devs/lichess-bot/blob/master/config.yml.default)
+move comes from Pandafish. Keep `uci_options` empty: the engine has no Hash,
+Threads, or other configurable engine options. Casual play follows the guidance
+in the [lichess-bot default config](https://github.com/lichess-bot-devs/lichess-bot/blob/master/config.yml.default)
 for engines that do not try to win.
 
 Contributions are welcome. Keep changes focused and the engine simple. Before
@@ -108,10 +114,10 @@ used. Past and current users are welcome.
 
 ## Milestones and plans
 
-**v0.1: Get games working (complete).** The first step was to build a minimal
-Go engine that speaks UCI and can complete games on Lichess through lichess-bot.
-Random legal moves were enough to prove that connection worked. GoPandaFish's
-first successful games included:
+**v0.1: Get games working (complete).** This release built a minimal Go engine
+that speaks UCI and can complete games on Lichess through lichess-bot. Random
+legal moves were enough to prove that connection worked. GoPandaFish's first
+successful games included:
 
 - [Casual correspondence / unlimited game](https://lichess.org/p3w5nk1V)
 - [Casual timed game: 3+0 blitz](https://lichess.org/wb007ifr)
@@ -119,7 +125,12 @@ first successful games included:
 Both games reached checkmate. This milestone was about getting the engine
 playing complete games, regardless of the result.
 
-**Next: Choose moves for a reason.** Add chess logic so Pandafish evaluates its
-choices and selects moves beyond uniform randomness. The next step is to build
-playing strength on top of the working UCI and lichess-bot integration, keeping
-the engine small and easy to evolve.
+**v0.2: Choose moves for a reason (complete).** Pandafish now evaluates the
+immediate material balance after each legal move, chooses the move with the
+best score from the moving side's perspective, and breaks ties randomly. This
+is a one-ply material evaluation. It does not consider the opponent's reply,
+checkmate, or positional features.
+
+**Next: Look ahead one reply.** Add depth-two minimax so Pandafish can account
+for the opponent's best response. Keep the current material scoring and tie
+breaking behavior as the foundation for that search.

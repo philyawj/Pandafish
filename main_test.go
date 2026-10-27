@@ -5,13 +5,15 @@ import (
 	"slices"
 	"strings"
 	"testing"
+
+	"github.com/corentings/chess/v2"
 )
 
 func TestUCI(t *testing.T) {
 	tests := []struct {
 		name, commands, want string
 	}{
-		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.1\nid author philyawj\nuciok\nreadyok\n"},
+		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.2\nid author philyawj\nuciok\nreadyok\n"},
 		{"history", "position startpos moves e2e4 e7e5\ngo wtime 1000 btime 1000 searchmoves g1f3", "bestmove g1f3\n"},
 		{"no implicit move", "position startpos\ngo searchmoves e2e4\ngo searchmoves e2e4", "bestmove e2e4\nbestmove e2e4\n"},
 		{"new game", "position startpos moves e2e4\nucinewgame\ngo searchmoves d2d4", "bestmove d2d4\n"},
@@ -40,7 +42,7 @@ func TestUCI(t *testing.T) {
 	}
 }
 
-func TestRandomLegalMove(t *testing.T) {
+func TestLegalMoveSelection(t *testing.T) {
 	legal := strings.Fields("a2a3 a2a4 b2b3 b2b4 c2c3 c2c4 d2d3 d2d4 e2e3 e2e4 f2f3 f2f4 g2g3 g2g4 h2h3 h2h4 b1a3 b1c3 g1f3 g1h3")
 	var out bytes.Buffer
 	if err := run(strings.NewReader(strings.Repeat("go\n", 100)), &out); err != nil {
@@ -62,5 +64,29 @@ func TestInvalidPosition(t *testing.T) {
 		if _, err := parsePosition(strings.Fields(command)); err == nil {
 			t.Errorf("accepted invalid position %q", command)
 		}
+	}
+}
+
+func TestEvaluateMaterial(t *testing.T) {
+	fen, err := chess.FEN("7k/8/8/8/8/8/8/KQ6 w - - 0 1")
+	if err != nil {
+		t.Fatal(err)
+	}
+	game := chess.NewGame(fen)
+	if got := evaluate(game.Position(), chess.White); got != 9 {
+		t.Fatalf("white score = %d, want 9", got)
+	}
+	if got := evaluate(game.Position(), chess.Black); got != -9 {
+		t.Fatalf("black score = %d, want -9", got)
+	}
+}
+func TestBestMaterialMoveCapturesQueen(t *testing.T) {
+	fen, err := chess.FEN("7k/q7/8/8/8/8/8/R6K w - - 0 1")
+	if err != nil {
+		t.Fatal(err)
+	}
+	game := chess.NewGame(fen)
+	if got := bestMaterialMove(game, nil); got != "a1a7" {
+		t.Fatalf("move = %q, want a1a7", got)
 	}
 }
