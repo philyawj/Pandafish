@@ -13,7 +13,7 @@ func TestUCI(t *testing.T) {
 	tests := []struct {
 		name, commands, want string
 	}{
-		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.2\nid author philyawj\nuciok\nreadyok\n"},
+		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.3\nid author philyawj\nuciok\nreadyok\n"},
 		{"history", "position startpos moves e2e4 e7e5\ngo wtime 1000 btime 1000 searchmoves g1f3", "bestmove g1f3\n"},
 		{"no implicit move", "position startpos\ngo searchmoves e2e4\ngo searchmoves e2e4", "bestmove e2e4\nbestmove e2e4\n"},
 		{"new game", "position startpos moves e2e4\nucinewgame\ngo searchmoves d2d4", "bestmove d2d4\n"},
@@ -88,5 +88,55 @@ func TestBestMaterialMoveCapturesQueen(t *testing.T) {
 	game := chess.NewGame(fen)
 	if got := bestMaterialMove(game, nil); got != "a1a7" {
 		t.Fatalf("move = %q, want a1a7", got)
+	}
+}
+
+func TestBestMaterialMoveConsidersOpponentReply(t *testing.T) {
+	for _, tt := range []struct{ name, fen, moves, want string }{
+		{"white avoids recapture", "3r2k1/8/8/3p4/8/8/8/3Q2K1 w - - 0 1", "d1d5 d1e2", "d1e2"},
+		{"black avoids recapture", "3q2k1/8/8/8/3P4/8/8/3R2K1 b - - 0 1", "d8d4 d8e7", "d8e7"},
+		{"white saves threatened queen", "6k1/8/8/8/8/2p5/1Q6/6K1 w - - 0 1", "g1h1 b2a2", "b2a2"},
+		{"black saves threatened queen", "6k1/1q6/2P5/8/8/8/8/6K1 b - - 0 1", "g8h8 b7a7", "b7a7"},
+	} {
+		t.Run(tt.name, func(t *testing.T) {
+			game, err := parsePosition(append([]string{"fen"}, strings.Fields(tt.fen)...))
+			if err != nil {
+				t.Fatal(err)
+			}
+			before := game.FEN()
+			if got := bestMaterialMove(game, strings.Fields("searchmoves "+tt.moves)); got != tt.want {
+				t.Fatalf("move = %q, want %q", got, tt.want)
+			}
+			if game.FEN() != before || len(game.Moves()) != 0 {
+				t.Fatal("search changed the root game")
+			}
+		})
+	}
+}
+
+func TestWorstReplyScoreUsesOpponentsBestCapture(t *testing.T) {
+	game, err := parsePosition(strings.Fields("fen r6k/7P/8/8/8/8/Q7/7K b - - 0 1"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	// Taking our queen leaves our pawn (1) against their rook (5).
+	// Taking only the pawn would leave a much better material balance for us.
+	if got := worstReplyScore(game.Position(), chess.White); got != -4 {
+		t.Fatalf("worst reply score = %d, want -4", got)
+	}
+}
+
+func TestWorstReplyScoreWithoutRepliesUsesMaterial(t *testing.T) {
+	for _, fen := range []string{
+		"7k/6Q1/5K2/8/8/8/8/8 b - - 0 1", // Checkmate.
+		"7k/5K2/6Q1/8/8/8/8/8 b - - 0 1", // Stalemate.
+	} {
+		game, err := parsePosition(append([]string{"fen"}, strings.Fields(fen)...))
+		if err != nil {
+			t.Fatal(err)
+		}
+		if got := worstReplyScore(game.Position(), chess.White); got != 9 {
+			t.Fatalf("terminal material score = %d, want 9", got)
+		}
 	}
 }

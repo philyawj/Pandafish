@@ -67,17 +67,18 @@ type match struct {
 	Games  []gameRecord `json:"games"`
 }
 type summary struct {
-	Schema         int      `json:"schema"`
-	Created        string   `json:"created_utc"`
-	Platform       string   `json:"platform"`
-	GoVersion      string   `json:"go_version"`
-	Candidate      identity `json:"candidate"`
-	Settings       settings `json:"settings"`
-	Matches        []match  `json:"matches"`
-	Complete       bool     `json:"complete"`
-	PlannedMatches int      `json:"planned_matches,omitempty"`
-	RunnerSHA256   string   `json:"runner_sha256,omitempty"`
-	Machine        string   `json:"machine,omitempty"`
+	Schema         int           `json:"schema"`
+	Created        string        `json:"created_utc"`
+	Platform       string        `json:"platform"`
+	GoVersion      string        `json:"go_version"`
+	Candidate      identity      `json:"candidate"`
+	Settings       settings      `json:"settings"`
+	Matches        []match       `json:"matches"`
+	Complete       bool          `json:"complete"`
+	PlannedMatches int           `json:"planned_matches,omitempty"`
+	RunnerSHA256   string        `json:"runner_sha256,omitempty"`
+	Machine        string        `json:"machine,omitempty"`
+	Checks         []checkRecord `json:"checks,omitempty"`
 }
 
 // Copy first, then identify and launch only the copy. Rebuilding the original
@@ -324,15 +325,40 @@ func run() error {
 	maxPlies := flag.Int("max-plies", 400, "Total plies before marking unfinished")
 	results := flag.String("results", "benchmarks/results", "Results directory")
 	reportOnly := flag.Bool("report-only", false, "Rebuild the Markdown table from saved results without playing")
+	validate := flag.Bool("validate", false, "Check Go code, build the candidate, and run the requested matches")
+	race := flag.Bool("race", false, "Use the race detector in validation mode")
+	verbose := flag.Bool("verbose", false, "Print progress after every color pair")
 	openingsPath := flag.String("openings", "benchmarks/openings-screening-10-v1.txt", "Opening suite")
 	flag.Parse()
+	if *validate && *reportOnly {
+		return fmt.Errorf("choose validate or report-only")
+	}
+	if *race && !*validate {
+		return fmt.Errorf("race requires validate mode")
+	}
 	if *reportOnly {
 		return report(*results)
+	}
+	if *validate {
+		if *candidate != "" {
+			return fmt.Errorf("validate builds its own candidate; omit --candidate")
+		}
+		if _, err := os.Stat("go.mod"); err != nil {
+			return fmt.Errorf("run validation from the repository root")
+		}
+		*candidate = "benchmarks/bin/pandafish-candidate"
 	}
 	if *candidate == "" || *version == "" || (*previous == "") != (*previousVersion == "") || *pairs < 1 || *moveMS < 1 || *maxPlies < 10 || *graceMS < 0 || *skill < 1 || *skill > 20 {
 		return fmt.Errorf("candidate/version required; previous flags paired; pairs/move-ms positive; max-plies >= 10; grace-ms >= 0; stockfish-skill 1..20")
 	}
 	var err error
+	var checks []checkRecord
+	if *validate {
+		checks, err = validateCandidate(*candidate, *race, runCommand, os.Stdout)
+		if err != nil {
+			return err
+		}
+	}
 	if *candidate, err = exec.LookPath(*candidate); err != nil {
 		return err
 	}
@@ -401,7 +427,7 @@ func run() error {
 		return err
 	}
 	s := summary{Schema: 2, Created: now.Format(time.RFC3339Nano), Platform: runtime.GOOS + "/" + runtime.GOARCH,
-		GoVersion: runtime.Version(), Candidate: id, Settings: cfg, PlannedMatches: len(paths), RunnerSHA256: runnerHash, Machine: *machine}
+		GoVersion: runtime.Version(), Candidate: id, Settings: cfg, PlannedMatches: len(paths), RunnerSHA256: runnerHash, Machine: *machine, Checks: checks}
 	dir, err := createRunDir(*results, *version, *previousVersion, *skill)
 	if err != nil {
 		return err
@@ -417,6 +443,7 @@ func run() error {
 	pgnSeparator := ""
 	for i, path := range paths {
 		m := match{Engine: identities[i]}
+		fmt.Printf("Starting %s vs %s: %d games\n", *version, labels[i], 2*cfg.Pairs)
 		for pair := 0; pair < cfg.Pairs; pair++ {
 			for _, white := range []bool{true, false} {
 				game, record, err := playGame(*candidate, path, options[i], openings[pair%len(openings)], white, cfg)
@@ -438,9 +465,12 @@ func run() error {
 				pgnSeparator = "\n"
 				m.Games = append(m.Games, record)
 			}
-			fmt.Printf("%s vs %s: %d/%d games\n", *version, labels[i], len(m.Games), 2*cfg.Pairs)
+			if *verbose {
+				fmt.Printf("%s vs %s: %d/%d games\n", *version, labels[i], len(m.Games), 2*cfg.Pairs)
+			}
 		}
 		m.Stats = summarize(m.Games)
+		fmt.Printf("%s vs %s: W/D/L %d/%d/%d; unfinished %d; forfeits %d; possible score %s\n", *version, labels[i], m.Stats.Wins, m.Stats.Draws, m.Stats.Losses, m.Stats.Unfinished, m.Stats.Forfeits, rangeText(m.Stats))
 		s.Matches = append(s.Matches, m)
 		if err = pgn.Sync(); err != nil {
 			return err
@@ -463,6 +493,13 @@ func run() error {
 		return err
 	}
 	fmt.Println("Saved", dir)
+	if *validate {
+		for _, m := range s.Matches {
+			if m.Stats.Forfeits > 0 {
+				return fmt.Errorf("validation found forfeits; inspect saved results")
+			}
+		}
+	}
 	return nil
 }
 

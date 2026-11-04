@@ -30,7 +30,7 @@ func run(in io.Reader, out io.Writer) error {
 		}
 		switch args[0] {
 		case "uci":
-			fmt.Fprintln(out, "id name Pandafish v0.2\nid author philyawj\nuciok")
+			fmt.Fprintln(out, "id name Pandafish v0.3\nid author philyawj\nuciok")
 		case "isready":
 			fmt.Fprintln(out, "readyok")
 		case "ucinewgame":
@@ -99,7 +99,7 @@ func bestMaterialMove(game *chess.Game, args []string) string {
 			continue
 		}
 		nextPosition := game.Position().Update(&move)
-		score := evaluate(nextPosition, game.Position().Turn())
+		score := worstReplyScore(nextPosition, game.Position().Turn())
 		if score > bestScore {
 			bestScore = score
 			candidates = candidates[:0]
@@ -112,4 +112,21 @@ func bestMaterialMove(game *chess.Game, args []string) string {
 		return "0000"
 	}
 	return candidates[rand.IntN(len(candidates))]
+}
+
+// worstReplyScore assumes the opponent chooses the reply with the lowest
+// material balance for us. Positions without replies keep their material score.
+func worstReplyScore(position *chess.Position, perspective chess.Color) int {
+	replies := position.ValidMoves()
+	if len(replies) == 0 {
+		return evaluate(position, perspective)
+	}
+	worstScore := int(^uint(0) >> 1)
+	for _, reply := range replies {
+		score := evaluate(position.Update(&reply), perspective)
+		if score < worstScore {
+			worstScore = score
+		}
+	}
+	return worstScore
 }

@@ -46,6 +46,10 @@ git archive v0.1 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.2 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.2" .)
+
+build_dir=$(mktemp -d)
+git archive v0.3 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.3" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -80,29 +84,37 @@ file is needed. This is separate from Lichess's numbered computer opponents.
 
 ## Test a development candidate
 
-The runner does not fetch releases, inspect tags, or build engines. You supply
-executables and labels. `--candidate` and `--previous` select binaries;
+The runner does not fetch releases or inspect tags. In direct match mode you
+supply executables; validation mode builds the working candidate automatically.
+`--candidate` and `--previous` select binaries in direct match mode;
 `--version` and `--previous-version` label their results. Labels do not verify
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-For work toward v0.3, build the released v0.2 baseline as above. Then run:
+For work toward v0.4, build the released v0.3 baseline as above. Then run one
+command from the repository root:
 
 ```sh
-go test ./...
-go vet ./...
-go build -o benchmarks/bin/benchmark ./benchmarks
-go build -o benchmarks/bin/pandafish-candidate .
-
-benchmarks/bin/benchmark \
-  --candidate benchmarks/bin/pandafish-candidate --version v0.3-dev \
-  --previous benchmarks/bin/pandafish-v0.2 --previous-version v0.2
+go run ./benchmarks --validate --version v0.4-dev \
+  --previous benchmarks/bin/pandafish-v0.3 --previous-version v0.3
 ```
 
-This builds your working source, including uncommitted changes, and plays 100
-games against each opponent. Rebuild the candidate after each source change.
+Validation checks formatting, runs Go tests and vet, builds your working source
+as `benchmarks/bin/pandafish-candidate`, and plays 100 games per opponent. Add
+`--race` when changing concurrent code. Omit `--candidate` in validation mode;
+the fixed candidate path protects released baselines from accidental overwrites.
+Any failed code check stops before matches. Forfeits make validation exit with
+an error after saving the results. A low match score is evidence to review,
+not a code-validation failure. The local lichess-bot wrapper check is separate.
+
+The default output is a short check/result summary, with detailed records in
+JSON and PGN. Use `--verbose` only when you want progress after every color pair.
+All moves and scores are handled by Go; no LLM is involved in playing games.
+Automated reviews should read the summary first and inspect individual games
+only to investigate a failure or a specific behavior.
+
 No release tag is needed. A committed candidate should use a label containing
-its revision, such as `v0.3-dev-ab12cd3`; append `-dirty` if source is modified.
+its revision, such as `v0.4-dev-ab12cd3`; append `-dirty` if source is modified.
 Optional `--revision` and `--previous-revision` fields also record source
 revisions. `--machine` records a hardware and power-setting note. A binary hash
 identifies executable bytes, but does not reconstruct uncommitted source.
@@ -114,8 +126,28 @@ copies are removed when the runner exits normally or returns an error. Rebuild
 files between runs; avoid changing an executable while its initial copy is made.
 
 After reviewing and releasing a candidate, build its baseline from the release
-tag. For the next cycle use released v0.3 as `--previous`, with a `v0.4-dev`
-candidate. Preserve released binaries rather than overwriting them with development builds.
+tag and use it as `--previous` for the next cycle. Preserve released binaries
+rather than overwriting them with development builds.
+
+### Moving a candidate to release
+
+Follow [the release workflow](../RELEASING.md) for the preparation, PR, merge,
+tag, and publishing steps.
+
+When the checks and routine matches support an improvement, open a PR with the
+engine change and its benchmark evidence. Prepare the release version in the
+source, UCI identity, example greetings, and relevant documentation. After the
+PR is reviewed and merged, tag the merged commit and publish the release.
+
+Keep development-run labels, hashes, and results as recorded. A benchmark label
+is not promoted into a release tag. Link the candidate's results from the PR
+or release notes instead of relabeling them as a test of the released binary.
+Build the next baseline from the release tag.
+
+If only version text and documentation change after testing, rerun the code
+checks and a short smoke test. Repeat the 100-game comparison when engine
+behavior changes. A separate run labeled with the release version is optional
+if you want results recorded for that exact released binary.
 
 ## Deciding whether a change helps
 
@@ -124,7 +156,13 @@ candidate. Preserve released binaries rather than overwriting them with developm
 | Unit tests and focused positions | No match required | Check intended behavior and known regressions |
 | Smoke test (`--pairs 1`) | 2 | Check executable paths, options, and UCI integration |
 | Screening (default `--pairs 50`) | 100 | Find large changes and reliability problems |
-| Confirmation (`--pairs 500`) | 1,000 | Gather evidence before a release or skill-level advancement |
+| Optional extended comparison (`--pairs 500`) | 1,000 | Resolve small differences or support a planned skill-level advancement |
+
+The routine for early engine development is 100 games per opponent. A promising
+screening result does not automatically trigger a longer run, and a longer run
+is not required for every release. Use focused tests and the short matches to
+evaluate large functional improvements such as adding an opponent reply.
+Long matches gather statistical evidence, rather than stress-testing an engine.
 
 Choose the sample size before starting. These are practical starting points,
 not guarantees of significance. Keep unfavorable and inconclusive results;
@@ -141,12 +179,12 @@ The filenames identify the purpose, position count, and suite version:
 | `openings-screening-10-v1.txt` | Quick screening: 10 positions, used by default |
 | `openings-confirmation-50-v1.txt` | Broader confirmation: 50 positions, selected explicitly |
 
-Use the screening suite unchanged for quick comparisons. For a broader confirmation run:
+Use the screening suite unchanged for routine comparisons. When more evidence
+is needed, explicitly request a broader, longer comparison:
 
 ```sh
-benchmarks/bin/benchmark \
-  --candidate benchmarks/bin/pandafish-candidate --version v0.3-dev \
-  --previous benchmarks/bin/pandafish-v0.2 --previous-version v0.2 \
+go run ./benchmarks --validate --version v0.4-dev \
+  --previous benchmarks/bin/pandafish-v0.3 --previous-version v0.3 \
   --pairs 500 --openings benchmarks/openings-confirmation-50-v1.txt
 ```
 
@@ -173,7 +211,8 @@ clock; test game-clock handling separately before tournament use.
 
 ## Stockfish skill progression
 
-Start at Skill Level 1. After a confirmation match scores strictly above 50%
+Start at Skill Level 1. For a planned advancement, use an extended comparison
+with enough evidence to resolve the result. Once it scores strictly above 50%
 at the current level, preserve that result and advance one level. Score means
 wins plus half the draws divided by games, rather than the fraction won outright.
 If games are unfinished, require the possible-score lower bound to exceed 50%
@@ -190,8 +229,8 @@ The flag accepts 1 through 20 and defaults to 1. For example:
 
 ```sh
 benchmarks/bin/benchmark \
-  --candidate benchmarks/bin/pandafish-candidate --version v0.3-dev \
-  --previous benchmarks/bin/pandafish-v0.2 --previous-version v0.2 \
+  --candidate benchmarks/bin/pandafish-candidate --version v0.4-dev \
+  --previous benchmarks/bin/pandafish-v0.3 --previous-version v0.3 \
   --stockfish-skill 2
 ```
 
@@ -242,7 +281,8 @@ Results go to matchup folders such as `v0.2-vs-v0.1-and-stockfish-1`, with
 `-run-2`, `-run-3`, etc. for repeats. Each contains `games.pgn` and `summary.json`.
 JSON records binary identities and hashes, optional source revisions, runner
 hash, Go version, platform, optional machine note, settings, opening hash,
-outcomes, and move timings. Each PGN includes its opening moves.
+outcomes, and move timings. Validation-mode runs also record the automated
+checks and commands. Each PGN includes its opening moves.
 
 After each completed matchup, the runner syncs the PGN and atomically saves
 its summary before starting the next opponent. Completed matchups from an

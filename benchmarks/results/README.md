@@ -9,6 +9,8 @@ Forfeits count as losses for the offending engine. Compare matching profiles bef
 | v0.1 | Stockfish 19 / Skill 1 | 0 / 0 / 100 | 0 | 0 | 0.0% | 0.0% to 0.0% | [R1](v0.1-vs-stockfish-1/summary.json) | [JSON](v0.1-vs-stockfish-1/summary.json), [PGN](v0.1-vs-stockfish-1/games.pgn) |
 | v0.2 | v0.1 | 24 / 72 / 0 | 4 | 0 | 62.5% | 60.0% to 64.0% | [R2](v0.2-vs-v0.1-and-stockfish-1/summary.json) | [JSON](v0.2-vs-v0.1-and-stockfish-1/summary.json), [PGN](v0.2-vs-v0.1-and-stockfish-1/games.pgn) |
 | v0.2 | Stockfish 19 / Skill 1 | 0 / 0 / 100 | 0 | 0 | 0.0% | 0.0% to 0.0% | [R2](v0.2-vs-v0.1-and-stockfish-1/summary.json) | [JSON](v0.2-vs-v0.1-and-stockfish-1/summary.json), [PGN](v0.2-vs-v0.1-and-stockfish-1/games.pgn) |
+| v0.3-dev | v0.2 | 40 / 60 / 0 | 0 | 0 | 70.0% | 70.0% to 70.0% | [R3](v0.3-dev-vs-v0.2-and-stockfish-1/summary.json) | [JSON](v0.3-dev-vs-v0.2-and-stockfish-1/summary.json), [PGN](v0.3-dev-vs-v0.2-and-stockfish-1/games.pgn) |
+| v0.3-dev | Stockfish 19 / Skill 1 | 0 / 0 / 100 | 0 | 0 | 0.0% | 0.0% to 0.0% | [R3](v0.3-dev-vs-v0.2-and-stockfish-1/summary.json) | [JSON](v0.3-dev-vs-v0.2-and-stockfish-1/summary.json), [PGN](v0.3-dev-vs-v0.2-and-stockfish-1/games.pgn) |
 
 ## Run profiles
 
@@ -18,6 +20,7 @@ Times are milliseconds. Compare matching timing policies and settings. Partial r
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [R1](v0.1-vs-stockfish-1/summary.json) | 2026-11-04 05:23Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple silicon; model and power setting not recorded | wall-clock-v2 | complete |
 | [R2](v0.2-vs-v0.1-and-stockfish-1/summary.json) | 2026-11-04 05:26Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple silicon; model and power setting not recorded | wall-clock-v2 | complete |
+| [R3](v0.3-dev-vs-v0.2-and-stockfish-1/summary.json) | 2026-11-04 06:20Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple silicon; model and power setting not recorded | wall-clock-v2 | complete |
 
 ## Measured timing
 
@@ -28,3 +31,5 @@ Wall time includes sending the position, requesting the move, and receiving best
 | R1 | Stockfish 19 / Skill 1 | 6.6 | 137.2 | 0 / 1116 |
 | R2 | v0.1 | 17.5 | 64.4 | 0 / 0 |
 | R2 | Stockfish 19 / Skill 1 | 7.4 | 115.4 | 0 / 1124 |
+| R3 | v0.2 | 23.9 | 2.9 | 0 / 0 |
+| R3 | Stockfish 19 / Skill 1 | 21.7 | 119.9 | 0 / 1424 |
