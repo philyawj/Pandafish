@@ -102,15 +102,18 @@ Pandafish is licensed under the [MIT License](LICENSE). The chess library's
 license is reproduced in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 Include both notices when distributing compiled Pandafish binaries.
 
-## Bots using Pandafish
+## Local benchmarks
 
-Have you run a Lichess bot with any version of Pandafish? Add it here with a
-pull request, or open an issue with your bot's profile link and the version you
-used. Past and current users are welcome.
-
-| Bot | Pandafish versions used |
-| --- | --- |
-| [GoPandaFish](https://lichess.org/@/GoPandaFish) | v0.1 |
+[Benchmark results and progress](benchmarks/README.md) track each version
+against Stockfish Skill Level 1 and the previous Pandafish release. The local
+runner saves game records, settings, and a results table separately from the
+engine. These matches measure development progress, not a Lichess rating.
+Use the [development candidate workflow](benchmarks/README.md#test-a-development-candidate)
+to test changes before tagging a release.
+The long-term goal is to progress through Stockfish Skill Levels 1 to 20,
+preserving a confirmed result above 50% before advancing to the next level.
+The [benchmark decision process](benchmarks/README.md#deciding-whether-a-change-helps)
+explains screening runs, confirmation runs, and the limits of those scores.
 
 ## Milestones and plans
 
