@@ -164,6 +164,15 @@ is not required for every release. Use focused tests and the short matches to
 evaluate large functional improvements such as adding an opponent reply.
 Long matches gather statistical evidence, rather than stress-testing an engine.
 
+Separate functional correctness from measured playing strength. Focused tests
+can verify a chess rule or intended decision, while a match against the prior
+release measures whether the full engine benefits under the tested conditions.
+For example, the v0.4 candidate's 44 wins, 39 draws, and 17 losses against v0.3
+give a 63.5% score: a measured improvement in that 100-game matchup, supported
+by tests for correct mate and stalemate scoring. That is useful evidence for
+an early release, without implying a precise Elo gain or improvement against
+all opponents. Report both the result and its limits when documenting a change.
+
 Choose the sample size before starting. These are practical starting points,
 not guarantees of significance. Keep unfavorable and inconclusive results;
 do not repeatedly rerun until a favorable score appears. A small lead is not

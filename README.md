@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones Go chess engine written in Go. Pandafish v0.3 speaks UCI over
+A bare-bones Go chess engine written in Go. Pandafish v0.4 speaks UCI over
 stdin/stdout and looks ahead one opponent reply using depth-two minimax.
 Standard chess only.
 
@@ -11,8 +11,9 @@ including castling, en passant, and promotions. The engine assigns values of
 legal move by scoring every possible opponent reply from the moving side's
 perspective. It assumes the opponent chooses the lowest score, then chooses
 the move with the highest such worst-case score. Equal scores are still
-selected randomly. Positions with no replies keep their material score;
-checkmate, draws, and positional features have no separate evaluation yet.
+selected randomly. Checkmate scores above any material advantage, being
+checkmated scores below any material disadvantage, and stalemate scores zero.
+Other draw rules and positional features have no separate search evaluation.
 
 Clone this repository and build with Go 1.25 or newer:
 
@@ -152,3 +153,18 @@ An earlier v0.3 screening run recorded Pandafish's first local benchmark draw
 against Stockfish 19 at Skill Level 1: a stalemate with Pandafish playing White
 in round 25. The milestone game is preserved separately from routine results.
 [Download the game PGN](benchmarks/milestones/first-stockfish-level-1-draw.pgn).
+
+**v0.4: Know when the game is over (complete).** The evaluator recognizes
+checkmate and stalemate, including an opponent's immediate mating reply.
+Depth-two search, material values, and random tie breaking are unchanged.
+Repetition and fifty-move draw detection inside the search remain future work.
+
+The development candidate scored 44 wins, 39 draws, and 17 losses against v0.3
+in 100 games, a 63.5% match score. This is a measured improvement over v0.3
+under the recorded conditions. Focused tests also verify that both colors
+choose mate over material, avoid immediate mating replies, and avoid stalemate
+when ahead. The sample supports this early increment; it does not establish
+a precise Elo gain or stronger play against every opponent or time control.
+The candidate lost all 100 games against Stockfish Level 1. Both matchups had
+no forfeits or unfinished games. [Results and conditions](benchmarks/results/README.md)
+retain their original development labels and hashes.
