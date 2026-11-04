@@ -107,19 +107,9 @@ Include both notices when distributing compiled Pandafish binaries.
 
 ## Local benchmarks
 
-[Benchmark results and progress](benchmarks/README.md) track each version
-against Stockfish Skill Level 1 and the previous Pandafish release. The local
-runner saves game records, settings, and a results table separately from the
-engine. These matches measure development progress, not a Lichess rating.
-Use the [development candidate workflow](benchmarks/README.md#test-a-development-candidate)
-to test changes before tagging a release.
-The long-term goal is to progress through Stockfish Skill Levels 1 to 20,
-preserving a confirmed result above 50% before advancing to the next level.
-The [benchmark decision process](benchmarks/README.md#deciding-whether-a-change-helps)
-explains routine 100-game matches, optional longer comparisons, and the limits
-of those scores.
-The [release workflow](RELEASING.md) covers preparing a version, reviewing and
-merging its PR, and publishing the release from the merged commit.
+[Benchmark documentation](benchmarks/README.md) covers the validation workflow,
+playing-strength comparisons, results, and their interpretation.
+See the [release workflow](RELEASING.md) for preparing and publishing a version.
 
 ## Milestones and plans
 
@@ -142,29 +132,9 @@ checkmate, or positional features.
 
 **v0.3: Look ahead one reply (complete).** Depth-two minimax now accounts
 for the opponent's best immediate material response. The v0.2 piece values and
-random tie breaking are unchanged. Focused position tests and the benchmark
-workflow verified the development candidate against v0.2 and Stockfish. The
-saved 100-game matchups scored 40 wins and 60 draws against v0.2, and 100 losses
-against Stockfish Skill Level 1, with no forfeits or unfinished games.
-The [development benchmark records](benchmarks/results/README.md) retain their
-original candidate labels and binary hashes.
-
-An earlier v0.3 screening run recorded Pandafish's first local benchmark draw
-against Stockfish 19 at Skill Level 1: a stalemate with Pandafish playing White
-in round 25. The milestone game is preserved separately from routine results.
-[Download the game PGN](benchmarks/milestones/first-stockfish-level-1-draw.pgn).
+random tie breaking are unchanged.
 
 **v0.4: Know when the game is over (complete).** The evaluator recognizes
 checkmate and stalemate, including an opponent's immediate mating reply.
 Depth-two search, material values, and random tie breaking are unchanged.
 Repetition and fifty-move draw detection inside the search remain future work.
-
-The development candidate scored 44 wins, 39 draws, and 17 losses against v0.3
-in 100 games, a 63.5% match score. This is a measured improvement over v0.3
-under the recorded conditions. Focused tests also verify that both colors
-choose mate over material, avoid immediate mating replies, and avoid stalemate
-when ahead. The sample supports this early increment; it does not establish
-a precise Elo gain or stronger play against every opponent or time control.
-The candidate lost all 100 games against Stockfish Level 1. Both matchups had
-no forfeits or unfinished games. [Results and conditions](benchmarks/results/README.md)
-retain their original development labels and hashes.

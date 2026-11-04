@@ -17,6 +17,11 @@ and benchmark evidence together. Run commands from the repository root.
    and the example bot greetings. Update the main README's current version and
    completed milestone. Update benchmark examples to use the new release as
    the next baseline. Keep credentials and private configs out of Git.
+   Keep the main README focused on functionality, setup, and short release
+   milestones. Put benchmark scores, sample sizes, conditions, notable test
+   games, and interpretation in `benchmarks/README.md` and its results report.
+   Link to those documents from the main README instead of repeating evidence
+   in each release milestone.
 4. Run formatting, tests, vet, a build, and `git diff --check`. If only version
    text and documentation changed since benchmarking, use a short smoke test
    instead of another full match. For example, while preparing v0.3:

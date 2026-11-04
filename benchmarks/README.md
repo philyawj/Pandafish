@@ -167,11 +167,7 @@ Long matches gather statistical evidence, rather than stress-testing an engine.
 Separate functional correctness from measured playing strength. Focused tests
 can verify a chess rule or intended decision, while a match against the prior
 release measures whether the full engine benefits under the tested conditions.
-For example, the v0.4 candidate's 44 wins, 39 draws, and 17 losses against v0.3
-give a 63.5% score: a measured improvement in that 100-game matchup, supported
-by tests for correct mate and stalemate scoring. That is useful evidence for
-an early release, without implying a precise Elo gain or improvement against
-all opponents. Report both the result and its limits when documenting a change.
+Report both the result and its limits when documenting a change.
 
 Choose the sample size before starting. These are practical starting points,
 not guarantees of significance. Keep unfavorable and inconclusive results;
@@ -217,6 +213,29 @@ and hardware consistent. Run matches sequentially with a stable power setting
 and little background load. The report shows comparison profiles and timing
 measurements. Its fixed move allowance does not simulate a tournament's game
 clock; test game-clock handling separately before tournament use.
+
+## Recorded development milestones
+
+The [results report](results/README.md) contains the complete counts and run
+conditions. Development labels and binary hashes remain as originally recorded.
+
+The v0.3 candidate scored 40 wins and 60 draws against v0.2 in 100 games, and
+lost all 100 games against Stockfish Skill Level 1. Both matchups had no
+forfeits or unfinished games.
+
+The v0.4 candidate scored 44 wins, 39 draws, and 17 losses against v0.3 in 100
+games, a 63.5% score. This is a measured improvement under the recorded
+conditions, supported by focused tests showing that both colors choose mate
+over material, avoid immediate mating replies, and avoid stalemate when ahead.
+The sample supports this early increment without establishing a precise Elo
+gain or stronger play against every opponent or time control. The candidate
+lost all 100 games against Stockfish Level 1. Neither matchup had forfeits or
+unfinished games.
+
+An earlier v0.3 screening run recorded the first local benchmark draw against
+Stockfish 19 at Skill Level 1: a stalemate with Pandafish playing White in round
+25. The [milestone PGN](milestones/first-stockfish-level-1-draw.pgn) is preserved
+separately from routine results.
 
 ## Stockfish skill progression
 
