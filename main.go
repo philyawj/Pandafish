@@ -30,7 +30,7 @@ func run(in io.Reader, out io.Writer) error {
 		}
 		switch args[0] {
 		case "uci":
-			fmt.Fprintln(out, "id name Pandafish v0.3\nid author philyawj\nuciok")
+			fmt.Fprintln(out, "id name Pandafish v0.4\nid author philyawj\nuciok")
 		case "isready":
 			fmt.Fprintln(out, "readyok")
 		case "ucinewgame":
@@ -43,7 +43,7 @@ func run(in io.Reader, out io.Writer) error {
 			}
 			game, pending = next, ""
 		case "go":
-			pending = bestMaterialMove(game, args[1:])
+			pending = bestMove(game, args[1:])
 			// Infinite searches and pondering wait for the GUI to release the move.
 			if !slices.Contains(args, "infinite") && !slices.Contains(args, "ponder") {
 				fmt.Fprintln(out, "bestmove", pending)
@@ -89,7 +89,7 @@ func parsePosition(args []string) (*chess.Game, error) {
 	return game, nil
 }
 
-func bestMaterialMove(game *chess.Game, args []string) string {
+func bestMove(game *chess.Game, args []string) string {
 	var candidates []string
 	bestScore := -int(^uint(0) >> 1)
 	searchMoves := slices.Index(args, "searchmoves")
@@ -115,7 +115,7 @@ func bestMaterialMove(game *chess.Game, args []string) string {
 }
 
 // worstReplyScore assumes the opponent chooses the reply with the lowest
-// material balance for us. Positions without replies keep their material score.
+// score for us. Positions without replies use their terminal evaluation.
 func worstReplyScore(position *chess.Position, perspective chess.Color) int {
 	replies := position.ValidMoves()
 	if len(replies) == 0 {

@@ -13,7 +13,7 @@ func TestUCI(t *testing.T) {
 	tests := []struct {
 		name, commands, want string
 	}{
-		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.3\nid author philyawj\nuciok\nreadyok\n"},
+		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.4\nid author philyawj\nuciok\nreadyok\n"},
 		{"history", "position startpos moves e2e4 e7e5\ngo wtime 1000 btime 1000 searchmoves g1f3", "bestmove g1f3\n"},
 		{"no implicit move", "position startpos\ngo searchmoves e2e4\ngo searchmoves e2e4", "bestmove e2e4\nbestmove e2e4\n"},
 		{"new game", "position startpos moves e2e4\nucinewgame\ngo searchmoves d2d4", "bestmove d2d4\n"},
@@ -80,18 +80,18 @@ func TestEvaluateMaterial(t *testing.T) {
 		t.Fatalf("black score = %d, want -9", got)
 	}
 }
-func TestBestMaterialMoveCapturesQueen(t *testing.T) {
+func TestBestMoveCapturesQueen(t *testing.T) {
 	fen, err := chess.FEN("7k/q7/8/8/8/8/8/R6K w - - 0 1")
 	if err != nil {
 		t.Fatal(err)
 	}
 	game := chess.NewGame(fen)
-	if got := bestMaterialMove(game, nil); got != "a1a7" {
+	if got := bestMove(game, nil); got != "a1a7" {
 		t.Fatalf("move = %q, want a1a7", got)
 	}
 }
 
-func TestBestMaterialMoveConsidersOpponentReply(t *testing.T) {
+func TestBestMoveConsidersOpponentReply(t *testing.T) {
 	for _, tt := range []struct{ name, fen, moves, want string }{
 		{"white avoids recapture", "3r2k1/8/8/3p4/8/8/8/3Q2K1 w - - 0 1", "d1d5 d1e2", "d1e2"},
 		{"black avoids recapture", "3q2k1/8/8/8/3P4/8/8/3R2K1 b - - 0 1", "d8d4 d8e7", "d8e7"},
@@ -104,7 +104,7 @@ func TestBestMaterialMoveConsidersOpponentReply(t *testing.T) {
 				t.Fatal(err)
 			}
 			before := game.FEN()
-			if got := bestMaterialMove(game, strings.Fields("searchmoves "+tt.moves)); got != tt.want {
+			if got := bestMove(game, strings.Fields("searchmoves "+tt.moves)); got != tt.want {
 				t.Fatalf("move = %q, want %q", got, tt.want)
 			}
 			if game.FEN() != before || len(game.Moves()) != 0 {
@@ -126,17 +126,77 @@ func TestWorstReplyScoreUsesOpponentsBestCapture(t *testing.T) {
 	}
 }
 
-func TestWorstReplyScoreWithoutRepliesUsesMaterial(t *testing.T) {
-	for _, fen := range []string{
-		"7k/6Q1/5K2/8/8/8/8/8 b - - 0 1", // Checkmate.
-		"7k/5K2/6Q1/8/8/8/8/8 b - - 0 1", // Stalemate.
+func TestWorstReplyScoreWithoutRepliesUsesTerminalScore(t *testing.T) {
+	for _, tt := range []struct {
+		fen  string
+		want int
+	}{
+		{"7k/6Q1/5K2/8/8/8/8/8 b - - 0 1", mateScore},
+		{"7k/5K2/6Q1/8/8/8/8/8 b - - 0 1", 0},
 	} {
-		game, err := parsePosition(append([]string{"fen"}, strings.Fields(fen)...))
+		game, err := parsePosition(append([]string{"fen"}, strings.Fields(tt.fen)...))
 		if err != nil {
 			t.Fatal(err)
 		}
-		if got := worstReplyScore(game.Position(), chess.White); got != 9 {
-			t.Fatalf("terminal material score = %d, want 9", got)
+		if got := worstReplyScore(game.Position(), chess.White); got != tt.want {
+			t.Fatalf("terminal score = %d, want %d", got, tt.want)
 		}
+	}
+}
+
+func TestEvaluateTerminalPositions(t *testing.T) {
+	for _, tt := range []struct {
+		name, fen  string
+		whiteScore int
+	}{
+		{"white mates", "7k/6Q1/5K2/8/8/8/8/8 b - - 0 1", mateScore},
+		{"black mates", "8/8/8/8/8/5k2/6q1/7K w - - 0 1", -mateScore},
+		{"black stalemated", "7k/5K2/6Q1/8/8/8/8/8 b - - 0 1", 0},
+		{"white stalemated", "8/8/8/8/8/6q1/5k2/7K w - - 0 1", 0},
+		{"check with an escape", "k6r/8/8/8/8/8/8/7K w - - 0 1", -5},
+	} {
+		t.Run(tt.name, func(t *testing.T) {
+			game, err := parsePosition(append([]string{"fen"}, strings.Fields(tt.fen)...))
+			if err != nil {
+				t.Fatal(err)
+			}
+			for _, side := range []chess.Color{chess.White, chess.Black} {
+				want := tt.whiteScore
+				if side == chess.Black {
+					want = -want
+				}
+				if got := evaluate(game.Position(), side); got != want {
+					t.Fatalf("score for %v = %d, want %d", side, got, want)
+				}
+			}
+		})
+	}
+}
+
+func TestBestMoveRecognizesGameEndings(t *testing.T) {
+	for _, tt := range []struct{ name, fen, moves, want string }{
+		{"white mates instead of taking queen", "7k/8/5KQ1/8/8/8/8/1q6 w - - 0 1", "g6g7 g6b1", "g6g7"},
+		{"black mates instead of taking queen", "1Q6/8/8/8/8/5kq1/8/7K b - - 0 1", "g3g2 g3b8", "g3g2"},
+		{"white avoids mate after taking rook", "8/8/r7/8/8/5kq1/Q7/7K w - - 0 1", "a2a6 a2b2", "a2b2"},
+		{"black avoids mate after taking rook", "7k/q7/5KQ1/8/8/R7/8/8 b - - 0 1", "a7a3 a7b7", "a7b7"},
+		{"white avoids stalemate while ahead", "7k/5K2/8/6Q1/8/8/8/8 w - - 0 1", "g5g6 g5g4", "g5g4"},
+		{"black avoids stalemate while ahead", "8/8/8/8/6q1/8/5k2/7K b - - 0 1", "g4g3 g4g5", "g4g5"},
+	} {
+		t.Run(tt.name, func(t *testing.T) {
+			game, err := parsePosition(append([]string{"fen"}, strings.Fields(tt.fen)...))
+			if err != nil {
+				t.Fatal(err)
+			}
+			// Validate both choices so an illegal alternative cannot hide a bug.
+			for _, move := range strings.Fields(tt.moves) {
+				copy, err := parsePosition(append(append([]string{"fen"}, strings.Fields(tt.fen)...), "moves", move))
+				if err != nil || copy == nil {
+					t.Fatalf("invalid fixture move %s: %v", move, err)
+				}
+			}
+			if got := bestMove(game, strings.Fields("searchmoves "+tt.moves)); got != tt.want {
+				t.Fatalf("move = %s, want %s", got, tt.want)
+			}
+		})
 	}
 }
