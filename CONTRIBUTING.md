@@ -15,3 +15,6 @@ Include the candidate source revision, full command, comparison version,
 settings, and results in your PR. A 100-game screening run is useful evidence,
 but does not by itself establish a small strength improvement. Run the Go
 tests and include focused positions that exercise the behavior changed.
+
+Maintainers follow the [release workflow](RELEASING.md) when preparing and
+publishing a version.

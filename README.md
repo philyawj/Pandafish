@@ -1,16 +1,18 @@
 # Pandafish
 
-A bare-bones Go chess engine written in Go. Pandafish v0.2 speaks UCI over
-stdin/stdout and chooses a move by looking at the immediate material balance.
+A bare-bones Go chess engine written in Go. Pandafish v0.3 speaks UCI over
+stdin/stdout and looks ahead one opponent reply using depth-two minimax.
 Standard chess only.
 
 The engine code is in `main.go` and `evaluation.go`.
 [corentings/chess](https://github.com/corentings/chess) handles chess rules,
 including castling, en passant, and promotions. The engine assigns values of
 1 to pawns, 3 to knights and bishops, 5 to rooks, and 9 to queens. It picks a
-legal move with the best immediate material balance for the moving side, and
-chooses randomly among equal scores. It does not account for the opponent's
-reply, checkmate, or positional features.
+legal move by scoring every possible opponent reply from the moving side's
+perspective. It assumes the opponent chooses the lowest score, then chooses
+the move with the highest such worst-case score. Equal scores are still
+selected randomly. Positions with no replies keep their material score;
+checkmate, draws, and positional features have no separate evaluation yet.
 
 Clone this repository and build with Go 1.25 or newer:
 
@@ -34,8 +36,8 @@ The last response is `bestmove` followed by the selected legal black move.
 When no legal move exists, the engine returns `bestmove 0000`.
 
 The engine accepts `position startpos` or `position fen ...`, optionally followed
-by `moves ...`. Normal `go` commands return immediately; clock/depth limits are
-ignored, so no maximum move time needs to be configured. `searchmoves` restricts
+by `moves ...`. Normal `go` commands return after the fixed depth-two search;
+clock/depth limits are ignored. `searchmoves` restricts
 the choices. `go infinite` waits for `stop`;
 `go ponder` waits for `stop` or `ponderhit`. Unknown commands and engine options
 are ignored.
@@ -113,7 +115,10 @@ to test changes before tagging a release.
 The long-term goal is to progress through Stockfish Skill Levels 1 to 20,
 preserving a confirmed result above 50% before advancing to the next level.
 The [benchmark decision process](benchmarks/README.md#deciding-whether-a-change-helps)
-explains screening runs, confirmation runs, and the limits of those scores.
+explains routine 100-game matches, optional longer comparisons, and the limits
+of those scores.
+The [release workflow](RELEASING.md) covers preparing a version, reviewing and
+merging its PR, and publishing the release from the merged commit.
 
 ## Milestones and plans
 
@@ -134,6 +139,16 @@ best score from the moving side's perspective, and breaks ties randomly. This
 is a one-ply material evaluation. It does not consider the opponent's reply,
 checkmate, or positional features.
 
-**Next: Look ahead one reply.** Add depth-two minimax so Pandafish can account
-for the opponent's best response. Keep the current material scoring and tie
-breaking behavior as the foundation for that search.
+**v0.3: Look ahead one reply (complete).** Depth-two minimax now accounts
+for the opponent's best immediate material response. The v0.2 piece values and
+random tie breaking are unchanged. Focused position tests and the benchmark
+workflow verified the development candidate against v0.2 and Stockfish. The
+saved 100-game matchups scored 40 wins and 60 draws against v0.2, and 100 losses
+against Stockfish Skill Level 1, with no forfeits or unfinished games.
+The [development benchmark records](benchmarks/results/README.md) retain their
+original candidate labels and binary hashes.
+
+An earlier v0.3 screening run recorded Pandafish's first local benchmark draw
+against Stockfish 19 at Skill Level 1: a stalemate with Pandafish playing White
+in round 25. The milestone game is preserved separately from routine results.
+[Download the game PGN](benchmarks/milestones/first-stockfish-level-1-draw.pgn).

@@ -32,13 +32,13 @@ engine:
     offer_draw_enabled: false
 
 abort_time: 30
-fake_think_time: false # Do not add artificial delay; Pandafish v0.2 responds immediately.
+fake_think_time: false # Do not add artificial delay after the engine returns.
 move_overhead: 1000 # lichess-bot clock allowance for communication, not engine search time.
 rate_limiting_delay: 0
 
 correspondence:
   ponder: false # Also disable pondering for correspondence games.
-  move_time: 1 # Requested correspondence search time; v0.2 still responds immediately.
+  move_time: 1 # Requested seconds; the fixed-depth engine ignores time limits.
   checkin_period: 300
   disconnect_time: 150
 
@@ -67,7 +67,7 @@ matchmaking:
 
 # {me} is replaced with your bot's username. Keep each rendered message under 140 characters.
 greeting:
-  hello: "{me} here, running Pandafish v0.2! I count material, then confidently guess. Good luck!"
-  goodbye: "GG! {me} was running Pandafish v0.2. Back to counting bamboo!"
-  hello_spectators: "{me} is running Pandafish v0.2: material counted, plans still imaginary. Bring bamboo!"
-  goodbye_spectators: "Thanks for watching {me} run Pandafish v0.2. The bamboo was real!"
+  hello: "{me} here, running Pandafish v0.3! I see one reply ahead. Surely that's enough. Good luck!"
+  goodbye: "GG! {me} was running Pandafish v0.3. Back to counting bamboo!"
+  hello_spectators: "{me} is running Pandafish v0.3: one reply ahead, unreasonable confidence. Bring bamboo!"
+  goodbye_spectators: "Thanks for watching {me} run Pandafish v0.3. The bamboo was real!"
