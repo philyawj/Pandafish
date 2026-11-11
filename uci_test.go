@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/corentings/chess/v2"
+	"github.com/philyawj/Pandafish/internal/telemetry"
 	"io"
 	"strings"
 	"testing"
@@ -17,11 +18,16 @@ type uciSession struct {
 	done  chan error
 }
 
-func newUCISession(t *testing.T) *uciSession {
+func newUCISession(t *testing.T) *uciSession { return newRecordedUCISession(t, nil) }
+
+func newRecordedUCISession(t *testing.T, trace *telemetry.Recorder) *uciSession {
 	input, commands := io.Pipe()
 	responses, output := io.Pipe()
 	session := &uciSession{t: t, input: commands, lines: make(chan string, 128), done: make(chan error, 1)}
-	go func() { session.done <- run(input, output); output.Close() }()
+	go func() {
+		session.done <- runEngine(input, telemetry.Output{Destination: output, Recorder: trace}, trace)
+		output.Close()
+	}()
 	go func() {
 		scanner := bufio.NewScanner(responses)
 		for scanner.Scan() {
@@ -58,6 +64,9 @@ func (session *uciSession) read() string {
 	case line, ok := <-session.lines:
 		if !ok {
 			session.t.Fatal("unexpected UCI EOF")
+		}
+		if strings.HasPrefix(line, "info string pandafish ") || strings.HasPrefix(line, "info depth ") {
+			return session.read()
 		}
 		return line
 	case <-time.After(3 * time.Second):

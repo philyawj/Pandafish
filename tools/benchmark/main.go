@@ -1,4 +1,4 @@
-// Command benchmarks plays local UCI matches and saves their history.
+// Command benchmark plays local UCI matches and saves their history.
 package main
 
 import (
@@ -323,12 +323,12 @@ func run() error {
 	previousRevision := flag.String("previous-revision", "", "Previous engine source revision")
 	machine := flag.String("machine", "", "Hardware and power-setting note for comparisons")
 	maxPlies := flag.Int("max-plies", 400, "Total plies before marking unfinished")
-	results := flag.String("results", "benchmarks/results", "Results directory")
+	results := flag.String("results", "tools/benchmark/results", "Results directory")
 	reportOnly := flag.Bool("report-only", false, "Rebuild the Markdown table from saved results without playing")
 	validate := flag.Bool("validate", false, "Check Go code, build the candidate, and run the requested matches")
 	race := flag.Bool("race", false, "Use the race detector in validation mode")
 	verbose := flag.Bool("verbose", false, "Print progress after every color pair")
-	openingsPath := flag.String("openings", "benchmarks/openings-screening-10-v1.txt", "Opening suite")
+	openingsPath := flag.String("openings", "tools/benchmark/openings-screening-10-v1.txt", "Opening suite")
 	flag.Parse()
 	if *validate && *reportOnly {
 		return fmt.Errorf("choose validate or report-only")
@@ -346,7 +346,7 @@ func run() error {
 		if _, err := os.Stat("go.mod"); err != nil {
 			return fmt.Errorf("run validation from the repository root")
 		}
-		*candidate = "benchmarks/bin/pandafish-candidate"
+		*candidate = "tools/benchmark/bin/pandafish-candidate"
 	}
 	if *candidate == "" || *version == "" || (*previous == "") != (*previousVersion == "") || *pairs < 1 || *moveMS < 1 || *maxPlies < 10 || *graceMS < 0 || *skill < 1 || *skill > 20 {
 		return fmt.Errorf("candidate/version required; previous flags paired; pairs/move-ms positive; max-plies >= 10; grace-ms >= 0; stockfish-skill 1..20")

@@ -15,6 +15,7 @@ const quiescenceDepth = 2
 // A zero-value searcher is unlimited, useful for fixed-depth comparisons.
 // Cancellation is distinct from a score, so unfinished nodes never affect ties.
 type searcher struct {
+	nodes    uint64
 	ctx      context.Context
 	deadline time.Time
 	now      func() time.Time
@@ -45,6 +46,7 @@ func (worker *searcher) search(position *chess.Position, depth, alpha, beta int,
 	if depth <= 0 {
 		return worker.quiet(position, quiescenceDepth, alpha, beta, checked)
 	}
+	worker.nodes++
 	if position.Status() != chess.NoMethod {
 		return evaluate(position, position.Turn()), !worker.stopped()
 	}
@@ -76,6 +78,7 @@ func (worker *searcher) quiet(position *chess.Position, depth, alpha, beta int, 
 	if worker.stopped() {
 		return 0, false
 	}
+	worker.nodes++
 	if position.Status() != chess.NoMethod {
 		return evaluate(position, position.Turn()), !worker.stopped()
 	}

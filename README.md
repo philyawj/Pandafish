@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.7 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.8 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
@@ -149,7 +149,12 @@ Include both notices when distributing compiled Pandafish binaries.
 
 ## Local benchmarks
 
-[Benchmark documentation](benchmarks/README.md) covers the validation workflow,
+[Developer tools](tools/README.md) describes the shared tools layout and the
+[Lichess session recorder](tools/lichess/README.md). The recorder launches
+lichess-bot with a fixed engine copy and reports on saved local records.
+It has been validated offline; live collection is a separate step.
+
+[Benchmark documentation](tools/benchmark/README.md) covers the validation workflow,
 playing-strength comparisons, results, and their interpretation.
 See the [release workflow](RELEASING.md) for preparing and publishing a version.
 
@@ -197,4 +202,9 @@ search depth and ignored clock/depth limits.
 depth limits with conservative clock allocation, iterative deepening, and
 interruptible search. Keep the last completed iteration and a legal fallback.
 Material scoring, mate/stalemate handling, and the two-ply quiescence cap are
-unchanged. Live-game logging and metric capture are planned for v0.7.1.
+unchanged.
+
+**v0.8: Record evidence from real games (complete).** Add optional
+engine traces and Go `record`/`report` tools for local Lichess sessions.
+Keep the existing search and challenge policy. See the
+[session tool documentation](tools/lichess/README.md) for operation and limits.

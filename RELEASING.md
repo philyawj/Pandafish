@@ -5,10 +5,15 @@ and benchmark evidence together. Run commands from the repository root.
 
 ## Prepare and review
 
-1. Implement the increment and add focused tests. Follow the
-   [benchmark workflow](benchmarks/README.md#test-a-development-candidate):
+1. Implement the increment and add focused tests. For changes to move selection
+   or time allocation, follow the
+   [benchmark workflow](tools/benchmark/README.md#test-a-development-candidate):
    100 games against the previous release and 100 against the current Stockfish
    skill. Longer comparisons are optional when more evidence is needed.
+   For tooling or recording changes that preserve those policies, use focused
+   unit/race tests, offline capture/report checks, local wrapper validation,
+   and a short real-engine smoke run. State that this validates integration
+   rather than strength; a fresh 100-game comparison is not required.
 2. Review check results, W/D/L, unfinished games, forfeits, and timings. Keep
    the candidate's original benchmark labels and hashes. Reference those
    results from the PR and release notes; do not rename a development run as
@@ -19,7 +24,7 @@ and benchmark evidence together. Run commands from the repository root.
    the next baseline. Keep credentials and private configs out of Git.
    Keep the main README focused on functionality, setup, and short release
    milestones. Put benchmark scores, sample sizes, conditions, notable test
-   games, and interpretation in `benchmarks/README.md` and its results report.
+   games, and interpretation in `tools/benchmark/README.md` and its results report.
    Link to those documents from the main README instead of repeating evidence
    in each release milestone.
 4. Run formatting, tests, vet, a build, and `git diff --check`. If only version
@@ -27,8 +32,8 @@ and benchmark evidence together. Run commands from the repository root.
    instead of another full match. For example, while preparing v0.3:
 
    ```sh
-   go run ./benchmarks --validate --race --version v0.3-release-smoke \
-     --previous benchmarks/bin/pandafish-v0.2 --previous-version v0.2 \
+   go run ./tools/benchmark --validate --race --version v0.3-release-smoke \
+     --previous tools/benchmark/bin/pandafish-v0.2 --previous-version v0.2 \
      --pairs 1 --results /tmp/pandafish-release-smoke
    git diff --check
    ```
@@ -69,8 +74,8 @@ does not automatically advance the Stockfish skill target.
 Build from the tag rather than a development checkout. For v0.3:
 
 ```sh
-mkdir -p benchmarks/bin
-benchmark_bin="$PWD/benchmarks/bin"
+mkdir -p tools/benchmark/bin
+benchmark_bin="$PWD/tools/benchmark/bin"
 build_dir=$(mktemp -d)
 git archive v0.3 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.3" .)
