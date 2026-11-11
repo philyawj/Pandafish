@@ -1,17 +1,19 @@
 # Pandafish
 
-A bare-bones Go chess engine written in Go. Pandafish v0.4 speaks UCI over
-stdin/stdout and looks ahead one opponent reply using depth-two minimax.
+A bare-bones chess engine written in Go. Pandafish v0.5 speaks UCI over
+stdin/stdout and searches three plies using minimax with alpha-beta pruning.
 Standard chess only.
 
-The engine code is in `main.go` and `evaluation.go`.
+The engine code is in `main.go`, `search.go`, and `evaluation.go`.
 [corentings/chess](https://github.com/corentings/chess) handles chess rules,
 including castling, en passant, and promotions. The engine assigns values of
 1 to pawns, 3 to knights and bishops, 5 to rooks, and 9 to queens. It picks a
-legal move by scoring every possible opponent reply from the moving side's
-perspective. It assumes the opponent chooses the lowest score, then chooses
-the move with the highest such worst-case score. Equal scores are still
-selected randomly. Checkmate scores above any material advantage, being
+legal move by looking ahead through its move, the opponent's reply, and its
+next response, assuming each side chooses its best continuation. Alpha-beta
+pruning skips branches that cannot improve a search result, with captures
+searched first to help pruning. Each root move gets an exact score, and equal
+best scores are selected randomly.
+Checkmate scores above any material advantage, being
 checkmated scores below any material disadvantage, and stalemate scores zero.
 Other draw rules and positional features have no separate search evaluation.
 
@@ -37,7 +39,7 @@ The last response is `bestmove` followed by the selected legal black move.
 When no legal move exists, the engine returns `bestmove 0000`.
 
 The engine accepts `position startpos` or `position fen ...`, optionally followed
-by `moves ...`. Normal `go` commands return after the fixed depth-two search;
+by `moves ...`. Normal `go` commands return after the fixed depth-three search;
 clock/depth limits are ignored. `searchmoves` restricts
 the choices. `go infinite` waits for `stop`;
 `go ponder` waits for `stop` or `ponderhit`. Unknown commands and engine options
@@ -138,3 +140,9 @@ random tie breaking are unchanged.
 checkmate and stalemate, including an opponent's immediate mating reply.
 Depth-two search, material values, and random tie breaking are unchanged.
 Repetition and fifty-move draw detection inside the search remain future work.
+
+**v0.5: Build a deeper search (complete).** Replace the fixed two-ply
+calculation with recursive minimax using alpha-beta pruning at three plies.
+The v0.4 material evaluator, mate/stalemate handling, and random tie breaking
+remain unchanged. Quiescence search and time-aware iterative deepening are
+future improvements; clock/depth limits are still ignored.

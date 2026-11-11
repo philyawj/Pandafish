@@ -50,6 +50,15 @@ git archive v0.2 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.3 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.3" .)
+
+build_dir=$(mktemp -d)
+git archive v0.4 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.4" .)
+
+# After v0.5 has been tagged:
+build_dir=$(mktemp -d)
+git archive v0.5 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.5" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -91,12 +100,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-For work toward v0.4, build the released v0.3 baseline as above. Then run one
-command from the repository root:
+After v0.5 is released, build its tagged baseline as above for work toward
+v0.6. Then run one command from the repository root:
 
 ```sh
-go run ./benchmarks --validate --version v0.4-dev \
-  --previous benchmarks/bin/pandafish-v0.3 --previous-version v0.3
+go run ./benchmarks --validate --version v0.6-dev \
+  --previous benchmarks/bin/pandafish-v0.5 --previous-version v0.5
 ```
 
 Validation checks formatting, runs Go tests and vet, builds your working source
@@ -114,7 +123,7 @@ Automated reviews should read the summary first and inspect individual games
 only to investigate a failure or a specific behavior.
 
 No release tag is needed. A committed candidate should use a label containing
-its revision, such as `v0.4-dev-ab12cd3`; append `-dirty` if source is modified.
+its revision, such as `v0.6-dev-ab12cd3`; append `-dirty` if source is modified.
 Optional `--revision` and `--previous-revision` fields also record source
 revisions. `--machine` records a hardware and power-setting note. A binary hash
 identifies executable bytes, but does not reconstruct uncommitted source.
@@ -188,8 +197,8 @@ Use the screening suite unchanged for routine comparisons. When more evidence
 is needed, explicitly request a broader, longer comparison:
 
 ```sh
-go run ./benchmarks --validate --version v0.4-dev \
-  --previous benchmarks/bin/pandafish-v0.3 --previous-version v0.3 \
+go run ./benchmarks --validate --version v0.6-dev \
+  --previous benchmarks/bin/pandafish-v0.5 --previous-version v0.5 \
   --pairs 500 --openings benchmarks/openings-confirmation-50-v1.txt
 ```
 
@@ -232,6 +241,52 @@ gain or stronger play against every opponent or time control. The candidate
 lost all 100 games against Stockfish Level 1. Neither matchup had forfeits or
 unfinished games.
 
+An earlier v0.5 knight-only experiment (recorded as `v0.5-dev`) scored
+45 wins, 20 draws, and 35 losses against v0.4, a 55% score in 100 games.
+This is a modest lead in one screening run, not conclusive evidence of a
+general strength improvement. Its focused tests checked central knight
+development without overlooking pawn captures or immediate material losses.
+
+Against Stockfish 19 at Skill Level 1, that experiment scored 2 wins and 98 losses.
+These are the first wins in the recorded routine Stockfish benchmarks: White
+in round 65 and Black in round 98, both by checkmate. Both matchups completed
+without forfeits or unfinished games. The candidate's largest measured move
+response was 38.4 ms, within the requested 100 ms budget in this run.
+The [saved results and games](results/README.md) preserve the full evidence.
+The Stockfish target remains Level 1; a 2% score does not justify advancing.
+The knight bonus was set aside in favor of deeper alpha-beta search. Its
+results remain preserved as an experiment, not evidence for the replacement
+candidate. The alpha-beta candidates use the unchanged v0.4 evaluator so the
+search change can be assessed separately.
+
+The first alpha-beta run (`v0.5-alpha-beta-dev`) won 99 games against v0.4 but
+lost one on a move-response timeout. The remaining Stockfish matchup was
+stopped to address that failure; the partial results are preserved. Captures
+are now searched first to improve pruning without changing minimax scores.
+The corrected candidate is recorded as `v0.5-alpha-beta-ordered-dev`.
+It scored 95 wins, 4 draws, and 1 loss against v0.4 in 100 games, a 97% score,
+with no forfeits or unfinished games. Together with the focused tactical
+tests, this supports the deeper-search increment under the recorded settings.
+It does not establish a precise Elo gain or strength at other time controls.
+Against Stockfish 19 at Skill Level 1, it scored 4 wins and 96 losses, with no
+forfeits or unfinished games. Its slowest measured response across both
+matchups was 65.3 ms, within the requested 100 ms budget. This supports the
+candidate's reliability in these matches, not a guarantee for every position:
+the engine still uses fixed depth and ignores UCI clock limits. The Stockfish
+target remains Level 1. The difference between four wins here and two in the
+knight experiment is too small to establish a reliable gain against Stockfish.
+
+The exact position that timed out is retained in `BenchmarkBestMove`. To check
+search cost separately from match strength, run from the repository root:
+
+```sh
+go test -run '^$' -bench '^BenchmarkBestMove$'
+```
+
+This reports average time per search on your machine, not a worst-case time
+guarantee. Unit tests compare alpha-beta against exhaustive minimax, including
+that position, and check queen-winning forks that need the third ply.
+
 An earlier v0.3 screening run recorded the first local benchmark draw against
 Stockfish 19 at Skill Level 1: a stalemate with Pandafish playing White in round
 25. The [milestone PGN](milestones/first-stockfish-level-1-draw.pgn) is preserved
@@ -257,7 +312,7 @@ The flag accepts 1 through 20 and defaults to 1. For example:
 
 ```sh
 benchmarks/bin/benchmark \
-  --candidate benchmarks/bin/pandafish-candidate --version v0.4-dev \
+  --candidate benchmarks/bin/pandafish-candidate --version v0.6-dev \
   --previous benchmarks/bin/pandafish-v0.3 --previous-version v0.3 \
   --stockfish-skill 2
 ```

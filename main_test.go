@@ -13,7 +13,7 @@ func TestUCI(t *testing.T) {
 	tests := []struct {
 		name, commands, want string
 	}{
-		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.4\nid author philyawj\nuciok\nreadyok\n"},
+		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.5\nid author philyawj\nuciok\nreadyok\n"},
 		{"history", "position startpos moves e2e4 e7e5\ngo wtime 1000 btime 1000 searchmoves g1f3", "bestmove g1f3\n"},
 		{"no implicit move", "position startpos\ngo searchmoves e2e4\ngo searchmoves e2e4", "bestmove e2e4\nbestmove e2e4\n"},
 		{"new game", "position startpos moves e2e4\nucinewgame\ngo searchmoves d2d4", "bestmove d2d4\n"},
@@ -114,31 +114,31 @@ func TestBestMoveConsidersOpponentReply(t *testing.T) {
 	}
 }
 
-func TestWorstReplyScoreUsesOpponentsBestCapture(t *testing.T) {
+func TestSearchFindsBestCapture(t *testing.T) {
 	game, err := parsePosition(strings.Fields("fen r6k/7P/8/8/8/8/Q7/7K b - - 0 1"))
 	if err != nil {
 		t.Fatal(err)
 	}
 	// Taking our queen leaves our pawn (1) against their rook (5).
 	// Taking only the pawn would leave a much better material balance for us.
-	if got := worstReplyScore(game.Position(), chess.White); got != -4 {
-		t.Fatalf("worst reply score = %d, want -4", got)
+	if got := search(game.Position(), 1, -searchInfinity, searchInfinity); got != 4 {
+		t.Fatalf("black search score = %d, want 4", got)
 	}
 }
 
-func TestWorstReplyScoreWithoutRepliesUsesTerminalScore(t *testing.T) {
+func TestSearchWithoutRepliesUsesTerminalScore(t *testing.T) {
 	for _, tt := range []struct {
 		fen  string
 		want int
 	}{
-		{"7k/6Q1/5K2/8/8/8/8/8 b - - 0 1", mateScore},
+		{"7k/6Q1/5K2/8/8/8/8/8 b - - 0 1", -mateScore},
 		{"7k/5K2/6Q1/8/8/8/8/8 b - - 0 1", 0},
 	} {
 		game, err := parsePosition(append([]string{"fen"}, strings.Fields(tt.fen)...))
 		if err != nil {
 			t.Fatal(err)
 		}
-		if got := worstReplyScore(game.Position(), chess.White); got != tt.want {
+		if got := search(game.Position(), searchDepth, -searchInfinity, searchInfinity); got != tt.want {
 			t.Fatalf("terminal score = %d, want %d", got, tt.want)
 		}
 	}
