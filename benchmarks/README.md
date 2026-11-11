@@ -59,10 +59,14 @@ build_dir=$(mktemp -d)
 git archive v0.5 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.5" .)
 
-# After v0.6 has been tagged:
 build_dir=$(mktemp -d)
 git archive v0.6 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.6" .)
+
+# After v0.7 has been tagged:
+build_dir=$(mktemp -d)
+git archive v0.7 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.7" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -104,12 +108,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-After v0.6 is released, build its tagged baseline as above for work toward
-v0.7. Then run one command from the repository root:
+After v0.7 is released, build its tagged baseline as above for the next engine
+change. Then run one command from the repository root:
 
 ```sh
-go run ./benchmarks --validate --version v0.7-dev \
-  --previous benchmarks/bin/pandafish-v0.6 --previous-version v0.6
+go run ./benchmarks --validate --race --version candidate-dev \
+  --previous benchmarks/bin/pandafish-v0.7 --previous-version v0.7
 ```
 
 Validation checks formatting, runs Go tests and vet, builds your working source
@@ -120,6 +124,12 @@ Any failed code check stops before matches. Forfeits make validation exit with
 an error after saving the results. A low match score is evidence to review,
 not a code-validation failure. The local lichess-bot wrapper check is separate.
 
+Starting with v0.7, UCI command handling stays active while search runs. A
+script must wait for `bestmove` before sending `quit` or closing stdin, which
+cancel unfinished work. Sending `go depth N` followed immediately by `quit`
+does not verify a completed depth-N search. The protocol tests exchange
+commands and responses through pipes instead of preloading an entire session.
+
 The default output is a short check/result summary, with detailed records in
 JSON and PGN. Use `--verbose` only when you want progress after every color pair.
 All moves and scores are handled by Go; no LLM is involved in playing games.
@@ -127,7 +137,7 @@ Automated reviews should read the summary first and inspect individual games
 only to investigate a failure or a specific behavior.
 
 No release tag is needed. A committed candidate should use a label containing
-its revision, such as `v0.7-dev-ab12cd3`; append `-dirty` if source is modified.
+its revision, such as `candidate-dev-ab12cd3`; append `-dirty` if source is modified.
 Optional `--revision` and `--previous-revision` fields also record source
 revisions. `--machine` records a hardware and power-setting note. A binary hash
 identifies executable bytes, but does not reconstruct uncommitted source.
@@ -201,8 +211,8 @@ Use the screening suite unchanged for routine comparisons. When more evidence
 is needed, explicitly request a broader, longer comparison:
 
 ```sh
-go run ./benchmarks --validate --version v0.7-dev \
-  --previous benchmarks/bin/pandafish-v0.6 --previous-version v0.6 \
+go run ./benchmarks --validate --version candidate-dev \
+  --previous benchmarks/bin/pandafish-v0.7 --previous-version v0.7 \
   --pairs 500 --openings benchmarks/openings-confirmation-50-v1.txt
 ```
 
@@ -290,6 +300,9 @@ go test -run '^$' -bench '^BenchmarkBestMove$'
 This reports average time per search on your machine, not a worst-case time
 guarantee. Unit tests compare alpha-beta against exhaustive minimax, including
 that position, and check queen-winning forks that need the third ply.
+For v0.7, this benchmark deliberately retains a fixed depth-three search with
+the same quiescence cap, so it measures computation cost separately from the
+timed UCI search. The match report measures actual UCI response times.
 
 The first v0.6 quiescence run (`v0.6-dev`) scored 83 wins, 10 draws, and 7
 losses against v0.5, but two losses were move-response timeouts. The Stockfish
@@ -324,6 +337,44 @@ both final matchups was 134.1 ms. Eleven responses exceeded the requested
 100 ms budget but stayed inside the 150 ms deadline including protocol
 allowance. These measurements do not establish a worst-case search time.
 
+The v0.7 candidate primarily adds time-control and UCI reliability. Functional
+tests establish budget calculation, cancellation, retention of completed
+iterations, and legal fallback behavior separately from playing strength.
+Iterative deepening can improve strength by reaching more depth, but honoring
+a deadline can also stop earlier than v0.6's fixed search. A higher match
+score is not the definition of correct time control.
+
+In 100 games against v0.6, `v0.7-dev` scored 63 wins, 21 draws, and 15 losses,
+with one unfinished game at the 400-ply cap and no forfeits. The completed-game
+score was 74.2%; treating the unfinished game as a loss through a win gives
+73.5% to 74.5%. This supports the increment under these settings without
+establishing a precise Elo gain or optimal clock allocation. The candidate's
+slowest response in that matchup was 101.6 ms, with one response beyond the
+100 ms request but within the 150 ms deadline including protocol allowance.
+
+The fixed-movetime matches do not test game-clock allocation over a whole
+game. A separate local UCI clock/increment sequence exercises successive
+legal moves and clock consumption. The race and protocol tests also cover
+`isready`, repeated `stop`, `quit`, held infinite/ponder results, `ponderhit`,
+replacement searches, and new-game cancellation. Live-game capture remains
+planned for v0.7.1.
+
+Against Stockfish 19 at Skill Level 1, v0.7-dev scored 9 wins, 1 draw, and
+90 losses, a 9.5% score, with no forfeits or unfinished games. The earlier
+v0.6 candidate scored 12.5%; these screens do not establish a clear change
+against Stockfish. The target remains Level 1. Across both v0.7 matchups, the
+slowest candidate response was 101.9 ms, and two responses exceeded the 100 ms
+request while staying within the 150 ms deadline. This is measured protocol
+wall time, including position handling and scheduling, rather than a strict
+bound on all future responses.
+
+The clock-allocation formula is deliberately conservative and has not been
+tuned through live play. The functional checks verify its rules and search
+control; later recorded Lichess games can test how well that policy spends
+the available game clock. A weaker result against some opponents or at some
+time controls would need review without invalidating the independently tested
+protocol improvements.
+
 An earlier v0.3 screening run recorded the first local benchmark draw against
 Stockfish 19 at Skill Level 1: a stalemate with Pandafish playing White in round
 25. The [milestone PGN](milestones/first-stockfish-level-1-draw.pgn) is preserved
@@ -349,7 +400,7 @@ The flag accepts 1 through 20 and defaults to 1. For example:
 
 ```sh
 benchmarks/bin/benchmark \
-  --candidate benchmarks/bin/pandafish-candidate --version v0.7-dev \
+  --candidate benchmarks/bin/pandafish-candidate --version candidate-dev \
   --previous benchmarks/bin/pandafish-v0.3 --previous-version v0.3 \
   --stockfish-skill 2
 ```

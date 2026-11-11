@@ -21,6 +21,8 @@ Forfeits count as losses for the offending engine. Compare matching profiles bef
 | v0.6-dev | v0.5 | 83 / 10 / 7 | 0 | 2 | 88.0% | 88.0% to 88.0% | [R8](v0.6-dev-vs-v0.5-and-stockfish-1/summary.json) | [JSON](v0.6-dev-vs-v0.5-and-stockfish-1/summary.json), [PGN](v0.6-dev-vs-v0.5-and-stockfish-1/games.pgn) |
 | v0.6-quiescence-dev | v0.5 | 80 / 16 / 4 | 0 | 0 | 88.0% | 88.0% to 88.0% | [R9](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/summary.json) | [JSON](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/summary.json), [PGN](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/games.pgn) |
 | v0.6-quiescence-dev | Stockfish 19 / Skill 1 | 12 / 1 / 87 | 0 | 0 | 12.5% | 12.5% to 12.5% | [R9](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/summary.json) | [JSON](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/summary.json), [PGN](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/games.pgn) |
+| v0.7-dev | v0.6 | 63 / 21 / 15 | 1 | 0 | 74.2% | 73.5% to 74.5% | [R10](v0.7-dev-vs-v0.6-and-stockfish-1/summary.json) | [JSON](v0.7-dev-vs-v0.6-and-stockfish-1/summary.json), [PGN](v0.7-dev-vs-v0.6-and-stockfish-1/games.pgn) |
+| v0.7-dev | Stockfish 19 / Skill 1 | 9 / 1 / 90 | 0 | 0 | 9.5% | 9.5% to 9.5% | [R10](v0.7-dev-vs-v0.6-and-stockfish-1/summary.json) | [JSON](v0.7-dev-vs-v0.6-and-stockfish-1/summary.json), [PGN](v0.7-dev-vs-v0.6-and-stockfish-1/games.pgn) |
 
 ## Run profiles
 
@@ -37,6 +39,7 @@ Times are milliseconds. Compare matching timing policies and settings. Partial r
 | [R7](v0.5-alpha-beta-ordered-dev-vs-v0.4-and-stockfish-1/summary.json) | 2026-11-11 05:56Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2; power setting not recorded | wall-clock-v2 | complete |
 | [R8](v0.6-dev-vs-v0.5-and-stockfish-1/summary.json) | 2026-11-11 06:33Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2; power setting not recorded | wall-clock-v2 | partial (1/2 matchups) |
 | [R9](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/summary.json) | 2026-11-11 06:41Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2; power setting not recorded | wall-clock-v2 | complete |
+| [R10](v0.7-dev-vs-v0.6-and-stockfish-1/summary.json) | 2026-11-11 15:30Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2; power setting not recorded | wall-clock-v2 | complete |
 
 ## Measured timing
 
@@ -59,3 +62,5 @@ Wall time includes sending the position, requesting the move, and receiving best
 | R8 | v0.5 | 151.0 | 51.4 | 17 / 0 |
 | R9 | v0.5 | 110.0 | 89.4 | 6 / 0 |
 | R9 | Stockfish 19 / Skill 1 | 134.1 | 136.6 | 5 / 2365 |
+| R10 | v0.6 | 101.6 | 139.6 | 1 / 4 |
+| R10 | Stockfish 19 / Skill 1 | 101.9 | 102.7 | 1 / 2666 |

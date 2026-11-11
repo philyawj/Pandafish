@@ -38,7 +38,7 @@ rate_limiting_delay: 0
 
 correspondence:
   ponder: false # Also disable pondering for correspondence games.
-  move_time: 1 # Requested seconds; the bounded search ignores time limits.
+  move_time: 1 # Requested seconds; Pandafish now honors the UCI move-time limit.
   checkin_period: 300
   disconnect_time: 150
 
@@ -67,7 +67,7 @@ matchmaking:
 
 # {me} is replaced with your bot's username. Keep each rendered message under 140 characters.
 greeting:
-  hello: "{me} here, running Pandafish v0.6! Checking the exchange before counting bamboo. Good luck!"
-  goodbye: "GG! {me} was running Pandafish v0.6. Back to counting bamboo!"
-  hello_spectators: "{me} is running Pandafish v0.6: looking past captures, dreaming of bamboo!"
-  goodbye_spectators: "Thanks for watching {me} run Pandafish v0.6. The bamboo was real!"
+  hello: "{me} here, running Pandafish v0.7! Watching the clock, counting bamboo. Good luck!"
+  goodbye: "GG! {me} was running Pandafish v0.7. Back to counting bamboo!"
+  hello_spectators: "{me} is running Pandafish v0.7: thinking on a budget, dreaming of bamboo!"
+  goodbye_spectators: "Thanks for watching {me} run Pandafish v0.7. The bamboo was real!"
