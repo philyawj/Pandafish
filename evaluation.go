@@ -21,8 +21,18 @@ func evaluate(position *chess.Position, perspective chess.Color) int {
 	case chess.Stalemate:
 		return 0
 	}
+	return materialScore(position, perspective)
+}
+
+// materialScore is used after the caller has ruled out a terminal position.
+func materialScore(position *chess.Position, perspective chess.Color) int {
 	score := 0
-	for _, piece := range position.Board().SquareMap() {
+	// Read the board directly to avoid allocating a map at every search leaf.
+	for square := chess.A1; square <= chess.H8; square++ {
+		piece := position.Board().Piece(square)
+		if piece == chess.NoPiece {
+			continue
+		}
 		value := pieceValues[piece.Type()]
 		if piece.Color() == perspective {
 			score += value

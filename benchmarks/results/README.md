@@ -18,6 +18,9 @@ Forfeits count as losses for the offending engine. Compare matching profiles bef
 | v0.5-alpha-beta-dev | v0.4 | 99 / 0 / 1 | 0 | 1 | 99.0% | 99.0% to 99.0% | [R6](v0.5-alpha-beta-dev-vs-v0.4-and-stockfish-1/summary.json) | [JSON](v0.5-alpha-beta-dev-vs-v0.4-and-stockfish-1/summary.json), [PGN](v0.5-alpha-beta-dev-vs-v0.4-and-stockfish-1/games.pgn) |
 | v0.5-alpha-beta-ordered-dev | v0.4 | 95 / 4 / 1 | 0 | 0 | 97.0% | 97.0% to 97.0% | [R7](v0.5-alpha-beta-ordered-dev-vs-v0.4-and-stockfish-1/summary.json) | [JSON](v0.5-alpha-beta-ordered-dev-vs-v0.4-and-stockfish-1/summary.json), [PGN](v0.5-alpha-beta-ordered-dev-vs-v0.4-and-stockfish-1/games.pgn) |
 | v0.5-alpha-beta-ordered-dev | Stockfish 19 / Skill 1 | 4 / 0 / 96 | 0 | 0 | 4.0% | 4.0% to 4.0% | [R7](v0.5-alpha-beta-ordered-dev-vs-v0.4-and-stockfish-1/summary.json) | [JSON](v0.5-alpha-beta-ordered-dev-vs-v0.4-and-stockfish-1/summary.json), [PGN](v0.5-alpha-beta-ordered-dev-vs-v0.4-and-stockfish-1/games.pgn) |
+| v0.6-dev | v0.5 | 83 / 10 / 7 | 0 | 2 | 88.0% | 88.0% to 88.0% | [R8](v0.6-dev-vs-v0.5-and-stockfish-1/summary.json) | [JSON](v0.6-dev-vs-v0.5-and-stockfish-1/summary.json), [PGN](v0.6-dev-vs-v0.5-and-stockfish-1/games.pgn) |
+| v0.6-quiescence-dev | v0.5 | 80 / 16 / 4 | 0 | 0 | 88.0% | 88.0% to 88.0% | [R9](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/summary.json) | [JSON](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/summary.json), [PGN](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/games.pgn) |
+| v0.6-quiescence-dev | Stockfish 19 / Skill 1 | 12 / 1 / 87 | 0 | 0 | 12.5% | 12.5% to 12.5% | [R9](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/summary.json) | [JSON](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/summary.json), [PGN](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/games.pgn) |
 
 ## Run profiles
 
@@ -32,6 +35,8 @@ Times are milliseconds. Compare matching timing policies and settings. Partial r
 | [R5](v0.5-dev-vs-v0.4-and-stockfish-1/summary.json) | 2026-11-11 05:32Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple silicon; power setting not recorded | wall-clock-v2 | complete |
 | [R6](v0.5-alpha-beta-dev-vs-v0.4-and-stockfish-1/summary.json) | 2026-11-11 05:50Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple silicon; model and power setting not recorded | wall-clock-v2 | partial (1/2 matchups) |
 | [R7](v0.5-alpha-beta-ordered-dev-vs-v0.4-and-stockfish-1/summary.json) | 2026-11-11 05:56Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2; power setting not recorded | wall-clock-v2 | complete |
+| [R8](v0.6-dev-vs-v0.5-and-stockfish-1/summary.json) | 2026-11-11 06:33Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2; power setting not recorded | wall-clock-v2 | partial (1/2 matchups) |
+| [R9](v0.6-quiescence-dev-vs-v0.5-and-stockfish-1/summary.json) | 2026-11-11 06:41Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2; power setting not recorded | wall-clock-v2 | complete |
 
 ## Measured timing
 
@@ -51,3 +56,6 @@ Wall time includes sending the position, requesting the move, and receiving best
 | R6 | v0.4 | 151.0 | 6.0 | 2 / 0 |
 | R7 | v0.4 | 65.3 | 6.4 | 0 / 0 |
 | R7 | Stockfish 19 / Skill 1 | 61.9 | 102.2 | 0 / 2266 |
+| R8 | v0.5 | 151.0 | 51.4 | 17 / 0 |
+| R9 | v0.5 | 110.0 | 89.4 | 6 / 0 |
+| R9 | Stockfish 19 / Skill 1 | 134.1 | 136.6 | 5 / 2365 |

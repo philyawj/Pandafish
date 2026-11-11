@@ -13,7 +13,7 @@ func TestUCI(t *testing.T) {
 	tests := []struct {
 		name, commands, want string
 	}{
-		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.5\nid author philyawj\nuciok\nreadyok\n"},
+		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.6\nid author philyawj\nuciok\nreadyok\n"},
 		{"history", "position startpos moves e2e4 e7e5\ngo wtime 1000 btime 1000 searchmoves g1f3", "bestmove g1f3\n"},
 		{"no implicit move", "position startpos\ngo searchmoves e2e4\ngo searchmoves e2e4", "bestmove e2e4\nbestmove e2e4\n"},
 		{"new game", "position startpos moves e2e4\nucinewgame\ngo searchmoves d2d4", "bestmove d2d4\n"},
@@ -177,8 +177,8 @@ func TestBestMoveRecognizesGameEndings(t *testing.T) {
 	for _, tt := range []struct{ name, fen, moves, want string }{
 		{"white mates instead of taking queen", "7k/8/5KQ1/8/8/8/8/1q6 w - - 0 1", "g6g7 g6b1", "g6g7"},
 		{"black mates instead of taking queen", "1Q6/8/8/8/8/5kq1/8/7K b - - 0 1", "g3g2 g3b8", "g3g2"},
-		{"white avoids mate after taking rook", "8/8/r7/8/8/5kq1/Q7/7K w - - 0 1", "a2a6 a2b2", "a2b2"},
-		{"black avoids mate after taking rook", "7k/q7/5KQ1/8/8/R7/8/8 b - - 0 1", "a7a3 a7b7", "a7b7"},
+		{"white avoids mate after taking rook", "8/8/r7/8/8/5kq1/Q7/5N1K w - - 0 1", "a2a6 a2b2", "a2b2"},
+		{"black avoids mate after taking rook", "5n1k/q7/5KQ1/8/8/R7/8/8 b - - 0 1", "a7a3 a7b7", "a7b7"},
 		{"white avoids stalemate while ahead", "7k/5K2/8/6Q1/8/8/8/8 w - - 0 1", "g5g6 g5g4", "g5g4"},
 		{"black avoids stalemate while ahead", "8/8/8/8/6q1/8/5k2/7K b - - 0 1", "g4g3 g4g5", "g4g5"},
 	} {

@@ -1,7 +1,7 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.5 speaks UCI over
-stdin/stdout and searches three plies using minimax with alpha-beta pruning.
+A bare-bones chess engine written in Go. Pandafish v0.6 speaks UCI over
+stdin/stdout and uses three-ply alpha-beta search with bounded quiescence.
 Standard chess only.
 
 The engine code is in `main.go`, `search.go`, and `evaluation.go`.
@@ -11,11 +11,19 @@ including castling, en passant, and promotions. The engine assigns values of
 legal move by looking ahead through its move, the opponent's reply, and its
 next response, assuming each side chooses its best continuation. Alpha-beta
 pruning skips branches that cannot improve a search result, with captures
-searched first to help pruning. Each root move gets an exact score, and equal
-best scores are selected randomly.
+searched first to help pruning. Equal best moves are selected randomly;
+root pruning keeps their scores exact while discarding inferior choices.
 Checkmate scores above any material advantage, being
 checkmated scores below any material disadvantage, and stalemate scores zero.
 Other draw rules and positional features have no separate search evaluation.
+
+Quiescence means quietness. At the normal search boundary, it examines
+captures and promotions, and all legal escapes when the king is in check.
+Away from check it can keep the current material score instead of making a
+capture. This helps avoid counting a captured piece before considering the
+recapture. The extension is capped at two additional plies. At that cap,
+static evaluation is used even
+if captures or checks remain, so long tactical sequences can still be missed.
 
 Clone this repository and build with Go 1.25 or newer:
 
@@ -39,9 +47,9 @@ The last response is `bestmove` followed by the selected legal black move.
 When no legal move exists, the engine returns `bestmove 0000`.
 
 The engine accepts `position startpos` or `position fen ...`, optionally followed
-by `moves ...`. Normal `go` commands return after the fixed depth-three search;
-clock/depth limits are ignored. `searchmoves` restricts
-the choices. `go infinite` waits for `stop`;
+by `moves ...`. Normal `go` commands return after the three-ply main search
+and bounded quiescence extension; clock/depth limits are ignored.
+`searchmoves` restricts the choices. `go infinite` waits for `stop`;
 `go ponder` waits for `stop` or `ponderhit`. Unknown commands and engine options
 are ignored.
 
@@ -144,5 +152,11 @@ Repetition and fifty-move draw detection inside the search remain future work.
 **v0.5: Build a deeper search (complete).** Replace the fixed two-ply
 calculation with recursive minimax using alpha-beta pruning at three plies.
 The v0.4 material evaluator, mate/stalemate handling, and random tie breaking
-remain unchanged. Quiescence search and time-aware iterative deepening are
-future improvements; clock/depth limits are still ignored.
+remain unchanged. This release retained fixed-depth search and ignored
+clock/depth limits.
+
+**v0.6: Finish the exchange before counting the pieces (complete).**
+Add bounded quiescence search for captures, promotions, and check evasions
+beyond the three-ply boundary. Material values, mate/stalemate scoring, and
+random tie breaking are unchanged. Time-aware iterative deepening remains
+the next search foundation to add before increasing search work further.
