@@ -30,7 +30,7 @@ func run(in io.Reader, out io.Writer) error {
 		}
 		switch args[0] {
 		case "uci":
-			fmt.Fprintln(out, "id name Pandafish v0.5\nid author philyawj\nuciok")
+			fmt.Fprintln(out, "id name Pandafish v0.6\nid author philyawj\nuciok")
 		case "isready":
 			fmt.Fprintln(out, "readyok")
 		case "ucinewgame":
@@ -91,16 +91,17 @@ func parsePosition(args []string) (*chess.Game, error) {
 
 func bestMove(game *chess.Game, args []string) string {
 	var candidates []string
-	bestScore := -int(^uint(0) >> 1)
+	bestScore := -searchInfinity
 	searchMoves := slices.Index(args, "searchmoves")
-	for _, move := range game.ValidMoves() {
+	for _, move := range orderedMoves(game.Position()) {
 		uci := (chess.UCINotation{}).Encode(game.Position(), &move)
 		if searchMoves >= 0 && !slices.Contains(args[searchMoves+1:], uci) {
 			continue
 		}
 		nextPosition := game.Position().Update(&move)
-		// Use a full window for each root move so ties have exact scores.
-		score := -search(nextPosition, searchDepth-1, -searchInfinity, searchInfinity)
+		// Keep a one-point margin below the best score so ties remain exact.
+		// Inferior moves can return bounds; they cannot join the best-move list.
+		score := -search(nextPosition, searchDepth-1, -searchInfinity, 1-bestScore)
 		if score > bestScore {
 			bestScore = score
 			candidates = candidates[:0]

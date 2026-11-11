@@ -55,10 +55,14 @@ build_dir=$(mktemp -d)
 git archive v0.4 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.4" .)
 
-# After v0.5 has been tagged:
 build_dir=$(mktemp -d)
 git archive v0.5 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.5" .)
+
+# After v0.6 has been tagged:
+build_dir=$(mktemp -d)
+git archive v0.6 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.6" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -100,12 +104,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-After v0.5 is released, build its tagged baseline as above for work toward
-v0.6. Then run one command from the repository root:
+After v0.6 is released, build its tagged baseline as above for work toward
+v0.7. Then run one command from the repository root:
 
 ```sh
-go run ./benchmarks --validate --version v0.6-dev \
-  --previous benchmarks/bin/pandafish-v0.5 --previous-version v0.5
+go run ./benchmarks --validate --version v0.7-dev \
+  --previous benchmarks/bin/pandafish-v0.6 --previous-version v0.6
 ```
 
 Validation checks formatting, runs Go tests and vet, builds your working source
@@ -123,7 +127,7 @@ Automated reviews should read the summary first and inspect individual games
 only to investigate a failure or a specific behavior.
 
 No release tag is needed. A committed candidate should use a label containing
-its revision, such as `v0.6-dev-ab12cd3`; append `-dirty` if source is modified.
+its revision, such as `v0.7-dev-ab12cd3`; append `-dirty` if source is modified.
 Optional `--revision` and `--previous-revision` fields also record source
 revisions. `--machine` records a hardware and power-setting note. A binary hash
 identifies executable bytes, but does not reconstruct uncommitted source.
@@ -197,8 +201,8 @@ Use the screening suite unchanged for routine comparisons. When more evidence
 is needed, explicitly request a broader, longer comparison:
 
 ```sh
-go run ./benchmarks --validate --version v0.6-dev \
-  --previous benchmarks/bin/pandafish-v0.5 --previous-version v0.5 \
+go run ./benchmarks --validate --version v0.7-dev \
+  --previous benchmarks/bin/pandafish-v0.6 --previous-version v0.6 \
   --pairs 500 --openings benchmarks/openings-confirmation-50-v1.txt
 ```
 
@@ -276,7 +280,7 @@ the engine still uses fixed depth and ignores UCI clock limits. The Stockfish
 target remains Level 1. The difference between four wins here and two in the
 knight experiment is too small to establish a reliable gain against Stockfish.
 
-The exact position that timed out is retained in `BenchmarkBestMove`. To check
+Positions that timed out are retained in `BenchmarkBestMove`. To check
 search cost separately from match strength, run from the repository root:
 
 ```sh
@@ -286,6 +290,39 @@ go test -run '^$' -bench '^BenchmarkBestMove$'
 This reports average time per search on your machine, not a worst-case time
 guarantee. Unit tests compare alpha-beta against exhaustive minimax, including
 that position, and check queen-winning forks that need the third ply.
+
+The first v0.6 quiescence run (`v0.6-dev`) scored 83 wins, 10 draws, and 7
+losses against v0.5, but two losses were move-response timeouts. The Stockfish
+leg was stopped to address those failures, and the partial results are
+preserved. A strength lead does not make a run with timing failures ready
+for release. The revised candidate (`v0.6-quiescence-dev`) orders captures by
+victim and attacker value, reuses root bounds while preserving exact best-move
+ties, and avoids repeated evaluation work. The extra tactical search remains
+capped at two plies; it does not implement clock management.
+
+Focused tests cover poisoned captures, recaptures, quiet and capture
+promotions, underpromotion to avoid stalemate, en passant, and check positions
+requiring quiet king moves or blocks. Reference minimax includes the bounded
+quiescence rules. Captured timeout positions remain in the performance suite;
+the main search comparisons use small representative positions so routine
+unit tests stay quick.
+
+The revised candidate scored 80 wins, 16 draws, and 4 losses against v0.5 in
+100 games, an 88% score, with no forfeits or unfinished games. This supports
+the increment under the recorded settings rather than establishing a precise
+Elo gain or reliability at every time control. Its slowest response in this
+matchup was 110.0 ms. Six responses exceeded the requested 100 ms budget but
+remained within the explicit 50 ms protocol allowance. Clock management is
+still needed before expanding the search further.
+
+Against Stockfish 19 at Skill Level 1, the revised candidate scored 12 wins,
+1 draw, and 87 losses, a 12.5% score, with no forfeits or unfinished games.
+This is a higher observed score than the v0.5 candidate's 4%, while the
+previous-release comparison remains the clearest evidence for this increment.
+The Stockfish target stays at Level 1. The slowest candidate response across
+both final matchups was 134.1 ms. Eleven responses exceeded the requested
+100 ms budget but stayed inside the 150 ms deadline including protocol
+allowance. These measurements do not establish a worst-case search time.
 
 An earlier v0.3 screening run recorded the first local benchmark draw against
 Stockfish 19 at Skill Level 1: a stalemate with Pandafish playing White in round
@@ -312,7 +349,7 @@ The flag accepts 1 through 20 and defaults to 1. For example:
 
 ```sh
 benchmarks/bin/benchmark \
-  --candidate benchmarks/bin/pandafish-candidate --version v0.6-dev \
+  --candidate benchmarks/bin/pandafish-candidate --version v0.7-dev \
   --previous benchmarks/bin/pandafish-v0.3 --previous-version v0.3 \
   --stockfish-skill 2
 ```
