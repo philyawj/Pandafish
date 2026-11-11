@@ -63,10 +63,13 @@ build_dir=$(mktemp -d)
 git archive v0.6 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.6" .)
 
-# After v0.7 has been tagged:
 build_dir=$(mktemp -d)
 git archive v0.7 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.7" .)
+
+build_dir=$(mktemp -d)
+git archive v0.8 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.8" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -108,12 +111,11 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-After v0.7 is released, build its tagged baseline as above for the next engine
-change. Then run one command from the repository root:
+Build the v0.8 tagged baseline as above for the next engine change. Then run one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.7 --previous-version v0.7
+  --previous tools/benchmark/bin/pandafish-v0.8 --previous-version v0.8
 ```
 
 Validation checks formatting, runs Go tests and vet, builds your working source
@@ -212,7 +214,7 @@ is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.7 --previous-version v0.7 \
+  --previous tools/benchmark/bin/pandafish-v0.8 --previous-version v0.8 \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
 
@@ -356,8 +358,8 @@ The fixed-movetime matches do not test game-clock allocation over a whole
 game. A separate local UCI clock/increment sequence exercises successive
 legal moves and clock consumption. The race and protocol tests also cover
 `isready`, repeated `stop`, `quit`, held infinite/ponder results, `ponderhit`,
-replacement searches, and new-game cancellation. Live-game capture remains
-planned for v0.7.1.
+replacement searches, and new-game cancellation. Live-game capture was originally planned for v0.7.1 and shipped as the
+separate v0.8 tooling increment.
 
 Against Stockfish 19 at Skill Level 1, v0.7-dev scored 9 wins, 1 draw, and
 90 losses, a 9.5% score, with no forfeits or unfinished games. The earlier
@@ -473,3 +475,20 @@ UCI helper, so they do not require Stockfish. They cover failures, timeouts,
 blocked writes, snapshots, options, color scoring, score bounds, move caps,
 opening legality, PGN output, checkpoints, and report history. These local
 checks do not connect to Lichess.
+
+### v0.8 recording and reporting
+
+v0.8 adds observation and session tooling without changing the evaluator,
+search rules, or time-allocation policy. It does not claim a strength gain.
+Validation focuses on protocol and capture correctness: unit/race checks,
+configuration loading, legal moves through the local client wrapper, complete
+search metrics, explicit PGN linkage, and short local integration matches.
+The release smoke comparison uses two games each against v0.7 and Stockfish
+Skill Level 1. That sample checks integration rather than playing strength;
+its records stay outside tracked history. No new routine strength tournament
+is required for this tooling increment. Level 1 remains the target.
+
+See the [session tool documentation](../lichess/README.md) for commands,
+recording limits, and offline reporting. Future changes to move selection or
+time allocation use the routine comparison workflow above with v0.8 as the
+previous-release baseline.

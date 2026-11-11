@@ -10,7 +10,7 @@ Stockfish to choose live moves.
 Use Go 1.25 or newer, a working lichess-bot checkout with its Python environment,
 a BOT account, and a private client configuration. This launcher supports
 macOS and Linux and a native UCI engine without an interpreter or engine
-command-line options. Build the engine from this branch to get trace support;
+command-line options. Build Pandafish v0.8 or newer to get trace support;
 older release binaries do not write these traces.
 
 Run from the Pandafish repository root:

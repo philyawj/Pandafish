@@ -124,7 +124,7 @@ func runEngine(in io.Reader, out io.Writer, trace *telemetry.Recorder) (err erro
 			}
 			switch args[0] {
 			case "uci":
-				fmt.Fprintln(out, "id name Pandafish v0.7\nid author philyawj\nuciok")
+				fmt.Fprintln(out, "id name Pandafish v0.8\nid author philyawj\nuciok")
 			case "isready":
 				fmt.Fprintln(out, "readyok")
 			case "ucinewgame":

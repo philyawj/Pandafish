@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.7 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.8 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
@@ -204,7 +204,7 @@ interruptible search. Keep the last completed iteration and a legal fallback.
 Material scoring, mate/stalemate handling, and the two-ply quiescence cap are
 unchanged.
 
-**Next: Record evidence from real games (in development).** Add optional
+**v0.8: Record evidence from real games (complete).** Add optional
 engine traces and Go `record`/`report` tools for local Lichess sessions.
 Keep the existing search and challenge policy. See the
 [session tool documentation](tools/lichess/README.md) for operation and limits.

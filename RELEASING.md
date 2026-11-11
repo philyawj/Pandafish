@@ -5,10 +5,15 @@ and benchmark evidence together. Run commands from the repository root.
 
 ## Prepare and review
 
-1. Implement the increment and add focused tests. Follow the
+1. Implement the increment and add focused tests. For changes to move selection
+   or time allocation, follow the
    [benchmark workflow](tools/benchmark/README.md#test-a-development-candidate):
    100 games against the previous release and 100 against the current Stockfish
    skill. Longer comparisons are optional when more evidence is needed.
+   For tooling or recording changes that preserve those policies, use focused
+   unit/race tests, offline capture/report checks, local wrapper validation,
+   and a short real-engine smoke run. State that this validates integration
+   rather than strength; a fresh 100-game comparison is not required.
 2. Review check results, W/D/L, unfinished games, forfeits, and timings. Keep
    the candidate's original benchmark labels and hashes. Reference those
    results from the PR and release notes; do not rename a development run as
