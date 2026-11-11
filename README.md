@@ -149,7 +149,10 @@ Include both notices when distributing compiled Pandafish binaries.
 
 ## Local benchmarks
 
-[Benchmark documentation](benchmarks/README.md) covers the validation workflow,
+[Developer tools](tools/README.md) describes the shared tools layout and the
+planned Lichess session recorder. The recorder has not been implemented.
+
+[Benchmark documentation](tools/benchmark/README.md) covers the validation workflow,
 playing-strength comparisons, results, and their interpretation.
 See the [release workflow](RELEASING.md) for preparing and publishing a version.
 

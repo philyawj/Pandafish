@@ -20,7 +20,7 @@ game counts and reports scores without a statistical pass/fail verdict.
 
 For now, it lives in the same repository so engine changes, benchmark tests,
 instructions, and supporting results can evolve together in one pull request.
-The separate `benchmarks/` folder keeps it out of the engine executable while
+The separate `tools/benchmark/` folder keeps it out of the engine executable while
 we build out Pandafish. A separate project would make more sense if the runner
 eventually serves other engines or needs distributed workers.
 
@@ -35,9 +35,9 @@ From the repository root, build the runner and released baselines. Temporary
 source checkouts keep your current source untouched:
 
 ```sh
-mkdir -p benchmarks/bin
-benchmark_bin="$PWD/benchmarks/bin"
-go build -o "$benchmark_bin/benchmark" ./benchmarks
+mkdir -p tools/benchmark/bin
+benchmark_bin="$PWD/tools/benchmark/bin"
+go build -o "$benchmark_bin/benchmark" ./tools/benchmark
 
 build_dir=$(mktemp -d)
 git archive v0.1 | tar -x -C "$build_dir"
@@ -81,12 +81,12 @@ only the executable is copied into the benchmark's temporary snapshot.
 From the repository root:
 
 ```sh
-benchmarks/bin/benchmark \
-  --candidate benchmarks/bin/pandafish-v0.1 --version v0.1
+tools/benchmark/bin/benchmark \
+  --candidate tools/benchmark/bin/pandafish-v0.1 --version v0.1
 
-benchmarks/bin/benchmark \
-  --candidate benchmarks/bin/pandafish-v0.2 --version v0.2 \
-  --previous benchmarks/bin/pandafish-v0.1 --previous-version v0.1
+tools/benchmark/bin/benchmark \
+  --candidate tools/benchmark/bin/pandafish-v0.2 --version v0.2 \
+  --previous tools/benchmark/bin/pandafish-v0.1 --previous-version v0.1
 ```
 
 These play v0.1 against Stockfish, then v0.2 against v0.1 and Stockfish. Each
@@ -112,12 +112,12 @@ After v0.7 is released, build its tagged baseline as above for the next engine
 change. Then run one command from the repository root:
 
 ```sh
-go run ./benchmarks --validate --race --version candidate-dev \
-  --previous benchmarks/bin/pandafish-v0.7 --previous-version v0.7
+go run ./tools/benchmark --validate --race --version candidate-dev \
+  --previous tools/benchmark/bin/pandafish-v0.7 --previous-version v0.7
 ```
 
 Validation checks formatting, runs Go tests and vet, builds your working source
-as `benchmarks/bin/pandafish-candidate`, and plays 100 games per opponent. Add
+as `tools/benchmark/bin/pandafish-candidate`, and plays 100 games per opponent. Add
 `--race` when changing concurrent code. Omit `--candidate` in validation mode;
 the fixed candidate path protects released baselines from accidental overwrites.
 Any failed code check stops before matches. Forfeits make validation exit with
@@ -154,7 +154,7 @@ rather than overwriting them with development builds.
 
 ### Moving a candidate to release
 
-Follow [the release workflow](../RELEASING.md) for the preparation, PR, merge,
+Follow [the release workflow](../../RELEASING.md) for the preparation, PR, merge,
 tag, and publishing steps.
 
 When the checks and routine matches support an improvement, open a PR with the
@@ -211,9 +211,9 @@ Use the screening suite unchanged for routine comparisons. When more evidence
 is needed, explicitly request a broader, longer comparison:
 
 ```sh
-go run ./benchmarks --validate --version candidate-dev \
-  --previous benchmarks/bin/pandafish-v0.7 --previous-version v0.7 \
-  --pairs 500 --openings benchmarks/openings-confirmation-50-v1.txt
+go run ./tools/benchmark --validate --version candidate-dev \
+  --previous tools/benchmark/bin/pandafish-v0.7 --previous-version v0.7 \
+  --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
 
 That plays 1,000 games per opponent, or 2,000 total. The separate confirmation
@@ -399,9 +399,9 @@ Advance manually with `--stockfish-skill 2`, then 3, and so on through 20.
 The flag accepts 1 through 20 and defaults to 1. For example:
 
 ```sh
-benchmarks/bin/benchmark \
-  --candidate benchmarks/bin/pandafish-candidate --version candidate-dev \
-  --previous benchmarks/bin/pandafish-v0.3 --previous-version v0.3 \
+tools/benchmark/bin/benchmark \
+  --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
+  --previous tools/benchmark/bin/pandafish-v0.3 --previous-version v0.3 \
   --stockfish-skill 2
 ```
 
@@ -462,7 +462,7 @@ have additional PGNs but is excluded from the summarized scores. There is
 no automatic resume. The report distinguishes partial and completed runs.
 
 `results/README.md` is rebuilt after each matchup and at completion. To rebuild
-it without playing, run `benchmarks/bin/benchmark --report-only`. Commit the
+it without playing, run `tools/benchmark/bin/benchmark --report-only`. Commit the
 JSON, PGNs, and Markdown report when publishing a benchmark. Compiled binaries
 stay gitignored in `bin/`; the benchmark has no Python dependency.
 
