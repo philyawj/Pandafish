@@ -10,10 +10,21 @@ import (
 	"time"
 
 	"github.com/corentings/chess/v2"
+	"github.com/philyawj/Pandafish/internal/telemetry"
 )
 
 func main() {
-	if err := run(os.Stdin, os.Stdout); err != nil {
+	var trace *telemetry.Recorder
+	if dir := os.Getenv(telemetry.Environment); dir != "" {
+		var err error
+		trace, err = telemetry.Open(dir)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, "capture:", err)
+			os.Exit(1)
+		}
+	}
+	defer trace.Close()
+	if err := runEngine(os.Stdin, telemetry.Output{Destination: os.Stdout, Recorder: trace}, trace); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
@@ -33,7 +44,18 @@ type activeSearch struct {
 	limits   goLimits
 }
 
-func run(in io.Reader, out io.Writer) error {
+func run(in io.Reader, out io.Writer) error { return runEngine(in, out, nil) }
+
+func runEngine(in io.Reader, out io.Writer, trace *telemetry.Recorder) (err error) {
+	defer func() {
+		status := "ok"
+		if err != nil {
+			status = "error"
+		}
+		if e := trace.Write("exit", status); err == nil {
+			err = e
+		}
+	}()
 	// Only this loop owns output and protocol state. The search worker owns its
 	// position until joined; a replacement cannot race old position caches.
 	lines, done := make(chan inputLine), make(chan struct{})
@@ -54,7 +76,7 @@ func run(in io.Reader, out io.Writer) error {
 	}()
 	game := chess.NewGame()
 	var active *activeSearch
-	finish := func(emit bool) {
+	finish := func(emit bool, reason string) {
 		if active == nil {
 			return
 		}
@@ -63,11 +85,15 @@ func run(in io.Reader, out io.Writer) error {
 			active.result = <-active.results
 		}
 		if emit {
+			if reason != "" {
+				active.result.metrics.Reason = reason
+			}
+			reportSearch(out, active.result)
 			fmt.Fprintln(out, "bestmove", active.result.move)
 		}
 		active = nil
 	}
-	defer func() { finish(false) }()
+	defer func() { finish(false, "") }()
 	start := func(limits goLimits) {
 		ctx, cancel := context.WithCancel(context.Background())
 		results := make(chan searchResult, 1)
@@ -85,12 +111,13 @@ func run(in io.Reader, out io.Writer) error {
 		case result := <-results:
 			active.result, active.finished = result, true
 			if !active.limits.infinite && !active.limits.ponder {
-				finish(true)
+				finish(true, "")
 			}
 		case line := <-lines:
 			if line.eof {
 				return line.err
 			}
+			_ = trace.Write("in", line.text) // Recording failures surface on exit; play continues.
 			args := strings.Fields(line.text)
 			if len(args) == 0 {
 				continue
@@ -101,7 +128,7 @@ func run(in io.Reader, out io.Writer) error {
 			case "isready":
 				fmt.Fprintln(out, "readyok")
 			case "ucinewgame":
-				finish(false)
+				finish(false, "")
 				game = chess.NewGame()
 			case "position":
 				next, err := parsePosition(args[1:])
@@ -109,7 +136,7 @@ func run(in io.Reader, out io.Writer) error {
 					fmt.Fprintln(out, "info string invalid position:", err)
 					continue
 				}
-				finish(false)
+				finish(false, "")
 				game = next
 			case "go":
 				limits, err := parseGo(args[1:])
@@ -120,15 +147,15 @@ func run(in io.Reader, out io.Writer) error {
 					fmt.Fprintln(out, "info string invalid go:", err)
 					continue
 				}
-				finish(false)
+				finish(false, "")
 				start(limits)
 			case "stop":
-				finish(true)
+				finish(true, "stop")
 			case "ponderhit":
 				if active != nil && active.limits.ponder {
 					limits := active.limits
 					limits.ponder = false
-					finish(false)
+					finish(false, "")
 					if _, err := limits.budget(game.Position().Turn()); err != nil {
 						fmt.Fprintln(out, "info string invalid go:", err)
 					} else {

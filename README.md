@@ -150,7 +150,9 @@ Include both notices when distributing compiled Pandafish binaries.
 ## Local benchmarks
 
 [Developer tools](tools/README.md) describes the shared tools layout and the
-planned Lichess session recorder. The recorder has not been implemented.
+[Lichess session recorder](tools/lichess/README.md). The recorder launches
+lichess-bot with a fixed engine copy and reports on saved local records.
+It has been validated offline; live collection is a separate step.
 
 [Benchmark documentation](tools/benchmark/README.md) covers the validation workflow,
 playing-strength comparisons, results, and their interpretation.
@@ -200,4 +202,9 @@ search depth and ignored clock/depth limits.
 depth limits with conservative clock allocation, iterative deepening, and
 interruptible search. Keep the last completed iteration and a legal fallback.
 Material scoring, mate/stalemate handling, and the two-ply quiescence cap are
-unchanged. Live-game logging and metric capture are planned for v0.7.1.
+unchanged.
+
+**Next: Record evidence from real games (in development).** Add optional
+engine traces and Go `record`/`report` tools for local Lichess sessions.
+Keep the existing search and challenge policy. See the
+[session tool documentation](tools/lichess/README.md) for operation and limits.
