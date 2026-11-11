@@ -30,7 +30,7 @@ func run(in io.Reader, out io.Writer) error {
 		}
 		switch args[0] {
 		case "uci":
-			fmt.Fprintln(out, "id name Pandafish v0.4\nid author philyawj\nuciok")
+			fmt.Fprintln(out, "id name Pandafish v0.5\nid author philyawj\nuciok")
 		case "isready":
 			fmt.Fprintln(out, "readyok")
 		case "ucinewgame":
@@ -99,7 +99,8 @@ func bestMove(game *chess.Game, args []string) string {
 			continue
 		}
 		nextPosition := game.Position().Update(&move)
-		score := worstReplyScore(nextPosition, game.Position().Turn())
+		// Use a full window for each root move so ties have exact scores.
+		score := -search(nextPosition, searchDepth-1, -searchInfinity, searchInfinity)
 		if score > bestScore {
 			bestScore = score
 			candidates = candidates[:0]
@@ -112,21 +113,4 @@ func bestMove(game *chess.Game, args []string) string {
 		return "0000"
 	}
 	return candidates[rand.IntN(len(candidates))]
-}
-
-// worstReplyScore assumes the opponent chooses the reply with the lowest
-// score for us. Positions without replies use their terminal evaluation.
-func worstReplyScore(position *chess.Position, perspective chess.Color) int {
-	replies := position.ValidMoves()
-	if len(replies) == 0 {
-		return evaluate(position, perspective)
-	}
-	worstScore := int(^uint(0) >> 1)
-	for _, reply := range replies {
-		score := evaluate(position.Update(&reply), perspective)
-		if score < worstScore {
-			worstScore = score
-		}
-	}
-	return worstScore
 }
