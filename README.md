@@ -1,15 +1,17 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.6 speaks UCI over
-stdin/stdout and uses three-ply alpha-beta search with bounded quiescence.
-Standard chess only.
+A bare-bones chess engine written in Go. Pandafish v0.7 speaks UCI over
+stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
+and bounded quiescence. Standard chess only.
 
-The engine code is in `main.go`, `search.go`, and `evaluation.go`.
+The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`, and
+`evaluation.go`.
 [corentings/chess](https://github.com/corentings/chess) handles chess rules,
 including castling, en passant, and promotions. The engine assigns values of
 1 to pawns, 3 to knights and bishops, 5 to rooks, and 9 to queens. It picks a
-legal move by looking ahead through its move, the opponent's reply, and its
-next response, assuming each side chooses its best continuation. Alpha-beta
+legal move by completing successively deeper searches, assuming each side
+chooses its best continuation. It keeps the last fully completed result when
+time runs out, with a legal fallback if no depth completes. Alpha-beta
 pruning skips branches that cannot improve a search result, with captures
 searched first to help pruning. Equal best moves are selected randomly;
 root pruning keeps their scores exact while discarding inferior choices.
@@ -22,8 +24,8 @@ captures and promotions, and all legal escapes when the king is in check.
 Away from check it can keep the current material score instead of making a
 capture. This helps avoid counting a captured piece before considering the
 recapture. The extension is capped at two additional plies. At that cap,
-static evaluation is used even
-if captures or checks remain, so long tactical sequences can still be missed.
+static evaluation is used even if captures or checks remain, so long tactical
+sequences can still be missed.
 
 Clone this repository and build with Go 1.25 or newer:
 
@@ -40,18 +42,48 @@ a native ARM64 executable. On Windows, use `go build -o pandafish.exe .`.
 Try it:
 
 ```sh
-printf 'uci\nisready\nposition startpos moves e2e4\ngo\nquit\n' | ./pandafish
+./pandafish
 ```
 
-The last response is `bestmove` followed by the selected legal black move.
-When no legal move exists, the engine returns `bestmove 0000`.
+Then enter:
 
-The engine accepts `position startpos` or `position fen ...`, optionally followed
-by `moves ...`. Normal `go` commands return after the three-ply main search
-and bounded quiescence extension; clock/depth limits are ignored.
-`searchmoves` restricts the choices. `go infinite` waits for `stop`;
-`go ponder` waits for `stop` or `ponderhit`. Unknown commands and engine options
-are ignored.
+```text
+uci
+isready
+position startpos moves e2e4
+go movetime 100
+```
+
+Wait for `bestmove` followed by the selected legal black move, then enter
+`quit`. Sending `quit` or closing stdin immediately after `go` cancels the
+search. When no legal move exists, the engine returns `bestmove 0000`.
+
+The engine accepts `position startpos` or `position fen ...`, optionally
+followed by `moves ...`. Search accepts `movetime`, `wtime`, `btime`, `winc`,
+`binc`, `movestogo`, and `depth` (1 through 64). Times are milliseconds.
+`searchmoves` restricts root choices and must come last. A depth-only request
+has no time deadline; time and depth limits otherwise apply together.
+
+Bare `go` uses a 100 ms allowance. Explicit `movetime` takes precedence over
+clock allocation, capped to the usable side-to-move clock when supplied.
+With game clocks, reserve the smaller of 10 ms or 10% of the remaining time, divide the
+usable clock by `movestogo` (30 if absent), and add 75% of the increment.
+Spending is capped to half the usable clock, so uncredited increment cannot
+exhaust the current clock.
+
+Inside the resulting allowance, reserve the smaller of 5 ms or 10% for
+scheduling and communication. The search stops starting new iterations at
+75% of that hard budget and checks cancellation inside both main search and
+quiescence. Scheduling can still affect observed response time; the engine
+makes no absolute real-time guarantee.
+
+`isready` remains responsive during search. `stop` returns the last completed
+result or legal fallback. Position changes, new games, and replacement
+searches cancel old work. `go infinite` holds its result until `stop`.
+`go ponder` also waits; `ponderhit` restarts a fresh timed search using its
+original limits. Pondering remains disabled in the example configuration.
+Invalid recognized search limits produce an `info string` error; unknown
+commands and unsupported engine options are ignored.
 
 To play through [lichess-bot](https://github.com/lichess-bot-devs/lichess-bot),
 install that client and its Python dependencies following its setup instructions.
@@ -158,5 +190,11 @@ clock/depth limits.
 **v0.6: Finish the exchange before counting the pieces (complete).**
 Add bounded quiescence search for captures, promotions, and check evasions
 beyond the three-ply boundary. Material values, mate/stalemate scoring, and
-random tie breaking are unchanged. Time-aware iterative deepening remains
-the next search foundation to add before increasing search work further.
+random tie breaking are unchanged. This release still used a fixed main
+search depth and ignored clock/depth limits.
+
+**v0.7: Know when to stop thinking (complete).** Honor UCI time and
+depth limits with conservative clock allocation, iterative deepening, and
+interruptible search. Keep the last completed iteration and a legal fallback.
+Material scoring, mate/stalemate handling, and the two-ply quiescence cap are
+unchanged. Live-game logging and metric capture are planned for v0.7.1.

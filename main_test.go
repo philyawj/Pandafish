@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"slices"
 	"strings"
 	"testing"
@@ -13,7 +12,7 @@ func TestUCI(t *testing.T) {
 	tests := []struct {
 		name, commands, want string
 	}{
-		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.6\nid author philyawj\nuciok\nreadyok\n"},
+		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.7\nid author philyawj\nuciok\nreadyok\n"},
 		{"history", "position startpos moves e2e4 e7e5\ngo wtime 1000 btime 1000 searchmoves g1f3", "bestmove g1f3\n"},
 		{"no implicit move", "position startpos\ngo searchmoves e2e4\ngo searchmoves e2e4", "bestmove e2e4\nbestmove e2e4\n"},
 		{"new game", "position startpos moves e2e4\nucinewgame\ngo searchmoves d2d4", "bestmove d2d4\n"},
@@ -31,12 +30,40 @@ func TestUCI(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			var out bytes.Buffer
-			if err := run(strings.NewReader(tt.commands), &out); err != nil {
-				t.Fatal(err)
+			session := newUCISession(t)
+			var got strings.Builder
+			pending := false
+			for _, command := range strings.Split(tt.commands, "\n") {
+				fields := strings.Fields(command)
+				if len(fields) == 0 {
+					continue
+				}
+				if fields[0] == "quit" {
+					break
+				}
+				session.send(command)
+				count := 0
+				switch fields[0] {
+				case "uci":
+					count = 3
+				case "isready":
+					count = 1
+				case "go":
+					pending = true
+					if !slices.Contains(fields, "infinite") && !slices.Contains(fields, "ponder") {
+						count, pending = 1, false
+					}
+				case "stop":
+					if pending {
+						count, pending = 1, false
+					}
+				}
+				for range count {
+					got.WriteString(session.read() + "\n")
+				}
 			}
-			if got := out.String(); got != tt.want {
-				t.Fatalf("got %q, want %q", got, tt.want)
+			if got.String() != tt.want {
+				t.Fatalf("got %q, want %q", got.String(), tt.want)
 			}
 		})
 	}
@@ -44,15 +71,10 @@ func TestUCI(t *testing.T) {
 
 func TestLegalMoveSelection(t *testing.T) {
 	legal := strings.Fields("a2a3 a2a4 b2b3 b2b4 c2c3 c2c4 d2d3 d2d4 e2e3 e2e4 f2f3 f2f4 g2g3 g2g4 h2h3 h2h4 b1a3 b1c3 g1f3 g1h3")
-	var out bytes.Buffer
-	if err := run(strings.NewReader(strings.Repeat("go\n", 100)), &out); err != nil {
-		t.Fatal(err)
-	}
-	lines := strings.Split(strings.TrimSpace(out.String()), "\n")
-	if len(lines) != 100 {
-		t.Fatalf("got %d responses, want 100", len(lines))
-	}
-	for _, line := range lines {
+	session := newUCISession(t)
+	for range 100 {
+		session.send("go movetime 1")
+		line := session.read()
 		if !strings.HasPrefix(line, "bestmove ") || !slices.Contains(legal, strings.TrimPrefix(line, "bestmove ")) {
 			t.Fatalf("invalid response: %q", line)
 		}

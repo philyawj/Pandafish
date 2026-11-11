@@ -2,12 +2,12 @@ package main
 
 import (
 	"bufio"
+	"context"
 	"fmt"
 	"io"
-	"math/rand/v2"
 	"os"
-	"slices"
 	"strings"
+	"time"
 
 	"github.com/corentings/chess/v2"
 )
@@ -19,46 +19,127 @@ func main() {
 	}
 }
 
+type inputLine struct {
+	text string
+	err  error
+	eof  bool
+}
+
+type activeSearch struct {
+	cancel   context.CancelFunc
+	results  chan searchResult
+	result   searchResult
+	finished bool
+	limits   goLimits
+}
+
 func run(in io.Reader, out io.Writer) error {
-	game := chess.NewGame()
-	pending := ""
-	scanner := bufio.NewScanner(in)
-	for scanner.Scan() {
-		args := strings.Fields(scanner.Text())
-		if len(args) == 0 {
-			continue
+	// Only this loop owns output and protocol state. The search worker owns its
+	// position until joined; a replacement cannot race old position caches.
+	lines, done := make(chan inputLine), make(chan struct{})
+	defer close(done)
+	go func() {
+		scanner := bufio.NewScanner(in)
+		for scanner.Scan() {
+			select {
+			case lines <- inputLine{text: scanner.Text()}:
+			case <-done:
+				return
+			}
 		}
-		switch args[0] {
-		case "uci":
-			fmt.Fprintln(out, "id name Pandafish v0.6\nid author philyawj\nuciok")
-		case "isready":
-			fmt.Fprintln(out, "readyok")
-		case "ucinewgame":
-			game, pending = chess.NewGame(), ""
-		case "position":
-			next, err := parsePosition(args[1:])
-			if err != nil {
-				fmt.Fprintln(out, "info string invalid position:", err)
+		select {
+		case lines <- inputLine{eof: true, err: scanner.Err()}:
+		case <-done:
+		}
+	}()
+	game := chess.NewGame()
+	var active *activeSearch
+	finish := func(emit bool) {
+		if active == nil {
+			return
+		}
+		active.cancel()
+		if !active.finished {
+			active.result = <-active.results
+		}
+		if emit {
+			fmt.Fprintln(out, "bestmove", active.result.move)
+		}
+		active = nil
+	}
+	defer func() { finish(false) }()
+	start := func(limits goLimits) {
+		ctx, cancel := context.WithCancel(context.Background())
+		results := make(chan searchResult, 1)
+		budget, _ := limits.budget(game.Position().Turn()) // Validated before start.
+		active = &activeSearch{cancel: cancel, results: results, limits: limits}
+		position, started := game.Position(), time.Now()
+		go func() { results <- iterativeSearch(ctx, position, limits, budget, started) }()
+	}
+	for {
+		var results <-chan searchResult
+		if active != nil && !active.finished {
+			results = active.results
+		}
+		select {
+		case result := <-results:
+			active.result, active.finished = result, true
+			if !active.limits.infinite && !active.limits.ponder {
+				finish(true)
+			}
+		case line := <-lines:
+			if line.eof {
+				return line.err
+			}
+			args := strings.Fields(line.text)
+			if len(args) == 0 {
 				continue
 			}
-			game, pending = next, ""
-		case "go":
-			pending = bestMove(game, args[1:])
-			// Infinite searches and pondering wait for the GUI to release the move.
-			if !slices.Contains(args, "infinite") && !slices.Contains(args, "ponder") {
-				fmt.Fprintln(out, "bestmove", pending)
-				pending = ""
+			switch args[0] {
+			case "uci":
+				fmt.Fprintln(out, "id name Pandafish v0.7\nid author philyawj\nuciok")
+			case "isready":
+				fmt.Fprintln(out, "readyok")
+			case "ucinewgame":
+				finish(false)
+				game = chess.NewGame()
+			case "position":
+				next, err := parsePosition(args[1:])
+				if err != nil {
+					fmt.Fprintln(out, "info string invalid position:", err)
+					continue
+				}
+				finish(false)
+				game = next
+			case "go":
+				limits, err := parseGo(args[1:])
+				if err == nil {
+					_, err = limits.budget(game.Position().Turn())
+				}
+				if err != nil {
+					fmt.Fprintln(out, "info string invalid go:", err)
+					continue
+				}
+				finish(false)
+				start(limits)
+			case "stop":
+				finish(true)
+			case "ponderhit":
+				if active != nil && active.limits.ponder {
+					limits := active.limits
+					limits.ponder = false
+					finish(false)
+					if _, err := limits.budget(game.Position().Turn()); err != nil {
+						fmt.Fprintln(out, "info string invalid go:", err)
+					} else {
+						start(limits)
+					}
+				}
+			case "quit":
+				return nil
 			}
-		case "stop", "ponderhit":
-			if pending != "" {
-				fmt.Fprintln(out, "bestmove", pending)
-				pending = ""
-			}
-		case "quit":
-			return nil
 		}
 	}
-	return scanner.Err()
 }
 
 func parsePosition(args []string) (*chess.Game, error) {
@@ -87,31 +168,4 @@ func parsePosition(args []string) (*chess.Game, error) {
 		}
 	}
 	return game, nil
-}
-
-func bestMove(game *chess.Game, args []string) string {
-	var candidates []string
-	bestScore := -searchInfinity
-	searchMoves := slices.Index(args, "searchmoves")
-	for _, move := range orderedMoves(game.Position()) {
-		uci := (chess.UCINotation{}).Encode(game.Position(), &move)
-		if searchMoves >= 0 && !slices.Contains(args[searchMoves+1:], uci) {
-			continue
-		}
-		nextPosition := game.Position().Update(&move)
-		// Keep a one-point margin below the best score so ties remain exact.
-		// Inferior moves can return bounds; they cannot join the best-move list.
-		score := -search(nextPosition, searchDepth-1, -searchInfinity, 1-bestScore)
-		if score > bestScore {
-			bestScore = score
-			candidates = candidates[:0]
-		}
-		if score == bestScore {
-			candidates = append(candidates, uci)
-		}
-	}
-	if len(candidates) == 0 {
-		return "0000"
-	}
-	return candidates[rand.IntN(len(candidates))]
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand/v2"
 	"strings"
 	"testing"
 
@@ -188,4 +189,18 @@ func TestBestMoveFindsThirdPlyQueenCapture(t *testing.T) {
 			}
 		}
 	}
+}
+
+// Keep v0.6's fixed-depth regression cases independent of timed search.
+func bestMove(game *chess.Game, args []string) string {
+	limits, err := parseGo(args)
+	if err != nil {
+		panic(err)
+	}
+	moves := rootMoves(game.Position(), limits.searchMoves)
+	if len(moves) == 0 {
+		return "0000"
+	}
+	best, _, _ := (&searcher{}).root(game.Position(), moves, searchDepth)
+	return best[rand.IntN(len(best))]
 }

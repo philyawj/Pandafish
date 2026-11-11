@@ -1,7 +1,9 @@
 package main
 
 import (
+	"context"
 	"slices"
+	"time"
 
 	"github.com/corentings/chess/v2"
 )
@@ -10,68 +12,103 @@ const searchDepth = 3
 const searchInfinity = mateScore + 1
 const quiescenceDepth = 2
 
-// search uses negamax: each side maximizes its own score. Negating a child's
-// score gives the parent's perspective. Alpha-beta skips replies that cannot
-// improve the result within the current window.
-func search(position *chess.Position, depth, alpha, beta int) int {
-	return searchPosition(position, depth, alpha, beta, inCheck(position))
+// A zero-value searcher is unlimited, useful for fixed-depth comparisons.
+// Cancellation is distinct from a score, so unfinished nodes never affect ties.
+type searcher struct {
+	ctx      context.Context
+	deadline time.Time
+	now      func() time.Time
 }
 
-// Check tags on legal moves let descendants reuse the library's check result.
-func searchPosition(position *chess.Position, depth, alpha, beta int, checked bool) int {
+func (worker *searcher) clock() time.Time {
+	if worker.now != nil {
+		return worker.now()
+	}
+	return time.Now()
+}
+
+func (worker *searcher) stopped() bool {
+	return (worker.ctx != nil && worker.ctx.Err() != nil) ||
+		(!worker.deadline.IsZero() && !worker.clock().Before(worker.deadline))
+}
+
+func search(position *chess.Position, depth, alpha, beta int) int {
+	score, _ := (&searcher{}).search(position, depth, alpha, beta, inCheck(position))
+	return score
+}
+
+// Negamax flips each child's score and window to the parent's perspective.
+func (worker *searcher) search(position *chess.Position, depth, alpha, beta int, checked bool) (int, bool) {
+	if worker.stopped() {
+		return 0, false
+	}
 	if depth <= 0 {
-		return quiescencePosition(position, quiescenceDepth, alpha, beta, checked)
+		return worker.quiet(position, quiescenceDepth, alpha, beta, checked)
 	}
 	if position.Status() != chess.NoMethod {
-		return evaluate(position, position.Turn())
+		return evaluate(position, position.Turn()), !worker.stopped()
 	}
 	best := -searchInfinity
 	for _, move := range orderedMoves(position) {
-		score := -searchPosition(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check))
-		best = max(best, score)
-		alpha = max(alpha, score)
+		if worker.stopped() {
+			return 0, false
+		}
+		score, complete := worker.search(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check))
+		if !complete {
+			return 0, false
+		}
+		score = -score
+		best, alpha = max(best, score), max(alpha, score)
 		if alpha >= beta {
 			break
 		}
 	}
-	return best
+	return best, !worker.stopped()
 }
 
-// quiescence follows captures, promotions, and all legal check evasions.
-// Away from check, the static score (stand pat) is an alternative to capturing.
-// A hard depth cap bounds the work; its leaves can still contain tactics.
 func quiescence(position *chess.Position, depth, alpha, beta int) int {
-	return quiescencePosition(position, depth, alpha, beta, inCheck(position))
+	score, _ := (&searcher{}).quiet(position, depth, alpha, beta, inCheck(position))
+	return score
 }
 
-func quiescencePosition(position *chess.Position, depth, alpha, beta int, checked bool) int {
+// Captures, promotions, and check evasions retain v0.6's two-ply hard cap.
+func (worker *searcher) quiet(position *chess.Position, depth, alpha, beta int, checked bool) (int, bool) {
+	if worker.stopped() {
+		return 0, false
+	}
 	if position.Status() != chess.NoMethod {
-		return evaluate(position, position.Turn())
+		return evaluate(position, position.Turn()), !worker.stopped()
 	}
 	static := materialScore(position, position.Turn())
 	if depth <= 0 {
-		return static
+		return static, !worker.stopped()
 	}
 	best := -searchInfinity
 	if !checked {
 		best = static
 		if best >= beta {
-			return best
+			return best, !worker.stopped()
 		}
 		alpha = max(alpha, best)
 	}
 	for _, move := range orderedMoves(position) {
+		if worker.stopped() {
+			return 0, false
+		}
 		if !checked && !move.HasTag(chess.Capture) && !move.HasTag(chess.EnPassant) && move.Promo() == chess.NoPieceType {
 			continue
 		}
-		score := -quiescencePosition(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check))
-		best = max(best, score)
-		alpha = max(alpha, score)
+		score, complete := worker.quiet(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check))
+		if !complete {
+			return 0, false
+		}
+		score = -score
+		best, alpha = max(best, score), max(alpha, score)
 		if alpha >= beta {
 			break
 		}
 	}
-	return best
+	return best, !worker.stopped()
 }
 
 // The chess library exposes attacks, but not Position's check flag.
