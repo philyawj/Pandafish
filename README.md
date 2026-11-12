@@ -1,11 +1,11 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.11 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.12 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
 The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`,
-`transposition.go`, and `evaluation.go`.
+`transposition.go`, `killers.go`, and `evaluation.go`.
 [corentings/chess](https://github.com/corentings/chess) handles chess rules,
 including castling, en passant, and promotions. The engine assigns values of
 1 to pawns, 3 to knights and bishops, 5 to rooks, and 9 to queens. It picks a
@@ -26,7 +26,11 @@ scores use centipawns (100 per pawn).
 
 Each engine process uses a fixed 65,536-entry transposition table (about
 2 MiB). It caches completed main-search scores at matching depths and tries
-stored moves first. The table persists within a game, clears on `ucinewgame`,
+stored moves first. Quiet moves that caused a beta cutoff can also be tried
+early at the same search ply, after captures/promotions and any cached move.
+Two such hints per ply are shared across iterative-deepening passes and reset
+for each search. They affect ordering, not evaluation or root tie handling.
+The transposition table persists within a game, clears on `ucinewgame`,
 and is never saved to disk. Quiescence scores are not cached. Search still
 has no repetition-history or fifty-move draw evaluation.
 
@@ -241,8 +245,13 @@ Allow at most four extra check-evasion plies, then use static evaluation at the
 final safety cap. A non-checked position at the ordinary horizon still stops.
 Evaluation, clocks, transposition caching, and random root ties are unchanged.
 
-**Next candidate: Quiet-move ordering.** Test small killer-move ordering after
-the local v0.11 validation. Use controlled local comparisons for each focused
-increment and live Lichess sessions periodically after meaningful progress.
-The [live-session review](tools/benchmark/live/v0.10-twitch-m2-20261112/REVIEW.md)
-records the current priorities and supporting evidence.
+**v0.12: Reuse quiet cutoff moves (complete).** Keep two killer-move
+hints per search ply. Try matching legal quiet moves early after the cached
+move and tactical priorities. Reset hints for each `go` command; iterative
+passes share them. Evaluation, search horizons, time allocation, and exact root
+ties remain unchanged.
+
+**Next: Target larger search and evaluation gaps.** Compare tactical horizon
+handling, selective search, and positional evaluation against the reference
+engines before choosing the next strength experiment. Keep controlled local
+comparisons as the main validation loop, with periodic live integration tests.

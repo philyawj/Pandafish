@@ -18,6 +18,7 @@ const checkEvasionDepth = 4
 type searcher struct {
 	nodes    uint64
 	table    *transpositionTable
+	killers  *killerTable
 	ctx      context.Context
 	deadline time.Time
 	now      func() time.Time
@@ -42,6 +43,10 @@ func search(position *chess.Position, depth, alpha, beta int) int {
 
 // Negamax flips each child's score and window to the parent's perspective.
 func (worker *searcher) search(position *chess.Position, depth, alpha, beta int, checked bool) (int, bool) {
+	return worker.searchAtPly(position, depth, alpha, beta, checked, 0)
+}
+
+func (worker *searcher) searchAtPly(position *chess.Position, depth, alpha, beta int, checked bool, ply int) (int, bool) {
 	if worker.stopped() {
 		return 0, false
 	}
@@ -63,6 +68,7 @@ func (worker *searcher) search(position *chess.Position, depth, alpha, beta int,
 	}
 	originalAlpha := alpha
 	moves := orderedMoves(position)
+	worker.killers.order(moves, ply)
 	if hit {
 		preferMove(moves, entry.move)
 	}
@@ -71,7 +77,7 @@ func (worker *searcher) search(position *chess.Position, depth, alpha, beta int,
 		if worker.stopped() {
 			return 0, false
 		}
-		score, complete := worker.search(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check))
+		score, complete := worker.searchAtPly(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
 		if !complete {
 			return 0, false
 		}
@@ -81,6 +87,7 @@ func (worker *searcher) search(position *chess.Position, depth, alpha, beta int,
 		}
 		alpha = max(alpha, score)
 		if alpha >= beta {
+			worker.killers.remember(ply, move)
 			break
 		}
 	}

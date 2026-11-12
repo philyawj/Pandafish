@@ -1,0 +1,36 @@
+{
+  "candidate_sha256": "aefba2bb9188c3f168c455141c32d4431bdb9734175a6ddbb6cf8450088b0d5a",
+  "baseline_tag": "v0.11",
+  "unit_tests": "go test ./... passed",
+  "race_tests": "go test -race ./... passed through validation",
+  "vet": "go vet ./... passed through validation",
+  "formatting": "gofmt validation passed",
+  "arm64_build": true,
+  "wrapper": {
+    "engine": "Pandafish v0.12-dev",
+    "legal_plies": 12,
+    "active_v011_restored": true
+  },
+  "public_example": "load_config passed after resolving engine paths; greetings v0.12-dev",
+  "private_configs": "remain v0.11; only their release greeting update occurred before this experiment",
+  "position_probes": 24,
+  "all_position_probes_legal": true,
+  "fixed_depth_score_matches": 6,
+  "timed_depths_higher_equal_lower": [
+    0,
+    6,
+    0
+  ],
+  "node_audit_baseline_total": 216241,
+  "node_audit_ordered_total": 138879,
+  "routine_games_completed": 300,
+  "serial": true,
+  "forfeits": 0,
+  "unfinished": 0,
+  "max_candidate_response_ms": 132.076834,
+  "live_checks": false,
+  "note": "Node reductions are deterministic evidence on four fixed positions, not a general runtime or strength estimate. All candidate results retain development labels and binary hashes.",
+  "candidate_responses_over_requested_100ms": 29,
+  "candidate_responses": 15816,
+  "all_responses_within_150ms_allowance": true
+}
