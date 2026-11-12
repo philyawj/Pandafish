@@ -78,6 +78,10 @@ git archive v0.8 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.9 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.9" .)
+
+build_dir=$(mktemp -d)
+git archive v0.10 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.10" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -159,12 +163,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.9 tagged baseline as above for the next engine change. Then run
+Build the v0.10 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.9 --previous-version v0.9 \
+  --previous tools/benchmark/bin/pandafish-v0.10 --previous-version v0.10 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -308,7 +312,7 @@ is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.9 --previous-version v0.9 \
+  --previous tools/benchmark/bin/pandafish-v0.10 --previous-version v0.10 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -615,4 +619,58 @@ is required for this tooling increment. Level 1 remains the target.
 See the [session tool documentation](../lichess/README.md) for commands,
 recording limits, and offline reporting. Future changes to move selection or
 time allocation use the routine comparison workflow above with the latest
-release as the baseline, currently v0.9.
+release as the baseline, currently v0.10.
+
+
+## v0.10 transposition-table candidate
+
+The candidate adds a fixed-size in-memory table, cached-move ordering, and
+per-game reuse while preserving v0.9 evaluation and time control. Cache score
+cutoffs require matching depth; deeper entries supply move hints only. This
+keeps fixed-depth comparisons exact. Quiescence is not cached. Position keys
+include the library's full 64-bit Zobrist key and a separate half-move clock.
+Index collisions check the full key; ordinary 64-bit hash collisions remain
+a theoretical limitation. Repetition history is not used by the current
+search, so caching does not add draw awareness; revisit cache validity when
+history-dependent draws are implemented. Mate values remain signs without
+ply distance, so no distance normalization is needed in this increment.
+
+Use the routine 100 serial games per opponent: v0.9 first, then Stockfish
+Skill 1, then pinned Sacrifice. For this increment, the predeclared criterion
+for an **additional** 100-game Skill 2 screen is at least 60% at Skill 1 with
+zero forfeits and zero unfinished games. Run that additional comparison only
+after Sacrifice finishes and after checking reliability of all routine
+matchups. This is a screening threshold for trying the next opponent, not a
+statistical confidence claim or permanent ladder advancement. Preserve the
+Skill 1 series and record Skill 2 separately; do not rerun until favorable.
+The candidate was reviewed in draft PR #17 and approved for v0.10 release.
+Its recorded development labels and hashes are retained; release preparation
+changes version text and documentation only.
+
+Functional validation compares cached and uncached fixed-depth scores and
+complete root tie sets, validates score bounds and depth isolation, checks
+collisions and en passant/turn/castling/half-move context, and exercises
+cancellation, per-search reuse, restricted roots, and UCI new-game clearing.
+To inspect the small node-count checks without playing games:
+
+```sh
+go test -run 'TestCacheReuseReducesNodesAndPreservesRootTies|TestUCICacheLifecycle' -v .
+```
+
+Node reductions on these positions check reuse; they are not a prediction of
+match strength or guaranteed completed-depth gains at every time control.
+After v0.10 is reviewed, another recorded Lichess session is the proposed next
+checkpoint to find real-game weaknesses and choose subsequent improvements.
+
+
+The v0.10 candidate completed all 300 serial games without forfeits or
+unfinished games: 37/39/24 against v0.9 (56.5%), 45/14/41 against Stockfish
+Skill 1 (52%), and 0/27/73 against Sacrifice (13.5%). The previous-release lead
+is modest; the external screens do not establish a strength gain. The fixed
+position audit preserved all nine depth-three scores and completed a higher
+depth on three of nine 100-ms probes, with six equal and none lower in that
+single trial. The maximum candidate response across the routine matches was
+98.730 ms, with none exceeding the requested 100 ms. These are measurements,
+not timing guarantees. Skill 2 was skipped because 52% did not meet the
+predeclared 60% trigger. See the [complete v0.10 candidate record](results/v0.10-dev-vs-v0.9-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/README.md)
+for counts, method, limitations, raw games, and the recorded decision.

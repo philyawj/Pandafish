@@ -1,0 +1,565 @@
+{
+  "method": "One depth-three and one 100-ms search per engine and public reference position, all serial after the routine matches. Fresh process and new game per probe, including the timed probe: the table is cold except for reuse within iterative deepening. Full position history supplied; wait for bestmove. Separate 20-second client watchdog. All moves validated as legal. Fixed-depth scores should agree because evaluation and horizon are unchanged; ties may choose different moves. Timed depth comparisons are a small single-trial diagnostic, not a statistical strength claim. No weights or code tuned after inspecting these outputs.",
+  "source": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n500000-confirmed/regression-candidates.json",
+  "source_sha256": "94e76a0973b0b59a64f430b934cb66cea6dc89344c2c145874a4b9b33661d564",
+  "cases": [
+    {
+      "game": "https://lichess.org/game/5ApneMbA",
+      "ply": 16,
+      "split": "development",
+      "fen": "rnbqkbnr/5p2/2p5/p2pp1pp/2p5/P2PP3/1P1BQPPP/RN2KBNR w KQkq - 0 9",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e3 a7a5 a2a3 e7e5 d2d3 b7b5 d1f3 c7c6 f3e2 d7d5 c2c3 h7h5 c1d2 g7g5 c3c4 b5c4",
+      "reference": "d3c4",
+      "probes": [
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "d3c4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 3 nodes 1477 time 5 score cp -15 pv d3c4",
+            "info string pandafish {\"depth\":3,\"nodes\":1477,\"elapsed_ms\":5.643333,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-15,\"pv\":[\"d3c4\"]}",
+            "bestmove d3c4"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "d3c4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 4 nodes 21148 time 95 score cp -114 pv d3c4",
+            "info string pandafish {\"depth\":4,\"nodes\":21148,\"elapsed_ms\":95.001459,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-114,\"pv\":[\"d3c4\"]}",
+            "bestmove d3c4"
+          ]
+        },
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "d3c4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 3 nodes 1455 time 12 score cp -15 pv d3c4",
+            "info string pandafish {\"depth\":3,\"nodes\":1455,\"elapsed_ms\":12.813667,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-15,\"pv\":[\"d3c4\"]}",
+            "bestmove d3c4"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "d3c4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 4 nodes 18937 time 95 score cp -114 pv d3c4",
+            "info string pandafish {\"depth\":4,\"nodes\":18937,\"elapsed_ms\":95.009958,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-114,\"pv\":[\"d3c4\"]}",
+            "bestmove d3c4"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "https://lichess.org/game/DnpnFIKb",
+      "ply": 18,
+      "split": "holdout",
+      "fen": "rnbqkbnr/6pp/8/p1p1p3/3p1p2/1P1P3P/2PBPPP1/RNQ1KBNR w Kkq - 0 10",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves b2b3 c7c5 d2d3 b7b5 c1e3 e7e5 h2h3 d7d5 a2a4 b5a4 a1a4 a7a5 a4a1 f7f5 d1c1 d5d4 e3d2 f5f4",
+      "reference": "b1a3",
+      "probes": [
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "g1f3",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 3298 time 11 score cp 75 pv g1f3",
+            "info string pandafish {\"depth\":3,\"nodes\":3298,\"elapsed_ms\":11.801292,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":75,\"pv\":[\"g1f3\"]}",
+            "bestmove g1f3"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "g1f3",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 21456 time 95 score cp 75 pv g1f3",
+            "info string pandafish {\"depth\":3,\"nodes\":21456,\"elapsed_ms\":95.000209,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":75,\"pv\":[\"g1f3\"]}",
+            "bestmove g1f3"
+          ]
+        },
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "g1f3",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 2088 time 8 score cp 75 pv g1f3",
+            "info string pandafish {\"depth\":3,\"nodes\":2088,\"elapsed_ms\":8.41875,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":75,\"pv\":[\"g1f3\"]}",
+            "bestmove g1f3"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "g1f3",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 20991 time 95 score cp 75 pv g1f3",
+            "info string pandafish {\"depth\":3,\"nodes\":20991,\"elapsed_ms\":95.002167,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":75,\"pv\":[\"g1f3\"]}",
+            "bestmove g1f3"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "https://lichess.org/game/Lkfnlfui",
+      "ply": 20,
+      "split": "development",
+      "fen": "rnb1kbnr/p1pp1pp1/4p3/1p5q/5P1P/5N2/PPPPP2R/RNBQKB2 w Qkq - 0 11",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves f2f3 e7e6 b1c3 d8h4 g2g3 h4d4 c3b1 b7b6 h2h4 d4e5 f3f4 e5d5 h1h2 d5c5 g1f3 b6b5 g3g4 h7h5 g4h5 c5h5",
+      "reference": "e2e4",
+      "probes": [
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "f3e5",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 8860 time 31 score cp 32 pv f3e5",
+            "info string pandafish {\"depth\":3,\"nodes\":8860,\"elapsed_ms\":31.914042,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":32,\"pv\":[\"f3e5\"]}",
+            "bestmove f3e5"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "f3e5",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 24195 time 95 score cp 32 pv f3e5",
+            "info string pandafish {\"depth\":3,\"nodes\":24195,\"elapsed_ms\":95.003166,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":32,\"pv\":[\"f3e5\"]}",
+            "bestmove f3e5"
+          ]
+        },
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "e2e4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 3 nodes 7277 time 28 score cp 32 pv e2e4",
+            "info string pandafish {\"depth\":3,\"nodes\":7277,\"elapsed_ms\":28.68825,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":32,\"pv\":[\"e2e4\"]}",
+            "bestmove e2e4"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "d2d4",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 22882 time 95 score cp 32 pv d2d4",
+            "info string pandafish {\"depth\":3,\"nodes\":22882,\"elapsed_ms\":95.000208,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":32,\"pv\":[\"d2d4\"]}",
+            "bestmove d2d4"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "https://lichess.org/game/RTekQhPS",
+      "ply": 3,
+      "split": "holdout",
+      "fen": "rnbqkbnr/ppppp1pp/8/5p2/4P3/2N5/PPPP1PPP/R1BQKBNR b KQkq e3 0 2",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves b1c3 f7f5 e2e4",
+      "reference": "f5e4",
+      "probes": [
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "f5e4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 3 nodes 1241 time 4 score cp -8 pv f5e4",
+            "info string pandafish {\"depth\":3,\"nodes\":1241,\"elapsed_ms\":4.172708,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-8,\"pv\":[\"f5e4\"]}",
+            "bestmove f5e4"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "f5e4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 4 nodes 18038 time 95 score cp -17 pv f5e4",
+            "info string pandafish {\"depth\":4,\"nodes\":18038,\"elapsed_ms\":95.005916,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-17,\"pv\":[\"f5e4\"]}",
+            "bestmove f5e4"
+          ]
+        },
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "f5e4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 3 nodes 1011 time 3 score cp -8 pv f5e4",
+            "info string pandafish {\"depth\":3,\"nodes\":1011,\"elapsed_ms\":3.779375,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-8,\"pv\":[\"f5e4\"]}",
+            "bestmove f5e4"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "f5e4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 5 nodes 22627 time 84 score cp -2 pv f5e4",
+            "info string pandafish {\"depth\":5,\"nodes\":22627,\"elapsed_ms\":84.881125,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-2,\"pv\":[\"f5e4\"]}",
+            "bestmove f5e4"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "https://lichess.org/game/ThL1IKzb",
+      "ply": 63,
+      "split": "development",
+      "fen": "r4kr1/2p1qp2/1p5b/3PPp2/nPP5/Q4N2/7P/1R3R1K b - - 2 32",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves d2d4 b8a6 e2e4 a6b8 c1e3 h7h5 f1d3 g7g6 g1f3 a7a5 e1g1 h5h4 f3h4 h8h4 g2g3 h4h3 g1g2 h3h8 c2c3 a8a7 d4d5 b7b6 f2f4 a7a8 e3d4 h8h6 b1d2 g8f6 d4f6 e7f6 a1c1 d8e7 d1a4 c8a6 d3a6 b8a6 a4d4 a6c5 g3g4 a5a4 b2b4 a4b3 a2b3 h6h8 b3b4 c5a4 c1b1 h8g8 d4d3 f8g7 c3c4 e8f8 d3a3 f6f5 e4e5 d7d6 g4f5 g6f5 g2h1 d6e5 f4e5 g7h6 d2f3",
+      "reference": "g8g4",
+      "probes": [
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "h6f4",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 4263 time 12 score cp 276 pv h6f4",
+            "info string pandafish {\"depth\":3,\"nodes\":4263,\"elapsed_ms\":12.762667,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":276,\"pv\":[\"h6f4\"]}",
+            "bestmove h6f4"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "h6g7",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 24258 time 95 score cp 276 pv h6g7",
+            "info string pandafish {\"depth\":3,\"nodes\":24258,\"elapsed_ms\":95.007458,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":276,\"pv\":[\"h6g7\"]}",
+            "bestmove h6g7"
+          ]
+        },
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "h6g7",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 3102 time 10 score cp 276 pv h6g7",
+            "info string pandafish {\"depth\":3,\"nodes\":3102,\"elapsed_ms\":10.76325,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":276,\"pv\":[\"h6g7\"]}",
+            "bestmove h6g7"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "h6g7",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 24103 time 95 score cp 276 pv h6g7",
+            "info string pandafish {\"depth\":3,\"nodes\":24103,\"elapsed_ms\":95.001916,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":276,\"pv\":[\"h6g7\"]}",
+            "bestmove h6g7"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "https://lichess.org/game/j9jUu1vU",
+      "ply": 19,
+      "split": "holdout",
+      "fen": "r1bqk1nr/1p5p/2npppp1/p7/1bQNPB2/2N5/PPP2PPP/2KR1B1R b kq - 1 10",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 g7g6 d2d4 a7a5 b1c3 e7e6 g1f3 c7c5 c1g5 f7f6 g5f4 c5d4 d1d4 f8b4 e1c1 b8c6 d4c4 d7d6 f3d4",
+      "reference": "c6d4",
+      "probes": [
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "g8e7",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 2562 time 9 score cp -21 pv g8e7",
+            "info string pandafish {\"depth\":3,\"nodes\":2562,\"elapsed_ms\":9.097625,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-21,\"pv\":[\"g8e7\"]}",
+            "bestmove g8e7"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "c6d4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 4 nodes 23724 time 95 score cp -41 pv c6d4",
+            "info string pandafish {\"depth\":4,\"nodes\":23724,\"elapsed_ms\":95.005958,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-41,\"pv\":[\"c6d4\"]}",
+            "bestmove c6d4"
+          ]
+        },
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "g8e7",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 2427 time 9 score cp -21 pv g8e7",
+            "info string pandafish {\"depth\":3,\"nodes\":2427,\"elapsed_ms\":9.048084,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-21,\"pv\":[\"g8e7\"]}",
+            "bestmove g8e7"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "c6d4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 4 nodes 23178 time 95 score cp -41 pv c6d4",
+            "info string pandafish {\"depth\":4,\"nodes\":23178,\"elapsed_ms\":95.012708,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-41,\"pv\":[\"c6d4\"]}",
+            "bestmove c6d4"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "https://lichess.org/game/mEY6KGOi",
+      "ply": 10,
+      "split": "development",
+      "fen": "r1b1kb1r/ppp1pppp/2nq1n2/8/P2p1P2/3PP3/1PPB2PP/RN1QKBNR w KQkq - 2 6",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves d2d3 b8c6 e2e3 g8f6 f2f4 d7d5 a2a4 d5d4 c1d2 d8d6",
+      "reference": "e3d4",
+      "probes": [
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "g1f3",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 3749 time 14 score cp -7 pv g1f3",
+            "info string pandafish {\"depth\":3,\"nodes\":3749,\"elapsed_ms\":14.896667,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-7,\"pv\":[\"g1f3\"]}",
+            "bestmove g1f3"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "g1f3",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 24894 time 95 score cp -7 pv g1f3",
+            "info string pandafish {\"depth\":3,\"nodes\":24894,\"elapsed_ms\":95.0055,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-7,\"pv\":[\"g1f3\"]}",
+            "bestmove g1f3"
+          ]
+        },
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "g1f3",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 3 nodes 3569 time 14 score cp -7 pv g1f3",
+            "info string pandafish {\"depth\":3,\"nodes\":3569,\"elapsed_ms\":14.6175,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-7,\"pv\":[\"g1f3\"]}",
+            "bestmove g1f3"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "e3d4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 4 nodes 19757 time 77 score cp -66 pv e3d4",
+            "info string pandafish {\"depth\":4,\"nodes\":19757,\"elapsed_ms\":77.390042,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-66,\"pv\":[\"e3d4\"]}",
+            "bestmove e3d4"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "https://lichess.org/game/pYNsRFix",
+      "ply": 26,
+      "split": "holdout",
+      "fen": "r2nkb1r/1ppbq2p/p5pn/3ppp2/8/NPP1PNP1/P2PBP1P/1RBQKR2 w kq - 5 14",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves g1f3 b8c6 c2c3 g7g6 e2e3 d7d6 b1a3 d6d5 f1b5 a7a6 b5d3 e7e5 d3e2 f7f5 b2b3 g8h6 h1f1 d8f6 a1b1 f6g7 g2g3 c8d7 f3g5 g7e7 g5f3 c6d8",
+      "reference": "d2d4",
+      "probes": [
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "d2d4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 3 nodes 5727 time 21 score cp 8 pv d2d4",
+            "info string pandafish {\"depth\":3,\"nodes\":5727,\"elapsed_ms\":21.486084,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":8,\"pv\":[\"d2d4\"]}",
+            "bestmove d2d4"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "d2d4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 3 nodes 22553 time 95 score cp 8 pv d2d4",
+            "info string pandafish {\"depth\":3,\"nodes\":22553,\"elapsed_ms\":95.000833,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":8,\"pv\":[\"d2d4\"]}",
+            "bestmove d2d4"
+          ]
+        },
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "d2d4",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 3 nodes 4609 time 20 score cp 8 pv d2d4",
+            "info string pandafish {\"depth\":3,\"nodes\":4609,\"elapsed_ms\":20.489542,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":8,\"pv\":[\"d2d4\"]}",
+            "bestmove d2d4"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "c3c4",
+          "legal": true,
+          "exact_reference": false,
+          "uci_output": [
+            "info depth 4 nodes 17156 time 71 score cp -24 pv c3c4",
+            "info string pandafish {\"depth\":4,\"nodes\":17156,\"elapsed_ms\":71.251125,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-24,\"pv\":[\"c3c4\"]}",
+            "bestmove c3c4"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "https://lichess.org/game/un7IhthI",
+      "ply": 15,
+      "split": "development",
+      "fen": "r2qkbnr/pbpppnpp/1p6/3P4/2P1NP2/5N2/PP4PP/R1BQKB1R b KQkq c3 0 8",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves d2d4 f7f5 e2e4 f5e4 b1c3 b7b6 c3e4 b8c6 d4d5 c6e5 f2f4 e5f7 g1f3 c8b7 c2c4",
+      "reference": "e7e6",
+      "probes": [
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "e7e6",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 3 nodes 2540 time 11 score cp 74 pv e7e6",
+            "info string pandafish {\"depth\":3,\"nodes\":2540,\"elapsed_ms\":11.129208,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":74,\"pv\":[\"e7e6\"]}",
+            "bestmove e7e6"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.9",
+          "binary_sha256": "340befcd065c20e210f16566972d3d6660580bfd348247d925bb5786d402cb28",
+          "move": "e7e6",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 3 nodes 25309 time 95 score cp 74 pv e7e6",
+            "info string pandafish {\"depth\":3,\"nodes\":25309,\"elapsed_ms\":95.000958,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":74,\"pv\":[\"e7e6\"]}",
+            "bestmove e7e6"
+          ]
+        },
+        {
+          "request": "go depth 3",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "e7e6",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 3 nodes 2282 time 10 score cp 74 pv e7e6",
+            "info string pandafish {\"depth\":3,\"nodes\":2282,\"elapsed_ms\":10.56425,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":74,\"pv\":[\"e7e6\"]}",
+            "bestmove e7e6"
+          ]
+        },
+        {
+          "request": "go movetime 100",
+          "engine": "Pandafish v0.10-dev",
+          "binary_sha256": "f72aef40802a24449de6d08182633daf6df7e11cc6bc5206fe3b87e6fa228a5b",
+          "move": "e7e6",
+          "legal": true,
+          "exact_reference": true,
+          "uci_output": [
+            "info depth 3 nodes 24282 time 95 score cp 74 pv e7e6",
+            "info string pandafish {\"depth\":3,\"nodes\":24282,\"elapsed_ms\":95.07025,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":74,\"pv\":[\"e7e6\"]}",
+            "bestmove e7e6"
+          ]
+        }
+      ]
+    }
+  ]
+}

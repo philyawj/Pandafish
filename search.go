@@ -16,6 +16,7 @@ const quiescenceDepth = 2
 // Cancellation is distinct from a score, so unfinished nodes never affect ties.
 type searcher struct {
 	nodes    uint64
+	table    *transpositionTable
 	ctx      context.Context
 	deadline time.Time
 	now      func() time.Time
@@ -50,8 +51,22 @@ func (worker *searcher) search(position *chess.Position, depth, alpha, beta int,
 	if position.Status() != chess.NoMethod {
 		return evaluate(position, position.Turn()), !worker.stopped()
 	}
-	best := -searchInfinity
-	for _, move := range orderedMoves(position) {
+	entry, hit := worker.table.probe(position)
+	// Equal depth preserves the exact fixed-depth value. Deeper entries still
+	// provide move hints. Quiescence has a separate horizon and is not cached.
+	if hit && int(entry.depth) == depth {
+		score := int(entry.score)
+		if entry.bound == exactBound || (entry.bound == lowerBound && score >= beta) || (entry.bound == upperBound && score <= alpha) {
+			return score, !worker.stopped()
+		}
+	}
+	originalAlpha := alpha
+	moves := orderedMoves(position)
+	if hit {
+		preferMove(moves, entry.move)
+	}
+	best, bestMove := -searchInfinity, uint16(0)
+	for _, move := range moves {
 		if worker.stopped() {
 			return 0, false
 		}
@@ -60,12 +75,19 @@ func (worker *searcher) search(position *chess.Position, depth, alpha, beta int,
 			return 0, false
 		}
 		score = -score
-		best, alpha = max(best, score), max(alpha, score)
+		if score > best {
+			best, bestMove = score, encodeMove(move)
+		}
+		alpha = max(alpha, score)
 		if alpha >= beta {
 			break
 		}
 	}
-	return best, !worker.stopped()
+	if worker.stopped() {
+		return 0, false
+	}
+	worker.table.store(position, depth, best, originalAlpha, beta, bestMove)
+	return best, true
 }
 
 func quiescence(position *chess.Position, depth, alpha, beta int) int {
