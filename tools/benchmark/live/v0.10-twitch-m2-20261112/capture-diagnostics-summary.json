@@ -1,0 +1,63 @@
+{
+  "method": "Offline audit of captured JSON and PGNs. Individual matches require full startpos move history, exact root FEN, and returned move equal to the saved next move. These are diagnostic candidates only; original group linkage is unchanged. Overlap uses UTC go timestamps plus monotonic measured response duration; it measures outstanding searches in distinct processes, not CPU utilization or a count of games. No hidden timing/temperature samples are inferred.",
+  "peak_concurrent_processes": 2,
+  "searches_overlapping_other_processes": 134,
+  "overlap_wall_seconds": 168.487527334,
+  "individually_unique_but_group_unlinked": 38,
+  "ambiguous": 2,
+  "no_pgn_match": 0,
+  "operator_observation": "Operator confirmed an error followed by a period of two simultaneous games.",
+  "pairs": [
+    {
+      "processes": [
+        "engine-725-1516623685.jsonl",
+        "engine-726-21886342.jsonl"
+      ],
+      "first_overlap": "2026-11-12T17:47:23.774059Z",
+      "last_overlap": "2026-11-12T17:47:32.521934792Z",
+      "overlap_seconds": 8.748,
+      "interval_count": 1
+    },
+    {
+      "processes": [
+        "engine-726-21886342.jsonl",
+        "engine-849-557950052.jsonl"
+      ],
+      "first_overlap": "2026-11-12T17:47:33.128855Z",
+      "last_overlap": "2026-11-12T17:50:35.25786675Z",
+      "overlap_seconds": 48.196,
+      "interval_count": 42
+    },
+    {
+      "processes": [
+        "engine-19427-1716338880.jsonl",
+        "engine-20166-3171722806.jsonl"
+      ],
+      "first_overlap": "2026-11-12T18:18:23.219046Z",
+      "last_overlap": "2026-11-12T18:18:26.198985958Z",
+      "overlap_seconds": 2.98,
+      "interval_count": 1
+    },
+    {
+      "processes": [
+        "engine-20166-3171722806.jsonl",
+        "engine-20272-2418863798.jsonl"
+      ],
+      "first_overlap": "2026-11-12T18:18:27.543877Z",
+      "last_overlap": "2026-11-12T18:20:30.542123709Z",
+      "overlap_seconds": 65.541,
+      "interval_count": 23
+    },
+    {
+      "processes": [
+        "engine-20272-2418863798.jsonl",
+        "engine-22605-602089638.jsonl"
+      ],
+      "first_overlap": "2026-11-12T18:22:22.997096Z",
+      "last_overlap": "2026-11-12T18:24:52.031454917Z",
+      "overlap_seconds": 43.022,
+      "interval_count": 17
+    }
+  ],
+  "note": "Pair seconds rounded to milliseconds. Original linkage is unchanged. Envelopes include gaps; summed overlap seconds are not continuous game durations or CPU utilization."
+}

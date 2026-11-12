@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "engine": "Stockfish 19",
+  "engine_sha256": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f",
+  "inventory_sha256": "e648c1456d862be3a8e79966b2e292cd9991728531a938ff1a38a52d339da12f",
+  "nodes_per_search": 500000,
+  "threads": 1,
+  "hash_mb": 64,
+  "multipv": 1,
+  "skill": 20,
+  "bot": "GoPandaFish",
+  "focus_sha256": "c09c3496196a7e95ce84feafb390868c9c520c40497243de9e657e226b319283",
+  "score_perspective": "root mover; positive favors the player to move; cp and mate remain separate",
+  "comparison": "unrestricted root versus played-move restricted root at the same node budget; fresh hash and ucinewgame per search"
+}

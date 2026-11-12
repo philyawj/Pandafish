@@ -251,3 +251,26 @@ capture data is untouched.
 Depth, nodes, and time attached to a Stockfish score come from its last exact-
 scored PV. The raw output also retains the final, potentially bounded
 iteration, so reported score-iteration nodes need not equal the node budget.
+
+
+### Reconnects and repeated searches
+
+A reconnect can leave multiple completed searches linked to the same game/ply.
+The processor preserves every attempt. A uniquely associated attempt remains in
+`capture`; multiple attempts appear in `captures` without selecting a guessed
+canonical submission. PGN moves are analyzed once per ply, regardless of how
+many times the engine searched them. Resuming refreshes these associations
+without rerunning matching Stockfish checkpoints.
+
+Operational timing totals include every completed attempt, including repeated
+and unlinked searches. The report distinguishes linked search attempts from
+unique linked positions. It counts explicit unlabelled control-stream reconnect
+markers separately from grouped ERROR/CRITICAL records, without counting each
+traceback line as a new incident. Missing/ambiguous PGN linkage remains visible;
+raw records are not relabeled or discarded to make a report look complete.
+
+The [v0.10 session review](../benchmark/live/v0.10-twitch-m2-20261112/REVIEW.md)
+documents a real reconnect/concurrent-play case. Configured concurrency is an
+intention, not proof that only one worker actually ran. Use timestamps and
+process identities to audit observed overlap; this is distinct from measuring
+CPU utilization or diagnosing the client's root cause.

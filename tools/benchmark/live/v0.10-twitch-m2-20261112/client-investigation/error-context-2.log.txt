@@ -1,0 +1,97 @@
+2026-11-12T18:18:13.128848Z                     INFO     Pv: 8. Qe2                    engine_wrapper.py:334
+2026-11-12T18:18:13.455161Z                     INFO                                      lichess_bot.py:852
+2026-11-12T18:18:13.455829Z                     INFO     move: 9                          lichess_bot.py:853
+2026-11-12T18:18:13.456533Z                     INFO     Searching for wtime 143839    engine_wrapper.py:726
+2026-11-12T18:18:13.456545Z                              btime 193260 for game                              
+2026-11-12T18:18:13.45655Z                              glYlALQg                                           
+2026-11-12T18:18:19.745178Z [11/12/26 10:18:19] INFO     Source: Engine                engine_wrapper.py:334
+2026-11-12T18:18:19.745806Z                     INFO     Evaluation: 1.22              engine_wrapper.py:334
+2026-11-12T18:18:19.74635Z                     INFO     Depth: 5                      engine_wrapper.py:334
+2026-11-12T18:18:19.74699Z                     INFO     Nodes: 1.3M                   engine_wrapper.py:334
+2026-11-12T18:18:19.747547Z                     INFO     Pv: 9. f3                     engine_wrapper.py:334
+2026-11-12T18:18:20.062899Z [11/12/26 10:18:20] INFO                                      lichess_bot.py:852
+2026-11-12T18:18:20.064225Z                     INFO     move: 10                         lichess_bot.py:853
+2026-11-12T18:18:20.065856Z                     INFO     Searching for wtime 139330    engine_wrapper.py:726
+2026-11-12T18:18:20.065897Z                              btime 195100 for game                              
+2026-11-12T18:18:20.06592Z                              glYlALQg                                           
+2026-11-12T18:18:21.65317Z Control stream error, reconnecting:
+2026-11-12T18:18:21.653204Z Traceback (most recent call last):
+2026-11-12T18:18:21.653221Z   File "/Users/philyawj/projects/lichess-bot/venv/lib/python3.12/site-packages/requests/models.py", line 937, in generate
+2026-11-12T18:18:21.653231Z     yield from self.raw.stream(chunk_size, decode_content=True)
+2026-11-12T18:18:21.653236Z   File "/Users/philyawj/projects/lichess-bot/venv/lib/python3.12/site-packages/urllib3/response.py", line 1284, in stream
+2026-11-12T18:18:21.653239Z     yield from self.read_chunked(amt, decode_content=decode_content)
+2026-11-12T18:18:21.653243Z   File "/Users/philyawj/projects/lichess-bot/venv/lib/python3.12/site-packages/urllib3/response.py", line 1459, in read_chunked
+2026-11-12T18:18:21.653247Z     self._update_chunk_length()
+2026-11-12T18:18:21.653253Z   File "/Users/philyawj/projects/lichess-bot/venv/lib/python3.12/site-packages/urllib3/response.py", line 1383, in _update_chunk_length
+2026-11-12T18:18:21.653257Z     raise ProtocolError("Response ended prematurely") from None
+2026-11-12T18:18:21.65326Z urllib3.exceptions.ProtocolError: Response ended prematurely
+2026-11-12T18:18:21.653263Z 
+2026-11-12T18:18:21.653267Z During handling of the above exception, another exception occurred:
+2026-11-12T18:18:21.65327Z 
+2026-11-12T18:18:21.653273Z Traceback (most recent call last):
+2026-11-12T18:18:21.653277Z   File "/Users/philyawj/projects/lichess-bot/lib/lichess_bot.py", line 121, in watch_control_stream
+2026-11-12T18:18:21.653308Z     for line in lines:
+2026-11-12T18:18:21.653324Z   File "/Users/philyawj/projects/lichess-bot/venv/lib/python3.12/site-packages/requests/models.py", line 1008, in iter_lines
+2026-11-12T18:18:21.65333Z     for chunk in self.iter_content(
+2026-11-12T18:18:21.653335Z   File "/Users/philyawj/projects/lichess-bot/venv/lib/python3.12/site-packages/requests/models.py", line 939, in generate
+2026-11-12T18:18:21.65334Z     raise ChunkedEncodingError(e)
+2026-11-12T18:18:21.653345Z requests.exceptions.ChunkedEncodingError: Response ended prematurely
+2026-11-12T18:18:21.653348Z 
+2026-11-12T18:18:23.036335Z [11/12/26 10:18:22] INFO     --- Process Used. Count: 1. IDs: lichess_bot.py:319
+2026-11-12T18:18:23.036372Z                              {'glYlALQg'}                                       
+2026-11-12T18:18:23.240117Z [11/12/26 10:18:23] INFO     +++                              lichess_bot.py:699
+2026-11-12T18:18:23.24014Z                              https://lichess.org/glYlALQg/whi                   
+2026-11-12T18:18:23.240146Z                              te Blitz vs BOT michaAmateurBot                    
+2026-11-12T18:18:23.24015Z                              (1408) (glYlALQg)                                  
+2026-11-12T18:18:23.240706Z                     INFO                                      lichess_bot.py:852
+2026-11-12T18:18:23.241167Z                     INFO     move: 10                         lichess_bot.py:853
+2026-11-12T18:18:23.241766Z                     INFO     Searching for wtime 136170    engine_wrapper.py:726
+2026-11-12T18:18:23.241778Z                              btime 195100 for game                              
+2026-11-12T18:18:23.241783Z                              glYlALQg                                           
+2026-11-12T18:18:23.242676Z                     INFO     Refreshing 0 online blocklists      blocklist.py:41
+2026-11-12T18:18:26.211008Z [11/12/26 10:18:26] INFO     Source: Engine                engine_wrapper.py:334
+2026-11-12T18:18:26.211478Z                     INFO     Evaluation: 0.73              engine_wrapper.py:334
+2026-11-12T18:18:26.211899Z                     INFO     Depth: 6                      engine_wrapper.py:334
+2026-11-12T18:18:26.212285Z                     INFO     Nodes: 1.1M                   engine_wrapper.py:334
+2026-11-12T18:18:26.212729Z                     INFO     Pv: 10. a3                    engine_wrapper.py:334
+2026-11-12T18:18:26.634433Z                     INFO     ---                              lichess_bot.py:938
+2026-11-12T18:18:26.634463Z                              https://lichess.org/glYlALQg/whi                   
+2026-11-12T18:18:26.634469Z                              te Game over                                       
+2026-11-12T18:18:26.635122Z                     INFO     Next challenge will be created   matchmaking.py:314
+2026-11-12T18:18:26.635143Z                              after Thu Nov 12 10:19:26 2026                     
+2026-11-12T18:18:26.635583Z                     INFO     +++ Process Freed. Count: 0.     lichess_bot.py:319
+2026-11-12T18:18:26.635592Z                              IDs: None                                          
+2026-11-12T18:18:26.636175Z                     INFO     Accept Blitz rated challenge     lichess_bot.py:520
+2026-11-12T18:18:26.636183Z                              from BOT LentusChess (1345)                        
+2026-11-12T18:18:26.636187Z                              (AMmBtiCB)                                         
+2026-11-12T18:18:26.843663Z                     INFO     --- Process Queued. Count: 1.    lichess_bot.py:319
+2026-11-12T18:18:26.843708Z                              IDs: {'AMmBtiCB'}                                  
+2026-11-12T18:18:26.844279Z                     INFO     --- Process Used. Count: 1. IDs: lichess_bot.py:319
+2026-11-12T18:18:26.844294Z                              {'AMmBtiCB'}                                       
+2026-11-12T18:18:27.149543Z [11/12/26 10:18:27] INFO     +++                              lichess_bot.py:699
+2026-11-12T18:18:27.14957Z                              https://lichess.org/AMmBtiCB/whi                   
+2026-11-12T18:18:27.149576Z                              te Blitz vs BOT LentusChess                        
+2026-11-12T18:18:27.14958Z                              (1345) (AMmBtiCB)                                  
+2026-11-12T18:18:27.150362Z                     INFO     ***                             conversation.py:100
+2026-11-12T18:18:27.150382Z                              https://lichess.org/AMmBtiCB/wh                    
+2026-11-12T18:18:27.150388Z                              ite [player] GoPandaFish:                          
+2026-11-12T18:18:27.150392Z                              GoPandaFish here! Pandafish                        
+2026-11-12T18:18:27.150396Z                              v0.10 is live on stream,                           
+2026-11-12T18:18:27.1504Z                              testing its chess and chasing                      
+2026-11-12T18:18:27.150403Z                              bamboo. Good luck!                                 
+2026-11-12T18:18:27.362017Z                     INFO     ***                             conversation.py:100
+2026-11-12T18:18:27.362045Z                              https://lichess.org/AMmBtiCB/wh                    
+2026-11-12T18:18:27.362051Z                              ite [spectator] GoPandaFish:                       
+2026-11-12T18:18:27.362056Z                              Live on stream: GoPandaFish                        
+2026-11-12T18:18:27.362059Z                              tests Pandafish v0.10. Fresh                       
+2026-11-12T18:18:27.362063Z                              moves, fresh data, same bamboo                     
+2026-11-12T18:18:27.362067Z                              budget.                                            
+2026-11-12T18:18:27.566852Z                     INFO                                      lichess_bot.py:852
+2026-11-12T18:18:27.567495Z                     INFO     move: 1                          lichess_bot.py:853
+2026-11-12T18:18:27.568284Z                     INFO     Searching for time 10 seconds engine_wrapper.py:704
+2026-11-12T18:18:27.568312Z                              for game AMmBtiCB                                  
+2026-11-12T18:18:29.310228Z [11/12/26 10:18:29] INFO     Source: Engine                engine_wrapper.py:334
+2026-11-12T18:18:29.310662Z                     INFO     Evaluation: 0.73              engine_wrapper.py:334
+2026-11-12T18:18:29.31108Z                     INFO     Depth: 6                      engine_wrapper.py:334
+2026-11-12T18:18:29.311463Z                     INFO     Nodes: 1.1M                   engine_wrapper.py:334
+2026-11-12T18:18:29.311933Z                     INFO     Pv: 10. a3                    engine_wrapper.py:334

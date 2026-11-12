@@ -10,6 +10,20 @@ This Go program runs local UCI matches separately from the engine. It reuses the
 evidence separately from controlled matches. Capture and analysis code lives
 in `tools/lichess/`.
 
+## Local development and live sessions
+
+Local testing should drive the next batch of strength changes. Keep each
+experiment focused, check saved positions and search behavior, then use the
+[previous-release gate](#routine-order-and-practical-gate) and serial external
+comparisons. A live stream is not required for every increment. Use live sessions
+periodically after meaningful progress, or when clocks, UCI handling, or client
+integration change. Controlled matches provide cleaner strength comparisons;
+live games expose operational failures and new positions.
+
+The [v0.10 review](live/v0.10-twitch-m2-20261112/REVIEW.md#current-strength-priorities)
+records the current five strength priorities and the reasoning behind them.
+They are hypotheses to test, not guaranteed gains or an approved release schedule.
+
 ## Why this exists
 
 This benchmark runner was created without knowing how Fishtest works. After

@@ -6,6 +6,7 @@ engine matches remain in [results](../results/README.md).
 
 | Session | Engine | Hardware/workload | Games | Status |
 | --- | --- | --- | --- | --- |
+| [v0.10 Twitch stream](v0.10-twitch-m2-20261112/README.md) | v0.10 | M2 MacBook Air, browser and Twitch; unintended overlap documented | 13 played + 1 abandoned | Complete survey, confirmation, depth replay, and client investigation |
 | [First Twitch stress test](v0.8-twitch-m2-20261111/README.md) | v0.8 | M2 MacBook Air, browser and Twitch streaming | 38 | Complete survey, targeted confirmation, and review |
 
 These games have selected opponents, mixed clocks, and an account rating that

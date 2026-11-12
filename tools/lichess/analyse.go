@@ -38,21 +38,22 @@ type analysisMethod struct {
 	Comparison      string `json:"comparison"`
 }
 type analysedMove struct {
-	Game           string        `json:"game"`
-	Ply            int           `json:"ply"`
-	Side           string        `json:"side"`
-	IsBot          bool          `json:"is_bot"`
-	FEN            string        `json:"fen"`
-	Position       string        `json:"position"`
-	Played         string        `json:"played"`
-	PlayedSAN      string        `json:"played_san"`
-	Best           sfResult      `json:"best"`
-	PlayedResult   sfResult      `json:"played_result"`
-	Reused         bool          `json:"played_search_reused"`
-	CPLoss         *int          `json:"cp_loss,omitempty"`
-	RawCPDelta     *int          `json:"raw_cp_delta,omitempty"`
-	Classification string        `json:"classification"`
-	Capture        *searchRecord `json:"capture,omitempty"`
+	Game           string          `json:"game"`
+	Ply            int             `json:"ply"`
+	Side           string          `json:"side"`
+	IsBot          bool            `json:"is_bot"`
+	FEN            string          `json:"fen"`
+	Position       string          `json:"position"`
+	Played         string          `json:"played"`
+	PlayedSAN      string          `json:"played_san"`
+	Best           sfResult        `json:"best"`
+	PlayedResult   sfResult        `json:"played_result"`
+	Reused         bool            `json:"played_search_reused"`
+	CPLoss         *int            `json:"cp_loss,omitempty"`
+	RawCPDelta     *int            `json:"raw_cp_delta,omitempty"`
+	Classification string          `json:"classification"`
+	Capture        *searchRecord   `json:"capture,omitempty"`
+	Captures       []*searchRecord `json:"captures,omitempty"` // Multiple attempts, without guessing which was submitted.
 }
 type gameAnalysis struct {
 	Game      string         `json:"game"`
@@ -93,7 +94,22 @@ func compareScores(best, played sfScore) (*int, *int, string) {
 	}
 	return nil, nil, "mate_score_comparison"
 }
-func loadCapture(path string) (map[string]*searchRecord, error) {
+
+type captureIndex struct {
+	All   []*searchRecord
+	ByPly map[string][]*searchRecord
+}
+
+func (index *captureIndex) attach(row *analysedMove, key string) {
+	attempts := index.ByPly[key]
+	if len(attempts) == 1 {
+		row.Capture = attempts[0]
+	} else if len(attempts) > 1 {
+		row.Captures = attempts
+	}
+}
+
+func loadCapture(path string) (*captureIndex, error) {
 	f, err := os.Open(path)
 	if err != nil {
 		return nil, err
@@ -101,18 +117,19 @@ func loadCapture(path string) (map[string]*searchRecord, error) {
 	defer f.Close()
 	scanner := bufio.NewScanner(f)
 	scanner.Buffer(make([]byte, 4096), 4*1024*1024)
-	rows := map[string]*searchRecord{}
+	rows := &captureIndex{ByPly: map[string][]*searchRecord{}}
 	for scanner.Scan() {
 		r := new(searchRecord)
 		if err = json.Unmarshal(scanner.Bytes(), r); err != nil {
 			return nil, err
 		}
-		if r.Game != "" && r.Ply != nil && r.Status == "completed" {
+		if r.Status != "completed" {
+			continue
+		}
+		rows.All = append(rows.All, r)
+		if r.Game != "" && r.Ply != nil {
 			key := fmt.Sprintf("%s/%d", r.Game, *r.Ply)
-			if _, ok := rows[key]; ok {
-				return nil, fmt.Errorf("duplicate completed search at %s", key)
-			}
-			rows[key] = r
+			rows.ByPly[key] = append(rows.ByPly[key], r)
 		}
 	}
 	return rows, scanner.Err()
@@ -264,6 +281,8 @@ func runProcess(o processOptions) error {
 					if len(cached.PlayedResult.PV) == 0 || cached.PlayedResult.PV[0] != cached.PlayedResult.Bestmove {
 						return fmt.Errorf("invalid played-move checkpoint")
 					}
+					cached.Capture, cached.Captures = nil, nil
+					capture.attach(&cached, key)
 					cached.CPLoss, cached.RawCPDelta, cached.Classification = compareScores(cached.Best.Score, cached.PlayedResult.Score)
 					result.Moves = append(result.Moves, cached)
 					processed++
@@ -294,7 +313,8 @@ func runProcess(o processOptions) error {
 					if positions[ply].Turn() == chess.Black {
 						side = "Black"
 					}
-					row := analysedMove{Game: site, Ply: ply, Side: side, IsBot: strings.EqualFold(game.GetTagPair(side), o.Bot), FEN: positions[ply].String(), Position: position, Played: move.String(), PlayedSAN: chess.AlgebraicNotation{}.Encode(positions[ply], move), Best: best, PlayedResult: played, Reused: reused, CPLoss: cp, RawCPDelta: delta, Classification: category, Capture: capture[key]}
+					row := analysedMove{Game: site, Ply: ply, Side: side, IsBot: strings.EqualFold(game.GetTagPair(side), o.Bot), FEN: positions[ply].String(), Position: position, Played: move.String(), PlayedSAN: chess.AlgebraicNotation{}.Encode(positions[ply], move), Best: best, PlayedResult: played, Reused: reused, CPLoss: cp, RawCPDelta: delta, Classification: category}
+					capture.attach(&row, key)
 					result.Moves = append(result.Moves, row)
 					processed++
 					result.Complete = false
@@ -471,5 +491,5 @@ func writeRegressions(output string, method analysisMethod, rows []analysedMove)
 		Method analysisMethod   `json:"method"`
 		Note   string           `json:"note"`
 		Cases  []regressionCase `json:"cases"`
-	}{method, "Public reference positions, not assertions that v0.8 must pass. Reference moves can have equally good alternatives. The deterministic split is for later engine development; it is not a hidden or statistically independent test set.", cases})
+	}{method, "Public reference positions; the recorded engine is not expected to pass improvement cases retroactively. Reference moves can have equally good alternatives. The deterministic split is for later engine development; it is not a hidden or statistically independent test set.", cases})
 }

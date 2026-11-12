@@ -1,0 +1,28 @@
+{
+  "recorded_engine_manifest": "../raw/manifest.json",
+  "processor_base_revision": "1511e88b5e51752b775487822d27eebb2f61fa9c",
+  "processor_has_local_changes": true,
+  "processor_binary_sha256": "7eeb41e9a8b051011a39ed67503b9f8c4f73ea02d497d9618ab78d8e20e7ec3f",
+  "go_version": "go version go1.25.0 darwin/arm64",
+  "source_sha256": {
+    "tools/lichess/analyse.go": "d6abc1e4c79528ce13a6cc86dc1599076e2fb76662eb1ea64aa5293585166de2",
+    "tools/lichess/operational.go": "5ca79084d1517f48b6664af4180f5a128cbaee14860020900c67731a31ec76d8",
+    "tools/lichess/process_test.go": "a119f46e4afd95dc81ff2c8a9f5938d79620d5fde3de878b3a829c9a087452b7"
+  },
+  "client_post_session_inspection": {
+    "revision": "df7e730de58cc3ef2f1415a0dc2eeda842d39167",
+    "status": [
+      "?? venv/"
+    ],
+    "source_file": "lib/lichess_bot.py",
+    "source_file_sha256": "ffe7ff57d6e68e156c46523c3328259ad142f5b58b2657ae7ca32c3680c8c7a1",
+    "origin": "https://github.com/lichess-bot-devs/lichess-bot.git",
+    "note": "Inspected after the session; this is not a separate capture-time source snapshot. No client source modified."
+  },
+  "diagnostic_sources_sha256": {
+    "played-depth-replay.go.txt": "0586a5ef6fb29c726390444e805c8702fc2f93f5a3a7c63f21ff02a28dedd7f0",
+    "session-audit.go.txt": "6b3f5b87daf9ebbbc64b77ea8be2cb987831dc6480aced4778e8b2017b465093",
+    "depth-replay.go.txt": "8a1e5ca8022585ff00ca96fc3a4970d6be72b0f0af6761ca5964b22e18051671"
+  },
+  "note": "Engine source and original records unchanged. Processor fixes preserve duplicate/unlinked completed searches and recognize explicit unlabelled reconnect markers. Source patch is preserved separately. Stockfish method identity is in each analysis profile."
+}

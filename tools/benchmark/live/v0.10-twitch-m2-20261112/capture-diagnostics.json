@@ -1,0 +1,3961 @@
+{
+  "method": "Offline audit of captured JSON and PGNs. Individual matches require full startpos move history, exact root FEN, and returned move equal to the saved next move. These are diagnostic candidates only; original group linkage is unchanged. Overlap uses UTC go timestamps plus monotonic measured response duration; it measures outstanding searches in distinct processes, not CPU utilization or a count of games. No hidden timing/temperature samples are inferred.",
+  "peak_concurrent_processes": 2,
+  "searches_overlapping_other_processes": 134,
+  "overlap_wall_seconds": 168.487527334,
+  "individually_unique_but_group_unlinked": 38,
+  "ambiguous": 2,
+  "no_pgn_match": 0,
+  "unlinked_search_audit": [
+    {
+      "process": "engine-725-1516623685.jsonl",
+      "search": 1,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:47:22.526744Z",
+      "position": "position startpos",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "bestmove": "d2d4",
+      "status": "completed",
+      "response_ms": 9995.190792,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/y1xXiZbd",
+          "ply": 0
+        },
+        {
+          "game": "https://lichess.org/game/djj7sLqm",
+          "ply": 0
+        },
+        {
+          "game": "https://lichess.org/game/JwrF9K8d",
+          "ply": 0
+        },
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 0
+        },
+        {
+          "game": "https://lichess.org/game/yQH0wqtl",
+          "ply": 0
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 1,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:47:23.774059Z",
+      "position": "position startpos",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "bestmove": "b1c3",
+      "status": "completed",
+      "response_ms": 9995.14825,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/dbkD6ZNt",
+          "ply": 0
+        },
+        {
+          "game": "https://lichess.org/game/AMmBtiCB",
+          "ply": 0
+        },
+        {
+          "game": "https://lichess.org/game/yZ6wObvi",
+          "ply": 0
+        },
+        {
+          "game": "https://lichess.org/game/6j1YSLRZ",
+          "ply": 0
+        },
+        {
+          "game": "https://lichess.org/game/glYlALQg",
+          "ply": 0
+        },
+        {
+          "game": "https://lichess.org/game/3y5c9jT5",
+          "ply": 0
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 2,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:47:42.885111Z",
+      "position": "position startpos moves d2d4 d7d5",
+      "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq d6 0 2",
+      "bestmove": "e2e4",
+      "status": "completed",
+      "response_ms": 3461.443125,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 2
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 3,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:47:49.163219Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4",
+      "fen": "rnbqkbnr/ppp1pppp/8/8/3Pp3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
+      "bestmove": "b1c3",
+      "status": "completed",
+      "response_ms": 3406.120416,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 4
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 4,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:47:55.546122Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5",
+      "fen": "rnbqkbnr/ppp2ppp/8/4p3/3Pp3/2N5/PPP2PPP/R1BQKBNR w KQkq e6 0 4",
+      "bestmove": "d4e5",
+      "status": "completed",
+      "response_ms": 3352.771083,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 6
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 5,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:48:02.235273Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1",
+      "fen": "rnb1kbnr/ppp2ppp/8/4P3/4p3/2N5/PPP2PPP/R1BqKBNR w KQkq - 0 5",
+      "bestmove": "e1d1",
+      "status": "completed",
+      "response_ms": 3301.464041,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 8
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 6,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:48:13.005567Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6",
+      "fen": "r1b1kbnr/ppp2ppp/2n5/4P3/4p3/2N5/PPP2PPP/R1BK1BNR w kq - 1 6",
+      "bestmove": "f1b5",
+      "status": "completed",
+      "response_ms": 3251.773209,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 10
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 7,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:48:18.64867Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7",
+      "fen": "r1b1kb1r/ppp1nppp/2n5/1B2P3/4p3/2N5/PPP2PPP/R1BK2NR w kq - 3 7",
+      "bestmove": "c3e4",
+      "status": "completed",
+      "response_ms": 3203.816083,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 12
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 8,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:48:24.417815Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5",
+      "fen": "r3kb1r/ppp1nppp/2n5/1B2Pb2/4N3/8/PPP2PPP/R1BK2NR w kq - 1 8",
+      "bestmove": "e4d2",
+      "status": "completed",
+      "response_ms": 3156.803792,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 14
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 9,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:48:30.650082Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8",
+      "fen": "2kr1b1r/ppp1nppp/2n5/1B2Pb2/8/8/PPPN1PPP/R1BK2NR w - - 3 9",
+      "bestmove": "g1f3",
+      "status": "completed",
+      "response_ms": 2994.071625,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 16
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 10,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:48:36.664556Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5",
+      "fen": "2kr1b1r/ppp1np1p/2n5/1B2Pbp1/8/5N2/PPPN1PPP/R1BK3R w - g6 0 10",
+      "bestmove": "c2c3",
+      "status": "completed",
+      "response_ms": 3072.156625,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 18
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 11,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:48:44.377597Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6",
+      "fen": "2kr1b1r/1pp1np1p/p1n5/1B2Pbp1/8/2P2N2/PP1N1PPP/R1BK3R w - - 0 11",
+      "bestmove": "b5c6",
+      "status": "completed",
+      "response_ms": 2303.535875,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 20
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 12,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:48:50.094742Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6",
+      "fen": "2kr1b1r/1pp2p1p/p1n5/4Pbp1/8/2P2N2/PP1N1PPP/R1BK3R w - - 0 12",
+      "bestmove": "d1e1",
+      "status": "completed",
+      "response_ms": 2379.976709,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 22
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 13,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:48:55.823804Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4",
+      "fen": "2kr1b1r/1pp2p1p/p1n5/4Pb2/6p1/2P2N2/PP1N1PPP/R1B1K2R w - - 0 13",
+      "bestmove": "f3h4",
+      "status": "completed",
+      "response_ms": 2993.8035,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 24
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 14,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:49:02.559542Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2",
+      "fen": "2kr1b1r/1pp2p1p/p1n5/4P3/6pN/2P5/PPbN1PPP/R1B1K2R w - - 2 14",
+      "bestmove": "d2f1",
+      "status": "completed",
+      "response_ms": 2954.104125,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 26
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 15,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:49:12.892028Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1",
+      "fen": "2k2b1r/1pp2p1p/p1n5/4P3/6pN/2P5/PPb2PPP/R1BrKN1R w - - 4 15",
+      "bestmove": "e1e2",
+      "status": "completed",
+      "response_ms": 2915.825958,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 28
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 16,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:49:22.2529Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5",
+      "fen": "2k2b1r/1pp2p1p/p7/4n3/6pN/2P5/PPb1KPPP/R1Br1N1R w - - 0 16",
+      "bestmove": "h2h3",
+      "status": "completed",
+      "response_ms": 2878.436459,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 30
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 17,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:49:29.323253Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5",
+      "fen": "2k4r/1pp2p1p/p7/2b1n3/6pN/2P4P/PPb1KPP1/R1Br1N1R w - - 1 17",
+      "bestmove": "f1g3",
+      "status": "completed",
+      "response_ms": 2842.10675,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 32
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 18,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:49:34.616907Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1",
+      "fen": "2k4r/1pp2p1p/p7/2b1n3/6pN/2P3NP/PPb1KPP1/R1B4r w - - 0 18",
+      "bestmove": "g3h1",
+      "status": "completed",
+      "response_ms": 2658.797042,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 34
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 19,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:49:39.924511Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3",
+      "fen": "2k4r/1pp2p1p/p7/2b1n3/6pN/2Pb3P/PP2KPP1/R1B4N w - - 1 19",
+      "bestmove": "e2d1",
+      "status": "completed",
+      "response_ms": 2774.443125,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 36
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 20,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:49:45.547019Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3",
+      "fen": "2k4r/1pp2p1p/p7/2b1n3/7N/2Pb3p/PP3PP1/R1BK3N w - - 0 20",
+      "bestmove": "f2f4",
+      "status": "completed",
+      "response_ms": 2742.097542,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 38
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 21,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:49:50.559912Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6",
+      "fen": "2k4r/1pp2p1p/p5n1/2b5/5P1N/2Pb3p/PP4P1/R1BK3N w - - 1 21",
+      "bestmove": "b2b4",
+      "status": "completed",
+      "response_ms": 2710.816291,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 40
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 22,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:49:55.442412Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4",
+      "fen": "2k4r/1pp2p1p/p7/2b5/1P3P1n/2Pb3p/P5P1/R1BK3N w - - 0 22",
+      "bestmove": "g2g3",
+      "status": "completed",
+      "response_ms": 2680.443167,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 42
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 23,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:00.283021Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3",
+      "fen": "2k4r/1pp2p1p/p7/2b5/1P3P2/2Pb1nPp/P7/R1BK3N w - - 1 23",
+      "bestmove": "b4c5",
+      "status": "completed",
+      "response_ms": 2651.438167,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 44
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 24,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:04.745244Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8",
+      "fen": "2k1r3/1pp2p1p/p7/2P5/5P2/2Pb1nPp/P7/R1BK3N w - - 1 24",
+      "bestmove": "c1d2",
+      "status": "completed",
+      "response_ms": 2623.143458,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 46
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 25,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:11.535339Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2",
+      "fen": "2k5/1pp2p1p/p7/2P5/5P2/2Pb1nPp/P2Br3/R2K3N w - - 3 25",
+      "bestmove": "g3g4",
+      "status": "completed",
+      "response_ms": 2037.25675,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 48
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 26,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:15.449024Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2",
+      "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb1n1p/P2r4/R2K3N w - - 0 26",
+      "bestmove": "d1c1",
+      "status": "completed",
+      "response_ms": 2587.830125,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 50
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 27,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:19.728634Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2",
+      "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb1n1p/P1r5/R1K4N w - - 2 27",
+      "bestmove": "c1d1",
+      "status": "completed",
+      "response_ms": 2561.11325,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 52
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 28,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:27.42253Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2",
+      "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb1n1p/P6r/R2K3N w - - 4 28",
+      "bestmove": "h1g3",
+      "status": "completed",
+      "response_ms": 2535.811208,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 54
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 29,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:32.746742Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2 h1g3 h2g2",
+      "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb1nNp/P5r1/R2K4 w - - 6 29",
+      "bestmove": "d1c1",
+      "status": "completed",
+      "response_ms": 2511.12475,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 56
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 30,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:39.813832Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2 h1g3 h2g2 d1c1 g2g3",
+      "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb1nrp/P7/R1K5 w - - 0 30",
+      "bestmove": "c1b2",
+      "status": "completed",
+      "response_ms": 2487.780208,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 58
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 31,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:46.451989Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2 h1g3 h2g2 d1c1 g2g3 c1b2 g3g1",
+      "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb1n1p/PK6/R5r1 w - - 2 31",
+      "bestmove": "a1g1",
+      "status": "completed",
+      "response_ms": 2464.794834,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 60
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 32,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:49.74588Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2 h1g3 h2g2 d1c1 g2g3 c1b2 g3g1 a1g1 f3g1",
+      "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb3p/PK6/6n1 w - - 0 32",
+      "bestmove": "b2c1",
+      "status": "completed",
+      "response_ms": 2442.485125,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 62
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 33,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:52.454246Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2 h1g3 h2g2 d1c1 g2g3 c1b2 g3g1 a1g1 f3g1 b2c1 g1f3",
+      "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb1n1p/P7/2K5 w - - 2 33",
+      "bestmove": "c1b2",
+      "status": "completed",
+      "response_ms": 2298.991792,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 64
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 34,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:55.051661Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2 h1g3 h2g2 d1c1 g2g3 c1b2 g3g1 a1g1 f3g1 b2c1 g1f3 c1b2 h3h2",
+      "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb1n2/PK5p/8 w - - 0 34",
+      "bestmove": "c3c4",
+      "status": "completed",
+      "response_ms": 1885.164125,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 66
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 35,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:57.21744Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2 h1g3 h2g2 d1c1 g2g3 c1b2 g3g1 a1g1 f3g1 b2c1 g1f3 c1b2 h3h2 c3c4 h2h1q",
+      "fen": "2k5/1pp2p1p/p7/2P5/2P2PP1/3b1n2/PK6/7q w - - 0 35",
+      "bestmove": "c5c6",
+      "status": "completed",
+      "response_ms": 2401.792167,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 68
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 36,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:50:59.96394Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2 h1g3 h2g2 d1c1 g2g3 c1b2 g3g1 a1g1 f3g1 b2c1 g1f3 c1b2 h3h2 c3c4 h2h1q c5c6 h1b1",
+      "fen": "2k5/1pp2p1p/p1P5/8/2P2PP1/3b1n2/PK6/1q6 w - - 1 36",
+      "bestmove": "b2a3",
+      "status": "completed",
+      "response_ms": 2381.821584,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 70
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 37,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:51:02.633654Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2 h1g3 h2g2 d1c1 g2g3 c1b2 g3g1 a1g1 f3g1 b2c1 g1f3 c1b2 h3h2 c3c4 h2h1q c5c6 h1b1 b2a3 b1c1",
+      "fen": "2k5/1pp2p1p/p1P5/8/2P2PP1/K2b1n2/P7/2q5 w - - 3 37",
+      "bestmove": "a3b3",
+      "status": "completed",
+      "response_ms": 2361.771833,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 72
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 38,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:51:05.278239Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2 h1g3 h2g2 d1c1 g2g3 c1b2 g3g1 a1g1 f3g1 b2c1 g1f3 c1b2 h3h2 c3c4 h2h1q c5c6 h1b1 b2a3 b1c1 a3b3 c1c4",
+      "fen": "2k5/1pp2p1p/p1P5/8/2q2PP1/1K1b1n2/P7/8 w - - 0 38",
+      "bestmove": "b3b2",
+      "status": "completed",
+      "response_ms": 2342.785,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 74
+        }
+      ]
+    },
+    {
+      "process": "engine-726-21886342.jsonl",
+      "search": 39,
+      "game": "",
+      "ply": null,
+      "time": "2026-11-12T17:51:07.880302Z",
+      "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2 h1g3 h2g2 d1c1 g2g3 c1b2 g3g1 a1g1 f3g1 b2c1 g1f3 c1b2 h3h2 c3c4 h2h1q c5c6 h1b1 b2a3 b1c1 a3b3 c1c4 b3b2 c4c2",
+      "fen": "2k5/1pp2p1p/p1P5/8/5PP1/3b1n2/PKq5/8 w - - 2 39",
+      "bestmove": "b2a1",
+      "status": "completed",
+      "response_ms": 2324.790792,
+      "individual_matches": [
+        {
+          "game": "https://lichess.org/game/eNxSUcbC",
+          "ply": 76
+        }
+      ]
+    }
+  ],
+  "overlap_intervals": [
+    {
+      "start": "2026-11-12T17:47:23.774059Z",
+      "end": "2026-11-12T17:47:32.521934792Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:47:22.526744Z",
+          "end": "2026-11-12T17:47:32.521934792Z",
+          "search": {
+            "process": "engine-725-1516623685.jsonl",
+            "search": 1,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:47:22.526744Z",
+            "position": "position startpos",
+            "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+            "bestmove": "d2d4",
+            "status": "completed",
+            "response_ms": 9995.190792
+          }
+        },
+        {
+          "start": "2026-11-12T17:47:23.774059Z",
+          "end": "2026-11-12T17:47:33.76920725Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 1,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:47:23.774059Z",
+            "position": "position startpos",
+            "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+            "bestmove": "b1c3",
+            "status": "completed",
+            "response_ms": 9995.14825
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:47:33.128855Z",
+      "end": "2026-11-12T17:47:33.76920725Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:47:23.774059Z",
+          "end": "2026-11-12T17:47:33.76920725Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 1,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:47:23.774059Z",
+            "position": "position startpos",
+            "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+            "bestmove": "b1c3",
+            "status": "completed",
+            "response_ms": 9995.14825
+          }
+        },
+        {
+          "start": "2026-11-12T17:47:33.128855Z",
+          "end": "2026-11-12T17:47:37.807451209Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 1,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 6,
+            "time": "2026-11-12T17:47:33.128855Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5",
+            "fen": "rnb1kb1r/pp1ppppp/5n2/q1p5/8/2N1PN2/PPPP1PPP/R1BQKB1R w KQkq - 1 4",
+            "bestmove": "f1b5",
+            "status": "completed",
+            "response_ms": 4678.596209
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:47:42.885111Z",
+      "end": "2026-11-12T17:47:44.15470525Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:47:42.885111Z",
+          "end": "2026-11-12T17:47:46.346554125Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 2,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:47:42.885111Z",
+            "position": "position startpos moves d2d4 d7d5",
+            "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq d6 0 2",
+            "bestmove": "e2e4",
+            "status": "completed",
+            "response_ms": 3461.443125
+          }
+        },
+        {
+          "start": "2026-11-12T17:47:39.147212Z",
+          "end": "2026-11-12T17:47:44.15470525Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 2,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 8,
+            "time": "2026-11-12T17:47:39.147212Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6",
+            "fen": "rnb1kb1r/1p1ppppp/p4n2/qBp5/8/2N1PN2/PPPP1PPP/R1BQK2R w KQkq - 0 5",
+            "bestmove": "b5c4",
+            "status": "completed",
+            "response_ms": 5007.49325
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:47:45.498342Z",
+      "end": "2026-11-12T17:47:46.346554125Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:47:42.885111Z",
+          "end": "2026-11-12T17:47:46.346554125Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 2,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:47:42.885111Z",
+            "position": "position startpos moves d2d4 d7d5",
+            "fen": "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR w KQkq d6 0 2",
+            "bestmove": "e2e4",
+            "status": "completed",
+            "response_ms": 3461.443125
+          }
+        },
+        {
+          "start": "2026-11-12T17:47:45.498342Z",
+          "end": "2026-11-12T17:47:50.332628583Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 3,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 10,
+            "time": "2026-11-12T17:47:45.498342Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5",
+            "fen": "rnb1kb1r/3ppppp/p4n2/qpp5/2B5/2N1PN2/PPPP1PPP/R1BQK2R w KQkq b6 0 6",
+            "bestmove": "c4d5",
+            "status": "completed",
+            "response_ms": 4834.286583
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:47:49.163219Z",
+      "end": "2026-11-12T17:47:50.332628583Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:47:49.163219Z",
+          "end": "2026-11-12T17:47:52.569339416Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 3,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:47:49.163219Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4",
+            "fen": "rnbqkbnr/ppp1pppp/8/8/3Pp3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
+            "bestmove": "b1c3",
+            "status": "completed",
+            "response_ms": 3406.120416
+          }
+        },
+        {
+          "start": "2026-11-12T17:47:45.498342Z",
+          "end": "2026-11-12T17:47:50.332628583Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 3,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 10,
+            "time": "2026-11-12T17:47:45.498342Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5",
+            "fen": "rnb1kb1r/3ppppp/p4n2/qpp5/2B5/2N1PN2/PPPP1PPP/R1BQK2R w KQkq b6 0 6",
+            "bestmove": "c4d5",
+            "status": "completed",
+            "response_ms": 4834.286583
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:47:51.731321Z",
+      "end": "2026-11-12T17:47:52.569339416Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:47:49.163219Z",
+          "end": "2026-11-12T17:47:52.569339416Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 3,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:47:49.163219Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4",
+            "fen": "rnbqkbnr/ppp1pppp/8/8/3Pp3/8/PPP2PPP/RNBQKBNR w KQkq - 0 3",
+            "bestmove": "b1c3",
+            "status": "completed",
+            "response_ms": 3406.120416
+          }
+        },
+        {
+          "start": "2026-11-12T17:47:51.731321Z",
+          "end": "2026-11-12T17:47:56.398099083Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 4,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 12,
+            "time": "2026-11-12T17:47:51.731321Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5",
+            "fen": "rnb1kb1r/3ppppp/p7/qppn4/8/2N1PN2/PPPP1PPP/R1BQK2R w KQkq - 0 7",
+            "bestmove": "c3d5",
+            "status": "completed",
+            "response_ms": 4666.778083
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:47:55.546122Z",
+      "end": "2026-11-12T17:47:56.398099083Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:47:55.546122Z",
+          "end": "2026-11-12T17:47:58.898893083Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 4,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:47:55.546122Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5",
+            "fen": "rnbqkbnr/ppp2ppp/8/4p3/3Pp3/2N5/PPP2PPP/R1BQKBNR w KQkq e6 0 4",
+            "bestmove": "d4e5",
+            "status": "completed",
+            "response_ms": 3352.771083
+          }
+        },
+        {
+          "start": "2026-11-12T17:47:51.731321Z",
+          "end": "2026-11-12T17:47:56.398099083Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 4,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 12,
+            "time": "2026-11-12T17:47:51.731321Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5",
+            "fen": "rnb1kb1r/3ppppp/p7/qppn4/8/2N1PN2/PPPP1PPP/R1BQK2R w KQkq - 0 7",
+            "bestmove": "c3d5",
+            "status": "completed",
+            "response_ms": 4666.778083
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:47:57.679675Z",
+      "end": "2026-11-12T17:47:58.898893083Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:47:55.546122Z",
+          "end": "2026-11-12T17:47:58.898893083Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 4,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:47:55.546122Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5",
+            "fen": "rnbqkbnr/ppp2ppp/8/4p3/3Pp3/2N5/PPP2PPP/R1BQKBNR w KQkq e6 0 4",
+            "bestmove": "d4e5",
+            "status": "completed",
+            "response_ms": 3352.771083
+          }
+        },
+        {
+          "start": "2026-11-12T17:47:57.679675Z",
+          "end": "2026-11-12T17:48:02.184156958Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 5,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 14,
+            "time": "2026-11-12T17:47:57.679675Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6",
+            "fen": "rnb1kb1r/3p1ppp/p3p3/qppN4/8/4PN2/PPPP1PPP/R1BQK2R w KQkq - 0 8",
+            "bestmove": "d5f4",
+            "status": "completed",
+            "response_ms": 4504.481958
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:48:03.523717Z",
+      "end": "2026-11-12T17:48:05.536737041Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:48:02.235273Z",
+          "end": "2026-11-12T17:48:05.536737041Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 5,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:48:02.235273Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1",
+            "fen": "rnb1kbnr/ppp2ppp/8/4P3/4p3/2N5/PPP2PPP/R1BqKBNR w KQkq - 0 5",
+            "bestmove": "e1d1",
+            "status": "completed",
+            "response_ms": 3301.464041
+          }
+        },
+        {
+          "start": "2026-11-12T17:48:03.523717Z",
+          "end": "2026-11-12T17:48:07.871478416Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 6,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 16,
+            "time": "2026-11-12T17:48:03.523717Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6",
+            "fen": "r1b1kb1r/3p1ppp/p1n1p3/qpp5/5N2/4PN2/PPPP1PPP/R1BQK2R w KQkq - 2 9",
+            "bestmove": "e1g1",
+            "status": "completed",
+            "response_ms": 4347.761416
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:48:13.005567Z",
+      "end": "2026-11-12T17:48:13.352974208Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:48:13.005567Z",
+          "end": "2026-11-12T17:48:16.257340209Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 6,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:48:13.005567Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6",
+            "fen": "r1b1kbnr/ppp2ppp/2n5/4P3/4p3/2N5/PPP2PPP/R1BK1BNR w kq - 1 6",
+            "bestmove": "f1b5",
+            "status": "completed",
+            "response_ms": 3251.773209
+          }
+        },
+        {
+          "start": "2026-11-12T17:48:09.156523Z",
+          "end": "2026-11-12T17:48:13.352974208Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 7,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 18,
+            "time": "2026-11-12T17:48:09.156523Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6",
+            "fen": "r1b1k2r/3p1ppp/p1nbp3/qpp5/5N2/4PN2/PPPP1PPP/R1BQ1RK1 w kq - 4 10",
+            "bestmove": "f4e2",
+            "status": "completed",
+            "response_ms": 4196.451208
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:48:14.67892Z",
+      "end": "2026-11-12T17:48:16.257340209Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:48:13.005567Z",
+          "end": "2026-11-12T17:48:16.257340209Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 6,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:48:13.005567Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6",
+            "fen": "r1b1kbnr/ppp2ppp/2n5/4P3/4p3/2N5/PPP2PPP/R1BK1BNR w kq - 1 6",
+            "bestmove": "f1b5",
+            "status": "completed",
+            "response_ms": 3251.773209
+          }
+        },
+        {
+          "start": "2026-11-12T17:48:14.67892Z",
+          "end": "2026-11-12T17:48:18.582550166Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 8,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 20,
+            "time": "2026-11-12T17:48:14.67892Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5",
+            "fen": "r1b1k2r/3p1ppp/p1nb4/qpp1p3/8/4PN2/PPPPNPPP/R1BQ1RK1 w kq - 0 11",
+            "bestmove": "e2g3",
+            "status": "completed",
+            "response_ms": 3903.630166
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:48:19.90164Z",
+      "end": "2026-11-12T17:48:21.852486083Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:48:18.64867Z",
+          "end": "2026-11-12T17:48:21.852486083Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 7,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:48:18.64867Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7",
+            "fen": "r1b1kb1r/ppp1nppp/2n5/1B2P3/4p3/2N5/PPP2PPP/R1BK2NR w kq - 3 7",
+            "bestmove": "c3e4",
+            "status": "completed",
+            "response_ms": 3203.816083
+          }
+        },
+        {
+          "start": "2026-11-12T17:48:19.90164Z",
+          "end": "2026-11-12T17:48:23.813725542Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 9,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 22,
+            "time": "2026-11-12T17:48:19.90164Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7",
+            "fen": "r1b1k2r/3pbppp/p1n5/qpp1p3/8/4PNN1/PPPP1PPP/R1BQ1RK1 w kq - 2 12",
+            "bestmove": "d2d3",
+            "status": "completed",
+            "response_ms": 3912.085542
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:48:25.128874Z",
+      "end": "2026-11-12T17:48:27.574618792Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:48:24.417815Z",
+          "end": "2026-11-12T17:48:27.574618792Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 8,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:48:24.417815Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5",
+            "fen": "r3kb1r/ppp1nppp/2n5/1B2Pb2/4N3/8/PPP2PPP/R1BK2NR w kq - 1 8",
+            "bestmove": "e4d2",
+            "status": "completed",
+            "response_ms": 3156.803792
+          }
+        },
+        {
+          "start": "2026-11-12T17:48:25.128874Z",
+          "end": "2026-11-12T17:48:28.904355167Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 10,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 24,
+            "time": "2026-11-12T17:48:25.128874Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5",
+            "fen": "r1b1k2r/4bppp/p1n5/qpppp3/8/3PPNN1/PPP2PPP/R1BQ1RK1 w kq d6 0 13",
+            "bestmove": "e3e4",
+            "status": "completed",
+            "response_ms": 3775.481167
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:48:30.650082Z",
+      "end": "2026-11-12T17:48:33.644153625Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:48:30.650082Z",
+          "end": "2026-11-12T17:48:33.644153625Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 9,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:48:30.650082Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8",
+            "fen": "2kr1b1r/ppp1nppp/2n5/1B2Pb2/8/8/PPPN1PPP/R1BK2NR w - - 3 9",
+            "bestmove": "g1f3",
+            "status": "completed",
+            "response_ms": 2994.071625
+          }
+        },
+        {
+          "start": "2026-11-12T17:48:30.157716Z",
+          "end": "2026-11-12T17:48:33.800985667Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 11,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 26,
+            "time": "2026-11-12T17:48:30.157716Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4",
+            "fen": "r1b1k2r/4bppp/p1n5/qpp1p3/4p3/3P1NN1/PPP2PPP/R1BQ1RK1 w kq - 0 14",
+            "bestmove": "g3e4",
+            "status": "completed",
+            "response_ms": 3643.269667
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:48:36.664556Z",
+      "end": "2026-11-12T17:48:37.723943667Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:48:36.664556Z",
+          "end": "2026-11-12T17:48:39.736712625Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 10,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:48:36.664556Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5",
+            "fen": "2kr1b1r/ppp1np1p/2n5/1B2Pbp1/8/5N2/PPPN1PPP/R1BK3R w - g6 0 10",
+            "bestmove": "c2c3",
+            "status": "completed",
+            "response_ms": 3072.156625
+          }
+        },
+        {
+          "start": "2026-11-12T17:48:35.080364Z",
+          "end": "2026-11-12T17:48:37.723943667Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 12,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 28,
+            "time": "2026-11-12T17:48:35.080364Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5",
+            "fen": "r1b1k2r/4b1pp/p1n5/qpp1pp2/4N3/3P1N2/PPP2PPP/R1BQ1RK1 w kq f6 0 15",
+            "bestmove": "e4g3",
+            "status": "completed",
+            "response_ms": 2643.579667
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:48:39.052535Z",
+      "end": "2026-11-12T17:48:39.736712625Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:48:36.664556Z",
+          "end": "2026-11-12T17:48:39.736712625Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 10,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:48:36.664556Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5",
+            "fen": "2kr1b1r/ppp1np1p/2n5/1B2Pbp1/8/5N2/PPPN1PPP/R1BK3R w - g6 0 10",
+            "bestmove": "c2c3",
+            "status": "completed",
+            "response_ms": 3072.156625
+          }
+        },
+        {
+          "start": "2026-11-12T17:48:39.052535Z",
+          "end": "2026-11-12T17:48:42.473684083Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 13,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 30,
+            "time": "2026-11-12T17:48:39.052535Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7",
+            "fen": "r3k2r/3bb1pp/p1n5/qpp1pp2/8/3P1NN1/PPP2PPP/R1BQ1RK1 w kq - 2 16",
+            "bestmove": "d1e2",
+            "status": "completed",
+            "response_ms": 3421.149083
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:48:44.377597Z",
+      "end": "2026-11-12T17:48:46.681132875Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:48:44.377597Z",
+          "end": "2026-11-12T17:48:46.681132875Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 11,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:48:44.377597Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6",
+            "fen": "2kr1b1r/1pp1np1p/p1n5/1B2Pbp1/8/2P2N2/PP1N1PPP/R1BK3R w - - 0 11",
+            "bestmove": "b5c6",
+            "status": "completed",
+            "response_ms": 2303.535875
+          }
+        },
+        {
+          "start": "2026-11-12T17:48:43.77759Z",
+          "end": "2026-11-12T17:48:47.078377Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 14,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 32,
+            "time": "2026-11-12T17:48:43.77759Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7",
+            "fen": "r3k2r/2qbb1pp/p1n5/1pp1pp2/8/3P1NN1/PPP1QPPP/R1B2RK1 w kq - 4 17",
+            "bestmove": "g1h1",
+            "status": "completed",
+            "response_ms": 3300.787
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:48:50.094742Z",
+      "end": "2026-11-12T17:48:51.616328291Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:48:50.094742Z",
+          "end": "2026-11-12T17:48:52.474718709Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 12,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:48:50.094742Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6",
+            "fen": "2kr1b1r/1pp2p1p/p1n5/4Pbp1/8/2P2N2/PP1N1PPP/R1BK3R w - - 0 12",
+            "bestmove": "d1e1",
+            "status": "completed",
+            "response_ms": 2379.976709
+          }
+        },
+        {
+          "start": "2026-11-12T17:48:48.432173Z",
+          "end": "2026-11-12T17:48:51.616328291Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 15,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 34,
+            "time": "2026-11-12T17:48:48.432173Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4",
+            "fen": "r3k2r/2qbb1pp/p1n5/1pp1p3/5p2/3P1NN1/PPP1QPPP/R1B2R1K w kq - 0 18",
+            "bestmove": "g3h5",
+            "status": "completed",
+            "response_ms": 3184.155291
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:48:55.823804Z",
+      "end": "2026-11-12T17:48:56.054072875Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:48:55.823804Z",
+          "end": "2026-11-12T17:48:58.8176075Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 13,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:48:55.823804Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4",
+            "fen": "2kr1b1r/1pp2p1p/p1n5/4Pb2/6p1/2P2N2/PP1N1PPP/R1B1K2R w - - 0 13",
+            "bestmove": "f3h4",
+            "status": "completed",
+            "response_ms": 2993.8035
+          }
+        },
+        {
+          "start": "2026-11-12T17:48:52.983173Z",
+          "end": "2026-11-12T17:48:56.054072875Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 16,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 36,
+            "time": "2026-11-12T17:48:52.983173Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6",
+            "fen": "r3k2r/2qbb2p/p1n3p1/1pp1p2N/5p2/3P1N2/PPP1QPPP/R1B2R1K w kq - 0 19",
+            "bestmove": "f3e5",
+            "status": "completed",
+            "response_ms": 3070.899875
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:48:57.384878Z",
+      "end": "2026-11-12T17:48:58.8176075Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:48:55.823804Z",
+          "end": "2026-11-12T17:48:58.8176075Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 13,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:48:55.823804Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4",
+            "fen": "2kr1b1r/1pp2p1p/p1n5/4Pb2/6p1/2P2N2/PP1N1PPP/R1B1K2R w - - 0 13",
+            "bestmove": "f3h4",
+            "status": "completed",
+            "response_ms": 2993.8035
+          }
+        },
+        {
+          "start": "2026-11-12T17:48:57.384878Z",
+          "end": "2026-11-12T17:49:00.346646417Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 17,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 38,
+            "time": "2026-11-12T17:48:57.384878Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5",
+            "fen": "r3k2r/3bb2p/p1n3p1/1pp1q2N/5p2/3P4/PPP1QPPP/R1B2R1K w kq - 0 20",
+            "bestmove": "e2e5",
+            "status": "completed",
+            "response_ms": 2961.768417
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:49:02.559542Z",
+      "end": "2026-11-12T17:49:04.5415Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:49:02.559542Z",
+          "end": "2026-11-12T17:49:05.513646125Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 14,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:49:02.559542Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2",
+            "fen": "2kr1b1r/1pp2p1p/p1n5/4P3/6pN/2P5/PPbN1PPP/R1B1K2R w - - 2 14",
+            "bestmove": "d2f1",
+            "status": "completed",
+            "response_ms": 2954.104125
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:01.685046Z",
+          "end": "2026-11-12T17:49:04.5415Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 18,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 40,
+            "time": "2026-11-12T17:49:01.685046Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5",
+            "fen": "r3k2r/3bb2p/p5p1/1pp1n2N/5p2/3P4/PPP2PPP/R1B2R1K w kq - 0 21",
+            "bestmove": "h5f4",
+            "status": "completed",
+            "response_ms": 2856.454
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:49:13.845243Z",
+      "end": "2026-11-12T17:49:15.807853958Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:49:12.892028Z",
+          "end": "2026-11-12T17:49:15.807853958Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 15,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:49:12.892028Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1",
+            "fen": "2k2b1r/1pp2p1p/p1n5/4P3/6pN/2P5/PPb2PPP/R1BrKN1R w - - 4 15",
+            "bestmove": "e1e2",
+            "status": "completed",
+            "response_ms": 2915.825958
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:13.845243Z",
+          "end": "2026-11-12T17:49:16.406711416Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 21,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 46,
+            "time": "2026-11-12T17:49:13.845243Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4",
+            "fen": "r4rk1/3b3p/p2b2p1/1pp5/5Nn1/3PB3/PPP2PPP/R3R2K w - - 5 24",
+            "bestmove": "f4h3",
+            "status": "completed",
+            "response_ms": 2561.468416
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:49:22.2529Z",
+      "end": "2026-11-12T17:49:23.641713834Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:49:22.2529Z",
+          "end": "2026-11-12T17:49:25.131336459Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 16,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:49:22.2529Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5",
+            "fen": "2k2b1r/1pp2p1p/p7/4n3/6pN/2P5/PPb1KPPP/R1Br1N1R w - - 0 16",
+            "bestmove": "h2h3",
+            "status": "completed",
+            "response_ms": 2878.436459
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:21.246584Z",
+          "end": "2026-11-12T17:49:23.641713834Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 23,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 50,
+            "time": "2026-11-12T17:49:21.246584Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3",
+            "fen": "r4rk1/7p/p2b2p1/1pp5/8/3PP2b/PPP3PP/R3R2K w - - 0 26",
+            "bestmove": "g2h3",
+            "status": "completed",
+            "response_ms": 2395.129834
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:49:24.925901Z",
+      "end": "2026-11-12T17:49:25.131336459Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:49:22.2529Z",
+          "end": "2026-11-12T17:49:25.131336459Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 16,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:49:22.2529Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5",
+            "fen": "2k2b1r/1pp2p1p/p7/4n3/6pN/2P5/PPb1KPPP/R1Br1N1R w - - 0 16",
+            "bestmove": "h2h3",
+            "status": "completed",
+            "response_ms": 2878.436459
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:24.925901Z",
+          "end": "2026-11-12T17:49:27.234720542Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 24,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 52,
+            "time": "2026-11-12T17:49:24.925901Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2",
+            "fen": "r5k1/7p/p2b2p1/1pp5/8/3PP2P/PPP2r1P/R3R2K w - - 1 27",
+            "bestmove": "a2a4",
+            "status": "completed",
+            "response_ms": 2308.819542
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:49:29.323253Z",
+      "end": "2026-11-12T17:49:30.2252625Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:49:29.323253Z",
+          "end": "2026-11-12T17:49:32.16535975Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 17,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:49:29.323253Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5",
+            "fen": "2k4r/1pp2p1p/p7/2b1n3/6pN/2P4P/PPb1KPP1/R1Br1N1R w - - 1 17",
+            "bestmove": "f1g3",
+            "status": "completed",
+            "response_ms": 2842.10675
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:28.515659Z",
+          "end": "2026-11-12T17:49:30.2252625Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 25,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 54,
+            "time": "2026-11-12T17:49:28.515659Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4",
+            "fen": "r5k1/7p/p2b2p1/2p5/p7/3PP2P/1PP2r1P/R3R2K w - - 0 28",
+            "bestmove": "e3e4",
+            "status": "completed",
+            "response_ms": 1709.6035
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:49:31.508949Z",
+      "end": "2026-11-12T17:49:32.16535975Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:49:29.323253Z",
+          "end": "2026-11-12T17:49:32.16535975Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 17,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:49:29.323253Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5",
+            "fen": "2k4r/1pp2p1p/p7/2b1n3/6pN/2P4P/PPb1KPP1/R1Br1N1R w - - 1 17",
+            "bestmove": "f1g3",
+            "status": "completed",
+            "response_ms": 2842.10675
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:31.508949Z",
+          "end": "2026-11-12T17:49:33.67104675Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 26,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 56,
+            "time": "2026-11-12T17:49:31.508949Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2",
+            "fen": "r5k1/7p/p2b2p1/2p5/p3P3/3P3P/1PP4r/R3R2K w - - 0 29",
+            "bestmove": "h1g1",
+            "status": "completed",
+            "response_ms": 2162.09775
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:49:34.963941Z",
+      "end": "2026-11-12T17:49:36.693081375Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:49:34.616907Z",
+          "end": "2026-11-12T17:49:37.275704042Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 18,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:49:34.616907Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1",
+            "fen": "2k4r/1pp2p1p/p7/2b1n3/6pN/2P3NP/PPb1KPP1/R1B4r w - - 0 18",
+            "bestmove": "g3h1",
+            "status": "completed",
+            "response_ms": 2658.797042
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:34.963941Z",
+          "end": "2026-11-12T17:49:36.693081375Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 27,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 58,
+            "time": "2026-11-12T17:49:34.963941Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2",
+            "fen": "r5k1/7p/p2b2p1/2p5/p3P3/3P3P/1Pr5/R3R1K1 w - - 0 30",
+            "bestmove": "a1a4",
+            "status": "completed",
+            "response_ms": 1729.140375
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:49:39.924511Z",
+      "end": "2026-11-12T17:49:40.064684875Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:49:39.924511Z",
+          "end": "2026-11-12T17:49:42.698954125Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 19,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:49:39.924511Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3",
+            "fen": "2k4r/1pp2p1p/p7/2b1n3/6pN/2Pb3P/PP2KPP1/R1B4N w - - 1 19",
+            "bestmove": "e2d1",
+            "status": "completed",
+            "response_ms": 2774.443125
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:38.044769Z",
+          "end": "2026-11-12T17:49:40.064684875Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 28,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 60,
+            "time": "2026-11-12T17:49:38.044769Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2",
+            "fen": "r5k1/7p/p5p1/2p5/R3P3/3P3P/1Pr4b/4R1K1 w - - 1 31",
+            "bestmove": "g1h1",
+            "status": "completed",
+            "response_ms": 2019.915875
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:49:41.31132Z",
+      "end": "2026-11-12T17:49:42.698954125Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:49:39.924511Z",
+          "end": "2026-11-12T17:49:42.698954125Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 19,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:49:39.924511Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3",
+            "fen": "2k4r/1pp2p1p/p7/2b1n3/6pN/2Pb3P/PP2KPP1/R1B4N w - - 1 19",
+            "bestmove": "e2d1",
+            "status": "completed",
+            "response_ms": 2774.443125
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:41.31132Z",
+          "end": "2026-11-12T17:49:43.257076959Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 29,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 62,
+            "time": "2026-11-12T17:49:41.31132Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5",
+            "fen": "r5k1/7p/p5p1/2p1b3/R3P3/3P3P/1Pr5/4R2K w - - 3 32",
+            "bestmove": "b2b4",
+            "status": "completed",
+            "response_ms": 1945.756959
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:49:45.547019Z",
+      "end": "2026-11-12T17:49:46.576100084Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:49:45.547019Z",
+          "end": "2026-11-12T17:49:48.289116542Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 20,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:49:45.547019Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3",
+            "fen": "2k4r/1pp2p1p/p7/2b1n3/7N/2Pb3p/PP3PP1/R1BK3N w - - 0 20",
+            "bestmove": "f2f4",
+            "status": "completed",
+            "response_ms": 2742.097542
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:44.701578Z",
+          "end": "2026-11-12T17:49:46.576100084Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 30,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 64,
+            "time": "2026-11-12T17:49:44.701578Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2",
+            "fen": "r5k1/7p/p5p1/2p1b3/RP2P3/3P3P/7r/4R2K w - - 1 33",
+            "bestmove": "h1g1",
+            "status": "completed",
+            "response_ms": 1874.522084
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:49:47.867994Z",
+      "end": "2026-11-12T17:49:48.289116542Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:49:45.547019Z",
+          "end": "2026-11-12T17:49:48.289116542Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 20,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:49:45.547019Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3",
+            "fen": "2k4r/1pp2p1p/p7/2b1n3/7N/2Pb3p/PP3PP1/R1BK3N w - - 0 20",
+            "bestmove": "f2f4",
+            "status": "completed",
+            "response_ms": 2742.097542
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:47.867994Z",
+          "end": "2026-11-12T17:49:49.673477708Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 31,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 66,
+            "time": "2026-11-12T17:49:47.867994Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2 h1g1 h2h3",
+            "fen": "r5k1/7p/p5p1/2p1b3/RP2P3/3P3r/8/4R1K1 w - - 0 34",
+            "bestmove": "b4c5",
+            "status": "completed",
+            "response_ms": 1805.483708
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:49:51.039775Z",
+      "end": "2026-11-12T17:49:52.383060417Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:49:50.559912Z",
+          "end": "2026-11-12T17:49:53.270728291Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 21,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:49:50.559912Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6",
+            "fen": "2k4r/1pp2p1p/p5n1/2b5/5P1N/2Pb3p/PP4P1/R1BK3N w - - 1 21",
+            "bestmove": "b2b4",
+            "status": "completed",
+            "response_ms": 2710.816291
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:51.039775Z",
+          "end": "2026-11-12T17:49:52.383060417Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 32,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 68,
+            "time": "2026-11-12T17:49:51.039775Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2 h1g1 h2h3 b4c5 h3d3",
+            "fen": "r5k1/7p/p5p1/2P1b3/R3P3/3r4/8/4R1K1 w - - 0 35",
+            "bestmove": "e1c1",
+            "status": "completed",
+            "response_ms": 1343.285417
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:49:56.675628Z",
+      "end": "2026-11-12T17:49:58.122855167Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:49:55.442412Z",
+          "end": "2026-11-12T17:49:58.122855167Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 22,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:49:55.442412Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4",
+            "fen": "2k4r/1pp2p1p/p7/2b5/1P3P1n/2Pb3p/P5P1/R1BK3N w - - 0 22",
+            "bestmove": "g2g3",
+            "status": "completed",
+            "response_ms": 2680.443167
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:56.675628Z",
+          "end": "2026-11-12T17:49:58.302401959Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 34,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 72,
+            "time": "2026-11-12T17:49:56.675628Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2 h1g1 h2h3 b4c5 h3d3 e1c1 a6a5 g1g2 h7h5",
+            "fen": "r5k1/8/6p1/p1P1b2p/R3P3/3r4/6K1/2R5 w - h6 0 37",
+            "bestmove": "a4a2",
+            "status": "completed",
+            "response_ms": 1626.773959
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:50:00.283021Z",
+      "end": "2026-11-12T17:50:01.324014667Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:50:00.283021Z",
+          "end": "2026-11-12T17:50:02.934459167Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 23,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:50:00.283021Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3",
+            "fen": "2k4r/1pp2p1p/p7/2b5/1P3P2/2Pb1nPp/P7/R1BK3N w - - 1 23",
+            "bestmove": "b4c5",
+            "status": "completed",
+            "response_ms": 2651.438167
+          }
+        },
+        {
+          "start": "2026-11-12T17:49:59.758177Z",
+          "end": "2026-11-12T17:50:01.324014667Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 35,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 74,
+            "time": "2026-11-12T17:49:59.758177Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2 h1g1 h2h3 b4c5 h3d3 e1c1 a6a5 g1g2 h7h5 a4a2 h5h4",
+            "fen": "r5k1/8/6p1/p1P1b3/4P2p/3r4/R5K1/2R5 w - - 0 38",
+            "bestmove": "c1h1",
+            "status": "completed",
+            "response_ms": 1565.837667
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:50:02.593834Z",
+      "end": "2026-11-12T17:50:02.934459167Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:50:00.283021Z",
+          "end": "2026-11-12T17:50:02.934459167Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 23,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:50:00.283021Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3",
+            "fen": "2k4r/1pp2p1p/p7/2b5/1P3P2/2Pb1nPp/P7/R1BK3N w - - 1 23",
+            "bestmove": "b4c5",
+            "status": "completed",
+            "response_ms": 2651.438167
+          }
+        },
+        {
+          "start": "2026-11-12T17:50:02.593834Z",
+          "end": "2026-11-12T17:50:04.100635625Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 36,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 76,
+            "time": "2026-11-12T17:50:02.593834Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2 h1g1 h2h3 b4c5 h3d3 e1c1 a6a5 g1g2 h7h5 a4a2 h5h4 c1h1 g6g5",
+            "fen": "r5k1/8/8/p1P1b1p1/4P2p/3r4/R5K1/7R w - - 0 39",
+            "bestmove": "h1h3",
+            "status": "completed",
+            "response_ms": 1506.801625
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:50:05.393018Z",
+      "end": "2026-11-12T17:50:06.843123208Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:50:04.745244Z",
+          "end": "2026-11-12T17:50:07.368387458Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 24,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:50:04.745244Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8",
+            "fen": "2k1r3/1pp2p1p/p7/2P5/5P2/2Pb1nPp/P7/R1BK3N w - - 1 24",
+            "bestmove": "c1d2",
+            "status": "completed",
+            "response_ms": 2623.143458
+          }
+        },
+        {
+          "start": "2026-11-12T17:50:05.393018Z",
+          "end": "2026-11-12T17:50:06.843123208Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 37,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 78,
+            "time": "2026-11-12T17:50:05.393018Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2 h1g1 h2h3 b4c5 h3d3 e1c1 a6a5 g1g2 h7h5 a4a2 h5h4 c1h1 g6g5 h1h3 d3d4",
+            "fen": "r5k1/8/8/p1P1b1p1/3rP2p/7R/R5K1/8 w - - 2 40",
+            "bestmove": "h3a3",
+            "status": "completed",
+            "response_ms": 1450.105208
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:50:11.535339Z",
+      "end": "2026-11-12T17:50:11.978716542Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:50:11.535339Z",
+          "end": "2026-11-12T17:50:13.57259575Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 25,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:50:11.535339Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2",
+            "fen": "2k5/1pp2p1p/p7/2P5/5P2/2Pb1nPp/P2Br3/R2K3N w - - 3 25",
+            "bestmove": "g3g4",
+            "status": "completed",
+            "response_ms": 2037.25675
+          }
+        },
+        {
+          "start": "2026-11-12T17:50:10.92696Z",
+          "end": "2026-11-12T17:50:11.978716542Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 39,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 82,
+            "time": "2026-11-12T17:50:10.92696Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2 h1g1 h2h3 b4c5 h3d3 e1c1 a6a5 g1g2 h7h5 a4a2 h5h4 c1h1 g6g5 h1h3 d3d4 h3a3 d4e4 a3a5 h4h3",
+            "fen": "r5k1/8/8/R1P1b1p1/4r3/7p/R5K1/8 w - - 0 42",
+            "bestmove": "g2f3",
+            "status": "completed",
+            "response_ms": 1051.756542
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:50:13.269141Z",
+      "end": "2026-11-12T17:50:13.57259575Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:50:11.535339Z",
+          "end": "2026-11-12T17:50:13.57259575Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 25,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:50:11.535339Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2",
+            "fen": "2k5/1pp2p1p/p7/2P5/5P2/2Pb1nPp/P2Br3/R2K3N w - - 3 25",
+            "bestmove": "g3g4",
+            "status": "completed",
+            "response_ms": 2037.25675
+          }
+        },
+        {
+          "start": "2026-11-12T17:50:13.269141Z",
+          "end": "2026-11-12T17:50:14.358881667Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 40,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 84,
+            "time": "2026-11-12T17:50:13.269141Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2 h1g1 h2h3 b4c5 h3d3 e1c1 a6a5 g1g2 h7h5 a4a2 h5h4 c1h1 g6g5 h1h3 d3d4 h3a3 d4e4 a3a5 h4h3 g2f3 e4f4",
+            "fen": "r5k1/8/8/R1P1b1p1/5r2/5K1p/R7/8 w - - 2 43",
+            "bestmove": "f3e3",
+            "status": "completed",
+            "response_ms": 1089.740667
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:50:15.617602Z",
+      "end": "2026-11-12T17:50:16.875394916Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:50:15.449024Z",
+          "end": "2026-11-12T17:50:18.036854125Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 26,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:50:15.449024Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2",
+            "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb1n1p/P2r4/R2K3N w - - 0 26",
+            "bestmove": "d1c1",
+            "status": "completed",
+            "response_ms": 2587.830125
+          }
+        },
+        {
+          "start": "2026-11-12T17:50:15.617602Z",
+          "end": "2026-11-12T17:50:16.875394916Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 41,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 86,
+            "time": "2026-11-12T17:50:15.617602Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2 h1g1 h2h3 b4c5 h3d3 e1c1 a6a5 g1g2 h7h5 a4a2 h5h4 c1h1 g6g5 h1h3 d3d4 h3a3 d4e4 a3a5 h4h3 g2f3 e4f4 f3e3 a8a5",
+            "fen": "6k1/8/8/r1P1b1p1/5r2/4K2p/R7/8 w - - 0 44",
+            "bestmove": "a2a5",
+            "status": "completed",
+            "response_ms": 1257.792916
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:50:20.708116Z",
+      "end": "2026-11-12T17:50:21.833385875Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:50:19.728634Z",
+          "end": "2026-11-12T17:50:22.28974725Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 27,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:50:19.728634Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2",
+            "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb1n1p/P1r5/R1K4N w - - 2 27",
+            "bestmove": "c1d1",
+            "status": "completed",
+            "response_ms": 2561.11325
+          }
+        },
+        {
+          "start": "2026-11-12T17:50:20.708116Z",
+          "end": "2026-11-12T17:50:21.833385875Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 43,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 90,
+            "time": "2026-11-12T17:50:20.708116Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2 h1g1 h2h3 b4c5 h3d3 e1c1 a6a5 g1g2 h7h5 a4a2 h5h4 c1h1 g6g5 h1h3 d3d4 h3a3 d4e4 a3a5 h4h3 g2f3 e4f4 f3e3 a8a5 a2a5 h3h2 a5a8 f4f8",
+            "fen": "R4rk1/8/8/2P1b1p1/8/4K3/7p/8 w - - 2 46",
+            "bestmove": "a8f8",
+            "status": "completed",
+            "response_ms": 1125.269875
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:50:27.996462Z",
+      "end": "2026-11-12T17:50:29.02906529Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:50:27.42253Z",
+          "end": "2026-11-12T17:50:29.958341208Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 28,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:50:27.42253Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2",
+            "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb1n1p/P6r/R2K3N w - - 4 28",
+            "bestmove": "h1g3",
+            "status": "completed",
+            "response_ms": 2535.811208
+          }
+        },
+        {
+          "start": "2026-11-12T17:50:27.996462Z",
+          "end": "2026-11-12T17:50:29.02906529Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 46,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 96,
+            "time": "2026-11-12T17:50:27.996462Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2 h1g1 h2h3 b4c5 h3d3 e1c1 a6a5 g1g2 h7h5 a4a2 h5h4 c1h1 g6g5 h1h3 d3d4 h3a3 d4e4 a3a5 h4h3 g2f3 e4f4 f3e3 a8a5 a2a5 h3h2 a5a8 f4f8 a8f8 g8f8 e3e4 e5f4 e4d4 h2h1q",
+            "fen": "5k2/8/8/2P3p1/3K1b2/8/8/7q w - - 0 49",
+            "bestmove": "d4c4",
+            "status": "completed",
+            "response_ms": 1032.603291
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:50:32.746742Z",
+      "end": "2026-11-12T17:50:33.582378583Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:50:32.746742Z",
+          "end": "2026-11-12T17:50:35.25786675Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 29,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:50:32.746742Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2 h1g3 h2g2",
+            "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb1nNp/P5r1/R2K4 w - - 6 29",
+            "bestmove": "d1c1",
+            "status": "completed",
+            "response_ms": 2511.12475
+          }
+        },
+        {
+          "start": "2026-11-12T17:50:32.630934Z",
+          "end": "2026-11-12T17:50:33.582378583Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 48,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 100,
+            "time": "2026-11-12T17:50:32.630934Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2 h1g1 h2h3 b4c5 h3d3 e1c1 a6a5 g1g2 h7h5 a4a2 h5h4 c1h1 g6g5 h1h3 d3d4 h3a3 d4e4 a3a5 h4h3 g2f3 e4f4 f3e3 a8a5 a2a5 h3h2 a5a8 f4f8 a8f8 g8f8 e3e4 e5f4 e4d4 h2h1q d4c4 f4c7 c4d4 g5g4",
+            "fen": "5k2/2b5/8/2P5/3K2p1/8/8/7q w - - 0 51",
+            "bestmove": "d4c4",
+            "status": "completed",
+            "response_ms": 951.444583
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T17:50:34.8845Z",
+      "end": "2026-11-12T17:50:35.25786675Z",
+      "active": [
+        {
+          "start": "2026-11-12T17:50:32.746742Z",
+          "end": "2026-11-12T17:50:35.25786675Z",
+          "search": {
+            "process": "engine-726-21886342.jsonl",
+            "search": 29,
+            "game": "",
+            "ply": null,
+            "time": "2026-11-12T17:50:32.746742Z",
+            "position": "position startpos moves d2d4 d7d5 e2e4 d5e4 b1c3 e7e5 d4e5 d8d1 e1d1 b8c6 f1b5 g8e7 c3e4 c8f5 e4d2 e8c8 g1f3 g7g5 c2c3 a7a6 b5c6 e7c6 d1e1 g5g4 f3h4 f5c2 d2f1 d8d1 e1e2 c6e5 h2h3 f8c5 f1g3 d1h1 g3h1 c2d3 e2d1 g4h3 f2f4 e5g6 b2b4 g6h4 g2g3 h4f3 b4c5 h8e8 c1d2 e8e2 g3g4 e2d2 d1c1 d2c2 c1d1 c2h2 h1g3 h2g2",
+            "fen": "2k5/1pp2p1p/p7/2P5/5PP1/2Pb1nNp/P5r1/R2K4 w - - 6 29",
+            "bestmove": "d1c1",
+            "status": "completed",
+            "response_ms": 2511.12475
+          }
+        },
+        {
+          "start": "2026-11-12T17:50:34.8845Z",
+          "end": "2026-11-12T17:50:35.64412825Z",
+          "search": {
+            "process": "engine-849-557950052.jsonl",
+            "search": 49,
+            "game": "https://lichess.org/game/6j1YSLRZ",
+            "ply": 102,
+            "time": "2026-11-12T17:50:34.8845Z",
+            "position": "position startpos moves b1c3 g8f6 g1f3 c7c5 e2e3 d8a5 f1b5 a7a6 b5c4 b7b5 c4d5 f6d5 c3d5 e7e6 d5f4 b8c6 e1g1 f8d6 f4e2 e6e5 e2g3 d6e7 d2d3 d7d5 e3e4 d5e4 g3e4 f7f5 e4g3 c8d7 d1e2 a5c7 g1h1 f5f4 g3h5 g7g6 f3e5 c7e5 e2e5 c6e5 h5f4 e7d6 f1e1 e8g8 c1e3 e5g4 f4h3 g4e3 f2e3 d7h3 g2h3 f8f2 a2a4 b5a4 e3e4 f2h2 h1g1 h2c2 a1a4 d6h2 g1h1 h2e5 b2b4 c2h2 h1g1 h2h3 b4c5 h3d3 e1c1 a6a5 g1g2 h7h5 a4a2 h5h4 c1h1 g6g5 h1h3 d3d4 h3a3 d4e4 a3a5 h4h3 g2f3 e4f4 f3e3 a8a5 a2a5 h3h2 a5a8 f4f8 a8f8 g8f8 e3e4 e5f4 e4d4 h2h1q d4c4 f4c7 c4d4 g5g4 d4c4 h1e4",
+            "fen": "5k2/2b5/8/2P5/2K1q1p1/8/8/8 w - - 2 52",
+            "bestmove": "c4b5",
+            "status": "completed",
+            "response_ms": 759.62825
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:18:23.219046Z",
+      "end": "2026-11-12T18:18:26.198985958Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:18:20.059795Z",
+          "end": "2026-11-12T18:18:26.198985958Z",
+          "search": {
+            "process": "engine-19427-1716338880.jsonl",
+            "search": 10,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 18,
+            "time": "2026-11-12T18:18:20.059795Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5",
+            "fen": "r3k2r/1ppq1ppp/p3bn2/2b3N1/1n6/2NP1P2/PPP1Q1PP/R1B1KB1R w KQkq - 1 10",
+            "bestmove": "a2a3",
+            "status": "completed",
+            "response_ms": 6139.190958
+          }
+        },
+        {
+          "start": "2026-11-12T18:18:23.219046Z",
+          "end": "2026-11-12T18:18:29.252936041Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 1,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 18,
+            "time": "2026-11-12T18:18:23.219046Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5",
+            "fen": "r3k2r/1ppq1ppp/p3bn2/2b3N1/1n6/2NP1P2/PPP1Q1PP/R1B1KB1R w KQkq - 1 10",
+            "bestmove": "a2a3",
+            "status": "completed",
+            "response_ms": 6033.890041
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:18:27.543877Z",
+      "end": "2026-11-12T18:18:29.252936041Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:18:23.219046Z",
+          "end": "2026-11-12T18:18:29.252936041Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 1,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 18,
+            "time": "2026-11-12T18:18:23.219046Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5",
+            "fen": "r3k2r/1ppq1ppp/p3bn2/2b3N1/1n6/2NP1P2/PPP1Q1PP/R1B1KB1R w KQkq - 1 10",
+            "bestmove": "a2a3",
+            "status": "completed",
+            "response_ms": 6033.890041
+          }
+        },
+        {
+          "start": "2026-11-12T18:18:27.543877Z",
+          "end": "2026-11-12T18:18:37.539021334Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 1,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 0,
+            "time": "2026-11-12T18:18:27.543877Z",
+            "position": "position startpos",
+            "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+            "bestmove": "b1c3",
+            "status": "completed",
+            "response_ms": 9995.144334
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:18:29.516988Z",
+      "end": "2026-11-12T18:18:35.511761667Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:18:29.516988Z",
+          "end": "2026-11-12T18:18:35.511761667Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 2,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 20,
+            "time": "2026-11-12T18:18:29.516988Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5",
+            "fen": "r3k2r/1ppq1ppp/p3bn2/2bn2N1/8/P1NP1P2/1PP1Q1PP/R1B1KB1R w KQkq - 1 11",
+            "bestmove": "c3e4",
+            "status": "completed",
+            "response_ms": 5994.773667
+          }
+        },
+        {
+          "start": "2026-11-12T18:18:27.543877Z",
+          "end": "2026-11-12T18:18:37.539021334Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 1,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 0,
+            "time": "2026-11-12T18:18:27.543877Z",
+            "position": "position startpos",
+            "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+            "bestmove": "b1c3",
+            "status": "completed",
+            "response_ms": 9995.144334
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:18:35.825352Z",
+      "end": "2026-11-12T18:18:37.539021334Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:18:35.825352Z",
+          "end": "2026-11-12T18:18:40.164192333Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 3,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 22,
+            "time": "2026-11-12T18:18:35.825352Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7",
+            "fen": "r3k2r/bppq1ppp/p3bn2/3n2N1/4N3/P2P1P2/1PP1Q1PP/R1B1KB1R w KQkq - 3 12",
+            "bestmove": "c2c4",
+            "status": "completed",
+            "response_ms": 4338.840333
+          }
+        },
+        {
+          "start": "2026-11-12T18:18:27.543877Z",
+          "end": "2026-11-12T18:18:37.539021334Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 1,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 0,
+            "time": "2026-11-12T18:18:27.543877Z",
+            "position": "position startpos",
+            "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+            "bestmove": "b1c3",
+            "status": "completed",
+            "response_ms": 9995.144334
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:18:47.967556Z",
+      "end": "2026-11-12T18:18:51.992159917Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:18:46.450703Z",
+          "end": "2026-11-12T18:18:51.992159917Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 5,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 26,
+            "time": "2026-11-12T18:18:46.450703Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6",
+            "fen": "r3k2r/bpp1nppp/p3qn2/8/2P1N3/P2P1P2/1P2Q1PP/R1B1KB1R w KQkq - 0 14",
+            "bestmove": "c1g5",
+            "status": "completed",
+            "response_ms": 5541.456917
+          }
+        },
+        {
+          "start": "2026-11-12T18:18:47.967556Z",
+          "end": "2026-11-12T18:18:55.428983416Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 2,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 2,
+            "time": "2026-11-12T18:18:47.967556Z",
+            "position": "position startpos moves b1c3 c7c6",
+            "fen": "rnbqkbnr/pp1ppppp/2p5/8/8/2N5/PPPPPPPP/R1BQKBNR w KQkq - 0 2",
+            "bestmove": "g1f3",
+            "status": "completed",
+            "response_ms": 7461.427416
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:18:52.247022Z",
+      "end": "2026-11-12T18:18:55.428983416Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:18:52.247022Z",
+          "end": "2026-11-12T18:18:56.968585708Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 6,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 28,
+            "time": "2026-11-12T18:18:52.247022Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8",
+            "fen": "r4rk1/bpp1nppp/p3qn2/6B1/2P1N3/P2P1P2/1P2Q1PP/R3KB1R w KQ - 2 15",
+            "bestmove": "e1c1",
+            "status": "completed",
+            "response_ms": 4721.563708
+          }
+        },
+        {
+          "start": "2026-11-12T18:18:47.967556Z",
+          "end": "2026-11-12T18:18:55.428983416Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 2,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 2,
+            "time": "2026-11-12T18:18:47.967556Z",
+            "position": "position startpos moves b1c3 c7c6",
+            "fen": "rnbqkbnr/pp1ppppp/2p5/8/8/2N5/PPPPPPPP/R1BQKBNR w KQkq - 0 2",
+            "bestmove": "g1f3",
+            "status": "completed",
+            "response_ms": 7461.427416
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:19:00.672808Z",
+      "end": "2026-11-12T18:19:02.660597709Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:18:57.339967Z",
+          "end": "2026-11-12T18:19:02.660597709Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 7,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 30,
+            "time": "2026-11-12T18:18:57.339967Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4",
+            "fen": "r4rk1/1pp1nppp/p3qn2/6B1/2PbN3/P2P1P2/1P2Q1PP/2KR1B1R w - - 4 16",
+            "bestmove": "c1b1",
+            "status": "completed",
+            "response_ms": 5320.630709
+          }
+        },
+        {
+          "start": "2026-11-12T18:19:00.672808Z",
+          "end": "2026-11-12T18:19:07.945912958Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 3,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 4,
+            "time": "2026-11-12T18:19:00.672808Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5",
+            "fen": "rnb1kbnr/pp1ppppp/2p5/q7/8/2N2N2/PPPPPPPP/R1BQKB1R w KQkq - 2 3",
+            "bestmove": "e2e4",
+            "status": "completed",
+            "response_ms": 7273.104958
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:19:02.951801Z",
+      "end": "2026-11-12T18:19:07.945912958Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:19:02.951801Z",
+          "end": "2026-11-12T18:19:08.15523975Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 8,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 32,
+            "time": "2026-11-12T18:19:02.951801Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8",
+            "fen": "3r1rk1/1pp1nppp/p3qn2/6B1/2PbN3/P2P1P2/1P2Q1PP/1K1R1B1R w - - 6 17",
+            "bestmove": "b2b4",
+            "status": "completed",
+            "response_ms": 5203.43875
+          }
+        },
+        {
+          "start": "2026-11-12T18:19:00.672808Z",
+          "end": "2026-11-12T18:19:07.945912958Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 3,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 4,
+            "time": "2026-11-12T18:19:00.672808Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5",
+            "fen": "rnb1kbnr/pp1ppppp/2p5/q7/8/2N2N2/PPPPPPPP/R1BQKB1R w KQkq - 2 3",
+            "bestmove": "e2e4",
+            "status": "completed",
+            "response_ms": 7273.104958
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:19:13.189386Z",
+      "end": "2026-11-12T18:19:13.613855084Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:19:08.523378Z",
+          "end": "2026-11-12T18:19:13.613855084Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 9,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 34,
+            "time": "2026-11-12T18:19:08.523378Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6",
+            "fen": "3r1rk1/1pp2ppp/p3qnn1/6B1/1PPbN3/P2P1P2/4Q1PP/1K1R1B1R w - - 1 18",
+            "bestmove": "b1c1",
+            "status": "completed",
+            "response_ms": 5090.477084
+          }
+        },
+        {
+          "start": "2026-11-12T18:19:13.189386Z",
+          "end": "2026-11-12T18:19:20.280514833Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 4,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 6,
+            "time": "2026-11-12T18:19:13.189386Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6",
+            "fen": "rnb1kbnr/pp1pp1pp/2p2p2/q7/4P3/2N2N2/PPPP1PPP/R1BQKB1R w KQkq - 0 4",
+            "bestmove": "d2d4",
+            "status": "completed",
+            "response_ms": 7091.128833
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:19:13.897337Z",
+      "end": "2026-11-12T18:19:18.878524875Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:19:13.897337Z",
+          "end": "2026-11-12T18:19:18.878524875Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 10,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 36,
+            "time": "2026-11-12T18:19:13.897337Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6",
+            "fen": "3r1rk1/1pp2pp1/p3qnnp/6B1/1PPbN3/P2P1P2/4Q1PP/2KR1B1R w - - 0 19",
+            "bestmove": "e4f6",
+            "status": "completed",
+            "response_ms": 4981.187875
+          }
+        },
+        {
+          "start": "2026-11-12T18:19:13.189386Z",
+          "end": "2026-11-12T18:19:20.280514833Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 4,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 6,
+            "time": "2026-11-12T18:19:13.189386Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6",
+            "fen": "rnb1kbnr/pp1pp1pp/2p2p2/q7/4P3/2N2N2/PPPP1PPP/R1BQKB1R w KQkq - 0 4",
+            "bestmove": "d2d4",
+            "status": "completed",
+            "response_ms": 7091.128833
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:19:19.219635Z",
+      "end": "2026-11-12T18:19:20.280514833Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:19:19.219635Z",
+          "end": "2026-11-12T18:19:24.095416583Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 11,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 38,
+            "time": "2026-11-12T18:19:19.219635Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6",
+            "fen": "3r1rk1/1pp2pp1/p3qbnp/6B1/1PP5/P2P1P2/4Q1PP/2KR1B1R w - - 0 20",
+            "bestmove": "g5f6",
+            "status": "completed",
+            "response_ms": 4875.781583
+          }
+        },
+        {
+          "start": "2026-11-12T18:19:13.189386Z",
+          "end": "2026-11-12T18:19:20.280514833Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 4,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 6,
+            "time": "2026-11-12T18:19:13.189386Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6",
+            "fen": "rnb1kbnr/pp1pp1pp/2p2p2/q7/4P3/2N2N2/PPPP1PPP/R1BQKB1R w KQkq - 0 4",
+            "bestmove": "d2d4",
+            "status": "completed",
+            "response_ms": 7091.128833
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:19:25.548019Z",
+      "end": "2026-11-12T18:19:29.228365042Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:19:24.454896Z",
+          "end": "2026-11-12T18:19:29.228365042Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 12,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 40,
+            "time": "2026-11-12T18:19:24.454896Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6 g5f6 e6f6",
+            "fen": "3r1rk1/1pp2pp1/p4qnp/8/1PP5/P2P1P2/4Q1PP/2KR1B1R w - - 0 21",
+            "bestmove": "c1b1",
+            "status": "completed",
+            "response_ms": 4773.469042
+          }
+        },
+        {
+          "start": "2026-11-12T18:19:25.548019Z",
+          "end": "2026-11-12T18:19:32.462449Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 5,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 8,
+            "time": "2026-11-12T18:19:25.548019Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5",
+            "fen": "rnb1kbnr/pp1pp1pp/5p2/q1p5/3PP3/2N2N2/PPP2PPP/R1BQKB1R w KQkq - 0 5",
+            "bestmove": "d4d5",
+            "status": "completed",
+            "response_ms": 6914.43
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:19:29.581734Z",
+      "end": "2026-11-12T18:19:32.462449Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:19:29.581734Z",
+          "end": "2026-11-12T18:19:34.255514875Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 13,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 42,
+            "time": "2026-11-12T18:19:29.581734Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6 g5f6 e6f6 c1b1 f8e8",
+            "fen": "3rr1k1/1pp2pp1/p4qnp/8/1PP5/P2P1P2/4Q1PP/1K1R1B1R w - - 2 22",
+            "bestmove": "e2f2",
+            "status": "completed",
+            "response_ms": 4673.780875
+          }
+        },
+        {
+          "start": "2026-11-12T18:19:25.548019Z",
+          "end": "2026-11-12T18:19:32.462449Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 5,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 8,
+            "time": "2026-11-12T18:19:25.548019Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5",
+            "fen": "rnb1kbnr/pp1pp1pp/5p2/q1p5/3PP3/2N2N2/PPP2PPP/R1BQKB1R w KQkq - 0 5",
+            "bestmove": "d4d5",
+            "status": "completed",
+            "response_ms": 6914.43
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:19:37.724716Z",
+      "end": "2026-11-12T18:19:39.196859333Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:19:34.618418Z",
+          "end": "2026-11-12T18:19:39.196859333Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 14,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 44,
+            "time": "2026-11-12T18:19:34.618418Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6 g5f6 e6f6 c1b1 f8e8 e2f2 e8e6",
+            "fen": "3r2k1/1pp2pp1/p3rqnp/8/1PP5/P2P1P2/5QPP/1K1R1B1R w - - 4 23",
+            "bestmove": "d3d4",
+            "status": "completed",
+            "response_ms": 4578.441333
+          }
+        },
+        {
+          "start": "2026-11-12T18:19:37.724716Z",
+          "end": "2026-11-12T18:19:44.468131833Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 6,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 10,
+            "time": "2026-11-12T18:19:37.724716Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4",
+            "fen": "rnb1kbnr/pp1pp1pp/5p2/2pP4/1q2P3/2N2N2/PPP2PPP/R1BQKB1R w KQkq - 1 6",
+            "bestmove": "f1b5",
+            "status": "completed",
+            "response_ms": 6743.415833
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:19:39.735298Z",
+      "end": "2026-11-12T18:19:44.216092875Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:19:39.735298Z",
+          "end": "2026-11-12T18:19:44.216092875Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 15,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 46,
+            "time": "2026-11-12T18:19:39.735298Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6 g5f6 e6f6 c1b1 f8e8 e2f2 e8e6 d3d4 e6d6",
+            "fen": "3r2k1/1pp2pp1/p2r1qnp/8/1PPP4/P4P2/5QPP/1K1R1B1R w - - 1 24",
+            "bestmove": "f1d3",
+            "status": "completed",
+            "response_ms": 4480.794875
+          }
+        },
+        {
+          "start": "2026-11-12T18:19:37.724716Z",
+          "end": "2026-11-12T18:19:44.468131833Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 6,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 10,
+            "time": "2026-11-12T18:19:37.724716Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4",
+            "fen": "rnb1kbnr/pp1pp1pp/5p2/2pP4/1q2P3/2N2N2/PPP2PPP/R1BQKB1R w KQkq - 1 6",
+            "bestmove": "f1b5",
+            "status": "completed",
+            "response_ms": 6743.415833
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:19:50.050219Z",
+      "end": "2026-11-12T18:19:53.501698209Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:19:49.196253Z",
+          "end": "2026-11-12T18:19:53.501698209Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 17,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 50,
+            "time": "2026-11-12T18:19:49.196253Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6 g5f6 e6f6 c1b1 f8e8 e2f2 e8e6 d3d4 e6d6 f1d3 d6d4 f2e3 g6f4",
+            "fen": "3r2k1/1pp2pp1/p4q1p/8/1PPr1n2/P2BQP2/6PP/1K1R3R w - - 2 26",
+            "bestmove": "d3c2",
+            "status": "completed",
+            "response_ms": 4305.445209
+          }
+        },
+        {
+          "start": "2026-11-12T18:19:50.050219Z",
+          "end": "2026-11-12T18:19:56.617993208Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 7,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 12,
+            "time": "2026-11-12T18:19:50.050219Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6",
+            "fen": "rnb1kbnr/1p1pp1pp/p4p2/1BpP4/1q2P3/2N2N2/PPP2PPP/R1BQK2R w KQkq - 0 7",
+            "bestmove": "b5d3",
+            "status": "completed",
+            "response_ms": 6567.774208
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:19:53.755872Z",
+      "end": "2026-11-12T18:19:56.617993208Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:19:53.755872Z",
+          "end": "2026-11-12T18:19:57.977986834Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 18,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 52,
+            "time": "2026-11-12T18:19:53.755872Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6 g5f6 e6f6 c1b1 f8e8 e2f2 e8e6 d3d4 e6d6 f1d3 d6d4 f2e3 g6f4 d3c2 d4c4",
+            "fen": "3r2k1/1pp2pp1/p4q1p/8/1Pr2n2/P3QP2/2B3PP/1K1R3R w - - 0 27",
+            "bestmove": "g2g3",
+            "status": "completed",
+            "response_ms": 4222.114834
+          }
+        },
+        {
+          "start": "2026-11-12T18:19:50.050219Z",
+          "end": "2026-11-12T18:19:56.617993208Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 7,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 12,
+            "time": "2026-11-12T18:19:50.050219Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6",
+            "fen": "rnb1kbnr/1p1pp1pp/p4p2/1BpP4/1q2P3/2N2N2/PPP2PPP/R1BQK2R w KQkq - 0 7",
+            "bestmove": "b5d3",
+            "status": "completed",
+            "response_ms": 6567.774208
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:20:01.864122Z",
+      "end": "2026-11-12T18:20:01.868508834Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:19:58.353957Z",
+          "end": "2026-11-12T18:20:01.868508834Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 19,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 54,
+            "time": "2026-11-12T18:19:58.353957Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6 g5f6 e6f6 c1b1 f8e8 e2f2 e8e6 d3d4 e6d6 f1d3 d6d4 f2e3 g6f4 d3c2 d4c4 g2g3 f4d5",
+            "fen": "3r2k1/1pp2pp1/p4q1p/3n4/1Pr5/P3QPP1/2B4P/1K1R3R w - - 1 28",
+            "bestmove": "d1d5",
+            "status": "completed",
+            "response_ms": 3514.551834
+          }
+        },
+        {
+          "start": "2026-11-12T18:20:01.864122Z",
+          "end": "2026-11-12T18:20:07.583971875Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 8,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 14,
+            "time": "2026-11-12T18:20:01.864122Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4",
+            "fen": "rnb1kbnr/1p1pp1pp/p4p2/3P4/1qp1P3/2NB1N2/PPP2PPP/R1BQK2R w KQkq - 0 8",
+            "bestmove": "d3e2",
+            "status": "completed",
+            "response_ms": 5719.849875
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:20:02.13201Z",
+      "end": "2026-11-12T18:20:06.214820333Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:20:02.13201Z",
+          "end": "2026-11-12T18:20:06.214820333Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 20,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 56,
+            "time": "2026-11-12T18:20:02.13201Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6 g5f6 e6f6 c1b1 f8e8 e2f2 e8e6 d3d4 e6d6 f1d3 d6d4 f2e3 g6f4 d3c2 d4c4 g2g3 f4d5 d1d5 c4b4",
+            "fen": "3r2k1/1pp2pp1/p4q1p/3R4/1r6/P3QPP1/2B4P/1K5R w - - 0 29",
+            "bestmove": "a3b4",
+            "status": "completed",
+            "response_ms": 4082.810333
+          }
+        },
+        {
+          "start": "2026-11-12T18:20:01.864122Z",
+          "end": "2026-11-12T18:20:07.583971875Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 8,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 14,
+            "time": "2026-11-12T18:20:01.864122Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4",
+            "fen": "rnb1kbnr/1p1pp1pp/p4p2/3P4/1qp1P3/2NB1N2/PPP2PPP/R1BQK2R w KQkq - 0 8",
+            "bestmove": "d3e2",
+            "status": "completed",
+            "response_ms": 5719.849875
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:20:06.56031Z",
+      "end": "2026-11-12T18:20:07.583971875Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:20:06.56031Z",
+          "end": "2026-11-12T18:20:10.565773583Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 21,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 58,
+            "time": "2026-11-12T18:20:06.56031Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6 g5f6 e6f6 c1b1 f8e8 e2f2 e8e6 d3d4 e6d6 f1d3 d6d4 f2e3 g6f4 d3c2 d4c4 g2g3 f4d5 d1d5 c4b4 a3b4 b7b5",
+            "fen": "3r2k1/2p2pp1/p4q1p/1p1R4/1P6/4QPP1/2B4P/1K5R w - b6 0 30",
+            "bestmove": "d5d7",
+            "status": "completed",
+            "response_ms": 4005.463583
+          }
+        },
+        {
+          "start": "2026-11-12T18:20:01.864122Z",
+          "end": "2026-11-12T18:20:07.583971875Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 8,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 14,
+            "time": "2026-11-12T18:20:01.864122Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4",
+            "fen": "rnb1kbnr/1p1pp1pp/p4p2/3P4/1qp1P3/2NB1N2/PPP2PPP/R1BQK2R w KQkq - 0 8",
+            "bestmove": "d3e2",
+            "status": "completed",
+            "response_ms": 5719.849875
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:20:12.884381Z",
+      "end": "2026-11-12T18:20:14.781245958Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:20:10.849102Z",
+          "end": "2026-11-12T18:20:14.781245958Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 22,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 60,
+            "time": "2026-11-12T18:20:10.849102Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6 g5f6 e6f6 c1b1 f8e8 e2f2 e8e6 d3d4 e6d6 f1d3 d6d4 f2e3 g6f4 d3c2 d4c4 g2g3 f4d5 d1d5 c4b4 a3b4 b7b5 d5d7 c7c6",
+            "fen": "3r2k1/3R1pp1/p1p2q1p/1p6/1P6/4QPP1/2B4P/1K5R w - - 0 31",
+            "bestmove": "e3e4",
+            "status": "completed",
+            "response_ms": 3932.143958
+          }
+        },
+        {
+          "start": "2026-11-12T18:20:12.884381Z",
+          "end": "2026-11-12T18:20:19.161604125Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 9,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 16,
+            "time": "2026-11-12T18:20:12.884381Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6",
+            "fen": "rnb1kbnr/3pp1pp/pp3p2/3P4/1qp1P3/2N2N2/PPP1BPPP/R1BQK2R w KQkq - 0 9",
+            "bestmove": "a2a3",
+            "status": "completed",
+            "response_ms": 6277.223125
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:20:15.146677Z",
+      "end": "2026-11-12T18:20:19.007783209Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:20:15.146677Z",
+          "end": "2026-11-12T18:20:19.007783209Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 23,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 62,
+            "time": "2026-11-12T18:20:15.146677Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6 g5f6 e6f6 c1b1 f8e8 e2f2 e8e6 d3d4 e6d6 f1d3 d6d4 f2e3 g6f4 d3c2 d4c4 g2g3 f4d5 d1d5 c4b4 a3b4 b7b5 d5d7 c7c6 e3e4 c6c5",
+            "fen": "3r2k1/3R1pp1/p4q1p/1pp5/1P2Q3/5PP1/2B4P/1K5R w - - 0 32",
+            "bestmove": "e4h7",
+            "status": "completed",
+            "response_ms": 3861.106209
+          }
+        },
+        {
+          "start": "2026-11-12T18:20:12.884381Z",
+          "end": "2026-11-12T18:20:19.161604125Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 9,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 16,
+            "time": "2026-11-12T18:20:12.884381Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6",
+            "fen": "rnb1kbnr/3pp1pp/pp3p2/3P4/1qp1P3/2N2N2/PPP1BPPP/R1BQK2R w KQkq - 0 9",
+            "bestmove": "a2a3",
+            "status": "completed",
+            "response_ms": 6277.223125
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:20:24.414005Z",
+      "end": "2026-11-12T18:20:27.170335542Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:20:23.443685Z",
+          "end": "2026-11-12T18:20:27.170335542Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 25,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 66,
+            "time": "2026-11-12T18:20:23.443685Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6 g5f6 e6f6 c1b1 f8e8 e2f2 e8e6 d3d4 e6d6 f1d3 d6d4 f2e3 g6f4 d3c2 d4c4 g2g3 f4d5 d1d5 c4b4 a3b4 b7b5 d5d7 c7c6 e3e4 c6c5 e4h7 g8f8 h1e1 g7g6",
+            "fen": "3r1k2/3R1p1Q/p4qpp/1pp5/1P6/5PP1/2B4P/1K2R3 w - - 0 34",
+            "bestmove": "d7d8",
+            "status": "completed",
+            "response_ms": 3726.650542
+          }
+        },
+        {
+          "start": "2026-11-12T18:20:24.414005Z",
+          "end": "2026-11-12T18:20:30.542123709Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 10,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 18,
+            "time": "2026-11-12T18:20:24.414005Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5",
+            "fen": "rnb1kbnr/3pp1pp/pp3p2/2qP4/2p1P3/P1N2N2/1PP1BPPP/R1BQK2R w KQkq - 1 10",
+            "bestmove": "c1e3",
+            "status": "completed",
+            "response_ms": 6128.118709
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:20:27.526136Z",
+      "end": "2026-11-12T18:20:30.542123709Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:20:27.526136Z",
+          "end": "2026-11-12T18:20:31.18759675Z",
+          "search": {
+            "process": "engine-20166-3171722806.jsonl",
+            "search": 26,
+            "game": "https://lichess.org/game/glYlALQg",
+            "ply": 68,
+            "time": "2026-11-12T18:20:27.526136Z",
+            "position": "position startpos moves b1c3 a7a6 e2e4 e7e6 g1f3 b8c6 d2d3 d7d5 e4d5 c6b4 d5e6 c8e6 f3g5 g8f6 d1e2 d8d7 f2f3 f8c5 a2a3 b4d5 c3e4 c5a7 c2c4 d5e7 g5e6 d7e6 c1g5 e8g8 e1c1 a7d4 c1b1 a8d8 b2b4 e7g6 b1c1 h7h6 e4f6 d4f6 g5f6 e6f6 c1b1 f8e8 e2f2 e8e6 d3d4 e6d6 f1d3 d6d4 f2e3 g6f4 d3c2 d4c4 g2g3 f4d5 d1d5 c4b4 a3b4 b7b5 d5d7 c7c6 e3e4 c6c5 e4h7 g8f8 h1e1 g7g6 d7d8 f6d8",
+            "fen": "3q1k2/5p1Q/p5pp/1pp5/1P6/5PP1/2B4P/1K2R3 w - - 0 35",
+            "bestmove": "h7h8",
+            "status": "completed",
+            "response_ms": 3661.46075
+          }
+        },
+        {
+          "start": "2026-11-12T18:20:24.414005Z",
+          "end": "2026-11-12T18:20:30.542123709Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 10,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 18,
+            "time": "2026-11-12T18:20:24.414005Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5",
+            "fen": "rnb1kbnr/3pp1pp/pp3p2/2qP4/2p1P3/P1N2N2/1PP1BPPP/R1BQK2R w KQkq - 1 10",
+            "bestmove": "c1e3",
+            "status": "completed",
+            "response_ms": 6128.118709
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:22:22.997096Z",
+      "end": "2026-11-12T18:22:27.766540833Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:22:22.997096Z",
+          "end": "2026-11-12T18:22:27.766540833Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 21,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 40,
+            "time": "2026-11-12T18:22:22.997096Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3",
+            "fen": "1n2Q1nr/rbqN2kp/p3Pp2/6p1/2B1P3/b1P1BN2/1P3PPP/R3K2R w KQ - 0 21",
+            "bestmove": "e8f7",
+            "status": "completed",
+            "response_ms": 4769.444833
+          }
+        },
+        {
+          "start": "2026-11-12T18:22:19.61603Z",
+          "end": "2026-11-12T18:22:29.611430375Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 1,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 1,
+            "time": "2026-11-12T18:22:19.61603Z",
+            "position": "position startpos moves g2g3",
+            "fen": "rnbqkbnr/pppppppp/8/8/8/6P1/PPPPPP1P/RNBQKBNR b KQkq - 0 1",
+            "bestmove": "b8c6",
+            "status": "completed",
+            "response_ms": 9995.400375
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:22:33.071538Z",
+      "end": "2026-11-12T18:22:37.741637833Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:22:33.071538Z",
+          "end": "2026-11-12T18:22:37.741637833Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 22,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 42,
+            "time": "2026-11-12T18:22:33.071538Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6",
+            "fen": "1n4nr/rbqN1Q1p/p3Pp1k/6p1/2B1P3/b1P1BN2/1P3PPP/R3K2R w KQ - 2 22",
+            "bestmove": "h2h4",
+            "status": "completed",
+            "response_ms": 4670.099833
+          }
+        },
+        {
+          "start": "2026-11-12T18:22:30.561487Z",
+          "end": "2026-11-12T18:22:38.0229755Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 2,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 3,
+            "time": "2026-11-12T18:22:30.561487Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2",
+            "fen": "r1bqkbnr/pppppppp/2n5/8/8/6P1/PPPPPPBP/RNBQK1NR b KQkq - 2 2",
+            "bestmove": "d7d5",
+            "status": "completed",
+            "response_ms": 7461.4885
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:22:42.983273Z",
+      "end": "2026-11-12T18:22:45.964672875Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:22:42.983273Z",
+          "end": "2026-11-12T18:22:47.558030417Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 23,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 44,
+            "time": "2026-11-12T18:22:42.983273Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2",
+            "fen": "1n4nr/rb1N1Q1p/p3Pp1k/6p1/2B1P2P/b1P1BN2/1P3PPq/R3K2R w KQ - 1 23",
+            "bestmove": "e3g5",
+            "status": "completed",
+            "response_ms": 4574.757417
+          }
+        },
+        {
+          "start": "2026-11-12T18:22:38.691922Z",
+          "end": "2026-11-12T18:22:45.964672875Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 3,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 5,
+            "time": "2026-11-12T18:22:38.691922Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4",
+            "fen": "r1bqkbnr/ppp1pppp/2n5/3p4/3P4/6P1/PPP1PPBP/RNBQK1NR b KQkq d3 0 3",
+            "bestmove": "e7e6",
+            "status": "completed",
+            "response_ms": 7272.750875
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:22:46.592687Z",
+      "end": "2026-11-12T18:22:47.558030417Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:22:42.983273Z",
+          "end": "2026-11-12T18:22:47.558030417Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 23,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 44,
+            "time": "2026-11-12T18:22:42.983273Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2",
+            "fen": "1n4nr/rb1N1Q1p/p3Pp1k/6p1/2B1P2P/b1P1BN2/1P3PPq/R3K2R w KQ - 1 23",
+            "bestmove": "e3g5",
+            "status": "completed",
+            "response_ms": 4574.757417
+          }
+        },
+        {
+          "start": "2026-11-12T18:22:46.592687Z",
+          "end": "2026-11-12T18:22:53.683443083Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 4,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 7,
+            "time": "2026-11-12T18:22:46.592687Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3",
+            "fen": "r1bqkbnr/ppp2ppp/2n1p3/3p4/3P4/1P4P1/P1P1PPBP/RNBQK1NR b KQkq - 0 4",
+            "bestmove": "f8d6",
+            "status": "completed",
+            "response_ms": 7090.756083
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:22:52.688557Z",
+      "end": "2026-11-12T18:22:53.683443083Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:22:52.688557Z",
+          "end": "2026-11-12T18:22:57.170704583Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 24,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 46,
+            "time": "2026-11-12T18:22:52.688557Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2 e3g5 f6g5",
+            "fen": "1n4nr/rb1N1Q1p/p3P2k/6p1/2B1P2P/b1P2N2/1P3PPq/R3K2R w KQ - 0 24",
+            "bestmove": "h1h2",
+            "status": "completed",
+            "response_ms": 4482.147583
+          }
+        },
+        {
+          "start": "2026-11-12T18:22:46.592687Z",
+          "end": "2026-11-12T18:22:53.683443083Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 4,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 7,
+            "time": "2026-11-12T18:22:46.592687Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3",
+            "fen": "r1bqkbnr/ppp2ppp/2n1p3/3p4/3P4/1P4P1/P1P1PPBP/RNBQK1NR b KQkq - 0 4",
+            "bestmove": "f8d6",
+            "status": "completed",
+            "response_ms": 7090.756083
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:22:54.321402Z",
+      "end": "2026-11-12T18:22:57.170704583Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:22:52.688557Z",
+          "end": "2026-11-12T18:22:57.170704583Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 24,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 46,
+            "time": "2026-11-12T18:22:52.688557Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2 e3g5 f6g5",
+            "fen": "1n4nr/rb1N1Q1p/p3P2k/6p1/2B1P2P/b1P2N2/1P3PPq/R3K2R w KQ - 0 24",
+            "bestmove": "h1h2",
+            "status": "completed",
+            "response_ms": 4482.147583
+          }
+        },
+        {
+          "start": "2026-11-12T18:22:54.321402Z",
+          "end": "2026-11-12T18:23:01.236495958Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 5,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 9,
+            "time": "2026-11-12T18:22:54.321402Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3 f8d6 c1b2",
+            "fen": "r1bqk1nr/ppp2ppp/2nbp3/3p4/3P4/1P4P1/PBP1PPBP/RN1QK1NR b KQkq - 2 5",
+            "bestmove": "g8h6",
+            "status": "completed",
+            "response_ms": 6915.093958
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:23:11.492359Z",
+      "end": "2026-11-12T18:23:13.378561542Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:23:11.492359Z",
+          "end": "2026-11-12T18:23:15.798466375Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 26,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 50,
+            "time": "2026-11-12T18:23:11.492359Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2 e3g5 f6g5 h1h2 g5g4 d7e5 g8f6",
+            "fen": "1n5r/rb3Q1p/p3Pn1k/4N3/2B1P1pP/b1P2N2/1P3PPR/R3K3 w Q - 2 26",
+            "bestmove": "f7f6",
+            "status": "completed",
+            "response_ms": 4306.107375
+          }
+        },
+        {
+          "start": "2026-11-12T18:23:06.633435Z",
+          "end": "2026-11-12T18:23:13.378561542Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 6,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 11,
+            "time": "2026-11-12T18:23:06.633435Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3 f8d6 c1b2 g8h6 b1c3",
+            "fen": "r1bqk2r/ppp2ppp/2nbp2n/3p4/3P4/1PN3P1/PBP1PPBP/R2QK1NR b KQkq - 4 6",
+            "bestmove": "h6f5",
+            "status": "completed",
+            "response_ms": 6745.126542
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:23:14.012977Z",
+      "end": "2026-11-12T18:23:15.798466375Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:23:11.492359Z",
+          "end": "2026-11-12T18:23:15.798466375Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 26,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 50,
+            "time": "2026-11-12T18:23:11.492359Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2 e3g5 f6g5 h1h2 g5g4 d7e5 g8f6",
+            "fen": "1n5r/rb3Q1p/p3Pn1k/4N3/2B1P1pP/b1P2N2/1P3PPR/R3K3 w Q - 2 26",
+            "bestmove": "f7f6",
+            "status": "completed",
+            "response_ms": 4306.107375
+          }
+        },
+        {
+          "start": "2026-11-12T18:23:14.012977Z",
+          "end": "2026-11-12T18:23:20.593739709Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 7,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 13,
+            "time": "2026-11-12T18:23:14.012977Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3 f8d6 c1b2 g8h6 b1c3 h6f5 g1f3",
+            "fen": "r1bqk2r/ppp2ppp/2nbp3/3p1n2/3P4/1PN2NP1/PBP1PPBP/R2QK2R b KQkq - 6 7",
+            "bestmove": "d6b4",
+            "status": "completed",
+            "response_ms": 6580.762709
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:23:28.526995Z",
+      "end": "2026-11-12T18:23:31.782470917Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:23:28.526995Z",
+          "end": "2026-11-12T18:23:31.830730583Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 28,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 54,
+            "time": "2026-11-12T18:23:28.526995Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2 e3g5 f6g5 h1h2 g5g4 d7e5 g8f6 f7f6 h6h5 f6f4 h8g8",
+            "fen": "1n4r1/rb5p/p3P3/4N2k/2B1PQpP/b1P2N2/1P3PPR/R3K3 w Q - 3 28",
+            "bestmove": "e6e7",
+            "status": "completed",
+            "response_ms": 3303.735583
+          }
+        },
+        {
+          "start": "2026-11-12T18:23:25.360659Z",
+          "end": "2026-11-12T18:23:31.782470917Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 8,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 15,
+            "time": "2026-11-12T18:23:25.360659Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3 f8d6 c1b2 g8h6 b1c3 h6f5 g1f3 d6b4 e2e3",
+            "fen": "r1bqk2r/ppp2ppp/2n1p3/3p1n2/1b1P4/1PN1PNP1/PBP2PBP/R2QK2R b KQkq - 0 8",
+            "bestmove": "d8f6",
+            "status": "completed",
+            "response_ms": 6421.811917
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:23:36.878929Z",
+      "end": "2026-11-12T18:23:40.571092542Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:23:36.445229Z",
+          "end": "2026-11-12T18:23:40.571092542Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 29,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 56,
+            "time": "2026-11-12T18:23:36.445229Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2 e3g5 f6g5 h1h2 g5g4 d7e5 g8f6 f7f6 h6h5 f6f4 h8g8 e6e7 a3b2",
+            "fen": "1n4r1/rb2P2p/p7/4N2k/2B1PQpP/2P2N2/1b3PPR/R3K3 w Q - 0 29",
+            "bestmove": "e7e8b",
+            "status": "completed",
+            "response_ms": 4125.863542
+          }
+        },
+        {
+          "start": "2026-11-12T18:23:36.878929Z",
+          "end": "2026-11-12T18:23:43.137028667Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 9,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 17,
+            "time": "2026-11-12T18:23:36.878929Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3 f8d6 c1b2 g8h6 b1c3 h6f5 g1f3 d6b4 e2e3 d8f6 e1g1",
+            "fen": "r1b1k2r/ppp2ppp/2n1pq2/3p1n2/1b1P4/1PN1PNP1/PBP2PBP/R2Q1RK1 b kq - 2 9",
+            "bestmove": "b4c3",
+            "status": "completed",
+            "response_ms": 6258.099667
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:23:47.957588Z",
+      "end": "2026-11-12T18:23:49.157308625Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:23:45.109158Z",
+          "end": "2026-11-12T18:23:49.157308625Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 30,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 58,
+            "time": "2026-11-12T18:23:45.109158Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2 e3g5 f6g5 h1h2 g5g4 d7e5 g8f6 f7f6 h6h5 f6f4 h8g8 e6e7 a3b2 e7e8b g8e8",
+            "fen": "1n2r3/rb5p/p7/4N2k/2B1PQpP/2P2N2/1b3PPR/R3K3 w Q - 0 30",
+            "bestmove": "a1b1",
+            "status": "completed",
+            "response_ms": 4048.150625
+          }
+        },
+        {
+          "start": "2026-11-12T18:23:47.957588Z",
+          "end": "2026-11-12T18:23:53.472103625Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 10,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 19,
+            "time": "2026-11-12T18:23:47.957588Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3 f8d6 c1b2 g8h6 b1c3 h6f5 g1f3 d6b4 e2e3 d8f6 e1g1 b4c3 b2c3",
+            "fen": "r1b1k2r/ppp2ppp/2n1pq2/3p1n2/3P4/1PB1PNP1/P1P2PBP/R2Q1RK1 b kq - 0 10",
+            "bestmove": "e8g8",
+            "status": "completed",
+            "response_ms": 5514.515625
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:24:01.488893Z",
+      "end": "2026-11-12T18:24:03.333229583Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:24:01.488893Z",
+          "end": "2026-11-12T18:24:05.407047375Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 32,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 62,
+            "time": "2026-11-12T18:24:01.488893Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2 e3g5 f6g5 h1h2 g5g4 d7e5 g8f6 f7f6 h6h5 f6f4 h8g8 e6e7 a3b2 e7e8b g8e8 a1b1 b2c3 e1d1 e8d8",
+            "fen": "1n1r4/rb5p/p7/4N2k/2B1PQpP/2b2N2/5PPR/1R1K4 w - - 2 32",
+            "bestmove": "c4d5",
+            "status": "completed",
+            "response_ms": 3918.154375
+          }
+        },
+        {
+          "start": "2026-11-12T18:23:58.331008Z",
+          "end": "2026-11-12T18:24:03.333229583Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 11,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 21,
+            "time": "2026-11-12T18:23:58.331008Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3 f8d6 c1b2 g8h6 b1c3 h6f5 g1f3 d6b4 e2e3 d8f6 e1g1 b4c3 b2c3 e8g8 f3e5",
+            "fen": "r1b2rk1/ppp2ppp/2n1pq2/3pNn2/3P4/1PB1P1P1/P1P2PBP/R2Q1RK1 b - - 2 11",
+            "bestmove": "f8d8",
+            "status": "completed",
+            "response_ms": 5002.221583
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:24:09.751179Z",
+      "end": "2026-11-12T18:24:13.598995834Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:24:09.751179Z",
+          "end": "2026-11-12T18:24:13.598995834Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 33,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 64,
+            "time": "2026-11-12T18:24:09.751179Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2 e3g5 f6g5 h1h2 g5g4 d7e5 g8f6 f7f6 h6h5 f6f4 h8g8 e6e7 a3b2 e7e8b g8e8 a1b1 b2c3 e1d1 e8d8 c4d5 d8d5",
+            "fen": "1n6/rb5p/p7/3rN2k/4PQpP/2b2N2/5PPR/1R1K4 w - - 0 33",
+            "bestmove": "d1e2",
+            "status": "completed",
+            "response_ms": 3847.816834
+          }
+        },
+        {
+          "start": "2026-11-12T18:24:08.237542Z",
+          "end": "2026-11-12T18:24:14.118927916Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 12,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 23,
+            "time": "2026-11-12T18:24:08.237542Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3 f8d6 c1b2 g8h6 b1c3 h6f5 g1f3 d6b4 e2e3 d8f6 e1g1 b4c3 b2c3 e8g8 f3e5 f8d8 b3b4",
+            "fen": "r1br2k1/ppp2ppp/2n1pq2/3pNn2/1P1P4/2B1P1P1/P1P2PBP/R2Q1RK1 b - - 0 12",
+            "bestmove": "c8d7",
+            "status": "completed",
+            "response_ms": 5881.385916
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:24:19.350598Z",
+      "end": "2026-11-12T18:24:21.183962291Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:24:17.83875Z",
+          "end": "2026-11-12T18:24:21.183962291Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 34,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 66,
+            "time": "2026-11-12T18:24:17.83875Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2 e3g5 f6g5 h1h2 g5g4 d7e5 g8f6 f7f6 h6h5 f6f4 h8g8 e6e7 a3b2 e7e8b g8e8 a1b1 b2c3 e1d1 e8d8 c4d5 d8d5 d1e2 g4f3",
+            "fen": "1n6/rb5p/p7/3rN2k/4PQ1P/2b2p2/4KPPR/1R6 w - - 0 34",
+            "bestmove": "f4f3",
+            "status": "completed",
+            "response_ms": 3345.212291
+          }
+        },
+        {
+          "start": "2026-11-12T18:24:19.350598Z",
+          "end": "2026-11-12T18:24:25.086469667Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 13,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 25,
+            "time": "2026-11-12T18:24:19.350598Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3 f8d6 c1b2 g8h6 b1c3 h6f5 g1f3 d6b4 e2e3 d8f6 e1g1 b4c3 b2c3 e8g8 f3e5 f8d8 b3b4 c8d7 e5d7",
+            "fen": "r2r2k1/pppN1ppp/2n1pq2/3p1n2/1P1P4/2B1P1P1/P1P2PBP/R2Q1RK1 b - - 0 13",
+            "bestmove": "d8d7",
+            "status": "completed",
+            "response_ms": 5735.871667
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:24:33.203416Z",
+      "end": "2026-11-12T18:24:34.596663916Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:24:33.203416Z",
+          "end": "2026-11-12T18:24:36.866854041Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 36,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 70,
+            "time": "2026-11-12T18:24:33.203416Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2 e3g5 f6g5 h1h2 g5g4 d7e5 g8f6 f7f6 h6h5 f6f4 h8g8 e6e7 a3b2 e7e8b g8e8 a1b1 b2c3 e1d1 e8d8 c4d5 d8d5 d1e2 g4f3 f4f3 h5h6 b1b6 b8c6",
+            "fen": "8/rb5p/pRn4k/3rN3/4P2P/2b2Q2/4KPPR/8 w - - 3 36",
+            "bestmove": "f3f4",
+            "status": "completed",
+            "response_ms": 3663.438041
+          }
+        },
+        {
+          "start": "2026-11-12T18:24:30.367287Z",
+          "end": "2026-11-12T18:24:34.596663916Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 14,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 27,
+            "time": "2026-11-12T18:24:30.367287Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3 f8d6 c1b2 g8h6 b1c3 h6f5 g1f3 d6b4 e2e3 d8f6 e1g1 b4c3 b2c3 e8g8 f3e5 f8d8 b3b4 c8d7 e5d7 d8d7 b4b5",
+            "fen": "r5k1/pppr1ppp/2n1pq2/1P1p1n2/3P4/2B1P1P1/P1P2PBP/R2Q1RK1 b - - 0 14",
+            "bestmove": "c6d8",
+            "status": "completed",
+            "response_ms": 4229.376916
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:24:40.936219Z",
+      "end": "2026-11-12T18:24:44.486413042Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:24:40.936219Z",
+          "end": "2026-11-12T18:24:44.486413042Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 37,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 72,
+            "time": "2026-11-12T18:24:40.936219Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2 e3g5 f6g5 h1h2 g5g4 d7e5 g8f6 f7f6 h6h5 f6f4 h8g8 e6e7 a3b2 e7e8b g8e8 a1b1 b2c3 e1d1 e8d8 c4d5 d8d5 d1e2 g4f3 f4f3 h5h6 b1b6 b8c6 f3f4 h6g7",
+            "fen": "8/rb4kp/pRn5/3rN3/4PQ1P/2b5/4KPPR/8 w - - 5 37",
+            "bestmove": "f4f7",
+            "status": "completed",
+            "response_ms": 3550.194042
+          }
+        },
+        {
+          "start": "2026-11-12T18:24:39.627617Z",
+          "end": "2026-11-12T18:24:45.142430125Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 15,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 29,
+            "time": "2026-11-12T18:24:39.627617Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3 f8d6 c1b2 g8h6 b1c3 h6f5 g1f3 d6b4 e2e3 d8f6 e1g1 b4c3 b2c3 e8g8 f3e5 f8d8 b3b4 c8d7 e5d7 d8d7 b4b5 c6d8 d1d3",
+            "fen": "r2n2k1/pppr1ppp/4pq2/1P1p1n2/3P4/2BQP1P1/P1P2PBP/R4RK1 b - - 2 15",
+            "bestmove": "c7c6",
+            "status": "completed",
+            "response_ms": 5514.813125
+          }
+        }
+      ]
+    },
+    {
+      "start": "2026-11-12T18:24:50.527592Z",
+      "end": "2026-11-12T18:24:52.031454917Z",
+      "active": [
+        {
+          "start": "2026-11-12T18:24:48.489281Z",
+          "end": "2026-11-12T18:24:52.031454917Z",
+          "search": {
+            "process": "engine-20272-2418863798.jsonl",
+            "search": 38,
+            "game": "https://lichess.org/game/AMmBtiCB",
+            "ply": 74,
+            "time": "2026-11-12T18:24:48.489281Z",
+            "position": "position startpos moves b1c3 c7c6 g1f3 d8a5 e2e4 f7f6 d2d4 c6c5 d4d5 a5b4 f1b5 a7a6 b5d3 c5c4 d3e2 b7b6 a2a3 b4c5 c1e3 c5c7 c3a4 c8b7 a4b6 a8a7 b6d7 a7a8 d7b6 a8a7 c2c3 e8f7 e2c4 e7e6 d1a4 g7g6 d5e6 f7g7 a4e8 g6g5 b6d7 f8a3 e8f7 g7h6 h2h4 c7h2 e3g5 f6g5 h1h2 g5g4 d7e5 g8f6 f7f6 h6h5 f6f4 h8g8 e6e7 a3b2 e7e8b g8e8 a1b1 b2c3 e1d1 e8d8 c4d5 d8d5 d1e2 g4f3 f4f3 h5h6 b1b6 b8c6 f3f4 h6g7 f4f7 g7h6",
+            "fen": "8/rb3Q1p/pRn4k/3rN3/4P2P/2b5/4KPPR/8 w - - 7 38",
+            "bestmove": "e5g4",
+            "status": "completed",
+            "response_ms": 3542.173917
+          }
+        },
+        {
+          "start": "2026-11-12T18:24:50.527592Z",
+          "end": "2026-11-12T18:24:55.909381542Z",
+          "search": {
+            "process": "engine-22605-602089638.jsonl",
+            "search": 16,
+            "game": "https://lichess.org/game/v0aclfVS",
+            "ply": 31,
+            "time": "2026-11-12T18:24:50.527592Z",
+            "position": "position startpos moves g2g3 b8c6 f1g2 d7d5 d2d4 e7e6 b2b3 f8d6 c1b2 g8h6 b1c3 h6f5 g1f3 d6b4 e2e3 d8f6 e1g1 b4c3 b2c3 e8g8 f3e5 f8d8 b3b4 c8d7 e5d7 d8d7 b4b5 c6d8 d1d3 c7c6 e3e4",
+            "fen": "r2n2k1/pp1r1ppp/2p1pq2/1P1p1n2/3PP3/2BQ2P1/P1P2PBP/R4RK1 b - - 0 16",
+            "bestmove": "f5e7",
+            "status": "completed",
+            "response_ms": 5381.789542
+          }
+        }
+      ]
+    }
+  ]
+}
