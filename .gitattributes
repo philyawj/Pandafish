@@ -1,0 +1,4 @@
+# Keep archived evidence and hash-bearing analysis inputs byte-for-byte on checkout.
+tools/benchmark/live/** -text
+# Original terminal output contains padding; do not reformat raw records.
+tools/benchmark/live/*/raw/** -whitespace

@@ -76,3 +76,7 @@ $RECYCLE.BIN/
 
 # Local Lichess recording sessions
 /local-games/
+
+# Reviewed live-session archives: data is tracked; compiled engine stays local.
+!/tools/benchmark/live/*/raw/lichess-bot.log
+/tools/benchmark/live/*/raw/pandafish

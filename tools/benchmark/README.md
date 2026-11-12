@@ -6,6 +6,10 @@ UCI matches separately from the engine. It reuses the project's chess library.
 
 [Results, run profiles, timings, and saved games](results/README.md)
 
+[Live Lichess session archives and analyses](live/README.md) preserve real-game
+evidence separately from controlled matches. Capture and analysis code lives
+in `tools/lichess/`.
+
 ## Why this exists
 
 This benchmark runner was created without knowing how Fishtest works. After

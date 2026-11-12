@@ -25,9 +25,12 @@ import (
 
 type recordOptions struct {
 	Client, Config, Engine, Session, Python string
+	Hardware, Workload                      string
 	PrepareOnly                             bool
 }
 type manifest struct {
+	Hardware       string     `json:"hardware,omitempty"`
+	Workload       string     `json:"workload,omitempty"`
 	Schema         int        `json:"schema"`
 	Started        time.Time  `json:"started"`
 	Finished       *time.Time `json:"finished,omitempty"`
@@ -214,7 +217,7 @@ func record(o recordOptions) (err error) {
 			return err
 		}
 	}
-	m := manifest{Schema: 1, Started: time.Now().UTC(), Status: "preparing", Platform: runtime.GOOS + "/" + runtime.GOARCH}
+	m := manifest{Schema: 1, Started: time.Now().UTC(), Status: "preparing", Platform: runtime.GOOS + "/" + runtime.GOARCH, Hardware: o.Hardware, Workload: o.Workload}
 	manifestPath := filepath.Join(session, "manifest.json")
 	defer func() {
 		if err != nil && m.Finished == nil {
@@ -269,6 +272,11 @@ func record(o recordOptions) (err error) {
 	m.Status = "prepared"
 	if err = writeJSON(manifestPath, m); err != nil {
 		return err
+	}
+	if o.Hardware != "" || o.Workload != "" {
+		if err = os.WriteFile(filepath.Join(session, "hardware.txt"), []byte("Hardware: "+o.Hardware+"\nWorkload: "+o.Workload+"\n"), 0644); err != nil {
+			return err
+		}
 	}
 	if o.PrepareOnly {
 		fmt.Println("Prepared offline session:", session)
@@ -332,6 +340,9 @@ func record(o recordOptions) (err error) {
 			}
 			if e := writeJSON(manifestPath, m); e != nil {
 				return e
+			}
+			if reportErr := report(session); reportErr != nil {
+				return fmt.Errorf("client exited; automatic report failed: %w", reportErr)
 			}
 			if flushErr != nil {
 				return fmt.Errorf("write client log: %w", flushErr)

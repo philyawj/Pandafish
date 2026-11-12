@@ -17,6 +17,10 @@ import (
 
 // The child is a local stand-in for Python, never a network client.
 func TestMain(m *testing.M) {
+	if os.Getenv("PANDAFISH_TEST_STOCKFISH") == "1" {
+		fakeStockfish()
+		os.Exit(0)
+	}
 	if os.Getenv("PANDAFISH_TEST_CLIENT") == "1" {
 		mode := os.Getenv("PANDAFISH_TEST_MODE")
 		if mode == "failure" {

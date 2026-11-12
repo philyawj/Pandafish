@@ -152,7 +152,9 @@ Include both notices when distributing compiled Pandafish binaries.
 [Developer tools](tools/README.md) describes the shared tools layout and the
 [Lichess session recorder](tools/lichess/README.md). The recorder launches
 lichess-bot with a fixed engine copy and reports on saved local records.
-It has been validated offline; live collection is a separate step.
+It also supports offline Stockfish processing.
+[Recorded live sessions](tools/benchmark/live/README.md) preserve raw evidence,
+analysis, and recommendations separately from controlled matches.
 
 [Benchmark documentation](tools/benchmark/README.md) covers the validation workflow,
 playing-strength comparisons, results, and their interpretation.

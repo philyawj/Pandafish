@@ -37,11 +37,13 @@ Lichess, or play games:
   --prepare-only
 ```
 
-`--client` and `--session` are required. Config paths are relative to the client
+`--client` is required. `--session` can be omitted to create a fresh timestamped
+directory under `local-games/`. Config paths are relative to the client
 checkout unless absolute. The engine defaults to the executable named in that
 config; `--engine /absolute/path/to/pandafish` overrides it. Python defaults to
 `CLIENT/venv/bin/python`; use `--python` for another environment. Each session
-must have a new directory. A preparation directory cannot later be resumed;
+must have a new directory. Pass `--hardware` and `--workload` to save machine
+and competing workload details in the manifest and a hardware note. A preparation directory cannot later be resumed;
 use a fresh name for the real session.
 
 Load the prepared `config.redacted.yml` with the client's `load_config` and use
@@ -73,10 +75,10 @@ hash. Keep the session copy unchanged; `report` checks those two artifact hashes
 The original configuration is never rewritten. Only the engine executable,
 PGN directory/grouping, and token delivery are changed for recording. Relative
 resource paths continue to resolve from the client checkout. Challenge rules,
-matchmaking, pondering, and other engine options are preserved. The current
-GoPandaFish policy remains casual standard games from humans with outgoing
-matchmaking and pondering disabled. Rated games against bots require a separate
-policy change.
+matchmaking, pondering, and other engine options are preserved. The public
+example uses casual standard games from humans with matchmaking and pondering
+disabled. The private stream profile can use different challenge rules;
+recording preserves whichever profile you select.
 
 The token uses the same precedence as lichess-bot: a nonempty
 `LICHESS_BOT_TOKEN`, then the config's token. Unset a stale environment value
@@ -102,6 +104,9 @@ attention. Abrupt termination leaves a partial session that can still be reporte
 ```sh
 ./bin/pandafish-lichess report --session local-games/first-session
 ```
+
+The launcher now runs this report automatically after the client exits. The
+manual command is useful for regenerating reports.
 
 Reporting runs offline. It does not start the client, contact Lichess, or need an
 API key. Run it again after parser changes; source records are preserved and
@@ -166,9 +171,10 @@ The client must actually save a PGN before linkage is possible. Preserve partial
 sessions; startup validation processes with no searches are normal.
 
 The client log is supporting evidence for disconnects, submission errors, and
-process failures, not a structured network-latency measurement. The first report
+process failures, not a structured network-latency measurement. The capture report
 does not classify every client error, calculate Elo or win probability, or run
-Stockfish analysis. Keep controlled strength comparisons in the
+Stockfish analysis. The offline `process` command adds grouped client-error
+classification and Stockfish analysis. Keep controlled strength comparisons in the
 [benchmark tool](../benchmark/README.md). A rating mixes opponents and versions
 and does not isolate an engine improvement.
 
@@ -190,3 +196,58 @@ local wrapper session and confirm its searches and PGN link correctly before
 starting live collection. Compare fixed-depth legality/scores and observe timing
 with and without tracing; do not require a new strength tournament for recording
 changes alone.
+
+## Archive and analyze a finished session
+
+```sh
+go run ./tools/lichess process \
+  --session local-games/first-session \
+  --archive tools/benchmark/live/first-session \
+  --bot YourBot --stockfish stockfish --nodes 100000
+```
+
+This command works offline: archive all source files with SHA-256 hashes,
+calculate operational results, and analyze every PGN move with unrestricted
+Stockfish. Raw files are never rewritten. The source session must be finalized (finished or a recorded client/capture
+failure). A still-running session is refused.
+The archive rejects symlinks, obvious token patterns, and unredacted credential
+keys in YAML. The executable is retained locally and hashed but stays ignored;
+all recorded data can be tracked after review. A clone can reprocess with its
+archive `raw/` directory as `--session` without the captured executable.
+
+The analysis uses one thread, 64 MiB hash, MultiPV 1, and Skill Level 20 with
+Elo limiting disabled. Scores favor the root mover. Best and played moves are
+compared at the same root and node budget, with fresh hash/search state and full
+move history. It keeps mate scores separate and retains full Stockfish output.
+This is not the Skill Level 1 strength benchmark. The node count controls cost;
+100,000 is an initial survey budget, not an assertion of tactical certainty.
+
+Use `--limit 20` for a pilot, then repeat without the limit to resume. Matching
+per-position checkpoints avoid repeating work after interruption. Method/input
+changes cannot overwrite a cached profile; use `--profile` with a new name.
+Summary output states how many plies are complete. `confirmation.json` selects
+up to 20 positions across different games for an optional `--nodes 500000`
+follow-up using `--focus PATH/confirmation.json`. That selection is targeted,
+not a random accuracy sample. Keep its findings separate from survey totals.
+
+[Live archives](../benchmark/live/README.md) contain the preserved data and
+results. The [first-session process record](../benchmark/live/v0.8-twitch-m2-20261111/PROCESS.md)
+documents the original stream, analysis method, confirmation, and future workflow.
+The tool is responsible for evidence and compact summaries; a written review
+connects confirmed examples to proposed engine changes and their limitations.
+
+### Returned move and scored PV consistency
+
+Stockfish can stop a node-limited search during an aspiration-window iteration.
+Its final `bestmove` can then differ from the last PV with an exact score.
+The processor never attaches that earlier move's score to the returned move.
+It independently re-searches the selected reference move when needed, retaining
+all unrestricted selection output in `selection_output` and setting
+`reference_rechecked`. The comparison score and PV then belong to that move.
+A regression test covers this case. Matching cached results from the initial
+implementation are repaired using their original selection output; original
+capture data is untouched.
+
+Depth, nodes, and time attached to a Stockfish score come from its last exact-
+scored PV. The raw output also retains the final, potentially bounded
+iteration, so reported score-iteration nodes need not equal the node budget.
