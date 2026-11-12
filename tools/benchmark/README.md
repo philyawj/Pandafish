@@ -1,8 +1,8 @@
 # Local benchmarks
 
-Track Pandafish against the previous release and a Stockfish skill ladder,
-starting at Level 1 and progressing toward Level 20. This Go program runs local
-UCI matches separately from the engine. It reuses the project's chess library.
+Track Pandafish against the previous release, pinned Sacrifice, and a
+Stockfish skill ladder starting at Level 1 and progressing toward Level 20.
+This Go program runs local UCI matches separately from the engine. It reuses the project's chess library.
 
 [Results, run profiles, timings, and saved games](results/README.md)
 
@@ -74,6 +74,10 @@ git archive v0.7 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.8 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.8" .)
+
+build_dir=$(mktemp -d)
+git archive v0.9 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.9" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -82,6 +86,46 @@ accepts executable paths directly and contains no paths to the maintainer's mach
 Official Stockfish builds include their default neural network. Custom engine
 builds requiring external data files need those files available independently;
 only the executable is copied into the benchmark's temporary snapshot.
+The pinned Sacrifice build below is one such engine.
+
+## Build the pinned Sacrifice opponent
+
+Starting with v0.9, every strength increment also compares against
+[Sacrifice-Engine](https://github.com/piratesboys/Sacrifice-Engine-). The current
+pin is package **0.2.0**, commit
+`b528f0ba373910b72052d991700a990ca1cb07fd`, including philyawj's merged
+[PR #1](https://github.com/piratesboys/Sacrifice-Engine-/pull/1).
+Its UCI identity says only `Sacrifice-Engine`; the package version and source
+revision identify the build. [Build provenance](opponents/sacrifice.json)
+records the toolchain and hashes used for the first comparison.
+
+Install Rust and Cargo, then run from the repository root:
+
+```sh
+git clone https://github.com/piratesboys/Sacrifice-Engine-.git tools/benchmark/bin/sacrifice-source
+git -C tools/benchmark/bin/sacrifice-source checkout --detach b528f0ba373910b72052d991700a990ca1cb07fd
+cargo build --release --locked --manifest-path tools/benchmark/bin/sacrifice-source/Cargo.toml
+```
+
+Use the native release executable, not `cargo run`. On macOS/Linux it is
+`tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine`.
+On Windows add `.exe`. This third-party Rust engine is an opponent only;
+Pandafish and the match runner remain Go programs. The checkout, binary, and
+large PGN asset stay in ignored `bin/`, not in source control.
+
+**Keep the checkout at its build location.** This pinned engine embeds its
+Cargo source path and reads `data/Tal.pgn` there. Copying its executable alone
+is insufficient. The runner records that PGN's SHA-256 and checks it before
+and after its matchup; pass `--sacrifice-data /path/to/data/Tal.pgn` if built
+elsewhere. That flag verifies the asset, it does not redirect the engine's
+embedded lookup. The engine's own Tal move-ordering feature stays enabled.
+
+The default `--sacrifice-version` and `--sacrifice-revision` flags describe
+this pin. They are provenance labels, not automatic source verification.
+Confirm `git -C tools/benchmark/bin/sacrifice-source rev-parse HEAD` before
+building. Keep this revision fixed across future increments. Deliberately
+updating the opponent requires new labels, source/build provenance, and a
+separate comparison series; do not silently replace it with upstream HEAD.
 
 ## Run the initial baseline
 
@@ -115,20 +159,66 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.8 tagged baseline as above for the next engine change. Then run one command from the repository root:
+Build the v0.9 tagged baseline as above for the next engine change. Then run
+one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.8 --previous-version v0.8
+  --previous tools/benchmark/bin/pandafish-v0.9 --previous-version v0.9 \
+  --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
 Validation checks formatting, runs Go tests and vet, builds your working source
-as `tools/benchmark/bin/pandafish-candidate`, and plays 100 games per opponent. Add
+as `tools/benchmark/bin/pandafish-candidate`, and runs the staged comparisons
+below. Add
 `--race` when changing concurrent code. Omit `--candidate` in validation mode;
 the fixed candidate path protects released baselines from accidental overwrites.
 Any failed code check stops before matches. Forfeits make validation exit with
-an error after saving the results. A low match score is evidence to review,
-not a code-validation failure. The local lichess-bot wrapper check is separate.
+an error after saving the results. The previous-release screen can stop the
+workflow; external scores are evidence to review rather than automatic release
+decisions. The local lichess-bot wrapper check is separate.
+
+### Routine order and practical gate
+
+1. Play **100 games against the previous Pandafish release**, alone.
+2. Continue only with **zero forfeits by either engine** and a score strictly
+   above 50% when unfinished games count as losses. The Go runner enforces
+   this gate for `--stage all` (the default), saves a blocked result, and exits
+   without external games if it fails. This is a conservative screening rule,
+   not a significance test or proof that the release is stronger.
+3. Play **100 against Stockfish Skill Level 1** and **100 against the pinned
+   Sacrifice**, sequentially in that order. Keep all routine matches serial: one
+   game at a time, with the candidate and opponent taking turns searching.
+4. Review code checks, timings, forfeits, unfinished games, and all three
+   scores before proposing a release. Preserve unfavorable results too.
+
+This is 300 games per routine strength increment, with only 100 needed when
+the previous-release screen blocks further comparisons. Stockfish stays at
+Level 1 until the separate progression rule below is satisfied. Add Sunfish
+later when Pandafish is stronger and the extra runtime is worthwhile.
+
+Full validation requires `--previous` and `--sacrifice`; this prevents the
+routine from silently omitting either comparison. Direct match mode still
+supports older two-opponent commands for reproduction and small integration checks. Use
+`--stage previous` for the previous-release matchup alone. `--stage external`
+explicitly skips that matchup, useful after reviewing a separate passing run;
+it does not load or verify a prior gate. Use the exact same candidate binary
+hash and settings, and link the two result folders when taking that path.
+
+### Why routine comparisons are serial
+
+Use serial execution for all routine comparisons, including Stockfish and
+Sacrifice. This decision keeps timed searches from competing for CPU, thermal,
+and memory resources and preserves a cleaner comparison profile. Passing the
+previous-release strength gate does not establish that concurrency is harmless.
+The lower wall-clock runtime of parallel matches is not worth another variable
+in this early baseline. Record CPU/power/background workload with `--machine`.
+
+The runner retains `--parallel` for explicitly separate experiments, but omit
+it for routine validation. It enables two external matchups on hosts with at
+least four logical CPUs and records the concurrency in the run profile. Such
+scores must stay separate from the serial series. Go tests already run before
+match play; the long part is the games' requested search time, not unit tests.
 
 Starting with v0.7, UCI command handling stays active while search runs. A
 script must wait for `bestmove` before sending `quit` or closing stdin, which
@@ -218,11 +308,13 @@ is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.8 --previous-version v0.8 \
+  --previous tools/benchmark/bin/pandafish-v0.9 --previous-version v0.9 \
+  --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
 
-That plays 1,000 games per opponent, or 2,000 total. The separate confirmation
+That plays 1,000 games per opponent, or 3,000 total if the previous-release
+gate passes. The separate confirmation
 suite contains 50 distinct legal opening positions, played with both colors.
 It is a public, hand-selected variety suite, not a calibrated or hidden test
 set. Compare candidate and baseline under the same suite and settings. More
@@ -238,8 +330,9 @@ It is an outcome bound, not a confidence interval. Do not silently count
 unfinished games as draws or ignore a rising unfinished count.
 
 Keep Stockfish version, skill, opening hash, time settings, move cap, compiler,
-and hardware consistent. Run matches sequentially with a stable power setting
-and little background load. The report shows comparison profiles and timing
+and hardware consistent. Use a stable power setting and little background
+load, and keep the external-concurrency profile consistent. The report shows
+comparison profiles and timing
 measurements. Its fixed move allowance does not simulate a tournament's game
 clock; test game-clock handling separately before tournament use.
 
@@ -381,6 +474,32 @@ the available game clock. A weaker result against some opponents or at some
 time controls would need review without invalidating the independently tested
 protocol improvements.
 
+The v0.9 positional-evaluation candidate scored **66 wins, 25 draws, and
+9 losses (78.5%)** against v0.8, with no forfeits or unfinished games. This
+supports the increment under the serial screening profile; it does not give
+a precise Elo estimate. The [previous-release record](results/v0.9-dev-vs-v0.8/README.md)
+contains the candidate hash and complete games.
+
+Against Stockfish 19 at native Skill Level 1, the same candidate scored
+**47 wins, 10 draws, and 43 losses (52%)**, with no forfeits or unfinished
+games. This is the first recorded routine screen above 50% at Level 1 and a
+much higher observed score than earlier material-only candidates. The margin
+above half is close in 100 games; it does not establish a reliable above-50%
+expectation or trigger an automatic level advancement. Keep the Level 1 result
+and use the progression policy below before choosing Level 2. The
+[external comparison record](results/v0.9-dev-vs-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/README.md)
+contains Stockfish and pinned Sacrifice evidence. Against Sacrifice package
+0.2.0 at `b528f0ba`, the candidate scored 4 wins, 17 draws, and 79 losses
+(12.5%), with no forfeits or unfinished games. This establishes the first
+controlled baseline against that opponent. Across all three matchups the
+candidate's maximum response was 120.222 ms; nine responses exceeded the
+100 ms request while remaining within the 150 ms deadline.
+
+All routine matchups run
+serially, including future increments, to keep timed searches from competing
+for resources. Passing the previous-version gate is independent of that
+scheduling decision.
+
 An earlier v0.3 screening run recorded the first local benchmark draw against
 Stockfish 19 at Skill Level 1: a stalemate with Pandafish playing White in round
 25. The [milestone PGN](milestones/first-stockfish-level-1-draw.pgn) is preserved
@@ -418,13 +537,11 @@ current Stockfish level. Previous-version matches and focused positions remain
 useful when the Stockfish score stays at zero. Skill levels are not Elo ratings,
 and success at 100 ms does not establish equal strength at longer controls.
 
-As Pandafish becomes stronger, expand the benchmarks to multiple independent
-engines, for example [Sunfish](https://github.com/thomasahle/sunfish), alongside
-Stockfish and previous Pandafish versions. This will help detect improvements
-that work against one opponent but regress against others. Pin each opponent's
-version and settings and introduce it as a separate comparison series. Additional
-engine support is future work; the current runner supports Stockfish and one
-previous Pandafish executable.
+Sacrifice now supplies an independent comparison alongside Stockfish and the
+previous Pandafish release. Later, add [Sunfish](https://github.com/thomasahle/sunfish)
+when the engine is stronger and another comparison is worth the runtime.
+Multiple opponents help detect gains that do not generalize. Pin each
+opponent's version and settings and introduce updates as separate series.
 
 ## Timing and game rules
 
@@ -455,14 +572,17 @@ previous Pandafish executable.
 ## Saved history and checks
 
 Results go to matchup folders such as `v0.2-vs-v0.1-and-stockfish-1`, with
-`-run-2`, `-run-3`, etc. for repeats. Each contains `games.pgn` and `summary.json`.
+`-run-2`, `-run-3`, etc. for repeats. Each contains combined `games.pgn` and
+`summary.json`. New runs also save
+`previous.pgn`, `stockfish.pgn`, and `sacrifice.pgn` for the opponents played.
 JSON records binary identities and hashes, optional source revisions, runner
 hash, Go version, platform, optional machine note, settings, opening hash,
 outcomes, and move timings. Validation-mode runs also record the automated
 checks and commands. Each PGN includes its opening moves.
 
 After each completed matchup, the runner syncs the PGN and atomically saves
-its summary before starting the next opponent. Completed matchups from an
+its summary. Parallel external matchups have independent PGN writers; only
+the scheduler updates the shared summary. Completed matchups from an
 interrupted run remain visible as a partial run. An incomplete matchup may
 have additional PGNs but is excluded from the summarized scores. There is
 no automatic resume. The report distinguishes partial and completed runs.
@@ -494,5 +614,5 @@ is required for this tooling increment. Level 1 remains the target.
 
 See the [session tool documentation](../lichess/README.md) for commands,
 recording limits, and offline reporting. Future changes to move selection or
-time allocation use the routine comparison workflow above with v0.8 as the
-previous-release baseline.
+time allocation use the routine comparison workflow above with the latest
+release as the baseline, currently v0.9.

@@ -34,7 +34,11 @@ func TestQuiescence(t *testing.T) {
 				t.Fatal(err)
 			}
 			before := game.FEN()
-			if got := quiescence(game.Position(), quiescenceDepth, -searchInfinity, searchInfinity); got != tt.want {
+			want := tt.want
+			if want != mateScore && want != -mateScore {
+				want *= 100
+			}
+			if got := quiescence(game.Position(), quiescenceDepth, -searchInfinity, searchInfinity); (game.Position().Status() != chess.NoMethod && got != want) || (game.Position().Status() == chess.NoMethod && abs(got-want) > 90) {
 				t.Fatalf("quiescence score = %d, want %d", got, tt.want)
 			}
 			if game.FEN() != before || len(game.Moves()) != 0 {
@@ -67,8 +71,8 @@ func TestQuiescenceCannotStandPatInCheck(t *testing.T) {
 	}
 	// Static material is zero, but every legal escape lets the bishop take
 	// our queen. A stand-pat cutoff at beta = 0 would hide that loss.
-	if got := quiescence(game.Position(), quiescenceDepth, -searchInfinity, 0); got != -9 {
-		t.Fatalf("checked score = %d, want -9", got)
+	if got := quiescence(game.Position(), quiescenceDepth, -searchInfinity, 0); got >= -800 {
+		t.Fatalf("checked score = %d, want a lost queen", got)
 	}
 }
 
@@ -77,9 +81,9 @@ func TestQuiescenceDepthCap(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	// At the hard cap we return material even if captures remain.
-	if got := quiescence(game.Position(), 0, -searchInfinity, searchInfinity); got != -4 {
-		t.Fatalf("capped score = %d, want -4", got)
+	// At the hard cap we return static positional evaluation even if captures remain.
+	if got := quiescence(game.Position(), 0, -searchInfinity, searchInfinity); got != evaluate(game.Position(), game.Position().Turn()) {
+		t.Fatalf("capped score = %d, want static evaluation", got)
 	}
 }
 

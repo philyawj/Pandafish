@@ -89,7 +89,7 @@ func TestReportingDoesNotChangeFixedDepthScores(t *testing.T) {
 		t.Fatal("reference interrupted")
 	}
 	result := iterativeSearch(context.Background(), game.Position(), goLimits{depth: 2}, timeBudget{}, time.Now())
-	if result.score != score || !slices.Contains(best, result.move) || result.metrics.Score != score*100 {
+	if result.score != score || !slices.Contains(best, result.move) || result.metrics.Score != score {
 		t.Fatalf("result %+v, reference %v %d", result, best, score)
 	}
 	var output strings.Builder

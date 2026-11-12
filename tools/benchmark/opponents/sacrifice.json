@@ -1,0 +1,22 @@
+{
+  "name": "Sacrifice-Engine",
+  "package_version": "0.2.0",
+  "uci_name": "Sacrifice-Engine",
+  "repository": "https://github.com/piratesboys/Sacrifice-Engine-",
+  "revision": "b528f0ba373910b72052d991700a990ca1cb07fd",
+  "included_pull_request": {
+    "number": 1,
+    "author": "philyawj",
+    "title": "Fix PGN castling notation with zeros",
+    "url": "https://github.com/piratesboys/Sacrifice-Engine-/pull/1"
+  },
+  "build": "cargo build --release --locked",
+  "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18) (Homebrew)",
+  "cargo": "cargo 1.98.0 (797e8a9bc 2026-08-05) (Homebrew)",
+  "platform": "darwin/arm64",
+  "binary_sha256": "5c2c63f19ff6f8be65aaa127a7cbe884f6cb52d7c4daee6967b1da7a7f8fa0e5",
+  "assets_sha256": {
+    "data/Tal.pgn": "da7d473f53ac933c3a14ca4aff872bc50fe64385234f3635094cc500c0b0ad59"
+  },
+  "notes": "Current upstream head verified when preparing v0.9. Keep the checkout and PGN available: the unmodified executable embeds CARGO_MANIFEST_DIR. Match summaries record binary and PGN hashes. Other platforms/toolchains can produce a different executable hash."
+}

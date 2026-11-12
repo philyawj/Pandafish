@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.8 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.9 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
@@ -17,11 +17,16 @@ searched first to help pruning. Equal best moves are selected randomly;
 root pruning keeps their scores exact while discarding inferior choices.
 Checkmate scores above any material advantage, being
 checkmated scores below any material disadvantage, and stalemate scores zero.
-Other draw rules and positional features have no separate search evaluation.
+Other draw rules have no separate search evaluation. Modest placement scores
+encourage central minor pieces, central pawn space, and active rooks on the
+seventh rank. King placement blends home-rank safety with endgame activity
+according to remaining non-pawn material. These are simple preferences, not
+full development, pawn-structure, or king-safety analysis. Internal and UCI
+scores use centipawns (100 per pawn).
 
 Quiescence means quietness. At the normal search boundary, it examines
 captures and promotions, and all legal escapes when the king is in check.
-Away from check it can keep the current material score instead of making a
+Away from check it can keep the current static score instead of making a
 capture. This helps avoid counting a captured piece before considering the
 recapture. The extension is capped at two additional plies. At that cap,
 static evaluation is used even if captures or checks remain, so long tactical
@@ -210,3 +215,12 @@ unchanged.
 engine traces and Go `record`/`report` tools for local Lichess sessions.
 Keep the existing search and challenge policy. See the
 [session tool documentation](tools/lichess/README.md) for operation and limits.
+
+**v0.9: Give quiet moves positional guidance (complete).** Add small
+placement terms alongside material, with a phase-dependent king score.
+Keep the existing alpha-beta search, timing rules, quiescence cap, and random
+choice among equally best moves. Placement helps distinguish quiet choices;
+it does not guarantee sensible opening play in every position.
+
+**Next: Reuse searched positions.** Test a small transposition table as a
+separate increment, retaining the current evaluation and time control.
