@@ -1,0 +1,142 @@
+package main
+
+import (
+	"bufio"
+	"context"
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"github.com/corentings/chess/v2"
+	"os"
+	"os/exec"
+	"strings"
+	"time"
+)
+
+type position struct {
+	Game      string `json:"game"`
+	Ply       int    `json:"ply"`
+	Split     string `json:"split"`
+	FEN       string `json:"fen"`
+	Position  string `json:"position"`
+	Reference string `json:"reference"`
+}
+type probe struct {
+	Request        string   `json:"request"`
+	Engine         string   `json:"engine"`
+	BinarySHA      string   `json:"binary_sha256"`
+	Move           string   `json:"move"`
+	Legal          bool     `json:"legal"`
+	ExactReference bool     `json:"exact_reference"`
+	Output         []string `json:"uci_output"`
+}
+type audited struct {
+	position
+	Probes []probe `json:"probes"`
+}
+
+func hash(path string) string {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		panic(err)
+	}
+	h := sha256.Sum256(data)
+	return hex.EncodeToString(h[:])
+}
+func search(path string, p position, request string) probe {
+	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+	defer cancel()
+	cmd := exec.CommandContext(ctx, path)
+	in, err := cmd.StdinPipe()
+	if err != nil {
+		panic(err)
+	}
+	out, err := cmd.StdoutPipe()
+	if err != nil {
+		panic(err)
+	}
+	if err = cmd.Start(); err != nil {
+		panic(err)
+	}
+	defer func() { in.Close(); cmd.Process.Kill(); cmd.Wait() }()
+	scanner := bufio.NewScanner(out)
+	wait := func(marker string) []string {
+		var lines []string
+		for scanner.Scan() {
+			s := scanner.Text()
+			lines = append(lines, s)
+			if strings.HasPrefix(s, marker) {
+				return lines
+			}
+		}
+		panic("missing UCI response: " + marker)
+	}
+	fmt.Fprintln(in, "uci")
+	handshake := wait("uciok")
+	r := probe{BinarySHA: hash(path), Request: request}
+	for _, line := range handshake {
+		if strings.HasPrefix(line, "id name ") {
+			r.Engine = strings.TrimPrefix(line, "id name ")
+		}
+	}
+	fmt.Fprintln(in, "ucinewgame\nisready")
+	wait("readyok")
+	fmt.Fprintln(in, p.Position)
+	fmt.Fprintln(in, request)
+	r.Output = wait("bestmove ")
+	r.Move = strings.Fields(r.Output[len(r.Output)-1])[1]
+	fen, err := chess.FEN(p.FEN)
+	if err != nil {
+		panic(err)
+	}
+	g := chess.NewGame(fen)
+	for _, m := range g.Position().ValidMoves() {
+		if m.String() == r.Move {
+			r.Legal = true
+		}
+	}
+	if !r.Legal {
+		panic("illegal audit move: " + r.Move)
+	}
+	r.ExactReference = r.Move == p.Reference
+	fmt.Fprintln(in, "quit")
+	return r
+}
+func main() {
+	source := "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n500000-confirmed/regression-candidates.json"
+	data, err := os.ReadFile(source)
+	if err != nil {
+		panic(err)
+	}
+	var fixture struct {
+		Cases []position `json:"cases"`
+	}
+	if err = json.Unmarshal(data, &fixture); err != nil {
+		panic(err)
+	}
+	var cases []audited
+	for _, p := range fixture.Cases {
+		a := audited{position: p}
+		for _, engine := range []string{"tools/benchmark/bin/pandafish-v0.10", "tools/benchmark/bin/pandafish-candidate"} {
+			for _, request := range []string{"go depth 3", "go movetime 100"} {
+				a.Probes = append(a.Probes, search(engine, p, request))
+			}
+		}
+		cases = append(cases, a)
+	}
+	report := struct {
+		Method    string    `json:"method"`
+		Source    string    `json:"source"`
+		SourceSHA string    `json:"source_sha256"`
+		Cases     []audited `json:"cases"`
+	}{"One depth-three and one 100-ms search per engine and public reference position, all serial before routine matches. Fresh process and new game per probe; full position history; cold table except reuse within iterative deepening. Separate 20-second watchdog; all moves checked legal. Evaluation is unchanged but quiescence horizon differs, so fixed-depth scores may change. A single timed sample per case is diagnostic, not a strength estimate. All six public cases, including the three holdouts, are evaluated without tuning afterward.", source, hash(source), cases}
+	encoded, err := json.MarshalIndent(report, "", "  ")
+	if err != nil {
+		panic(err)
+	}
+	if err = os.WriteFile(os.Args[1], append(encoded, '\n'), 0644); err != nil {
+		panic(err)
+	}
+	fmt.Printf("Saved %d legal position probes per engine\n", len(cases))
+}

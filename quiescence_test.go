@@ -3,6 +3,7 @@ package main
 import (
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/corentings/chess/v2"
 )
@@ -76,12 +77,15 @@ func TestQuiescenceCannotStandPatInCheck(t *testing.T) {
 	}
 }
 
-func TestQuiescenceDepthCap(t *testing.T) {
-	game, err := parsePosition(strings.Fields("fen 3r2k1/8/8/3Q4/8/8/8/6K1 b - - 0 1"))
+func TestQuiescenceDepthCapOutsideCheck(t *testing.T) {
+	game, err := parsePosition(strings.Fields("fen 3r2k1/8/8/8/3Q4/8/8/6K1 b - - 0 1"))
 	if err != nil {
 		t.Fatal(err)
 	}
-	// At the hard cap we return static positional evaluation even if captures remain.
+	if inCheck(game.Position()) {
+		t.Fatal("fixture must not be checked")
+	}
+	// At the ordinary horizon we return static positional evaluation even if captures remain.
 	if got := quiescence(game.Position(), 0, -searchInfinity, searchInfinity); got != evaluate(game.Position(), game.Position().Turn()) {
 		t.Fatalf("capped score = %d, want static evaluation", got)
 	}
@@ -106,5 +110,131 @@ func TestInCheck(t *testing.T) {
 		if got := inCheck(game.Position()); got != tt.want {
 			t.Errorf("%s: check = %v, want %v", tt.fen, got, tt.want)
 		}
+	}
+}
+
+// Both queens give check at the ordinary quiescence horizon. Capturing the
+// checker wins it, but the old cutoff returns the pre-capture material score.
+func TestQuiescenceHorizonCheckEvasions(t *testing.T) {
+	for _, fen := range []string{
+		"6k1/8/8/8/3q4/8/8/3R2K1 w - - 0 1",
+		"3r2k1/8/8/3Q4/8/8/8/6K1 b - - 0 1",
+	} {
+		game, err := parsePosition(strings.Fields("fen " + fen))
+		if err != nil {
+			t.Fatal(err)
+		}
+		position := game.Position()
+		if !inCheck(position) {
+			t.Fatal("fixture must be checked")
+		}
+		before := game.FEN()
+		got := quiescence(position, 0, -searchInfinity, searchInfinity)
+		if abs(got-500) > 90 {
+			t.Fatalf("%s: horizon score %d, want the queen captured and a rook remaining", fen, got)
+		}
+		if game.FEN() != before {
+			t.Fatal("search changed root")
+		}
+	}
+}
+
+func TestQuiescenceHorizonQuietEvasion(t *testing.T) {
+	game, err := parsePosition(strings.Fields("fen 7r/8/8/8/8/6k1/8/6BK w - - 0 1"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	position := game.Position()
+	moves := position.ValidMoves()
+	if len(moves) != 1 || moves[0].String() != "g1h2" {
+		t.Fatal("fixture must force Bh2")
+	}
+	// The only evasion is a quiet bishop block. The score must describe the
+	// resulting line, rather than treating the checked position as quiet.
+	// Bh2 also gives check; Black can answer Kxh2, winning the bishop.
+	want := exhaustiveQuietScore(position, 0)
+	if got := quiescence(position, 0, -searchInfinity, searchInfinity); got != want || abs(got+500) > 90 {
+		t.Fatalf("score %d, want forced quiet evasion score %d", got, want)
+	}
+}
+
+func TestDeadlineDuringHorizonCheckEvasion(t *testing.T) {
+	game, err := parsePosition(strings.Fields("fen 3r2k1/8/8/3Q4/8/8/8/6K1 b - - 0 1"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	start := time.Unix(100, 0)
+	calls := 0
+	worker := searcher{deadline: start.Add(time.Second), now: func() time.Time {
+		calls++
+		if calls >= 3 {
+			return start.Add(time.Second)
+		}
+		return start
+	}}
+	if _, complete := worker.quiet(game.Position(), 0, -searchInfinity, searchInfinity, true); complete {
+		t.Fatal("horizon evasion ignored its deadline")
+	}
+	if worker.nodes != 1 {
+		t.Fatalf("visited %d nodes after deadline", worker.nodes)
+	}
+}
+
+func TestQuiescenceHorizonCountercheck(t *testing.T) {
+	game, err := parsePosition(strings.Fields("fen 3k4/8/8/8/3q4/8/8/3R2K1 w - - 0 1"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	position := game.Position()
+	var capture *chess.Position
+	for _, move := range position.ValidMoves() {
+		if move.String() == "d1d4" {
+			capture = position.Update(&move)
+		}
+	}
+	if capture == nil || !inCheck(capture) {
+		t.Fatal("Rxd4 must give countercheck")
+	}
+	// Resolve the countercheck as well; evaluating immediately after Rxd4+
+	// would leave the checked king's positional score unresolved.
+	want := exhaustiveQuietScore(position, 0)
+	worker := searcher{}
+	got, complete := worker.quiet(position, 0, -searchInfinity, searchInfinity, true)
+	if !complete || got != want || abs(got-500) > 90 || worker.nodes < 3 {
+		t.Fatalf("countercheck: score %d, want %d, nodes %d, complete %v", got, want, worker.nodes, complete)
+	}
+}
+
+func TestQuiescenceCheckEvasionSafetyCap(t *testing.T) {
+	game, err := parsePosition(strings.Fields("fen 6k1/8/8/8/3q4/8/8/3R2K1 w - - 0 1"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	worker := searcher{}
+	position := game.Position()
+	got, complete := worker.quiet(position, -checkEvasionDepth, -searchInfinity, searchInfinity, true)
+	if !complete || got != staticScore(position, position.Turn()) || worker.nodes != 1 {
+		t.Fatalf("safety cap: score %d, complete %v, nodes %d", got, complete, worker.nodes)
+	}
+	// Immediately before the cap, a forced evasion still receives one ply.
+	got, complete = (&searcher{}).quiet(position, 1-checkEvasionDepth, -searchInfinity, searchInfinity, true)
+	if !complete || abs(got-500) > 90 {
+		t.Fatalf("last evasion: score %d, complete %v", got, complete)
+	}
+}
+
+func TestQuiescenceResolvesCheckAfterCaptureAndRecapture(t *testing.T) {
+	game, err := parsePosition(strings.Fields("fen 4k3/8/3q4/3p4/2B5/3R4/6K1/8 w - - 0 1"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	// Either piece can take d5. Qxd5+ then reaches the ordinary two-ply
+	// horizon, but the other white piece can take the checking queen.
+	// Black must decline that exchange, so White can win the pawn.
+	position := game.Position()
+	got := quiescence(position, quiescenceDepth, -searchInfinity, searchInfinity)
+	want := exhaustiveQuietScore(position, quiescenceDepth)
+	if got != want || got <= staticScore(position, position.Turn())+50 {
+		t.Fatalf("score %d, want safe pawn capture, reference %d, static %d", got, want, staticScore(position, position.Turn()))
 	}
 }
