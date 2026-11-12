@@ -17,6 +17,7 @@ The engine came from clean release commit
   and [classified client errors](client-incidents.json)
 - [Stockfish survey](analysis/stockfish-n100000/README.md)
 - [Final synthesis and recommendations](REVIEW.md)
+- [Sacrifice, Sunfish, and Stockfish comparison](ENGINE_COMPARISON.md)
 - [500,000-node confirmation](analysis/stockfish-n500000-confirmed/README.md) and
   [regression candidates](analysis/stockfish-n500000-confirmed/regression-candidates.json)
 - [Post-session client environment](provenance/client-environment.json)
