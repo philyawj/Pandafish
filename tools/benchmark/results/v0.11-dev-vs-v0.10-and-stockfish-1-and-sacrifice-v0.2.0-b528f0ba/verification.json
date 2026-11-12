@@ -1,0 +1,24 @@
+{
+  "candidate_sha256": "1f8a7f7a6240ac01f9dfa4765a48a8e236b6e7bea9f9b384233dbc7c46b49948",
+  "unit_tests": "go test ./... passed",
+  "race_tests": "go test -race ./... passed through validation",
+  "vet": "go vet ./... passed through validation",
+  "formatting": "gofmt validation passed",
+  "arm64_build": "go build -o pandafish .; file pandafish reported Mach-O 64-bit executable arm64",
+  "local_wrapper": {
+    "engine": "Pandafish v0.11-dev",
+    "legal_plies": 12,
+    "limit_seconds": 0.1,
+    "ponder": false,
+    "active_v010_executable_restored": true
+  },
+  "public_example": "load_config passed with only engine dir/name/working_dir resolved to the local candidate; development greetings matched",
+  "private_configs_changed": false,
+  "live_checks": false,
+  "position_probes": 24,
+  "all_position_probes_legal": true,
+  "all_matches_serial": true,
+  "routine_games_completed": 300,
+  "no_forfeits_or_unfinished": true,
+  "note": "Supplemental offline evidence. Exact benchmark check commands and binary/opponent identities are in summary.json. The ultimate quiescence safety cap still uses static evaluation in check."
+}

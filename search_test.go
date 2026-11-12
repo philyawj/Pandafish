@@ -36,10 +36,13 @@ func exhaustiveScore(position *chess.Position, depth int) int {
 // Reference quiescence uses fixed-color minimax without pruning or ordering.
 func exhaustiveQuietScore(position *chess.Position, depth int) int {
 	static := evaluate(position, chess.White)
-	if depth <= 0 || position.Status() != chess.NoMethod {
+	if position.Status() != chess.NoMethod {
 		return static
 	}
 	checked := inCheck(position)
+	if depth <= -checkEvasionDepth || (depth <= 0 && !checked) {
+		return static
+	}
 	best := static
 	if checked {
 		best = searchInfinity

@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.10 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.11 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
@@ -34,9 +34,10 @@ Quiescence means quietness. At the normal search boundary, it examines
 captures and promotions, and all legal escapes when the king is in check.
 Away from check it can keep the current static score instead of making a
 capture. This helps avoid counting a captured piece before considering the
-recapture. The extension is capped at two additional plies. At that cap,
-static evaluation is used even if captures or checks remain, so long tactical
-sequences can still be missed.
+recapture. Captures and promotions stop after two quiescence plies unless
+the side to move is checked. Required check evasions can extend for at most
+four further plies. At that final safety cap, static evaluation is used even
+if checks remain, so long tactical sequences can still be missed.
 
 Clone this repository and build with Go 1.25 or newer:
 
@@ -234,6 +235,14 @@ Keep v0.9's evaluation, time control, quiescence cap, and exact root ties.
 The in-memory table is private to each process, reused during a game, and
 cleared on `ucinewgame`. No learned data is saved to disk.
 
-**Next: Collect real-game evidence.** Record another Lichess session, check
-operational behavior, and use recurring weaknesses to choose the next focused
-improvement while retaining the existing alpha-beta foundation.
+**v0.11: Resolve checks at the quiescence horizon (complete).** Keep the
+two-ply capture/promotion horizon, but search required check evasions beyond it.
+Allow at most four extra check-evasion plies, then use static evaluation at the
+final safety cap. A non-checked position at the ordinary horizon still stops.
+Evaluation, clocks, transposition caching, and random root ties are unchanged.
+
+**Next candidate: Quiet-move ordering.** Test small killer-move ordering after
+the local v0.11 validation. Use controlled local comparisons for each focused
+increment and live Lichess sessions periodically after meaningful progress.
+The [live-session review](tools/benchmark/live/v0.10-twitch-m2-20261112/REVIEW.md)
+records the current priorities and supporting evidence.

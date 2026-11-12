@@ -11,6 +11,7 @@ import (
 const searchDepth = 3
 const searchInfinity = mateScore + 1
 const quiescenceDepth = 2
+const checkEvasionDepth = 4
 
 // A zero-value searcher is unlimited, useful for fixed-depth comparisons.
 // Cancellation is distinct from a score, so unfinished nodes never affect ties.
@@ -95,7 +96,9 @@ func quiescence(position *chess.Position, depth, alpha, beta int) int {
 	return score
 }
 
-// Captures, promotions, and check evasions retain v0.6's two-ply hard cap.
+// Captures and promotions keep the two-ply horizon. At that horizon, only
+// checked nodes extend, for at most four extra plies of check evasions. The
+// final safety cap still uses static evaluation, even in a checking sequence.
 func (worker *searcher) quiet(position *chess.Position, depth, alpha, beta int, checked bool) (int, bool) {
 	if worker.stopped() {
 		return 0, false
@@ -105,7 +108,7 @@ func (worker *searcher) quiet(position *chess.Position, depth, alpha, beta int, 
 		return evaluate(position, position.Turn()), !worker.stopped()
 	}
 	static := staticScore(position, position.Turn())
-	if depth <= 0 {
+	if depth <= -checkEvasionDepth || (depth <= 0 && !checked) {
 		return static, !worker.stopped()
 	}
 	best := -searchInfinity
