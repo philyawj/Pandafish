@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-12",
+  "old_revision": "df7e730de58cc3ef2f1415a0dc2eeda842d39167",
+  "new_revision": "baa2b7e78320b99125a91c2b1805bb7a5c4fb6ea",
+  "version": "2026.11.12.1",
+  "update": "git fetch origin master; git merge --ff-only origin/master",
+  "fix_merge_commit": "0c805828da75f923e3975426302814273b50d8c2",
+  "fix_is_ancestor": true,
+  "upstream_tests": {
+    "command": "env -u LICHESS_BOT_TOKEN -u LICHESS_BOT_TEST_TOKEN PYTHONDONTWRITEBYTECODE=1 ./venv/bin/python -m pytest -q -p no:cacheprovider --timeout=60 test_bot/test_game_processes.py test_bot/test_next_event.py test_bot/test_correspondence.py test_bot/test_config.py test_bot/test_bot.py::test_game_stream_reconnect",
+    "result": "23 passed in 7.05s"
+  },
+  "wrapper": {
+    "engine": "Pandafish v0.10",
+    "legal_plies": 12,
+    "config": "config-gopandafish.yml",
+    "ponder": false,
+    "limit_seconds": 0.1,
+    "procedure": "AGENTS.md local config/UCI wrapper smoke; no listener"
+  },
+  "configuration": {
+    "active_and_snapshot_bytes_unchanged": true,
+    "permissions": "0644",
+    "challenge_policy_unchanged": true
+  },
+  "runtime_requirements": "requirements.txt unchanged between old and new revision; pip check passed",
+  "test_dependencies_installed": [
+    "pytest 9.2.0",
+    "pytest-timeout 2.4.0"
+  ],
+  "live_checks": false,
+  "custom_client_patch": false,
+  "note": "Post-investigation local update. Original capture, dependency inspection, and old-source reproduction records are unchanged historical evidence."
+}

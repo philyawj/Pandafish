@@ -279,3 +279,94 @@ func TestBoundOnlyFinalChoiceIsRescored(t *testing.T) {
 		t.Fatalf("unrelated PV score used for final move: %+v", result)
 	}
 }
+
+func TestProcessRetainsRepeatedAndUnlinkedSearches(t *testing.T) {
+	o, _ := processFixture(t)
+	path := filepath.Join(o.Session, "moves.jsonl")
+	original, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var first searchRecord
+	if err = json.Unmarshal(original, &first); err != nil {
+		t.Fatal(err)
+	}
+	first.Bestmove = "e2e4"
+	second := first
+	second.Process = "engine-reconnected"
+	second.Search = 2
+	unlinked := first
+	unlinked.Process = "engine-unlinked"
+	unlinked.Game = ""
+	unlinked.Ply = nil
+	unlinked.ResponseMS = 100
+	unlinked.Go = "go movetime 10"
+	rows := []searchRecord{first, second, unlinked}
+	var content []byte
+	for _, r := range rows {
+		b, e := json.Marshal(r)
+		if e != nil {
+			t.Fatal(e)
+		}
+		content = append(content, append(b, '\n')...)
+	}
+	if err = os.WriteFile(path, content, 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err = runProcess(o); err != nil {
+		t.Fatal(err)
+	}
+	data, err := os.ReadFile(filepath.Join(o.Archive, "operations.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var ops struct {
+		Completed int           `json:"completed_searches"`
+		Linked    int           `json:"linked_searches"`
+		Unique    int           `json:"unique_linked_positions"`
+		Repeated  int           `json:"repeated_linked_positions"`
+		Unlinked  int           `json:"unlinked_completed_searches"`
+		Longest   *searchRecord `json:"longest_search"`
+	}
+	if err = json.Unmarshal(data, &ops); err != nil {
+		t.Fatal(err)
+	}
+	if ops.Completed != 3 || ops.Linked != 2 || ops.Unique != 1 || ops.Repeated != 1 || ops.Unlinked != 1 || ops.Longest.Process != "engine-unlinked" {
+		t.Fatalf("lost search attempts: %+v", ops)
+	}
+	var game gameAnalysis
+	data, err = os.ReadFile(filepath.Join(o.Archive, "analysis", "stockfish-n100", "game0001.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = json.Unmarshal(data, &game); err != nil {
+		t.Fatal(err)
+	}
+	if len(game.Moves) != 1 || game.Moves[0].Capture != nil || len(game.Moves[0].Captures) != 2 {
+		t.Fatal("multiple attempts were dropped or guessed")
+	}
+	if err = runProcess(o); err != nil {
+		t.Fatal(err)
+	}
+	unchanged, err := os.ReadFile(path)
+	if err != nil || string(unchanged) != string(content) {
+		t.Fatal("raw capture changed")
+	}
+}
+
+func TestUnlabelledControlStreamReconnectCountedOnce(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "client.log")
+	text := "2026-11-12T17:47:21Z Control stream error, reconnecting:\n2026-11-12T17:47:21Z Traceback (most recent call last):\n2026-11-12T17:47:21Z requests.exceptions.ChunkedEncodingError: Response ended prematurely\n2026-11-12T17:48:00Z INFO Chat: quoted Control stream error, reconnecting:\n2026-11-12T17:48:01Z INFO resumed\n2026-11-12T18:18:21Z Control stream error, reconnecting:\n2026-11-12T18:18:21Z Traceback (most recent call last):\n"
+	if err := os.WriteFile(path, []byte(text), 0644); err != nil {
+		t.Fatal(err)
+	}
+	incidents, err := classifyClientLog(path)
+	if err != nil || len(incidents) != 2 {
+		t.Fatalf("reconnects: %v %v", incidents, err)
+	}
+	for _, i := range incidents {
+		if i.Kind != "control_stream_reconnect" {
+			t.Fatal(i)
+		}
+	}
+}

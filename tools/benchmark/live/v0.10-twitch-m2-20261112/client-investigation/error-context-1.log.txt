@@ -1,0 +1,156 @@
+2026-11-12T17:47:05.921153Z                     INFO     ***                              conversation.py:58
+2026-11-12T17:47:05.921168Z                              https://lichess.org/6j1YSLRZ/whi                   
+2026-11-12T17:47:05.921176Z                              te [spectator] GoPandaFish: Live                   
+2026-11-12T17:47:05.921184Z                              on stream: GoPandaFish tests                       
+2026-11-12T17:47:05.921191Z                              Pandafish v0.10. Fresh moves,                      
+2026-11-12T17:47:05.921197Z                              fresh data, same bamboo budget.                    
+2026-11-12T17:47:07.267015Z [11/12/26 09:47:07] INFO                                      lichess_bot.py:852
+2026-11-12T17:47:07.267842Z                     INFO     move: 2                          lichess_bot.py:853
+2026-11-12T17:47:07.268772Z                     INFO     Searching for wtime 178999    engine_wrapper.py:726
+2026-11-12T17:47:07.268794Z                              btime 180000 for game                              
+2026-11-12T17:47:07.268804Z                              6j1YSLRZ                                           
+2026-11-12T17:47:13.261129Z [11/12/26 09:47:13] INFO     Source: Engine                engine_wrapper.py:334
+2026-11-12T17:47:13.26171Z                     INFO     Evaluation: 0.0               engine_wrapper.py:334
+2026-11-12T17:47:13.26239Z                     INFO     Depth: 6                      engine_wrapper.py:334
+2026-11-12T17:47:13.262962Z                     INFO     Nodes: 1.4M                   engine_wrapper.py:334
+2026-11-12T17:47:13.263567Z                     INFO     Pv: 2. Nf3                    engine_wrapper.py:334
+2026-11-12T17:47:14.513177Z [11/12/26 09:47:14] INFO                                      lichess_bot.py:852
+2026-11-12T17:47:14.514013Z                     INFO     move: 3                          lichess_bot.py:853
+2026-11-12T17:47:14.515058Z                     INFO     Searching for wtime 172849    engine_wrapper.py:726
+2026-11-12T17:47:14.515095Z                              btime 178900 for game                              
+2026-11-12T17:47:14.515104Z                              6j1YSLRZ                                           
+2026-11-12T17:47:17.864401Z [11/12/26 09:47:17] INFO     Refreshing 0 online blocklists      blocklist.py:41
+2026-11-12T17:47:20.304426Z [11/12/26 09:47:20] INFO     Source: Engine                engine_wrapper.py:334
+2026-11-12T17:47:20.305138Z                     INFO     Evaluation: 0.16              engine_wrapper.py:334
+2026-11-12T17:47:20.305743Z                     INFO     Depth: 6                      engine_wrapper.py:334
+2026-11-12T17:47:20.306438Z                     INFO     Nodes: 1.5M                   engine_wrapper.py:334
+2026-11-12T17:47:20.30707Z                     INFO     Pv: 3. e3                     engine_wrapper.py:334
+2026-11-12T17:47:21.242612Z [11/12/26 09:47:21] INFO     ---                              lichess_bot.py:938
+2026-11-12T17:47:21.242704Z                              https://lichess.org/6j1YSLRZ/whi                   
+2026-11-12T17:47:21.242735Z                              te Game over                                       
+2026-11-12T17:47:21.244908Z                     INFO     Next challenge will be created   matchmaking.py:314
+2026-11-12T17:47:21.244965Z                              after Thu Nov 12 09:48:21 2026                     
+2026-11-12T17:47:21.246332Z                     INFO     +++ Process Freed. Count: 0.     lichess_bot.py:319
+2026-11-12T17:47:21.246476Z                              IDs: None                                          
+2026-11-12T17:47:21.24834Z                     INFO     Accept Bullet rated challenge    lichess_bot.py:520
+2026-11-12T17:47:21.248404Z                              from BOT Vic98lg (2474)                            
+2026-11-12T17:47:21.248425Z                              (eNxSUcbC)                                         
+2026-11-12T17:47:21.533183Z Control stream error, reconnecting:
+2026-11-12T17:47:21.533264Z Traceback (most recent call last):
+2026-11-12T17:47:21.533296Z   File "/Users/philyawj/projects/lichess-bot/venv/lib/python3.12/site-packages/requests/models.py", line 937, in generate
+2026-11-12T17:47:21.53332Z     yield from self.raw.stream(chunk_size, decode_content=True)
+2026-11-12T17:47:21.533334Z   File "/Users/philyawj/projects/lichess-bot/venv/lib/python3.12/site-packages/urllib3/response.py", line 1284, in stream
+2026-11-12T17:47:21.533347Z     yield from self.read_chunked(amt, decode_content=decode_content)
+2026-11-12T17:47:21.533359Z   File "/Users/philyawj/projects/lichess-bot/venv/lib/python3.12/site-packages/urllib3/response.py", line 1459, in read_chunked
+2026-11-12T17:47:21.533369Z     self._update_chunk_length()
+2026-11-12T17:47:21.533386Z   File "/Users/philyawj/projects/lichess-bot/venv/lib/python3.12/site-packages/urllib3/response.py", line 1383, in _update_chunk_length
+2026-11-12T17:47:21.533397Z     raise ProtocolError("Response ended prematurely") from None
+2026-11-12T17:47:21.533408Z urllib3.exceptions.ProtocolError: Response ended prematurely
+2026-11-12T17:47:21.533418Z 
+2026-11-12T17:47:21.533428Z During handling of the above exception, another exception occurred:
+2026-11-12T17:47:21.533437Z 
+2026-11-12T17:47:21.533447Z Traceback (most recent call last):
+2026-11-12T17:47:21.533458Z   File "/Users/philyawj/projects/lichess-bot/lib/lichess_bot.py", line 121, in watch_control_stream
+2026-11-12T17:47:21.533468Z     for line in lines:
+2026-11-12T17:47:21.533507Z   File "/Users/philyawj/projects/lichess-bot/venv/lib/python3.12/site-packages/requests/models.py", line 1008, in iter_lines
+2026-11-12T17:47:21.533603Z     for chunk in self.iter_content(
+2026-11-12T17:47:21.533625Z   File "/Users/philyawj/projects/lichess-bot/venv/lib/python3.12/site-packages/requests/models.py", line 939, in generate
+2026-11-12T17:47:21.533637Z     raise ChunkedEncodingError(e)
+2026-11-12T17:47:21.533648Z requests.exceptions.ChunkedEncodingError: Response ended prematurely
+2026-11-12T17:47:21.533658Z 
+2026-11-12T17:47:21.565746Z                     INFO     --- Process Queued. Count: 1.    lichess_bot.py:319
+2026-11-12T17:47:21.565848Z                              IDs: {'eNxSUcbC'}                                  
+2026-11-12T17:47:21.567416Z                     INFO     --- Process Used. Count: 1. IDs: lichess_bot.py:319
+2026-11-12T17:47:21.567531Z                              {'eNxSUcbC'}                                       
+2026-11-12T17:47:22.19203Z [11/12/26 09:47:22] INFO     +++                              lichess_bot.py:699
+2026-11-12T17:47:22.192114Z                              https://lichess.org/eNxSUcbC/whi                   
+2026-11-12T17:47:22.192138Z                              te Bullet vs BOT Vic98lg (2474)                    
+2026-11-12T17:47:22.192206Z                              (eNxSUcbC)                                         
+2026-11-12T17:47:22.195364Z                     INFO     ***                             conversation.py:100
+2026-11-12T17:47:22.195432Z                              https://lichess.org/eNxSUcbC/wh                    
+2026-11-12T17:47:22.195776Z                              ite [player] GoPandaFish:                          
+2026-11-12T17:47:22.19581Z                              GoPandaFish here! Pandafish                        
+2026-11-12T17:47:22.195824Z                              v0.10 is live on stream,                           
+2026-11-12T17:47:22.195834Z                              testing its chess and chasing                      
+2026-11-12T17:47:22.195844Z                              bamboo. Good luck!                                 
+2026-11-12T17:47:22.406747Z                     INFO     ***                             conversation.py:100
+2026-11-12T17:47:22.407154Z                              https://lichess.org/eNxSUcbC/wh                    
+2026-11-12T17:47:22.40721Z                              ite [spectator] GoPandaFish:                       
+2026-11-12T17:47:22.407239Z                              Live on stream: GoPandaFish                        
+2026-11-12T17:47:22.407264Z                              tests Pandafish v0.10. Fresh                       
+2026-11-12T17:47:22.407288Z                              moves, fresh data, same bamboo                     
+2026-11-12T17:47:22.407311Z                              budget.                                            
+2026-11-12T17:47:22.61567Z                     INFO                                      lichess_bot.py:852
+2026-11-12T17:47:22.616143Z                     INFO     move: 1                          lichess_bot.py:853
+2026-11-12T17:47:22.616629Z                     INFO     Searching for time 10 seconds engine_wrapper.py:704
+2026-11-12T17:47:22.61664Z                              for game eNxSUcbC                                  
+2026-11-12T17:47:22.822646Z                     INFO     --- Process Used. Count: 1. IDs: lichess_bot.py:319
+2026-11-12T17:47:22.82268Z                              {'eNxSUcbC'}                                       
+2026-11-12T17:47:22.823288Z                     INFO     --- Process Used. Count: 2. IDs: lichess_bot.py:319
+2026-11-12T17:47:22.823303Z                              {'6j1YSLRZ', 'eNxSUcbC'}                           
+2026-11-12T17:47:23.434701Z [11/12/26 09:47:23] INFO     +++                              lichess_bot.py:699
+2026-11-12T17:47:23.434722Z                              https://lichess.org/eNxSUcbC/whi                   
+2026-11-12T17:47:23.434728Z                              te Bullet vs BOT Vic98lg (2474)                    
+2026-11-12T17:47:23.434732Z                              (eNxSUcbC)                                         
+2026-11-12T17:47:23.435493Z                     INFO     ***                             conversation.py:100
+2026-11-12T17:47:23.435508Z                              https://lichess.org/eNxSUcbC/wh                    
+2026-11-12T17:47:23.435513Z                              ite [player] GoPandaFish:                          
+2026-11-12T17:47:23.435517Z                              GoPandaFish here! Pandafish                        
+2026-11-12T17:47:23.435521Z                              v0.10 is live on stream,                           
+2026-11-12T17:47:23.435532Z                              testing its chess and chasing                      
+2026-11-12T17:47:23.435537Z                              bamboo. Good luck!                                 
+2026-11-12T17:47:23.639504Z                     INFO     ***                             conversation.py:100
+2026-11-12T17:47:23.639523Z                              https://lichess.org/eNxSUcbC/wh                    
+2026-11-12T17:47:23.639527Z                              ite [spectator] GoPandaFish:                       
+2026-11-12T17:47:23.639531Z                              Live on stream: GoPandaFish                        
+2026-11-12T17:47:23.639535Z                              tests Pandafish v0.10. Fresh                       
+2026-11-12T17:47:23.639539Z                              moves, fresh data, same bamboo                     
+2026-11-12T17:47:23.639542Z                              budget.                                            
+2026-11-12T17:47:23.843353Z                     INFO                                      lichess_bot.py:852
+2026-11-12T17:47:23.843868Z                     INFO     move: 1                          lichess_bot.py:853
+2026-11-12T17:47:23.844349Z                     INFO     Searching for time 10 seconds engine_wrapper.py:704
+2026-11-12T17:47:23.84436Z                              for game eNxSUcbC                                  
+2026-11-12T17:47:32.571108Z [11/12/26 09:47:32] INFO     Source: Engine                engine_wrapper.py:334
+2026-11-12T17:47:32.571605Z                     INFO     Evaluation: 0.24              engine_wrapper.py:334
+2026-11-12T17:47:32.572014Z                     INFO     Depth: 7                      engine_wrapper.py:334
+2026-11-12T17:47:32.572421Z                     INFO     Nodes: 2.5M                   engine_wrapper.py:334
+2026-11-12T17:47:32.572852Z                     INFO     Pv: 1. d4                     engine_wrapper.py:334
+2026-11-12T17:47:32.775481Z                     INFO     ***                              conversation.py:58
+2026-11-12T17:47:32.775509Z                              https://lichess.org/eNxSUcbC/whi                   
+2026-11-12T17:47:32.775515Z                              te [player] GoPandaFish:                           
+2026-11-12T17:47:32.77552Z                              GoPandaFish here! Pandafish                        
+2026-11-12T17:47:32.775524Z                              v0.10 is live on stream, testing                   
+2026-11-12T17:47:32.775528Z                              its chess and chasing bamboo.                      
+2026-11-12T17:47:32.775532Z                              Good luck!                                         
+2026-11-12T17:47:32.776291Z                     INFO     ***                              conversation.py:58
+2026-11-12T17:47:32.776306Z                              https://lichess.org/eNxSUcbC/whi                   
+2026-11-12T17:47:32.776311Z                              te [spectator] GoPandaFish: Live                   
+2026-11-12T17:47:32.776315Z                              on stream: GoPandaFish tests                       
+2026-11-12T17:47:32.776319Z                              Pandafish v0.10. Fresh moves,                      
+2026-11-12T17:47:32.776322Z                              fresh data, same bamboo budget.                    
+2026-11-12T17:47:32.881823Z                     INFO     ---                              lichess_bot.py:938
+2026-11-12T17:47:32.881865Z                              https://lichess.org/eNxSUcbC/whi                   
+2026-11-12T17:47:32.881896Z                              te Game over                                       
+2026-11-12T17:47:32.882579Z                     INFO     Next challenge will be created   matchmaking.py:314
+2026-11-12T17:47:32.882589Z                              after Thu Nov 12 09:48:32 2026                     
+2026-11-12T17:47:32.883073Z                     INFO     +++ Process Freed. Count: 1.     lichess_bot.py:319
+2026-11-12T17:47:32.883091Z                              IDs: {'6j1YSLRZ'}                                  
+2026-11-12T17:47:33.191523Z [11/12/26 09:47:33] INFO     +++                              lichess_bot.py:699
+2026-11-12T17:47:33.191567Z                              https://lichess.org/6j1YSLRZ/whi                   
+2026-11-12T17:47:33.191574Z                              te Blitz vs BOT Sacrifice-Engine                   
+2026-11-12T17:47:33.191579Z                              (2328?) (6j1YSLRZ)                                 
+2026-11-12T17:47:33.192029Z                     INFO                                      lichess_bot.py:852
+2026-11-12T17:47:33.19256Z                     INFO     move: 4                          lichess_bot.py:853
+2026-11-12T17:47:33.193094Z                     INFO     Searching for wtime 155320    engine_wrapper.py:726
+2026-11-12T17:47:33.193109Z                              btime 177770 for game                              
+2026-11-12T17:47:33.193114Z                              6j1YSLRZ                                           
+2026-11-12T17:47:33.80379Z                     INFO     Source: Engine                engine_wrapper.py:334
+2026-11-12T17:47:33.804205Z                     INFO     Evaluation: 0.24              engine_wrapper.py:334
+2026-11-12T17:47:33.804699Z                     INFO     Depth: 7                      engine_wrapper.py:334
+2026-11-12T17:47:33.805143Z                     INFO     Nodes: 2.8M                   engine_wrapper.py:334
+2026-11-12T17:47:33.805515Z                     INFO     Pv: 1. Nc3                    engine_wrapper.py:334
+2026-11-12T17:47:34.012243Z                     INFO     ***                              conversation.py:58
+2026-11-12T17:47:34.012269Z                              https://lichess.org/eNxSUcbC/whi                   
+2026-11-12T17:47:34.012276Z                              te [player] GoPandaFish:                           
+2026-11-12T17:47:34.01228Z                              GoPandaFish here! Pandafish                        
+2026-11-12T17:47:34.012283Z                              v0.10 is live on stream, testing                   

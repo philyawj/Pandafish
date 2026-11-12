@@ -1,0 +1,48 @@
+{
+  "checked_at": "2026-11-12",
+  "head": "baa2b7e78320b99125a91c2b1805bb7a5c4fb6ea",
+  "source_url": "https://raw.githubusercontent.com/lichess-bot-devs/lichess-bot/baa2b7e78320b99125a91c2b1805bb7a5c4fb6ea/lib/lichess_bot.py",
+  "related": [
+    {
+      "number": 1266,
+      "title": "A second `gameStart` for a running game starts a second `play_game`, and the two handlers keep breaking each other's game stream",
+      "url": "https://github.com/lichess-bot-devs/lichess-bot/issues/1266",
+      "state": "closed",
+      "merged_at": null,
+      "merge_commit": null
+    },
+    {
+      "number": 1262,
+      "title": "Reconnect a dropped game stream in play_game and ignore a repeated gameStart",
+      "url": "https://github.com/lichess-bot-devs/lichess-bot/pull/1262",
+      "state": "closed",
+      "merged_at": "2026-11-02T05:05:45Z",
+      "merge_commit": "0c805828da75f923e3975426302814273b50d8c2"
+    },
+    {
+      "number": 1163,
+      "title": "Bot exceeds `concurrency = 1` and accepts multiple simultaneous challenges",
+      "url": "https://github.com/lichess-bot-devs/lichess-bot/issues/1163",
+      "state": "closed",
+      "merged_at": null,
+      "merge_commit": null
+    },
+    {
+      "number": 1164,
+      "title": "Assume game is active until lichess says otherwise",
+      "url": "https://github.com/lichess-bot-devs/lichess-bot/pull/1164",
+      "state": "closed",
+      "merged_at": "2025-12-15T17:56:43Z",
+      "merge_commit": "8eace058cf13eb71b9ffcb0934c4b21c771a20d2"
+    },
+    {
+      "number": 1241,
+      "title": "Abort games that exceed challenge.concurrency instead of queuing them",
+      "url": "https://github.com/lichess-bot-devs/lichess-bot/pull/1241",
+      "state": "closed",
+      "merged_at": null,
+      "merge_commit": null
+    }
+  ],
+  "note": "Read-only public research. PR 1262 already implements separate worker ownership and stream reconnection. PR 1241 closed unmerged; no overflow abort policy is recommended from it."
+}

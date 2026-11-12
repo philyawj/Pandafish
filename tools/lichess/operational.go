@@ -76,6 +76,15 @@ func classifyClientLog(path string) ([]clientIncident, error) {
 		if !ok {
 			body = line
 		}
+		// The client prints control-stream exceptions directly, without a log level.
+		// Count the reconnect marker once, not each wrapped traceback line.
+		if strings.HasPrefix(strings.TrimSpace(body), "Control stream error, reconnecting:") {
+			flush()
+			errorBlock = false
+			block = ""
+			incidents = append(incidents, clientIncident{"control_stream_reconnect", strings.TrimSpace(body)})
+			continue
+		}
 		if level := logLevel.FindString(body); level != "" {
 			flush()
 			errorBlock = level == "ERROR" || level == "CRITICAL"
@@ -157,7 +166,7 @@ func operationalReport(raw, output, bot string) error {
 	clockCases, lowClockCases := 0, 0
 	maxOverrun, maxProtocolOverhead := 0.0, 0.0
 	totalSearchMS := 0.0
-	for _, r := range capture {
+	for _, r := range capture.All {
 		if longest == nil || r.ResponseMS > longest.ResponseMS {
 			longest = r
 		}
@@ -200,21 +209,33 @@ func operationalReport(raw, output, bot string) error {
 	for _, i := range incidents {
 		incidentCounts[i.Kind]++
 	}
+	linked, repeated := 0, 0
+	for _, attempts := range capture.ByPly {
+		linked += len(attempts)
+		if len(attempts) > 1 {
+			repeated++
+		}
+	}
 	summary := struct {
-		Games               []gameRecord   `json:"games"`
-		Outcomes            map[string]int `json:"outcomes"`
-		Controls            map[string]int `json:"time_controls"`
-		Terminations        map[string]int `json:"terminations"`
-		UniqueOpponents     int            `json:"unique_opponents"`
-		FixedRequests       map[string]int `json:"fixed_requests"`
-		ClockRequests       int            `json:"clock_requests"`
-		Below10s            int            `json:"requests_with_own_clock_below_10s"`
-		MaxOverrunMS        float64        `json:"max_hard_overrun_ms"`
-		MaxOutputOverheadMS float64        `json:"max_response_minus_search_ms"`
-		SearchWallSeconds   float64        `json:"total_search_wall_seconds"`
-		ClientErrors        map[string]int `json:"client_error_blocks"`
-		Longest             *searchRecord  `json:"longest_search"`
-	}{games, outcomes, controls, terminations, len(opponents), fixed, clockCases, lowClockCases, maxOverrun, maxProtocolOverhead, totalSearchMS / 1000, incidentCounts, longest}
+		CompletedSearches       int            `json:"completed_searches"`
+		LinkedSearches          int            `json:"linked_searches"`
+		UniqueLinkedPositions   int            `json:"unique_linked_positions"`
+		RepeatedLinkedPositions int            `json:"repeated_linked_positions"`
+		UnlinkedSearches        int            `json:"unlinked_completed_searches"`
+		Games                   []gameRecord   `json:"games"`
+		Outcomes                map[string]int `json:"outcomes"`
+		Controls                map[string]int `json:"time_controls"`
+		Terminations            map[string]int `json:"terminations"`
+		UniqueOpponents         int            `json:"unique_opponents"`
+		FixedRequests           map[string]int `json:"fixed_requests"`
+		ClockRequests           int            `json:"clock_requests"`
+		Below10s                int            `json:"requests_with_own_clock_below_10s"`
+		MaxOverrunMS            float64        `json:"max_hard_overrun_ms"`
+		MaxOutputOverheadMS     float64        `json:"max_response_minus_search_ms"`
+		SearchWallSeconds       float64        `json:"total_search_wall_seconds"`
+		ClientErrors            map[string]int `json:"client_error_blocks"`
+		Longest                 *searchRecord  `json:"longest_search"`
+	}{len(capture.All), linked, len(capture.ByPly), repeated, len(capture.All) - linked, games, outcomes, controls, terminations, len(opponents), fixed, clockCases, lowClockCases, maxOverrun, maxProtocolOverhead, totalSearchMS / 1000, incidentCounts, longest}
 	if err = writeJSON(filepath.Join(output, "operations.json"), summary); err != nil {
 		return err
 	}
@@ -235,10 +256,14 @@ func operationalReport(raw, output, bot string) error {
 		text += fmt.Sprintf("| %s | %d |\n", k, controls[k])
 	}
 	text += fmt.Sprintf("\nMaximum hard-budget overrun: %.6f ms. Maximum response minus search time: %.3f ms. %d clock-based requests had less than 10 seconds left on the moving side's supplied clock. Search wall time totals %.1f seconds; this is not measured CPU utilization.\n\nFixed requests: `%v`. Clock requests: %d.\n", maxOverrun, maxProtocolOverhead, lowClockCases, totalSearchMS/1000, fixed, clockCases)
-	if longest != nil && longest.Metrics != nil {
+	text += fmt.Sprintf("\nCompleted searches: %d; linked searches: %d; unique linked positions: %d; positions with repeated searches: %d; unlinked completed searches: %d. Timing totals include all completed searches, including repeated and unlinked attempts.\n", len(capture.All), linked, len(capture.ByPly), repeated, len(capture.All)-linked)
+	if longest != nil && longest.Metrics != nil && longest.Ply == nil {
+		text += fmt.Sprintf("\nLongest response: %.3f ms in unlinked process `%s`. Request: `%s`; allocated hard budget %.3f ms.\n", longest.ResponseMS, longest.Process, longest.Go, longest.Metrics.HardMS)
+	}
+	if longest != nil && longest.Metrics != nil && longest.Ply != nil {
 		text += fmt.Sprintf("\nLongest response: %.3f ms at [%s](%s), zero-based ply %d. Request: `%s`; allocated hard budget %.3f ms. Compare the request and budget before calling a long search a stall.\n", longest.ResponseMS, longest.Game, longest.Game, *longest.Ply, longest.Go, longest.Metrics.HardMS)
 	}
-	text += "\n## Client errors\n\nCounts refer to grouped ERROR/CRITICAL log records, not keyword hits. Other severity levels and individual wrapped lines are not counted as separate failures. Opponent daily-cap responses describe the challenged account, not an engine crash.\n\n"
+	text += "\n## Client errors\n\nCounts refer to grouped ERROR/CRITICAL records plus explicit unlabelled control-stream reconnect markers, not keyword hits. Other severity levels and individual wrapped traceback lines are not counted as separate failures. Opponent daily-cap responses describe the challenged account, not an engine crash.\n\n"
 	keys = nil
 	for k := range incidentCounts {
 		keys = append(keys, k)

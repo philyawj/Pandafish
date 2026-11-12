@@ -1,0 +1,59 @@
+{
+  "scope": "Actual selected function bodies, mocked pool and event stream; no workers, engines, online client, or API calls.",
+  "clients": {
+    "installed": {
+      "source_sha256": "ffe7ff57d6e68e156c46523c3328259ad142f5b58b2657ae7ca32c3680c8c7a1",
+      "cases": [
+        {
+          "pre_reserved": false,
+          "jobs_after_first": 1,
+          "jobs_after_duplicate": 2,
+          "logical_active_ids": 1,
+          "modeled_jobs_remaining_after_one_completion": 1,
+          "modeled_logical_active_ids_after_one_completion": 0
+        },
+        {
+          "pre_reserved": true,
+          "jobs_after_first": 1,
+          "jobs_after_duplicate": 2,
+          "logical_active_ids": 1,
+          "modeled_jobs_remaining_after_one_completion": 1,
+          "modeled_logical_active_ids_after_one_completion": 0
+        }
+      ],
+      "reconnect": {
+        "stream_connections": 2,
+        "game_start_events": 2,
+        "reconnect_warnings": 1,
+        "note": "Synthetic server deliberately replays the start. This does not establish what the real SSE server emitted."
+      }
+    },
+    "upstream": {
+      "source_sha256": "7d7a8b4088a4a30662b464811012a86714f78363dd9106236da3451afc1356d3",
+      "cases": [
+        {
+          "pre_reserved": false,
+          "jobs_after_first": 1,
+          "jobs_after_duplicate": 1,
+          "logical_active_ids": 1,
+          "modeled_jobs_remaining_after_one_completion": 0,
+          "modeled_logical_active_ids_after_one_completion": 0
+        },
+        {
+          "pre_reserved": true,
+          "jobs_after_first": 1,
+          "jobs_after_duplicate": 1,
+          "logical_active_ids": 1,
+          "modeled_jobs_remaining_after_one_completion": 0,
+          "modeled_logical_active_ids_after_one_completion": 0
+        }
+      ],
+      "reconnect": {
+        "stream_connections": 2,
+        "game_start_events": 2,
+        "reconnect_warnings": 1,
+        "note": "Synthetic server deliberately replays the start. This does not establish what the real SSE server emitted."
+      }
+    }
+  }
+}

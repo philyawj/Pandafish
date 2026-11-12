@@ -2,3 +2,7 @@
 tools/benchmark/live/** -text
 # Original terminal output contains padding; do not reformat raw records.
 tools/benchmark/live/*/raw/** -whitespace
+# Exact investigation excerpts preserve the original terminal padding too.
+tools/benchmark/live/*/client-investigation/*.log.txt -whitespace
+# Saved patches include a literal context prefix before original Go tabs.
+tools/benchmark/live/*/provenance/*.patch -whitespace

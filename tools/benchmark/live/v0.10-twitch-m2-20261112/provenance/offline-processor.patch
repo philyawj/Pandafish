@@ -1,0 +1,311 @@
+diff --git a/tools/lichess/analyse.go b/tools/lichess/analyse.go
+index 242ae5b..721c5ee 100644
+--- a/tools/lichess/analyse.go
++++ b/tools/lichess/analyse.go
+@@ -38,21 +38,22 @@ type analysisMethod struct {
+ 	Comparison      string `json:"comparison"`
+ }
+ type analysedMove struct {
+-	Game           string        `json:"game"`
+-	Ply            int           `json:"ply"`
+-	Side           string        `json:"side"`
+-	IsBot          bool          `json:"is_bot"`
+-	FEN            string        `json:"fen"`
+-	Position       string        `json:"position"`
+-	Played         string        `json:"played"`
+-	PlayedSAN      string        `json:"played_san"`
+-	Best           sfResult      `json:"best"`
+-	PlayedResult   sfResult      `json:"played_result"`
+-	Reused         bool          `json:"played_search_reused"`
+-	CPLoss         *int          `json:"cp_loss,omitempty"`
+-	RawCPDelta     *int          `json:"raw_cp_delta,omitempty"`
+-	Classification string        `json:"classification"`
+-	Capture        *searchRecord `json:"capture,omitempty"`
++	Game           string          `json:"game"`
++	Ply            int             `json:"ply"`
++	Side           string          `json:"side"`
++	IsBot          bool            `json:"is_bot"`
++	FEN            string          `json:"fen"`
++	Position       string          `json:"position"`
++	Played         string          `json:"played"`
++	PlayedSAN      string          `json:"played_san"`
++	Best           sfResult        `json:"best"`
++	PlayedResult   sfResult        `json:"played_result"`
++	Reused         bool            `json:"played_search_reused"`
++	CPLoss         *int            `json:"cp_loss,omitempty"`
++	RawCPDelta     *int            `json:"raw_cp_delta,omitempty"`
++	Classification string          `json:"classification"`
++	Capture        *searchRecord   `json:"capture,omitempty"`
++	Captures       []*searchRecord `json:"captures,omitempty"` // Multiple attempts, without guessing which was submitted.
+ }
+ type gameAnalysis struct {
+ 	Game      string         `json:"game"`
+@@ -93,7 +94,22 @@ func compareScores(best, played sfScore) (*int, *int, string) {
+ 	}
+ 	return nil, nil, "mate_score_comparison"
+ }
+-func loadCapture(path string) (map[string]*searchRecord, error) {
++
++type captureIndex struct {
++	All   []*searchRecord
++	ByPly map[string][]*searchRecord
++}
++
++func (index *captureIndex) attach(row *analysedMove, key string) {
++	attempts := index.ByPly[key]
++	if len(attempts) == 1 {
++		row.Capture = attempts[0]
++	} else if len(attempts) > 1 {
++		row.Captures = attempts
++	}
++}
++
++func loadCapture(path string) (*captureIndex, error) {
+ 	f, err := os.Open(path)
+ 	if err != nil {
+ 		return nil, err
+@@ -101,18 +117,19 @@ func loadCapture(path string) (map[string]*searchRecord, error) {
+ 	defer f.Close()
+ 	scanner := bufio.NewScanner(f)
+ 	scanner.Buffer(make([]byte, 4096), 4*1024*1024)
+-	rows := map[string]*searchRecord{}
++	rows := &captureIndex{ByPly: map[string][]*searchRecord{}}
+ 	for scanner.Scan() {
+ 		r := new(searchRecord)
+ 		if err = json.Unmarshal(scanner.Bytes(), r); err != nil {
+ 			return nil, err
+ 		}
+-		if r.Game != "" && r.Ply != nil && r.Status == "completed" {
++		if r.Status != "completed" {
++			continue
++		}
++		rows.All = append(rows.All, r)
++		if r.Game != "" && r.Ply != nil {
+ 			key := fmt.Sprintf("%s/%d", r.Game, *r.Ply)
+-			if _, ok := rows[key]; ok {
+-				return nil, fmt.Errorf("duplicate completed search at %s", key)
+-			}
+-			rows[key] = r
++			rows.ByPly[key] = append(rows.ByPly[key], r)
+ 		}
+ 	}
+ 	return rows, scanner.Err()
+@@ -264,6 +281,8 @@ func runProcess(o processOptions) error {
+ 					if len(cached.PlayedResult.PV) == 0 || cached.PlayedResult.PV[0] != cached.PlayedResult.Bestmove {
+ 						return fmt.Errorf("invalid played-move checkpoint")
+ 					}
++					cached.Capture, cached.Captures = nil, nil
++					capture.attach(&cached, key)
+ 					cached.CPLoss, cached.RawCPDelta, cached.Classification = compareScores(cached.Best.Score, cached.PlayedResult.Score)
+ 					result.Moves = append(result.Moves, cached)
+ 					processed++
+@@ -294,7 +313,8 @@ func runProcess(o processOptions) error {
+ 					if positions[ply].Turn() == chess.Black {
+ 						side = "Black"
+ 					}
+-					row := analysedMove{Game: site, Ply: ply, Side: side, IsBot: strings.EqualFold(game.GetTagPair(side), o.Bot), FEN: positions[ply].String(), Position: position, Played: move.String(), PlayedSAN: chess.AlgebraicNotation{}.Encode(positions[ply], move), Best: best, PlayedResult: played, Reused: reused, CPLoss: cp, RawCPDelta: delta, Classification: category, Capture: capture[key]}
++					row := analysedMove{Game: site, Ply: ply, Side: side, IsBot: strings.EqualFold(game.GetTagPair(side), o.Bot), FEN: positions[ply].String(), Position: position, Played: move.String(), PlayedSAN: chess.AlgebraicNotation{}.Encode(positions[ply], move), Best: best, PlayedResult: played, Reused: reused, CPLoss: cp, RawCPDelta: delta, Classification: category}
++					capture.attach(&row, key)
+ 					result.Moves = append(result.Moves, row)
+ 					processed++
+ 					result.Complete = false
+@@ -471,5 +491,5 @@ func writeRegressions(output string, method analysisMethod, rows []analysedMove)
+ 		Method analysisMethod   `json:"method"`
+ 		Note   string           `json:"note"`
+ 		Cases  []regressionCase `json:"cases"`
+-	}{method, "Public reference positions, not assertions that v0.8 must pass. Reference moves can have equally good alternatives. The deterministic split is for later engine development; it is not a hidden or statistically independent test set.", cases})
++	}{method, "Public reference positions; the recorded engine is not expected to pass improvement cases retroactively. Reference moves can have equally good alternatives. The deterministic split is for later engine development; it is not a hidden or statistically independent test set.", cases})
+ }
+diff --git a/tools/lichess/operational.go b/tools/lichess/operational.go
+index e9bcf40..7970b5e 100644
+--- a/tools/lichess/operational.go
++++ b/tools/lichess/operational.go
+@@ -76,6 +76,15 @@ func classifyClientLog(path string) ([]clientIncident, error) {
+ 		if !ok {
+ 			body = line
+ 		}
++		// The client prints control-stream exceptions directly, without a log level.
++		// Count the reconnect marker once, not each wrapped traceback line.
++		if strings.HasPrefix(strings.TrimSpace(body), "Control stream error, reconnecting:") {
++			flush()
++			errorBlock = false
++			block = ""
++			incidents = append(incidents, clientIncident{"control_stream_reconnect", strings.TrimSpace(body)})
++			continue
++		}
+ 		if level := logLevel.FindString(body); level != "" {
+ 			flush()
+ 			errorBlock = level == "ERROR" || level == "CRITICAL"
+@@ -157,7 +166,7 @@ func operationalReport(raw, output, bot string) error {
+ 	clockCases, lowClockCases := 0, 0
+ 	maxOverrun, maxProtocolOverhead := 0.0, 0.0
+ 	totalSearchMS := 0.0
+-	for _, r := range capture {
++	for _, r := range capture.All {
+ 		if longest == nil || r.ResponseMS > longest.ResponseMS {
+ 			longest = r
+ 		}
+@@ -200,21 +209,33 @@ func operationalReport(raw, output, bot string) error {
+ 	for _, i := range incidents {
+ 		incidentCounts[i.Kind]++
+ 	}
++	linked, repeated := 0, 0
++	for _, attempts := range capture.ByPly {
++		linked += len(attempts)
++		if len(attempts) > 1 {
++			repeated++
++		}
++	}
+ 	summary := struct {
+-		Games               []gameRecord   `json:"games"`
+-		Outcomes            map[string]int `json:"outcomes"`
+-		Controls            map[string]int `json:"time_controls"`
+-		Terminations        map[string]int `json:"terminations"`
+-		UniqueOpponents     int            `json:"unique_opponents"`
+-		FixedRequests       map[string]int `json:"fixed_requests"`
+-		ClockRequests       int            `json:"clock_requests"`
+-		Below10s            int            `json:"requests_with_own_clock_below_10s"`
+-		MaxOverrunMS        float64        `json:"max_hard_overrun_ms"`
+-		MaxOutputOverheadMS float64        `json:"max_response_minus_search_ms"`
+-		SearchWallSeconds   float64        `json:"total_search_wall_seconds"`
+-		ClientErrors        map[string]int `json:"client_error_blocks"`
+-		Longest             *searchRecord  `json:"longest_search"`
+-	}{games, outcomes, controls, terminations, len(opponents), fixed, clockCases, lowClockCases, maxOverrun, maxProtocolOverhead, totalSearchMS / 1000, incidentCounts, longest}
++		CompletedSearches       int            `json:"completed_searches"`
++		LinkedSearches          int            `json:"linked_searches"`
++		UniqueLinkedPositions   int            `json:"unique_linked_positions"`
++		RepeatedLinkedPositions int            `json:"repeated_linked_positions"`
++		UnlinkedSearches        int            `json:"unlinked_completed_searches"`
++		Games                   []gameRecord   `json:"games"`
++		Outcomes                map[string]int `json:"outcomes"`
++		Controls                map[string]int `json:"time_controls"`
++		Terminations            map[string]int `json:"terminations"`
++		UniqueOpponents         int            `json:"unique_opponents"`
++		FixedRequests           map[string]int `json:"fixed_requests"`
++		ClockRequests           int            `json:"clock_requests"`
++		Below10s                int            `json:"requests_with_own_clock_below_10s"`
++		MaxOverrunMS            float64        `json:"max_hard_overrun_ms"`
++		MaxOutputOverheadMS     float64        `json:"max_response_minus_search_ms"`
++		SearchWallSeconds       float64        `json:"total_search_wall_seconds"`
++		ClientErrors            map[string]int `json:"client_error_blocks"`
++		Longest                 *searchRecord  `json:"longest_search"`
++	}{len(capture.All), linked, len(capture.ByPly), repeated, len(capture.All) - linked, games, outcomes, controls, terminations, len(opponents), fixed, clockCases, lowClockCases, maxOverrun, maxProtocolOverhead, totalSearchMS / 1000, incidentCounts, longest}
+ 	if err = writeJSON(filepath.Join(output, "operations.json"), summary); err != nil {
+ 		return err
+ 	}
+@@ -235,10 +256,14 @@ func operationalReport(raw, output, bot string) error {
+ 		text += fmt.Sprintf("| %s | %d |\n", k, controls[k])
+ 	}
+ 	text += fmt.Sprintf("\nMaximum hard-budget overrun: %.6f ms. Maximum response minus search time: %.3f ms. %d clock-based requests had less than 10 seconds left on the moving side's supplied clock. Search wall time totals %.1f seconds; this is not measured CPU utilization.\n\nFixed requests: `%v`. Clock requests: %d.\n", maxOverrun, maxProtocolOverhead, lowClockCases, totalSearchMS/1000, fixed, clockCases)
+-	if longest != nil && longest.Metrics != nil {
++	text += fmt.Sprintf("\nCompleted searches: %d; linked searches: %d; unique linked positions: %d; positions with repeated searches: %d; unlinked completed searches: %d. Timing totals include all completed searches, including repeated and unlinked attempts.\n", len(capture.All), linked, len(capture.ByPly), repeated, len(capture.All)-linked)
++	if longest != nil && longest.Metrics != nil && longest.Ply == nil {
++		text += fmt.Sprintf("\nLongest response: %.3f ms in unlinked process `%s`. Request: `%s`; allocated hard budget %.3f ms.\n", longest.ResponseMS, longest.Process, longest.Go, longest.Metrics.HardMS)
++	}
++	if longest != nil && longest.Metrics != nil && longest.Ply != nil {
+ 		text += fmt.Sprintf("\nLongest response: %.3f ms at [%s](%s), zero-based ply %d. Request: `%s`; allocated hard budget %.3f ms. Compare the request and budget before calling a long search a stall.\n", longest.ResponseMS, longest.Game, longest.Game, *longest.Ply, longest.Go, longest.Metrics.HardMS)
+ 	}
+-	text += "\n## Client errors\n\nCounts refer to grouped ERROR/CRITICAL log records, not keyword hits. Other severity levels and individual wrapped lines are not counted as separate failures. Opponent daily-cap responses describe the challenged account, not an engine crash.\n\n"
++	text += "\n## Client errors\n\nCounts refer to grouped ERROR/CRITICAL records plus explicit unlabelled control-stream reconnect markers, not keyword hits. Other severity levels and individual wrapped traceback lines are not counted as separate failures. Opponent daily-cap responses describe the challenged account, not an engine crash.\n\n"
+ 	keys = nil
+ 	for k := range incidentCounts {
+ 		keys = append(keys, k)
+diff --git a/tools/lichess/process_test.go b/tools/lichess/process_test.go
+index c5e7d25..b5f5039 100644
+--- a/tools/lichess/process_test.go
++++ b/tools/lichess/process_test.go
+@@ -279,3 +279,94 @@ func TestBoundOnlyFinalChoiceIsRescored(t *testing.T) {
+ 		t.Fatalf("unrelated PV score used for final move: %+v", result)
+ 	}
+ }
++
++func TestProcessRetainsRepeatedAndUnlinkedSearches(t *testing.T) {
++	o, _ := processFixture(t)
++	path := filepath.Join(o.Session, "moves.jsonl")
++	original, err := os.ReadFile(path)
++	if err != nil {
++		t.Fatal(err)
++	}
++	var first searchRecord
++	if err = json.Unmarshal(original, &first); err != nil {
++		t.Fatal(err)
++	}
++	first.Bestmove = "e2e4"
++	second := first
++	second.Process = "engine-reconnected"
++	second.Search = 2
++	unlinked := first
++	unlinked.Process = "engine-unlinked"
++	unlinked.Game = ""
++	unlinked.Ply = nil
++	unlinked.ResponseMS = 100
++	unlinked.Go = "go movetime 10"
++	rows := []searchRecord{first, second, unlinked}
++	var content []byte
++	for _, r := range rows {
++		b, e := json.Marshal(r)
++		if e != nil {
++			t.Fatal(e)
++		}
++		content = append(content, append(b, '\n')...)
++	}
++	if err = os.WriteFile(path, content, 0644); err != nil {
++		t.Fatal(err)
++	}
++	if err = runProcess(o); err != nil {
++		t.Fatal(err)
++	}
++	data, err := os.ReadFile(filepath.Join(o.Archive, "operations.json"))
++	if err != nil {
++		t.Fatal(err)
++	}
++	var ops struct {
++		Completed int           `json:"completed_searches"`
++		Linked    int           `json:"linked_searches"`
++		Unique    int           `json:"unique_linked_positions"`
++		Repeated  int           `json:"repeated_linked_positions"`
++		Unlinked  int           `json:"unlinked_completed_searches"`
++		Longest   *searchRecord `json:"longest_search"`
++	}
++	if err = json.Unmarshal(data, &ops); err != nil {
++		t.Fatal(err)
++	}
++	if ops.Completed != 3 || ops.Linked != 2 || ops.Unique != 1 || ops.Repeated != 1 || ops.Unlinked != 1 || ops.Longest.Process != "engine-unlinked" {
++		t.Fatalf("lost search attempts: %+v", ops)
++	}
++	var game gameAnalysis
++	data, err = os.ReadFile(filepath.Join(o.Archive, "analysis", "stockfish-n100", "game0001.json"))
++	if err != nil {
++		t.Fatal(err)
++	}
++	if err = json.Unmarshal(data, &game); err != nil {
++		t.Fatal(err)
++	}
++	if len(game.Moves) != 1 || game.Moves[0].Capture != nil || len(game.Moves[0].Captures) != 2 {
++		t.Fatal("multiple attempts were dropped or guessed")
++	}
++	if err = runProcess(o); err != nil {
++		t.Fatal(err)
++	}
++	unchanged, err := os.ReadFile(path)
++	if err != nil || string(unchanged) != string(content) {
++		t.Fatal("raw capture changed")
++	}
++}
++
++func TestUnlabelledControlStreamReconnectCountedOnce(t *testing.T) {
++	path := filepath.Join(t.TempDir(), "client.log")
++	text := "2026-11-12T17:47:21Z Control stream error, reconnecting:\n2026-11-12T17:47:21Z Traceback (most recent call last):\n2026-11-12T17:47:21Z requests.exceptions.ChunkedEncodingError: Response ended prematurely\n2026-11-12T17:48:00Z INFO Chat: quoted Control stream error, reconnecting:\n2026-11-12T17:48:01Z INFO resumed\n2026-11-12T18:18:21Z Control stream error, reconnecting:\n2026-11-12T18:18:21Z Traceback (most recent call last):\n"
++	if err := os.WriteFile(path, []byte(text), 0644); err != nil {
++		t.Fatal(err)
++	}
++	incidents, err := classifyClientLog(path)
++	if err != nil || len(incidents) != 2 {
++		t.Fatalf("reconnects: %v %v", incidents, err)
++	}
++	for _, i := range incidents {
++		if i.Kind != "control_stream_reconnect" {
++			t.Fatal(i)
++		}
++	}
++}

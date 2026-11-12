@@ -1,0 +1,176 @@
+package main
+
+import (
+	"bufio"
+	"encoding/json"
+	"fmt"
+	"github.com/corentings/chess/v2"
+	"os"
+	"path/filepath"
+	"sort"
+	"strings"
+	"time"
+)
+
+type row struct {
+	Process  string    `json:"process"`
+	Search   int       `json:"search"`
+	Game     string    `json:"game"`
+	Ply      *int      `json:"ply"`
+	Time     time.Time `json:"time"`
+	Position string    `json:"position"`
+	FEN      string    `json:"fen"`
+	Bestmove string    `json:"bestmove"`
+	Status   string    `json:"status"`
+	Response float64   `json:"response_ms"`
+}
+type match struct {
+	Game string `json:"game"`
+	Ply  int    `json:"ply"`
+}
+type audit struct {
+	row
+	Matches []match `json:"individual_matches"`
+}
+type span struct {
+	Start  time.Time `json:"start"`
+	End    time.Time `json:"end"`
+	Search row       `json:"search"`
+}
+type overlap struct {
+	Start  time.Time `json:"start"`
+	End    time.Time `json:"end"`
+	Active []span    `json:"active"`
+}
+
+func must(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+func main() {
+	raw, output := os.Args[1], os.Args[2]
+	f, err := os.Open(filepath.Join(raw, "moves.jsonl"))
+	must(err)
+	defer f.Close()
+	scanner := bufio.NewScanner(f)
+	scanner.Buffer(make([]byte, 4096), 4*1024*1024)
+	var rows []row
+	for scanner.Scan() {
+		var r row
+		must(json.Unmarshal(scanner.Bytes(), &r))
+		if r.Status == "completed" {
+			rows = append(rows, r)
+		}
+	}
+	must(scanner.Err())
+	paths, err := filepath.Glob(filepath.Join(raw, "games", "*.pgn"))
+	must(err)
+	games := []*chess.Game{}
+	for _, p := range paths {
+		b, e := os.ReadFile(p)
+		must(e)
+		opt, e := chess.PGN(strings.NewReader(string(b)))
+		must(e)
+		games = append(games, chess.NewGame(opt))
+	}
+	var audits []audit
+	for _, r := range rows {
+		if r.Game != "" {
+			continue
+		}
+		a := audit{row: r}
+		fields := strings.Fields(r.Position)
+		if len(fields) < 2 || fields[1] != "startpos" {
+			panic("audit requires startpos histories")
+		}
+		hist := []string{}
+		if len(fields) > 2 {
+			if fields[2] != "moves" {
+				panic("bad history")
+			}
+			hist = fields[3:]
+		}
+		for _, g := range games {
+			ply := len(hist)
+			moves := g.Moves()
+			positions := g.Positions()
+			if ply >= len(moves) || positions[ply].String() != r.FEN || moves[ply].String() != r.Bestmove {
+				continue
+			}
+			ok := true
+			for i, m := range hist {
+				if moves[i].String() != m {
+					ok = false
+					break
+				}
+			}
+			if ok {
+				a.Matches = append(a.Matches, match{g.GetTagPair("Site"), ply})
+			}
+		}
+		audits = append(audits, a)
+	}
+	// UTC starts plus monotonic response durations approximate wall intervals. No CPU utilization inference.
+	spans := make([]span, len(rows))
+	events := make([]time.Time, 0, len(rows)*2)
+	for i, r := range rows {
+		spans[i] = span{r.Time, r.Time.Add(time.Duration(r.Response * float64(time.Millisecond))), r}
+		events = append(events, spans[i].Start, spans[i].End)
+	}
+	sort.Slice(events, func(i, j int) bool { return events[i].Before(events[j]) })
+	var overlaps []overlap
+	peak := 0
+	involved := map[string]bool{}
+	total := time.Duration(0)
+	for i := 0; i+1 < len(events); i++ {
+		start, end := events[i], events[i+1]
+		if !end.After(start) {
+			continue
+		}
+		var active []span
+		processes := map[string]bool{}
+		for _, s := range spans {
+			if !start.Before(s.Start) && start.Before(s.End) {
+				active = append(active, s)
+				processes[s.Search.Process] = true
+			}
+		}
+		if len(processes) > peak {
+			peak = len(processes)
+		}
+		if len(processes) > 1 {
+			overlaps = append(overlaps, overlap{start, end, active})
+			total += end.Sub(start)
+			for _, s := range active {
+				involved[fmt.Sprintf("%s/%d", s.Search.Process, s.Search.Search)] = true
+			}
+		}
+	}
+	unique, ambiguous, unmatched := 0, 0, 0
+	for _, a := range audits {
+		switch len(a.Matches) {
+		case 0:
+			unmatched++
+		case 1:
+			unique++
+		default:
+			ambiguous++
+		}
+	}
+	report := struct {
+		Method    string    `json:"method"`
+		Peak      int       `json:"peak_concurrent_processes"`
+		Involved  int       `json:"searches_overlapping_other_processes"`
+		Seconds   float64   `json:"overlap_wall_seconds"`
+		Unique    int       `json:"individually_unique_but_group_unlinked"`
+		Ambiguous int       `json:"ambiguous"`
+		Unmatched int       `json:"no_pgn_match"`
+		Unlinked  []audit   `json:"unlinked_search_audit"`
+		Overlaps  []overlap `json:"overlap_intervals"`
+	}{"Offline audit of captured JSON and PGNs. Individual matches require full startpos move history, exact root FEN, and returned move equal to the saved next move. These are diagnostic candidates only; original group linkage is unchanged. Overlap uses UTC go timestamps plus monotonic measured response duration; it measures outstanding searches in distinct processes, not CPU utilization or a count of games. No hidden timing/temperature samples are inferred.", peak, len(involved), total.Seconds(), unique, ambiguous, unmatched, audits, overlaps}
+	b, err := json.MarshalIndent(report, "", "  ")
+	must(err)
+	must(os.WriteFile(output, append(b, '\n'), 0644))
+	fmt.Printf("peak=%d overlapping_searches=%d overlap_seconds=%.3f individual_unique=%d ambiguous=%d unmatched=%d\n", peak, len(involved), total.Seconds(), unique, ambiguous, unmatched)
+}

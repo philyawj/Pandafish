@@ -1,0 +1,90 @@
+abort_time: 30
+challenge:
+    accept_bot: true
+    bullet_requires_increment: false
+    concurrency: 1
+    games_reserved_for_humans: 0
+    max_base: .inf
+    max_days: .inf
+    max_increment: .inf
+    max_rating: .inf
+    max_recent_bot_challenges: null
+    min_base: 0
+    min_days: 1
+    min_increment: 0
+    min_rating: 0
+    modes:
+        - rated
+        - casual
+    only_bot: false
+    preference: none
+    sort_by: first
+    time_controls:
+        - bullet
+        - blitz
+        - rapid
+        - classical
+        - correspondence
+    variants:
+        - standard
+correspondence:
+    checkin_period: 300
+    disconnect_time: 150
+    move_time: 1
+    ponder: false
+engine:
+    debug: false
+    dir: /Users/philyawj/projects/Pandafish/local-games/v0.10-twitch-m2-20261112-093212
+    draw_or_resign:
+        offer_draw_enabled: false
+        resign_enabled: false
+    lichess_bot_tbs:
+        gaviota:
+            enabled: false
+        syzygy:
+            enabled: false
+    name: pandafish
+    online_moves:
+        chessdb_book:
+            enabled: false
+        lichess_cloud_analysis:
+            enabled: false
+        lichess_opening_explorer:
+            enabled: false
+        online_egtb:
+            enabled: false
+    polyglot:
+        enabled: false
+    ponder: false
+    protocol: uci
+    uci_options: {}
+    working_dir: /Users/philyawj/projects/Pandafish
+fake_think_time: false
+greeting:
+    goodbye: GG! Pandafish v0.10 logged another live stream test. Time for a bamboo break!
+    goodbye_spectators: Thanks for watching Pandafish v0.10 live! The games end; the bamboo research continues.
+    hello: '{me} here! Pandafish v0.10 is live on stream, testing its chess and chasing bamboo. Good luck!'
+    hello_spectators: 'Live on stream: {me} tests Pandafish v0.10. Fresh moves, fresh data, same bamboo budget.'
+matchmaking:
+    allow_during_games: false
+    allow_matchmaking: true
+    challenge_decliner_file_name: null
+    challenge_filter: fine
+    challenge_increment:
+        - 2
+    challenge_initial_time:
+        - 180
+    challenge_mode: rated
+    challenge_timeout: 1
+    challenge_variant: standard
+    opponent_max_rating: 4000
+    opponent_min_rating: 600
+    overrides: {}
+    rating_preference: none
+move_overhead: 1000
+pgn_directory: /Users/philyawj/projects/Pandafish/local-games/v0.10-twitch-m2-20261112-093212/games
+pgn_file_grouping: game
+quit_after_all_games_finish: true
+rate_limiting_delay: 0
+token: REDACTED
+url: https://lichess.org/
