@@ -616,3 +616,55 @@ See the [session tool documentation](../lichess/README.md) for commands,
 recording limits, and offline reporting. Future changes to move selection or
 time allocation use the routine comparison workflow above with the latest
 release as the baseline, currently v0.9.
+
+
+## v0.10 transposition-table candidate
+
+The candidate adds a fixed-size in-memory table, cached-move ordering, and
+per-game reuse while preserving v0.9 evaluation and time control. Cache score
+cutoffs require matching depth; deeper entries supply move hints only. This
+keeps fixed-depth comparisons exact. Quiescence is not cached. Position keys
+include the library's full 64-bit Zobrist key and a separate half-move clock.
+Index collisions check the full key; ordinary 64-bit hash collisions remain
+a theoretical limitation. Repetition history is not used by the current
+search, so caching does not add draw awareness; revisit cache validity when
+history-dependent draws are implemented. Mate values remain signs without
+ply distance, so no distance normalization is needed in this increment.
+
+Use the routine 100 serial games per opponent: v0.9 first, then Stockfish
+Skill 1, then pinned Sacrifice. For this increment, the predeclared criterion
+for an **additional** 100-game Skill 2 screen is at least 60% at Skill 1 with
+zero forfeits and zero unfinished games. Run that additional comparison only
+after Sacrifice finishes and after checking reliability of all routine
+matchups. This is a screening threshold for trying the next opponent, not a
+statistical confidence claim or permanent ladder advancement. Preserve the
+Skill 1 series and record Skill 2 separately; do not rerun until favorable.
+A draft PR is the intended outcome, not a release.
+
+Functional validation compares cached and uncached fixed-depth scores and
+complete root tie sets, validates score bounds and depth isolation, checks
+collisions and en passant/turn/castling/half-move context, and exercises
+cancellation, per-search reuse, restricted roots, and UCI new-game clearing.
+To inspect the small node-count checks without playing games:
+
+```sh
+go test -run 'TestCacheReuseReducesNodesAndPreservesRootTies|TestUCICacheLifecycle' -v .
+```
+
+Node reductions on these positions check reuse; they are not a prediction of
+match strength or guaranteed completed-depth gains at every time control.
+After v0.10 is reviewed, another recorded Lichess session is the proposed next
+checkpoint to find real-game weaknesses and choose subsequent improvements.
+
+
+The v0.10 candidate completed all 300 serial games without forfeits or
+unfinished games: 37/39/24 against v0.9 (56.5%), 45/14/41 against Stockfish
+Skill 1 (52%), and 0/27/73 against Sacrifice (13.5%). The previous-release lead
+is modest; the external screens do not establish a strength gain. The fixed
+position audit preserved all nine depth-three scores and completed a higher
+depth on three of nine 100-ms probes, with six equal and none lower in that
+single trial. The maximum candidate response across the routine matches was
+98.730 ms, with none exceeding the requested 100 ms. These are measurements,
+not timing guarantees. Skill 2 was skipped because 52% did not meet the
+predeclared 60% trigger. See the [complete v0.10 candidate record](results/v0.10-dev-vs-v0.9-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/README.md)
+for counts, method, limitations, raw games, and the recorded decision.

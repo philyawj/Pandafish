@@ -1,0 +1,17 @@
+{
+  "command": "go test -run 'TestCacheReuseReducesNodesAndPreservesRootTies|TestUCICacheLifecycle' -v .",
+  "position": "startpos",
+  "depth": 3,
+  "reference_root": {
+    "uncached_nodes": 834,
+    "cached_first_pass_nodes": 834,
+    "cached_repeat_nodes": 20,
+    "score_and_complete_root_tie_set_unchanged": true
+  },
+  "uci_lifecycle": {
+    "first_search_nodes": 692,
+    "repeat_search_nodes": 179,
+    "after_ucinewgame_nodes": 692
+  },
+  "note": "Observed unit-test output before routine match play. Node counts can depend on move order and random ties in iterative search. These counts demonstrate reuse and clearing on one position, not a measured strength gain or universal speedup."
+}

@@ -75,6 +75,7 @@ func runEngine(in io.Reader, out io.Writer, trace *telemetry.Recorder) (err erro
 		}
 	}()
 	game := chess.NewGame()
+	table := newTable()
 	var active *activeSearch
 	finish := func(emit bool, reason string) {
 		if active == nil {
@@ -100,7 +101,7 @@ func runEngine(in io.Reader, out io.Writer, trace *telemetry.Recorder) (err erro
 		budget, _ := limits.budget(game.Position().Turn()) // Validated before start.
 		active = &activeSearch{cancel: cancel, results: results, limits: limits}
 		position, started := game.Position(), time.Now()
-		go func() { results <- iterativeSearch(ctx, position, limits, budget, started) }()
+		go func() { results <- iterativeSearchWithTable(ctx, position, limits, budget, started, table) }()
 	}
 	for {
 		var results <-chan searchResult
@@ -124,12 +125,13 @@ func runEngine(in io.Reader, out io.Writer, trace *telemetry.Recorder) (err erro
 			}
 			switch args[0] {
 			case "uci":
-				fmt.Fprintln(out, "id name Pandafish v0.9\nid author philyawj\nuciok")
+				fmt.Fprintln(out, "id name Pandafish v0.10-dev\nid author philyawj\nuciok")
 			case "isready":
 				fmt.Fprintln(out, "readyok")
 			case "ucinewgame":
 				finish(false, "")
 				game = chess.NewGame()
+				table.clear()
 			case "position":
 				next, err := parsePosition(args[1:])
 				if err != nil {

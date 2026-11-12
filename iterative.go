@@ -27,7 +27,12 @@ func rootMoves(position *chess.Position, restriction []string) []chess.Move {
 }
 
 func iterativeSearch(ctx context.Context, position *chess.Position, limits goLimits, budget timeBudget, start time.Time) searchResult {
-	worker := searcher{ctx: ctx}
+	return iterativeSearchWithTable(ctx, position, limits, budget, start, newTable())
+}
+
+func iterativeSearchWithTable(ctx context.Context, position *chess.Position, limits goLimits, budget timeBudget, start time.Time, table *transpositionTable) searchResult {
+	table.generation++
+	worker := searcher{ctx: ctx, table: table}
 	if budget.timed {
 		worker.deadline = start.Add(budget.hard)
 	}

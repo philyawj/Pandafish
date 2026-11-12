@@ -1,11 +1,11 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.9 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.10-dev speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
-The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`, and
-`evaluation.go`.
+The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`,
+`transposition.go`, and `evaluation.go`.
 [corentings/chess](https://github.com/corentings/chess) handles chess rules,
 including castling, en passant, and promotions. The engine assigns values of
 1 to pawns, 3 to knights and bishops, 5 to rooks, and 9 to queens. It picks a
@@ -23,6 +23,12 @@ seventh rank. King placement blends home-rank safety with endgame activity
 according to remaining non-pawn material. These are simple preferences, not
 full development, pawn-structure, or king-safety analysis. Internal and UCI
 scores use centipawns (100 per pawn).
+
+Each engine process uses a fixed 65,536-entry transposition table (about
+2 MiB). It caches completed main-search scores at matching depths and tries
+stored moves first. The table persists within a game, clears on `ucinewgame`,
+and is never saved to disk. Quiescence scores are not cached. Search still
+has no repetition-history or fifty-move draw evaluation.
 
 Quiescence means quietness. At the normal search boundary, it examines
 captures and promotions, and all legal escapes when the king is in check.
@@ -222,5 +228,8 @@ Keep the existing alpha-beta search, timing rules, quiescence cap, and random
 choice among equally best moves. Placement helps distinguish quiet choices;
 it does not guarantee sensible opening play in every position.
 
-**Next: Reuse searched positions.** Test a small transposition table as a
-separate increment, retaining the current evaluation and time control.
+**v0.10: Reuse searched positions (in development).** Cache completed main-search
+results in a fixed-size transposition table and try cached moves first.
+Keep v0.9's evaluation, time control, quiescence cap, and exact root ties.
+The in-memory table is private to each process, reused during a game, and
+cleared on `ucinewgame`. No learned data is saved to disk.
