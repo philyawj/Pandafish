@@ -78,6 +78,10 @@ git archive v0.8 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.9 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.9" .)
+
+build_dir=$(mktemp -d)
+git archive v0.10 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.10" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -159,12 +163,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.9 tagged baseline as above for the next engine change. Then run
+Build the v0.10 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.9 --previous-version v0.9 \
+  --previous tools/benchmark/bin/pandafish-v0.10 --previous-version v0.10 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -308,7 +312,7 @@ is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.9 --previous-version v0.9 \
+  --previous tools/benchmark/bin/pandafish-v0.10 --previous-version v0.10 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -615,7 +619,7 @@ is required for this tooling increment. Level 1 remains the target.
 See the [session tool documentation](../lichess/README.md) for commands,
 recording limits, and offline reporting. Future changes to move selection or
 time allocation use the routine comparison workflow above with the latest
-release as the baseline, currently v0.9.
+release as the baseline, currently v0.10.
 
 
 ## v0.10 transposition-table candidate
@@ -639,7 +643,9 @@ after Sacrifice finishes and after checking reliability of all routine
 matchups. This is a screening threshold for trying the next opponent, not a
 statistical confidence claim or permanent ladder advancement. Preserve the
 Skill 1 series and record Skill 2 separately; do not rerun until favorable.
-A draft PR is the intended outcome, not a release.
+The candidate was reviewed in draft PR #17 and approved for v0.10 release.
+Its recorded development labels and hashes are retained; release preparation
+changes version text and documentation only.
 
 Functional validation compares cached and uncached fixed-depth scores and
 complete root tie sets, validates score bounds and depth isolation, checks

@@ -142,14 +142,14 @@ reporting flags the resulting partial records. Node counting and final UCI searc
 work during ordinary UCI play.
 
 Every returned move has a compact `info string pandafish` JSON summary, plus
-standard UCI depth, nodes, elapsed milliseconds, material score when available,
+standard UCI depth, nodes, elapsed milliseconds, evaluation score when available,
 and the chosen move as a one-move PV. Metrics include the allocated soft/hard
 budgets, completed depth, total visited nodes across iterations including
 quiescence and interrupted work, elapsed search time, stopping reason, and legal
 fallback status. Abandoned searches remain identifiable from protocol events;
 they do not have final metrics or a returned move. Score and depth always refer
-to the last complete iteration. Material scores are centipawns from the root
-side's perspective. Mate scores record a sign, not an uncomputed mate distance;
+to the last complete iteration. Evaluation scores include material and positional terms and use centipawns
+from the root side's perspective. Mate scores record a sign, not an uncomputed mate distance;
 fallbacks do not invent a score. Full multi-move PVs remain future work.
 
 The report validates returned move legality and counts completed, cancelled,

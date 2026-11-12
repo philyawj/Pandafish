@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.10-dev speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.10 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
@@ -228,8 +228,12 @@ Keep the existing alpha-beta search, timing rules, quiescence cap, and random
 choice among equally best moves. Placement helps distinguish quiet choices;
 it does not guarantee sensible opening play in every position.
 
-**v0.10: Reuse searched positions (in development).** Cache completed main-search
+**v0.10: Reuse searched positions (complete).** Cache completed main-search
 results in a fixed-size transposition table and try cached moves first.
 Keep v0.9's evaluation, time control, quiescence cap, and exact root ties.
 The in-memory table is private to each process, reused during a game, and
 cleared on `ucinewgame`. No learned data is saved to disk.
+
+**Next: Collect real-game evidence.** Record another Lichess session, check
+operational behavior, and use recurring weaknesses to choose the next focused
+improvement while retaining the existing alpha-beta foundation.
