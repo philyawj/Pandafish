@@ -168,3 +168,7 @@ move and no Lichess API dependency for this complete archive.
 See [PROCESS.md](PROCESS.md) for the actual session history, all commands,
 method limitations, and the repeatable future-session workflow. The engine
 itself has not changed as part of this analysis.
+
+The follow-up [engine comparison](ENGINE_COMPARISON.md) reviews Sacrifice,
+Sunfish, and Stockfish and proposes positional evaluation followed by a small
+transposition table as separate increments.
