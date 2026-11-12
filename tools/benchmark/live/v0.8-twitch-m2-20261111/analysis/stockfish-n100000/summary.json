@@ -1,0 +1,31 @@
+{
+  "method": {
+    "schema": 1,
+    "engine": "Stockfish 19",
+    "engine_sha256": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f",
+    "inventory_sha256": "3cae15188b444664152f77088dd033fda7128b4f4608eb797cd6ef38d2f8169a",
+    "nodes_per_search": 100000,
+    "threads": 1,
+    "hash_mb": 64,
+    "multipv": 1,
+    "skill": 20,
+    "bot": "GoPandaFish",
+    "score_perspective": "root mover; positive favors the player to move; cp and mate remain separate",
+    "comparison": "unrestricted root versus played-move restricted root at the same node budget; fresh hash and ucinewgame per search"
+  },
+  "processed_plies": 3069,
+  "expected_plies": 3069,
+  "bot_moves": 1531,
+  "classifications": {
+    "allowed_forced_mate": 30,
+    "loss_100cp_plus": 229,
+    "loss_300cp_plus": 49,
+    "mate_score_comparison": 242,
+    "missed_forced_mate": 2,
+    "search_disagreement": 98,
+    "small_or_equal": 881
+  },
+  "mean_cp_loss_cp_only": 61.334128878281625,
+  "cp_cases": 1257,
+  "candidate_positions": 310
+}

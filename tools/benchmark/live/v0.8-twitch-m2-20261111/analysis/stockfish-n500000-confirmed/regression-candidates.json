@@ -1,0 +1,182 @@
+{
+  "method": {
+    "schema": 1,
+    "engine": "Stockfish 19",
+    "engine_sha256": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f",
+    "inventory_sha256": "3cae15188b444664152f77088dd033fda7128b4f4608eb797cd6ef38d2f8169a",
+    "nodes_per_search": 500000,
+    "threads": 1,
+    "hash_mb": 64,
+    "multipv": 1,
+    "skill": 20,
+    "bot": "GoPandaFish",
+    "focus_sha256": "bd31922e486c46ed520176728a6d25a67909cd55f17ea32e0684751ca877903a",
+    "score_perspective": "root mover; positive favors the player to move; cp and mate remain separate",
+    "comparison": "unrestricted root versus played-move restricted root at the same node budget; fresh hash and ucinewgame per search"
+  },
+  "note": "Public reference positions, not assertions that v0.8 must pass. Reference moves can have equally good alternatives. The deterministic split is for later engine development; it is not a hidden or statistically independent test set.",
+  "cases": [
+    {
+      "game": "https://lichess.org/game/5ApneMbA",
+      "ply": 16,
+      "split": "development",
+      "fen": "rnbqkbnr/5p2/2p5/p2pp1pp/2p5/P2PP3/1P1BQPPP/RN2KBNR w KQkq - 0 9",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e3 a7a5 a2a3 e7e5 d2d3 b7b5 d1f3 c7c6 f3e2 d7d5 c2c3 h7h5 c1d2 g7g5 c3c4 b5c4",
+      "played": "d3d4",
+      "reference": "d3c4",
+      "best_score": {
+        "kind": "cp",
+        "value": -103
+      },
+      "played_score": {
+        "kind": "cp",
+        "value": -400
+      },
+      "estimated_cp_loss": 297
+    },
+    {
+      "game": "https://lichess.org/game/DnpnFIKb",
+      "ply": 18,
+      "split": "holdout",
+      "fen": "rnbqkbnr/6pp/8/p1p1p3/3p1p2/1P1P3P/2PBPPP1/RNQ1KBNR w Kkq - 0 10",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves b2b3 c7c5 d2d3 b7b5 c1e3 e7e5 h2h3 d7d5 a2a4 b5a4 a1a4 a7a5 a4a1 f7f5 d1c1 d5d4 e3d2 f5f4",
+      "played": "c2c4",
+      "reference": "b1a3",
+      "best_score": {
+        "kind": "cp",
+        "value": -121
+      },
+      "played_score": {
+        "kind": "cp",
+        "value": -382
+      },
+      "estimated_cp_loss": 261
+    },
+    {
+      "game": "https://lichess.org/game/Lkfnlfui",
+      "ply": 20,
+      "split": "development",
+      "fen": "rnb1kbnr/p1pp1pp1/4p3/1p5q/5P1P/5N2/PPPPP2R/RNBQKB2 w Qkq - 0 11",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves f2f3 e7e6 b1c3 d8h4 g2g3 h4d4 c3b1 b7b6 h2h4 d4e5 f3f4 e5d5 h1h2 d5c5 g1f3 b6b5 g3g4 h7h5 g4h5 c5h5",
+      "played": "h2g2",
+      "reference": "e2e4",
+      "best_score": {
+        "kind": "cp",
+        "value": -67
+      },
+      "played_score": {
+        "kind": "cp",
+        "value": -353
+      },
+      "estimated_cp_loss": 286
+    },
+    {
+      "game": "https://lichess.org/game/RTekQhPS",
+      "ply": 3,
+      "split": "holdout",
+      "fen": "rnbqkbnr/ppppp1pp/8/5p2/4P3/2N5/PPPP1PPP/R1BQKBNR b KQkq e3 0 2",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves b1c3 f7f5 e2e4",
+      "played": "d7d5",
+      "reference": "f5e4",
+      "best_score": {
+        "kind": "cp",
+        "value": -48
+      },
+      "played_score": {
+        "kind": "cp",
+        "value": -264
+      },
+      "estimated_cp_loss": 216
+    },
+    {
+      "game": "https://lichess.org/game/ThL1IKzb",
+      "ply": 63,
+      "split": "development",
+      "fen": "r4kr1/2p1qp2/1p5b/3PPp2/nPP5/Q4N2/7P/1R3R1K b - - 2 32",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves d2d4 b8a6 e2e4 a6b8 c1e3 h7h5 f1d3 g7g6 g1f3 a7a5 e1g1 h5h4 f3h4 h8h4 g2g3 h4h3 g1g2 h3h8 c2c3 a8a7 d4d5 b7b6 f2f4 a7a8 e3d4 h8h6 b1d2 g8f6 d4f6 e7f6 a1c1 d8e7 d1a4 c8a6 d3a6 b8a6 a4d4 a6c5 g3g4 a5a4 b2b4 a4b3 a2b3 h6h8 b3b4 c5a4 c1b1 h8g8 d4d3 f8g7 c3c4 e8f8 d3a3 f6f5 e4e5 d7d6 g4f5 g6f5 g2h1 d6e5 f4e5 g7h6 d2f3",
+      "played": "h6g7",
+      "reference": "g8g4",
+      "best_score": {
+        "kind": "cp",
+        "value": 63
+      },
+      "played_score": {
+        "kind": "cp",
+        "value": -217
+      },
+      "estimated_cp_loss": 280
+    },
+    {
+      "game": "https://lichess.org/game/j9jUu1vU",
+      "ply": 19,
+      "split": "holdout",
+      "fen": "r1bqk1nr/1p5p/2npppp1/p7/1bQNPB2/2N5/PPP2PPP/2KR1B1R b kq - 1 10",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 g7g6 d2d4 a7a5 b1c3 e7e6 g1f3 c7c5 c1g5 f7f6 g5f4 c5d4 d1d4 f8b4 e1c1 b8c6 d4c4 d7d6 f3d4",
+      "played": "b4c3",
+      "reference": "c6d4",
+      "best_score": {
+        "kind": "cp",
+        "value": -40
+      },
+      "played_score": {
+        "kind": "cp",
+        "value": -461
+      },
+      "estimated_cp_loss": 421
+    },
+    {
+      "game": "https://lichess.org/game/mEY6KGOi",
+      "ply": 10,
+      "split": "development",
+      "fen": "r1b1kb1r/ppp1pppp/2nq1n2/8/P2p1P2/3PP3/1PPB2PP/RN1QKBNR w KQkq - 2 6",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves d2d3 b8c6 e2e3 g8f6 f2f4 d7d5 a2a4 d5d4 c1d2 d8d6",
+      "played": "e1e2",
+      "reference": "e3d4",
+      "best_score": {
+        "kind": "cp",
+        "value": -46
+      },
+      "played_score": {
+        "kind": "cp",
+        "value": -452
+      },
+      "estimated_cp_loss": 406
+    },
+    {
+      "game": "https://lichess.org/game/pYNsRFix",
+      "ply": 26,
+      "split": "holdout",
+      "fen": "r2nkb1r/1ppbq2p/p5pn/3ppp2/8/NPP1PNP1/P2PBP1P/1RBQKR2 w kq - 5 14",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves g1f3 b8c6 c2c3 g7g6 e2e3 d7d6 b1a3 d6d5 f1b5 a7a6 b5d3 e7e5 d3e2 f7f5 b2b3 g8h6 h1f1 d8f6 a1b1 f6g7 g2g3 c8d7 f3g5 g7e7 g5f3 c6d8",
+      "played": "f3g1",
+      "reference": "d2d4",
+      "best_score": {
+        "kind": "cp",
+        "value": -82
+      },
+      "played_score": {
+        "kind": "cp",
+        "value": -325
+      },
+      "estimated_cp_loss": 243
+    },
+    {
+      "game": "https://lichess.org/game/un7IhthI",
+      "ply": 15,
+      "split": "development",
+      "fen": "r2qkbnr/pbpppnpp/1p6/3P4/2P1NP2/5N2/PP4PP/R1BQKB1R b KQkq c3 0 8",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves d2d4 f7f5 e2e4 f5e4 b1c3 b7b6 c3e4 b8c6 d4d5 c6e5 f2f4 e5f7 g1f3 c8b7 c2c4",
+      "played": "c7c5",
+      "reference": "e7e6",
+      "best_score": {
+        "kind": "cp",
+        "value": -34
+      },
+      "played_score": {
+        "kind": "cp",
+        "value": -316
+      },
+      "estimated_cp_loss": 282
+    }
+  ]
+}
