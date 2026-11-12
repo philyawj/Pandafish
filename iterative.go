@@ -32,7 +32,7 @@ func iterativeSearch(ctx context.Context, position *chess.Position, limits goLim
 
 func iterativeSearchWithTable(ctx context.Context, position *chess.Position, limits goLimits, budget timeBudget, start time.Time, table *transpositionTable) searchResult {
 	table.generation++
-	worker := searcher{ctx: ctx, table: table}
+	worker := searcher{ctx: ctx, table: table, killers: new(killerTable)}
 	if budget.timed {
 		worker.deadline = start.Add(budget.hard)
 	}

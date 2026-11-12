@@ -100,6 +100,10 @@ git archive v0.10 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.11 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.11" .)
+
+build_dir=$(mktemp -d)
+git archive v0.12 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.12" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -181,12 +185,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.11 tagged baseline as above for the next engine change. Then run
+Build the v0.12 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.11 --previous-version v0.11 \
+  --previous tools/benchmark/bin/pandafish-v0.12 --previous-version v0.12 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -330,7 +334,7 @@ is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.11 --previous-version v0.11 \
+  --previous tools/benchmark/bin/pandafish-v0.12 --previous-version v0.12 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -637,7 +641,7 @@ is required for this tooling increment. Level 1 remains the target.
 See the [session tool documentation](../lichess/README.md) for commands,
 recording limits, and offline reporting. Future changes to move selection or
 time allocation use the routine comparison workflow above with the latest
-release as the baseline, currently v0.11.
+release as the baseline, currently v0.12.
 
 
 ## v0.10 transposition-table candidate
@@ -707,3 +711,14 @@ v0.10, followed by Stockfish Skill 1 and pinned Sacrifice, all serial.
 record the implementation limit, power conditions, and saved-position probes.
 The candidate was reviewed for the v0.11 release. Original development labels
 and hashes are retained; the release does not advance the Stockfish target.
+
+
+## v0.12 quiet-move ordering candidate
+
+Test two quiet beta-cutoff hints per main-search ply, after cached moves and
+tactical priorities. Hints reset for each search and do not change evaluation,
+quiescence, clocks, or exact root ties. Use v0.11 as the previous-release gate,
+then Stockfish Skill 1 and pinned Sacrifice, with all comparisons serial.
+
+[Fresh assessment, source profile, correctness/node checks, and results](results/v0.12-dev-vs-v0.11-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/README.md)
+separate deterministic search-work evidence from measured playing strength.
