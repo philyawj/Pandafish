@@ -45,7 +45,7 @@ inappropriate.
 
 ## Recommended next steps
 
-1. **First increment: positional evaluation.** Preserve search, clocks, the
+1. **v0.9: positional evaluation.** Preserve search, clocks, the
    legal-move library, and random choice among true ties. Add modest piece-square
    terms for all pieces, with a small material-phase rule separating king safety
    from endgame activity. Encourage development and sensible central pawn
@@ -54,7 +54,7 @@ inappropriate.
    terminal-score dominance, quiescence stand-pat, ordering, and reporting
    consistently. Test color symmetry, phase transitions, and quiet-leaf scoring.
    Write our own small implementation; check licenses before copying tables.
-2. **Second increment: a small transposition table.** Store position key, depth,
+2. **Proposed v0.10: a small transposition table.** Store position key, depth,
    bound type, score, and best move; try the hash move first. Test interruption,
    mate-score handling, collisions, and draw/history context. Compare completed
    depth and response tails under unchanged clock settings. This develops the
@@ -77,15 +77,40 @@ The friend's Level 5 result remains anecdotal here. Verify the difficulty
 scale, Stockfish build, clocks, openings, colors, and sample size: Lichess
 computer difficulty and native UCI Skill Level are different controls. The
 [README example](https://lichess.org/NW5ZGVEZ) is a 5+3 human/bot draw; no comparable
-Level 5 match series was verified. No Sacrifice or Sunfish matches were run.
+Level 5 match series was verified. At the time of this source review, no
+Sacrifice or Sunfish matches had been run.
 Our roughly 10% figure comes from the [v0.7-dev benchmark](../../README.md),
 whose search/evaluation policies v0.8 retained.
 
 Test the first increment against the saved development/hold-out positions and
-run 100 games against v0.8 plus 100 against Stockfish Skill Level 1. Later
-increments use the latest released baseline. Keep the documented skill-ladder
-promotion rule. A subsequent live session tests operational behavior and finds
+run 100 games against v0.8 first. A favorable screen then permits 100 games
+each against Stockfish Skill Level 1 and the pinned Sacrifice build. Later
+increments use the latest released Pandafish baseline. Keep the documented
+skill-ladder promotion rule. A subsequent live session tests operational behavior and finds
 new cases; the successful M2 stream does not prove every future clock scenario.
 
 Sources are pinned above: Sacrifice `b528f0ba`, Sunfish `e396948a`, and Stockfish
-`def601cc`. This is source inspection and planning; no engine code changed.
+`def601cc`. The source review itself did not change engine code.
+
+## Where Lichess data fits later
+
+Use [Lichess puzzles and game exports](https://database.lichess.org/) to add
+varied tactical and quiet positions after the basic evaluator is established.
+Keep development cases separate from held-out validation positions, and retain
+source game IDs, sampling rules, and analysis budgets. Our recorded live games
+already provide concrete regression cases. Later, a broader data set could
+support evaluation tuning; opening books and learned evaluation would be
+separate features. Neither data ingestion nor training is needed for v0.9's
+placement terms or the proposed v0.10 transposition table.
+
+## Additional comparison opponents
+
+Starting with v0.9, Sacrifice is a routine opponent: package **0.2.0**, revision
+`b528f0ba373910b72052d991700a990ca1cb07fd`. This is the upstream head verified
+for this increment and includes philyawj's merged
+[PR #1, Fix PGN castling notation with zeros](https://github.com/piratesboys/Sacrifice-Engine-/pull/1).
+Keep that pin until deliberately updating it; record its Tal PGN dependency
+and executable hash. See the [benchmark workflow](../../README.md) for build
+instructions, scheduling, and saved results. Add Sunfish later when Pandafish
+is stronger and another comparison is worth the runtime; that is a priority
+decision, not a technical barrier to running it now.

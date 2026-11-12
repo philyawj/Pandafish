@@ -82,7 +82,7 @@ func (worker *searcher) quiet(position *chess.Position, depth, alpha, beta int, 
 	if position.Status() != chess.NoMethod {
 		return evaluate(position, position.Turn()), !worker.stopped()
 	}
-	static := materialScore(position, position.Turn())
+	static := staticScore(position, position.Turn())
 	if depth <= 0 {
 		return static, !worker.stopped()
 	}
@@ -143,7 +143,7 @@ func orderedMoves(position *chess.Position) []chess.Move {
 			if move.HasTag(chess.EnPassant) {
 				victim = pieceValues[chess.Pawn]
 			}
-			value += 100 + 10*victim - pieceValues[position.Board().Piece(move.S1()).Type()]
+			value += 10000 + 10*victim - pieceValues[position.Board().Piece(move.S1()).Type()]
 		}
 		return value
 	}

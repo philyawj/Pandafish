@@ -12,7 +12,7 @@ func TestUCI(t *testing.T) {
 	tests := []struct {
 		name, commands, want string
 	}{
-		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.8\nid author philyawj\nuciok\nreadyok\n"},
+		{"handshake", "\n  uci \nisready\nsetoption name Hash value 16\nunknown\nstop\nquit\nisready", "id name Pandafish v0.9\nid author philyawj\nuciok\nreadyok\n"},
 		{"history", "position startpos moves e2e4 e7e5\ngo wtime 1000 btime 1000 searchmoves g1f3", "bestmove g1f3\n"},
 		{"no implicit move", "position startpos\ngo searchmoves e2e4\ngo searchmoves e2e4", "bestmove e2e4\nbestmove e2e4\n"},
 		{"new game", "position startpos moves e2e4\nucinewgame\ngo searchmoves d2d4", "bestmove d2d4\n"},
@@ -95,11 +95,11 @@ func TestEvaluateMaterial(t *testing.T) {
 		t.Fatal(err)
 	}
 	game := chess.NewGame(fen)
-	if got := evaluate(game.Position(), chess.White); got != 9 {
-		t.Fatalf("white score = %d, want 9", got)
+	if got := materialScore(game.Position(), chess.White); got != 900 {
+		t.Fatalf("white score = %d, want 900", got)
 	}
-	if got := evaluate(game.Position(), chess.Black); got != -9 {
-		t.Fatalf("black score = %d, want -9", got)
+	if got := materialScore(game.Position(), chess.Black); got != -900 {
+		t.Fatalf("black score = %d, want -900", got)
 	}
 }
 func TestBestMoveCapturesQueen(t *testing.T) {
@@ -143,8 +143,8 @@ func TestSearchFindsBestCapture(t *testing.T) {
 	}
 	// Taking our queen leaves our pawn (1) against their rook (5).
 	// Taking only the pawn would leave a much better material balance for us.
-	if got := search(game.Position(), 1, -searchInfinity, searchInfinity); got != 4 {
-		t.Fatalf("black search score = %d, want 4", got)
+	if got := search(game.Position(), 1, -searchInfinity, searchInfinity); abs(got-400) > 90 {
+		t.Fatalf("black search score = %d, want about 400 cp", got)
 	}
 }
 
@@ -175,7 +175,7 @@ func TestEvaluateTerminalPositions(t *testing.T) {
 		{"black mates", "8/8/8/8/8/5k2/6q1/7K w - - 0 1", -mateScore},
 		{"black stalemated", "7k/5K2/6Q1/8/8/8/8/8 b - - 0 1", 0},
 		{"white stalemated", "8/8/8/8/8/6q1/5k2/7K w - - 0 1", 0},
-		{"check with an escape", "k6r/8/8/8/8/8/8/7K w - - 0 1", -5},
+		{"check with an escape", "k6r/8/8/8/8/8/8/7K w - - 0 1", -500},
 	} {
 		t.Run(tt.name, func(t *testing.T) {
 			game, err := parsePosition(append([]string{"fen"}, strings.Fields(tt.fen)...))
@@ -187,7 +187,7 @@ func TestEvaluateTerminalPositions(t *testing.T) {
 				if side == chess.Black {
 					want = -want
 				}
-				if got := evaluate(game.Position(), side); got != want {
+				if got := evaluate(game.Position(), side); (game.Position().Status() != chess.NoMethod && got != want) || (game.Position().Status() == chess.NoMethod && abs(got-want) > 90) {
 					t.Fatalf("score for %v = %d, want %d", side, got, want)
 				}
 			}

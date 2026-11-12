@@ -29,15 +29,17 @@ type identity struct {
 	SHA256   string            `json:"sha256"`
 	Options  map[string]string `json:"options"`
 	Revision string            `json:"source_revision,omitempty"`
+	Assets   map[string]string `json:"assets_sha256,omitempty"`
 }
 type settings struct {
-	Pairs          int    `json:"pairs"`
-	MoveMS         int    `json:"move_ms"`
-	GraceMS        int    `json:"timeout_grace_ms"`
-	MaxPlies       int    `json:"max_plies"`
-	OpeningsSHA256 string `json:"openings_sha256"`
-	OpeningsName   string `json:"openings_name,omitempty"`
-	TimingPolicy   string `json:"timing_policy,omitempty"`
+	ExternalConcurrency int    `json:"external_matchup_concurrency,omitempty"`
+	Pairs               int    `json:"pairs"`
+	MoveMS              int    `json:"move_ms"`
+	GraceMS             int    `json:"timeout_grace_ms"`
+	MaxPlies            int    `json:"max_plies"`
+	OpeningsSHA256      string `json:"openings_sha256"`
+	OpeningsName        string `json:"openings_name,omitempty"`
+	TimingPolicy        string `json:"timing_policy,omitempty"`
 }
 type moveTiming struct {
 	Candidate bool    `json:"candidate"`
@@ -62,11 +64,13 @@ type stats struct {
 	ScoreUpper *float64 `json:"possible_score_upper_percent"`
 }
 type match struct {
+	PGN    string       `json:"pgn_file,omitempty"`
 	Engine identity     `json:"engine"`
 	Stats  stats        `json:"stats"`
 	Games  []gameRecord `json:"games"`
 }
 type summary struct {
+	PreviousGate   string        `json:"previous_gate,omitempty"`
 	Schema         int           `json:"schema"`
 	Created        string        `json:"created_utc"`
 	Platform       string        `json:"platform"`
@@ -287,11 +291,22 @@ func folderLabel(label string) string {
 }
 
 func createRunDir(root, version, previous string, skill int) (string, error) {
+	return namedRunDir(root, version, previous, skill, "all", "")
+}
+
+func namedRunDir(root, version, previous string, skill int, stage, sacrifice string) (string, error) {
 	base := folderLabel(version) + "-vs-"
 	if previous != "" {
 		base += folderLabel(previous) + "-and-"
 	}
-	base += fmt.Sprintf("stockfish-%d", skill)
+	if stage != "previous" {
+		base += fmt.Sprintf("stockfish-%d", skill)
+		if sacrifice != "" {
+			base += "-and-" + folderLabel(sacrifice)
+		}
+	} else {
+		base = strings.TrimSuffix(base, "-and-")
+	}
 	if err := os.MkdirAll(root, 0755); err != nil {
 		return "", err
 	}
@@ -315,6 +330,12 @@ func run() error {
 	previous := flag.String("previous", "", "Previous version's executable (optional)")
 	previousVersion := flag.String("previous-version", "", "Previous version label")
 	stockfish := flag.String("stockfish", "stockfish", "Stockfish executable")
+	sacrifice := flag.String("sacrifice", "", "Sacrifice executable; required for validation external comparisons")
+	sacrificeVersion := flag.String("sacrifice-version", "Sacrifice v0.2.0 b528f0ba", "Sacrifice package version and revision label")
+	sacrificeRevision := flag.String("sacrifice-revision", "b528f0ba373910b72052d991700a990ca1cb07fd", "Sacrifice source revision")
+	sacrificeData := flag.String("sacrifice-data", "tools/benchmark/bin/sacrifice-source/data/Tal.pgn", "Tal PGN asset required by the pinned Sacrifice build")
+	stage := flag.String("stage", "all", "all, previous, or external; all gates external matches on previous screen")
+	parallel := flag.Bool("parallel", false, "Run Stockfish and Sacrifice concurrently after previous screen")
 	skill := flag.Int("stockfish-skill", 1, "Stockfish Skill Level (1 through 20)")
 	pairs := flag.Int("pairs", 50, "Color pairs per opponent")
 	moveMS := flag.Int("move-ms", 100, "Requested milliseconds per move")
@@ -351,6 +372,9 @@ func run() error {
 	if *candidate == "" || *version == "" || (*previous == "") != (*previousVersion == "") || *pairs < 1 || *moveMS < 1 || *maxPlies < 10 || *graceMS < 0 || *skill < 1 || *skill > 20 {
 		return fmt.Errorf("candidate/version required; previous flags paired; pairs/move-ms positive; max-plies >= 10; grace-ms >= 0; stockfish-skill 1..20")
 	}
+	if err := validateSchedule(*stage, *previous, *sacrifice, *validate); err != nil {
+		return err
+	}
 	var err error
 	var checks []checkRecord
 	if *validate {
@@ -362,17 +386,32 @@ func run() error {
 	if *candidate, err = exec.LookPath(*candidate); err != nil {
 		return err
 	}
-	if *stockfish, err = exec.LookPath(*stockfish); err != nil {
-		return err
-	}
-	paths, labels, options := []string{}, []string{}, []map[string]string{}
-	if *previous != "" {
-		if *previous, err = exec.LookPath(*previous); err != nil {
-			return err
+	var opponents []opponent
+	if *previous != "" && *stage != "external" {
+		path, e := exec.LookPath(*previous)
+		if e != nil {
+			return e
 		}
-		paths, labels, options = append(paths, *previous), append(labels, *previousVersion), append(options, nil)
+		opponents = append(opponents, opponent{Path: path, Label: *previousVersion, Revision: *previousRevision, Role: "previous"})
 	}
-	paths, labels, options = append(paths, *stockfish), append(labels, fmt.Sprintf("Stockfish Skill %d", *skill)), append(options, stockfishOptions(*skill))
+	if *stage != "previous" {
+		path, e := exec.LookPath(*stockfish)
+		if e != nil {
+			return e
+		}
+		opponents = append(opponents, opponent{Path: path, Label: fmt.Sprintf("Stockfish Skill %d", *skill), Options: stockfishOptions(*skill), Role: "stockfish"})
+		if *sacrifice != "" {
+			path, e := exec.LookPath(*sacrifice)
+			if e != nil {
+				return e
+			}
+			asset, e := digest(*sacrificeData)
+			if e != nil {
+				return fmt.Errorf("Sacrifice Tal PGN: %w", e)
+			}
+			opponents = append(opponents, opponent{Path: path, Label: *sacrificeVersion, Revision: *sacrificeRevision, Role: "sacrifice", AssetPath: *sacrificeData, AssetSHA: asset})
+		}
+	}
 	openings, err := loadOpenings(*openingsPath)
 	if err != nil {
 		return err
@@ -386,7 +425,11 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	cfg := settings{Pairs: *pairs, MoveMS: *moveMS, GraceMS: *graceMS, MaxPlies: *maxPlies, OpeningsSHA256: hash,
+	concurrency := 1
+	if *parallel && runtime.NumCPU() >= 4 {
+		concurrency = 2
+	}
+	cfg := settings{ExternalConcurrency: concurrency, Pairs: *pairs, MoveMS: *moveMS, GraceMS: *graceMS, MaxPlies: *maxPlies, OpeningsSHA256: hash,
 		OpeningsName: filepath.Base(*openingsPath), TimingPolicy: "wall-clock-v2"}
 	snapshots, err := os.MkdirTemp("", "pandafish-benchmark-")
 	if err != nil {
@@ -396,10 +439,19 @@ func run() error {
 	if *candidate, err = snapshotEngine(*candidate, snapshots, "candidate"); err != nil {
 		return err
 	}
-	for i, path := range paths {
-		paths[i], err = snapshotEngine(path, snapshots, fmt.Sprint("opponent-", i))
+	for i := range opponents {
+		o := &opponents[i]
+		o.Path, err = snapshotEngine(o.Path, snapshots, o.Role)
 		if err != nil {
 			return err
+		}
+		o.Identity, err = identify(o.Path, o.Label, o.Options)
+		if err != nil {
+			return err
+		}
+		o.Identity.Revision = o.Revision
+		if o.AssetPath != "" {
+			o.Identity.Assets = map[string]string{"Tal.pgn": o.AssetSHA}
 		}
 	}
 	id, err := identify(*candidate, *version, nil)
@@ -407,16 +459,6 @@ func run() error {
 		return err
 	}
 	id.Revision = *revision
-	identities := make([]identity, len(paths))
-	for i, path := range paths {
-		identities[i], err = identify(path, labels[i], options[i])
-		if err != nil {
-			return err
-		}
-		if *previous != "" && i == 0 {
-			identities[i].Revision = *previousRevision
-		}
-	}
 	now := time.Now().UTC()
 	runner, err := os.Executable()
 	if err != nil {
@@ -427,64 +469,38 @@ func run() error {
 		return err
 	}
 	s := summary{Schema: 2, Created: now.Format(time.RFC3339Nano), Platform: runtime.GOOS + "/" + runtime.GOARCH,
-		GoVersion: runtime.Version(), Candidate: id, Settings: cfg, PlannedMatches: len(paths), RunnerSHA256: runnerHash, Machine: *machine, Checks: checks}
-	dir, err := createRunDir(*results, *version, *previousVersion, *skill)
+		GoVersion: runtime.Version(), Candidate: id, Settings: cfg, PlannedMatches: len(opponents), RunnerSHA256: runnerHash, Machine: *machine, Checks: checks}
+	previousLabel := ""
+	if *stage != "external" {
+		previousLabel = *previousVersion
+	}
+	dir, err := namedRunDir(*results, *version, previousLabel, *skill, *stage, func() string {
+		if *sacrifice != "" {
+			return *sacrificeVersion
+		}
+		return ""
+	}())
 	if err != nil {
 		return err
 	}
-	pgn, err := os.Create(filepath.Join(dir, "games.pgn"))
-	if err != nil {
-		return err
-	}
-	defer pgn.Close()
 	if err = saveSummary(dir, s); err != nil {
 		return err
 	}
-	pgnSeparator := ""
-	for i, path := range paths {
-		m := match{Engine: identities[i]}
-		fmt.Printf("Starting %s vs %s: %d games\n", *version, labels[i], 2*cfg.Pairs)
-		for pair := 0; pair < cfg.Pairs; pair++ {
-			for _, white := range []bool{true, false} {
-				game, record, err := playGame(*candidate, path, options[i], openings[pair%len(openings)], white, cfg)
-				if err != nil {
-					return err
-				}
-				w, b := id.UCIName, identities[i].UCIName
-				if !white {
-					w, b = b, w
-				}
-				for key, value := range map[string]string{"Event": "Pandafish local benchmark", "Site": "local",
-					"Date": now.Format("2006.01.02"), "White": w, "Black": b, "Round": fmt.Sprint(len(m.Games) + 1),
-					"Result": record.Result, "Termination": record.Termination, "TimeControl": "-"} {
-					game.AddTagPair(key, value)
-				}
-				if _, err = fmt.Fprintf(pgn, "%s%s\n", pgnSeparator, game.String()); err != nil {
-					return err
-				}
-				pgnSeparator = "\n"
-				m.Games = append(m.Games, record)
-			}
-			if *verbose {
-				fmt.Printf("%s vs %s: %d/%d games\n", *version, labels[i], len(m.Games), 2*cfg.Pairs)
-			}
+	save := func(completed []match) error {
+		s.Matches = completed
+		if e := combinePGNs(dir, completed); e != nil {
+			return e
 		}
-		m.Stats = summarize(m.Games)
-		fmt.Printf("%s vs %s: W/D/L %d/%d/%d; unfinished %d; forfeits %d; possible score %s\n", *version, labels[i], m.Stats.Wins, m.Stats.Draws, m.Stats.Losses, m.Stats.Unfinished, m.Stats.Forfeits, rangeText(m.Stats))
-		s.Matches = append(s.Matches, m)
-		if err = pgn.Sync(); err != nil {
-			return err
+		if e := saveSummary(dir, s); e != nil {
+			return e
 		}
-		if err = saveSummary(dir, s); err != nil {
-			return err
-		}
-		if err = report(*results); err != nil {
-			return err
-		}
+		return report(*results)
 	}
-	if err = pgn.Close(); err != nil {
-		return err
+	completed, e := playSchedule(*candidate, id, opponents, openings, cfg, dir, now, *verbose, save, func(status string) { s.PreviousGate = status })
+	if e != nil {
+		return e
 	}
+	s.Matches = completed
 	s.Complete = true
 	if err = saveSummary(dir, s); err != nil {
 		return err

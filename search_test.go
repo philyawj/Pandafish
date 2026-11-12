@@ -184,8 +184,8 @@ func TestBestMoveFindsThirdPlyQueenCapture(t *testing.T) {
 		}
 		// Check evasions and the following capture now extend depth two as well.
 		for _, check := range []struct{ depth, want int }{{2, 3}, {3, 3}} {
-			if got := search(game.Position(), check.depth, -searchInfinity, searchInfinity); got != check.want {
-				t.Fatalf("depth %d score = %d, want %d", check.depth, got, check.want)
+			if got := search(game.Position(), check.depth, -searchInfinity, searchInfinity); abs(got-check.want*100) > 90 {
+				t.Fatalf("depth %d score = %d, want about %d cp", check.depth, got, check.want*100)
 			}
 		}
 	}

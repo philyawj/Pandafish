@@ -55,7 +55,7 @@ func (worker *searcher) iterate(position *chess.Position, moves []chess.Move, de
 			ScoreKind: "unknown",
 		}
 		if result.depth > 0 {
-			result.metrics.ScoreKind, result.metrics.Score = "cp", result.score*100
+			result.metrics.ScoreKind, result.metrics.Score = "cp", result.score
 			if result.score >= mateScore {
 				result.metrics.ScoreKind, result.metrics.Score = "mate", 1
 			}
