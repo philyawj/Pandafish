@@ -117,7 +117,7 @@ func TestFallbackAndMateReporting(t *testing.T) {
 	result.metrics = telemetry.Metrics{Depth: 1, ScoreKind: "mate", Score: 1}
 	output.Reset()
 	reportSearch(&output, result)
-	if strings.Contains(output.String(), "score cp") || strings.Contains(output.String(), "score mate") {
-		t.Fatal("invented mate distance")
+	if strings.Contains(output.String(), "score cp") || !strings.Contains(output.String(), "score mate 1") {
+		t.Fatal("missing searched mate distance")
 	}
 }

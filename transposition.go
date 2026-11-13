@@ -37,20 +37,26 @@ func (table *transpositionTable) clear() {
 	table.generation = 0
 }
 
-func (table *transpositionTable) probe(position *chess.Position) (tableEntry, bool) {
+func (table *transpositionTable) probe(position *chess.Position, history ...uint64) (tableEntry, bool) {
 	if table == nil {
 		return tableEntry{}, false
 	}
-	key := position.ZobristHash() // Pieces, turn, castling, capturable en passant.
+	key := position.ZobristHash()
+	if len(history) > 0 {
+		key ^= history[0]
+	} // Pieces, turn, castling, capturable en passant.
 	entry := table.entries[key%uint64(len(table.entries))]
 	return entry, entry.bound != noBound && entry.key == key && entry.halfmove == position.HalfMoveClock()
 }
 
-func (table *transpositionTable) store(position *chess.Position, depth, score, alpha, beta int, move uint16) {
+func (table *transpositionTable) store(position *chess.Position, depth, score, alpha, beta int, move uint16, history ...uint64) {
 	if table == nil {
 		return
 	}
 	key := position.ZobristHash()
+	if len(history) > 0 {
+		key ^= history[0]
+	}
 	entry := &table.entries[key%uint64(len(table.entries))]
 	// Prefer deeper work within a search; allow replacement in a later search.
 	if entry.bound != noBound && entry.generation == table.generation && int(entry.depth) > depth {

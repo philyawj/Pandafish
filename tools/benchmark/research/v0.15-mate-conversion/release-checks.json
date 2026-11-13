@@ -1,0 +1,27 @@
+{
+  "release": "v0.15",
+  "checks": [
+    "gofmt",
+    "go test ./...",
+    "go test -race ./... through release validation",
+    "go vet ./...",
+    "ARM64 build",
+    "offline lichess-bot 12-ply wrapper",
+    "UCI mate count and full-history drawing move",
+    "offline recorder preparation",
+    "git diff --check"
+  ],
+  "smoke_games": 6,
+  "smoke_previous_gate": "blocked: no favorable previous-release screen or forfeits; concurrent results retained",
+  "smoke_note": "Two-game score decision returned exit 1 at 50%; all 6 integration games completed without forfeits or unfinished games. No retry.",
+  "private_configs_updated": 2,
+  "private_permissions": "0644",
+  "challenge_cases": 56,
+  "public_conservative_defaults_preserved": true,
+  "prepared_config_loaded_and_engine_identity_checked": true,
+  "account_credential_verified_read_only": true,
+  "live_client_started": false,
+  "online_games_started": false,
+  "active_engine_identity": "Pandafish v0.15",
+  "note": "Active binary is rebuilt from the clean release commit after merge; pre-merge smoke hashes remain original."
+}

@@ -31,8 +31,15 @@ func iterativeSearch(ctx context.Context, position *chess.Position, limits goLim
 }
 
 func iterativeSearchWithTable(ctx context.Context, position *chess.Position, limits goLimits, budget timeBudget, start time.Time, table *transpositionTable) searchResult {
+	return iterativeSearchWithHistory(ctx, position, limits, budget, start, table, nil)
+}
+
+func iterativeSearchWithHistory(ctx context.Context, position *chess.Position, limits goLimits, budget timeBudget, start time.Time, table *transpositionTable, history []uint64) searchResult {
 	table.generation++
 	worker := searcher{ctx: ctx, table: table, killers: new(killerTable)}
+	for _, key := range history {
+		worker.pushKey(key)
+	}
 	if budget.timed {
 		worker.deadline = start.Add(budget.hard)
 	}
@@ -61,11 +68,8 @@ func (worker *searcher) iterate(position *chess.Position, moves []chess.Move, de
 		}
 		if result.depth > 0 {
 			result.metrics.ScoreKind, result.metrics.Score = "cp", result.score
-			if result.score >= mateScore {
-				result.metrics.ScoreKind, result.metrics.Score = "mate", 1
-			}
-			if result.score <= -mateScore {
-				result.metrics.ScoreKind, result.metrics.Score = "mate", -1
+			if abs(result.score) >= mateBound {
+				result.metrics.ScoreKind, result.metrics.Score = "mate", mateMoves(result.score)
 			}
 			result.metrics.PV = []string{result.move}
 		}
@@ -100,6 +104,8 @@ func (worker *searcher) iterate(position *chess.Position, moves []chess.Move, de
 }
 
 func (worker *searcher) root(position *chess.Position, moves []chess.Move, depth int) ([]string, int, bool) {
+	worker.pushPosition(position)
+	defer worker.popPosition(position)
 	var best []string
 	bestScore := -searchInfinity
 	for _, move := range moves {
@@ -108,7 +114,7 @@ func (worker *searcher) root(position *chess.Position, moves []chess.Move, depth
 		}
 		// The one-point margin keeps tied root scores exact. Inferior moves
 		// may return bounds and cannot join the best-move list.
-		score, complete := worker.search(position.Update(&move), depth-1, -searchInfinity, 1-bestScore, move.HasTag(chess.Check))
+		score, complete := worker.searchAtPly(position.Update(&move), depth-1, -searchInfinity, 1-bestScore, move.HasTag(chess.Check), 1)
 		if !complete {
 			return nil, 0, false
 		}

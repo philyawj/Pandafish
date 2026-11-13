@@ -152,8 +152,8 @@ git archive v0.14 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14" .)
 
 build_dir=$(mktemp -d)
-git archive v0.14.4 | tar -x -C "$build_dir"
-(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14.4" .)
+git archive v0.15 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.15" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -236,12 +236,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.14.4 tagged baseline as above for the next engine change. Then run
+Build the v0.15 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.14.4 --previous-version v0.14.4 \
+  --previous tools/benchmark/bin/pandafish-v0.15 --previous-version v0.15 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -400,7 +400,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.14.4 --previous-version v0.14.4 \
+  --previous tools/benchmark/bin/pandafish-v0.15 --previous-version v0.15 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -623,7 +623,7 @@ reproduce earlier profiles. For example, a future Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.14.4 --previous-version v0.14.4 \
+  --previous tools/benchmark/bin/pandafish-v0.15 --previous-version v0.15 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```
@@ -713,7 +713,7 @@ is required for this tooling increment. Level 1 remains the target.
 See the [session tool documentation](../lichess/README.md) for commands,
 recording limits, and offline reporting. Future changes to move selection or
 time allocation use the routine comparison workflow above with the latest
-release as the baseline, currently v0.14.4.
+release as the baseline, currently v0.15.
 
 
 ## v0.10 transposition-table candidate
@@ -914,3 +914,24 @@ The candidate failed the previous-release criterion and was not promoted. The
 release restores v0.14.3 evaluation and keeps playing behavior unchanged. Next,
 use focused tactical/conversion fixtures and the smaller Sacrifice reference to
 identify an actual decision failure before another implementation.
+
+## Local v0.15 conversion correction
+
+A [Sacrifice-inspired mate/conversion diagnosis](research/v0.15-mate-conversion/README.md)
+reproduced delayed-mate ties and repeated winning queen endings. Mate distance
+and history-aware repetition corrected those examples; the formal four-case
+conversion diagnostic scored 1/4 wins released, 2/4 mate-only and 4/4 combined.
+These are selected examples, not full-game Stockfish strength results.
+The routine concurrent screen scored 53% against v0.14.4, 50% against Skill 2 and
+34% against Sacrifice, with all 150 games finished and no forfeits. Recommend
+review for demonstrated conversion behavior, with overall strength still uncertain.
+[Exact source, controls, fixtures, timings, PGNs and assessment](results/v0.15-conversion-dev-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/README.md).
+
+## v0.15 release and next live investigation
+
+v0.15 promotes the mate-distance and repetition correction for its demonstrated
+conversion behavior and narrow previous-release pass. The original development
+labels/hashes stay unchanged. It is not a demonstrated broad strength leap.
+The [extended live-test plan](live/v0.15-test-plan/README.md) targets roughly 200
+completed games across multiple sessions with one fixed build, preserving raw
+records and separating diagnostic evidence from controlled strength tests.

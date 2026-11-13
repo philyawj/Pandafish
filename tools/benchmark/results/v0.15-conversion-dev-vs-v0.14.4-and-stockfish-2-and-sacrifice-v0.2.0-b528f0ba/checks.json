@@ -1,0 +1,29 @@
+{
+  "checks": [
+    "gofmt",
+    "go test ./...",
+    "go test -race ./... through validation",
+    "go vet ./...",
+    "ARM64 build",
+    "git diff --check"
+  ],
+  "wrapper": {
+    "identity": "Pandafish v0.15-conversion-dev",
+    "sha256": "ab78d33434e380eb7d093c21e61772aef68fd82de17ff2b30e121509a2a20537",
+    "legal_plies": 12,
+    "mate_in_one_and_score_mate_1": true,
+    "full_history_drawing_move_and_score_0": true,
+    "public_example_loaded": true,
+    "private_configs_changed": false,
+    "active_v0141_restored": true,
+    "online": false
+  },
+  "routine": {
+    "games": 150,
+    "concurrency": 3,
+    "unfinished": 0,
+    "forfeits": 0,
+    "previous_gate": "passed narrowly at 53%"
+  },
+  "decision": "Recommend review for demonstrated conversion corrections; overall strength uncertain, no broad leap established. No candidate commit/push/PR/release."
+}

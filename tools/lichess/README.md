@@ -149,7 +149,9 @@ quiescence and interrupted work, elapsed search time, stopping reason, and legal
 fallback status. Abandoned searches remain identifiable from protocol events;
 they do not have final metrics or a returned move. Score and depth always refer
 to the last complete iteration. Evaluation scores include material and positional terms and use centipawns
-from the root side's perspective. Mate scores record a sign, not an uncomputed mate distance;
+from the root side's perspective. Released versions through v0.14.4 record only a mate sign; v0.15
+records signed moves to mate from its completed search.
+Historical captures retain their original sign-only meaning;
 fallbacks do not invent a score. Full multi-move PVs remain future work.
 
 The report validates returned move legality and counts completed, cancelled,
@@ -274,3 +276,13 @@ documents a real reconnect/concurrent-play case. Configured concurrency is an
 intention, not proof that only one worker actually ran. Use timestamps and
 process identities to audit observed overlap; this is distinct from measuring
 CPU utilization or diagnosing the client's root cause.
+
+## Extended v0.15 investigation
+
+The [v0.15 live-test plan](../benchmark/live/v0.15-test-plan/README.md) documents
+roughly 200 games over multiple sessions, exact local GoPandaFish commands,
+stopping/restarting, offline processing, and how failures become regression
+fixtures. Session directories are never reused. Keep the same build and settings
+across the campaign, record intentional changes separately, and deduplicate game
+IDs across sessions before pooled analysis. A report only summarizes one session;
+there is no automatic cross-session pooling command.

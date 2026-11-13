@@ -101,7 +101,8 @@ func runEngine(in io.Reader, out io.Writer, trace *telemetry.Recorder) (err erro
 		budget, _ := limits.budget(game.Position().Turn()) // Validated before start.
 		active = &activeSearch{cancel: cancel, results: results, limits: limits}
 		position, started := game.Position(), time.Now()
-		go func() { results <- iterativeSearchWithTable(ctx, position, limits, budget, started, table) }()
+		history := repetitionHistory(game)
+		go func() { results <- iterativeSearchWithHistory(ctx, position, limits, budget, started, table, history) }()
 	}
 	for {
 		var results <-chan searchResult
@@ -125,7 +126,7 @@ func runEngine(in io.Reader, out io.Writer, trace *telemetry.Recorder) (err erro
 			}
 			switch args[0] {
 			case "uci":
-				fmt.Fprintln(out, "id name Pandafish v0.14.4\nid author philyawj\nuciok")
+				fmt.Fprintln(out, "id name Pandafish v0.15\nid author philyawj\nuciok")
 			case "isready":
 				fmt.Fprintln(out, "readyok")
 			case "ucinewgame":

@@ -13,6 +13,8 @@ func reportSearch(out io.Writer, result searchResult) {
 		fmt.Fprintf(out, "info depth %d nodes %d time %d", m.Depth, m.Nodes, int64(m.ElapsedMS))
 		if m.ScoreKind == "cp" {
 			fmt.Fprintf(out, " score cp %d", m.Score)
+		} else if m.ScoreKind == "mate" {
+			fmt.Fprintf(out, " score mate %d", m.Score)
 		}
 		fmt.Fprintln(out, " pv", result.move)
 	}
