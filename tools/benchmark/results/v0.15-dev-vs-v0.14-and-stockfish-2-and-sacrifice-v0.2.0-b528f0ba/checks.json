@@ -1,0 +1,25 @@
+{
+  "code_checks": [
+    "gofmt changed Go files",
+    "go test ./...",
+    "go test -race ./... through validation",
+    "go vet ./...",
+    "go build candidate through validation",
+    "git diff --check"
+  ],
+  "wrapper": {
+    "identity": "Pandafish v0.15-dev",
+    "legal_plies": 12,
+    "architecture": "ARM64",
+    "active_v014_restored": true,
+    "public_example_config_loaded": true,
+    "private_configs_changed": false,
+    "online": false
+  },
+  "final_power_observation": {
+    "source": "AC Power",
+    "battery_percent": 57,
+    "state": "charging"
+  },
+  "decision": "Hold: larger strength goal not met; no PR/commit/push/release."
+}

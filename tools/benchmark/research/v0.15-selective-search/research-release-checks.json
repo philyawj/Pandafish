@@ -1,0 +1,78 @@
+{
+  "release": "v0.14.1",
+  "playing_policy": "v0.14 unchanged; experimental source/tests archived, not compiled by normal builds.",
+  "checks": [
+    "go test ./...",
+    "go test -race ./...",
+    "go vet ./...",
+    "ARM64 build",
+    "git diff --check"
+  ],
+  "archived_replay": {
+    "archived_identity": "Pandafish v0.15-dev",
+    "source_matches_snapshot": true,
+    "go_tests_passed": true,
+    "go_build_passed": true,
+    "temporary_checkout": "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-selective-replay-wyw1n1gm"
+  },
+  "smoke": {
+    "complete": true,
+    "previous_decision": "blocked: no favorable previous-release screen or forfeits; concurrent results retained",
+    "results": [
+      {
+        "opponent": "v0.14",
+        "games": 2,
+        "stats": {
+          "wins": 0,
+          "draws": 1,
+          "losses": 1,
+          "unfinished": 0,
+          "forfeits": 0,
+          "score_percent": 25,
+          "possible_score_lower_percent": 25,
+          "possible_score_upper_percent": 25
+        }
+      },
+      {
+        "opponent": "Stockfish Skill 2",
+        "games": 2,
+        "stats": {
+          "wins": 0,
+          "draws": 0,
+          "losses": 2,
+          "unfinished": 0,
+          "forfeits": 0,
+          "score_percent": 0,
+          "possible_score_lower_percent": 0,
+          "possible_score_upper_percent": 0
+        }
+      },
+      {
+        "opponent": "Sacrifice v0.2.0 b528f0ba",
+        "games": 2,
+        "stats": {
+          "wins": 0,
+          "draws": 2,
+          "losses": 0,
+          "unfinished": 0,
+          "forfeits": 0,
+          "score_percent": 50,
+          "possible_score_lower_percent": 50,
+          "possible_score_upper_percent": 50
+        }
+      }
+    ],
+    "records_location": "/tmp/pandafish-v0141-research-smoke",
+    "interpretation": "Six integration games, not a strength test. Previous two-game decision blocked; all games retained, no retry, zero unfinished/forfeits."
+  },
+  "offline_wrapper": {
+    "identity": "Pandafish v0.14.1",
+    "legal_plies": 12,
+    "configs_loaded": [
+      "active private config",
+      "ignored snapshot",
+      "public example with resolved engine paths"
+    ],
+    "online": false
+  }
+}

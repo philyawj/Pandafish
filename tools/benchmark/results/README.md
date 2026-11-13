@@ -41,6 +41,9 @@ Forfeits count as losses for the offending engine. Compare matching profiles bef
 | v0.13-parallel-check | v0.12 | 25 / 23 / 2 | 0 | 0 | 73.0% | 73.0% to 73.0% | [R17](v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/previous.pgn) |
 | v0.13-parallel-check | Stockfish 19 / Skill 2 | 26 / 8 / 16 | 0 | 0 | 60.0% | 60.0% to 60.0% | [R17](v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/stockfish.pgn) |
 | v0.13-parallel-check | Sacrifice v0.2.0 b528f0ba | 9 / 16 / 25 | 0 | 0 | 34.0% | 34.0% to 34.0% | [R17](v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/sacrifice.pgn) |
+| v0.15-dev | v0.14 | 16 / 19 / 15 | 0 | 0 | 51.0% | 51.0% to 51.0% | [R18](v0.15-dev-vs-v0.14-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15-dev-vs-v0.14-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15-dev-vs-v0.14-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/previous.pgn) |
+| v0.15-dev | Stockfish 19 / Skill 2 | 22 / 8 / 20 | 0 | 0 | 52.0% | 52.0% to 52.0% | [R18](v0.15-dev-vs-v0.14-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15-dev-vs-v0.14-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15-dev-vs-v0.14-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/stockfish.pgn) |
+| v0.15-dev | Sacrifice v0.2.0 b528f0ba | 8 / 18 / 24 | 0 | 0 | 34.0% | 34.0% to 34.0% | [R18](v0.15-dev-vs-v0.14-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15-dev-vs-v0.14-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15-dev-vs-v0.14-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/sacrifice.pgn) |
 
 ## Run profiles
 
@@ -65,6 +68,7 @@ Times are milliseconds. Compare matching timing policies and settings. Partial r
 | [R15](v0.12-dev-vs-v0.11-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-12 21:49Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; AC power reported at start; all matchups serial; no live bot | wall-clock-v2 | 1 (external) | complete |
 | [R16](v0.13-dev-vs-v0.12-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-13 02:25Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; AC power reported at start; all matchups serial; no live bot | wall-clock-v2 | 1 (external) | complete |
 | [R17](v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-13 04:15Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; AC power reported at start; three matchups concurrent; no live bot | wall-clock-v2 | 3 (all) | complete |
+| [R18](v0.15-dev-vs-v0.14-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-13 04:59Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; AC power reported at start; three concurrent matchups; no live bot | wall-clock-v2 | 3 (all) | complete |
 
 ## Measured timing
 
@@ -107,3 +111,6 @@ Wall time includes sending the position, requesting the move, and receiving best
 | R17 | v0.12 | 100.1 | 116.1 | 1 / 4 |
 | R17 | Stockfish 19 / Skill 2 | 113.6 | 124.4 | 3 / 1400 |
 | R17 | Sacrifice v0.2.0 b528f0ba | 112.1 | 119.3 | 4 / 2440 |
+| R18 | v0.14 | 115.9 | 128.1 | 4 / 5 |
+| R18 | Stockfish 19 / Skill 2 | 126.8 | 143.7 | 2 / 1565 |
+| R18 | Sacrifice v0.2.0 b528f0ba | 134.2 | 118.6 | 4 / 2364 |

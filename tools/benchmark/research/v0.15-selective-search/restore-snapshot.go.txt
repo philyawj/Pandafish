@@ -1,0 +1,59 @@
+// Restore an archived experiment into a temporary checkout of its recorded base.
+// This file has a .txt suffix so ordinary project builds do not compile it.
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+	"strings"
+)
+
+func main() {
+	if len(os.Args) != 3 {
+		fmt.Fprintln(os.Stderr, "usage: restore-snapshot ARCHIVE_JSON BASE_CHECKOUT")
+		os.Exit(2)
+	}
+	if err := restore(os.Args[1], os.Args[2]); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+}
+
+func restore(archive, destination string) error {
+	if _, err := os.Stat(filepath.Join(destination, "go.mod")); err != nil {
+		return fmt.Errorf("destination must be an unpacked Go source checkout: %w", err)
+	}
+	data, err := os.ReadFile(archive)
+	if err != nil {
+		return err
+	}
+	var snapshot struct {
+		Files map[string]string `json:"files"`
+	}
+	if err := json.Unmarshal(data, &snapshot); err != nil {
+		return err
+	}
+	if len(snapshot.Files) == 0 {
+		return fmt.Errorf("archive has no source files")
+	}
+	// Validate every path before writing any file.
+	for name := range snapshot.Files {
+		clean := filepath.Clean(name)
+		if filepath.IsAbs(name) || clean == "." || clean == ".." || strings.HasPrefix(clean, ".."+string(filepath.Separator)) {
+			return fmt.Errorf("invalid relative source path %q", name)
+		}
+	}
+	for name, source := range snapshot.Files {
+		path := filepath.Join(destination, name)
+		if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
+			return err
+		}
+		if err := os.WriteFile(path, []byte(source), 0644); err != nil {
+			return err
+		}
+	}
+	fmt.Printf("Restored %d files from %s into %s\n", len(snapshot.Files), archive, destination)
+	return nil
+}

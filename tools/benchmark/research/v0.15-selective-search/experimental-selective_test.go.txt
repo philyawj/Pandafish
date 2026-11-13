@@ -1,0 +1,192 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"os"
+	"slices"
+	"strings"
+	"testing"
+	"time"
+
+	"github.com/corentings/chess/v2"
+)
+
+func TestPVSMatchesFullWidthWindowsAndRootTies(t *testing.T) {
+	for _, command := range []string{"startpos", "fen " + timeoutPosition, "fen " + queenRaidPosition, "fen " + crowdedPosition, "fen 4k3/1q6/8/5N2/8/8/8/K7 w - - 0 1"} {
+		game, err := parsePosition(strings.Fields(command))
+		if err != nil {
+			t.Fatal(err)
+		}
+		p := game.Position()
+		before := game.FEN()
+		for _, depth := range []int{2, 3} {
+			reference := searcher{mode: fullWidthSearch}
+			exact, ok := reference.search(p, depth, -searchInfinity, searchInfinity, inCheck(p))
+			if !ok {
+				t.Fatal("reference interrupted")
+			}
+			worker := searcher{mode: pvsOnly, table: newTable(), killers: new(killerTable)}
+			for _, window := range [][2]int{{exact - 1, exact}, {exact, exact + 1}, {exact - 1, exact + 1}, {-searchInfinity, searchInfinity}} {
+				got, complete := worker.search(p, depth, window[0], window[1], inCheck(p))
+				if !complete || (exact <= window[0] && (got < exact || got > window[0])) || (exact >= window[1] && (got > exact || got < window[1])) || (window[0] < exact && exact < window[1] && got != exact) {
+					t.Fatalf("%s d%d window%v got%d exact%d", command, depth, window, got, exact)
+				}
+			}
+		}
+		plain := searcher{mode: fullWidthSearch, table: newTable(), killers: new(killerTable)}
+		pvs := searcher{mode: pvsOnly, table: newTable(), killers: new(killerTable)}
+		best, score, ok := plain.root(p, rootMoves(p, nil), 4)
+		got, value, complete := pvs.root(p, rootMoves(p, nil), 4)
+		slices.Sort(best)
+		slices.Sort(got)
+		if !ok || !complete || score != value || !slices.Equal(best, got) {
+			t.Fatalf("%s root PVS%v/%d full%v/%d", command, got, value, best, score)
+		}
+		if game.FEN() != before {
+			t.Fatal("search changed root")
+		}
+	}
+}
+
+func TestLateMoveReductionGuards(t *testing.T) {
+	start := chess.StartingPosition()
+	quiet := killerTestMove(t, start, "g1f3")
+	capture := killerTestMove(t, evalFEN(t, "6k1/8/8/3p4/8/8/8/3R2K1 w - - 0 1"), "d1d5")
+	checking := killerTestMove(t, evalFEN(t, "4k3/8/8/8/8/8/8/R5K1 w - - 0 1"), "a1a8")
+	ep := killerTestMove(t, evalFEN(t, "k7/8/8/3pP3/8/8/8/7K w - d6 0 1"), "e5d6")
+	promotion := killerTestMove(t, evalFEN(t, "7k/P7/8/8/8/8/8/7K w - - 0 1"), "a7a8n")
+	for _, tt := range []struct {
+		name         string
+		move         chess.Move
+		depth, index int
+		checked      bool
+		alpha        int
+		mode         searchMode
+		hash, killer bool
+		want         bool
+	}{
+		{"eligible", quiet, 3, 3, false, 0, selectiveSearch, false, false, true},
+		{"shallow", quiet, 2, 3, false, 0, selectiveSearch, false, false, false},
+		{"early", quiet, 3, 2, false, 0, selectiveSearch, false, false, false},
+		{"evasion", quiet, 3, 3, true, 0, selectiveSearch, false, false, false},
+		{"capture", capture, 3, 3, false, 0, selectiveSearch, false, false, false},
+		{"check", checking, 3, 3, false, 0, selectiveSearch, false, false, false},
+		{"ep", ep, 3, 3, false, 0, selectiveSearch, false, false, false},
+		{"promotion", promotion, 3, 3, false, 0, selectiveSearch, false, false, false},
+		{"mate", quiet, 3, 3, false, mateScore, selectiveSearch, false, false, false},
+		{"mated", quiet, 3, 3, false, -mateScore, selectiveSearch, false, false, false},
+		{"hash", quiet, 3, 3, false, 0, selectiveSearch, true, false, false},
+		{"killer", quiet, 3, 3, false, 0, selectiveSearch, false, true, false},
+		{"pvs reference", quiet, 3, 3, false, 0, pvsOnly, false, false, false},
+		{"full reference", quiet, 3, 3, false, 0, fullWidthSearch, false, false, false},
+	} {
+		t.Run(tt.name, func(t *testing.T) {
+			worker := searcher{mode: tt.mode, killers: new(killerTable)}
+			if tt.killer {
+				worker.killers.remember(2, tt.move)
+			}
+			entry := tableEntry{move: encodeMove(tt.move)}
+			if got := worker.reduce(tt.move, tt.depth, tt.index, 2, tt.checked, tt.alpha, entry, tt.hash); got != tt.want {
+				t.Fatalf("reduce=%v want%v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestSelectiveVerificationAndRootDepth(t *testing.T) {
+	p := chess.StartingPosition()
+	audit := new(selectivityAudit)
+	worker := searcher{audit: audit, table: newTable(), killers: new(killerTable)}
+	_, _, complete := worker.root(p, rootMoves(p, nil), 3)
+	if !complete || audit.reductions != 0 {
+		t.Fatal("root moves were reduced before any internal node had depth three")
+	}
+	audit = &selectivityAudit{}
+	worker = searcher{audit: audit, table: newTable(), killers: new(killerTable)}
+	_, _, complete = worker.root(p, rootMoves(p, nil), 4)
+	t.Logf("selectivity: %+v", *audit)
+	if !complete || audit.probes == 0 || audit.reductions == 0 {
+		t.Fatal("fixture did not exercise internal reduced probes")
+	}
+	audit = new(selectivityAudit)
+	worker = searcher{audit: audit, table: newTable(), killers: new(killerTable)}
+	_, complete = worker.search(p, 4, -searchInfinity, searchInfinity, false)
+	t.Logf("verification: %+v", *audit)
+	if !complete || audit.verifications == 0 || audit.refutations == 0 {
+		t.Fatal("fixture did not exercise full-depth verification and reject shallow optimism")
+	}
+}
+
+func TestSelectiveCancellationDuringResearch(t *testing.T) {
+	for _, stage := range []string{"verification", "wide research"} {
+		t.Run(stage, func(t *testing.T) {
+			audit := new(selectivityAudit)
+			start := time.Unix(100, 0)
+			table := newTable()
+			worker := searcher{audit: audit, table: table, killers: new(killerTable), deadline: start.Add(time.Second), now: func() time.Time {
+				if (stage == "verification" && audit.verifications > 0) || (stage == "wide research" && audit.researches > 0) {
+					return start.Add(2 * time.Second)
+				}
+				return start
+			}}
+			p := chess.StartingPosition()
+			if _, complete := worker.search(p, 4, -searchInfinity, searchInfinity, false); complete {
+				t.Fatal("re-search ignored deadline")
+			}
+			if _, hit := table.probe(p); hit {
+				t.Fatal("incomplete parent cached")
+			}
+		})
+	}
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	if _, complete := (&searcher{ctx: ctx}).search(chess.StartingPosition(), 4, -searchInfinity, searchInfinity, false); complete {
+		t.Fatal("cancelled search completed")
+	}
+}
+
+func TestSelectiveNodeAudit(t *testing.T) {
+	type row struct {
+		Position      string   `json:"position"`
+		Mode          string   `json:"mode"`
+		Depth         int      `json:"depth"`
+		Score         int      `json:"score"`
+		Best          []string `json:"best"`
+		Nodes         uint64   `json:"nodes"`
+		Probes        uint64   `json:"pvs_probes"`
+		Reductions    uint64   `json:"reductions"`
+		Verifications uint64   `json:"verifications"`
+		Refutations   uint64   `json:"refutations"`
+		Researches    uint64   `json:"wide_researches"`
+	}
+	var rows []row
+	for _, command := range []string{"startpos", "fen " + timeoutPosition, "fen " + queenRaidPosition, "fen " + crowdedPosition} {
+		game, err := parsePosition(strings.Fields(command))
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, variant := range []struct {
+			name string
+			mode searchMode
+		}{{"full-width", fullWidthSearch}, {"PVS-only", pvsOnly}, {"PVS-and-LMR", selectiveSearch}} {
+			audit := new(selectivityAudit)
+			worker := searcher{mode: variant.mode, table: newTable(), killers: new(killerTable), audit: audit}
+			best, score, complete := worker.root(game.Position(), rootMoves(game.Position(), nil), 4)
+			if !complete {
+				t.Fatal("audit interrupted")
+			}
+			slices.Sort(best)
+			rows = append(rows, row{command, variant.name, 4, score, best, worker.nodes, audit.probes, audit.reductions, audit.verifications, audit.refutations, audit.researches})
+		}
+	}
+	if path := os.Getenv("PANDAFISH_SELECTIVE_AUDIT"); path != "" {
+		data, err := json.MarshalIndent(rows, "", "  ")
+		if err != nil {
+			t.Fatal(err)
+		}
+		if err = os.WriteFile(path, append(data, '\n'), 0644); err != nil {
+			t.Fatal(err)
+		}
+	}
+}

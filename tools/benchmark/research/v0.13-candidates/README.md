@@ -1,5 +1,10 @@
 # Choosing the next strength experiment after v0.12
 
+Historical review: selective quiescence shipped in v0.13. The follow-up
+[selective-search report](../v0.15-selective-search/README.md) records the next
+experiment, its non-promotion decision, and the evaluation hypothesis that
+follows it under the newer 50-game concurrent validation profile.
+
 Reviewed November 12, 2026, after releasing v0.12. The original review preceded engine changes. The horizon diagnostic below
 describes the released baseline; the selected implementation and its separate
 audit are recorded in [the local experiment](selective-quiescence-audit/README.md).
@@ -90,8 +95,8 @@ it does not implement a new engine policy or run online games.
 
 ## Ranked candidates
 
-Candidate 1 was selected by the maintainer for local implementation and
-validation. Candidates 2 and 3 remain future alternatives. The original review
+Candidate 1 was implemented and validated for v0.13. Candidates 2 and 3
+were left as later alternatives. The original review
 and diagnostic below describe the released v0.12 baseline.
 
 ### 1. Selective quiescence that resolves ordinary exchanges
