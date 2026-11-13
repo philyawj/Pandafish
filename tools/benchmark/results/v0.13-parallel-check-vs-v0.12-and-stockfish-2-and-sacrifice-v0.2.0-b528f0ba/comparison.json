@@ -1,0 +1,341 @@
+{
+  "method": "Scores calculated with an exact copy of the benchmark runner's summarize function. Prefix selected before reviewing scores: first 50 published games match 25 opening/color pairs. Skill 2 has no published same-skill serial control. Timing p95 is nearest rank. No equivalence/significance inference from these small repeated-opening samples.",
+  "published_summary_sha256": "ed7831f34853b77d7466c21dcf25ec1365aca945abf39b2f18aa0aca5a1891bc",
+  "parallel_summary_sha256": "68477e153e2319aafc42147899511022c1dd33ac8ff960b852f7b83199ba126e",
+  "published_candidate": {
+    "label": "v0.13-dev",
+    "uci_name": "Pandafish v0.13-dev",
+    "sha256": "394243a8bcb0368f5288363785f8fff9226384414a07bcbf25ec79591b20d63f"
+  },
+  "parallel_candidate": {
+    "label": "v0.13-parallel-check",
+    "uci_name": "Pandafish v0.13",
+    "sha256": "d802d96a2ccfbaeca419175c528a5c02893231ae6c7a6ec01c87b8ec4dd792d8"
+  },
+  "rows": [
+    {
+      "profile": "published-serial-100",
+      "opponent": {
+        "label": "v0.12",
+        "uci_name": "Pandafish v0.12",
+        "sha256": "4d0d0ccf474f704da9bbbd914fc7d9bc467b4a286229db26c40439b8d2bb462c"
+      },
+      "stats": {
+        "wins": 46,
+        "draws": 43,
+        "losses": 11,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 67.5,
+        "possible_score_lower_percent": 67.5,
+        "possible_score_upper_percent": 67.5
+      },
+      "timing": [
+        {
+          "side": "candidate",
+          "responses": 6012,
+          "over100_ms": 6,
+          "over150_ms": 0,
+          "max_ms": 136.474208,
+          "p95_ms": 96.3505
+        },
+        {
+          "side": "opponent",
+          "responses": 5997,
+          "over100_ms": 4,
+          "over150_ms": 0,
+          "max_ms": 132.516,
+          "p95_ms": 96.322667
+        }
+      ]
+    },
+    {
+      "profile": "published-serial-100",
+      "opponent": {
+        "label": "Stockfish Skill 1",
+        "uci_name": "Stockfish 19",
+        "sha256": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f"
+      },
+      "stats": {
+        "wins": 58,
+        "draws": 11,
+        "losses": 31,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 63.5,
+        "possible_score_lower_percent": 63.5,
+        "possible_score_upper_percent": 63.5
+      },
+      "timing": [
+        {
+          "side": "candidate",
+          "responses": 4812,
+          "over100_ms": 7,
+          "over150_ms": 0,
+          "max_ms": 129.334,
+          "p95_ms": 96.572042
+        },
+        {
+          "side": "opponent",
+          "responses": 4797,
+          "over100_ms": 2616,
+          "over150_ms": 0,
+          "max_ms": 149.918292,
+          "p95_ms": 100.980375
+        }
+      ]
+    },
+    {
+      "profile": "published-serial-100",
+      "opponent": {
+        "label": "Sacrifice v0.2.0 b528f0ba",
+        "uci_name": "Sacrifice-Engine",
+        "sha256": "5c2c63f19ff6f8be65aaa127a7cbe884f6cb52d7c4daee6967b1da7a7f8fa0e5"
+      },
+      "stats": {
+        "wins": 24,
+        "draws": 28,
+        "losses": 48,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 38,
+        "possible_score_lower_percent": 38,
+        "possible_score_upper_percent": 38
+      },
+      "timing": [
+        {
+          "side": "candidate",
+          "responses": 4674,
+          "over100_ms": 8,
+          "over150_ms": 0,
+          "max_ms": 131.0875,
+          "p95_ms": 96.295208
+        },
+        {
+          "side": "opponent",
+          "responses": 4684,
+          "over100_ms": 4092,
+          "over150_ms": 0,
+          "max_ms": 137.511875,
+          "p95_ms": 100.084875
+        }
+      ]
+    },
+    {
+      "profile": "published-serial-first-50",
+      "opponent": {
+        "label": "v0.12",
+        "uci_name": "Pandafish v0.12",
+        "sha256": "4d0d0ccf474f704da9bbbd914fc7d9bc467b4a286229db26c40439b8d2bb462c"
+      },
+      "stats": {
+        "wins": 20,
+        "draws": 23,
+        "losses": 7,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 63,
+        "possible_score_lower_percent": 63,
+        "possible_score_upper_percent": 63
+      },
+      "timing": [
+        {
+          "side": "candidate",
+          "responses": 3170,
+          "over100_ms": 0,
+          "over150_ms": 0,
+          "max_ms": 97.505083,
+          "p95_ms": 96.353959
+        },
+        {
+          "side": "opponent",
+          "responses": 3165,
+          "over100_ms": 0,
+          "over150_ms": 0,
+          "max_ms": 98.759708,
+          "p95_ms": 96.330334
+        }
+      ]
+    },
+    {
+      "profile": "published-serial-first-50",
+      "opponent": {
+        "label": "Stockfish Skill 1",
+        "uci_name": "Stockfish 19",
+        "sha256": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f"
+      },
+      "stats": {
+        "wins": 30,
+        "draws": 8,
+        "losses": 12,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 68,
+        "possible_score_lower_percent": 68,
+        "possible_score_upper_percent": 68
+      },
+      "timing": [
+        {
+          "side": "candidate",
+          "responses": 2404,
+          "over100_ms": 2,
+          "over150_ms": 0,
+          "max_ms": 121.525,
+          "p95_ms": 96.527459
+        },
+        {
+          "side": "opponent",
+          "responses": 2394,
+          "over100_ms": 1261,
+          "over150_ms": 0,
+          "max_ms": 149.918292,
+          "p95_ms": 100.962417
+        }
+      ]
+    },
+    {
+      "profile": "published-serial-first-50",
+      "opponent": {
+        "label": "Sacrifice v0.2.0 b528f0ba",
+        "uci_name": "Sacrifice-Engine",
+        "sha256": "5c2c63f19ff6f8be65aaa127a7cbe884f6cb52d7c4daee6967b1da7a7f8fa0e5"
+      },
+      "stats": {
+        "wins": 10,
+        "draws": 14,
+        "losses": 26,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 34,
+        "possible_score_lower_percent": 34,
+        "possible_score_upper_percent": 34
+      },
+      "timing": [
+        {
+          "side": "candidate",
+          "responses": 2373,
+          "over100_ms": 4,
+          "over150_ms": 0,
+          "max_ms": 128.463334,
+          "p95_ms": 96.231125
+        },
+        {
+          "side": "opponent",
+          "responses": 2381,
+          "over100_ms": 2108,
+          "over150_ms": 0,
+          "max_ms": 137.511875,
+          "p95_ms": 100.08425
+        }
+      ]
+    },
+    {
+      "profile": "parallel-3-50",
+      "opponent": {
+        "label": "v0.12",
+        "uci_name": "Pandafish v0.12",
+        "sha256": "4d0d0ccf474f704da9bbbd914fc7d9bc467b4a286229db26c40439b8d2bb462c"
+      },
+      "stats": {
+        "wins": 25,
+        "draws": 23,
+        "losses": 2,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 73,
+        "possible_score_lower_percent": 73,
+        "possible_score_upper_percent": 73
+      },
+      "timing": [
+        {
+          "side": "candidate",
+          "responses": 2754,
+          "over100_ms": 1,
+          "over150_ms": 0,
+          "max_ms": 100.057541,
+          "p95_ms": 96.401542
+        },
+        {
+          "side": "opponent",
+          "responses": 2741,
+          "over100_ms": 4,
+          "over150_ms": 0,
+          "max_ms": 116.11575,
+          "p95_ms": 96.400083
+        }
+      ]
+    },
+    {
+      "profile": "parallel-3-50",
+      "opponent": {
+        "label": "Stockfish Skill 2",
+        "uci_name": "Stockfish 19",
+        "sha256": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f"
+      },
+      "stats": {
+        "wins": 26,
+        "draws": 8,
+        "losses": 16,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 60,
+        "possible_score_lower_percent": 60,
+        "possible_score_upper_percent": 60
+      },
+      "timing": [
+        {
+          "side": "candidate",
+          "responses": 2396,
+          "over100_ms": 3,
+          "over150_ms": 0,
+          "max_ms": 113.565458,
+          "p95_ms": 96.364375
+        },
+        {
+          "side": "opponent",
+          "responses": 2393,
+          "over100_ms": 1400,
+          "over150_ms": 0,
+          "max_ms": 124.357584,
+          "p95_ms": 101.104584
+        }
+      ]
+    },
+    {
+      "profile": "parallel-3-50",
+      "opponent": {
+        "label": "Sacrifice v0.2.0 b528f0ba",
+        "uci_name": "Sacrifice-Engine",
+        "sha256": "5c2c63f19ff6f8be65aaa127a7cbe884f6cb52d7c4daee6967b1da7a7f8fa0e5"
+      },
+      "stats": {
+        "wins": 9,
+        "draws": 16,
+        "losses": 25,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 34,
+        "possible_score_lower_percent": 34,
+        "possible_score_upper_percent": 34
+      },
+      "timing": [
+        {
+          "side": "candidate",
+          "responses": 2705,
+          "over100_ms": 4,
+          "over150_ms": 0,
+          "max_ms": 112.117583,
+          "p95_ms": 96.417084
+        },
+        {
+          "side": "opponent",
+          "responses": 2714,
+          "over100_ms": 2440,
+          "over150_ms": 0,
+          "max_ms": 119.317625,
+          "p95_ms": 100.129458
+        }
+      ]
+    }
+  ]
+}

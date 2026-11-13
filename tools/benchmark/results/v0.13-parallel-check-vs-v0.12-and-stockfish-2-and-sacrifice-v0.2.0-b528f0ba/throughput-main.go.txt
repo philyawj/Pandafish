@@ -1,0 +1,96 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"strings"
+	"sync"
+	"time"
+)
+
+type observation struct {
+	Mode    string          `json:"mode"`
+	Worker  int             `json:"worker"`
+	Round   int             `json:"round"`
+	Input   position        `json:"input"`
+	Probe   probe           `json:"probe"`
+	Metrics json.RawMessage `json:"metrics"`
+}
+
+func main() {
+	data, err := os.ReadFile("testdata/quiescence-validation.json")
+	if err != nil {
+		panic(err)
+	}
+	var inputs struct {
+		Cases []position `json:"cases"`
+	}
+	if err = json.Unmarshal(data, &inputs); err != nil {
+		panic(err)
+	}
+	cases := inputs.Cases[7:]
+	var rows []observation
+	durations := map[string]float64{}
+	modes := []string{"serial", "parallel-3"}
+	// Reverse block order on the second pass to limit a simple warm-up/order bias.
+	for block := 0; block < 2; block++ {
+		for mi := 0; mi < 2; mi++ {
+			mode := modes[(mi+block)%2]
+			start := time.Now()
+			ch := make(chan []observation, 3)
+			run := func(worker int) {
+				var out []observation
+				for round := 0; round < 3; round++ {
+					for i := range cases {
+						p := cases[(i+worker)%len(cases)]
+						for _, request := range []string{"go depth 4", "go movetime 100"} {
+							q := search("tools/benchmark/bin/pandafish-v0.13", p, request)
+							var metrics json.RawMessage
+							for _, line := range q.Output {
+								if strings.HasPrefix(line, "info string pandafish ") {
+									metrics = json.RawMessage(strings.TrimPrefix(line, "info string pandafish "))
+								}
+							}
+							if len(metrics) == 0 {
+								panic("missing metrics")
+							}
+							out = append(out, observation{mode, worker, block*3 + round, p, q, metrics})
+						}
+					}
+				}
+				ch <- out
+			}
+			if mode == "serial" {
+				for worker := 0; worker < 3; worker++ {
+					run(worker)
+					rows = append(rows, (<-ch)...)
+				}
+			} else {
+				var wg sync.WaitGroup
+				for worker := 0; worker < 3; worker++ {
+					wg.Add(1)
+					go func(w int) { defer wg.Done(); run(w) }(worker)
+				}
+				wg.Wait()
+				for worker := 0; worker < 3; worker++ {
+					rows = append(rows, (<-ch)...)
+				}
+			}
+			durations[mode] += time.Since(start).Seconds()
+			result := struct {
+				Method  string             `json:"method"`
+				Elapsed map[string]float64 `json:"elapsed_seconds"`
+				Rows    []observation      `json:"observations"`
+			}{"Released v0.13; six saved stream positions, cold process and TT per probe. Per mode: 3 workers, 6 rounds each, depth 4 and independent 100ms searches. Different position order offsets per worker. Block order serial/parallel/parallel/serial; no other match workload. Raw legal moves and UCI metrics retained. Diagnostic throughput, not strength or proof of thermal stability.", durations, rows}
+			encoded, err := json.MarshalIndent(result, "", "  ")
+			if err != nil {
+				panic(err)
+			}
+			if err = os.WriteFile(os.Args[1], append(encoded, '\n'), 0644); err != nil {
+				panic(err)
+			}
+			fmt.Printf("Completed diagnostic block %d: %s\n", block*2+mi+1, mode)
+		}
+	}
+}

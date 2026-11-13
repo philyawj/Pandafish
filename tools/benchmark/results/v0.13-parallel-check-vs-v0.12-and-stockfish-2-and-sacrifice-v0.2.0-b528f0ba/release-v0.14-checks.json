@@ -1,0 +1,81 @@
+{
+  "release": "v0.14",
+  "engine_policy": "Unchanged from v0.13; release identity only.",
+  "code_checks": [
+    "gofmt changed Go files",
+    "go test ./...",
+    "go test -race ./...",
+    "go vet ./...",
+    "go build -o tools/benchmark/bin/benchmark ./tools/benchmark",
+    "go build -o pandafish .",
+    "file pandafish: ARM64",
+    "git diff --check"
+  ],
+  "wrapper": {
+    "identity": "Pandafish v0.14",
+    "legal_plies": 12,
+    "online": false
+  },
+  "config_checks": "Active and ignored snapshot: version greetings only; both load_config passed. Resolved public example passed with placeholder credentials.",
+  "smoke": {
+    "records_location": "/tmp/pandafish-v014-release-smoke",
+    "complete": true,
+    "settings": {
+      "matchup_concurrency": 3,
+      "external_matchup_concurrency": 2,
+      "pairs": 1,
+      "move_ms": 100,
+      "timeout_grace_ms": 50,
+      "max_plies": 400,
+      "openings_sha256": "80ceed68e4575b7a0d8649aa67efd35da4c8c46e480ad31b1ce12fefa94e89ca",
+      "openings_name": "openings-screening-10-v1.txt",
+      "timing_policy": "wall-clock-v2"
+    },
+    "previous_decision": "blocked: no favorable previous-release screen or forfeits; concurrent results retained",
+    "results": [
+      {
+        "opponent": "v0.13",
+        "games": 2,
+        "stats": {
+          "wins": 0,
+          "draws": 1,
+          "losses": 1,
+          "unfinished": 0,
+          "forfeits": 0,
+          "score_percent": 25,
+          "possible_score_lower_percent": 25,
+          "possible_score_upper_percent": 25
+        }
+      },
+      {
+        "opponent": "Stockfish Skill 2",
+        "games": 2,
+        "stats": {
+          "wins": 0,
+          "draws": 0,
+          "losses": 2,
+          "unfinished": 0,
+          "forfeits": 0,
+          "score_percent": 0,
+          "possible_score_lower_percent": 0,
+          "possible_score_upper_percent": 0
+        }
+      },
+      {
+        "opponent": "Sacrifice v0.2.0 b528f0ba",
+        "games": 2,
+        "stats": {
+          "wins": 1,
+          "draws": 1,
+          "losses": 0,
+          "unfinished": 0,
+          "forfeits": 0,
+          "score_percent": 75,
+          "possible_score_lower_percent": 75,
+          "possible_score_upper_percent": 75
+        }
+      }
+    ],
+    "interpretation": "Six integration games; no unfinished or forfeits. Tiny previous screen blocked, as expected to be possible with identical search algorithms/random ties. No retry for a favorable score; no strength claim."
+  }
+}
