@@ -1,0 +1,24 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/philyawj/Pandafish
+cpu: Apple M2
+BenchmarkPositionFeatures/start/released-8         	  434430	       553.2 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/start/released-8         	  430200	       565.0 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/start/pawn-king-8        	  329502	       755.6 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/start/pawn-king-8        	  324195	       751.5 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/start/candidate-8        	  241832	       968.9 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/start/candidate-8        	  246688	       969.7 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/dense/released-8         	  498597	       467.8 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/dense/released-8         	  506488	       475.1 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/dense/pawn-king-8        	  377516	       641.4 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/dense/pawn-king-8        	  373448	       643.6 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/dense/candidate-8        	  291891	       841.0 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/dense/candidate-8        	  285398	       827.6 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/crowded/released-8       	  440053	       529.3 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/crowded/released-8       	  439341	       534.8 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/crowded/pawn-king-8      	  351710	       706.2 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/crowded/pawn-king-8      	  345457	       695.3 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/crowded/candidate-8      	  260821	       918.1 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPositionFeatures/crowded/candidate-8      	  260673	       939.5 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/philyawj/Pandafish	5.166s

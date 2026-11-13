@@ -141,7 +141,7 @@ calibration from new engine-strength evidence, and link the original records.
 
 ## Research releases
 
-v0.14.1 uses a patch version to publish an unpromoted experiment as research.
+v0.14.1 and v0.14.2 use patch versions to publish an unpromoted experiment as research.
 Document its hypothesis, code, controls, validation, results, limits, decision,
 and concrete next direction. Preserve raw records and original candidate labels.
 Archive experimental source/tests as data, with a reproducible restoration path,
