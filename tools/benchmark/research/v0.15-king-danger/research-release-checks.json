@@ -1,0 +1,20 @@
+{
+  "release": "v0.14.4",
+  "policy": "Unchanged from v0.14.3; king danger excluded",
+  "checks": [
+    "gofmt",
+    "go test ./...",
+    "go test -race ./... through validation",
+    "go vet ./...",
+    "ARM64 build",
+    "offline 12-ply lichess-bot wrapper",
+    "archived candidate replay tests/build/identity",
+    "git diff --check"
+  ],
+  "smoke_games": 6,
+  "smoke_previous_gate": "blocked: no favorable previous-release screen or forfeits; concurrent results retained",
+  "smoke_note": "Exit 1 is two-game score criterion, not integration failure. All six games completed with zero forfeits. No retry.",
+  "active_binary_restored": "v0.14.1",
+  "private_configs_changed": false,
+  "live_games_played": false
+}

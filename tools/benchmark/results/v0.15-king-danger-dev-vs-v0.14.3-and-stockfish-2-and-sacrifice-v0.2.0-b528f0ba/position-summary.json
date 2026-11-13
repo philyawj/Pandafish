@@ -1,0 +1,98 @@
+{
+  "rows": [
+    {
+      "engine": "Pandafish v0.14.3",
+      "request": "go depth 4",
+      "probes": 16,
+      "legal": 16,
+      "cp_cases": 16,
+      "cp_loss_sum": 1132,
+      "nodes": 322081,
+      "depths": {
+        "4": 16
+      }
+    },
+    {
+      "engine": "Pandafish v0.14.3",
+      "request": "go movetime 100",
+      "probes": 16,
+      "legal": 16,
+      "cp_cases": 16,
+      "cp_loss_sum": 1380,
+      "nodes": 233707,
+      "depths": {
+        "4": 6,
+        "3": 10
+      }
+    },
+    {
+      "engine": "Pandafish v0.15-king-danger-dev",
+      "request": "go depth 4",
+      "probes": 16,
+      "legal": 16,
+      "cp_cases": 16,
+      "cp_loss_sum": 1186,
+      "nodes": 324326,
+      "depths": {
+        "4": 16
+      }
+    },
+    {
+      "engine": "Pandafish v0.15-king-danger-dev",
+      "request": "go movetime 100",
+      "probes": 16,
+      "legal": 16,
+      "cp_cases": 16,
+      "cp_loss_sum": 1309,
+      "nodes": 211520,
+      "depths": {
+        "4": 6,
+        "3": 10
+      }
+    }
+  ],
+  "recorded_100cp_flags": [
+    {
+      "game": "previous.pgn/round-1",
+      "ply": 34,
+      "recorded_move": "d8e7",
+      "reference_move": "a7a5",
+      "estimated_cp_loss": 188
+    },
+    {
+      "game": "previous.pgn/round-2",
+      "ply": 23,
+      "recorded_move": "d1d3",
+      "reference_move": "d5f6",
+      "estimated_cp_loss": 108
+    },
+    {
+      "game": "previous.pgn/round-4",
+      "ply": 35,
+      "recorded_move": "e1f1",
+      "reference_move": "b1c1",
+      "estimated_cp_loss": 104
+    },
+    {
+      "game": "previous.pgn/round-5",
+      "ply": 20,
+      "recorded_move": "e8c8",
+      "reference_move": "e6d7",
+      "estimated_cp_loss": 157
+    },
+    {
+      "game": "previous.pgn/round-6",
+      "ply": 29,
+      "recorded_move": "d1e2",
+      "reference_move": "c2c3",
+      "estimated_cp_loss": 120
+    },
+    {
+      "game": "previous.pgn/round-10",
+      "ply": 13,
+      "recorded_move": "e1c1",
+      "reference_move": "e5e3",
+      "estimated_cp_loss": 291
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "candidate": {
+    "label": "v0.15-king-danger-dev",
+    "uci_name": "Pandafish v0.15-king-danger-dev",
+    "sha256": "b02aeef2de5dc1be28b8cf42da17505e37334db4462bf91ececaee51e3471842",
+    "options": null,
+    "source_revision": "1470b161423263517c567e3fed934234487e553d-dirty"
+  },
+  "settings": {
+    "matchup_concurrency": 3,
+    "external_matchup_concurrency": 2,
+    "pairs": 25,
+    "move_ms": 100,
+    "timeout_grace_ms": 50,
+    "max_plies": 400,
+    "openings_sha256": "80ceed68e4575b7a0d8649aa67efd35da4c8c46e480ad31b1ce12fefa94e89ca",
+    "openings_name": "openings-screening-10-v1.txt",
+    "timing_policy": "wall-clock-v2"
+  },
+  "previous_gate": "blocked: no favorable previous-release screen or forfeits; concurrent results retained",
+  "created_utc": "2026-11-13T08:48:59.192985Z",
+  "completed_utc": "2026-11-13T08:57:46.015128+00:00",
+  "matches": [
+    {
+      "opponent": "v0.14.3",
+      "stats": {
+        "wins": 13,
+        "draws": 24,
+        "losses": 13,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 50,
+        "possible_score_lower_percent": 50,
+        "possible_score_upper_percent": 50
+      },
+      "responses": 2644,
+      "over_100ms": 0,
+      "over_150ms": 0,
+      "max_ms": 97.318584,
+      "p95_ms": 96.256166
+    },
+    {
+      "opponent": "Stockfish Skill 2",
+      "stats": {
+        "wins": 21,
+        "draws": 4,
+        "losses": 25,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 46,
+        "possible_score_lower_percent": 46,
+        "possible_score_upper_percent": 46
+      },
+      "responses": 2506,
+      "over_100ms": 0,
+      "over_150ms": 0,
+      "max_ms": 98.463042,
+      "p95_ms": 96.666834
+    },
+    {
+      "opponent": "Sacrifice v0.2.0 b528f0ba",
+      "stats": {
+        "wins": 7,
+        "draws": 21,
+        "losses": 22,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 35,
+        "possible_score_lower_percent": 35,
+        "possible_score_upper_percent": 35
+      },
+      "responses": 2777,
+      "over_100ms": 2,
+      "over_150ms": 0,
+      "max_ms": 113.302958,
+      "p95_ms": 96.39525
+    }
+  ],
+  "end_power": "Now drawing from 'AC Power'\n -InternalBattery-0 (id=22151267)\t59%; charging; (no estimate) present: true\n"
+}

@@ -1,0 +1,28 @@
+{
+  "code_checks": [
+    "gofmt changed Go files",
+    "go test ./...",
+    "go test -race ./... through validation",
+    "go vet ./...",
+    "ARM64 build",
+    "git diff --check"
+  ],
+  "wrapper": {
+    "identity": "Pandafish v0.15-king-danger-dev",
+    "candidate_sha256": "b02aeef2de5dc1be28b8cf42da17505e37334db4462bf91ececaee51e3471842",
+    "legal_plies": 12,
+    "active_v0141_restored": true,
+    "private_configs_changed": false,
+    "public_placeholder_example_loaded": true,
+    "online": false
+  },
+  "matches": {
+    "games": 150,
+    "concurrency": 3,
+    "unfinished": 0,
+    "forfeits": 0,
+    "runner_exit_status": 1,
+    "reason": "Previous-release score exactly 50%, criterion requires greater than 50%."
+  },
+  "decision": "Hold; no candidate commit, push, PR or release."
+}

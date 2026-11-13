@@ -1,0 +1,103 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"strings"
+)
+
+type scoredProbe struct {
+	Probe   probe           `json:"engine_probe"`
+	Metrics json.RawMessage `json:"metrics,omitempty"`
+	Referee *sfResult       `json:"played_move_referee,omitempty"`
+	Delta   *int            `json:"estimated_cp_loss,omitempty"`
+}
+type auditCase struct {
+	Position  position      `json:"input"`
+	Reference sfResult      `json:"reference"`
+ Recorded sfResult `json:"recorded_move_referee"`
+	Probes    []scoredProbe `json:"probes"`
+}
+
+func safeSearch(path string, p position, request string) (r probe) {
+	defer func() {
+		if v := recover(); v != nil {
+			r.Error = fmt.Sprint(v)
+			r.Request = request
+			r.Engine = path
+		}
+	}()
+	return search(path, p, request)
+}
+func main() {
+	source := "tools/benchmark/research/v0.15-king-danger/position-inputs.json"
+	data, err := os.ReadFile(source)
+	if err != nil {
+		panic(err)
+	}
+	var fixture struct {
+		Cases []position `json:"cases"`
+	}
+	if err = json.Unmarshal(data, &fixture); err != nil {
+		panic(err)
+	}
+	sf, err := openStockfish("/opt/homebrew/bin/stockfish")
+	if err != nil {
+		panic(err)
+	}
+	defer sf.close()
+	rows := []auditCase{}
+	for i, p := range fixture.Cases {
+		ref, err := sf.analyse(p.Position, "", 100000)
+		if err != nil {
+			panic(err)
+		}
+		recorded,err:=sf.analyse(p.Position,p.Played,100000);if err!=nil{panic(err)}
+ row := auditCase{Position: p, Reference: ref, Recorded:recorded}
+		cache := map[string]sfResult{ref.Bestmove: ref}
+		for _, engine := range []string{"tools/benchmark/bin/pandafish-v0.14.3", "tools/benchmark/bin/pandafish-candidate"} {
+			for _, request := range []string{"go depth 4", "go movetime 100"} {
+				q := safeSearch(engine, p, request)
+				r := scoredProbe{Probe: q}
+				for _, line := range q.Output {
+					if strings.HasPrefix(line, "info string pandafish ") {
+						r.Metrics = json.RawMessage(strings.TrimPrefix(line, "info string pandafish "))
+					}
+				}
+				if q.Error == "" {
+					score, ok := cache[q.Move]
+					if !ok {
+						score, err = sf.analyse(p.Position, q.Move, 100000)
+						if err != nil {
+							panic(err)
+						}
+						cache[q.Move] = score
+					}
+					r.Referee = &score
+					if ref.Score.Kind == "cp" && score.Score.Kind == "cp" {
+						v := ref.Score.Value - score.Score.Value
+						r.Delta = &v
+					}
+				}
+				row.Probes = append(row.Probes, r)
+			}
+		}
+		rows = append(rows, row)
+		result := struct {
+			Method     string      `json:"method"`
+			Source     string      `json:"source"`
+			SourceSHA  string      `json:"source_sha256"`
+			RefereeSHA string      `json:"referee_sha256"`
+			Cases      []auditCase `json:"cases"`
+		}{"16 deterministically selected actual king/queen decisions; all diagnostic searches serial. Two engine variants each get cold-process depth-four and separate 100-ms probes. Wait for bestmove with 20-second external watchdog; preserve failures and legality. Stockfish 19 referee: 100000 nodes per independent unrestricted/restricted query, 1 thread, 64 MiB, Skill 20, MultiPV 1, Elo limit off. Hash/new game reset each query; returned/PV mismatch rechecked. Scores from root side; signed finite-budget differences retained. This selected diagnostic is not a strength estimate or a parameter sweep.", source, hash(source), hash("/opt/homebrew/bin/stockfish"), rows}
+		b, err := json.MarshalIndent(result, "", "  ")
+		if err != nil {
+			panic(err)
+		}
+		if err = os.WriteFile(os.Args[1], append(b, '\n'), 0644); err != nil {
+			panic(err)
+		}
+		fmt.Printf("Completed selected position %d/%d\n", i+1, len(fixture.Cases))
+	}
+}

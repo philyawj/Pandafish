@@ -1,0 +1,135 @@
+{
+  "Source": "tools/benchmark/results/v0.15-null-dev-vs-v0.14.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/previous.pgn",
+  "SourceSHA256": "56d53efb5c11187cd1955f4d89f29d65c127e7ff9f7b9813e36ff1d6f49754af",
+  "Method": "Deterministic: first 8 king decisions and first 8 queen decisions by released v0.14.2, at plies 12-48, at most one of each kind per game, in PGN order. No selection by Stockfish score or candidate output. Selected diagnostic, not representative or hidden.",
+  "cases": [
+    {
+      "game": "previous.pgn/round-1",
+      "ply": 16,
+      "fen": "r1bqk2r/p2p1ppp/2pb1n2/1p2p3/3nP3/1BNP1N2/PPP2PPP/R1BQ1RK1 b kq - 1 8",
+      "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 e1g1 c6d4 b1c3 f8d6 d2d3 c7c6 b5c4 b7b5 c4b3",
+      "played": "e8g8",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-1",
+      "ply": 34,
+      "fen": "r2q1rk1/pb1p2pp/8/2bpN3/1p1N4/1QPP4/PP3PPP/R4RK1 b - - 0 17",
+      "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 e1g1 c6d4 b1c3 f8d6 d2d3 c7c6 b5c4 b7b5 c4b3 e8g8 c1e3 b5b4 e3d4 e5d4 c3e2 d6c5 e4e5 f6d5 e2d4 f7f6 b3d5 c6d5 c2c3 f6e5 d1b3 c8b7 f3e5",
+      "played": "d8e7",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-2",
+      "ply": 23,
+      "fen": "r1bq1rk1/pp1p1p1p/3bn3/2pNp3/2B1P3/5N2/PPP2PPP/R2Q1RK1 w - - 1 12",
+      "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b1c3 c6d4 e1g1 f8d6 d2d3 e8g8 c1g5 c7c5 g5f6 g7f6 b5c4 f6f5 c3d5 f5e4 d3e4 d4e6",
+      "played": "d1d3",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-3",
+      "ply": 14,
+      "fen": "r1bqk2r/ppp2ppp/2nb1n2/3p4/3P1B2/2N2N2/PP1QPPPP/R3KB1R b KQkq - 7 7",
+      "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 e6d5 b1c3 b8c6 g1f3 g8f6 c1f4 f8d6 d1d2",
+      "played": "e8g8",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-3",
+      "ply": 30,
+      "fen": "r2q1rk1/pp4pp/2p1b3/3pP2n/3Q4/2N1P3/PP4PP/2KR1B1R b - - 0 15",
+      "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 e6d5 b1c3 b8c6 g1f3 g8f6 c1f4 f8d6 d1d2 e8g8 e1c1 d6f4 d2f4 c8e6 f3e5 c6e5 d4e5 f6h5 f4d4 c7c6 e2e3 f7f6 f2f4 f6e5 f4e5",
+      "played": "d8g5",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-4",
+      "ply": 17,
+      "fen": "r1b1k2r/ppp2ppp/2n1pn2/5q2/2BP4/4PN2/PP1N1PPP/R2QK2R w KQkq - 5 9",
+      "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 f8b4 c1d2 b4d2 b1d2 d8d5 e2e3 g8f6 g1f3 d5f5 f1c4 b8c6",
+      "played": "d1b1",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-4",
+      "ply": 35,
+      "fen": "r1bnk2r/ppp3pp/4pn2/2N1N3/2BP4/7P/PP3PP1/1R2K2R w Kkq - 4 18",
+      "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 f8b4 c1d2 b4d2 b1d2 d8d5 e2e3 g8f6 g1f3 d5f5 f1c4 b8c6 d1b1 f5b1 a1b1 c8d7 e3e4 f6g4 h2h3 g4f6 e4e5 f6d5 d2e4 f7f6 e5f6 d5f6 e4c5 c6d8 f3e5 d7c8",
+      "played": "e1f1",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-5",
+      "ply": 14,
+      "fen": "r2qkb1r/pp2pppp/2n1bn2/1BppN3/4P3/2N5/PPPP1PPP/R1BQ1RK1 b kq - 1 7",
+      "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 c8e6 e1g1 b8c6 d3b5 g8f6 b1c3 d6d5 f3e5",
+      "played": "d8d6",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-5",
+      "ply": 20,
+      "fen": "r3kb1r/pp2pppp/2n1b3/1Bp1q3/8/4N3/PPPP1PPP/R1BQ1RK1 b kq - 1 10",
+      "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 c8e6 e1g1 b8c6 d3b5 g8f6 b1c3 d6d5 f3e5 d8d6 e4d5 f6d5 c3d5 d6e5 d5e3",
+      "played": "e8c8",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-6",
+      "ply": 29,
+      "fen": "2kr1b1r/p3pppp/2p5/3b1P2/2pq4/3PN3/PPP3PP/R1BQ1RK1 w - - 1 15",
+      "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 c8e6 e1g1 b8c6 d3b5 g8f6 b1c3 d6d5 f3e5 d8d6 e4d5 f6d5 c3d5 d6e5 d5e3 e8c8 b5c6 b7c6 f2f4 e5d4 d2d3 c5c4 f4f5 e6d5",
+      "played": "d1e2",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-7",
+      "ply": 30,
+      "fen": "r1bqr1k1/pp4pp/2p5/3p1p2/3PnB2/1Q2PN2/PP3PPP/2R2RK1 b - - 7 15",
+      "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1d2 f8b4 g1f3 e8g8 e2e3 d7d5 c4d5 f6d5 f1c4 b4d2 c1d2 b8d7 e1g1 f7f5 c4d5 e6d5 d1b3 c7c6 d2b4 f8e8 b4d6 d7f6 d6f4 f6e4 a1c1",
+      "played": "d8e7",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-8",
+      "ply": 15,
+      "fen": "r2qk2r/ppp2ppp/2n2n2/3p4/1b1P2b1/3BPN2/PP1N1PPP/R1BQK2R w KQkq - 2 8",
+      "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1d2 b8c6 g1f3 f8b4 e2e3 d7d5 c4d5 e6d5 f1d3 c8g4",
+      "played": "e1g1",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-8",
+      "ply": 19,
+      "fen": "r2q1rk1/ppp2ppp/2nb1n2/3p4/3P2b1/P2BPN2/1P1N1PPP/R1BQ1RK1 w - - 1 10",
+      "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1d2 b8c6 g1f3 f8b4 e2e3 d7d5 c4d5 e6d5 f1d3 c8g4 e1g1 e8g8 a2a3 b4d6",
+      "played": "d1e2",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-9",
+      "ply": 18,
+      "fen": "r1bqk2r/ppp2ppp/n2p1n2/2bP4/2N5/P1N5/1P2PPPP/R1BQKB1R b KQkq - 1 9",
+      "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 g1f3 b8c6 d2d4 f8d6 d4d5 c6b4 c4c5 d6c5 a2a3 b4a6 f3e5 d7d6 e5c4",
+      "played": "e8g8",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-10",
+      "ply": 13,
+      "fen": "rnbq1k1r/ppp2ppp/3p1n2/4Q3/1bP2B2/2N5/PP2PPPP/R3KBNR w KQ - 0 7",
+      "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d4 e5d4 d1d4 f8b4 d4e5 e8f8 c1f4 d7d6",
+      "played": "e1c1",
+      "split": "selected-released-king-or-queen-decisions"
+    },
+    {
+      "game": "previous.pgn/round-11",
+      "ply": 14,
+      "fen": "r2qk2r/pppb1ppp/2nbpn2/3pN3/3P1B2/3BP3/PPPN1PPP/R2QK2R b KQkq - 4 7",
+      "position": "position startpos moves g1f3 d7d5 d2d4 g8f6 c1f4 b8c6 b1d2 e7e6 e2e3 f8d6 f3e5 c8d7 f1d3",
+      "played": "e8g8",
+      "split": "selected-released-king-or-queen-decisions"
+    }
+  ]
+}
