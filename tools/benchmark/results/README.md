@@ -47,6 +47,9 @@ Forfeits count as losses for the offending engine. Compare matching profiles bef
 | v0.15-evaluation-dev | v0.14.1 | 18 / 21 / 11 | 0 | 0 | 57.0% | 57.0% to 57.0% | [R19](v0.15-evaluation-dev-vs-v0.14.1-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15-evaluation-dev-vs-v0.14.1-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15-evaluation-dev-vs-v0.14.1-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/previous.pgn) |
 | v0.15-evaluation-dev | Stockfish 19 / Skill 2 | 20 / 5 / 25 | 0 | 0 | 45.0% | 45.0% to 45.0% | [R19](v0.15-evaluation-dev-vs-v0.14.1-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15-evaluation-dev-vs-v0.14.1-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15-evaluation-dev-vs-v0.14.1-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/stockfish.pgn) |
 | v0.15-evaluation-dev | Sacrifice v0.2.0 b528f0ba | 7 / 25 / 18 | 0 | 0 | 39.0% | 39.0% to 39.0% | [R19](v0.15-evaluation-dev-vs-v0.14.1-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15-evaluation-dev-vs-v0.14.1-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15-evaluation-dev-vs-v0.14.1-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/sacrifice.pgn) |
+| v0.15-null-dev | v0.14.2 | 18 / 20 / 12 | 0 | 0 | 56.0% | 56.0% to 56.0% | [R20](v0.15-null-dev-vs-v0.14.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15-null-dev-vs-v0.14.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15-null-dev-vs-v0.14.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/previous.pgn) |
+| v0.15-null-dev | Stockfish 19 / Skill 2 | 16 / 4 / 30 | 0 | 0 | 36.0% | 36.0% to 36.0% | [R20](v0.15-null-dev-vs-v0.14.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15-null-dev-vs-v0.14.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15-null-dev-vs-v0.14.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/stockfish.pgn) |
+| v0.15-null-dev | Sacrifice v0.2.0 b528f0ba | 3 / 17 / 30 | 0 | 0 | 23.0% | 23.0% to 23.0% | [R20](v0.15-null-dev-vs-v0.14.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15-null-dev-vs-v0.14.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15-null-dev-vs-v0.14.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/sacrifice.pgn) |
 
 ## Run profiles
 
@@ -73,6 +76,7 @@ Times are milliseconds. Compare matching timing policies and settings. Partial r
 | [R17](v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-13 04:15Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; AC power reported at start; three matchups concurrent; no live bot | wall-clock-v2 | 3 (all) | complete |
 | [R18](v0.15-dev-vs-v0.14-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-13 04:59Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; AC power reported at start; three concurrent matchups; no live bot | wall-clock-v2 | 3 (all) | complete |
 | [R19](v0.15-evaluation-dev-vs-v0.14.1-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-13 07:49Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; AC power reported at start; three concurrent matchups; no live bot | wall-clock-v2 | 3 (all) | complete |
+| [R20](v0.15-null-dev-vs-v0.14.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-13 08:22Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; three concurrent matchups; no live bot | wall-clock-v2 | 3 (all) | complete |
 
 ## Measured timing
 
@@ -121,3 +125,6 @@ Wall time includes sending the position, requesting the move, and receiving best
 | R19 | v0.14.1 | 130.2 | 142.4 | 4 / 6 |
 | R19 | Stockfish 19 / Skill 2 | 143.3 | 131.3 | 2 / 1452 |
 | R19 | Sacrifice v0.2.0 b528f0ba | 133.7 | 136.2 | 4 / 2218 |
+| R20 | v0.14.2 | 129.7 | 124.9 | 19 / 20 |
+| R20 | Stockfish 19 / Skill 2 | 128.7 | 135.9 | 16 / 1859 |
+| R20 | Sacrifice v0.2.0 b528f0ba | 131.7 | 129.7 | 21 / 2188 |

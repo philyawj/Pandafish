@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.14.2 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.14.3 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
@@ -278,7 +278,12 @@ released playing behavior unchanged. See the
 [research report](tools/benchmark/research/v0.15-positional-evaluation/README.md)
 for findings and replay instructions.
 
-**Next:** Test a narrower pawn-structure and king-shelter hypothesis without
-minor-piece mobility. Keep controlled local comparisons as the main validation
-loop, with periodic live integration tests. Prioritize substantial gains and
-require game evidence before promoting additional evaluation complexity.
+**v0.14.3: Preserve the null-move search experiment (complete).** Archive the
+reference-engine comparison, guarded null-move code, tests, diagnostics, and
+match records. Keep the released playing behavior unchanged. See the
+[research report](tools/benchmark/research/v0.15-null-move/README.md).
+
+**Next:** Diagnose tactical and conversion failures from saved local games before
+choosing the next strength change. Mate-distance and repetition handling remain
+concrete gaps to investigate; pawn/king-only evaluation is another hypothesis.
+Keep controlled local validation and periodic live integration tests.
