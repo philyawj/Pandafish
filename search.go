@@ -16,13 +16,15 @@ const checkEvasionDepth = 4
 // A zero-value searcher is unlimited, useful for fixed-depth comparisons.
 // Cancellation is distinct from a score, so unfinished nodes never affect ties.
 type searcher struct {
-	nodes      uint64
-	table      *transpositionTable
-	killers    *killerTable
-	ctx        context.Context
-	deadline   time.Time
-	now        func() time.Time
-	unfiltered bool // Internal reference mode for broader-quiescence ablations.
+	repetitions map[uint64]int
+	historyKey  uint64
+	nodes       uint64
+	table       *transpositionTable
+	killers     *killerTable
+	ctx         context.Context
+	deadline    time.Time
+	now         func() time.Time
+	unfiltered  bool // Internal reference mode for broader-quiescence ablations.
 }
 
 func (worker *searcher) clock() time.Time {
@@ -52,17 +54,22 @@ func (worker *searcher) searchAtPly(position *chess.Position, depth, alpha, beta
 		return 0, false
 	}
 	if depth <= 0 {
-		return worker.quiet(position, quiescenceDepth, alpha, beta, checked)
+		return worker.quietAtPly(position, quiescenceDepth, alpha, beta, checked, ply)
 	}
 	worker.nodes++
 	if position.Status() != chess.NoMethod {
-		return evaluate(position, position.Turn()), !worker.stopped()
+		return searchedEvaluation(position, ply), !worker.stopped()
 	}
-	entry, hit := worker.table.probe(position)
+	if worker.pushPosition(position) {
+		worker.popPosition(position)
+		return 0, !worker.stopped()
+	}
+	defer worker.popPosition(position)
+	entry, hit := worker.table.probe(position, worker.historyKey)
 	// Equal depth preserves the exact fixed-depth value. Deeper entries still
 	// provide move hints. Quiescence has a separate horizon and is not cached.
 	if hit && int(entry.depth) == depth {
-		score := int(entry.score)
+		score := scoreFromTable(int(entry.score), ply)
 		if entry.bound == exactBound || (entry.bound == lowerBound && score >= beta) || (entry.bound == upperBound && score <= alpha) {
 			return score, !worker.stopped()
 		}
@@ -95,7 +102,7 @@ func (worker *searcher) searchAtPly(position *chess.Position, depth, alpha, beta
 	if worker.stopped() {
 		return 0, false
 	}
-	worker.table.store(position, depth, best, originalAlpha, beta, bestMove)
+	worker.table.store(position, depth, scoreToTable(best, ply), scoreToTable(originalAlpha, ply), scoreToTable(beta, ply), bestMove, worker.historyKey)
 	return best, true
 }
 
@@ -108,13 +115,22 @@ func quiescence(position *chess.Position, depth, alpha, beta int) int {
 // Non-checking ordinary captures may be filtered by their material exchange.
 // Checking captures, promotions, and every check evasion remain eligible.
 func (worker *searcher) quiet(position *chess.Position, depth, alpha, beta int, checked bool) (int, bool) {
+	return worker.quietAtPly(position, depth, alpha, beta, checked, 0)
+}
+
+func (worker *searcher) quietAtPly(position *chess.Position, depth, alpha, beta int, checked bool, ply int) (int, bool) {
 	if worker.stopped() {
 		return 0, false
 	}
 	worker.nodes++
 	if position.Status() != chess.NoMethod {
-		return evaluate(position, position.Turn()), !worker.stopped()
+		return searchedEvaluation(position, ply), !worker.stopped()
 	}
+	if worker.pushPosition(position) {
+		worker.popPosition(position)
+		return 0, !worker.stopped()
+	}
+	defer worker.popPosition(position)
 	static := staticScore(position, position.Turn())
 	if depth <= -checkEvasionDepth || (depth <= 0 && !checked) {
 		return static, !worker.stopped()
@@ -146,7 +162,7 @@ func (worker *searcher) quiet(position *chess.Position, depth, alpha, beta int, 
 				continue
 			}
 		}
-		score, complete := worker.quiet(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check))
+		score, complete := worker.quietAtPly(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
 		if !complete {
 			return 0, false
 		}

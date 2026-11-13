@@ -1,0 +1,109 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/corentings/chess/v2"
+	"os"
+	"strings"
+)
+
+type played struct {
+	FEN, Move string
+	Converter bool
+	Engine    *probe    `json:",omitempty"`
+	Defender  *sfResult `json:",omitempty"`
+}
+type trial struct {
+	FEN, Engine, Hash, Result, Termination string
+	Plies                                  int
+	Moves                                  []played
+}
+
+func mirror(fen string) string {
+	f := strings.Fields(fen)
+	r := strings.Split(f[0], "/")
+	for i, j := 0, 7; i < j; i, j = i+1, j-1 {
+		r[i], r[j] = r[j], r[i]
+	}
+	f[0] = strings.Map(func(c rune) rune {
+		if c >= 'a' && c <= 'z' {
+			return c - 32
+		}
+		if c >= 'A' && c <= 'Z' {
+			return c + 32
+		}
+		return c
+	}, strings.Join(r, "/"))
+	f[1] = "b"
+	return strings.Join(f, " ")
+}
+func main() {
+	sf, err := openStockfish("/opt/homebrew/bin/stockfish")
+	if err != nil {
+		panic(err)
+	}
+	defer sf.close()
+	var rows []trial
+	bases := []string{"6k1/8/8/8/3QK3/8/8/8 w - - 0 1", "7k/8/8/8/5K2/8/3Q4/8 w - - 0 1"}
+	fens := append([]string{}, bases...)
+	for _, f := range bases {
+		fens = append(fens, mirror(f))
+	}
+	for _, f := range fens {
+		opt, err := chess.FEN(f)
+		if err != nil {
+			panic(err)
+		}
+		for _, engine := range []string{"tools/benchmark/bin/pandafish-v0.14.4", "/tmp/pandafish-mate-only", "tools/benchmark/bin/pandafish-candidate"} {
+			g := chess.NewGame(opt)
+			side := g.Position().Turn()
+			history := []string{}
+			row := trial{FEN: f, Engine: engine, Hash: hash(engine), Moves: []played{}}
+			for ply := 0; ply < 100 && g.Outcome() == chess.NoOutcome; ply++ {
+				p := g.Position()
+				m := played{FEN: p.String(), Converter: p.Turn() == side}
+				if m.Converter {
+					q := search(engine, position{FEN: p.String(), Position: "position fen " + f + " moves " + strings.Join(history, " ")}, "go depth 5")
+					m.Move = q.Move
+					m.Engine = &q
+				} else {
+					q, err := sf.analyse("position fen "+p.String(), "", 20000)
+					if err != nil {
+						panic(err)
+					}
+					m.Move = q.Bestmove
+					m.Defender = &q
+				}
+				move, err := (chess.UCINotation{}).Decode(p, m.Move)
+				if err != nil {
+					panic(err)
+				}
+				if err = g.Move(move, nil); err != nil {
+					panic(err)
+				}
+				row.Moves = append(row.Moves, m)
+				history = append(history, m.Move)
+				for _, method := range g.EligibleDraws() {
+					if method == chess.ThreefoldRepetition || method == chess.FiftyMoveRule {
+						g.Draw(method)
+						break
+					}
+				}
+			}
+			row.Plies = len(row.Moves)
+			row.Result = string(g.Outcome())
+			row.Termination = fmt.Sprint(g.Method())
+			rows = append(rows, row)
+			fmt.Println(engine, "plies", row.Plies, row.Result, row.Termination)
+		}
+	}
+	out := struct {
+		Method, Defender, DefenderHash string
+		Trials                         []trial
+	}{"Four preselected synthetic queen-vs-king endings, two mirrored colors, each released/candidate policy versus Stockfish 19 Skill20 at 20000 nodes, Threads1 Hash64, fresh hash each query. Converter cold process depth5 with full initial-FEN/move history each move. All three policies receive identical history. Serial diagnostic, not representative strength or standard timed matches. Threefold/50move draws claimed; cap100plies. Random ties vary; no retries.", sf.name, hash("/opt/homebrew/bin/stockfish"), rows}
+	b, _ := json.MarshalIndent(out, "", "  ")
+	if err = os.WriteFile("/tmp/pandafish-full-conversion-audit.json", append(b, '\n'), 0644); err != nil {
+		panic(err)
+	}
+}

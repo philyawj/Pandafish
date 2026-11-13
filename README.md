@@ -1,11 +1,11 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.14.4 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.15 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
 The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`,
-`transposition.go`, `killers.go`, `exchange.go`, and `evaluation.go`.
+`transposition.go`, `killers.go`, `exchange.go`, `evaluation.go`, `mate.go`, and `repetition.go`.
 [corentings/chess](https://github.com/corentings/chess) handles chess rules,
 including castling, en passant, and promotions. The engine assigns values of
 1 to pawns, 3 to knights and bishops, 5 to rooks, and 9 to queens. It picks a
@@ -17,7 +17,9 @@ searched first to help pruning. Equal best moves are selected randomly;
 root pruning keeps their scores exact while discarding inferior choices.
 Checkmate scores above any material advantage, being
 checkmated scores below any material disadvantage, and stalemate scores zero.
-Other draw rules have no separate search evaluation. Modest placement scores
+Shorter forced mates score higher, and longer forced losses score less badly.
+Threefold repetition is scored as a draw using supplied game history and the
+current search path. Other draw rules have no separate search evaluation. Modest placement scores
 encourage central minor pieces, central pawn space, and active rooks on the
 seventh rank. King placement blends home-rank safety with endgame activity
 according to remaining non-pawn material. These are simple preferences, not
@@ -32,7 +34,8 @@ Two such hints per ply are shared across iterative-deepening passes and reset
 for each search. They affect ordering, not evaluation or root tie handling.
 The transposition table persists within a game, clears on `ucinewgame`,
 and is never saved to disk. Quiescence scores are not cached. Search still
-has no repetition-history or fifty-move draw evaluation.
+uses a repetition-count fingerprint to distinguish draw-sensitive score contexts.
+It still has no separate fifty-move draw evaluation.
 
 Quiescence means quietness. At the normal search boundary, it examines
 captures and promotions, and all legal escapes when the king is in check.
@@ -288,7 +291,17 @@ the ranked positional hypotheses, exact code, tests, saved-decision diagnostics,
 and match records. Keep released playing behavior unchanged. See the
 [research report](tools/benchmark/research/v0.15-king-danger/README.md).
 
-**Next:** Diagnose actual tactical and conversion failures using focused fixtures
-and Sacrifice as a small-engine reference. Require a demonstrated decision change
-before broader strength testing. Keep controlled local validation and periodic
-live integration tests.
+**v0.15: Convert wins and recognize repetitions (complete).**
+Prefer shorter forced mates, carry mate distance through quiescence and cached
+scores, and evaluate threefold repetitions from known game/search history.
+Report calculated signed mate counts through UCI. Keep the released positional
+evaluation, search breadth and clocks. See the
+[conversion diagnosis and validation](tools/benchmark/research/v0.15-mate-conversion/README.md).
+
+**Next:** Collect roughly 200 live Lichess games across multiple sessions on the
+same v0.15 build. Use the recorded games, full-strength offline analysis and
+controlled replays to identify recurring tactical, positional and conversion
+failures before selecting the next engine change. See the
+[extended live-test plan](tools/benchmark/live/v0.15-test-plan/README.md) for capture,
+session handling, analysis and limits. The local benchmark workflow remains the
+validation loop for each proposed correction.
