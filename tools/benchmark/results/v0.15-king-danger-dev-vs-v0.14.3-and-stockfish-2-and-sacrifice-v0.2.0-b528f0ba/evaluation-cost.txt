@@ -1,0 +1,14 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/philyawj/Pandafish
+cpu: Apple M2
+BenchmarkKingDangerControls/start/released-8         	  311253	       667.5 ns/op	       0 B/op	       0 allocs/op
+BenchmarkKingDangerControls/start/released-8         	  420468	       563.9 ns/op	       0 B/op	       0 allocs/op
+BenchmarkKingDangerControls/start/candidate-8        	  168583	      1461 ns/op	       0 B/op	       0 allocs/op
+BenchmarkKingDangerControls/start/candidate-8        	  160494	      1496 ns/op	       0 B/op	       0 allocs/op
+BenchmarkKingDangerControls/dense/released-8         	  416766	       583.0 ns/op	       0 B/op	       0 allocs/op
+BenchmarkKingDangerControls/dense/released-8         	  408835	       581.9 ns/op	       0 B/op	       0 allocs/op
+BenchmarkKingDangerControls/dense/candidate-8        	  165495	      1437 ns/op	       0 B/op	       0 allocs/op
+BenchmarkKingDangerControls/dense/candidate-8        	  165037	      1446 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/philyawj/Pandafish	2.268s

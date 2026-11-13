@@ -152,8 +152,8 @@ git archive v0.14 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14" .)
 
 build_dir=$(mktemp -d)
-git archive v0.14.3 | tar -x -C "$build_dir"
-(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14.3" .)
+git archive v0.14.4 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14.4" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -236,12 +236,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.14.3 tagged baseline as above for the next engine change. Then run
+Build the v0.14.4 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.14.3 --previous-version v0.14.3 \
+  --previous tools/benchmark/bin/pandafish-v0.14.4 --previous-version v0.14.4 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -400,7 +400,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.14.3 --previous-version v0.14.3 \
+  --previous tools/benchmark/bin/pandafish-v0.14.4 --previous-version v0.14.4 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -623,7 +623,7 @@ reproduce earlier profiles. For example, a future Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.14.3 --previous-version v0.14.3 \
+  --previous tools/benchmark/bin/pandafish-v0.14.4 --previous-version v0.14.4 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```
@@ -713,7 +713,7 @@ is required for this tooling increment. Level 1 remains the target.
 See the [session tool documentation](../lichess/README.md) for commands,
 recording limits, and offline reporting. Future changes to move selection or
 time allocation use the routine comparison workflow above with the latest
-release as the baseline, currently v0.14.3.
+release as the baseline, currently v0.14.4.
 
 
 ## v0.10 transposition-table candidate
@@ -895,3 +895,22 @@ its fresh reference comparison, exact replayable source, diagnostics, and all
 150 games. The candidate saved fixed-depth work but did not earn promotion.
 The release keeps v0.14.2 playing behavior, with no new strength claim. Diagnose
 saved-game failures and conversion gaps before selecting another feature.
+
+## Local v0.15 king-danger evaluation attempt
+
+The [ranked positional hypotheses](research/v0.15-king-danger/README.md) include
+initial low-confidence gain estimates, scope and the reference comparison. The
+isolated king-danger candidate scored 50% against v0.14.3, 46% against Skill 2
+and 35% against Sacrifice in the standard concurrent 50-game screen. All games
+finished without forfeits; exactly 50% failed the previous-release criterion.
+It is held locally, not promoted. [Raw records, cost, saved-decision diagnostics
+and full interpretation](results/v0.15-king-danger-dev-vs-v0.14.3-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/README.md).
+
+## v0.14.4 research release
+
+Archive the [king-danger evaluation experiment](research/v0.15-king-danger/README.md),
+including the five positional hypotheses and initial speculative gain estimates.
+The candidate failed the previous-release criterion and was not promoted. The
+release restores v0.14.3 evaluation and keeps playing behavior unchanged. Next,
+use focused tactical/conversion fixtures and the smaller Sacrifice reference to
+identify an actual decision failure before another implementation.
