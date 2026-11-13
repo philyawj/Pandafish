@@ -1,0 +1,272 @@
+package main
+
+import (
+	"context"
+	"slices"
+	"time"
+
+	"github.com/corentings/chess/v2"
+)
+
+const searchDepth = 3
+const searchInfinity = mateScore + 1
+const quiescenceDepth = 16
+const checkEvasionDepth = 4
+
+// Internal ablations use fresh workers/tables; these are not UCI options.
+type searchMode uint8
+
+const (
+	selectiveSearch searchMode = iota
+	pvsOnly
+	fullWidthSearch
+)
+
+type selectivityAudit struct {
+	probes, reductions, verifications, refutations, researches uint64
+}
+
+// A zero-value searcher is unlimited, useful for fixed-depth comparisons.
+// Cancellation is distinct from a score, so unfinished nodes never affect ties.
+type searcher struct {
+	nodes      uint64
+	table      *transpositionTable
+	killers    *killerTable
+	ctx        context.Context
+	deadline   time.Time
+	now        func() time.Time
+	unfiltered bool // Internal reference mode for broader-quiescence ablations.
+	mode       searchMode
+	audit      *selectivityAudit
+}
+
+func (worker *searcher) clock() time.Time {
+	if worker.now != nil {
+		return worker.now()
+	}
+	return time.Now()
+}
+
+func (worker *searcher) stopped() bool {
+	return (worker.ctx != nil && worker.ctx.Err() != nil) ||
+		(!worker.deadline.IsZero() && !worker.clock().Before(worker.deadline))
+}
+
+func search(position *chess.Position, depth, alpha, beta int) int {
+	score, _ := (&searcher{}).search(position, depth, alpha, beta, inCheck(position))
+	return score
+}
+
+// Negamax flips each child's score and window to the parent's perspective.
+func (worker *searcher) search(position *chess.Position, depth, alpha, beta int, checked bool) (int, bool) {
+	return worker.searchAtPly(position, depth, alpha, beta, checked, 0)
+}
+
+func (worker *searcher) searchAtPly(position *chess.Position, depth, alpha, beta int, checked bool, ply int) (int, bool) {
+	if worker.stopped() {
+		return 0, false
+	}
+	if depth <= 0 {
+		return worker.quiet(position, quiescenceDepth, alpha, beta, checked)
+	}
+	worker.nodes++
+	if position.Status() != chess.NoMethod {
+		return evaluate(position, position.Turn()), !worker.stopped()
+	}
+	entry, hit := worker.table.probe(position)
+	// Only reuse scores at matching nominal depths; deeper entries supply hints.
+	// With LMR, scores describe selective coverage, not full-width minimax.
+	// Quiescence has a separate horizon and is not cached.
+	if hit && int(entry.depth) == depth {
+		score := int(entry.score)
+		if entry.bound == exactBound || (entry.bound == lowerBound && score >= beta) || (entry.bound == upperBound && score <= alpha) {
+			return score, !worker.stopped()
+		}
+	}
+	originalAlpha := alpha
+	moves := orderedMoves(position)
+	worker.killers.order(moves, ply)
+	if hit {
+		preferMove(moves, entry.move)
+	}
+	best, bestMove := -searchInfinity, uint16(0)
+	for index, move := range moves {
+		if worker.stopped() {
+			return 0, false
+		}
+		child := position.Update(&move)
+		score, complete := 0, false
+		if worker.mode == fullWidthSearch || index == 0 {
+			score, complete = worker.searchAtPly(child, depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
+			score = -score
+		} else {
+			if worker.audit != nil {
+				worker.audit.probes++
+			}
+			reduction := 0
+			if worker.reduce(move, depth, index, ply, checked, alpha, entry, hit) {
+				reduction = 1
+				if worker.audit != nil {
+					worker.audit.reductions++
+				}
+			}
+			// Later moves first ask whether they can improve alpha. A promising
+			// reduced probe must repeat at full nominal depth before a cutoff.
+			score, complete = worker.searchAtPly(child, depth-1-reduction, -alpha-1, -alpha, move.HasTag(chess.Check), ply+1)
+			score = -score
+			if complete && reduction != 0 && score > alpha {
+				if worker.audit != nil {
+					worker.audit.verifications++
+				}
+				score, complete = worker.searchAtPly(child, depth-1, -alpha-1, -alpha, move.HasTag(chess.Check), ply+1)
+				score = -score
+				if complete && score <= alpha && worker.audit != nil {
+					worker.audit.refutations++
+				}
+			}
+			if complete && score > alpha && score < beta {
+				if worker.audit != nil {
+					worker.audit.researches++
+				}
+				score, complete = worker.searchAtPly(child, depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
+				score = -score
+			}
+		}
+		if !complete {
+			return 0, false
+		}
+		if score > best {
+			best, bestMove = score, encodeMove(move)
+		}
+		alpha = max(alpha, score)
+		if alpha >= beta {
+			worker.killers.remember(ply, move)
+			break
+		}
+	}
+	if worker.stopped() {
+		return 0, false
+	}
+	worker.table.store(position, depth, best, originalAlpha, beta, bestMove)
+	return best, true
+}
+
+// Reduce only a later quiet probe, by one ply. Root moves are searched by
+// root(), which never reduces them. A reduced fail-low is deliberately selective
+// and can miss a quiet tactic; a fail-high must be verified before use.
+func (worker *searcher) reduce(move chess.Move, depth, index, ply int, checked bool, alpha int, entry tableEntry, hit bool) bool {
+	if worker.mode != selectiveSearch || depth < 3 || index < 3 || checked || move.HasTag(chess.Check) || !isQuietMove(move) || abs(alpha) >= mateScore {
+		return false
+	}
+	hint := encodeMove(move)
+	if hit && entry.move == hint {
+		return false
+	}
+	if worker.killers != nil && ply >= 0 && ply < len(worker.killers) {
+		for _, killer := range worker.killers[ply] {
+			if killer == hint {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+func quiescence(position *chess.Position, depth, alpha, beta int) int {
+	score, _ := (&searcher{}).quiet(position, depth, alpha, beta, inCheck(position))
+	return score
+}
+
+// Continue tactical exchanges until quiet or the safety bound is reached.
+// Non-checking ordinary captures may be filtered by their material exchange.
+// Checking captures, promotions, and every check evasion remain eligible.
+func (worker *searcher) quiet(position *chess.Position, depth, alpha, beta int, checked bool) (int, bool) {
+	if worker.stopped() {
+		return 0, false
+	}
+	worker.nodes++
+	if position.Status() != chess.NoMethod {
+		return evaluate(position, position.Turn()), !worker.stopped()
+	}
+	static := staticScore(position, position.Turn())
+	if depth <= -checkEvasionDepth || (depth <= 0 && !checked) {
+		return static, !worker.stopped()
+	}
+	best := -searchInfinity
+	if !checked {
+		best = static
+		if best >= beta {
+			return best, !worker.stopped()
+		}
+		alpha = max(alpha, best)
+	}
+	for _, move := range orderedMoves(position) {
+		if worker.stopped() {
+			return 0, false
+		}
+		if !checked && !move.HasTag(chess.Capture) && !move.HasTag(chess.EnPassant) && move.Promo() == chess.NoPieceType {
+			continue
+		}
+		// Equal-or-cheaper attackers usually cannot lose a material exchange.
+		// Keep them without SEE, including recapture-promotion exceptions.
+		if !worker.unfiltered && !checked && !move.HasTag(chess.Check) && move.Promo() == chess.NoPieceType &&
+			captureValue(position, move) < pieceValues[position.Board().Piece(move.S1()).Type()] {
+			gain, complete := worker.exchange(position, move)
+			if !complete {
+				return 0, false
+			}
+			if gain < 0 {
+				continue
+			}
+		}
+		score, complete := worker.quiet(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check))
+		if !complete {
+			return 0, false
+		}
+		score = -score
+		best, alpha = max(best, score), max(alpha, score)
+		if alpha >= beta {
+			break
+		}
+	}
+	return best, !worker.stopped()
+}
+
+// The chess library exposes attacks, but not Position's check flag.
+func inCheck(position *chess.Position) bool {
+	pieces := position.Board().SquareMap()
+	var king chess.Square
+	for square, piece := range pieces {
+		if piece.Type() == chess.King && piece.Color() == position.Turn() {
+			king = square
+			break
+		}
+	}
+	for square, piece := range pieces {
+		if piece.Color() != position.Turn() && slices.Contains(position.Board().AttacksFrom(square), king) {
+			return true
+		}
+	}
+	return false
+}
+
+// Search captures of valuable pieces first, preferring cheaper attackers.
+// ValidMoves returns a copy, so reordering does not change the position.
+func orderedMoves(position *chess.Position) []chess.Move {
+	moves := position.ValidMoves()
+	priority := func(move chess.Move) int {
+		value := pieceValues[move.Promo()]
+		if move.HasTag(chess.Capture) || move.HasTag(chess.EnPassant) {
+			victim := pieceValues[position.Board().Piece(move.S2()).Type()]
+			if move.HasTag(chess.EnPassant) {
+				victim = pieceValues[chess.Pawn]
+			}
+			value += 10000 + 10*victim - pieceValues[position.Board().Piece(move.S1()).Type()]
+		}
+		return value
+	}
+	slices.SortStableFunc(moves, func(a, b chess.Move) int {
+		return priority(b) - priority(a)
+	})
+	return moves
+}

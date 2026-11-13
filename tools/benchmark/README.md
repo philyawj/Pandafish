@@ -50,9 +50,13 @@ periodically after meaningful progress, or when clocks, UCI handling, or client
 integration change. Controlled matches provide cleaner strength comparisons;
 live games expose operational failures and new positions.
 
-The [v0.10 review](live/v0.10-twitch-m2-20261112/REVIEW.md#current-strength-priorities)
-records the current five strength priorities and the reasoning behind them.
-They are hypotheses to test, not guaranteed gains or an approved release schedule.
+The [selective-search research report](research/v0.15-selective-search/README.md)
+records PVS with guarded reductions as a tested substantial search hypothesis.
+Its screen did not meet the larger-gain goal; richer classical evaluation is
+the next preferred research direction.
+The older [v0.10 priorities](live/v0.10-twitch-m2-20261112/REVIEW.md#current-strength-priorities)
+describe earlier groundwork. Prefer meaningful strength experiments now; defer
+small optimizations unless profiling shows a specific need.
 
 ## Why this exists
 
@@ -142,6 +146,10 @@ git archive v0.13 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.14 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14" .)
+
+build_dir=$(mktemp -d)
+git archive v0.14.1 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14.1" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -224,12 +232,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.14 tagged baseline as above for the next engine change. Then run
+Build the v0.14.1 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.14 --previous-version v0.14 \
+  --previous tools/benchmark/bin/pandafish-v0.14.1 --previous-version v0.14.1 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -388,7 +396,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.14 --previous-version v0.14 \
+  --previous tools/benchmark/bin/pandafish-v0.14.1 --previous-version v0.14.1 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -611,7 +619,7 @@ reproduce earlier profiles. For example, a future Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.14 --previous-version v0.14 \
+  --previous tools/benchmark/bin/pandafish-v0.14.1 --previous-version v0.14.1 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```
@@ -701,7 +709,7 @@ is required for this tooling increment. Level 1 remains the target.
 See the [session tool documentation](../lichess/README.md) for commands,
 recording limits, and offline reporting. Future changes to move selection or
 time allocation use the routine comparison workflow above with the latest
-release as the baseline, currently v0.14.
+release as the baseline, currently v0.14.1.
 
 
 ## v0.10 transposition-table candidate
@@ -830,3 +838,30 @@ The [v0.13 concurrency experiment](results/v0.13-parallel-check-vs-v0.12-and-sto
 is evidence for the workflow, not a fresh strength test of v0.14. Its exact
 source, labels, hashes, all 150 games, throughput probes, and comparisons are
 preserved. Release validation uses code checks and short integration matches.
+
+
+## Unpromoted v0.15 selective-search experiment
+
+PVS plus guarded one-ply late-move reductions passed functional checks and
+reduced search work, but scored 16/19/15 against v0.14 (51%), 22/8/20 against
+Skill 2 (52%), and 8/18/24 against Sacrifice (34%). All three 50-game matchups
+completed concurrently without forfeits or unfinished games. The prior profile
+scored 60% and 34% externally. This does not demonstrate the substantial gain
+sought, so the search candidate was not promoted. v0.14.1 archives the research and
+restores the released playing policy.
+
+[Fresh assessment, ablations, checks, method, full results, and raw records](results/v0.15-dev-vs-v0.14-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/README.md)
+explain the limits and the recommendation to test richer classical evaluation
+on the released baseline next. The research release makes no new playing-strength claim.
+
+
+## v0.14.1 research release
+
+The [research report](research/v0.15-selective-search/README.md) preserves the
+unpromoted PVS/LMR hypothesis, original code and tests, all results, decision,
+lessons, and a detailed plan for board-aware classical evaluation. Experimental
+source lives in snapshots and `.go.txt` files outside normal builds. The release
+restores v0.14's search and ordering tests, with only the release identity changed.
+A research release records useful findings without presenting them as an engine
+improvement. Future evaluation work starts from this released baseline with a
+distinct candidate label, rather than stacking the unproven reductions.
