@@ -33,7 +33,9 @@ func exhaustiveScore(position *chess.Position, depth int) int {
 	return best
 }
 
-// Reference quiescence uses fixed-color minimax without pruning or ordering.
+// Reference quiescence uses fixed-color minimax without alpha-beta pruning or
+// ordering. Capture eligibility matches the policy under test; SEE is checked
+// separately against a legal-recapture material oracle.
 func exhaustiveQuietScore(position *chess.Position, depth int) int {
 	static := evaluate(position, chess.White)
 	if position.Status() != chess.NoMethod {
@@ -52,6 +54,9 @@ func exhaustiveQuietScore(position *chess.Position, depth int) int {
 	}
 	for _, move := range position.ValidMoves() {
 		if !checked && !move.HasTag(chess.Capture) && !move.HasTag(chess.EnPassant) && move.Promo() == chess.NoPieceType {
+			continue
+		}
+		if !checked && !move.HasTag(chess.Check) && move.Promo() == chess.NoPieceType && staticExchange(position, move) < 0 {
 			continue
 		}
 		score := exhaustiveQuietScore(position.Update(&move), depth-1)

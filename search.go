@@ -10,18 +10,19 @@ import (
 
 const searchDepth = 3
 const searchInfinity = mateScore + 1
-const quiescenceDepth = 2
+const quiescenceDepth = 16
 const checkEvasionDepth = 4
 
 // A zero-value searcher is unlimited, useful for fixed-depth comparisons.
 // Cancellation is distinct from a score, so unfinished nodes never affect ties.
 type searcher struct {
-	nodes    uint64
-	table    *transpositionTable
-	killers  *killerTable
-	ctx      context.Context
-	deadline time.Time
-	now      func() time.Time
+	nodes      uint64
+	table      *transpositionTable
+	killers    *killerTable
+	ctx        context.Context
+	deadline   time.Time
+	now        func() time.Time
+	unfiltered bool // Internal reference mode for broader-quiescence ablations.
 }
 
 func (worker *searcher) clock() time.Time {
@@ -103,9 +104,9 @@ func quiescence(position *chess.Position, depth, alpha, beta int) int {
 	return score
 }
 
-// Captures and promotions keep the two-ply horizon. At that horizon, only
-// checked nodes extend, for at most four extra plies of check evasions. The
-// final safety cap still uses static evaluation, even in a checking sequence.
+// Continue tactical exchanges until quiet or the safety bound is reached.
+// Non-checking ordinary captures may be filtered by their material exchange.
+// Checking captures, promotions, and every check evasion remain eligible.
 func (worker *searcher) quiet(position *chess.Position, depth, alpha, beta int, checked bool) (int, bool) {
 	if worker.stopped() {
 		return 0, false
@@ -132,6 +133,18 @@ func (worker *searcher) quiet(position *chess.Position, depth, alpha, beta int, 
 		}
 		if !checked && !move.HasTag(chess.Capture) && !move.HasTag(chess.EnPassant) && move.Promo() == chess.NoPieceType {
 			continue
+		}
+		// Equal-or-cheaper attackers usually cannot lose a material exchange.
+		// Keep them without SEE, including recapture-promotion exceptions.
+		if !worker.unfiltered && !checked && !move.HasTag(chess.Check) && move.Promo() == chess.NoPieceType &&
+			captureValue(position, move) < pieceValues[position.Board().Piece(move.S1()).Type()] {
+			gain, complete := worker.exchange(position, move)
+			if !complete {
+				return 0, false
+			}
+			if gain < 0 {
+				continue
+			}
 		}
 		score, complete := worker.quiet(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check))
 		if !complete {

@@ -32,14 +32,14 @@ and benchmark evidence together. Run commands from the repository root.
    in each release milestone.
 4. Run formatting, tests, vet, a build, and `git diff --check`. If only version
    text and documentation changed since benchmarking, use a short smoke test
-   instead of another full match. For example, while preparing v0.12:
+   instead of another full match. For example, while preparing v0.13:
 
    ```sh
-   go run ./tools/benchmark --validate --race --version v0.12-release-smoke \
-     --previous tools/benchmark/bin/pandafish-v0.11 --previous-version v0.11 \
+   go run ./tools/benchmark --validate --race --version v0.13-release-smoke \
+     --previous tools/benchmark/bin/pandafish-v0.12 --previous-version v0.12 \
      --stage previous --pairs 1 --results /tmp/pandafish-release-smoke
    go run ./tools/benchmark --candidate tools/benchmark/bin/pandafish-candidate \
-     --version v0.12-release-smoke --stage external \
+     --version v0.13-release-smoke --stage external \
      --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
      --pairs 1 --results /tmp/pandafish-release-smoke
    git diff --check
@@ -58,7 +58,7 @@ and benchmark evidence together. Run commands from the repository root.
 ## Tag and publish after merge
 
 Confirm the PR is merged and the version is unused, then fast-forward local
-`main` to the merged commit. For v0.12:
+`main` to the merged commit. For v0.13:
 
 ```sh
 git switch main
@@ -71,29 +71,54 @@ Check that the working tree is clean and HEAD is the intended release commit.
 Then create and push the tag:
 
 ```sh
-git tag -a v0.12 -m "Pandafish v0.12: quiet-move ordering"
-git push origin v0.12
+git tag -a v0.13 -m "Pandafish v0.13: selective quiescence"
+git push origin v0.13
 ```
 
 Publish a GitHub release for that tag, through the GitHub UI or
 `gh release create`. Use the version alone as the release title, such as
-`v0.12`. Describe the engine change, remaining limits,
+`v0.13`. Describe the engine change, remaining limits,
 and validation, linking the candidate benchmark evidence. An engine release
 does not automatically advance the Stockfish skill target.
 
+## Benchmark evidence in GitHub releases
+
+For every release with strength results, include a compact table in its GitHub
+release description, plus links to the complete settings, identities, hashes,
+and PGNs. Copy values from the saved Go summary, identify the tested candidate,
+and state the games per opponent. Use this column layout and matching separator:
+
+```markdown
+| Opponent | W / D / L | Unfinished | Forfeits | Completed score |
+| --- | --- | --- | --- | --- |
+| Previous version | ... | ... | ... | ... |
+```
+
+Completed score excludes unfinished games. If any games are unfinished, also
+state the possible score when they count as losses through wins. Keep timing
+and uncertainty caveats relevant to the result. A tooling-only release should
+say when no new strength benchmark was run, link its existing baseline, and
+describe smoke checks separately. If benchmarks were recorded after an older
+release, date and label them as retrospective evidence. Preserve the original
+development labels and hashes; do not imply that they tested the tagged binary.
+
+Check the table's column counts and rendered Markdown before publishing.
+Put summaries in release notes and link the detailed records in the repository;
+benchmark files do not need to be attached again as release assets.
+
 ## Build the next baseline
 
-Build from the tag rather than a development checkout. For v0.12:
+Build from the tag rather than a development checkout. For v0.13:
 
 ```sh
 mkdir -p tools/benchmark/bin
 benchmark_bin="$PWD/tools/benchmark/bin"
 build_dir=$(mktemp -d)
-git archive v0.12 | tar -x -C "$build_dir"
-(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.12" .)
+git archive v0.13 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.13" .)
 ```
 
-The tagged executable becomes the previous version for v0.13 development.
+The tagged executable becomes the previous version for v0.14 development.
 Compiled binaries remain gitignored. Building this baseline does not require
 relabeling or rerunning the development benchmarks. A separate benchmark of
 the exact released binary is optional. Keep private bot greetings in sync

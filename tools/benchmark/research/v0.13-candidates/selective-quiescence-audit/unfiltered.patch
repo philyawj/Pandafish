@@ -1,0 +1,10 @@
+--- a/iterative.go
++++ b/iterative.go
+@@ -35 +35 @@
+-	worker := searcher{ctx: ctx, table: table, killers: new(killerTable)}
++	worker := searcher{ctx: ctx, table: table, killers: new(killerTable), unfiltered: true}
+--- a/main.go
++++ b/main.go
+@@ -128 +128 @@
+-				fmt.Fprintln(out, "id name Pandafish v0.13-dev\nid author philyawj\nuciok")
++				fmt.Fprintln(out, "id name Pandafish v0.13-unfiltered-audit\nid author philyawj\nuciok")

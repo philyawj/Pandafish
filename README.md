@@ -1,11 +1,11 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.12 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.13 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
 The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`,
-`transposition.go`, `killers.go`, and `evaluation.go`.
+`transposition.go`, `killers.go`, `exchange.go`, and `evaluation.go`.
 [corentings/chess](https://github.com/corentings/chess) handles chess rules,
 including castling, en passant, and promotions. The engine assigns values of
 1 to pawns, 3 to knights and bishops, 5 to rooks, and 9 to queens. It picks a
@@ -38,10 +38,13 @@ Quiescence means quietness. At the normal search boundary, it examines
 captures and promotions, and all legal escapes when the king is in check.
 Away from check it can keep the current static score instead of making a
 capture. This helps avoid counting a captured piece before considering the
-recapture. Captures and promotions stop after two quiescence plies unless
-the side to move is checked. Required check evasions can extend for at most
-four further plies. At that final safety cap, static evaluation is used even
-if checks remain, so long tactical sequences can still be missed.
+recapture. A static exchange estimate skips losing ordinary captures outside
+check, while checking captures, promotions, and required evasions remain eligible.
+The estimate follows legal least-valuable recaptures on the destination square;
+it is a material heuristic and can miss sacrifices with other tactical benefits.
+Captures and promotions have a 16-ply safety bound. Required check evasions can
+extend for at most four further plies. At that final safety cap, static evaluation
+is used even if checks remain, so long tactical sequences can still be missed.
 
 Clone this repository and build with Go 1.25 or newer:
 
@@ -251,7 +254,12 @@ move and tactical priorities. Reset hints for each `go` command; iterative
 passes share them. Evaluation, search horizons, time allocation, and exact root
 ties remain unchanged.
 
-**Next: Target larger search and evaluation gaps.** Compare tactical horizon
-handling, selective search, and positional evaluation against the reference
-engines before choosing the next strength experiment. Keep controlled local
-comparisons as the main validation loop, with periodic live integration tests.
+**v0.13: Settle longer exchanges (complete).** Continue selective
+quiescence beyond the old two-ply boundary, with a 16-ply ordinary safety bound
+and the existing four extra check-evasion plies. Estimate material exchanges
+to skip losing non-checking captures. Keep checking captures, promotions,
+and evasions, and preserve evaluation, main search, clocks, and random root ties.
+
+**Next:** Use the local evidence to choose between selective main search and
+richer positional evaluation. Keep controlled local comparisons as the main
+validation loop, with periodic live integration tests.

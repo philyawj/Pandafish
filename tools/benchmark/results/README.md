@@ -35,6 +35,9 @@ Forfeits count as losses for the offending engine. Compare matching profiles bef
 | v0.12-dev | v0.11 | 34 / 49 / 17 | 0 | 0 | 58.5% | 58.5% to 58.5% | [R15](v0.12-dev-vs-v0.11-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.12-dev-vs-v0.11-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.12-dev-vs-v0.11-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/previous.pgn) |
 | v0.12-dev | Stockfish 19 / Skill 1 | 53 / 9 / 38 | 0 | 0 | 57.5% | 57.5% to 57.5% | [R15](v0.12-dev-vs-v0.11-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.12-dev-vs-v0.11-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.12-dev-vs-v0.11-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/stockfish.pgn) |
 | v0.12-dev | Sacrifice v0.2.0 b528f0ba | 1 / 33 / 66 | 0 | 0 | 17.5% | 17.5% to 17.5% | [R15](v0.12-dev-vs-v0.11-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.12-dev-vs-v0.11-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.12-dev-vs-v0.11-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/sacrifice.pgn) |
+| v0.13-dev | v0.12 | 46 / 43 / 11 | 0 | 0 | 67.5% | 67.5% to 67.5% | [R16](v0.13-dev-vs-v0.12-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.13-dev-vs-v0.12-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.13-dev-vs-v0.12-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/previous.pgn) |
+| v0.13-dev | Stockfish 19 / Skill 1 | 58 / 11 / 31 | 0 | 0 | 63.5% | 63.5% to 63.5% | [R16](v0.13-dev-vs-v0.12-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.13-dev-vs-v0.12-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.13-dev-vs-v0.12-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/stockfish.pgn) |
+| v0.13-dev | Sacrifice v0.2.0 b528f0ba | 24 / 28 / 48 | 0 | 0 | 38.0% | 38.0% to 38.0% | [R16](v0.13-dev-vs-v0.12-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.13-dev-vs-v0.12-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.13-dev-vs-v0.12-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/sacrifice.pgn) |
 
 ## Run profiles
 
@@ -57,6 +60,7 @@ Times are milliseconds. Compare matching timing policies and settings. Partial r
 | [R13](v0.10-dev-vs-v0.9-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-12 09:48Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; all matchups serial; AC power reported at start | wall-clock-v2 | 1 | complete |
 | [R14](v0.11-dev-vs-v0.10-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-12 20:42Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; serial matchups; battery power at start (27%); no live bot | wall-clock-v2 | 1 | complete |
 | [R15](v0.12-dev-vs-v0.11-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-12 21:49Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; AC power reported at start; all matchups serial; no live bot | wall-clock-v2 | 1 | complete |
+| [R16](v0.13-dev-vs-v0.12-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-13 02:25Z | 100 / 50 | 50 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; AC power reported at start; all matchups serial; no live bot | wall-clock-v2 | 1 | complete |
 
 ## Measured timing
 
@@ -93,3 +97,6 @@ Wall time includes sending the position, requesting the move, and receiving best
 | R15 | v0.11 | 124.2 | 121.2 | 13 / 12 |
 | R15 | Stockfish 19 / Skill 1 | 132.1 | 141.0 | 15 / 2783 |
 | R15 | Sacrifice v0.2.0 b528f0ba | 111.8 | 124.9 | 1 / 4513 |
+| R16 | v0.12 | 136.5 | 132.5 | 6 / 4 |
+| R16 | Stockfish 19 / Skill 1 | 129.3 | 149.9 | 7 / 2616 |
+| R16 | Sacrifice v0.2.0 b528f0ba | 131.1 | 137.5 | 8 / 4092 |
