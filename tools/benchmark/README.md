@@ -104,6 +104,10 @@ git archive v0.11 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.12 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.12" .)
+
+build_dir=$(mktemp -d)
+git archive v0.13 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.13" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -185,12 +189,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.12 tagged baseline as above for the next engine change. Then run
+Build the v0.13 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.12 --previous-version v0.12 \
+  --previous tools/benchmark/bin/pandafish-v0.13 --previous-version v0.13 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -334,7 +338,7 @@ is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.12 --previous-version v0.12 \
+  --previous tools/benchmark/bin/pandafish-v0.13 --previous-version v0.13 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -641,7 +645,7 @@ is required for this tooling increment. Level 1 remains the target.
 See the [session tool documentation](../lichess/README.md) for commands,
 recording limits, and offline reporting. Future changes to move selection or
 time allocation use the routine comparison workflow above with the latest
-release as the baseline, currently v0.12.
+release as the baseline, currently v0.13.
 
 
 ## v0.10 transposition-table candidate
@@ -722,3 +726,37 @@ then Stockfish Skill 1 and pinned Sacrifice, with all comparisons serial.
 
 [Fresh assessment, source profile, correctness/node checks, and results](results/v0.12-dev-vs-v0.11-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/README.md)
 separate deterministic search-work evidence from measured playing strength.
+
+
+## Choosing the next strength experiment
+
+The [post-v0.12 reference comparison and ranked candidates](research/v0.13-candidates/README.md)
+assess selective quiescence, selective main search, and richer classical
+scoring. The review includes a reproducible ordinary-exchange cutoff example
+and separates measured efficiency from external strength. These are research
+options. Recommendation 1 was subsequently selected for the local v0.13
+experiment; recommendations 2 and 3 remain future alternatives. The maintainer
+approved the selected candidate for v0.13.
+
+The local [v0.13 selective-quiescence experiment](research/v0.13-candidates/selective-quiescence-audit/README.md)
+records the SEE tests, broader-search ablation, and selected-position diagnostic.
+Its diagnostic scores are separate from routine game results.
+
+
+## v0.13 selective-quiescence candidate
+
+The local candidate extends ordinary tactical continuation to a 16-ply safety
+bound, retains four extra checked-node evasion plies, and filters negative
+material exchanges for non-checking ordinary captures outside check. Evaluation,
+main search, clocks, TT rules, and root tie handling are unchanged.
+
+The serial 100-game screens scored 46/43/11 against v0.12 (67.5%), 58/11/31
+against Skill 1 (63.5%), and 24/28/48 against pinned Sacrifice (38%), with no
+forfeits or unfinished games. The external scores improve on the separate
+v0.12 screens by 6 and 20.5 percentage points respectively. This is promising
+screening evidence, not a precise Elo estimate or proof of gains at all controls.
+
+[Method, checks, timing limits, interpretation, and raw records](results/v0.13-dev-vs-v0.12-and-stockfish-1-and-sacrifice-v0.2.0-b528f0ba/README.md)
+preserve the exact tested source and selected-position ablation. The candidate
+was approved for v0.13. Original development labels and hashes are preserved;
+release preparation changes version text and documentation only.

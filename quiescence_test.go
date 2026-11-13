@@ -49,17 +49,19 @@ func TestQuiescence(t *testing.T) {
 	}
 }
 
+// Four tactical plies keep the dense exhaustive oracle bounded. Production
+// search uses the larger safety allowance with alpha-beta cutoffs.
 func TestQuiescenceMatchesExhaustiveOnTimeoutPositions(t *testing.T) {
 	for _, fen := range []string{timeoutPosition, queenRaidPosition, crowdedPosition} {
 		game, err := parsePosition(strings.Fields("fen " + fen))
 		if err != nil {
 			t.Fatal(err)
 		}
-		want := exhaustiveQuietScore(game.Position(), quiescenceDepth)
+		want := exhaustiveQuietScore(game.Position(), 4)
 		if game.Position().Turn() == chess.Black {
 			want = -want
 		}
-		if got := quiescence(game.Position(), quiescenceDepth, -searchInfinity, searchInfinity); got != want {
+		if got := quiescence(game.Position(), 4, -searchInfinity, searchInfinity); got != want {
 			t.Errorf("%s: quiescence score = %d, exhaustive score = %d", fen, got, want)
 		}
 	}
@@ -236,5 +238,53 @@ func TestQuiescenceResolvesCheckAfterCaptureAndRecapture(t *testing.T) {
 	want := exhaustiveQuietScore(position, quiescenceDepth)
 	if got != want || got <= staticScore(position, position.Turn())+50 {
 		t.Fatalf("score %d, want safe pawn capture, reference %d, static %d", got, want, staticScore(position, position.Turn()))
+	}
+}
+
+// The v0.12 two-ply cutoff rejected taking this pawn because it stopped before
+// the final recapture. All moves in the example are ordinary non-checking captures.
+const exchangeHorizonPosition = "4k3/8/3q4/3p4/2B5/3R3K/8/8 w - - 0 1"
+
+func TestQuiescenceContinuesOrdinaryExchanges(t *testing.T) {
+	for _, fen := range []string{
+		exchangeHorizonPosition,
+		"8/8/3r3k/2b5/3P4/3Q4/8/4K3 b - - 0 1",
+	} {
+		game, err := parsePosition(strings.Fields("fen " + fen))
+		if err != nil {
+			t.Fatal(err)
+		}
+		position := game.Position()
+		if inCheck(position) {
+			t.Fatal("fixture must not be checked")
+		}
+		before := game.FEN()
+		short, oldComplete := (&searcher{unfiltered: true}).quiet(position, 2, -searchInfinity, searchInfinity, false)
+		worker := searcher{}
+		got, complete := worker.quiet(position, quiescenceDepth, -searchInfinity, searchInfinity, false)
+		if !oldComplete || !complete || got <= short+50 || abs(got+100) > 90 {
+			t.Fatalf("exchange score %d, old horizon %d, complete %v", got, short, complete)
+		}
+		if game.FEN() != before {
+			t.Fatal("exchange changed root")
+		}
+	}
+}
+
+func TestExchangeFilterKeepsTacticalExceptions(t *testing.T) {
+	// Full and filtered continuation must retain checking sacrifices, quiet
+	// promotions, underpromotions, and every evasion, even when SEE is negative.
+	for _, fen := range []string{
+		"3r2k1/8/8/3p4/8/8/8/3Q2K1 w - - 0 1",
+		"k6r/p7/8/8/8/8/1b6/Q6K w - - 0 1",
+		"r6k/1P6/8/8/8/8/8/7K w - - 0 1",
+		"8/k1P5/2K5/8/8/8/8/8 w - - 0 1",
+	} {
+		position := evalFEN(t, fen)
+		got, ok := (&searcher{}).quiet(position, 4, -searchInfinity, searchInfinity, inCheck(position))
+		want, complete := (&searcher{unfiltered: true}).quiet(position, 4, -searchInfinity, searchInfinity, inCheck(position))
+		if !ok || !complete || got != want {
+			t.Fatalf("%s: filtered %d, full %d", fen, got, want)
+		}
 	}
 }

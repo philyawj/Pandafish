@@ -1,0 +1,10 @@
+--- a/search.go
++++ b/search.go
+@@ -109 +109 @@
+-// Checks, promotions, and every check evasion remain eligible.
++// Checking captures, promotions, and every check evasion remain eligible.
+@@ -137,2 +137,2 @@
+-		// Equal-or-cheaper attackers cannot lose material on this square if
+-		// we stop after a recapture. Avoid paying for SEE in those cases.
++		// Equal-or-cheaper attackers usually cannot lose a material exchange.
++		// Keep them without SEE, including recapture-promotion exceptions.
