@@ -53,7 +53,11 @@ live games expose operational failures and new positions.
 The [selective-search research report](research/v0.15-selective-search/README.md)
 records PVS with guarded reductions as a tested substantial search hypothesis.
 Its screen did not meet the larger-gain goal; richer classical evaluation is
-the next preferred research direction.
+the next preferred research direction. A subsequent
+[board-aware evaluation screen](research/v0.15-positional-evaluation/README.md)
+passed the direct previous-release criterion but produced mixed external scores,
+so it is also held locally. Its lower-cost pawn/king-only diagnostic is a
+possible next hypothesis, not a validated strength improvement.
 The older [v0.10 priorities](live/v0.10-twitch-m2-20261112/REVIEW.md#current-strength-priorities)
 describe earlier groundwork. Prefer meaningful strength experiments now; defer
 small optimizations unless profiling shows a specific need.
@@ -148,8 +152,8 @@ git archive v0.14 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14" .)
 
 build_dir=$(mktemp -d)
-git archive v0.14.1 | tar -x -C "$build_dir"
-(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14.1" .)
+git archive v0.14.2 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14.2" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -232,12 +236,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.14.1 tagged baseline as above for the next engine change. Then run
+Build the v0.14.2 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.14.1 --previous-version v0.14.1 \
+  --previous tools/benchmark/bin/pandafish-v0.14.2 --previous-version v0.14.2 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -396,7 +400,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.14.1 --previous-version v0.14.1 \
+  --previous tools/benchmark/bin/pandafish-v0.14.2 --previous-version v0.14.2 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -619,7 +623,7 @@ reproduce earlier profiles. For example, a future Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.14.1 --previous-version v0.14.1 \
+  --previous tools/benchmark/bin/pandafish-v0.14.2 --previous-version v0.14.2 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```
@@ -709,7 +713,7 @@ is required for this tooling increment. Level 1 remains the target.
 See the [session tool documentation](../lichess/README.md) for commands,
 recording limits, and offline reporting. Future changes to move selection or
 time allocation use the routine comparison workflow above with the latest
-release as the baseline, currently v0.14.1.
+release as the baseline, currently v0.14.2.
 
 
 ## v0.10 transposition-table candidate
@@ -865,3 +869,12 @@ restores v0.14's search and ordering tests, with only the release identity chang
 A research release records useful findings without presenting them as an engine
 improvement. Future evaluation work starts from this released baseline with a
 distinct candidate label, rather than stacking the unproven reductions.
+
+## v0.14.2 research release
+
+The [board-aware evaluation report](research/v0.15-positional-evaluation/README.md)
+archives pawn structure, king shelter, and minor activity scoring with its exact
+source, position controls, and all 150 games. The candidate passed the direct
+previous-release criterion but did not show the substantial external gain sought.
+The research release restores v0.14.1 playing behavior. A narrower pawn/king-only
+candidate is the next hypothesis; its diagnostic results are not game validation.

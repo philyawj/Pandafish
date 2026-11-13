@@ -1,0 +1,20 @@
+{
+  "code_checks": [
+    "gofmt changed Go files",
+    "go test ./...",
+    "go test -race ./... through validation",
+    "go vet ./...",
+    "go build candidate through validation",
+    "git diff --check"
+  ],
+  "wrapper": {
+    "identity": "Pandafish v0.15-evaluation-dev",
+    "legal_plies": 12,
+    "architecture": "ARM64",
+    "active_v0141_restored": true,
+    "public_example_config_loaded": true,
+    "private_configs_changed": false,
+    "online": false
+  },
+  "decision": "Hold: previous-release criterion passed but substantial external gain not demonstrated. No commit, push, PR, merge, or release."
+}
