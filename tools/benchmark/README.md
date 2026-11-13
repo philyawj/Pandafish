@@ -152,8 +152,8 @@ git archive v0.14 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14" .)
 
 build_dir=$(mktemp -d)
-git archive v0.14.2 | tar -x -C "$build_dir"
-(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14.2" .)
+git archive v0.14.3 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14.3" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -236,12 +236,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.14.2 tagged baseline as above for the next engine change. Then run
+Build the v0.14.3 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.14.2 --previous-version v0.14.2 \
+  --previous tools/benchmark/bin/pandafish-v0.14.3 --previous-version v0.14.3 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -400,7 +400,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.14.2 --previous-version v0.14.2 \
+  --previous tools/benchmark/bin/pandafish-v0.14.3 --previous-version v0.14.3 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -623,7 +623,7 @@ reproduce earlier profiles. For example, a future Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.14.2 --previous-version v0.14.2 \
+  --previous tools/benchmark/bin/pandafish-v0.14.3 --previous-version v0.14.3 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```
@@ -713,7 +713,7 @@ is required for this tooling increment. Level 1 remains the target.
 See the [session tool documentation](../lichess/README.md) for commands,
 recording limits, and offline reporting. Future changes to move selection or
 time allocation use the routine comparison workflow above with the latest
-release as the baseline, currently v0.14.2.
+release as the baseline, currently v0.14.3.
 
 
 ## v0.10 transposition-table candidate
@@ -878,3 +878,20 @@ source, position controls, and all 150 games. The candidate passed the direct
 previous-release criterion but did not show the substantial external gain sought.
 The research release restores v0.14.1 playing behavior. A narrower pawn/king-only
 candidate is the next hypothesis; its diagnostic results are not game validation.
+
+## Unpromoted v0.15 null-move experiment
+
+The [fresh three-engine assessment](research/v0.15-null-move/README.md) motivated
+a guarded null-move experiment on the released evaluator. The candidate saved
+28% of fixed-depth nodes on 19 selected cases but scored 56% against v0.14.2,
+36% against Skill 2 and 23% against Sacrifice in the 50-game concurrent routine.
+All 150 games completed without forfeits. It is held, with no strength promotion.
+[Raw records, exact source, controls, timings, and next diagnostic recommendation](results/v0.15-null-dev-vs-v0.14.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/README.md).
+
+## v0.14.3 research release
+
+Archive the [null-move experiment](research/v0.15-null-move/README.md), including
+its fresh reference comparison, exact replayable source, diagnostics, and all
+150 games. The candidate saved fixed-depth work but did not earn promotion.
+The release keeps v0.14.2 playing behavior, with no new strength claim. Diagnose
+saved-game failures and conversion gaps before selecting another feature.

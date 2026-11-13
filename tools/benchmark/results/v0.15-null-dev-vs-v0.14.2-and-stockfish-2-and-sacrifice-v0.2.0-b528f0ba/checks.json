@@ -1,0 +1,19 @@
+{
+  "checks": [
+    "gofmt",
+    "go test ./...",
+    "go test -race ./... through validation preflight",
+    "go vet ./...",
+    "ARM64 build",
+    "git diff --check"
+  ],
+  "wrapper": {
+    "identity": "Pandafish v0.15-null-dev",
+    "legal_plies": 12,
+    "public_example_loaded": true,
+    "active_v0141_restored": true,
+    "private_configs_changed": false,
+    "online": false
+  },
+  "decision": "Hold; no candidate commit, push, PR, or release."
+}

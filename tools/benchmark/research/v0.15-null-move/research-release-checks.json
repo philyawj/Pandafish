@@ -1,0 +1,20 @@
+{
+  "release": "v0.14.3",
+  "policy": "Unchanged from v0.14.2; null-move experiment excluded from build",
+  "checks": [
+    "gofmt",
+    "go test ./...",
+    "go test -race ./... through validation",
+    "go vet ./...",
+    "ARM64 build",
+    "offline lichess-bot wrapper: 12 legal plies",
+    "archived candidate replay tests/build and identity",
+    "git diff --check"
+  ],
+  "smoke_games": 6,
+  "smoke_previous_gate": "passed: score above 50% treating unfinished as losses, zero forfeits",
+  "smoke_note": "Three concurrent two-game matchups; integration only, not strength evidence.",
+  "active_binary_restored": "v0.14.1",
+  "private_configs_changed": false,
+  "live_games_played": false
+}
