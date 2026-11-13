@@ -10,11 +10,41 @@ This Go program runs local UCI matches separately from the engine. It reuses the
 evidence separately from controlled matches. Capture and analysis code lives
 in `tools/lichess/`.
 
+## Routine workflow after v0.13
+
+Starting after v0.13, use **50 games per opponent with all three matchups
+concurrent** to speed up development. That is 25 color pairs each against the
+previous release, Stockfish Skill 2, and pinned Sacrifice: 150 games total.
+The runner defaults to 25 pairs and Skill 2. A full three-opponent suite starts
+all matchups together on hosts with at least four logical CPUs. Smaller hosts
+fall back to serial execution; `--parallel-all` requires the concurrent profile
+explicitly and rejects insufficient capacity.
+
+The previous-release criterion remains a review requirement, rather than an
+early scheduling gate in concurrent mode. A failed screen keeps all results
+and returns an error after the matchups finish. Historical records, including
+v0.13's 100-game serial screens and the subsequent concurrency experiment,
+retain their original labels, sample sizes, and profiles.
+
+This prioritizes faster feedback on noticeable improvements. The calibration
+found a typical 6% to 8% search-throughput cost, but the 150-game suite finished
+in about 8.5 minutes without protocol failures. That tradeoff is worthwhile
+at this stage; it does not establish that parallel and serial strength scores
+are interchangeable. Keep concurrency consistent for future comparisons.
+
+When development reaches smaller gains, reconsider serial execution and larger
+samples for the specific question. Use `--sequential` and, if justified,
+`--pairs 50` for 100 games per opponent or a planned extended comparison.
+Do not extend every promising screen automatically or rerun until favorable.
+Timing budgets, openings, unit tests, race checks when applicable, and integration
+checks stay unchanged. See the [calibration record](results/v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/README.md)
+for measurements and limits.
+
 ## Local development and live sessions
 
 Local testing should drive the next batch of strength changes. Keep each
 experiment focused, check saved positions and search behavior, then use the
-[previous-release gate](#routine-order-and-practical-gate) and serial external
+[previous-release criterion](#routine-order-and-practical-gate) and concurrent
 comparisons. A live stream is not required for every increment. Use live sessions
 periodically after meaningful progress, or when clocks, UCI handling, or client
 integration change. Controlled matches provide cleaner strength comparisons;
@@ -108,6 +138,10 @@ git archive v0.12 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.13 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.13" .)
+
+build_dir=$(mktemp -d)
+git archive v0.14 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -159,15 +193,16 @@ separate comparison series; do not silently replace it with upstream HEAD.
 
 ## Run the initial baseline
 
-From the repository root:
+These commands reproduce the earlier 100-game baseline profile. From the
+repository root:
 
 ```sh
 tools/benchmark/bin/benchmark \
-  --candidate tools/benchmark/bin/pandafish-v0.1 --version v0.1
+  --candidate tools/benchmark/bin/pandafish-v0.1 --version v0.1 --pairs 50 --stockfish-skill 1 --sequential
 
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-v0.2 --version v0.2 \
-  --previous tools/benchmark/bin/pandafish-v0.1 --previous-version v0.1
+  --previous tools/benchmark/bin/pandafish-v0.1 --previous-version v0.1 --pairs 50 --stockfish-skill 1 --sequential
 ```
 
 These play v0.1 against Stockfish, then v0.2 against v0.1 and Stockfish. Each
@@ -175,7 +210,7 @@ matchup has 50 color pairs, or 100 games. Each pair uses the same opening with
 the engines swapping colors. The ten openings in `openings-screening-10-v1.txt`
 cycle five times.
 
-The runner sets Stockfish's native UCI Skill Level 1 itself. No Stockfish config
+These commands set Stockfish's native UCI Skill Level 1. No Stockfish config
 file is needed. This is separate from Lichess's numbered computer opponents.
 `UCI_LimitStrength` is disabled so its Elo setting cannot override the skill.
 [Stockfish documents these controls here](https://official-stockfish.github.io/docs/stockfish-wiki/Stockfish-FAQ.html#how-do-skill-level-and-uci_elo-work).
@@ -189,12 +224,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.13 tagged baseline as above for the next engine change. Then run
+Build the v0.14 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
-go run ./tools/benchmark --validate --race --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.13 --previous-version v0.13 \
+go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
+  --previous tools/benchmark/bin/pandafish-v0.14 --previous-version v0.14 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -205,50 +240,62 @@ below. Add
 the fixed candidate path protects released baselines from accidental overwrites.
 Any failed code check stops before matches. Forfeits make validation exit with
 an error after saving the results. The previous-release screen can stop the
-workflow; external scores are evidence to review rather than automatic release
-decisions. The local lichess-bot wrapper check is separate.
+workflow in serial mode. In concurrent mode all matchups finish before a failed
+previous-release decision returns an error. External scores remain evidence to
+review rather than automatic release decisions. The local lichess-bot wrapper
+check is separate.
 
 ### Routine order and practical gate
 
-1. Play **100 games against the previous Pandafish release**, alone.
-2. Continue only with **zero forfeits by either engine** and a score strictly
-   above 50% when unfinished games count as losses. The Go runner enforces
-   this gate for `--stage all` (the default), saves a blocked result, and exits
-   without external games if it fails. This is a conservative screening rule,
-   not a significance test or proof that the release is stronger.
-3. Play **100 against Stockfish Skill Level 1** and **100 against the pinned
-   Sacrifice**, sequentially in that order. Keep all routine matches serial: one
-   game at a time, with the candidate and opponent taking turns searching.
-4. Review code checks, timings, forfeits, unfinished games, and all three
-   scores before proposing a release. Preserve unfavorable results too.
+1. Run **50 games each against the previous release, Stockfish Skill 2, and
+   pinned Sacrifice**, with all three matchups concurrent. Each matchup plays
+   one game at a time; the two engines take turns searching.
+2. Require a previous-release score strictly above 50% when unfinished games
+   count as losses, with zero forfeits by either engine. This is a conservative
+   screen, not a significance test or proof that the candidate is stronger.
+3. In concurrent mode a failed previous screen returns an error after all
+   matchups finish and preserves every result. In `--sequential` mode it stops
+   before external matches. Do not discard or relabel a failed screen.
+4. Review all three scores, code checks, timings, forfeits, and unfinished games
+   before proposing a release. A narrow lead remains inconclusive.
 
-This is 300 games per routine strength increment, with only 100 needed when
-the previous-release screen blocks further comparisons. Stockfish stays at
-Level 1 until the separate progression rule below is satisfied. Add Sunfish
-later when Pandafish is stronger and the extra runtime is worthwhile.
+The routine concurrent suite plans 150 games. Keep Skill 2 as the
+current reference point; further ladder changes are deliberate decisions.
+Sunfish remains a possible future opponent when adding it is worthwhile.
 
-Full validation requires `--previous` and `--sacrifice`; this prevents the
-routine from silently omitting either comparison. Direct match mode still
-supports older two-opponent commands for reproduction and small integration checks. Use
-`--stage previous` for the previous-release matchup alone. `--stage external`
-explicitly skips that matchup, useful after reviewing a separate passing run;
-it does not load or verify a prior gate. Use the exact same candidate binary
-hash and settings, and link the two result folders when taking that path.
+Full validation requires `--previous` and `--sacrifice`. Use `--stage previous`
+for only the previous-release matchup or `--stage external` for external
+comparisons; these partial stages do not automatically use three-way scheduling.
+The latter skips the previous-release review and does not verify a prior result.
+When splitting a run, preserve the same candidate hash/settings and link the
+result folders. Direct match mode also supports historical two-opponent runs.
 
-### Why routine comparisons are serial
+### Why routine comparisons are concurrent
 
-Use serial execution for all routine comparisons, including Stockfish and
-Sacrifice. This decision keeps timed searches from competing for CPU, thermal,
-and memory resources and preserves a cleaner comparison profile. Passing the
-previous-release strength gate does not establish that concurrency is harmless.
-The lower wall-clock runtime of parallel matches is not worth another variable
-in this early baseline. Record CPU/power/background workload with `--machine`.
+The maintainer accepted a modest throughput cost to shorten the development
+loop. The [v0.13 calibration](results/v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/README.md)
+compared unchanged opponents with published results and measured search work
+under one-search and three-search loads. All 150 games completed in about
+8 minutes 34 seconds with no forfeits or unfinished games. Typical probe
+throughput fell about 6% to 8%; the diagnostic workload finished about three
+times faster. These measurements support the practical choice on this host,
+not universal capacity or statistical equivalence.
 
-The runner retains `--parallel` for explicitly separate experiments, but omit
-it for routine validation. It enables two external matchups on hosts with at
-least four logical CPUs and records the concurrency in the run profile. Such
-scores must stay separate from the serial series. Go tests already run before
-match play; the long part is the games' requested search time, not unit tests.
+Use the same profile for future comparisons and record CPU/power/background
+workload with `--machine`. Reconsider sequential matches when investigating
+smaller gains, timing problems, or constrained hardware. Serial execution and
+larger samples are available tools, not automatic follow-ups to every screen.
+
+- Default full suite: all three matchups overlap on at least four logical CPUs.
+- `--parallel-all`: explicitly require that full-suite profile and capacity.
+- `--sequential`: all matchups serial; the previous-release gate runs first.
+- `--parallel`: legacy mode, previous release first, then two external matchups
+  concurrent when capacity permits. Do not combine scheduling flags.
+
+The summary records `matchup_concurrency: 3` for all-three scheduling. Historical
+external-only concurrency keeps its original metadata. Profiles distinguish
+these modes, so historical serial results remain readable without relabeling.
+Go checks finish before match play; tests are not run alongside the games.
 
 Starting with v0.7, UCI command handling stays active while search runs. A
 script must wait for `bestmove` before sending `quit` or closing stdin, which
@@ -294,7 +341,7 @@ or release notes instead of relabeling them as a test of the released binary.
 Build the next baseline from the release tag.
 
 If only version text and documentation change after testing, rerun the code
-checks and a short smoke test. Repeat the 100-game comparison when engine
+checks and a short smoke test. Repeat the routine 50-game comparison when engine
 behavior changes. A separate run labeled with the release version is optional
 if you want results recorded for that exact released binary.
 
@@ -304,10 +351,11 @@ if you want results recorded for that exact released binary.
 | --- | --- | --- |
 | Unit tests and focused positions | No match required | Check intended behavior and known regressions |
 | Smoke test (`--pairs 1`) | 2 | Check executable paths, options, and UCI integration |
-| Screening (default `--pairs 50`) | 100 | Find large changes and reliability problems |
+| Routine screen (default `--pairs 25`) | 50 | Find noticeable changes and reliability problems quickly |
+| Optional larger screen (`--pairs 50`) | 100 | Get more evidence when a close result matters |
 | Optional extended comparison (`--pairs 500`) | 1,000 | Resolve small differences or support a planned skill-level advancement |
 
-The routine for early engine development is 100 games per opponent. A promising
+After v0.13, the routine is 50 games per opponent. A promising
 screening result does not automatically trigger a longer run, and a longer run
 is not required for every release. Use focused tests and the short matches to
 evaluate large functional improvements such as adding an opponent reply.
@@ -333,12 +381,14 @@ The filenames identify the purpose, position count, and suite version:
 | `openings-screening-10-v1.txt` | Quick screening: 10 positions, used by default |
 | `openings-confirmation-50-v1.txt` | Broader confirmation: 50 positions, selected explicitly |
 
-Use the screening suite unchanged for routine comparisons. When more evidence
-is needed, explicitly request a broader, longer comparison:
+Use the screening suite unchanged for routine comparisons. With 25 color pairs,
+the first five openings appear three times and the remaining five twice; each
+pair still swaps colors. Keep that order fixed for comparisons using this profile.
+When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.13 --previous-version v0.13 \
+  --previous tools/benchmark/bin/pandafish-v0.14 --previous-version v0.14 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -525,10 +575,9 @@ controlled baseline against that opponent. Across all three matchups the
 candidate's maximum response was 120.222 ms; nine responses exceeded the
 100 ms request while remaining within the 150 ms deadline.
 
-All routine matchups run
-serially, including future increments, to keep timed searches from competing
-for resources. Passing the previous-version gate is independent of that
-scheduling decision.
+These earlier routine matchups used the serial profile. Starting after v0.13,
+the [current routine](#routine-workflow-after-v013) uses three concurrent
+50-game comparisons. Historical results retain their original profiles.
 
 An earlier v0.3 screening run recorded the first local benchmark draw against
 Stockfish 19 at Skill Level 1: a stalemate with Pandafish playing White in round
@@ -537,27 +586,34 @@ separately from routine results.
 
 ## Stockfish skill progression
 
-Start at Skill Level 1. For a planned advancement, use an extended comparison
-with enough evidence to resolve the result. Once it scores strictly above 50%
-at the current level, preserve that result and advance one level. Score means
-wins plus half the draws divided by games, rather than the fraction won outright.
-If games are unfinished, require the possible-score lower bound to exceed 50%
-for this decision. Do not advance on results containing protocol failures or
-timing problems. Close results remain inconclusive without statistical analysis.
+The ladder began at Skill Level 1. Starting with the post-v0.13 workflow,
+**Skill Level 2 is the standard reference**. The maintainer selected it after
+the Skill 1 results and a 60% first 50-game screen at Skill 2. This is a practical
+comparison point, not proof of a reliable above-50% rate at that level.
+
+For later advancement, review results and reliability at the current level,
+preserve them, and deliberately choose the next level. Score means wins plus
+half the draws divided by completed games. Require the possible-score lower
+bound to exceed 50% when unfinished games are present, and do not advance on
+protocol failures or timing problems. Close results remain inconclusive; a
+larger or serial comparison is optional when needed for a specific decision,
+not an automatic 1,000-game requirement.
 
 Record the source revision, Stockfish version and skill, sample size, settings,
 W/D/L, unfinished games, and JSON/PGN links when documenting an advancement.
 Keep previous levels' records. Continue comparing against the previous Pandafish
 release after moving to a new Stockfish level.
 
-Advance manually with `--stockfish-skill 2`, then 3, and so on through 20.
-The flag accepts 1 through 20 and defaults to 1. For example:
+Advance manually with `--stockfish-skill 3`, then 4, and so on through 20.
+The flag accepts 1 through 20 and defaults to 2. Use `--stockfish-skill 1` to
+reproduce earlier profiles. For example, a future Skill 3 comparison:
 
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.3 --previous-version v0.3 \
-  --stockfish-skill 2
+  --previous tools/benchmark/bin/pandafish-v0.14 --previous-version v0.14 \
+  --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
+  --stockfish-skill 3
 ```
 
 Skill is recorded in the options, matchup label, and folder name. The runner
@@ -645,7 +701,7 @@ is required for this tooling increment. Level 1 remains the target.
 See the [session tool documentation](../lichess/README.md) for commands,
 recording limits, and offline reporting. Future changes to move selection or
 time allocation use the routine comparison workflow above with the latest
-release as the baseline, currently v0.13.
+release as the baseline, currently v0.14.
 
 
 ## v0.10 transposition-table candidate
@@ -760,3 +816,17 @@ screening evidence, not a precise Elo estimate or proof of gains at all controls
 preserve the exact tested source and selected-position ablation. The candidate
 was approved for v0.13. Original development labels and hashes are preserved;
 release preparation changes version text and documentation only.
+
+
+## v0.14 benchmark workflow release
+
+v0.14 adopts 50 games per opponent and three concurrent matchups as the routine
+for faster iteration, with Stockfish Skill 2 as the reference. `--sequential`
+retains the older previous-first schedule for questions about smaller gains
+or timing. Small hosts fall back to serial mode unless concurrency is required
+explicitly. The playing algorithm remains that of v0.13.
+
+The [v0.13 concurrency experiment](results/v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/README.md)
+is evidence for the workflow, not a fresh strength test of v0.14. Its exact
+source, labels, hashes, all 150 games, throughput probes, and comparisons are
+preserved. Release validation uses code checks and short integration matches.

@@ -8,15 +8,16 @@ and benchmark evidence together. Run commands from the repository root.
 1. Implement the increment and add focused tests. For changes to move selection
    or time allocation, follow the
    [benchmark workflow](tools/benchmark/README.md#test-a-development-candidate):
-   100 games against the previous release first. If the conservative screen
-   passes, play 100 each against the current Stockfish skill and pinned
-   Sacrifice version. Run all matchups serially, Stockfish before Sacrifice,
-   to keep timed searches from competing for resources. Longer
-   comparisons are optional when more evidence is needed.
+   starting after v0.13, run 50 games each against the previous release,
+   Stockfish Skill 2, and pinned Sacrifice, with all three matchups concurrent.
+   Review the previous-release criterion after play and keep all results even
+   when it fails. Defaults match this routine on hosts with sufficient capacity.
+   Use `--sequential` or larger samples later when investigating smaller gains
+   or timing, with a specific reason rather than automatic escalation.
    For tooling or recording changes that preserve those policies, use focused
    unit/race tests, offline capture/report checks, local wrapper validation,
    and a short real-engine smoke run. State that this validates integration
-   rather than strength; a fresh 100-game comparison is not required.
+   rather than strength; a fresh routine match comparison is not required.
 2. Review check results, W/D/L, unfinished games, forfeits, and timings. Keep
    the candidate's original benchmark labels and hashes. Reference those
    results from the PR and release notes; do not rename a development run as
@@ -32,22 +33,27 @@ and benchmark evidence together. Run commands from the repository root.
    in each release milestone.
 4. Run formatting, tests, vet, a build, and `git diff --check`. If only version
    text and documentation changed since benchmarking, use a short smoke test
-   instead of another full match. For example, while preparing v0.13:
+   instead of another full match. For example, while preparing v0.14:
 
    ```sh
-   go run ./tools/benchmark --validate --race --version v0.13-release-smoke \
-     --previous tools/benchmark/bin/pandafish-v0.12 --previous-version v0.12 \
-     --stage previous --pairs 1 --results /tmp/pandafish-release-smoke
+   go run ./tools/benchmark --validate --race --version v0.14-release-smoke \
+     --previous tools/benchmark/bin/pandafish-v0.13 --previous-version v0.13 \
+     --sequential --stage previous --pairs 1 --results /tmp/pandafish-release-smoke
    go run ./tools/benchmark --candidate tools/benchmark/bin/pandafish-candidate \
-     --version v0.13-release-smoke --stage external \
+     --version v0.14-release-smoke --stage external --parallel \
      --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
      --pairs 1 --results /tmp/pandafish-release-smoke
    git diff --check
    ```
 
+   Also smoke-test the full default concurrent schedule with `--pairs 1`.
+   Its two-game previous screen may return a blocked decision; inspect all six
+   saved games for integration failures instead of rerunning for a better score.
+
    These explicit stages check all three integrations without treating a
    two-game smoke score as a new strength gate. They supplement the already
-   reviewed 100-game candidate comparisons.
+   reviewed candidate comparisons (100 games per opponent through v0.13;
+   50 per opponent afterward).
 
    Also perform the local lichess-bot wrapper check when using that client.
    These checks do not start a live bot or play online games. If engine behavior
@@ -58,7 +64,7 @@ and benchmark evidence together. Run commands from the repository root.
 ## Tag and publish after merge
 
 Confirm the PR is merged and the version is unused, then fast-forward local
-`main` to the merged commit. For v0.13:
+`main` to the merged commit. For v0.14:
 
 ```sh
 git switch main
@@ -71,13 +77,13 @@ Check that the working tree is clean and HEAD is the intended release commit.
 Then create and push the tag:
 
 ```sh
-git tag -a v0.13 -m "Pandafish v0.13: selective quiescence"
-git push origin v0.13
+git tag -a v0.14 -m "Pandafish v0.14: faster benchmark workflow"
+git push origin v0.14
 ```
 
 Publish a GitHub release for that tag, through the GitHub UI or
 `gh release create`. Use the version alone as the release title, such as
-`v0.13`. Describe the engine change, remaining limits,
+`v0.14`. Describe the engine or tooling change, remaining limits,
 and validation, linking the candidate benchmark evidence. An engine release
 does not automatically advance the Stockfish skill target.
 
@@ -108,18 +114,26 @@ benchmark files do not need to be attached again as release assets.
 
 ## Build the next baseline
 
-Build from the tag rather than a development checkout. For v0.13:
+Build from the tag rather than a development checkout. For v0.14:
 
 ```sh
 mkdir -p tools/benchmark/bin
 benchmark_bin="$PWD/tools/benchmark/bin"
 build_dir=$(mktemp -d)
-git archive v0.13 | tar -x -C "$build_dir"
-(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.13" .)
+git archive v0.14 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.14" .)
 ```
 
-The tagged executable becomes the previous version for v0.14 development.
+The tagged executable becomes the previous version for v0.15 development.
 Compiled binaries remain gitignored. Building this baseline does not require
 relabeling or rerunning the development benchmarks. A separate benchmark of
 the exact released binary is optional. Keep private bot greetings in sync
 when choosing to run the new engine through lichess-bot.
+
+
+## Tooling releases
+
+v0.8 established the precedent for a minor release that adds developer tooling
+without changing playing strength. v0.14 follows it for the faster benchmark
+workflow. State the unchanged engine policy explicitly, distinguish workflow
+calibration from new engine-strength evidence, and link the original records.

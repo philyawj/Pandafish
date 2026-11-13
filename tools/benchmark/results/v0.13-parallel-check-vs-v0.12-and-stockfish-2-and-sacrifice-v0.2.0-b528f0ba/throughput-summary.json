@@ -1,0 +1,149 @@
+{
+  "elapsed_seconds": {
+    "parallel-3": 8.153732333,
+    "serial": 24.147746626
+  },
+  "aggregates": [
+    {
+      "request": "go depth 4",
+      "mode": "serial",
+      "probes": 108,
+      "legal": 108,
+      "nodes": 1905096,
+      "search_ms": 12431.229747,
+      "aggregate_nodes_per_second": 153250.80774569005,
+      "depths": {
+        "4": 108
+      },
+      "fallbacks": 0
+    },
+    {
+      "request": "go depth 4",
+      "mode": "parallel-3",
+      "probes": 108,
+      "legal": 108,
+      "nodes": 1901645,
+      "search_ms": 12716.312294,
+      "aggregate_nodes_per_second": 149543.74790695118,
+      "depths": {
+        "4": 108
+      },
+      "fallbacks": 0
+    },
+    {
+      "request": "go movetime 100",
+      "mode": "serial",
+      "probes": 108,
+      "legal": 108,
+      "nodes": 1611705,
+      "search_ms": 9790.922837,
+      "aggregate_nodes_per_second": 164612.16443350466,
+      "depths": {
+        "4": 69,
+        "3": 39
+      },
+      "fallbacks": 0
+    },
+    {
+      "request": "go movetime 100",
+      "mode": "parallel-3",
+      "probes": 108,
+      "legal": 108,
+      "nodes": 1551027,
+      "search_ms": 9902.667126,
+      "aggregate_nodes_per_second": 156627.1975281985,
+      "depths": {
+        "4": 66,
+        "3": 42
+      },
+      "fallbacks": 0
+    }
+  ],
+  "per_position_medians": [
+    {
+      "request": "go depth 4",
+      "fen": "3r1rk1/1pp2ppp/p3qnn1/6B1/1PPbN3/P2P1P2/4Q1PP/1K1R1B1R w - - 1 18",
+      "serial_median_nps": 136892.5368549517,
+      "parallel_median_nps": 126491.47075843948,
+      "parallel_over_serial": 0.9240202107764797
+    },
+    {
+      "request": "go depth 4",
+      "fen": "5r2/p4ppk/4b3/2rN4/4P3/2P1P1P1/P1P5/R3R1K1 w - - 1 24",
+      "serial_median_nps": 263841.66917798226,
+      "parallel_median_nps": 243214.59966264683,
+      "parallel_over_serial": 0.9218202735769503
+    },
+    {
+      "request": "go depth 4",
+      "fen": "r1b2rk1/p4ppp/4p3/qp1p4/1bpPn3/1P2PN2/P1P1BPPP/RQ1N1RK1 w - - 1 15",
+      "serial_median_nps": 209626.8004903026,
+      "parallel_median_nps": 196760.84321716617,
+      "parallel_over_serial": 0.9386244638422003
+    },
+    {
+      "request": "go depth 4",
+      "fen": "r2n2k1/pp1rnppp/4p1q1/1P1pP3/3P4/2BQ2P1/2P2PBP/R4RK1 b - - 0 19",
+      "serial_median_nps": 194886.38023885724,
+      "parallel_median_nps": 181148.92359317097,
+      "parallel_over_serial": 0.9295104325461363
+    },
+    {
+      "request": "go depth 4",
+      "fen": "r3k2r/2qbb1pp/p1n5/1pp1p3/5p2/3P1NN1/PPP1QPPP/R1B2R1K w kq - 0 18",
+      "serial_median_nps": 161776.5991081217,
+      "parallel_median_nps": 149313.9002081977,
+      "parallel_over_serial": 0.9229635252030816
+    },
+    {
+      "request": "go depth 4",
+      "fen": "r6r/pp2nkpp/4np2/1R6/2P1p2P/P5PN/1BP2P2/2K1R3 b - - 8 23",
+      "serial_median_nps": 168560.96471261297,
+      "parallel_median_nps": 154997.06255479512,
+      "parallel_over_serial": 0.91953117863947
+    },
+    {
+      "request": "go movetime 100",
+      "fen": "3r1rk1/1pp2ppp/p3qnn1/6B1/1PPbN3/P2P1P2/4Q1PP/1K1R1B1R w - - 1 18",
+      "serial_median_nps": 147013.99515513825,
+      "parallel_median_nps": 139507.6185068495,
+      "parallel_over_serial": 0.9489410743489587
+    },
+    {
+      "request": "go movetime 100",
+      "fen": "5r2/p4ppk/4b3/2rN4/4P3/2P1P1P1/P1P5/R3R1K1 w - - 1 24",
+      "serial_median_nps": 185317.46009577892,
+      "parallel_median_nps": 168415.7307763715,
+      "parallel_over_serial": 0.9087958074178656
+    },
+    {
+      "request": "go movetime 100",
+      "fen": "r1b2rk1/p4ppp/4p3/qp1p4/1bpPn3/1P2PN2/P1P1BPPP/RQ1N1RK1 w - - 1 15",
+      "serial_median_nps": 180595.83981223952,
+      "parallel_median_nps": 170179.50848031783,
+      "parallel_over_serial": 0.9423224181534234
+    },
+    {
+      "request": "go movetime 100",
+      "fen": "r2n2k1/pp1rnppp/4p1q1/1P1pP3/3P4/2BQ2P1/2P2PBP/R4RK1 b - - 0 19",
+      "serial_median_nps": 180889.91310092015,
+      "parallel_median_nps": 167387.50961633702,
+      "parallel_over_serial": 0.925355685935622
+    },
+    {
+      "request": "go movetime 100",
+      "fen": "r3k2r/2qbb1pp/p1n5/1pp1p3/5p2/3P1NN1/PPP1QPPP/R1B2R1K w kq - 0 18",
+      "serial_median_nps": 151038.34456877725,
+      "parallel_median_nps": 141566.872845395,
+      "parallel_over_serial": 0.9372909458824922
+    },
+    {
+      "request": "go movetime 100",
+      "fen": "r6r/pp2nkpp/4np2/1R6/2P1p2P/P5PN/1BP2P2/2K1R3 b - - 8 23",
+      "serial_median_nps": 159063.39691323056,
+      "parallel_median_nps": 150023.22185894605,
+      "parallel_over_serial": 0.9431662140397018
+    }
+  ],
+  "limits": "Homogeneous three-Pandafish load, not exact mixed-engine cache/bandwidth load. Short diagnostic, not sustained thermal measurement. Different random root ties can change work; no strength inference."
+}

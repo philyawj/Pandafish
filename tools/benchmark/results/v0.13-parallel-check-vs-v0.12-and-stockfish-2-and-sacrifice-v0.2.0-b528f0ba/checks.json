@@ -1,0 +1,12 @@
+{
+  "passed": [
+    "gofmt changed Go files",
+    "go test ./...",
+    "go test -race ./...",
+    "go vet ./...",
+    "go build -o tools/benchmark/bin/benchmark ./tools/benchmark",
+    "git diff --check"
+  ],
+  "smoke": "Six real-engine games concurrent outside tracked results; no unfinished or forfeits. Previous two-game screen drew twice, correctly returned a blocked decision after retaining every result. Not strength evidence.",
+  "smoke_path": "/tmp/pandafish-three-way-smoke"
+}

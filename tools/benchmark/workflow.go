@@ -27,6 +27,30 @@ func validateSchedule(stage, previous, sacrifice string, validation bool) error 
 	return nil
 }
 
+// Full suites default to three-way concurrency. Explicit serial mode retains
+// the previous-first gate; constrained hosts fall back to that mode as well.
+func scheduleConcurrency(stage string, previous, sacrifice, parallel, parallelAll, sequential bool, cpus int) (int, int, error) {
+	selected := 0
+	for _, enabled := range []bool{parallel, parallelAll, sequential} {
+		if enabled {
+			selected++
+		}
+	}
+	if selected > 1 {
+		return 0, 0, fmt.Errorf("choose only one of parallel, parallel-all, or sequential")
+	}
+	if parallelAll && (stage != "all" || !previous || !sacrifice || cpus < 4) {
+		return 0, 0, fmt.Errorf("parallel-all requires all three opponents, stage all, and at least four logical CPUs")
+	}
+	if !sequential && !parallel && stage == "all" && previous && sacrifice && cpus >= 4 {
+		return 3, 2, nil
+	}
+	if parallel && cpus >= 4 {
+		return 0, 2, nil
+	}
+	return 0, 1, nil
+}
+
 // Conservative screen, not a significance test: unfinished games count as losses.
 func favorablePrevious(s stats) bool {
 	total := s.Wins + s.Draws + s.Losses + s.Unfinished
@@ -110,7 +134,13 @@ func playSchedule(candidate string, id identity, opponents []opponent, openings 
 	return playScheduleWith(candidate, id, opponents, openings, cfg, dir, now, verbose, save, gate, runMatch)
 }
 func playScheduleWith(candidate string, id identity, opponents []opponent, openings [][]string, cfg settings, dir string, now time.Time, verbose bool, save func([]match) error, gate func(string), play matchPlayer) ([]match, error) {
-	cfg.ExternalConcurrency = max(1, min(2, cfg.ExternalConcurrency))
+	concurrency := max(1, min(2, cfg.ExternalConcurrency))
+	concurrentPrevious := cfg.MatchupConcurrency > 1
+	if concurrentPrevious {
+		concurrency = min(3, cfg.MatchupConcurrency)
+		gate("pending: previous screen runs concurrently")
+	}
+	previousFailed := false
 	matches := make([]*match, len(opponents))
 	completed := func() []match {
 		var out []match
@@ -122,7 +152,7 @@ func playScheduleWith(candidate string, id identity, opponents []opponent, openi
 		return out
 	}
 	first := 0
-	if len(opponents) > 0 && opponents[0].Role == "previous" {
+	if !concurrentPrevious && len(opponents) > 0 && opponents[0].Role == "previous" {
 		m, err := play(candidate, id, opponents[0], openings, cfg, dir, now, verbose)
 		if err != nil {
 			return nil, err
@@ -143,11 +173,11 @@ func playScheduleWith(candidate string, id identity, opponents []opponent, openi
 			return completed(), err
 		}
 	}
-	// At most two independent matchups. Only this goroutine updates shared summaries.
+	// Only this goroutine updates shared summaries; workers own distinct PGNs.
 	results := make(chan matchupResult, len(opponents)-first)
 	next, running, finished := first, 0, first
 	for finished < len(opponents) {
-		for next < len(opponents) && running < cfg.ExternalConcurrency {
+		for next < len(opponents) && running < concurrency {
 			i := next
 			next++
 			running++
@@ -176,6 +206,14 @@ func playScheduleWith(candidate string, id identity, opponents []opponent, openi
 		}
 		m := r.match
 		matches[r.index] = &m
+		if concurrentPrevious && opponents[r.index].Role == "previous" {
+			previousFailed = !favorablePrevious(m.Stats)
+			if previousFailed {
+				gate("blocked: no favorable previous-release screen or forfeits; concurrent results retained")
+			} else {
+				gate("passed: score above 50% treating unfinished as losses, zero forfeits")
+			}
+		}
 		if err := save(completed()); err != nil {
 			for running > 0 {
 				<-results
@@ -183,6 +221,9 @@ func playScheduleWith(candidate string, id identity, opponents []opponent, openi
 			}
 			return completed(), err
 		}
+	}
+	if previousFailed {
+		return completed(), fmt.Errorf("previous-release gate failed; all concurrent matchups retained")
 	}
 	return completed(), nil
 }

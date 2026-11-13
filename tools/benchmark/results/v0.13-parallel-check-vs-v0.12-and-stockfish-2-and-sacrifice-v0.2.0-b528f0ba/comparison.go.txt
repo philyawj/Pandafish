@@ -1,0 +1,176 @@
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"os"
+	"sort"
+	"strings"
+)
+
+type identity struct {
+	Label   string `json:"label"`
+	UCIName string `json:"uci_name"`
+	SHA256  string `json:"sha256"`
+}
+type moveTiming struct {
+	Candidate bool    `json:"candidate"`
+	ElapsedMS float64 `json:"elapsed_ms"`
+}
+type gameRecord struct {
+	CandidateWhite bool         `json:"candidate_white"`
+	Opening        []string     `json:"opening"`
+	Result         string       `json:"result"`
+	Termination    string       `json:"termination"`
+	Plies          int          `json:"plies"`
+	Timings        []moveTiming `json:"response_times,omitempty"`
+}
+type stats struct {
+	Wins       int      `json:"wins"`
+	Draws      int      `json:"draws"`
+	Losses     int      `json:"losses"`
+	Unfinished int      `json:"unfinished"`
+	Forfeits   int      `json:"forfeits"`
+	Score      *float64 `json:"score_percent"`
+	ScoreLower *float64 `json:"possible_score_lower_percent"`
+	ScoreUpper *float64 `json:"possible_score_upper_percent"`
+}
+type match struct {
+	PGN    string       `json:"pgn_file,omitempty"`
+	Engine identity     `json:"engine"`
+	Stats  stats        `json:"stats"`
+	Games  []gameRecord `json:"games"`
+}
+
+func summarize(games []gameRecord) stats {
+	s := stats{}
+	for _, game := range games {
+		switch game.Result {
+		case "*":
+			s.Unfinished++
+		case "1/2-1/2":
+			s.Draws++
+		default:
+			if (game.Result == "1-0") == game.CandidateWhite {
+				s.Wins++
+			} else {
+				s.Losses++
+			}
+		}
+		if strings.HasPrefix(game.Termination, "forfeit:") {
+			s.Forfeits++
+		}
+	}
+	if completed := s.Wins + s.Draws + s.Losses; completed > 0 {
+		value := 100 * (float64(s.Wins) + float64(s.Draws)/2) / float64(completed)
+		s.Score = &value
+	}
+	if total := s.Wins + s.Draws + s.Losses + s.Unfinished; total > 0 {
+		lower := 100 * (float64(s.Wins) + float64(s.Draws)/2) / float64(total)
+		upper := lower + 100*float64(s.Unfinished)/float64(total)
+		s.ScoreLower, s.ScoreUpper = &lower, &upper
+	}
+	return s
+}
+
+type input struct {
+	Candidate identity `json:"candidate"`
+	Matches   []match  `json:"matches"`
+	Complete  bool     `json:"complete"`
+}
+type timing struct {
+	Side      string  `json:"side"`
+	Responses int     `json:"responses"`
+	Over100   int     `json:"over100_ms"`
+	Over150   int     `json:"over150_ms"`
+	Max       float64 `json:"max_ms"`
+	P95       float64 `json:"p95_ms"`
+}
+type row struct {
+	Profile  string   `json:"profile"`
+	Opponent identity `json:"opponent"`
+	Stats    stats    `json:"stats"`
+	Timing   []timing `json:"timing"`
+}
+
+func load(path string) (input, string) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		panic(err)
+	}
+	var in input
+	if err = json.Unmarshal(data, &in); err != nil {
+		panic(err)
+	}
+	sum := sha256.Sum256(data)
+	return in, fmt.Sprintf("%x", sum)
+}
+func main() {
+	published, ph := load(os.Args[1])
+	concurrent, ch := load(os.Args[2])
+	if !published.Complete || !concurrent.Complete {
+		panic("run incomplete")
+	}
+	var rows []row
+	for _, profile := range []struct {
+		name  string
+		in    input
+		limit int
+	}{{"published-serial-100", published, 100}, {"published-serial-first-50", published, 50}, {"parallel-3-50", concurrent, 50}} {
+		for _, m := range profile.in.Matches {
+			if len(m.Games) < profile.limit {
+				panic("too few games")
+			}
+			games := m.Games[:profile.limit]
+			r := row{Profile: profile.name, Opponent: m.Engine, Stats: summarize(games)}
+			for _, candidate := range []bool{true, false} {
+				t := timing{Side: "opponent"}
+				if candidate {
+					t.Side = "candidate"
+				}
+				var ts []float64
+				for _, g := range games {
+					for _, sample := range g.Timings {
+						if sample.Candidate != candidate {
+							continue
+						}
+						ts = append(ts, sample.ElapsedMS)
+						if sample.ElapsedMS > 100 {
+							t.Over100++
+						}
+						if sample.ElapsedMS > 150 {
+							t.Over150++
+						}
+					}
+				}
+				sort.Float64s(ts)
+				t.Responses = len(ts)
+				if len(ts) > 0 {
+					t.Max = ts[len(ts)-1]
+					t.P95 = ts[(95*len(ts)+99)/100-1]
+				}
+				r.Timing = append(r.Timing, t)
+			}
+			rows = append(rows, r)
+		}
+	}
+	result := struct {
+		Method             string   `json:"method"`
+		PublishedSHA       string   `json:"published_summary_sha256"`
+		ParallelSHA        string   `json:"parallel_summary_sha256"`
+		PublishedCandidate identity `json:"published_candidate"`
+		ParallelCandidate  identity `json:"parallel_candidate"`
+		Rows               []row    `json:"rows"`
+	}{"Scores calculated with an exact copy of the benchmark runner's summarize function. Prefix selected before reviewing scores: first 50 published games match 25 opening/color pairs. Skill 2 has no published same-skill serial control. Timing p95 is nearest rank. No equivalence/significance inference from these small repeated-opening samples.", ph, ch, published.Candidate, concurrent.Candidate, rows}
+	data, err := json.MarshalIndent(result, "", "  ")
+	if err != nil {
+		panic(err)
+	}
+	if err = os.WriteFile(os.Args[3], append(data, '\n'), 0644); err != nil {
+		panic(err)
+	}
+	for _, r := range rows {
+		fmt.Printf("%s | %s | %d/%d/%d | unfinished %d forfeits %d | %.1f%% | candidate max %.3fms over100 %d over150 %d\n", r.Profile, r.Opponent.Label, r.Stats.Wins, r.Stats.Draws, r.Stats.Losses, r.Stats.Unfinished, r.Stats.Forfeits, *r.Stats.Score, r.Timing[0].Max, r.Timing[0].Over100, r.Timing[0].Over150)
+	}
+}

@@ -12,8 +12,12 @@ The README also covers setup and the checks to run before submitting a PR.
 For changes intended to improve playing strength, follow the
 [benchmark workflow](tools/benchmark/README.md#test-a-development-candidate).
 Include the candidate source revision, full command, comparison version,
-settings, and results in your PR. A 100-game screening run is useful evidence,
-but does not by itself establish a small strength improvement. Run the Go
+settings, and results in your PR. Starting after v0.13, the routine screen is
+50 games per opponent (`--pairs 25`), with the three matchups concurrent, to
+speed up development. Use the documented defaults and preserve the run profile.
+A screen is
+useful evidence, but does not by itself establish a small strength improvement.
+Run the Go
 tests and include focused positions that exercise the behavior changed.
 
 Maintainers follow the [release workflow](RELEASING.md) when preparing and

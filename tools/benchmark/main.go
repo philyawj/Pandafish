@@ -32,6 +32,7 @@ type identity struct {
 	Assets   map[string]string `json:"assets_sha256,omitempty"`
 }
 type settings struct {
+	MatchupConcurrency  int    `json:"matchup_concurrency,omitempty"`
 	ExternalConcurrency int    `json:"external_matchup_concurrency,omitempty"`
 	Pairs               int    `json:"pairs"`
 	MoveMS              int    `json:"move_ms"`
@@ -334,10 +335,12 @@ func run() error {
 	sacrificeVersion := flag.String("sacrifice-version", "Sacrifice v0.2.0 b528f0ba", "Sacrifice package version and revision label")
 	sacrificeRevision := flag.String("sacrifice-revision", "b528f0ba373910b72052d991700a990ca1cb07fd", "Sacrifice source revision")
 	sacrificeData := flag.String("sacrifice-data", "tools/benchmark/bin/sacrifice-source/data/Tal.pgn", "Tal PGN asset required by the pinned Sacrifice build")
-	stage := flag.String("stage", "all", "all, previous, or external; all gates external matches on previous screen")
+	stage := flag.String("stage", "all", "all, previous, or external; all reviews previous screen; serial mode gates external matches")
 	parallel := flag.Bool("parallel", false, "Run Stockfish and Sacrifice concurrently after previous screen")
-	skill := flag.Int("stockfish-skill", 1, "Stockfish Skill Level (1 through 20)")
-	pairs := flag.Int("pairs", 50, "Color pairs per opponent")
+	parallelAll := flag.Bool("parallel-all", false, "Require three-way concurrency (automatic for a full suite on at least four logical CPUs)")
+	sequential := flag.Bool("sequential", false, "Run matchups serially and gate external matches on the previous screen")
+	skill := flag.Int("stockfish-skill", 2, "Stockfish Skill Level (1 through 20)")
+	pairs := flag.Int("pairs", 25, "Color pairs per opponent")
 	moveMS := flag.Int("move-ms", 100, "Requested milliseconds per move")
 	graceMS := flag.Int("grace-ms", 50, "Additional wall-clock allowance for protocol overhead")
 	revision := flag.String("revision", "", "Candidate source revision; append -dirty for modified source")
@@ -371,6 +374,10 @@ func run() error {
 	}
 	if *candidate == "" || *version == "" || (*previous == "") != (*previousVersion == "") || *pairs < 1 || *moveMS < 1 || *maxPlies < 10 || *graceMS < 0 || *skill < 1 || *skill > 20 {
 		return fmt.Errorf("candidate/version required; previous flags paired; pairs/move-ms positive; max-plies >= 10; grace-ms >= 0; stockfish-skill 1..20")
+	}
+	allConcurrency, concurrency, scheduleErr := scheduleConcurrency(*stage, *previous != "", *sacrifice != "", *parallel, *parallelAll, *sequential, runtime.NumCPU())
+	if scheduleErr != nil {
+		return scheduleErr
 	}
 	if err := validateSchedule(*stage, *previous, *sacrifice, *validate); err != nil {
 		return err
@@ -425,11 +432,7 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	concurrency := 1
-	if *parallel && runtime.NumCPU() >= 4 {
-		concurrency = 2
-	}
-	cfg := settings{ExternalConcurrency: concurrency, Pairs: *pairs, MoveMS: *moveMS, GraceMS: *graceMS, MaxPlies: *maxPlies, OpeningsSHA256: hash,
+	cfg := settings{MatchupConcurrency: allConcurrency, ExternalConcurrency: concurrency, Pairs: *pairs, MoveMS: *moveMS, GraceMS: *graceMS, MaxPlies: *maxPlies, OpeningsSHA256: hash,
 		OpeningsName: filepath.Base(*openingsPath), TimingPolicy: "wall-clock-v2"}
 	snapshots, err := os.MkdirTemp("", "pandafish-benchmark-")
 	if err != nil {
@@ -488,6 +491,7 @@ func run() error {
 	}
 	save := func(completed []match) error {
 		s.Matches = completed
+		s.Complete = len(completed) == s.PlannedMatches
 		if e := combinePGNs(dir, completed); e != nil {
 			return e
 		}
