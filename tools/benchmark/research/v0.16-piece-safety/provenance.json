@@ -1,0 +1,75 @@
+{
+  "base_tag": "v0.15.1",
+  "base_revision": "42f4510de619056728f87d3e30ecad3db3966545",
+  "date_local": "2026-11-15T23:44:34-08:00",
+  "go_version": "go version go1.25.0 darwin/arm64",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "candidate_identity": "Pandafish v0.16-piece-safety-dev",
+  "candidate_overlay_sha256": "cd8302f2d309588dc997a7beea9bb77d3d99af578d61c03c06eb439ce8f0fd9f",
+  "candidate_file_sha256": {
+    "evaluation.go": "cfeab16f2a633a0315b40c7389e3f457c28d69368820daf86133db4110c98e25",
+    "evaluation_test.go": "307e62063196bef50314447268f510e051746e4e9a90b6970be523d8e7c80fab",
+    "exchange.go": "b49f442e9f3689db18291af085ef3a6ec605008dcc0dfbb670b091cf4e893575",
+    "exchange_test.go": "e71f82cce4de851991786093aa1f5931f84bd987df6f8648802eabe3f043c6fd",
+    "iterative.go": "4b979dcee433a7e989bb4d8c1cdfde6b872a4013f1badf8d0d26fed7c7ab3507",
+    "iterative_test.go": "9c86d4b3d00dc41fe599ddef204910f1e47903bd5368577d411b39abf03102c1",
+    "killers.go": "f9e1458a5b974b8f32e498304b88db3d7dcbea1a0298a4a0be35a5c9fb72e90c",
+    "killers_test.go": "7674a3e5bea294f23b6ce9e757d4a92bbd6add98ddd83a40a96274bc8489f06c",
+    "limits.go": "7605e6b48b329dadb222890d1ae8588f50e92f091a8cd509c69f356f7bc354ba",
+    "limits_test.go": "1615ddd4ccf88bfddeb98d560658a234e651f2b0811822ba999106e70ae70406",
+    "main.go": "3e1a88f9c888ea48a85579e5c47c16862ad79a10d23de3a1610c5ba2eda32b9c",
+    "main_test.go": "8a19baff67d0d398d458a149d29fd10786bd09de4cf60547f35f57f996250c6b",
+    "mate.go": "728dc306664b92fb152ac59e1caa5385792d17354ec3cf3b13c89477d258d8aa",
+    "mate_test.go": "df1e7ffa034a8e65eae9a10de1cd2ca67f758a7387b7db3ea2c9e97ca2d1b10b",
+    "piece_safety.go": "712aba1fb386c19cc2ee3e4683a88364a287692083b00f3c0ef71591ad6d1364",
+    "piece_safety_test.go": "5956a21572fbfdbcb1cbec30f1d49c022101b0a22fe50fd9a62bdfb8718d147e",
+    "quiescence_test.go": "f04df5ea6b01927b872a732d75f2d66dc8fa400e8d1214c555774ac712ea4999",
+    "repetition.go": "5cf04b5fbd69249fdb05a20450bc71769a83c4048dc02d66fd9ce1649ce252b6",
+    "repetition_test.go": "2dcc78bf2f3c55bb52d1775fddb7a0dab7655dd03236c6ea5f8596a5855b9fa2",
+    "reporting.go": "3d23f2890894e8bf869098f11597727e705038da1e256c05db4becb59fafb7b4",
+    "reporting_test.go": "1d97fce816a28a4a0d4a805a37d569ec3a68b5f7c318203bb19054ebccf07dcd",
+    "search.go": "33c038d4da3c85de3134f6f8d33ff70fd942ba9e2233cfc5da665f5af491f086",
+    "search_test.go": "7e35f3bd5dc8f70ae3ac06926bde7bcb622f2d962f131abe1135c3c841f2a0e5",
+    "transposition.go": "61c4830bd48fd8b6e3d495b0ab8b639a59cb5ab7f339f49beaf582f5b7f4c906",
+    "transposition_test.go": "91ee38372fc2b51599eb102f872a8f14ae24d0d581810e0b4be1569dd8e7bfdf",
+    "uci_test.go": "3a3d591acc4ba286ae12c4c813e70c2bc690311ba648fba208fe432429a6372c"
+  },
+  "fixed_policy_files_identical_to_tag": {
+    "search.go": true,
+    "iterative.go": true,
+    "exchange.go": true,
+    "transposition.go": true,
+    "limits.go": true,
+    "killers.go": true,
+    "repetition.go": true,
+    "mate.go": true
+  },
+  "binaries": {
+    "tools/benchmark/bin/pandafish-v0.15.1": {
+      "sha256": "37e1b3d40fb5b8af78d4f5aef5c83098a35b4e5032136fb2ac0e5690719412fe",
+      "size": 3742434
+    },
+    "tools/benchmark/bin/pandafish-v0.16-piece-safety-dev": {
+      "sha256": "ad225b3a2b08c314dea35d3afdb6c24783edd3dd480f620447bfd4f5aa456b14",
+      "size": 3759922
+    },
+    "/opt/homebrew/bin/stockfish": {
+      "sha256": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f",
+      "size": 99868024
+    },
+    "tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine": {
+      "sha256": "5c2c63f19ff6f8be65aaa127a7cbe884f6cb52d7c4daee6967b1da7a7f8fa0e5",
+      "size": 3370080
+    },
+    "tools/benchmark/bin/sacrifice-source/data/Tal.pgn": {
+      "sha256": "da7d473f53ac933c3a14ca4aff872bc50fe64385234f3635094cc500c0b0ad59",
+      "size": 1455126
+    }
+  },
+  "sacrifice_revision": "b528f0ba373910b72052d991700a990ca1cb07fd",
+  "matches_run": false,
+  "larger_confirmation_run": false,
+  "live_client_started": false,
+  "note": "Apple M2, eight logical CPUs. No thermal/utilization telemetry. Initial baseline diagnostics overlapped microbenchmark; balanced final timing probes serial with no other deliberately launched engine task. Candidate final tests include a post-probe test-only addition.",
+  "base_tag_object": "2b595cb3f5e8bfad30f87a8c28af4dc8875c88da"
+}
