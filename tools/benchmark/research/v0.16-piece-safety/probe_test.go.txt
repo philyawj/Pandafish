@@ -1,0 +1,20 @@
+package main
+import (
+ "context"
+ "encoding/json"
+ "os"
+ "strings"
+ "testing"
+ "time"
+ "github.com/corentings/chess/v2"
+)
+type probeCase struct{Game,Position,Split string;Ply,Depth int}
+type probeRecord struct{Game,Split,Mode string;Ply,Trial,Depth,Score int;Moves []string;Nodes uint64;ElapsedMS float64;Complete,Legal bool}
+func TestResearchProbe(t *testing.T){
+ data,err:=os.ReadFile(os.Getenv("PROBE_INPUT"));if err!=nil{t.Fatal(err)};var input struct{Cases []probeCase};if err=json.Unmarshal(data,&input);err!=nil{t.Fatal(err)};var out []probeRecord
+ for _,c:=range input.Cases{g,e:=parsePosition(strings.Fields(strings.TrimPrefix(c.Position,"position ")));if e!=nil{t.Fatal(e)};p:=g.Position()
+ depths:=[]int{3,5};if os.Getenv("PROBE_LIVE")=="1"{depths=[]int{c.Depth,c.Depth+1}};for _,depth:=range depths{if os.Getenv("PROBE_TIMED_ONLY")=="1"{break};w:=searcher{table:newTable(),killers:new(killerTable),deadline:time.Now().Add(30*time.Second)};for _,k:=range repetitionHistory(g){w.pushKey(k)};start:=time.Now();moves,score,ok:=w.root(p,orderedMoves(p),depth);legal:=len(moves)>0;for _,s:=range moves{found:=false;for _,m:=range p.ValidMoves(){if m.String()==s{found=true}};legal=legal&&found};out=append(out,probeRecord{c.Game,c.Split,"fixed",c.Ply,0,depth,score,moves,w.nodes,float64(time.Since(start))/float64(time.Millisecond),ok,legal})}
+ for trial:=0;trial<3;trial++{if os.Getenv("PROBE_FIXED_ONLY")=="1"{break};limits:=goLimits{moveTime:100*time.Millisecond,hasTime:true};budget,_:=limits.budget(p.Turn());start:=time.Now();r:=iterativeSearchWithHistory(context.Background(),p,limits,budget,start,newTable(),repetitionHistory(g));legal:=false;for _,m:=range p.ValidMoves(){if m.String()==r.move{legal=true}};out=append(out,probeRecord{c.Game,c.Split,"100ms",c.Ply,trial,r.depth,r.score,[]string{r.move},r.metrics.Nodes,float64(time.Since(start))/float64(time.Millisecond),r.depth>0,legal})}
+ };b,_:=json.MarshalIndent(out,"","  ");if e:=os.WriteFile(os.Getenv("PROBE_OUTPUT"),append(b,'\n'),0644);e!=nil{t.Fatal(e)}
+}
+var _ = chess.White

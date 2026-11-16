@@ -1,0 +1,3 @@
+package main
+import("encoding/json";"os";"testing";"github.com/corentings/chess/v2")
+func TestResearchLeafSafety(t *testing.T){b,e:=os.ReadFile(os.Getenv("LEAF_INPUT"));if e!=nil{t.Fatal(e)};var records []struct{Game,Kind,Root string;PV []string;Nodes []struct{FEN string;Static int}};if e=json.Unmarshal(b,&records);e!=nil{t.Fatal(e)};var out []map[string]any;for _,r:=range records{for i,n:=range r.Nodes{p:=evalFEN(t,n.FEN);out=append(out,map[string]any{"game":r.Game,"kind":r.Kind,"root":r.Root,"ply":i+1,"fen":n.FEN,"baseline_black_cp":n.Static,"safety_black_cp":pieceSafety(p,chess.Black),"candidate_black_cp":staticScore(p,chess.Black)})}};b,_=json.MarshalIndent(out,"","  ");if e=os.WriteFile(os.Getenv("LEAF_OUTPUT"),append(b,'\n'),0644);e!=nil{t.Fatal(e)}}

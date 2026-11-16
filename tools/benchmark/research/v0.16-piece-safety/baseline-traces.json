@@ -1,0 +1,1103 @@
+[
+  {
+    "Game": "https://lichess.org/game/16G1f9rx",
+    "Kind": "baseline_exact_research_pv",
+    "Root": "c6d4",
+    "Depth": 7,
+    "Score": -12,
+    "PV": [
+      "c6d4",
+      "f3d4",
+      "e5d4",
+      "c1g5",
+      "e8g8",
+      "b1d2",
+      "d6e5",
+      "g5f6",
+      "d8f6"
+    ],
+    "Nodes": [
+      {
+        "FEN": "r1bqk2r/pppp1ppp/3b1n2/1B2p3/3nP3/3P1N2/PPP2PPP/RNBQ1RK1 w kq - 3 6",
+        "Static": 5,
+        "Targets": [
+          "♙@c2 attackers=d4 defenders=d1 legalAttacker=d4",
+          "♘@f3 attackers=d4 defenders=d1,g2 legalAttacker=d4",
+          "♞@d4 attackers=f3 defenders=e5 legalAttacker=f3",
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♗@b5 attackers=d4 defenders= legalAttacker=d4",
+          "♟@e5 attackers=f3 defenders=d6 legalAttacker=f3",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8,e8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bqk2r/pppp1ppp/3b1n2/1B2p3/3NP3/3P4/PPP2PPP/RNBQ1RK1 b kq - 0 6",
+        "Static": -349,
+        "Targets": [
+          "♘@d4 attackers=e5 defenders= legalAttacker=e5",
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8,e8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bqk2r/pppp1ppp/3b1n2/1B6/3pP3/3P4/PPP2PPP/RNBQ1RK1 w kq - 0 7",
+        "Static": -1,
+        "Targets": [
+          "♙@h2 attackers=d6 defenders=g1 legalAttacker=d6",
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8,e8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bqk2r/pppp1ppp/3b1n2/1B4B1/3pP3/3P4/PPP2PPP/RN1Q1RK1 b kq - 1 7",
+        "Static": -18,
+        "Targets": [
+          "♙@h2 attackers=d6 defenders=g1 legalAttacker=d6",
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♞@f6 attackers=g5 defenders=g7,d8 legalAttacker=g5",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8,e8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/pppp1ppp/3b1n2/1B4B1/3pP3/3P4/PPP2PPP/RN1Q1RK1 w - - 2 8",
+        "Static": 6,
+        "Targets": [
+          "♙@h2 attackers=d6 defenders=g1 legalAttacker=d6",
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♞@f6 attackers=g5 defenders=g7,d8 legalAttacker=g5",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/pppp1ppp/3b1n2/1B4B1/3pP3/3P4/PPPN1PPP/R2Q1RK1 b - - 3 8",
+        "Static": -18,
+        "Targets": [
+          "♙@h2 attackers=d6 defenders=g1 legalAttacker=d6",
+          "♙@e4 attackers=f6 defenders=d2,d3 legalAttacker=f6",
+          "♞@f6 attackers=g5 defenders=g7,d8 legalAttacker=g5",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/pppp1ppp/5n2/1B2b1B1/3pP3/3P4/PPPN1PPP/R2Q1RK1 w - - 4 9",
+        "Static": -11,
+        "Targets": [
+          "♙@h2 attackers=e5 defenders=g1 legalAttacker=e5",
+          "♙@e4 attackers=f6 defenders=d2,d3 legalAttacker=f6",
+          "♞@f6 attackers=g5 defenders=e5,g7,d8 legalAttacker=g5",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/pppp1ppp/5B2/1B2b3/3pP3/3P4/PPPN1PPP/R2Q1RK1 b - - 0 9",
+        "Static": -335,
+        "Targets": [
+          "♙@h2 attackers=e5 defenders=g1 legalAttacker=e5",
+          "♝@e5 attackers=f6 defenders= legalAttacker=f6",
+          "♗@f6 attackers=e5,g7,d8 defenders= legalAttacker=g7",
+          "♟@d7 attackers=b5 defenders=c8,d8 legalAttacker=b5",
+          "♟@g7 attackers=f6 defenders=g8 legalAttacker=f6",
+          "♛@d8 attackers=f6 defenders=f8 legalAttacker=f6"
+        ]
+      },
+      {
+        "FEN": "r1b2rk1/pppp1ppp/5q2/1B2b3/3pP3/3P4/PPPN1PPP/R2Q1RK1 w - - 0 10",
+        "Static": -12,
+        "Targets": [
+          "♙@f2 attackers=f6 defenders=f1,g1 legalAttacker=f6",
+          "♙@h2 attackers=e5 defenders=g1 legalAttacker=e5",
+          "♟@d7 attackers=b5 defenders=c8 legalAttacker=b5"
+        ]
+      }
+    ],
+    "ElapsedMS": 982
+  },
+  {
+    "Game": "https://lichess.org/game/16G1f9rx",
+    "Kind": "baseline_exact_research_pv",
+    "Root": "e8g8",
+    "Depth": 7,
+    "Score": -18,
+    "PV": [
+      "e8g8",
+      "c1e3",
+      "a7a6",
+      "b5c6",
+      "d7c6",
+      "b1d2",
+      "c8e6"
+    ],
+    "Nodes": [
+      {
+        "FEN": "r1bq1rk1/pppp1ppp/2nb1n2/1B2p3/4P3/3P1N2/PPP2PPP/RNBQ1RK1 w - - 3 6",
+        "Static": 17,
+        "Targets": [
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=c6,d6 legalAttacker=f3",
+          "♞@c6 attackers=b5 defenders=b7,d7 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/pppp1ppp/2nb1n2/1B2p3/4P3/3PBN2/PPP2PPP/RN1Q1RK1 b - - 4 6",
+        "Static": -1,
+        "Targets": [
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=c6,d6 legalAttacker=f3",
+          "♞@c6 attackers=b5 defenders=b7,d7 legalAttacker=b5",
+          "♟@a7 attackers=e3 defenders=c6,a8 legalAttacker=e3"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/1ppp1ppp/p1nb1n2/1B2p3/4P3/3PBN2/PPP2PPP/RN1Q1RK1 w - - 0 7",
+        "Static": -1,
+        "Targets": [
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♗@b5 attackers=a6 defenders= legalAttacker=a6",
+          "♟@e5 attackers=f3 defenders=c6,d6 legalAttacker=f3",
+          "♟@a6 attackers=b5 defenders=b7,a8 legalAttacker=b5",
+          "♞@c6 attackers=b5 defenders=b7,d7 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/1ppp1ppp/p1Bb1n2/4p3/4P3/3PBN2/PPP2PPP/RN1Q1RK1 b - - 0 7",
+        "Static": -325,
+        "Targets": [
+          "♙@e4 attackers=f6 defenders=d3,c6 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=d6 legalAttacker=f3",
+          "♗@c6 attackers=b7,d7 defenders= legalAttacker=b7",
+          "♟@b7 attackers=c6 defenders=c8 legalAttacker=c6",
+          "♟@d7 attackers=c6 defenders=f6,c8,d8 legalAttacker=c6"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/1pp2ppp/p1pb1n2/4p3/4P3/3PBN2/PPP2PPP/RN1Q1RK1 w - - 0 8",
+        "Static": -12,
+        "Targets": [
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=d6 legalAttacker=f3"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/1pp2ppp/p1pb1n2/4p3/4P3/3PBN2/PPPN1PPP/R2Q1RK1 b - - 1 8",
+        "Static": -36,
+        "Targets": [
+          "♙@e4 attackers=f6 defenders=d2,d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=d6 legalAttacker=f3"
+        ]
+      },
+      {
+        "FEN": "r2q1rk1/1pp2ppp/p1pbbn2/4p3/4P3/3PBN2/PPPN1PPP/R2Q1RK1 w - - 2 9",
+        "Static": -18,
+        "Targets": [
+          "♙@a2 attackers=e6 defenders=a1 legalAttacker=e6",
+          "♙@e4 attackers=f6 defenders=d2,d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=d6 legalAttacker=f3"
+        ]
+      }
+    ],
+    "ElapsedMS": 4348
+  },
+  {
+    "Game": "https://lichess.org/game/16G1f9rx",
+    "Kind": "referee_played",
+    "Root": "",
+    "Depth": 0,
+    "Score": 0,
+    "PV": [
+      "c6d4",
+      "f3d4",
+      "e5d4",
+      "e4e5",
+      "d6e5",
+      "f1e1",
+      "e8g8",
+      "e1e5",
+      "d7d5",
+      "e5e1",
+      "c7c6",
+      "b5a4",
+      "c8g4",
+      "f2f3",
+      "g4f5",
+      "b1a3"
+    ],
+    "Nodes": [
+      {
+        "FEN": "r1bqk2r/pppp1ppp/3b1n2/1B2p3/3nP3/3P1N2/PPP2PPP/RNBQ1RK1 w kq - 3 6",
+        "Static": 5,
+        "Targets": [
+          "♙@c2 attackers=d4 defenders=d1 legalAttacker=d4",
+          "♘@f3 attackers=d4 defenders=d1,g2 legalAttacker=d4",
+          "♞@d4 attackers=f3 defenders=e5 legalAttacker=f3",
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♗@b5 attackers=d4 defenders= legalAttacker=d4",
+          "♟@e5 attackers=f3 defenders=d6 legalAttacker=f3",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8,e8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bqk2r/pppp1ppp/3b1n2/1B2p3/3NP3/3P4/PPP2PPP/RNBQ1RK1 b kq - 0 6",
+        "Static": -349,
+        "Targets": [
+          "♘@d4 attackers=e5 defenders= legalAttacker=e5",
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8,e8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bqk2r/pppp1ppp/3b1n2/1B6/3pP3/3P4/PPP2PPP/RNBQ1RK1 w kq - 0 7",
+        "Static": -1,
+        "Targets": [
+          "♙@h2 attackers=d6 defenders=g1 legalAttacker=d6",
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8,e8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bqk2r/pppp1ppp/3b1n2/1B2P3/3p4/3P4/PPP2PPP/RNBQ1RK1 b kq - 0 7",
+        "Static": -7,
+        "Targets": [
+          "♙@e5 attackers=d6 defenders= legalAttacker=d6",
+          "♝@d6 attackers=e5 defenders=c7 legalAttacker=e5",
+          "♞@f6 attackers=e5 defenders=g7,d8 legalAttacker=e5",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8,e8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bqk2r/pppp1ppp/5n2/1B2b3/3p4/3P4/PPP2PPP/RNBQ1RK1 w kq - 0 8",
+        "Static": 130,
+        "Targets": [
+          "♙@h2 attackers=e5 defenders=g1 legalAttacker=e5",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8,e8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bqk2r/pppp1ppp/5n2/1B2b3/3p4/3P4/PPP2PPP/RNBQR1K1 b kq - 1 8",
+        "Static": 130,
+        "Targets": [
+          "♙@h2 attackers=e5 defenders=g1 legalAttacker=none",
+          "♝@e5 attackers=e1 defenders= legalAttacker=e1",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8,e8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/pppp1ppp/5n2/1B2b3/3p4/3P4/PPP2PPP/RNBQR1K1 w - - 2 9",
+        "Static": 154,
+        "Targets": [
+          "♙@h2 attackers=e5 defenders=g1 legalAttacker=e5",
+          "♝@e5 attackers=e1 defenders= legalAttacker=e1",
+          "♟@d7 attackers=b5 defenders=f6,c8,d8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/pppp1ppp/5n2/1B2R3/3p4/3P4/PPP2PPP/RNBQ2K1 b - - 0 9",
+        "Static": -175,
+        "Targets": [
+          "♟@d7 attackers=b5 defenders=f6,c8,d8 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/ppp2ppp/5n2/1B1pR3/3p4/3P4/PPP2PPP/RNBQ2K1 w - d6 0 10",
+        "Static": -159,
+        "Targets": [
+          "♟@d5 attackers=e5 defenders=f6,d8 legalAttacker=e5"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/ppp2ppp/5n2/1B1p4/3p4/3P4/PPP2PPP/RNBQR1K1 b - - 1 10",
+        "Static": -159,
+        "Targets": null
+      },
+      {
+        "FEN": "r1bq1rk1/pp3ppp/2p2n2/1B1p4/3p4/3P4/PPP2PPP/RNBQR1K1 w - - 0 11",
+        "Static": -159,
+        "Targets": [
+          "♗@b5 attackers=c6 defenders= legalAttacker=c6",
+          "♟@c6 attackers=b5 defenders=b7 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/pp3ppp/2p2n2/3p4/B2p4/3P4/PPP2PPP/RNBQR1K1 b - - 1 11",
+        "Static": -155,
+        "Targets": [
+          "♟@c6 attackers=a4 defenders=b7 legalAttacker=a4"
+        ]
+      },
+      {
+        "FEN": "r2q1rk1/pp3ppp/2p2n2/3p4/B2p2b1/3P4/PPP2PPP/RNBQR1K1 w - - 2 12",
+        "Static": -138,
+        "Targets": [
+          "♕@d1 attackers=g4 defenders=e1 legalAttacker=g4",
+          "♝@g4 attackers=d1 defenders=f6 legalAttacker=d1",
+          "♟@c6 attackers=a4 defenders=b7 legalAttacker=a4"
+        ]
+      },
+      {
+        "FEN": "r2q1rk1/pp3ppp/2p2n2/3p4/B2p2b1/3P1P2/PPP3PP/RNBQR1K1 b - - 0 12",
+        "Static": -138,
+        "Targets": [
+          "♙@f3 attackers=g4 defenders=d1,g2 legalAttacker=g4",
+          "♝@g4 attackers=f3 defenders=f6 legalAttacker=f3",
+          "♟@c6 attackers=a4 defenders=b7 legalAttacker=a4"
+        ]
+      },
+      {
+        "FEN": "r2q1rk1/pp3ppp/2p2n2/3p1b2/B2p4/3P1P2/PPP3PP/RNBQR1K1 w - - 1 13",
+        "Static": -134,
+        "Targets": [
+          "♙@d3 attackers=f5 defenders=d1,c2 legalAttacker=f5",
+          "♟@c6 attackers=a4 defenders=b7 legalAttacker=a4"
+        ]
+      },
+      {
+        "FEN": "r2q1rk1/pp3ppp/2p2n2/3p1b2/B2p4/N2P1P2/PPP3PP/R1BQR1K1 b - - 2 13",
+        "Static": -142,
+        "Targets": [
+          "♙@d3 attackers=f5 defenders=d1,c2 legalAttacker=f5",
+          "♟@c6 attackers=a4 defenders=b7 legalAttacker=a4"
+        ]
+      }
+    ],
+    "ElapsedMS": 0
+  },
+  {
+    "Game": "https://lichess.org/game/16G1f9rx",
+    "Kind": "referee_best",
+    "Root": "",
+    "Depth": 0,
+    "Score": 0,
+    "PV": [
+      "e8g8",
+      "c2c4",
+      "f8e8",
+      "c1e3",
+      "d6b4",
+      "b5a4",
+      "d7d6",
+      "h2h3",
+      "b4c5",
+      "a4c6",
+      "b7c6",
+      "e3c5",
+      "d6c5"
+    ],
+    "Nodes": [
+      {
+        "FEN": "r1bq1rk1/pppp1ppp/2nb1n2/1B2p3/4P3/3P1N2/PPP2PPP/RNBQ1RK1 w - - 3 6",
+        "Static": 17,
+        "Targets": [
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=c6,d6 legalAttacker=f3",
+          "♞@c6 attackers=b5 defenders=b7,d7 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bq1rk1/pppp1ppp/2nb1n2/1B2p3/2P1P3/3P1N2/PP3PPP/RNBQ1RK1 b - c3 0 6",
+        "Static": 17,
+        "Targets": [
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=c6,d6 legalAttacker=f3",
+          "♞@c6 attackers=b5 defenders=b7,d7 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bqr1k1/pppp1ppp/2nb1n2/1B2p3/2P1P3/3P1N2/PP3PPP/RNBQ1RK1 w - - 1 7",
+        "Static": 17,
+        "Targets": [
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=c6,d6,e8 legalAttacker=f3",
+          "♞@c6 attackers=b5 defenders=b7,d7 legalAttacker=b5"
+        ]
+      },
+      {
+        "FEN": "r1bqr1k1/pppp1ppp/2nb1n2/1B2p3/2P1P3/3PBN2/PP3PPP/RN1Q1RK1 b - - 2 7",
+        "Static": -1,
+        "Targets": [
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=c6,d6,e8 legalAttacker=f3",
+          "♞@c6 attackers=b5 defenders=b7,d7 legalAttacker=b5",
+          "♟@a7 attackers=e3 defenders=c6,a8 legalAttacker=e3"
+        ]
+      },
+      {
+        "FEN": "r1bqr1k1/pppp1ppp/2n2n2/1B2p3/1bP1P3/3PBN2/PP3PPP/RN1Q1RK1 w - - 3 8",
+        "Static": -2,
+        "Targets": [
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=c6,e8 legalAttacker=f3",
+          "♞@c6 attackers=b5 defenders=b7,d7 legalAttacker=b5",
+          "♟@a7 attackers=e3 defenders=c6,a8 legalAttacker=e3"
+        ]
+      },
+      {
+        "FEN": "r1bqr1k1/pppp1ppp/2n2n2/4p3/BbP1P3/3PBN2/PP3PPP/RN1Q1RK1 b - - 4 8",
+        "Static": 2,
+        "Targets": [
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=c6,e8 legalAttacker=f3",
+          "♞@c6 attackers=a4 defenders=b7,d7 legalAttacker=a4",
+          "♟@a7 attackers=e3 defenders=c6,a8 legalAttacker=e3"
+        ]
+      },
+      {
+        "FEN": "r1bqr1k1/ppp2ppp/2np1n2/4p3/BbP1P3/3PBN2/PP3PPP/RN1Q1RK1 w - - 0 9",
+        "Static": 10,
+        "Targets": [
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=c6,d6,e8 legalAttacker=f3",
+          "♞@c6 attackers=a4 defenders=b7 legalAttacker=a4",
+          "♟@a7 attackers=e3 defenders=c6,a8 legalAttacker=e3"
+        ]
+      },
+      {
+        "FEN": "r1bqr1k1/ppp2ppp/2np1n2/4p3/BbP1P3/3PBN1P/PP3PP1/RN1Q1RK1 b - - 0 9",
+        "Static": 10,
+        "Targets": [
+          "♙@h3 attackers=c8 defenders=g2 legalAttacker=c8",
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=c6,d6,e8 legalAttacker=f3",
+          "♞@c6 attackers=a4 defenders=b7 legalAttacker=a4",
+          "♟@a7 attackers=e3 defenders=c6,a8 legalAttacker=e3"
+        ]
+      },
+      {
+        "FEN": "r1bqr1k1/ppp2ppp/2np1n2/2b1p3/B1P1P3/3PBN1P/PP3PP1/RN1Q1RK1 w - - 1 10",
+        "Static": 14,
+        "Targets": [
+          "♗@e3 attackers=c5 defenders=f2 legalAttacker=c5",
+          "♙@h3 attackers=c8 defenders=g2 legalAttacker=c8",
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♝@c5 attackers=e3 defenders=d6 legalAttacker=e3",
+          "♟@e5 attackers=f3 defenders=c6,d6,e8 legalAttacker=f3",
+          "♞@c6 attackers=a4 defenders=b7 legalAttacker=a4"
+        ]
+      },
+      {
+        "FEN": "r1bqr1k1/ppp2ppp/2Bp1n2/2b1p3/2P1P3/3PBN1P/PP3PP1/RN1Q1RK1 b - - 0 10",
+        "Static": -314,
+        "Targets": [
+          "♗@e3 attackers=c5 defenders=f2 legalAttacker=c5",
+          "♙@h3 attackers=c8 defenders=g2 legalAttacker=c8",
+          "♙@e4 attackers=f6 defenders=d3,c6 legalAttacker=f6",
+          "♝@c5 attackers=e3 defenders=d6 legalAttacker=e3",
+          "♟@e5 attackers=f3 defenders=d6,e8 legalAttacker=f3",
+          "♗@c6 attackers=b7 defenders= legalAttacker=b7",
+          "♟@b7 attackers=c6 defenders=c8 legalAttacker=c6",
+          "♜@e8 attackers=c6 defenders=f6,d8 legalAttacker=c6"
+        ]
+      },
+      {
+        "FEN": "r1bqr1k1/p1p2ppp/2pp1n2/2b1p3/2P1P3/3PBN1P/PP3PP1/RN1Q1RK1 w - - 0 11",
+        "Static": 7,
+        "Targets": [
+          "♗@e3 attackers=c5 defenders=f2 legalAttacker=c5",
+          "♙@h3 attackers=c8 defenders=g2 legalAttacker=c8",
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♝@c5 attackers=e3 defenders=d6 legalAttacker=e3",
+          "♟@e5 attackers=f3 defenders=d6,e8 legalAttacker=f3"
+        ]
+      },
+      {
+        "FEN": "r1bqr1k1/p1p2ppp/2pp1n2/2B1p3/2P1P3/3P1N1P/PP3PP1/RN1Q1RK1 b - - 0 11",
+        "Static": -321,
+        "Targets": [
+          "♙@h3 attackers=c8 defenders=g2 legalAttacker=c8",
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♗@c5 attackers=d6 defenders= legalAttacker=d6",
+          "♟@e5 attackers=f3 defenders=d6,e8 legalAttacker=f3",
+          "♟@d6 attackers=c5 defenders=c7,d8 legalAttacker=c5",
+          "♟@a7 attackers=c5 defenders=a8 legalAttacker=c5"
+        ]
+      },
+      {
+        "FEN": "r1bqr1k1/p1p2ppp/2p2n2/2p1p3/2P1P3/3P1N1P/PP3PP1/RN1Q1RK1 w - - 0 12",
+        "Static": -12,
+        "Targets": [
+          "♙@d3 attackers=d8 defenders=d1 legalAttacker=d8",
+          "♙@h3 attackers=c8 defenders=g2 legalAttacker=c8",
+          "♙@e4 attackers=f6 defenders=d3 legalAttacker=f6",
+          "♟@e5 attackers=f3 defenders=e8 legalAttacker=f3"
+        ]
+      }
+    ],
+    "ElapsedMS": 0
+  },
+  {
+    "Game": "https://lichess.org/game/HhPI3vCx",
+    "Kind": "baseline_exact_research_pv",
+    "Root": "d8d6",
+    "Depth": 6,
+    "Score": 161,
+    "PV": [
+      "d8d6",
+      "a1e1",
+      "d6c6",
+      "g5f6",
+      "e7f6",
+      "c3e4",
+      "f6e7"
+    ],
+    "Nodes": [
+      {
+        "FEN": "r4b1r/ppp1k1pp/3qpn2/6BQ/2p5/2N5/PP3PPP/R4RK1 w - - 6 14",
+        "Static": 177,
+        "Targets": [
+          "♙@h2 attackers=d6 defenders=g1,h5 legalAttacker=d6",
+          "♕@h5 attackers=f6 defenders= legalAttacker=none",
+          "♞@f6 attackers=g5 defenders=e7,g7 legalAttacker=g5",
+          "♟@h7 attackers=h5 defenders=f6,h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "r4b1r/ppp1k1pp/3qpn2/6BQ/2p5/2N5/PP3PPP/4RRK1 b - - 7 14",
+        "Static": 177,
+        "Targets": [
+          "♙@h2 attackers=d6 defenders=g1,h5 legalAttacker=d6",
+          "♕@h5 attackers=f6 defenders= legalAttacker=none",
+          "♟@e6 attackers=e1 defenders=d6,e7 legalAttacker=e1",
+          "♞@f6 attackers=g5 defenders=e7,g7 legalAttacker=g5",
+          "♟@h7 attackers=h5 defenders=f6,h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "r4b1r/ppp1k1pp/2q1pn2/6BQ/2p5/2N5/PP3PPP/4RRK1 w - - 8 15",
+        "Static": 175,
+        "Targets": [
+          "♙@g2 attackers=c6 defenders=g1 legalAttacker=c6",
+          "♕@h5 attackers=f6 defenders= legalAttacker=none",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♞@f6 attackers=g5 defenders=e7,g7 legalAttacker=g5",
+          "♟@h7 attackers=h5 defenders=f6,h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "r4b1r/ppp1k1pp/2q1pB2/7Q/2p5/2N5/PP3PPP/4RRK1 b - - 0 15",
+        "Static": -146,
+        "Targets": [
+          "♙@g2 attackers=c6 defenders=g1 legalAttacker=none",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♗@f6 attackers=e7,g7 defenders= legalAttacker=g7",
+          "♟@g7 attackers=f6 defenders=f8 legalAttacker=f6",
+          "♟@h7 attackers=h5 defenders=h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "r4b1r/ppp3pp/2q1pk2/7Q/2p5/2N5/PP3PPP/4RRK1 w - - 0 16",
+        "Static": 183,
+        "Targets": [
+          "♙@g2 attackers=c6 defenders=g1 legalAttacker=c6",
+          "♟@e6 attackers=e1 defenders=c6,f6 legalAttacker=e1",
+          "♟@h7 attackers=h5 defenders=h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "r4b1r/ppp3pp/2q1pk2/7Q/2p1N3/8/PP3PPP/4RRK1 b - - 1 16",
+        "Static": 167,
+        "Targets": [
+          "♘@e4 attackers=c6 defenders=e1 legalAttacker=c6",
+          "♟@h7 attackers=h5 defenders=h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "r4b1r/ppp1k1pp/2q1p3/7Q/2p1N3/8/PP3PPP/4RRK1 w - - 2 17",
+        "Static": 161,
+        "Targets": [
+          "♘@e4 attackers=c6 defenders=e1 legalAttacker=c6",
+          "♟@h7 attackers=h5 defenders=h8 legalAttacker=h5"
+        ]
+      }
+    ],
+    "ElapsedMS": 1102
+  },
+  {
+    "Game": "https://lichess.org/game/HhPI3vCx",
+    "Kind": "baseline_exact_research_pv",
+    "Root": "d8e8",
+    "Depth": 6,
+    "Score": 75,
+    "PV": [
+      "d8e8",
+      "g5f6",
+      "g7f6",
+      "h5c5",
+      "e7d8",
+      "c5c4"
+    ],
+    "Nodes": [
+      {
+        "FEN": "r3qb1r/ppp1k1pp/4pn2/6BQ/2p5/2N5/PP3PPP/R4RK1 w - - 6 14",
+        "Static": 173,
+        "Targets": [
+          "♕@h5 attackers=f6,e8 defenders= legalAttacker=e8",
+          "♞@f6 attackers=g5 defenders=e7,g7 legalAttacker=g5",
+          "♟@h7 attackers=h5 defenders=f6,h8 legalAttacker=h5",
+          "♛@e8 attackers=h5 defenders=f6,e7,a8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "r3qb1r/ppp1k1pp/4pB2/7Q/2p5/2N5/PP3PPP/R4RK1 b - - 0 14",
+        "Static": -148,
+        "Targets": [
+          "♕@h5 attackers=e8 defenders= legalAttacker=none",
+          "♗@f6 attackers=e7,g7 defenders= legalAttacker=g7",
+          "♟@g7 attackers=f6 defenders=f8 legalAttacker=f6",
+          "♟@h7 attackers=h5 defenders=h8 legalAttacker=h5",
+          "♛@e8 attackers=h5 defenders=e7,a8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "r3qb1r/ppp1k2p/4pp2/7Q/2p5/2N5/PP3PPP/R4RK1 w - - 0 15",
+        "Static": 175,
+        "Targets": [
+          "♕@h5 attackers=e8 defenders= legalAttacker=e8",
+          "♟@h7 attackers=h5 defenders=h8 legalAttacker=h5",
+          "♛@e8 attackers=h5 defenders=e7,a8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "r3qb1r/ppp1k2p/4pp2/2Q5/2p5/2N5/PP3PPP/R4RK1 b - - 1 15",
+        "Static": 171,
+        "Targets": [
+          "♟@c4 attackers=c5 defenders= legalAttacker=c5",
+          "♟@a7 attackers=c5 defenders=a8 legalAttacker=c5",
+          "♟@c7 attackers=c5 defenders= legalAttacker=c5"
+        ]
+      },
+      {
+        "FEN": "r2kqb1r/ppp4p/4pp2/2Q5/2p5/2N5/PP3PPP/R4RK1 w - - 2 16",
+        "Static": 181,
+        "Targets": [
+          "♟@c4 attackers=c5 defenders= legalAttacker=c5",
+          "♕@c5 attackers=f8 defenders= legalAttacker=f8",
+          "♟@a7 attackers=c5 defenders=a8 legalAttacker=c5",
+          "♟@c7 attackers=c5 defenders=d8 legalAttacker=c5",
+          "♝@f8 attackers=c5 defenders=e8,h8 legalAttacker=c5"
+        ]
+      },
+      {
+        "FEN": "r2kqb1r/ppp4p/4pp2/8/2Q5/2N5/PP3PPP/R4RK1 b - - 0 16",
+        "Static": 75,
+        "Targets": [
+          "♟@e6 attackers=c4 defenders=e8 legalAttacker=c4",
+          "♟@c7 attackers=c4 defenders=d8 legalAttacker=c4"
+        ]
+      }
+    ],
+    "ElapsedMS": 149
+  },
+  {
+    "Game": "https://lichess.org/game/HhPI3vCx",
+    "Kind": "referee_played",
+    "Root": "",
+    "Depth": 0,
+    "Score": 0,
+    "PV": [
+      "d8d6",
+      "a1d1",
+      "d6c6",
+      "f1e1",
+      "a8d8",
+      "g5f6",
+      "g7f6",
+      "c3d5",
+      "d8d5",
+      "d1d5",
+      "b7b6",
+      "d5d4",
+      "h8g8",
+      "g2g3",
+      "h7h6",
+      "a2a3"
+    ],
+    "Nodes": [
+      {
+        "FEN": "r4b1r/ppp1k1pp/3qpn2/6BQ/2p5/2N5/PP3PPP/R4RK1 w - - 6 14",
+        "Static": 177,
+        "Targets": [
+          "♙@h2 attackers=d6 defenders=g1,h5 legalAttacker=d6",
+          "♕@h5 attackers=f6 defenders= legalAttacker=none",
+          "♞@f6 attackers=g5 defenders=e7,g7 legalAttacker=g5",
+          "♟@h7 attackers=h5 defenders=f6,h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "r4b1r/ppp1k1pp/3qpn2/6BQ/2p5/2N5/PP3PPP/3R1RK1 b - - 7 14",
+        "Static": 177,
+        "Targets": [
+          "♖@d1 attackers=d6 defenders=f1,c3,h5 legalAttacker=d6",
+          "♙@h2 attackers=d6 defenders=g1,h5 legalAttacker=d6",
+          "♕@h5 attackers=f6 defenders= legalAttacker=none",
+          "♛@d6 attackers=d1 defenders=c7,e7 legalAttacker=d1",
+          "♞@f6 attackers=g5 defenders=e7,g7 legalAttacker=g5",
+          "♟@h7 attackers=h5 defenders=f6,h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "r4b1r/ppp1k1pp/2q1pn2/6BQ/2p5/2N5/PP3PPP/3R1RK1 w - - 8 15",
+        "Static": 175,
+        "Targets": [
+          "♙@g2 attackers=c6 defenders=g1 legalAttacker=c6",
+          "♕@h5 attackers=f6 defenders= legalAttacker=none",
+          "♞@f6 attackers=g5 defenders=e7,g7 legalAttacker=g5",
+          "♟@h7 attackers=h5 defenders=f6,h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "r4b1r/ppp1k1pp/2q1pn2/6BQ/2p5/2N5/PP3PPP/3RR1K1 b - - 9 15",
+        "Static": 175,
+        "Targets": [
+          "♙@g2 attackers=c6 defenders=g1 legalAttacker=c6",
+          "♕@h5 attackers=f6 defenders= legalAttacker=none",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♞@f6 attackers=g5 defenders=e7,g7 legalAttacker=g5",
+          "♟@h7 attackers=h5 defenders=f6,h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "3r1b1r/ppp1k1pp/2q1pn2/6BQ/2p5/2N5/PP3PPP/3RR1K1 w - - 10 16",
+        "Static": 175,
+        "Targets": [
+          "♖@d1 attackers=d8 defenders=e1,c3,h5 legalAttacker=d8",
+          "♙@g2 attackers=c6 defenders=g1 legalAttacker=c6",
+          "♕@h5 attackers=f6 defenders= legalAttacker=none",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♞@f6 attackers=g5 defenders=e7,g7 legalAttacker=g5",
+          "♟@h7 attackers=h5 defenders=f6,h8 legalAttacker=h5",
+          "♜@d8 attackers=d1 defenders=e7 legalAttacker=d1"
+        ]
+      },
+      {
+        "FEN": "3r1b1r/ppp1k1pp/2q1pB2/7Q/2p5/2N5/PP3PPP/3RR1K1 b - - 0 16",
+        "Static": -146,
+        "Targets": [
+          "♖@d1 attackers=d8 defenders=e1,c3,h5 legalAttacker=none",
+          "♙@g2 attackers=c6 defenders=g1 legalAttacker=none",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♗@f6 attackers=e7,g7 defenders= legalAttacker=g7",
+          "♟@g7 attackers=f6 defenders=f8 legalAttacker=f6",
+          "♟@h7 attackers=h5 defenders=h8 legalAttacker=h5",
+          "♜@d8 attackers=d1 defenders=e7 legalAttacker=d1"
+        ]
+      },
+      {
+        "FEN": "3r1b1r/ppp1k2p/2q1pp2/7Q/2p5/2N5/PP3PPP/3RR1K1 w - - 0 17",
+        "Static": 177,
+        "Targets": [
+          "♖@d1 attackers=d8 defenders=e1,c3,h5 legalAttacker=d8",
+          "♙@g2 attackers=c6 defenders=g1 legalAttacker=c6",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♟@h7 attackers=h5 defenders=h8 legalAttacker=h5",
+          "♜@d8 attackers=d1 defenders=e7 legalAttacker=d1"
+        ]
+      },
+      {
+        "FEN": "3r1b1r/ppp1k2p/2q1pp2/3N3Q/2p5/8/PP3PPP/3RR1K1 b - - 1 17",
+        "Static": 161,
+        "Targets": [
+          "♘@d5 attackers=c6,e6,d8 defenders=d1,h5 legalAttacker=d8",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♟@f6 attackers=d5 defenders=e7 legalAttacker=d5",
+          "♟@c7 attackers=d5 defenders=c6 legalAttacker=d5",
+          "♟@h7 attackers=h5 defenders=h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "5b1r/ppp1k2p/2q1pp2/3r3Q/2p5/8/PP3PPP/3RR1K1 w - - 0 18",
+        "Static": 504,
+        "Targets": [
+          "♖@d1 attackers=d5 defenders=e1,h5 legalAttacker=d5",
+          "♜@d5 attackers=d1,h5 defenders=c6,e6 legalAttacker=d1",
+          "♕@h5 attackers=d5 defenders= legalAttacker=d5",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♟@h7 attackers=h5 defenders=h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "5b1r/ppp1k2p/2q1pp2/3R3Q/2p5/8/PP3PPP/4R1K1 b - - 0 18",
+        "Static": 10,
+        "Targets": [
+          "♖@d5 attackers=c6,e6 defenders=h5 legalAttacker=c6",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♟@h7 attackers=h5 defenders=h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "5b1r/p1p1k2p/1pq1pp2/3R3Q/2p5/8/PP3PPP/4R1K1 w - - 0 19",
+        "Static": 10,
+        "Targets": [
+          "♖@d5 attackers=c6,e6 defenders=h5 legalAttacker=c6",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♟@h7 attackers=h5 defenders=h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "5b1r/p1p1k2p/1pq1pp2/7Q/2pR4/8/PP3PPP/4R1K1 b - - 1 19",
+        "Static": 10,
+        "Targets": [
+          "♙@g2 attackers=c6 defenders=g1 legalAttacker=c6",
+          "♟@c4 attackers=d4 defenders=c6 legalAttacker=d4",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♟@h7 attackers=h5 defenders=h8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "5br1/p1p1k2p/1pq1pp2/7Q/2pR4/8/PP3PPP/4R1K1 w - - 2 20",
+        "Static": 10,
+        "Targets": [
+          "♙@g2 attackers=c6,g8 defenders=g1 legalAttacker=g8",
+          "♟@c4 attackers=d4 defenders=c6 legalAttacker=d4",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♟@h7 attackers=h5 defenders= legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "5br1/p1p1k2p/1pq1pp2/7Q/2pR4/6P1/PP3P1P/4R1K1 b - - 0 20",
+        "Static": 10,
+        "Targets": [
+          "♙@g3 attackers=g8 defenders=f2,h2 legalAttacker=g8",
+          "♟@c4 attackers=d4 defenders=c6 legalAttacker=d4",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♟@h7 attackers=h5 defenders= legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "5br1/p1p1k3/1pq1pp1p/7Q/2pR4/6P1/PP3P1P/4R1K1 w - - 0 21",
+        "Static": 10,
+        "Targets": [
+          "♙@g3 attackers=g8 defenders=f2,h2 legalAttacker=g8",
+          "♟@c4 attackers=d4 defenders=c6 legalAttacker=d4",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♟@h6 attackers=h5 defenders=f8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "5br1/p1p1k3/1pq1pp1p/7Q/2pR4/P5P1/1P3P1P/4R1K1 b - - 0 21",
+        "Static": 10,
+        "Targets": [
+          "♙@g3 attackers=g8 defenders=f2,h2 legalAttacker=g8",
+          "♟@c4 attackers=d4 defenders=c6 legalAttacker=d4",
+          "♟@e6 attackers=e1 defenders=c6,e7 legalAttacker=e1",
+          "♟@h6 attackers=h5 defenders=f8 legalAttacker=h5"
+        ]
+      }
+    ],
+    "ElapsedMS": 0
+  },
+  {
+    "Game": "https://lichess.org/game/HhPI3vCx",
+    "Kind": "referee_best",
+    "Root": "",
+    "Depth": 0,
+    "Score": 0,
+    "PV": [
+      "d8e8",
+      "h5f3",
+      "e7f7",
+      "c3e4",
+      "f8e7",
+      "g5f6",
+      "e7f6",
+      "e4f6",
+      "g7f6",
+      "f3b7",
+      "e8e7",
+      "f1c1",
+      "a8b8",
+      "b7a7",
+      "b8b2",
+      "c1c4",
+      "c7c5",
+      "a7a5",
+      "h8d8",
+      "c4c5"
+    ],
+    "Nodes": [
+      {
+        "FEN": "r3qb1r/ppp1k1pp/4pn2/6BQ/2p5/2N5/PP3PPP/R4RK1 w - - 6 14",
+        "Static": 173,
+        "Targets": [
+          "♕@h5 attackers=f6,e8 defenders= legalAttacker=e8",
+          "♞@f6 attackers=g5 defenders=e7,g7 legalAttacker=g5",
+          "♟@h7 attackers=h5 defenders=f6,h8 legalAttacker=h5",
+          "♛@e8 attackers=h5 defenders=f6,e7,a8 legalAttacker=h5"
+        ]
+      },
+      {
+        "FEN": "r3qb1r/ppp1k1pp/4pn2/6B1/2p5/2N2Q2/PP3PPP/R4RK1 b - - 7 14",
+        "Static": 171,
+        "Targets": [
+          "♞@f6 attackers=f3,g5 defenders=e7,g7 legalAttacker=g5",
+          "♟@b7 attackers=f3 defenders= legalAttacker=f3"
+        ]
+      },
+      {
+        "FEN": "r3qb1r/ppp2kpp/4pn2/6B1/2p5/2N2Q2/PP3PPP/R4RK1 w - - 8 15",
+        "Static": 189,
+        "Targets": [
+          "♞@f6 attackers=f3,g5 defenders=f7,g7 legalAttacker=g5",
+          "♟@b7 attackers=f3 defenders= legalAttacker=f3"
+        ]
+      },
+      {
+        "FEN": "r3qb1r/ppp2kpp/4pn2/6B1/2p1N3/5Q2/PP3PPP/R4RK1 b - - 9 15",
+        "Static": 173,
+        "Targets": [
+          "♘@e4 attackers=f6 defenders=f3 legalAttacker=none",
+          "♞@f6 attackers=f3,e4,g5 defenders=f7,g7 legalAttacker=e4"
+        ]
+      },
+      {
+        "FEN": "r3q2r/ppp1bkpp/4pn2/6B1/2p1N3/5Q2/PP3PPP/R4RK1 w - - 10 16",
+        "Static": 184,
+        "Targets": [
+          "♘@e4 attackers=f6 defenders=f3 legalAttacker=none",
+          "♞@f6 attackers=f3,e4,g5 defenders=e7,f7,g7 legalAttacker=e4"
+        ]
+      },
+      {
+        "FEN": "r3q2r/ppp1bkpp/4pB2/8/2p1N3/5Q2/PP3PPP/R4RK1 b - - 0 16",
+        "Static": -138,
+        "Targets": [
+          "♗@f6 attackers=e7,f7,g7 defenders=f3,e4 legalAttacker=g7",
+          "♝@e7 attackers=f6 defenders=f7,e8 legalAttacker=f6",
+          "♟@g7 attackers=f6 defenders=f7 legalAttacker=f6"
+        ]
+      },
+      {
+        "FEN": "r3q2r/ppp2kpp/4pb2/8/2p1N3/5Q2/PP3PPP/R4RK1 w - - 0 17",
+        "Static": 187,
+        "Targets": [
+          "♙@b2 attackers=f6 defenders= legalAttacker=none",
+          "♝@f6 attackers=f3,e4 defenders=f7,g7 legalAttacker=e4"
+        ]
+      },
+      {
+        "FEN": "r3q2r/ppp2kpp/4pN2/8/2p5/5Q2/PP3PPP/R4RK1 b - - 0 17",
+        "Static": -114,
+        "Targets": [
+          "♘@f6 attackers=f7,g7 defenders=f3 legalAttacker=g7",
+          "♟@b7 attackers=f3 defenders= legalAttacker=f3",
+          "♟@h7 attackers=f6 defenders=h8 legalAttacker=f6",
+          "♛@e8 attackers=f6 defenders=f7,a8,h8 legalAttacker=f6"
+        ]
+      },
+      {
+        "FEN": "r3q2r/ppp2k1p/4pp2/8/2p5/5Q2/PP3PPP/R4RK1 w - - 0 18",
+        "Static": 212,
+        "Targets": [
+          "♟@f6 attackers=f3 defenders=f7 legalAttacker=f3",
+          "♟@b7 attackers=f3 defenders= legalAttacker=f3"
+        ]
+      },
+      {
+        "FEN": "r3q2r/pQp2k1p/4pp2/8/2p5/8/PP3PPP/R4RK1 b - - 0 18",
+        "Static": 116,
+        "Targets": [
+          "♟@a7 attackers=b7 defenders=a8 legalAttacker=b7",
+          "♟@c7 attackers=b7 defenders= legalAttacker=b7",
+          "♜@a8 attackers=b7 defenders=e8 legalAttacker=b7"
+        ]
+      },
+      {
+        "FEN": "r6r/pQp1qk1p/4pp2/8/2p5/8/PP3PPP/R4RK1 w - - 1 19",
+        "Static": 118,
+        "Targets": [
+          "♟@a7 attackers=b7 defenders=a8 legalAttacker=b7",
+          "♟@c7 attackers=b7 defenders=e7 legalAttacker=b7",
+          "♜@a8 attackers=b7 defenders=h8 legalAttacker=b7"
+        ]
+      },
+      {
+        "FEN": "r6r/pQp1qk1p/4pp2/8/2p5/8/PP3PPP/R1R3K1 b - - 2 19",
+        "Static": 118,
+        "Targets": [
+          "♟@c4 attackers=c1 defenders= legalAttacker=c1",
+          "♟@a7 attackers=b7 defenders=a8 legalAttacker=b7",
+          "♟@c7 attackers=b7 defenders=e7 legalAttacker=b7",
+          "♜@a8 attackers=b7 defenders=h8 legalAttacker=b7"
+        ]
+      },
+      {
+        "FEN": "1r5r/pQp1qk1p/4pp2/8/2p5/8/PP3PPP/R1R3K1 w - - 3 20",
+        "Static": 118,
+        "Targets": [
+          "♟@c4 attackers=c1 defenders= legalAttacker=c1",
+          "♟@a7 attackers=b7 defenders= legalAttacker=b7",
+          "♕@b7 attackers=b8 defenders= legalAttacker=b8",
+          "♟@c7 attackers=b7 defenders=e7 legalAttacker=b7",
+          "♜@b8 attackers=b7 defenders=h8 legalAttacker=b7"
+        ]
+      },
+      {
+        "FEN": "1r5r/Q1p1qk1p/4pp2/8/2p5/8/PP3PPP/R1R3K1 b - - 0 20",
+        "Static": 20,
+        "Targets": [
+          "♙@b2 attackers=b8 defenders= legalAttacker=b8",
+          "♟@c4 attackers=c1 defenders= legalAttacker=c1",
+          "♟@c7 attackers=a7 defenders=e7 legalAttacker=a7",
+          "♜@b8 attackers=a7 defenders=h8 legalAttacker=a7"
+        ]
+      },
+      {
+        "FEN": "7r/Q1p1qk1p/4pp2/8/2p5/8/Pr3PPP/R1R3K1 w - - 0 21",
+        "Static": 140,
+        "Targets": [
+          "♙@a2 attackers=b2 defenders=a1,a7 legalAttacker=b2",
+          "♙@f2 attackers=b2 defenders=g1,a7 legalAttacker=b2",
+          "♟@c4 attackers=c1 defenders= legalAttacker=c1",
+          "♟@c7 attackers=a7 defenders=e7 legalAttacker=a7"
+        ]
+      },
+      {
+        "FEN": "7r/Q1p1qk1p/4pp2/8/2R5/8/Pr3PPP/R5K1 b - - 0 21",
+        "Static": 34,
+        "Targets": [
+          "♙@a2 attackers=b2 defenders=a1,a7 legalAttacker=b2",
+          "♙@f2 attackers=b2 defenders=g1,a7 legalAttacker=b2",
+          "♟@c7 attackers=c4,a7 defenders=e7 legalAttacker=c4"
+        ]
+      },
+      {
+        "FEN": "7r/Q3qk1p/4pp2/2p5/2R5/8/Pr3PPP/R5K1 w - c6 0 22",
+        "Static": 34,
+        "Targets": [
+          "♙@a2 attackers=b2 defenders=a1,a7 legalAttacker=b2",
+          "♙@f2 attackers=b2 defenders=g1 legalAttacker=b2",
+          "♟@c5 attackers=c4,a7 defenders=e7 legalAttacker=c4",
+          "♕@a7 attackers=e7 defenders= legalAttacker=e7",
+          "♛@e7 attackers=a7 defenders=f7 legalAttacker=a7"
+        ]
+      },
+      {
+        "FEN": "7r/4qk1p/4pp2/Q1p5/2R5/8/Pr3PPP/R5K1 b - - 1 22",
+        "Static": 30,
+        "Targets": [
+          "♙@a2 attackers=b2 defenders=a1,a5 legalAttacker=b2",
+          "♙@f2 attackers=b2 defenders=g1 legalAttacker=b2",
+          "♟@c5 attackers=c4,a5 defenders=e7 legalAttacker=c4"
+        ]
+      },
+      {
+        "FEN": "3r4/4qk1p/4pp2/Q1p5/2R5/8/Pr3PPP/R5K1 w - - 2 23",
+        "Static": 30,
+        "Targets": [
+          "♙@a2 attackers=b2 defenders=a1,a5 legalAttacker=b2",
+          "♙@f2 attackers=b2 defenders=g1 legalAttacker=b2",
+          "♟@c5 attackers=c4,a5 defenders=e7 legalAttacker=c4",
+          "♜@d8 attackers=a5 defenders=e7 legalAttacker=a5"
+        ]
+      },
+      {
+        "FEN": "3r4/4qk1p/4pp2/Q1R5/8/8/Pr3PPP/R5K1 b - - 0 23",
+        "Static": -70,
+        "Targets": [
+          "♙@a2 attackers=b2 defenders=a1,a5 legalAttacker=b2",
+          "♙@f2 attackers=b2 defenders=g1 legalAttacker=b2",
+          "♖@c5 attackers=e7 defenders=a5 legalAttacker=e7",
+          "♜@d8 attackers=a5 defenders=e7 legalAttacker=a5"
+        ]
+      }
+    ],
+    "ElapsedMS": 0
+  }
+]

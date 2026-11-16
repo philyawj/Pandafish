@@ -1,0 +1,15 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/philyawj/Pandafish
+cpu: Apple M2
+BenchmarkResearchStatic/start-8         	  206409	      1685 ns/op
+BenchmarkResearchStatic/start-8         	  176960	      1719 ns/op
+BenchmarkResearchStatic/start-8         	  221104	      1638 ns/op
+BenchmarkResearchStatic/middlegame-8    	  224061	      1616 ns/op
+BenchmarkResearchStatic/middlegame-8    	  225182	      1618 ns/op
+BenchmarkResearchStatic/middlegame-8    	  220776	      1616 ns/op
+BenchmarkResearchStatic/ending-8        	  299588	      1234 ns/op
+BenchmarkResearchStatic/ending-8        	  297870	      1213 ns/op
+BenchmarkResearchStatic/ending-8        	  296504	      1208 ns/op
+PASS
+ok  	github.com/philyawj/Pandafish	3.745s

@@ -1,0 +1,39 @@
+package main
+
+import (
+ "encoding/json"
+ "os"
+ "strings"
+ "testing"
+ "time"
+ "github.com/corentings/chess/v2"
+)
+
+type traceInput struct { Game, Position, Played, Reference string; Depth int; RefPlayedPV []string `json:"ref_played_pv"`; RefBestPV []string `json:"ref_best_pv"` }
+type traceNode struct { FEN string; Static int; Targets []string }
+type traceRecord struct { Game, Kind, Root string; Depth, Score int; PV []string; Nodes []traceNode; ElapsedMS int64 }
+func traceThreats(p *chess.Position) traceNode {
+ b:=exchangeBoard{}; for s:=chess.A1;s<=chess.H8;s++ { b.pieces[s]=p.Board().Piece(s); if b.pieces[s].Type()==chess.King {b.kings[b.pieces[s].Color()]=s} }
+ n:=traceNode{FEN:p.String(),Static:staticScore(p,chess.Black)}
+ for s,piece:=range b.pieces {if piece==chess.NoPiece || piece.Type()==chess.King {continue}; var a,d []string
+ for f,other:=range b.pieces {if other==chess.NoPiece || !b.attacks(chess.Square(f),chess.Square(s)) {continue}; if other.Color()==piece.Color(){d=append(d,chess.Square(f).String())}else{a=append(a,chess.Square(f).String())} }
+ if len(a)>0 { legal:=b.leastAttacker(chess.Square(s),piece.Color().Other()); n.Targets=append(n.Targets,piece.String()+"@"+chess.Square(s).String()+" attackers="+strings.Join(a,",")+" defenders="+strings.Join(d,",")+" legalAttacker="+func()string{if legal<0{return "none"};return chess.Square(legal).String()}()) }
+ };return n
+}
+func traceMove(t *testing.T,p *chess.Position,s string)*chess.Position {t.Helper();for _,m:=range p.ValidMoves(){if m.String()==s{return p.Update(&m)}};t.Fatalf("illegal %s at %s",s,p);return nil}
+func TestResearchTrace(t *testing.T) {
+ data,e:=os.ReadFile(os.Getenv("TRACE_INPUT"));if e!=nil{t.Fatal(e)};var inputs []traceInput;if e=json.Unmarshal(data,&inputs);e!=nil{t.Fatal(e)};var out []traceRecord
+ for _,c:=range inputs {for _,root:=range []string{c.Played,c.Reference}{
+ start:=time.Now();g,e:=parsePosition(strings.Fields(strings.TrimPrefix(c.Position,"position ")));if e!=nil{t.Fatal(e)};p:=g.Position();w:=searcher{table:newTable(),killers:new(killerTable),deadline:time.Now().Add(90*time.Second)}
+ for _,key:=range repetitionHistory(g){w.pushKey(key)}
+ w.pushPosition(p);p=traceMove(t,p,root);r:=traceRecord{Game:c.Game,Kind:"baseline_exact_research_pv",Root:root,Depth:c.Depth,PV:[]string{root},Nodes:[]traceNode{traceThreats(p)}}
+ score,ok:=w.searchAtPly(p,c.Depth-1,-searchInfinity,searchInfinity,inCheck(p),1);if !ok{t.Fatal("timeout")};r.Score=-score
+ for d:=c.Depth-1;d>0;d-- { moves,_,ok:=w.root(p,orderedMoves(p),d);if !ok||len(moves)==0{t.Fatal("pv search failed")}; w.pushPosition(p);p=traceMove(t,p,moves[0]);r.PV=append(r.PV,moves[0]);r.Nodes=append(r.Nodes,traceThreats(p)) }
+ // Reconstruct the maximizing quiescence line with exact windows and the same eligibility/filter rules.
+ for d:=quiescenceDepth;d> -checkEvasionDepth;d-- {checked:=inCheck(p);if p.Status()!=chess.NoMethod || (d<=0&&!checked){break};target,ok:=w.quietAtPly(p,d,-searchInfinity,searchInfinity,checked,len(r.PV));if !ok{t.Fatal("q timeout")};if !checked&&staticScore(p,p.Turn())==target{break};w.pushPosition(p);found:=""
+ for _,m:=range orderedMoves(p){if !checked&&!m.HasTag(chess.Capture)&&!m.HasTag(chess.EnPassant)&&m.Promo()==chess.NoPieceType{continue};if !checked&&!m.HasTag(chess.Check)&&m.Promo()==chess.NoPieceType&&captureValue(p,m)<pieceValues[p.Board().Piece(m.S1()).Type()]&&staticExchange(p,m)<0{continue};v,ok:=w.quietAtPly(p.Update(&m),d-1,-searchInfinity,searchInfinity,m.HasTag(chess.Check),len(r.PV)+1);if !ok{t.Fatal("q child timeout")};if -v==target{found=m.String();break} };if found==""{break};p=traceMove(t,p,found);r.PV=append(r.PV,found);r.Nodes=append(r.Nodes,traceThreats(p)) }
+ r.ElapsedMS=time.Since(start).Milliseconds();out=append(out,r)
+ }
+ for _,line:=range []struct{k string;pv []string}{{"referee_played",c.RefPlayedPV},{"referee_best",c.RefBestPV}}{g,_:=parsePosition(strings.Fields(strings.TrimPrefix(c.Position,"position ")));p:=g.Position();r:=traceRecord{Game:c.Game,Kind:line.k,PV:line.pv};for _,s:=range line.pv{p=traceMove(t,p,s);r.Nodes=append(r.Nodes,traceThreats(p))};out=append(out,r)}
+ }; b,_:=json.MarshalIndent(out,"","  ");if e=os.WriteFile(os.Getenv("TRACE_OUTPUT"),append(b,'\n'),0644);e!=nil{t.Fatal(e)}
+}

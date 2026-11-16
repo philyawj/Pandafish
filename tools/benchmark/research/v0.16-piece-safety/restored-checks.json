@@ -1,0 +1,45 @@
+[
+  {
+    "name": "tests",
+    "args": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit_code": 0,
+    "elapsed_s": 9.186277125030756
+  },
+  {
+    "name": "vet",
+    "args": [
+      "go",
+      "vet",
+      "./..."
+    ],
+    "exit_code": 0,
+    "elapsed_s": 0.18183054216206074
+  },
+  {
+    "name": "build",
+    "args": [
+      "go",
+      "build",
+      "-o",
+      "/tmp/pandafish-v0151-restored",
+      "."
+    ],
+    "exit_code": 0,
+    "elapsed_s": 0.22950399992987514
+  },
+  {
+    "name": "diff",
+    "args": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 0.011528959032148123
+  }
+]

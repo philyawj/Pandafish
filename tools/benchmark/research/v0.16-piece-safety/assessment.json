@@ -1,0 +1,415 @@
+{
+  "initial": {
+    "note": "First baseline partly overlaps static microbenchmark; fixed scores valid, elapsed not final cost evidence.",
+    "records_per_engine": 200,
+    "all_complete_legal": true,
+    "fixed": {
+      "best_sets_changed": 25,
+      "baseline_nodes": 4891440,
+      "candidate_nodes": 4883572
+    },
+    "100ms": {
+      "best_sets_changed": 39,
+      "baseline_nodes": 1840381,
+      "candidate_nodes": 1477534
+    }
+  },
+  "clean_100ms": {
+    "schedule": "baseline,candidate,candidate,baseline; three repeats per position per round; no parallel engine task",
+    "probes_per_engine": 240,
+    "all_complete_legal": true,
+    "baseline": {
+      "nodes": 3673443,
+      "mean_depth": 3.725,
+      "mean_elapsed_ms": 92.96021735,
+      "max_elapsed_ms": 95.052708
+    },
+    "candidate": {
+      "nodes": 3006622,
+      "mean_depth": 3.475,
+      "mean_elapsed_ms": 93.51470465,
+      "max_elapsed_ms": 95.079083
+    },
+    "depth_higher_equal_lower": {
+      "equal": 176,
+      "lower": 62,
+      "higher": 2
+    },
+    "node_ratio": 0.8184752016024204
+  },
+  "initial_referee_comparison": {
+    "method": "Mean referee cp over every tied best move; repeated timed choices correlated; positive favors candidate. Selected errors, no Elo inference. Mate excluded and separately saved.",
+    "groups": [
+      {
+        "mode": "fixed",
+        "depth": 3,
+        "split": "development",
+        "n": 15,
+        "mean_cp_delta": 7.6880555555555565,
+        "better_same_worse": [
+          3,
+          10,
+          2
+        ]
+      },
+      {
+        "mode": "fixed",
+        "depth": 5,
+        "split": "development",
+        "n": 15,
+        "mean_cp_delta": -49.355555555555554,
+        "better_same_worse": [
+          0,
+          8,
+          7
+        ]
+      },
+      {
+        "mode": "100ms",
+        "depth": 0,
+        "split": "development",
+        "n": 45,
+        "mean_cp_delta": 43.111111111111114,
+        "better_same_worse": [
+          11,
+          26,
+          8
+        ]
+      },
+      {
+        "mode": "fixed",
+        "depth": 3,
+        "split": "public_holdout",
+        "n": 15,
+        "mean_cp_delta": -13.066666666666666,
+        "better_same_worse": [
+          0,
+          14,
+          1
+        ]
+      },
+      {
+        "mode": "fixed",
+        "depth": 5,
+        "split": "public_holdout",
+        "n": 15,
+        "mean_cp_delta": -8.266666666666667,
+        "better_same_worse": [
+          2,
+          11,
+          2
+        ]
+      },
+      {
+        "mode": "100ms",
+        "depth": 0,
+        "split": "public_holdout",
+        "n": 45,
+        "mean_cp_delta": -14.222222222222221,
+        "better_same_worse": [
+          2,
+          39,
+          4
+        ]
+      },
+      {
+        "mode": "fixed",
+        "depth": 3,
+        "split": "older_v010",
+        "n": 9,
+        "mean_cp_delta": 19.88888888888889,
+        "better_same_worse": [
+          2,
+          5,
+          2
+        ]
+      },
+      {
+        "mode": "fixed",
+        "depth": 5,
+        "split": "older_v010",
+        "n": 9,
+        "mean_cp_delta": -0.6296296296296318,
+        "better_same_worse": [
+          1,
+          5,
+          3
+        ]
+      },
+      {
+        "mode": "100ms",
+        "depth": 0,
+        "split": "older_v010",
+        "n": 27,
+        "mean_cp_delta": 88.48148148148148,
+        "better_same_worse": [
+          13,
+          14,
+          0
+        ]
+      }
+    ],
+    "mates": [
+      {
+        "case": "https://lichess.org/game/djj7sLqm",
+        "mode": "fixed",
+        "depth": 3,
+        "baseline": [
+          {
+            "mate": -4
+          },
+          {
+            "mate": -4
+          }
+        ],
+        "candidate": [
+          {
+            "mate": -4
+          },
+          {
+            "mate": -4
+          }
+        ]
+      },
+      {
+        "case": "https://lichess.org/game/djj7sLqm",
+        "mode": "fixed",
+        "depth": 5,
+        "baseline": [
+          {
+            "mate": -4
+          },
+          {
+            "mate": -4
+          }
+        ],
+        "candidate": [
+          {
+            "mate": -4
+          },
+          {
+            "mate": -4
+          }
+        ]
+      },
+      {
+        "case": "https://lichess.org/game/djj7sLqm",
+        "mode": "100ms",
+        "depth": 5,
+        "baseline": [
+          {
+            "mate": -4
+          }
+        ],
+        "candidate": [
+          {
+            "mate": -4
+          }
+        ]
+      },
+      {
+        "case": "https://lichess.org/game/djj7sLqm",
+        "mode": "100ms",
+        "depth": 5,
+        "baseline": [
+          {
+            "mate": -4
+          }
+        ],
+        "candidate": [
+          {
+            "mate": -4
+          }
+        ]
+      },
+      {
+        "case": "https://lichess.org/game/djj7sLqm",
+        "mode": "100ms",
+        "depth": 5,
+        "baseline": [
+          {
+            "mate": -4
+          }
+        ],
+        "candidate": [
+          {
+            "mate": -4
+          }
+        ]
+      }
+    ]
+  },
+  "clean_referee_comparison": {
+    "method": "Position/trial slots from balanced rounds; repeated same-case scores highly correlated, not 240 independent samples. Mate cases separate.",
+    "groups": [
+      {
+        "split": "development",
+        "n": 90,
+        "mean_cp_delta": 21.5,
+        "better_same_worse": [
+          18,
+          55,
+          17
+        ]
+      },
+      {
+        "split": "public_holdout",
+        "n": 90,
+        "mean_cp_delta": -27.633333333333333,
+        "better_same_worse": [
+          1,
+          79,
+          10
+        ]
+      },
+      {
+        "split": "older_v010",
+        "n": 54,
+        "mean_cp_delta": 84.14814814814815,
+        "better_same_worse": [
+          22,
+          32,
+          0
+        ]
+      }
+    ],
+    "mates": [
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "baseline": {
+          "mate": -4
+        },
+        "candidate": {
+          "mate": -4
+        }
+      },
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "baseline": {
+          "mate": -4
+        },
+        "candidate": {
+          "mate": -4
+        }
+      },
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "baseline": {
+          "mate": -4
+        },
+        "candidate": {
+          "mate": -4
+        }
+      },
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "baseline": {
+          "mate": -4
+        },
+        "candidate": {
+          "mate": -4
+        }
+      },
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "baseline": {
+          "mate": -4
+        },
+        "candidate": {
+          "mate": -4
+        }
+      },
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "baseline": {
+          "mate": -4
+        },
+        "candidate": {
+          "mate": -4
+        }
+      }
+    ]
+  },
+  "leaf_last": [
+    {
+      "baseline_black_cp": -12,
+      "candidate_black_cp": -12,
+      "fen": "r1b2rk1/pppp1ppp/5q2/1B2b3/3pP3/3P4/PPPN1PPP/R2Q1RK1 w - - 0 10",
+      "game": "https://lichess.org/game/16G1f9rx",
+      "kind": "baseline_exact_research_pv",
+      "ply": 9,
+      "root": "c6d4",
+      "safety_black_cp": 0
+    },
+    {
+      "baseline_black_cp": -18,
+      "candidate_black_cp": -18,
+      "fen": "r2q1rk1/1pp2ppp/p1pbbn2/4p3/4P3/3PBN2/PPPN1PPP/R2Q1RK1 w - - 2 9",
+      "game": "https://lichess.org/game/16G1f9rx",
+      "kind": "baseline_exact_research_pv",
+      "ply": 7,
+      "root": "e8g8",
+      "safety_black_cp": 0
+    },
+    {
+      "baseline_black_cp": -142,
+      "candidate_black_cp": -142,
+      "fen": "r2q1rk1/pp3ppp/2p2n2/3p1b2/B2p4/N2P1P2/PPP3PP/R1BQR1K1 b - - 2 13",
+      "game": "https://lichess.org/game/16G1f9rx",
+      "kind": "referee_played",
+      "ply": 16,
+      "root": "",
+      "safety_black_cp": 0
+    },
+    {
+      "baseline_black_cp": -12,
+      "candidate_black_cp": -12,
+      "fen": "r1bqr1k1/p1p2ppp/2p2n2/2p1p3/2P1P3/3P1N1P/PP3PP1/RN1Q1RK1 w - - 0 12",
+      "game": "https://lichess.org/game/16G1f9rx",
+      "kind": "referee_best",
+      "ply": 13,
+      "root": "",
+      "safety_black_cp": 0
+    },
+    {
+      "baseline_black_cp": 161,
+      "candidate_black_cp": 161,
+      "fen": "r4b1r/ppp1k1pp/2q1p3/7Q/2p1N3/8/PP3PPP/4RRK1 w - - 2 17",
+      "game": "https://lichess.org/game/HhPI3vCx",
+      "kind": "baseline_exact_research_pv",
+      "ply": 7,
+      "root": "d8d6",
+      "safety_black_cp": 0
+    },
+    {
+      "baseline_black_cp": 75,
+      "candidate_black_cp": 75,
+      "fen": "r2kqb1r/ppp4p/4pp2/8/2Q5/2N5/PP3PPP/R4RK1 b - - 0 16",
+      "game": "https://lichess.org/game/HhPI3vCx",
+      "kind": "baseline_exact_research_pv",
+      "ply": 6,
+      "root": "d8e8",
+      "safety_black_cp": 0
+    },
+    {
+      "baseline_black_cp": 10,
+      "candidate_black_cp": 10,
+      "fen": "5br1/p1p1k3/1pq1pp1p/7Q/2pR4/P5P1/1P3P1P/4R1K1 b - - 0 21",
+      "game": "https://lichess.org/game/HhPI3vCx",
+      "kind": "referee_played",
+      "ply": 16,
+      "root": "",
+      "safety_black_cp": 0
+    },
+    {
+      "baseline_black_cp": -70,
+      "candidate_black_cp": -70,
+      "fen": "3r4/4qk1p/4pp2/Q1R5/8/8/Pr3PPP/R5K1 b - - 0 23",
+      "game": "https://lichess.org/game/HhPI3vCx",
+      "kind": "referee_best",
+      "ply": 20,
+      "root": "",
+      "safety_black_cp": 0
+    }
+  ]
+}

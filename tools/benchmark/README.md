@@ -154,6 +154,10 @@ git archive v0.14 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.15 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.15" .)
+
+build_dir=$(mktemp -d)
+git archive v0.15.2 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.15.2" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -236,12 +240,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.15 tagged baseline as above for the next engine change. Then run
+Build the v0.15.2 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.15.1 --previous-version v0.15.1 \
+  --previous tools/benchmark/bin/pandafish-v0.15.2 --previous-version v0.15.2 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -407,7 +411,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.15.1 --previous-version v0.15.1 \
+  --previous tools/benchmark/bin/pandafish-v0.15.2 --previous-version v0.15.2 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -630,7 +634,7 @@ reproduce earlier profiles. For example, a future Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.15.1 --previous-version v0.15.1 \
+  --previous tools/benchmark/bin/pandafish-v0.15.2 --previous-version v0.15.2 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```
@@ -955,3 +959,27 @@ See the [ranked recommendations](live/v0.15-live-20261113-074740/REVIEW.md),
 [fresh-context handoff](live/v0.15-live-20261113-074740/HANDOFF.md).
 The next strength hypothesis is narrow board-aware piece safety, tested first
 against explained quiet-leaf mistakes with fixed search and clocks.
+
+## Unpromoted v0.16 piece-safety experiment
+
+The [narrow piece-safety investigation](research/v0.16-piece-safety/README.md)
+traces the saved Nd4/Qd6 quiet leaves, preserves an isolated evaluation overlay,
+and tests pins, defenders, blockers and tactical sacrifices. The term passes
+its focused controls but does not explain either motivating settled leaf.
+Across 40 saved cases, balanced 100 ms probes search 18.2% fewer nodes and
+complete lower depth more often; decision changes are mixed, with public
+holdout regressions. The candidate is rejected before the conditional match
+screen, so no new strength comparison or Elo claim is made. Every result,
+including fixture failures and deeper-search deadline failures, is retained.
+Normal builds keep tagged v0.15.1 playing behavior. Next investigate the
+concrete pawn ending after Rd5 rather than tuning another exposure penalty.
+
+
+## v0.15.2 research release
+
+Archive the rejected narrow exposure term and its reproducible source as data.
+The [research report and handoff](research/v0.16-piece-safety/README.md) preserve
+all diagnostics and limitations. Released playing behavior remains v0.15;
+only release identity changes. The short release smoke checks integration,
+not strength. Reassess the next hypothesis using these findings before the
+next implementation; no fixed checklist or automatic confirmation is adopted.

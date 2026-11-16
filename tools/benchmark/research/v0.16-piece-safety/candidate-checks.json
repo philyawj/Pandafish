@@ -1,0 +1,92 @@
+[
+  {
+    "name": "focused",
+    "args": [
+      "go",
+      "test",
+      "-count=1",
+      "-run",
+      "TestPieceSafety|TestSafetySummary",
+      "-v",
+      "."
+    ],
+    "extra_env": {},
+    "exit_code": 0,
+    "elapsed_s": 1.1602381670381874
+  },
+  {
+    "name": "tests",
+    "args": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "extra_env": {},
+    "exit_code": 0,
+    "elapsed_s": 10.255962542025372
+  },
+  {
+    "name": "race",
+    "args": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./..."
+    ],
+    "extra_env": {},
+    "exit_code": 0,
+    "elapsed_s": 67.58636420802213
+  },
+  {
+    "name": "vet",
+    "args": [
+      "go",
+      "vet",
+      "./..."
+    ],
+    "extra_env": {},
+    "exit_code": 0,
+    "elapsed_s": 0.9051252920180559
+  },
+  {
+    "name": "arm64",
+    "args": [
+      "go",
+      "build",
+      "-o",
+      "/tmp/pandafish-v016-arm64",
+      "."
+    ],
+    "extra_env": {
+      "GOOS": "darwin",
+      "GOARCH": "arm64"
+    },
+    "exit_code": 0,
+    "elapsed_s": 0.42447108402848244
+  },
+  {
+    "name": "candidate-build",
+    "args": [
+      "go",
+      "build",
+      "-o",
+      "tools/benchmark/bin/pandafish-v0.16-piece-safety-dev",
+      "."
+    ],
+    "extra_env": {},
+    "exit_code": 0,
+    "elapsed_s": 0.18340483400970697
+  },
+  {
+    "name": "wrapper",
+    "args": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.16-piece-safety/wrapper-check.py"
+    ],
+    "extra_env": {},
+    "exit_code": 0,
+    "elapsed_s": 1.778197207953781
+  }
+]
