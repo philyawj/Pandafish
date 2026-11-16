@@ -1,0 +1,276 @@
+{"schema":1,"sequence":1,"time":"2026-11-14T00:33:51.483803Z","elapsed_ns":5667,"kind":"start","line":"engine-65245-2783789820.jsonl"}
+{"schema":1,"sequence":2,"time":"2026-11-14T00:33:51.48412Z","elapsed_ns":318459,"kind":"in","line":"uci"}
+{"schema":1,"sequence":3,"time":"2026-11-14T00:33:51.484175Z","elapsed_ns":373250,"kind":"out","line":"id name Pandafish v0.15\nid author philyawj\nuciok\n"}
+{"schema":1,"sequence":4,"time":"2026-11-14T00:33:51.922928Z","elapsed_ns":439121375,"kind":"in","line":"ucinewgame"}
+{"schema":1,"sequence":5,"time":"2026-11-14T00:33:51.923863Z","elapsed_ns":440056292,"kind":"in","line":"isready"}
+{"schema":1,"sequence":6,"time":"2026-11-14T00:33:51.923999Z","elapsed_ns":440191625,"kind":"out","line":"readyok\n"}
+{"schema":1,"sequence":7,"time":"2026-11-14T00:33:51.925606Z","elapsed_ns":441799500,"kind":"in","line":"position startpos"}
+{"schema":1,"sequence":8,"time":"2026-11-14T00:33:51.925887Z","elapsed_ns":442079459,"kind":"in","line":"go movetime 10000"}
+{"schema":1,"sequence":9,"time":"2026-11-14T00:34:01.921098Z","elapsed_ns":10437176542,"kind":"out","line":"info depth 7 nodes 2267295 time 9995"}
+{"schema":1,"sequence":10,"time":"2026-11-14T00:34:01.921143Z","elapsed_ns":10437221667,"kind":"out","line":" score cp 21"}
+{"schema":1,"sequence":11,"time":"2026-11-14T00:34:01.921153Z","elapsed_ns":10437231250,"kind":"out","line":" pv g1f3\n"}
+{"schema":1,"sequence":12,"time":"2026-11-14T00:34:01.921193Z","elapsed_ns":10437271084,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":2267295,\"elapsed_ms\":9995.002083,\"timed\":true,\"soft_ms\":7496.25,\"hard_ms\":9995,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":21,\"pv\":[\"g1f3\"]}\n"}
+{"schema":1,"sequence":13,"time":"2026-11-14T00:34:01.921204Z","elapsed_ns":10437282459,"kind":"out","line":"bestmove g1f3\n"}
+{"schema":1,"sequence":14,"time":"2026-11-14T00:34:02.685069Z","elapsed_ns":11201139792,"kind":"in","line":"position startpos moves g1f3 d7d5"}
+{"schema":1,"sequence":15,"time":"2026-11-14T00:34:02.685557Z","elapsed_ns":11201627542,"kind":"in","line":"go wtime 178999 btime 180000 winc 2000 binc 2000"}
+{"schema":1,"sequence":16,"time":"2026-11-14T00:34:10.147053Z","elapsed_ns":18663037500,"kind":"out","line":"info depth 7 nodes 2030462 time 7461"}
+{"schema":1,"sequence":17,"time":"2026-11-14T00:34:10.147099Z","elapsed_ns":18663083375,"kind":"out","line":" score cp 16"}
+{"schema":1,"sequence":18,"time":"2026-11-14T00:34:10.147109Z","elapsed_ns":18663093959,"kind":"out","line":" pv c2c4\n"}
+{"schema":1,"sequence":19,"time":"2026-11-14T00:34:10.14712Z","elapsed_ns":18663104500,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":2030462,\"elapsed_ms\":7461.303375,\"timed\":true,\"soft_ms\":5595.975,\"hard_ms\":7461.3,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":16,\"pv\":[\"c2c4\"]}\n"}
+{"schema":1,"sequence":20,"time":"2026-11-14T00:34:10.147126Z","elapsed_ns":18663110167,"kind":"out","line":"bestmove c2c4\n"}
+{"schema":1,"sequence":21,"time":"2026-11-14T00:34:10.393103Z","elapsed_ns":18909085292,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4"}
+{"schema":1,"sequence":22,"time":"2026-11-14T00:34:10.393378Z","elapsed_ns":18909359667,"kind":"in","line":"go wtime 173320 btime 181940 winc 2000 binc 2000"}
+{"schema":1,"sequence":23,"time":"2026-11-14T00:34:16.99213Z","elapsed_ns":25508036375,"kind":"out","line":"info depth 7 nodes 1362774 time 6598"}
+{"schema":1,"sequence":24,"time":"2026-11-14T00:34:16.992183Z","elapsed_ns":25508089500,"kind":"out","line":" score cp 16"}
+{"schema":1,"sequence":25,"time":"2026-11-14T00:34:16.992193Z","elapsed_ns":25508099709,"kind":"out","line":" pv e2e3\n"}
+{"schema":1,"sequence":26,"time":"2026-11-14T00:34:16.992203Z","elapsed_ns":25508109500,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":1362774,\"elapsed_ms\":6598.630709,\"timed\":true,\"soft_ms\":5454,\"hard_ms\":7272,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":16,\"pv\":[\"e2e3\"]}\n"}
+{"schema":1,"sequence":27,"time":"2026-11-14T00:34:16.99221Z","elapsed_ns":25508116709,"kind":"out","line":"bestmove e2e3\n"}
+{"schema":1,"sequence":28,"time":"2026-11-14T00:34:17.237788Z","elapsed_ns":25753691709,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6"}
+{"schema":1,"sequence":29,"time":"2026-11-14T00:34:17.238364Z","elapsed_ns":25754267334,"kind":"in","line":"go wtime 168539 btime 183880 winc 2000 binc 2000"}
+{"schema":1,"sequence":30,"time":"2026-11-14T00:34:24.351165Z","elapsed_ns":32866987667,"kind":"out","line":"info depth 7 nodes 1628870 time 7112"}
+{"schema":1,"sequence":31,"time":"2026-11-14T00:34:24.351208Z","elapsed_ns":32867030125,"kind":"out","line":" score cp 8"}
+{"schema":1,"sequence":32,"time":"2026-11-14T00:34:24.351216Z","elapsed_ns":32867038625,"kind":"out","line":" pv d1a4\n"}
+{"schema":1,"sequence":33,"time":"2026-11-14T00:34:24.351226Z","elapsed_ns":32867047959,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":1628870,\"elapsed_ms\":7112.636208,\"timed\":true,\"soft_ms\":5334.474999,\"hard_ms\":7112.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":8,\"pv\":[\"d1a4\"]}\n"}
+{"schema":1,"sequence":34,"time":"2026-11-14T00:34:24.351231Z","elapsed_ns":32867053667,"kind":"out","line":"bestmove d1a4\n"}
+{"schema":1,"sequence":35,"time":"2026-11-14T00:34:24.592226Z","elapsed_ns":33108045834,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7"}
+{"schema":1,"sequence":36,"time":"2026-11-14T00:34:24.592832Z","elapsed_ns":33108652125,"kind":"in","line":"go wtime 163239 btime 185830 winc 2000 binc 2000"}
+{"schema":1,"sequence":37,"time":"2026-11-14T00:34:31.528964Z","elapsed_ns":40044704000,"kind":"out","line":"info depth 6 nodes 1239705 time 6935"}
+{"schema":1,"sequence":38,"time":"2026-11-14T00:34:31.529009Z","elapsed_ns":40044749417,"kind":"out","line":" score cp -2"}
+{"schema":1,"sequence":39,"time":"2026-11-14T00:34:31.529018Z","elapsed_ns":40044758375,"kind":"out","line":" pv f1d3\n"}
+{"schema":1,"sequence":40,"time":"2026-11-14T00:34:31.529028Z","elapsed_ns":40044768500,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":1239705,\"elapsed_ms\":6935.97575,\"timed\":true,\"soft_ms\":5201.974998,\"hard_ms\":6935.966666,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-2,\"pv\":[\"f1d3\"]}\n"}
+{"schema":1,"sequence":41,"time":"2026-11-14T00:34:31.529033Z","elapsed_ns":40044773709,"kind":"out","line":"bestmove f1d3\n"}
+{"schema":1,"sequence":42,"time":"2026-11-14T00:34:38.52633Z","elapsed_ns":47041991042,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6"}
+{"schema":1,"sequence":43,"time":"2026-11-14T00:34:38.527161Z","elapsed_ns":47042821750,"kind":"in","line":"go wtime 158109 btime 181030 winc 2000 binc 2000"}
+{"schema":1,"sequence":44,"time":"2026-11-14T00:34:45.292275Z","elapsed_ns":53807858125,"kind":"out","line":"info depth 6 nodes 1189373 time 6764"}
+{"schema":1,"sequence":45,"time":"2026-11-14T00:34:45.29233Z","elapsed_ns":53807913209,"kind":"out","line":" score cp -5"}
+{"schema":1,"sequence":46,"time":"2026-11-14T00:34:45.29234Z","elapsed_ns":53807922875,"kind":"out","line":" pv a4b5\n"}
+{"schema":1,"sequence":47,"time":"2026-11-14T00:34:45.292352Z","elapsed_ns":53807934500,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":1189373,\"elapsed_ms\":6764.967792,\"timed\":true,\"soft_ms\":5073.724998,\"hard_ms\":6764.966666,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-5,\"pv\":[\"a4b5\"]}\n"}
+{"schema":1,"sequence":48,"time":"2026-11-14T00:34:45.292357Z","elapsed_ns":53807940167,"kind":"out","line":"bestmove a4b5\n"}
+{"schema":1,"sequence":49,"time":"2026-11-14T00:34:52.35131Z","elapsed_ns":60866812667,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5"}
+{"schema":1,"sequence":50,"time":"2026-11-14T00:34:52.352266Z","elapsed_ns":60867769167,"kind":"in","line":"go wtime 153139 btime 176230 winc 2000 binc 2000"}
+{"schema":1,"sequence":51,"time":"2026-11-14T00:34:58.951758Z","elapsed_ns":67467184542,"kind":"out","line":"info depth 6 nodes 1515004 time 6599"}
+{"schema":1,"sequence":52,"time":"2026-11-14T00:34:58.951814Z","elapsed_ns":67467241209,"kind":"out","line":" score cp -3"}
+{"schema":1,"sequence":53,"time":"2026-11-14T00:34:58.951823Z","elapsed_ns":67467250375,"kind":"out","line":" pv f3e5\n"}
+{"schema":1,"sequence":54,"time":"2026-11-14T00:34:58.951833Z","elapsed_ns":67467259750,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":1515004,\"elapsed_ms\":6599.3025,\"timed\":true,\"soft_ms\":4949.475,\"hard_ms\":6599.3,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-3,\"pv\":[\"f3e5\"]}\n"}
+{"schema":1,"sequence":55,"time":"2026-11-14T00:34:58.951838Z","elapsed_ns":67467264792,"kind":"out","line":"bestmove f3e5\n"}
+{"schema":1,"sequence":56,"time":"2026-11-14T00:35:05.969907Z","elapsed_ns":74485254084,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3"}
+{"schema":1,"sequence":57,"time":"2026-11-14T00:35:05.970716Z","elapsed_ns":74486062834,"kind":"in","line":"go wtime 148289 btime 171420 winc 2000 binc 2000"}
+{"schema":1,"sequence":58,"time":"2026-11-14T00:35:12.408548Z","elapsed_ns":80923821500,"kind":"out","line":"info depth 6 nodes 1390053 time 6437"}
+{"schema":1,"sequence":59,"time":"2026-11-14T00:35:12.408656Z","elapsed_ns":80923928959,"kind":"out","line":" score cp -32"}
+{"schema":1,"sequence":60,"time":"2026-11-14T00:35:12.408668Z","elapsed_ns":80923941209,"kind":"out","line":" pv f2e3\n"}
+{"schema":1,"sequence":61,"time":"2026-11-14T00:35:12.408679Z","elapsed_ns":80923951709,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":1390053,\"elapsed_ms\":6437.636542,\"timed\":true,\"soft_ms\":4828.224999,\"hard_ms\":6437.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-32,\"pv\":[\"f2e3\"]}\n"}
+{"schema":1,"sequence":62,"time":"2026-11-14T00:35:12.408685Z","elapsed_ns":80923957792,"kind":"out","line":"bestmove f2e3\n"}
+{"schema":1,"sequence":63,"time":"2026-11-14T00:35:19.487406Z","elapsed_ns":88002598834,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5"}
+{"schema":1,"sequence":64,"time":"2026-11-14T00:35:19.488385Z","elapsed_ns":88003578250,"kind":"in","line":"go wtime 143639 btime 166610 winc 2000 binc 2000"}
+{"schema":1,"sequence":65,"time":"2026-11-14T00:35:25.771224Z","elapsed_ns":94286344792,"kind":"out","line":"info depth 7 nodes 1131795 time 6282"}
+{"schema":1,"sequence":66,"time":"2026-11-14T00:35:25.771267Z","elapsed_ns":94286387167,"kind":"out","line":" score cp -18"}
+{"schema":1,"sequence":67,"time":"2026-11-14T00:35:25.771276Z","elapsed_ns":94286396292,"kind":"out","line":" pv b5e5\n"}
+{"schema":1,"sequence":68,"time":"2026-11-14T00:35:25.771287Z","elapsed_ns":94286407709,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":1131795,\"elapsed_ms\":6282.640667,\"timed\":true,\"soft_ms\":4711.974999,\"hard_ms\":6282.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-18,\"pv\":[\"b5e5\"]}\n"}
+{"schema":1,"sequence":69,"time":"2026-11-14T00:35:25.771294Z","elapsed_ns":94286414292,"kind":"out","line":"bestmove b5e5\n"}
+{"schema":1,"sequence":70,"time":"2026-11-14T00:35:32.798883Z","elapsed_ns":101313924292,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6"}
+{"schema":1,"sequence":71,"time":"2026-11-14T00:35:32.799996Z","elapsed_ns":101315036625,"kind":"in","line":"go wtime 139079 btime 161790 winc 2000 binc 2000"}
+{"schema":1,"sequence":72,"time":"2026-11-14T00:35:38.930804Z","elapsed_ns":107445773792,"kind":"out","line":"info depth 6 nodes 1116753 time 6130"}
+{"schema":1,"sequence":73,"time":"2026-11-14T00:35:38.930853Z","elapsed_ns":107445823125,"kind":"out","line":" score cp -42"}
+{"schema":1,"sequence":74,"time":"2026-11-14T00:35:38.930863Z","elapsed_ns":107445833209,"kind":"out","line":" pv d3f1\n"}
+{"schema":1,"sequence":75,"time":"2026-11-14T00:35:38.930882Z","elapsed_ns":107445852292,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":1116753,\"elapsed_ms\":6130.63625,\"timed\":true,\"soft_ms\":4597.974999,\"hard_ms\":6130.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-42,\"pv\":[\"d3f1\"]}\n"}
+{"schema":1,"sequence":76,"time":"2026-11-14T00:35:38.930888Z","elapsed_ns":107445858000,"kind":"out","line":"bestmove d3f1\n"}
+{"schema":1,"sequence":77,"time":"2026-11-14T00:35:46.009091Z","elapsed_ns":114523981250,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6"}
+{"schema":1,"sequence":78,"time":"2026-11-14T00:35:46.010416Z","elapsed_ns":114525305500,"kind":"in","line":"go wtime 134739 btime 157000 winc 2000 binc 2000"}
+{"schema":1,"sequence":79,"time":"2026-11-14T00:35:51.996523Z","elapsed_ns":120511344375,"kind":"out","line":"info depth 6 nodes 948780 time 5985"}
+{"schema":1,"sequence":80,"time":"2026-11-14T00:35:51.996574Z","elapsed_ns":120511394417,"kind":"out","line":" score cp -37"}
+{"schema":1,"sequence":81,"time":"2026-11-14T00:35:51.996584Z","elapsed_ns":120511404709,"kind":"out","line":" pv b1c3\n"}
+{"schema":1,"sequence":82,"time":"2026-11-14T00:35:51.996594Z","elapsed_ns":120511415000,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":948780,\"elapsed_ms\":5985.973709,\"timed\":true,\"soft_ms\":4489.474998,\"hard_ms\":5985.966666,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-37,\"pv\":[\"b1c3\"]}\n"}
+{"schema":1,"sequence":83,"time":"2026-11-14T00:35:51.996601Z","elapsed_ns":120511421500,"kind":"out","line":"bestmove b1c3\n"}
+{"schema":1,"sequence":84,"time":"2026-11-14T00:35:59.321573Z","elapsed_ns":127836310584,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6"}
+{"schema":1,"sequence":85,"time":"2026-11-14T00:35:59.322742Z","elapsed_ns":127837479709,"kind":"in","line":"go wtime 130169 btime 152240 winc 2000 binc 2000"}
+{"schema":1,"sequence":86,"time":"2026-11-14T00:36:04.652561Z","elapsed_ns":133167237250,"kind":"out","line":"info depth 7 nodes 1112292 time 5329"}
+{"schema":1,"sequence":87,"time":"2026-11-14T00:36:04.652615Z","elapsed_ns":133167291750,"kind":"out","line":" score cp -30"}
+{"schema":1,"sequence":88,"time":"2026-11-14T00:36:04.652626Z","elapsed_ns":133167302417,"kind":"out","line":" pv e5g5\n"}
+{"schema":1,"sequence":89,"time":"2026-11-14T00:36:04.652636Z","elapsed_ns":133167312542,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":1112292,\"elapsed_ms\":5329.641958,\"timed\":true,\"soft_ms\":4375.224999,\"hard_ms\":5833.633333,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-30,\"pv\":[\"e5g5\"]}\n"}
+{"schema":1,"sequence":90,"time":"2026-11-14T00:36:04.652643Z","elapsed_ns":133167319209,"kind":"out","line":"bestmove e5g5\n"}
+{"schema":1,"sequence":91,"time":"2026-11-14T00:36:11.561731Z","elapsed_ns":140076328834,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8"}
+{"schema":1,"sequence":92,"time":"2026-11-14T00:36:11.563027Z","elapsed_ns":140077624542,"kind":"in","line":"go wtime 126569 btime 147510 winc 2000 binc 2000"}
+{"schema":1,"sequence":93,"time":"2026-11-14T00:36:17.276842Z","elapsed_ns":145791374084,"kind":"out","line":"info depth 6 nodes 831379 time 5713"}
+{"schema":1,"sequence":94,"time":"2026-11-14T00:36:17.276882Z","elapsed_ns":145791414167,"kind":"out","line":" score cp -29"}
+{"schema":1,"sequence":95,"time":"2026-11-14T00:36:17.276891Z","elapsed_ns":145791423459,"kind":"out","line":" pv d2d4\n"}
+{"schema":1,"sequence":96,"time":"2026-11-14T00:36:17.276902Z","elapsed_ns":145791433917,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":831379,\"elapsed_ms\":5713.637917,\"timed\":true,\"soft_ms\":4285.224999,\"hard_ms\":5713.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-29,\"pv\":[\"d2d4\"]}\n"}
+{"schema":1,"sequence":97,"time":"2026-11-14T00:36:17.276919Z","elapsed_ns":145791450792,"kind":"out","line":"bestmove d2d4\n"}
+{"schema":1,"sequence":98,"time":"2026-11-14T00:36:24.205065Z","elapsed_ns":152719518000,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7"}
+{"schema":1,"sequence":99,"time":"2026-11-14T00:36:24.20588Z","elapsed_ns":152720332834,"kind":"in","line":"go wtime 122669 btime 142830 winc 2000 binc 2000"}
+{"schema":1,"sequence":100,"time":"2026-11-14T00:36:29.789675Z","elapsed_ns":158304063917,"kind":"out","line":"info depth 6 nodes 803112 time 5583"}
+{"schema":1,"sequence":101,"time":"2026-11-14T00:36:29.789721Z","elapsed_ns":158304109792,"kind":"out","line":" score cp -22"}
+{"schema":1,"sequence":102,"time":"2026-11-14T00:36:29.789729Z","elapsed_ns":158304118500,"kind":"out","line":" pv f1d3\n"}
+{"schema":1,"sequence":103,"time":"2026-11-14T00:36:29.789739Z","elapsed_ns":158304127917,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":803112,\"elapsed_ms\":5583.641334,\"timed\":true,\"soft_ms\":4187.724999,\"hard_ms\":5583.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-22,\"pv\":[\"f1d3\"]}\n"}
+{"schema":1,"sequence":104,"time":"2026-11-14T00:36:29.789745Z","elapsed_ns":158304133625,"kind":"out","line":"bestmove f1d3\n"}
+{"schema":1,"sequence":105,"time":"2026-11-14T00:36:36.698565Z","elapsed_ns":165212875084,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4"}
+{"schema":1,"sequence":106,"time":"2026-11-14T00:36:36.700695Z","elapsed_ns":165215005375,"kind":"in","line":"go wtime 118840 btime 138200 winc 2000 binc 2000"}
+{"schema":1,"sequence":107,"time":"2026-11-14T00:36:42.15688Z","elapsed_ns":170671127459,"kind":"out","line":"info depth 6 nodes 877543 time 5456"}
+{"schema":1,"sequence":108,"time":"2026-11-14T00:36:42.156932Z","elapsed_ns":170671179709,"kind":"out","line":" score cp -37"}
+{"schema":1,"sequence":109,"time":"2026-11-14T00:36:42.156943Z","elapsed_ns":170671190625,"kind":"out","line":" pv g5h5\n"}
+{"schema":1,"sequence":110,"time":"2026-11-14T00:36:42.156953Z","elapsed_ns":170671200917,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":877543,\"elapsed_ms\":5456.00725,\"timed\":true,\"soft_ms\":4092,\"hard_ms\":5456,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-37,\"pv\":[\"g5h5\"]}\n"}
+{"schema":1,"sequence":111,"time":"2026-11-14T00:36:42.15696Z","elapsed_ns":170671207292,"kind":"out","line":"bestmove g5h5\n"}
+{"schema":1,"sequence":112,"time":"2026-11-14T00:36:48.943857Z","elapsed_ns":177458027625,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6"}
+{"schema":1,"sequence":113,"time":"2026-11-14T00:36:48.94528Z","elapsed_ns":177459450500,"kind":"in","line":"go wtime 115099 btime 133590 winc 2000 binc 2000"}
+{"schema":1,"sequence":114,"time":"2026-11-14T00:36:54.276754Z","elapsed_ns":182790863709,"kind":"out","line":"info depth 6 nodes 885317 time 5331"}
+{"schema":1,"sequence":115,"time":"2026-11-14T00:36:54.276809Z","elapsed_ns":182790918125,"kind":"out","line":" score cp -114"}
+{"schema":1,"sequence":116,"time":"2026-11-14T00:36:54.27682Z","elapsed_ns":182790929084,"kind":"out","line":" pv h5h6\n"}
+{"schema":1,"sequence":117,"time":"2026-11-14T00:36:54.27683Z","elapsed_ns":182790939709,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":885317,\"elapsed_ms\":5331.303625,\"timed\":true,\"soft_ms\":3998.475,\"hard_ms\":5331.3,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-114,\"pv\":[\"h5h6\"]}\n"}
+{"schema":1,"sequence":118,"time":"2026-11-14T00:36:54.276836Z","elapsed_ns":182790945500,"kind":"out","line":"bestmove h5h6\n"}
+{"schema":1,"sequence":119,"time":"2026-11-14T00:37:01.070872Z","elapsed_ns":189584904125,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3"}
+{"schema":1,"sequence":120,"time":"2026-11-14T00:37:01.072481Z","elapsed_ns":189586512917,"kind":"in","line":"go wtime 111569 btime 129070 winc 2000 binc 2000"}
+{"schema":1,"sequence":121,"time":"2026-11-14T00:37:06.286313Z","elapsed_ns":194800284625,"kind":"out","line":"info depth 6 nodes 751836 time 5213"}
+{"schema":1,"sequence":122,"time":"2026-11-14T00:37:06.28636Z","elapsed_ns":194800332459,"kind":"out","line":" score cp -184"}
+{"schema":1,"sequence":123,"time":"2026-11-14T00:37:06.286369Z","elapsed_ns":194800340917,"kind":"out","line":" pv b2c3\n"}
+{"schema":1,"sequence":124,"time":"2026-11-14T00:37:06.286382Z","elapsed_ns":194800354000,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":751836,\"elapsed_ms\":5213.652791,\"timed\":true,\"soft_ms\":3910.224999,\"hard_ms\":5213.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-184,\"pv\":[\"b2c3\"]}\n"}
+{"schema":1,"sequence":125,"time":"2026-11-14T00:37:06.286387Z","elapsed_ns":194800359209,"kind":"out","line":"bestmove b2c3\n"}
+{"schema":1,"sequence":126,"time":"2026-11-14T00:37:12.94369Z","elapsed_ns":201457586042,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2"}
+{"schema":1,"sequence":127,"time":"2026-11-14T00:37:12.945051Z","elapsed_ns":201458946959,"kind":"in","line":"go wtime 108059 btime 124620 winc 2000 binc 2000"}
+{"schema":1,"sequence":128,"time":"2026-11-14T00:37:18.040352Z","elapsed_ns":206555656500,"kind":"out","line":"info depth 6 nodes 1012176 time 5096"}
+{"schema":1,"sequence":129,"time":"2026-11-14T00:37:18.04039Z","elapsed_ns":206555694250,"kind":"out","line":" score cp -192"}
+{"schema":1,"sequence":130,"time":"2026-11-14T00:37:18.040399Z","elapsed_ns":206555703167,"kind":"out","line":" pv h1g1\n"}
+{"schema":1,"sequence":131,"time":"2026-11-14T00:37:18.040409Z","elapsed_ns":206555713209,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":1012176,\"elapsed_ms\":5096.634625,\"timed\":true,\"soft_ms\":3822.474999,\"hard_ms\":5096.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-192,\"pv\":[\"h1g1\"]}\n"}
+{"schema":1,"sequence":132,"time":"2026-11-14T00:37:18.040414Z","elapsed_ns":206555718834,"kind":"out","line":"bestmove h1g1\n"}
+{"schema":1,"sequence":133,"time":"2026-11-14T00:37:24.709464Z","elapsed_ns":213237985542,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5"}
+{"schema":1,"sequence":134,"time":"2026-11-14T00:37:24.71198Z","elapsed_ns":213240505709,"kind":"in","line":"go wtime 104779 btime 120180 winc 2000 binc 2000"}
+{"schema":1,"sequence":135,"time":"2026-11-14T00:37:29.692649Z","elapsed_ns":218227918584,"kind":"out","line":"info depth 7 nodes 1061570 time 4987"}
+{"schema":1,"sequence":136,"time":"2026-11-14T00:37:29.6927Z","elapsed_ns":218227969750,"kind":"out","line":" score cp -175"}
+{"schema":1,"sequence":137,"time":"2026-11-14T00:37:29.692711Z","elapsed_ns":218227980125,"kind":"out","line":" pv h6f8\n"}
+{"schema":1,"sequence":138,"time":"2026-11-14T00:37:29.692722Z","elapsed_ns":218227991625,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":1061570,\"elapsed_ms\":4987.301542,\"timed\":true,\"soft_ms\":3740.475,\"hard_ms\":4987.3,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-175,\"pv\":[\"h6f8\"]}\n"}
+{"schema":1,"sequence":139,"time":"2026-11-14T00:37:29.692729Z","elapsed_ns":218227998875,"kind":"out","line":"bestmove h6f8\n"}
+{"schema":1,"sequence":140,"time":"2026-11-14T00:37:36.142605Z","elapsed_ns":224683927667,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8"}
+{"schema":1,"sequence":141,"time":"2026-11-14T00:37:36.144623Z","elapsed_ns":224685946292,"kind":"in","line":"go wtime 101549 btime 115910 winc 2000 binc 2000"}
+{"schema":1,"sequence":142,"time":"2026-11-14T00:37:41.021206Z","elapsed_ns":229565692167,"kind":"out","line":"info depth 7 nodes 1152886 time 4879"}
+{"schema":1,"sequence":143,"time":"2026-11-14T00:37:41.021259Z","elapsed_ns":229565745584,"kind":"out","line":" score cp -173"}
+{"schema":1,"sequence":144,"time":"2026-11-14T00:37:41.02127Z","elapsed_ns":229565756209,"kind":"out","line":" pv g1g2\n"}
+{"schema":1,"sequence":145,"time":"2026-11-14T00:37:41.02128Z","elapsed_ns":229565766750,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":1152886,\"elapsed_ms\":4879.635458,\"timed\":true,\"soft_ms\":3659.724999,\"hard_ms\":4879.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-173,\"pv\":[\"g1g2\"]}\n"}
+{"schema":1,"sequence":146,"time":"2026-11-14T00:37:41.021286Z","elapsed_ns":229565772584,"kind":"out","line":"bestmove g1g2\n"}
+{"schema":1,"sequence":147,"time":"2026-11-14T00:37:47.444981Z","elapsed_ns":235992372125,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6"}
+{"schema":1,"sequence":148,"time":"2026-11-14T00:37:47.44583Z","elapsed_ns":235993221500,"kind":"in","line":"go wtime 98479 btime 111670 winc 2000 binc 2000"}
+{"schema":1,"sequence":149,"time":"2026-11-14T00:37:52.221686Z","elapsed_ns":240770574375,"kind":"out","line":"info depth 6 nodes 797505 time 4777"}
+{"schema":1,"sequence":150,"time":"2026-11-14T00:37:52.221736Z","elapsed_ns":240770624292,"kind":"out","line":" score cp -180"}
+{"schema":1,"sequence":151,"time":"2026-11-14T00:37:52.221745Z","elapsed_ns":240770633959,"kind":"out","line":" pv e1f2\n"}
+{"schema":1,"sequence":152,"time":"2026-11-14T00:37:52.221756Z","elapsed_ns":240770644292,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":797505,\"elapsed_ms\":4777.300667,\"timed\":true,\"soft_ms\":3582.975,\"hard_ms\":4777.3,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-180,\"pv\":[\"e1f2\"]}\n"}
+{"schema":1,"sequence":153,"time":"2026-11-14T00:37:52.221762Z","elapsed_ns":240770650250,"kind":"out","line":"bestmove e1f2\n"}
+{"schema":1,"sequence":154,"time":"2026-11-14T00:37:58.585249Z","elapsed_ns":247135536250,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5"}
+{"schema":1,"sequence":155,"time":"2026-11-14T00:37:58.587082Z","elapsed_ns":247137369584,"kind":"in","line":"go wtime 95519 btime 107520 winc 2000 binc 2000"}
+{"schema":1,"sequence":156,"time":"2026-11-14T00:38:03.265203Z","elapsed_ns":251816208625,"kind":"out","line":"info depth 6 nodes 835722 time 4678"}
+{"schema":1,"sequence":157,"time":"2026-11-14T00:38:03.265252Z","elapsed_ns":251816257500,"kind":"out","line":" score cp -184"}
+{"schema":1,"sequence":158,"time":"2026-11-14T00:38:03.265262Z","elapsed_ns":251816267792,"kind":"out","line":" pv d3e4\n"}
+{"schema":1,"sequence":159,"time":"2026-11-14T00:38:03.265273Z","elapsed_ns":251816278042,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":835722,\"elapsed_ms\":4678.635334,\"timed\":true,\"soft_ms\":3508.974999,\"hard_ms\":4678.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-184,\"pv\":[\"d3e4\"]}\n"}
+{"schema":1,"sequence":160,"time":"2026-11-14T00:38:03.265278Z","elapsed_ns":251816283750,"kind":"out","line":"bestmove d3e4\n"}
+{"schema":1,"sequence":161,"time":"2026-11-14T00:38:09.538828Z","elapsed_ns":258090512209,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4"}
+{"schema":1,"sequence":162,"time":"2026-11-14T00:38:09.539776Z","elapsed_ns":258091460167,"kind":"in","line":"go wtime 92619 btime 103470 winc 2000 binc 2000"}
+{"schema":1,"sequence":163,"time":"2026-11-14T00:38:14.121462Z","elapsed_ns":262673495125,"kind":"out","line":"info depth 6 nodes 738320 time 4581"}
+{"schema":1,"sequence":164,"time":"2026-11-14T00:38:14.121519Z","elapsed_ns":262673551125,"kind":"out","line":" score cp -188"}
+{"schema":1,"sequence":165,"time":"2026-11-14T00:38:14.12153Z","elapsed_ns":262673562709,"kind":"out","line":" pv f2f3\n"}
+{"schema":1,"sequence":166,"time":"2026-11-14T00:38:14.12154Z","elapsed_ns":262673572959,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":738320,\"elapsed_ms\":4581.968,\"timed\":true,\"soft_ms\":3436.474998,\"hard_ms\":4581.966666,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-188,\"pv\":[\"f2f3\"]}\n"}
+{"schema":1,"sequence":167,"time":"2026-11-14T00:38:14.121547Z","elapsed_ns":262673579209,"kind":"out","line":"bestmove f2f3\n"}
+{"schema":1,"sequence":168,"time":"2026-11-14T00:38:20.289178Z","elapsed_ns":268841544292,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8"}
+{"schema":1,"sequence":169,"time":"2026-11-14T00:38:20.290332Z","elapsed_ns":268842698542,"kind":"in","line":"go wtime 89809 btime 99550 winc 2000 binc 2000"}
+{"schema":1,"sequence":170,"time":"2026-11-14T00:38:24.778551Z","elapsed_ns":273331088667,"kind":"out","line":"info depth 6 nodes 704770 time 4488"}
+{"schema":1,"sequence":171,"time":"2026-11-14T00:38:24.778599Z","elapsed_ns":273331137375,"kind":"out","line":" score cp -169"}
+{"schema":1,"sequence":172,"time":"2026-11-14T00:38:24.77861Z","elapsed_ns":273331148042,"kind":"out","line":" pv e4b7\n"}
+{"schema":1,"sequence":173,"time":"2026-11-14T00:38:24.778621Z","elapsed_ns":273331158709,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":704770,\"elapsed_ms\":4488.304709,\"timed\":true,\"soft_ms\":3366.225,\"hard_ms\":4488.3,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-169,\"pv\":[\"e4b7\"]}\n"}
+{"schema":1,"sequence":174,"time":"2026-11-14T00:38:24.778627Z","elapsed_ns":273331164792,"kind":"out","line":"bestmove e4b7\n"}
+{"schema":1,"sequence":175,"time":"2026-11-14T00:38:30.833907Z","elapsed_ns":279386611625,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4"}
+{"schema":1,"sequence":176,"time":"2026-11-14T00:38:30.835Z","elapsed_ns":279387704167,"kind":"in","line":"go wtime 87069 btime 95730 winc 2000 binc 2000"}
+{"schema":1,"sequence":177,"time":"2026-11-14T00:38:35.231982Z","elapsed_ns":283784772209,"kind":"out","line":"info depth 6 nodes 823409 time 4396"}
+{"schema":1,"sequence":178,"time":"2026-11-14T00:38:35.232033Z","elapsed_ns":283784822959,"kind":"out","line":" score cp -295"}
+{"schema":1,"sequence":179,"time":"2026-11-14T00:38:35.232043Z","elapsed_ns":283784833375,"kind":"out","line":" pv c3d4\n"}
+{"schema":1,"sequence":180,"time":"2026-11-14T00:38:35.232054Z","elapsed_ns":283784844000,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":823409,\"elapsed_ms\":4396.97675,\"timed\":true,\"soft_ms\":3297.724998,\"hard_ms\":4396.966666,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-295,\"pv\":[\"c3d4\"]}\n"}
+{"schema":1,"sequence":181,"time":"2026-11-14T00:38:35.23207Z","elapsed_ns":283784860792,"kind":"out","line":"bestmove c3d4\n"}
+{"schema":1,"sequence":182,"time":"2026-11-14T00:38:41.176396Z","elapsed_ns":289729271459,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4 c3d4 h4h3"}
+{"schema":1,"sequence":183,"time":"2026-11-14T00:38:41.178492Z","elapsed_ns":289731366917,"kind":"in","line":"go wtime 84429 btime 92000 winc 2000 binc 2000"}
+{"schema":1,"sequence":184,"time":"2026-11-14T00:38:45.487545Z","elapsed_ns":294040464417,"kind":"out","line":"info depth 7 nodes 1039015 time 4308"}
+{"schema":1,"sequence":185,"time":"2026-11-14T00:38:45.487606Z","elapsed_ns":294040525292,"kind":"out","line":" score cp -393"}
+{"schema":1,"sequence":186,"time":"2026-11-14T00:38:45.487616Z","elapsed_ns":294040535375,"kind":"out","line":" pv f3e2\n"}
+{"schema":1,"sequence":187,"time":"2026-11-14T00:38:45.487626Z","elapsed_ns":294040545417,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":1039015,\"elapsed_ms\":4308.971291,\"timed\":true,\"soft_ms\":3231.724998,\"hard_ms\":4308.966666,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-393,\"pv\":[\"f3e2\"]}\n"}
+{"schema":1,"sequence":188,"time":"2026-11-14T00:38:45.487632Z","elapsed_ns":294040551500,"kind":"out","line":"bestmove f3e2\n"}
+{"schema":1,"sequence":189,"time":"2026-11-14T00:38:51.290468Z","elapsed_ns":299843431000,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4 c3d4 h4h3 f3e2 g5e3"}
+{"schema":1,"sequence":190,"time":"2026-11-14T00:38:51.292452Z","elapsed_ns":299845415584,"kind":"in","line":"go wtime 81909 btime 88380 winc 2000 binc 2000"}
+{"schema":1,"sequence":191,"time":"2026-11-14T00:38:55.517476Z","elapsed_ns":304070462375,"kind":"out","line":"info depth 7 nodes 994440 time 4224"}
+{"schema":1,"sequence":192,"time":"2026-11-14T00:38:55.517526Z","elapsed_ns":304070512709,"kind":"out","line":" score cp -516"}
+{"schema":1,"sequence":193,"time":"2026-11-14T00:38:55.517538Z","elapsed_ns":304070523834,"kind":"out","line":" pv e2d3\n"}
+{"schema":1,"sequence":194,"time":"2026-11-14T00:38:55.517548Z","elapsed_ns":304070534625,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":994440,\"elapsed_ms\":4224.969333,\"timed\":true,\"soft_ms\":3168.724998,\"hard_ms\":4224.966666,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-516,\"pv\":[\"e2d3\"]}\n"}
+{"schema":1,"sequence":195,"time":"2026-11-14T00:38:55.517554Z","elapsed_ns":304070540459,"kind":"out","line":"bestmove e2d3\n"}
+{"schema":1,"sequence":196,"time":"2026-11-14T00:39:01.249795Z","elapsed_ns":309802805667,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4 c3d4 h4h3 f3e2 g5e3 e2d3 e3f2"}
+{"schema":1,"sequence":197,"time":"2026-11-14T00:39:01.252608Z","elapsed_ns":309805618625,"kind":"in","line":"go wtime 79489 btime 84900 winc 2000 binc 2000"}
+{"schema":1,"sequence":198,"time":"2026-11-14T00:39:05.132446Z","elapsed_ns":313685468334,"kind":"out","line":"info depth 7 nodes 612691 time 3879"}
+{"schema":1,"sequence":199,"time":"2026-11-14T00:39:05.132505Z","elapsed_ns":313685526750,"kind":"out","line":" score cp -578"}
+{"schema":1,"sequence":200,"time":"2026-11-14T00:39:05.132515Z","elapsed_ns":313685537000,"kind":"out","line":" pv g2g3\n"}
+{"schema":1,"sequence":201,"time":"2026-11-14T00:39:05.132525Z","elapsed_ns":313685547292,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":612691,\"elapsed_ms\":3879.732875,\"timed\":true,\"soft_ms\":3108.225,\"hard_ms\":4144.3,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-578,\"pv\":[\"g2g3\"]}\n"}
+{"schema":1,"sequence":202,"time":"2026-11-14T00:39:05.13254Z","elapsed_ns":313685562500,"kind":"out","line":"bestmove g2g3\n"}
+{"schema":1,"sequence":203,"time":"2026-11-14T00:39:10.874431Z","elapsed_ns":319427467375,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4 c3d4 h4h3 f3e2 g5e3 e2d3 e3f2 g2g3 h3f1"}
+{"schema":1,"sequence":204,"time":"2026-11-14T00:39:10.877898Z","elapsed_ns":319430934500,"kind":"in","line":"go wtime 77339 btime 81460 winc 2000 binc 2000"}
+{"schema":1,"sequence":205,"time":"2026-11-14T00:39:14.950635Z","elapsed_ns":323503678709,"kind":"out","line":"info depth 7 nodes 734960 time 4072"}
+{"schema":1,"sequence":206,"time":"2026-11-14T00:39:14.950687Z","elapsed_ns":323503729875,"kind":"out","line":" score cp -669"}
+{"schema":1,"sequence":207,"time":"2026-11-14T00:39:14.950697Z","elapsed_ns":323503740334,"kind":"out","line":" pv d3c3\n"}
+{"schema":1,"sequence":208,"time":"2026-11-14T00:39:14.950708Z","elapsed_ns":323503751084,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":734960,\"elapsed_ms\":4072.634333,\"timed\":true,\"soft_ms\":3054.474999,\"hard_ms\":4072.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-669,\"pv\":[\"d3c3\"]}\n"}
+{"schema":1,"sequence":209,"time":"2026-11-14T00:39:14.950714Z","elapsed_ns":323503757042,"kind":"out","line":"bestmove d3c3\n"}
+{"schema":1,"sequence":210,"time":"2026-11-14T00:39:20.502814Z","elapsed_ns":329055865667,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4 c3d4 h4h3 f3e2 g5e3 e2d3 e3f2 g2g3 h3f1 d3c3 f1d1"}
+{"schema":1,"sequence":211,"time":"2026-11-14T00:39:20.504288Z","elapsed_ns":329057339792,"kind":"in","line":"go wtime 74969 btime 78100 winc 2000 binc 2000"}
+{"schema":1,"sequence":212,"time":"2026-11-14T00:39:24.49818Z","elapsed_ns":333051236167,"kind":"out","line":"info depth 7 nodes 830279 time 3993"}
+{"schema":1,"sequence":213,"time":"2026-11-14T00:39:24.498237Z","elapsed_ns":333051293334,"kind":"out","line":" score cp -880"}
+{"schema":1,"sequence":214,"time":"2026-11-14T00:39:24.498248Z","elapsed_ns":333051303625,"kind":"out","line":" pv g3d3\n"}
+{"schema":1,"sequence":215,"time":"2026-11-14T00:39:24.498258Z","elapsed_ns":333051314042,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":830279,\"elapsed_ms\":3993.638792,\"timed\":true,\"soft_ms\":2995.224999,\"hard_ms\":3993.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-880,\"pv\":[\"g3d3\"]}\n"}
+{"schema":1,"sequence":216,"time":"2026-11-14T00:39:24.498265Z","elapsed_ns":333051320625,"kind":"out","line":"bestmove g3d3\n"}
+{"schema":1,"sequence":217,"time":"2026-11-14T00:39:29.921728Z","elapsed_ns":338474789334,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4 c3d4 h4h3 f3e2 g5e3 e2d3 e3f2 g2g3 h3f1 d3c3 f1d1 g3d3 f2e1"}
+{"schema":1,"sequence":218,"time":"2026-11-14T00:39:29.923568Z","elapsed_ns":338476629292,"kind":"in","line":"go wtime 72769 btime 74880 winc 2000 binc 2000"}
+{"schema":1,"sequence":219,"time":"2026-11-14T00:39:33.353138Z","elapsed_ns":341906201875,"kind":"out","line":"info depth 8 nodes 1092594 time 3429"}
+{"schema":1,"sequence":220,"time":"2026-11-14T00:39:33.353222Z","elapsed_ns":341906285459,"kind":"out","line":" score cp -976"}
+{"schema":1,"sequence":221,"time":"2026-11-14T00:39:33.353231Z","elapsed_ns":341906295250,"kind":"out","line":" pv d3d2\n"}
+{"schema":1,"sequence":222,"time":"2026-11-14T00:39:33.353242Z","elapsed_ns":341906305417,"kind":"out","line":"info string pandafish {\"depth\":8,\"nodes\":1092594,\"elapsed_ms\":3429.460334,\"timed\":true,\"soft_ms\":2940.225,\"hard_ms\":3920.3,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-976,\"pv\":[\"d3d2\"]}\n"}
+{"schema":1,"sequence":223,"time":"2026-11-14T00:39:33.353247Z","elapsed_ns":341906310459,"kind":"out","line":"bestmove d3d2\n"}
+{"schema":1,"sequence":224,"time":"2026-11-14T00:39:38.726219Z","elapsed_ns":347279286917,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4 c3d4 h4h3 f3e2 g5e3 e2d3 e3f2 g2g3 h3f1 d3c3 f1d1 g3d3 f2e1 d3d2 e8e2"}
+{"schema":1,"sequence":225,"time":"2026-11-14T00:39:38.729864Z","elapsed_ns":347282932334,"kind":"in","line":"go wtime 71129 btime 71750 winc 2000 binc 2000"}
+{"schema":1,"sequence":226,"time":"2026-11-14T00:39:42.595618Z","elapsed_ns":351148687667,"kind":"out","line":"info depth 7 nodes 1089179 time 3865"}
+{"schema":1,"sequence":227,"time":"2026-11-14T00:39:42.595671Z","elapsed_ns":351148741167,"kind":"out","line":" score cp -1007"}
+{"schema":1,"sequence":228,"time":"2026-11-14T00:39:42.595681Z","elapsed_ns":351148751125,"kind":"out","line":" pv c4c5\n"}
+{"schema":1,"sequence":229,"time":"2026-11-14T00:39:42.595692Z","elapsed_ns":351148761625,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":1089179,\"elapsed_ms\":3865.638792,\"timed\":true,\"soft_ms\":2899.224999,\"hard_ms\":3865.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-1007,\"pv\":[\"c4c5\"]}\n"}
+{"schema":1,"sequence":230,"time":"2026-11-14T00:39:42.595697Z","elapsed_ns":351148767334,"kind":"out","line":"bestmove c4c5\n"}
+{"schema":1,"sequence":231,"time":"2026-11-14T00:39:47.82016Z","elapsed_ns":356373233209,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4 c3d4 h4h3 f3e2 g5e3 e2d3 e3f2 g2g3 h3f1 d3c3 f1d1 g3d3 f2e1 d3d2 e8e2 c4c5 e1d2"}
+{"schema":1,"sequence":232,"time":"2026-11-14T00:39:47.822404Z","elapsed_ns":356375476875,"kind":"in","line":"go wtime 69029 btime 68700 winc 2000 binc 2000"}
+{"schema":1,"sequence":233,"time":"2026-11-14T00:39:51.61813Z","elapsed_ns":360171204792,"kind":"out","line":"info depth 7 nodes 911567 time 3795"}
+{"schema":1,"sequence":234,"time":"2026-11-14T00:39:51.61818Z","elapsed_ns":360171254959,"kind":"out","line":" score cp -1240"}
+{"schema":1,"sequence":235,"time":"2026-11-14T00:39:51.61819Z","elapsed_ns":360171264625,"kind":"out","line":" pv c3c4\n"}
+{"schema":1,"sequence":236,"time":"2026-11-14T00:39:51.6182Z","elapsed_ns":360171274709,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":911567,\"elapsed_ms\":3795.634542,\"timed\":true,\"soft_ms\":2846.724999,\"hard_ms\":3795.633333,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-1240,\"pv\":[\"c3c4\"]}\n"}
+{"schema":1,"sequence":237,"time":"2026-11-14T00:39:51.618205Z","elapsed_ns":360171280167,"kind":"out","line":"bestmove c3c4\n"}
+{"schema":1,"sequence":238,"time":"2026-11-14T00:39:56.853007Z","elapsed_ns":365406084709,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4 c3d4 h4h3 f3e2 g5e3 e2d3 e3f2 g2g3 h3f1 d3c3 f1d1 g3d3 f2e1 d3d2 e8e2 c4c5 e1d2 c3c4 d2c3"}
+{"schema":1,"sequence":239,"time":"2026-11-14T00:39:56.855014Z","elapsed_ns":365408091167,"kind":"in","line":"go wtime 67049 btime 65720 winc 2000 binc 2000"}
+{"schema":1,"sequence":240,"time":"2026-11-14T00:40:00.114276Z","elapsed_ns":368667354209,"kind":"out","line":"info depth 7 nodes 566903 time 3259"}
+{"schema":1,"sequence":241,"time":"2026-11-14T00:40:00.114302Z","elapsed_ns":368667380459,"kind":"out","line":" score cp -1316"}
+{"schema":1,"sequence":242,"time":"2026-11-14T00:40:00.114309Z","elapsed_ns":368667387292,"kind":"out","line":" pv a1b1\n"}
+{"schema":1,"sequence":243,"time":"2026-11-14T00:40:00.11432Z","elapsed_ns":368667398125,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":566903,\"elapsed_ms\":3259.199042,\"timed\":true,\"soft_ms\":2797.224999,\"hard_ms\":3729.633333,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-1316,\"pv\":[\"a1b1\"]}\n"}
+{"schema":1,"sequence":244,"time":"2026-11-14T00:40:00.114326Z","elapsed_ns":368667404667,"kind":"out","line":"bestmove a1b1\n"}
+{"schema":1,"sequence":245,"time":"2026-11-14T00:40:01.169591Z","elapsed_ns":369722670292,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4 c3d4 h4h3 f3e2 g5e3 e2d3 e3f2 g2g3 h3f1 d3c3 f1d1 g3d3 f2e1 d3d2 e8e2 c4c5 e1d2 c3c4 d2c3 a1b1 d1d4"}
+{"schema":1,"sequence":246,"time":"2026-11-14T00:40:01.171611Z","elapsed_ns":369724690959,"kind":"in","line":"go wtime 65529 btime 66850 winc 2000 binc 2000"}
+{"schema":1,"sequence":247,"time":"2026-11-14T00:40:04.834162Z","elapsed_ns":373387242250,"kind":"out","line":"info depth 7 nodes 590667 time 3662"}
+{"schema":1,"sequence":248,"time":"2026-11-14T00:40:04.834212Z","elapsed_ns":373387292375,"kind":"out","line":" score cp -1600"}
+{"schema":1,"sequence":249,"time":"2026-11-14T00:40:04.834221Z","elapsed_ns":373387301750,"kind":"out","line":" pv c4b5\n"}
+{"schema":1,"sequence":250,"time":"2026-11-14T00:40:04.834231Z","elapsed_ns":373387311209,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":590667,\"elapsed_ms\":3662.486083,\"timed\":true,\"soft_ms\":2759.224998,\"hard_ms\":3678.966666,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-1600,\"pv\":[\"c4b5\"]}\n"}
+{"schema":1,"sequence":251,"time":"2026-11-14T00:40:04.834236Z","elapsed_ns":373387317042,"kind":"out","line":"bestmove c4b5\n"}
+{"schema":1,"sequence":252,"time":"2026-11-14T00:40:05.186617Z","elapsed_ns":373739698625,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4 c3d4 h4h3 f3e2 g5e3 e2d3 e3f2 g2g3 h3f1 d3c3 f1d1 g3d3 f2e1 d3d2 e8e2 c4c5 e1d2 c3c4 d2c3 a1b1 d1d4 c4b5 d4d3"}
+{"schema":1,"sequence":253,"time":"2026-11-14T00:40:05.188389Z","elapsed_ns":373741469709,"kind":"in","line":"go wtime 63679 btime 68680 winc 2000 binc 2000"}
+{"schema":1,"sequence":254,"time":"2026-11-14T00:40:08.805767Z","elapsed_ns":377358849209,"kind":"out","line":"info depth 6 nodes 617027 time 3617"}
+{"schema":1,"sequence":255,"time":"2026-11-14T00:40:08.805859Z","elapsed_ns":377358941584,"kind":"out","line":" score mate -3"}
+{"schema":1,"sequence":256,"time":"2026-11-14T00:40:08.805871Z","elapsed_ns":377358953667,"kind":"out","line":" pv b5c6\n"}
+{"schema":1,"sequence":257,"time":"2026-11-14T00:40:08.805885Z","elapsed_ns":377358967542,"kind":"out","line":"info string pandafish {\"depth\":6,\"nodes\":617027,\"elapsed_ms\":3617.312417,\"timed\":true,\"soft_ms\":2712.975,\"hard_ms\":3617.3,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"mate\",\"score\":-3,\"pv\":[\"b5c6\"]}\n"}
+{"schema":1,"sequence":258,"time":"2026-11-14T00:40:08.805891Z","elapsed_ns":377358972959,"kind":"out","line":"bestmove b5c6\n"}
+{"schema":1,"sequence":259,"time":"2026-11-14T00:40:09.035525Z","elapsed_ns":377588607625,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4 c3d4 h4h3 f3e2 g5e3 e2d3 e3f2 g2g3 h3f1 d3c3 f1d1 g3d3 f2e1 d3d2 e8e2 c4c5 e1d2 c3c4 d2c3 a1b1 d1d4 c4b5 d4d3 b5c6 e2e6"}
+{"schema":1,"sequence":260,"time":"2026-11-14T00:40:09.037734Z","elapsed_ns":377590816042,"kind":"in","line":"go wtime 61869 btime 70640 winc 2000 binc 2000"}
+{"schema":1,"sequence":261,"time":"2026-11-14T00:40:12.086611Z","elapsed_ns":380639694542,"kind":"out","line":"info depth 7 nodes 449589 time 3048"}
+{"schema":1,"sequence":262,"time":"2026-11-14T00:40:12.086662Z","elapsed_ns":380639746000,"kind":"out","line":" score mate -2"}
+{"schema":1,"sequence":263,"time":"2026-11-14T00:40:12.086673Z","elapsed_ns":380639756542,"kind":"out","line":" pv c6c7\n"}
+{"schema":1,"sequence":264,"time":"2026-11-14T00:40:12.086684Z","elapsed_ns":380639767209,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":449589,\"elapsed_ms\":3048.820958,\"timed\":true,\"soft_ms\":2667.724998,\"hard_ms\":3556.966666,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"mate\",\"score\":-2,\"pv\":[\"c6c7\"]}\n"}
+{"schema":1,"sequence":265,"time":"2026-11-14T00:40:12.08669Z","elapsed_ns":380639773167,"kind":"out","line":"bestmove c6c7\n"}
+{"schema":1,"sequence":266,"time":"2026-11-14T00:40:12.303768Z","elapsed_ns":380856852125,"kind":"in","line":"position startpos moves g1f3 d7d5 c2c4 d5d4 e2e3 b8c6 d1a4 c8d7 f1d3 g8f6 a4b5 a7a5 f3e5 d4e3 f2e3 c6e5 b5e5 d7c6 d3f1 e7e6 b1c3 f8d6 e5g5 e8g8 d2d4 d6e7 f1d3 f6e4 g5h5 g7g6 h5h6 e4c3 b2c3 c6g2 h1g1 e7g5 h6f8 d8f8 g1g2 f8h6 e1f2 e6e5 d3e4 h6h4 f2f3 a8e8 e4b7 e5d4 c3d4 h4h3 f3e2 g5e3 e2d3 e3f2 g2g3 h3f1 d3c3 f1d1 g3d3 f2e1 d3d2 e8e2 c4c5 e1d2 c3c4 d2c3 a1b1 d1d4 c4b5 d4d3 b5c6 e2e6 c6c7 c3e5"}
+{"schema":1,"sequence":267,"time":"2026-11-14T00:40:12.306602Z","elapsed_ns":380859686375,"kind":"in","line":"go wtime 60629 btime 72600 winc 2000 binc 2000"}
+{"schema":1,"sequence":268,"time":"2026-11-14T00:40:15.14791Z","elapsed_ns":383700994542,"kind":"out","line":"info depth 7 nodes 436428 time 2841"}
+{"schema":1,"sequence":269,"time":"2026-11-14T00:40:15.14796Z","elapsed_ns":383701045042,"kind":"out","line":" score mate -1"}
+{"schema":1,"sequence":270,"time":"2026-11-14T00:40:15.14797Z","elapsed_ns":383701054959,"kind":"out","line":" pv c7c8\n"}
+{"schema":1,"sequence":271,"time":"2026-11-14T00:40:15.14798Z","elapsed_ns":383701065125,"kind":"out","line":"info string pandafish {\"depth\":7,\"nodes\":436428,\"elapsed_ms\":2841.216,\"timed\":true,\"soft_ms\":2636.724999,\"hard_ms\":3515.633333,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"mate\",\"score\":-1,\"pv\":[\"c7c8\"]}\n"}
+{"schema":1,"sequence":272,"time":"2026-11-14T00:40:15.147986Z","elapsed_ns":383701071084,"kind":"out","line":"bestmove c7c8\n"}
+{"schema":1,"sequence":273,"time":"2026-11-14T00:40:15.946255Z","elapsed_ns":384499340334,"kind":"in","line":"isready"}
+{"schema":1,"sequence":274,"time":"2026-11-14T00:40:15.946494Z","elapsed_ns":384499579292,"kind":"out","line":"readyok\n"}
+{"schema":1,"sequence":275,"time":"2026-11-14T00:40:15.947344Z","elapsed_ns":384500428834,"kind":"in","line":"quit"}
+{"schema":1,"sequence":276,"time":"2026-11-14T00:40:15.947402Z","elapsed_ns":384500486834,"kind":"exit","line":"ok"}

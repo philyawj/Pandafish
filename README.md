@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.15 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.15.1 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
@@ -298,10 +298,16 @@ Report calculated signed mate counts through UCI. Keep the released positional
 evaluation, search breadth and clocks. See the
 [conversion diagnosis and validation](tools/benchmark/research/v0.15-mate-conversion/README.md).
 
-**Next:** Collect roughly 200 live Lichess games across multiple sessions on the
-same v0.15 build. Use the recorded games, full-strength offline analysis and
-controlled replays to identify recurring tactical, positional and conversion
-failures before selecting the next engine change. See the
-[extended live-test plan](tools/benchmark/live/v0.15-test-plan/README.md) for capture,
-session handling, analysis and limits. The local benchmark workflow remains the
-validation loop for each proposed correction.
+**v0.15.1: Review the extended live test (complete).** Preserve the session,
+full-strength offline analysis, diagnostic replays and next-step recommendations.
+Repair partial search/game linkage in the reporting tool. Engine playing
+behavior remains v0.15. See the
+[live research and handoff](tools/benchmark/live/v0.15-live-20261113-074740/README.md).
+
+**Next:** Test a compact piece-safety evaluation against diagnosed game
+positions, then validate any promising candidate with controlled local matches.
+Keep the existing search and time-management foundation. The
+[ranked research recommendations](tools/benchmark/live/v0.15-live-20261113-074740/REVIEW.md)
+explain the hypothesis, alternatives and uncertainty; the
+[testing review](tools/benchmark/live/v0.15-live-20261113-074740/TESTING.md)
+explains sample sizes and the proposed confirmation stage.

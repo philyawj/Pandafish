@@ -1,0 +1,402 @@
+package main
+
+import (
+	"bufio"
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+	"sort"
+	"strconv"
+	"strings"
+	"time"
+
+	"github.com/corentings/chess/v2"
+)
+
+type score struct {
+	Kind  string
+	Value int
+}
+type sf struct {
+	Score    score
+	Bestmove string
+	PV       []string
+}
+type metrics struct {
+	Depth     int
+	Nodes     uint64
+	Elapsed   float64 `json:"elapsed_ms"`
+	ScoreKind string  `json:"score_kind"`
+	Score     int
+}
+type capture struct {
+	Process                                   string
+	GameNumber                                int `json:"game_number"`
+	Search                                    int
+	Time                                      time.Time
+	FEN, Position, Go, Bestmove, Game, Status string
+	Ply                                       *int
+	Response                                  float64 `json:"response_ms"`
+	Metrics                                   *metrics
+}
+type move struct {
+	Game                  string
+	Ply                   int
+	FEN, Position, Played string
+	SAN                   string `json:"played_san"`
+	IsBot                 bool   `json:"is_bot"`
+	Best                  sf
+	After                 sf   `json:"played_result"`
+	Loss                  *int `json:"cp_loss"`
+	Classification        string
+	Capture               *capture
+	Captures              []*capture
+}
+type game struct {
+	Game, Opponent, Result, Outcome, Event string
+	OpponentTitle                          string `json:"opponent_title"`
+	Clock                                  string `json:"time_control"`
+	Plies                                  int
+}
+type tally struct {
+	Moves, Flags100, Flags300, PlayableFlags int
+	Classes                                  map[string]int
+}
+
+func tallyMove(t *tally, m move) {
+	t.Moves++
+	if t.Classes == nil {
+		t.Classes = map[string]int{}
+	}
+	t.Classes[m.Classification]++
+	if m.Loss != nil && *m.Loss >= 100 {
+		t.Flags100++
+	}
+	if m.Loss != nil && *m.Loss >= 300 {
+		t.Flags300++
+	}
+	if m.Best.Score.Kind == "cp" && m.Best.Score.Value >= -100 && (m.Classification == "allowed_forced_mate" || m.Loss != nil && *m.Loss >= 200 && m.After.Score.Kind == "cp" && m.After.Score.Value <= -100) {
+		t.PlayableFlags++
+	}
+}
+func id(s string) string {
+	parts := strings.Split(strings.TrimRight(s, "/"), "/")
+	r := parts[len(parts)-1]
+	if len(r) > 8 {
+		r = r[:8]
+	}
+	return r
+}
+func group(c *capture) string     { return fmt.Sprintf("%s/%d", c.Process, c.GameNumber) }
+func key(g, fen, m string) string { return id(g) + "|" + fen + "|" + m }
+func read(path string, out any) {
+	b, e := os.ReadFile(path)
+	if e != nil {
+		panic(e)
+	}
+	if e = json.Unmarshal(b, out); e != nil {
+		panic(e)
+	}
+}
+func write(path string, v any) {
+	b, e := json.MarshalIndent(v, "", "  ")
+	if e != nil {
+		panic(e)
+	}
+	if e = os.WriteFile(path, append(b, '\n'), 0644); e != nil {
+		panic(e)
+	}
+}
+func main() {
+	base := os.Args[1]
+	var ops struct{ Games []game }
+	read(filepath.Join(base, "operations.json"), &ops)
+	gm := map[string]game{}
+	duplicates := []string{}
+	for _, g := range ops.Games {
+		if _, ok := gm[id(g.Game)]; ok {
+			duplicates = append(duplicates, g.Game)
+		}
+		gm[id(g.Game)] = g
+	}
+	var moves []move
+	byKey := map[string][]int{}
+	files, _ := filepath.Glob(filepath.Join(base, "analysis/stockfish-n100000/*.json"))
+	surveyGames := map[string]int{}
+	finals := map[string]map[string]string{}
+	for _, f := range files {
+		switch filepath.Base(f) {
+		case "method.json", "summary.json", "candidates.json", "confirmation.json":
+			continue
+		}
+		var g struct {
+			Game     string
+			Complete bool
+			Moves    []move
+		}
+		read(f, &g)
+		if g.Game == "" {
+			continue
+		}
+		surveyGames[id(g.Game)]++
+		if len(g.Moves) > 0 {
+			last := g.Moves[len(g.Moves)-1]
+			opt, err := chess.FEN(last.FEN)
+			if err != nil {
+				panic(err)
+			}
+			pos := chess.NewGame(opt).Position()
+			mv, err := (chess.UCINotation{}).Decode(pos, last.Played)
+			if err != nil {
+				panic(err)
+			}
+			finals[id(g.Game)] = map[string]string{"fen": pos.Update(mv).String(), "position": last.Position + " " + last.Played}
+		}
+		for _, m := range g.Moves {
+			if m.IsBot {
+				byKey[key(m.Game, m.FEN, m.Played)] = append(byKey[key(m.Game, m.FEN, m.Played)], len(moves))
+				byKey[key("", m.FEN, m.Played)] = append(byKey[key("", m.FEN, m.Played)], len(moves))
+				moves = append(moves, m)
+			}
+		}
+	}
+	f, e := os.Open(filepath.Join(base, "raw/moves.jsonl"))
+	if e != nil {
+		panic(e)
+	}
+	scanner := bufio.NewScanner(f)
+	scanner.Buffer(make([]byte, 4096), 16<<20)
+	var captures []*capture
+	groups := map[string]map[string]int{}
+	for scanner.Scan() {
+		var c capture
+		if e = json.Unmarshal(scanner.Bytes(), &c); e != nil {
+			panic(e)
+		}
+		captures = append(captures, &c)
+		if c.Game != "" {
+			g := group(&c)
+			if groups[g] == nil {
+				groups[g] = map[string]int{}
+			}
+			groups[g][id(c.Game)]++
+		}
+	}
+	if e = scanner.Err(); e != nil {
+		panic(e)
+	}
+	f.Close()
+	var inferred, unresolved []map[string]any
+	originalLinked := 0
+	derived := map[*capture]bool{}
+	attempts := map[int][]*capture{}
+	normalized := func(command string) string {
+		command = strings.Join(strings.Fields(command), " ")
+		command = strings.Replace(command, "position startpos", "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", 1)
+		return strings.TrimSuffix(command, " moves")
+	}
+	exactMatches := func(c *capture, g string) []int {
+		var result []int
+		for _, i := range byKey[key(g, c.FEN, c.Bestmove)] {
+			if normalized(c.Position) == normalized(moves[i].Position) {
+				result = append(result, i)
+			}
+		}
+		return result
+	}
+	derive := func(c *capture, i int, basis string) {
+		m := moves[i]
+		derived[c] = true
+		attempts[i] = append(attempts[i], c)
+		inferred = append(inferred, map[string]any{"process": c.Process, "game_number": c.GameNumber, "search": c.Search, "game": m.Game, "ply": m.Ply, "basis": basis})
+		if groups[group(c)] == nil {
+			groups[group(c)] = map[string]int{}
+		}
+		groups[group(c)][id(m.Game)]++
+	}
+	for _, c := range captures {
+		if c.Game != "" {
+			originalLinked++
+			continue
+		}
+		matches := exactMatches(c, "")
+		if len(matches) == 1 {
+			derive(c, matches[0], "unique saved-game full history, exact FEN and played move")
+		}
+	}
+	for _, c := range captures {
+		if c.Game != "" || derived[c] {
+			continue
+		}
+		gs := groups[group(c)]
+		candidate := ""
+		if len(gs) == 1 {
+			for g := range gs {
+				candidate = g
+			}
+		}
+		matches := exactMatches(c, candidate)
+		if candidate != "" && len(matches) == 1 {
+			derive(c, matches[0], "single consistent process/game boundary plus exact history, FEN and move")
+		} else {
+			unresolved = append(unresolved, map[string]any{"process": c.Process, "game_number": c.GameNumber, "search": c.Search, "fen": c.FEN, "bestmove": c.Bestmove, "process_linked_games": gs, "matches": len(matches), "matches_final_saved_root": candidate != "" && finals[candidate] != nil && finals[candidate]["fen"] == c.FEN && normalized(finals[candidate]["position"]) == normalized(c.Position)})
+		}
+	}
+	derivedRepeated := 0
+	for i, rows := range attempts {
+		if len(rows) == 1 && moves[i].Capture == nil {
+			moves[i].Capture = rows[0]
+		} else if len(rows) > 1 {
+			derivedRepeated++
+			moves[i].Captures = append(moves[i].Captures, rows...)
+		}
+	}
+	type event struct {
+		At    time.Time
+		Index int
+		Start bool
+	}
+	var events []event
+	for i, c := range captures {
+		if c.Status != "completed" {
+			continue
+		}
+		events = append(events, event{c.Time, i, true}, event{c.Time.Add(time.Duration(c.Response * float64(time.Millisecond))), i, false})
+	}
+	sort.Slice(events, func(i, j int) bool {
+		if events[i].At.Equal(events[j].At) {
+			return !events[i].Start && events[j].Start
+		}
+		return events[i].At.Before(events[j].At)
+	})
+	active := map[int]bool{}
+	overlapped := map[int]bool{}
+	peak := 0
+	seconds := 0.
+	var last time.Time
+	for _, ev := range events {
+		procs := map[string]bool{}
+		for i := range active {
+			procs[captures[i].Process] = true
+		}
+		if len(procs) > 1 && !last.IsZero() {
+			seconds += ev.At.Sub(last).Seconds()
+		}
+		if ev.Start {
+			for i := range active {
+				if captures[i].Process != captures[ev.Index].Process {
+					overlapped[i] = true
+					overlapped[ev.Index] = true
+				}
+			}
+			active[ev.Index] = true
+		} else {
+			delete(active, ev.Index)
+		}
+		procs = map[string]bool{}
+		for i := range active {
+			procs[captures[i].Process] = true
+		}
+		peak = max(peak, len(procs))
+		last = ev.At
+	}
+	cohorts := map[string]map[string]int{}
+	for _, g := range gm {
+		kind := "human"
+		if g.OpponentTitle == "BOT" {
+			kind = "bot"
+		}
+		mode := "casual"
+		if strings.Contains(g.Event, "rated") {
+			mode = "rated"
+		}
+		k := g.Clock + " / " + kind + " / " + mode
+		if cohorts[k] == nil {
+			cohorts[k] = map[string]int{}
+		}
+		cohorts[k][g.Outcome]++
+	}
+	byPhase, byPiece, byClock := map[string]*tally{}, map[string]*tally{}, map[string]*tally{}
+	freq := map[string]map[string]any{}
+	var compact []map[string]any
+	missingCapture, lowClock, flaggedLowClock := 0, 0, 0
+	for _, m := range moves {
+		option, e := chess.FEN(m.FEN)
+		if e != nil {
+			panic(e)
+		}
+		p := chess.NewGame(option).Position()
+		mv, e := (chess.UCINotation{}).Decode(p, m.Played)
+		if e != nil {
+			panic(e)
+		}
+		piece := p.Board().Piece(mv.S1()).Type().String()
+		phase := "middle"
+		if m.Ply < 24 {
+			phase = "opening"
+		} else if m.Ply >= 60 || len(p.Board().SquareMap()) <= 10 {
+			phase = "late_or_low_material"
+		}
+		clock := gm[id(m.Game)].Clock
+		for _, x := range []struct {
+			M   map[string]*tally
+			Key string
+		}{{byPhase, phase}, {byPiece, piece}, {byClock, clock}} {
+			if x.M[x.Key] == nil {
+				x.M[x.Key] = new(tally)
+			}
+			tallyMove(x.M[x.Key], m)
+		}
+		ownMs := -1
+		if m.Capture != nil {
+			fields := strings.Fields(m.Capture.Go)
+			target := "wtime"
+			if p.Turn() == chess.Black {
+				target = "btime"
+			}
+			for i := 0; i+1 < len(fields); i++ {
+				if fields[i] == target {
+					ownMs, _ = strconv.Atoi(fields[i+1])
+				}
+			}
+		}
+		bad := m.Loss != nil && *m.Loss >= 100 || m.Classification == "allowed_forced_mate" || m.Classification == "missed_forced_mate"
+		if m.Capture == nil {
+			missingCapture++
+		}
+		if ownMs >= 0 && ownMs < 10000 {
+			lowClock++
+			if bad {
+				flaggedLowClock++
+			}
+		}
+		if bad {
+			k := m.Position + "|" + m.Played
+			if freq[k] == nil {
+				freq[k] = map[string]any{"fen": m.FEN, "played": m.Played, "san": m.SAN, "reference": m.Best.Bestmove, "count": 0, "games": []string{}}
+			}
+			a := freq[k]
+			a["count"] = a["count"].(int) + 1
+			a["games"] = append(a["games"].([]string), m.Game)
+		}
+		record := map[string]any{"game": m.Game, "ply": m.Ply, "fen": m.FEN, "position": m.Position, "played": m.Played, "san": m.SAN, "reference": m.Best.Bestmove, "best_score": m.Best.Score, "played_score": m.After.Score, "loss_cp": m.Loss, "class": m.Classification, "phase": phase, "piece": piece, "clock": clock, "own_clock_ms": ownMs}
+		if m.Capture != nil {
+			record["capture"] = m.Capture
+		}
+		compact = append(compact, record)
+	}
+	repeated := []map[string]any{}
+	for _, a := range freq {
+		if a["count"].(int) > 1 {
+			repeated = append(repeated, a)
+		}
+	}
+	sort.Slice(repeated, func(i, j int) bool { return repeated[i]["count"].(int) > repeated[j]["count"].(int) })
+	inventoryBytes, _ := os.ReadFile(filepath.Join(base, "inventory.json"))
+	out := map[string]any{"method": "Original source files unchanged. Game IDs deduplicated; repeated positions retained as occurrences. Additional linkage is derived, not canonical submission attribution. Overlap uses UTC go receipt plus recorded monotonic response duration, not CPU utilization.", "inventory_sha256": fmt.Sprintf("%x", sha256.Sum256(inventoryBytes)), "game_rows": len(ops.Games), "unique_games": len(gm), "duplicate_game_ids": duplicates, "survey_game_files": len(surveyGames), "bot_moves": len(moves), "original_linked_searches": originalLinked, "inferred_additional_links": len(inferred), "remaining_unresolved": len(unresolved), "additional_positions_with_multiple_attempts": derivedRepeated, "bot_moves_missing_unique_capture": missingCapture, "bot_moves_with_own_clock_below_10s": lowClock, "flagged_moves_with_own_clock_below_10s": flaggedLowClock, "overlapping_searches": len(overlapped), "peak_search_processes": peak, "overlap_union_seconds": seconds, "cohorts": cohorts, "by_phase": byPhase, "by_piece": byPiece, "by_clock": byClock, "repeated_flagged_decisions": repeated, "inferred_links": inferred, "unresolved_searches": unresolved}
+	write(filepath.Join(base, "session-audit.json"), out)
+	write(filepath.Join(base, "analysis/compact-bot-moves.json"), compact)
+	fmt.Printf("Games%d; moves%d; original links%d; inferred%d; unresolved%d; overlapping%d peak%d seconds%.3f\n", len(gm), len(moves), originalLinked, len(inferred), len(unresolved), len(overlapped), peak, seconds)
+}

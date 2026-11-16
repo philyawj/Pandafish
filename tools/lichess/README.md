@@ -165,7 +165,11 @@ inputs and timing records to investigate rather than treating every overrun as
 a lost game or time forfeit.
 
 PGN linkage uses the recorded history, root FEN, returned move, and all searches
-within the same process/game boundary. The engine does not receive Lichess game
+within the same process/game boundary. From v0.15.1, an unmatched request
+(such as a move absent from the final saved PGN) no longer erases earlier
+valid matches. Only matchable requests contribute to shared game evidence;
+conflicting evidence keeps per-request ambiguity. Identical histories across
+games remain unresolved. The engine does not receive Lichess game
 IDs through UCI. Common opening prefixes can be ambiguous; later searches can
 resolve them. Missing, truncated, and ambiguous records are flagged rather than
 assigned a guessed game. Reconnected games may have several engine processes.
@@ -286,3 +290,12 @@ fixtures. Session directories are never reused. Keep the same build and settings
 across the campaign, record intentional changes separately, and deduplicate game
 IDs across sessions before pooled analysis. A report only summarizes one session;
 there is no automatic cross-session pooling command.
+
+## Completed v0.15 live research
+
+The [extended session review](../benchmark/live/v0.15-live-20261113-074740/README.md)
+preserves the original reports and a separately generated repaired-linkage
+report. Its [process](../benchmark/live/v0.15-live-20261113-074740/PROCESS.md)
+documents deduplication, full survey, larger-budget checks, offline replays and
+fresh-context handoff. Re-report a temporary copy when investigating old
+records; preserve original raw hashes rather than overwriting history.

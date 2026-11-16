@@ -1,0 +1,20 @@
+{
+  "base_revision": "d7a61498a16c8dcdd5582b85406eb568917189d7",
+  "release_branch": "v0.15.1-live-research",
+  "source_changed": true,
+  "engine_playing_policy": "v0.15, identity only changed to v0.15.1",
+  "go_version": "go version go1.25.0 darwin/arm64",
+  "tool_source_sha256": {
+    "tools/lichess/report.go": "106e1d0c1eccbd26fddb0a1ef8475db99d2bf949efe217385396e8395fc9cb46",
+    "tools/lichess/report_test.go": "034f00563ea3f168143aa72d09f1334093d74c311f8fdc4b83570436053011f9",
+    "tools/lichess/analyse.go": "d6abc1e4c79528ce13a6cc86dc1599076e2fb76662eb1ea64aa5293585166de2",
+    "tools/lichess/stockfish.go": "03dac404f2e5193a22e203c13f33817d4080bf3ae942c339f4fa56e3826427e1",
+    "evaluation.go": "05ccf8887c310664744891b24f3227115434f211f470701141d1d5bafbfbfce0",
+    "search.go": "33c038d4da3c85de3134f6f8d33ff70fd942ba9e2233cfc5da665f5af491f086"
+  },
+  "release_smoke_binary_sha256": "274e685f4c3732de9b3cb2cf7d4eb038587483414b94373c8e020c5375991b18",
+  "captured_engine_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+  "active_binary_preserved": true,
+  "no_live_client_started": true,
+  "note": "Original inputs unchanged; full survey reused; 30 focused confirmations, cold decision probes, negative counterfactuals and conservative linkage repair added. Dirty client patch was not captured."
+}

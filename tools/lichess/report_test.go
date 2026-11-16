@@ -199,3 +199,73 @@ func TestDuplicateEventIsFlagged(t *testing.T) {
 		t.Fatalf("rows %+v warnings %v", rows, warnings)
 	}
 }
+
+func correlationRow(t *testing.T, position, best string, boundary int) *searchRecord {
+	t.Helper()
+	g, err := positionGame(position)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return &searchRecord{Process: "one", GameNumber: boundary, Position: position, FEN: g.FEN(), Bestmove: best}
+}
+func TestUnplayedRequestDoesNotEraseEarlierLinks(t *testing.T) {
+	dir := t.TempDir()
+	fixturePGN(t, dir, "game0001", "1. e4 e5 2. Nf3 Nc6", "1/2-1/2")
+	fixturePGN(t, dir, "game0002", "1. e4 c5", "*")
+	games, warnings := loadGames(dir)
+	if len(warnings) > 0 {
+		t.Fatal(warnings)
+	}
+	first := correlationRow(t, "position startpos", "e2e4", 1)
+	later := correlationRow(t, "position startpos moves e2e4 e7e5", "g1f3", 1)
+	unplayed := correlationRow(t, "position startpos moves e2e4 e7e5 g1f3 b8c6", "f1b5", 1)
+	correlate([]*searchRecord{first, later, unplayed}, games)
+	if first.Correlation != "matched" || later.Correlation != "matched" || !strings.HasSuffix(first.Game, "game0001") {
+		t.Fatal("unplayed request erased valid links")
+	}
+	if unplayed.Correlation != "missing" || unplayed.Game != "" || unplayed.Ply != nil {
+		t.Fatal("attributed an unplayed move")
+	}
+}
+func TestConflictingProcessEvidenceDoesNotGuessCommonOpening(t *testing.T) {
+	dir := t.TempDir()
+	fixturePGN(t, dir, "game0001", "1. e4 e5 2. Nf3", "*")
+	fixturePGN(t, dir, "game0002", "1. e4 c5 2. Nf3", "*")
+	games, _ := loadGames(dir)
+	first := correlationRow(t, "position startpos", "e2e4", 1)
+	a := correlationRow(t, "position startpos moves e2e4 e7e5", "g1f3", 1)
+	b := correlationRow(t, "position startpos moves e2e4 c7c5", "g1f3", 1)
+	correlate([]*searchRecord{first, a, b}, games)
+	if first.Correlation != "ambiguous" || len(first.Candidates) != 2 || a.Correlation != "matched" || b.Correlation != "matched" || a.Game == b.Game {
+		t.Fatal("conflicting process evidence guessed a shared game")
+	}
+}
+func TestCorrelationKeepsIdenticalGamesAmbiguousAndBoundariesSeparate(t *testing.T) {
+	dir := t.TempDir()
+	fixturePGN(t, dir, "game0001", "1. e4 e5 2. Nf3", "*")
+	fixturePGN(t, dir, "game0002", "1. e4 c5 2. Nf3", "*")
+	games, _ := loadGames(dir)
+	specific := correlationRow(t, "position startpos moves e2e4 e7e5", "g1f3", 1)
+	newGame := correlationRow(t, "position startpos", "e2e4", 2)
+	correlate([]*searchRecord{specific, newGame}, games)
+	if specific.Correlation != "matched" || newGame.Correlation != "ambiguous" {
+		t.Fatal("crossed ucinewgame boundary")
+	}
+	fixturePGN(t, dir, "game0003", "1. e4 e5 2. Nf3", "*")
+	games, _ = loadGames(dir)
+	correlate([]*searchRecord{specific}, games)
+	if specific.Correlation != "ambiguous" || len(specific.Candidates) != 2 {
+		t.Fatal("guessed between identical saved games")
+	}
+}
+func TestCorrelationRequiresHistoryNotJustTransposedFEN(t *testing.T) {
+	dir := t.TempDir()
+	fixturePGN(t, dir, "game0001", "1. Nf3 Nf6 2. Nc3 Nc6 3. e4", "*")
+	fixturePGN(t, dir, "game0002", "1. Nc3 Nc6 2. Nf3 Nf6 3. e4", "*")
+	games, _ := loadGames(dir)
+	row := correlationRow(t, "position startpos moves g1f3 g8f6 b1c3 b8c6", "e2e4", 1)
+	correlate([]*searchRecord{row}, games)
+	if row.Correlation != "matched" || !strings.HasSuffix(row.Game, "game0001") {
+		t.Fatal("ignored recorded history")
+	}
+}

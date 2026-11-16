@@ -1,0 +1,55 @@
+{
+  "conventional_elo_point_equivalent": 20.87120466602866,
+  "draw_rate": 0.26,
+  "games": 50,
+  "iid_normal_95_score_interval": {
+    "Low": 0.4098607474636204,
+    "High": 0.6501392525363796
+  },
+  "illustrative_power": [
+    {
+      "Elo": 10,
+      "ExpectedScorePercent": 51.43871841659987,
+      "ApproxGamesFor80PercentPower": 7016
+    },
+    {
+      "Elo": 25,
+      "ExpectedScorePercent": 53.591592694510226,
+      "ApproxGamesFor80PercentPower": 1126
+    },
+    {
+      "Elo": 50,
+      "ExpectedScorePercent": 57.146311740838144,
+      "ApproxGamesFor80PercentPower": 285
+    },
+    {
+      "Elo": 100,
+      "ExpectedScorePercent": 64.00649998028851,
+      "ApproxGamesFor80PercentPower": 75
+    }
+  ],
+  "mean_score": 0.53,
+  "method": "Descriptive sampling diagnostics on original v0.15 candidate versus v0.14.4. Bootstrap 100000 repetitions, deterministic PCG seed 151/20261115. Pair bootstrap resamples 25 color pairs. Opening-cluster bootstrap resamples 10 observed opening clusters with their full repeated observations. Conditional on this small fixed book; neither accounts for new-opening selection or multiple-hypothesis selection. Not SPRT or a certified strength confidence bound.",
+  "opening_cluster_bootstrap_95_score_interval": {
+    "Low": 0.39285714285714285,
+    "High": 0.68
+  },
+  "opening_clusters": 10,
+  "pair_bootstrap_95_score_interval": {
+    "Low": 0.4,
+    "High": 0.66
+  },
+  "pair_interval_elo_equivalent": {
+    "Low": -70.43650362227247,
+    "High": 115.22600739984543
+  },
+  "pair_score_histogram_0_0point5_1_1point5_2": [
+    3,
+    7,
+    5,
+    4,
+    6
+  ],
+  "pairs": 25,
+  "power_model": "Illustrative independent-game normal approximation: two-sided alpha .05, power .8, fixed observed draw rate .26; n=(z.975+z.8)^2*(1-drawrate)/4/(logistic(Elo)-.5)^2. Does not model color-pair covariance, repeated books, multiple testing or workload shifts; not guaranteed sample requirements."
+}

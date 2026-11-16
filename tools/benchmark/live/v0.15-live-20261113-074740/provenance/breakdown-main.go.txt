@@ -1,0 +1,82 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/corentings/chess/v2"
+	"os"
+)
+
+type input struct {
+	Game                   string
+	Ply                    int
+	FEN, Played, Reference string
+}
+
+func main() {
+	b, e := os.ReadFile(os.Args[1])
+	if e != nil {
+		panic(e)
+	}
+	var cases []input
+	json.Unmarshal(b, &cases)
+	var rows []map[string]any
+	for _, c := range cases {
+		opt, e := chess.FEN(c.FEN)
+		if e != nil {
+			panic(e)
+		}
+		p := chess.NewGame(opt).Position()
+		side := p.Turn()
+		choices := []map[string]any{}
+		for _, u := range []string{c.Played, c.Reference} {
+			m, e := (chess.UCINotation{}).Decode(p, u)
+			if e != nil {
+				panic(e)
+			}
+			child := p.Update(m)
+			phase := 0
+			kingSquare := ""
+			kingPlacement := 0
+			passed := []string{}
+			for sq := chess.A1; sq <= chess.H8; sq++ {
+				piece := child.Board().Piece(sq)
+				phase += phaseWeight(piece.Type())
+			}
+			phase = min(24, phase)
+			for sq := chess.A1; sq <= chess.H8; sq++ {
+				piece := child.Board().Piece(sq)
+				if piece.Color() == side && piece.Type() == chess.King {
+					rank := int(sq) / 8
+					if side == chess.Black {
+						rank = 7 - rank
+					}
+					kingSquare = sq.String()
+					kingPlacement = placement(chess.King, int(sq)%8, rank, phase)
+				}
+				if piece.Type() == chess.Pawn {
+					direction := 1
+					if piece.Color() == chess.Black {
+						direction = -1
+					}
+					isPassed := true
+					for x := max(0, int(sq)%8-1); x <= min(7, int(sq)%8+1); x++ {
+						for y := int(sq)/8 + direction; y >= 0 && y < 8; y += direction {
+							other := child.Board().Piece(chess.Square(y*8 + x))
+							if other.Type() == chess.Pawn && other.Color() != piece.Color() {
+								isPassed = false
+							}
+						}
+					}
+					if isPassed {
+						passed = append(passed, piece.Color().String()+":"+sq.String())
+					}
+				}
+			}
+			choices = append(choices, map[string]any{"move": u, "material": materialScore(child, side), "static": staticScore(child, side), "placement": staticScore(child, side) - materialScore(child, side), "phase": phase, "own_king_square": kingSquare, "own_king_placement": kingPlacement, "geometrically_passed_pawns": passed})
+		}
+		rows = append(rows, map[string]any{"game": c.Game, "ply": c.Ply, "choices": choices})
+	}
+	out, _ := json.MarshalIndent(map[string]any{"method": "Released v0.15 evaluation copied verbatim. Child static scores from original root mover; passed pawns are diagnostic geometry only, not an implemented term. This is not a searched score or proof of causal blame.", "middlegame_king_e1": placement(chess.King, 4, 0, 24), "middlegame_king_f2": placement(chess.King, 5, 1, 24), "cases": rows}, "", "  ")
+	fmt.Println(string(out))
+}

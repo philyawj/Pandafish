@@ -1,0 +1,130 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"math"
+	"math/rand/v2"
+	"os"
+	"sort"
+	"strings"
+)
+
+type gameResult struct {
+	White   bool `json:"candidate_white"`
+	Opening []string
+	Result  string
+}
+type interval struct{ Low, High float64 }
+
+func quantiles(x []float64) interval {
+	sort.Float64s(x)
+	return interval{x[int(.025*float64(len(x)))], x[int(.975*float64(len(x)))]}
+}
+func elo(p float64) float64 { return 400 * math.Log10(p/(1-p)) }
+func main() {
+	b, e := os.ReadFile(os.Args[1])
+	if e != nil {
+		panic(e)
+	}
+	var summary struct {
+		Matches []struct {
+			Engine struct{ Label string }
+			Games  []gameResult
+		}
+	}
+	json.Unmarshal(b, &summary)
+	var games []gameResult
+	for _, m := range summary.Matches {
+		if m.Engine.Label == "v0.14.4" {
+			games = m.Games
+		}
+	}
+	if len(games) != 50 {
+		panic("expected 50 previous-release games")
+	}
+	var points, pairs []float64
+	clusters := map[string][]float64{}
+	draws := 0
+	for _, g := range games {
+		v := 0.
+		switch g.Result {
+		case "1/2-1/2":
+			v = .5
+			draws++
+		case "1-0":
+			if g.White {
+				v = 1
+			}
+		case "0-1":
+			if !g.White {
+				v = 1
+			}
+		default:
+			panic("unfinished game")
+		}
+		points = append(points, v)
+		k := strings.Join(g.Opening, " ")
+		clusters[k] = append(clusters[k], v)
+	}
+	mean := 0.
+	for _, x := range points {
+		mean += x
+	}
+	mean /= float64(len(points))
+	variance := 0.
+	for _, x := range points {
+		variance += (x - mean) * (x - mean)
+	}
+	variance /= float64(len(points) - 1)
+	se := math.Sqrt(variance / float64(len(points)))
+	hist := make([]int, 5)
+	for i := 0; i < len(games); i += 2 {
+		if strings.Join(games[i].Opening, " ") != strings.Join(games[i+1].Opening, " ") || games[i].White == games[i+1].White {
+			panic("pair ordering inconsistent")
+		}
+		sum := points[i] + points[i+1]
+		hist[int(sum*2)]++
+		pairs = append(pairs, sum/2)
+	}
+	rng := rand.New(rand.NewPCG(151, 20261115))
+	pairSamples := make([]float64, 100000)
+	clusterSamples := make([]float64, 100000)
+	keys := []string{}
+	for k := range clusters {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	for i := range pairSamples {
+		sum := 0.
+		for range pairs {
+			sum += pairs[rng.IntN(len(pairs))]
+		}
+		pairSamples[i] = sum / float64(len(pairs))
+		sum, n := 0., 0
+		for range keys {
+			for _, v := range clusters[keys[rng.IntN(len(keys))]] {
+				sum += v
+				n++
+			}
+		}
+		clusterSamples[i] = sum / float64(n)
+	}
+	type powerRow struct {
+		Elo, ExpectedScorePercent    float64
+		ApproxGamesFor80PercentPower int
+	}
+	power := []powerRow{}
+	drawRate := float64(draws) / float64(len(points))
+	for _, delta := range []float64{10, 25, 50, 100} {
+		p := 1 / (1 + math.Pow(10, -delta/400))
+		n := int(math.Ceil(math.Pow(1.95996398454+.84162123357, 2) * (1 - drawRate) / 4 / math.Pow(p-.5, 2)))
+		power = append(power, powerRow{delta, p * 100, n})
+	}
+	pairCI := quantiles(pairSamples)
+	clusterCI := quantiles(clusterSamples)
+	normal := interval{mean - 1.96*se, mean + 1.96*se}
+	out := map[string]any{"method": "Descriptive sampling diagnostics on original v0.15 candidate versus v0.14.4. Bootstrap 100000 repetitions, deterministic PCG seed 151/20261115. Pair bootstrap resamples 25 color pairs. Opening-cluster bootstrap resamples 10 observed opening clusters with their full repeated observations. Conditional on this small fixed book; neither accounts for new-opening selection or multiple-hypothesis selection. Not SPRT or a certified strength confidence bound.", "games": len(points), "pairs": len(pairs), "opening_clusters": len(keys), "pair_score_histogram_0_0point5_1_1point5_2": hist, "mean_score": mean, "draw_rate": drawRate, "conventional_elo_point_equivalent": elo(mean), "iid_normal_95_score_interval": normal, "pair_bootstrap_95_score_interval": pairCI, "opening_cluster_bootstrap_95_score_interval": clusterCI, "pair_interval_elo_equivalent": interval{elo(pairCI.Low), elo(pairCI.High)}, "power_model": "Illustrative independent-game normal approximation: two-sided alpha .05, power .8, fixed observed draw rate .26; n=(z.975+z.8)^2*(1-drawrate)/4/(logistic(Elo)-.5)^2. Does not model color-pair covariance, repeated books, multiple testing or workload shifts; not guaranteed sample requirements.", "illustrative_power": power}
+	data, _ := json.MarshalIndent(out, "", "  ")
+	fmt.Println(string(data))
+}
