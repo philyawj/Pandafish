@@ -1,0 +1,426 @@
+[
+  {
+    "input": {
+      "game": "https://lichess.org/game/16G1f9rx",
+      "ply": 9,
+      "split": "",
+      "fen": "r1bqk2r/pppp1ppp/2nb1n2/1B2p3/4P3/3P1N2/PPP2PPP/RNBQ1RK1 b kq - 2 5",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 d2d3 f8d6 e1g1",
+      "reference": "e8g8",
+      "depth": 7,
+      "played": "c6d4"
+    },
+    "probes": [
+      {
+        "request": "go depth 7 searchmoves c6d4 e8g8",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "c6d4",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 7 nodes 294482 time 1474 score cp -12 pv c6d4",
+          "info string pandafish {\"depth\":7,\"nodes\":294482,\"elapsed_ms\":1474.006042,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-12,\"pv\":[\"c6d4\"]}",
+          "bestmove c6d4"
+        ]
+      },
+      {
+        "request": "go depth 8 searchmoves c6d4 e8g8",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "c6d4",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 8 nodes 1371871 time 4791 score cp -19 pv c6d4",
+          "info string pandafish {\"depth\":8,\"nodes\":1371871,\"elapsed_ms\":4791.105292,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-19,\"pv\":[\"c6d4\"]}",
+          "bestmove c6d4"
+        ]
+      },
+      {
+        "request": "go depth 8 searchmoves e8g8",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "e8g8",
+        "legal": true,
+        "exact_reference": true,
+        "uci_output": [
+          "info depth 8 nodes 2113460 time 6901 score cp -25 pv e8g8",
+          "info string pandafish {\"depth\":8,\"nodes\":2113460,\"elapsed_ms\":6901.492125,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-25,\"pv\":[\"e8g8\"]}",
+          "bestmove e8g8"
+        ]
+      }
+    ]
+  },
+  {
+    "input": {
+      "game": "https://lichess.org/game/O4wRsvjl",
+      "ply": 11,
+      "split": "",
+      "fen": "r1bqkb1r/ppp1p1pp/2n4n/3pP3/3P4/8/PPP1B1PP/RNBQK1NR b KQkq - 0 6",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4e5 f7f6 f2f4 g8h6 f1e2 f6e5 f4e5",
+      "reference": "c8f5",
+      "depth": 6,
+      "played": "e8f7"
+    },
+    "probes": [
+      {
+        "request": "go depth 6 searchmoves e8f7 c8f5",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "e8f7",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 6 nodes 171207 time 838 score cp -25 pv e8f7",
+          "info string pandafish {\"depth\":6,\"nodes\":171207,\"elapsed_ms\":838.975209,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-25,\"pv\":[\"e8f7\"]}",
+          "bestmove e8f7"
+        ]
+      },
+      {
+        "request": "go depth 7 searchmoves e8f7 c8f5",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "e8f7",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 7 nodes 761921 time 5038 score cp -11 pv e8f7",
+          "info string pandafish {\"depth\":7,\"nodes\":761921,\"elapsed_ms\":5038.936875,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-11,\"pv\":[\"e8f7\"]}",
+          "bestmove e8f7"
+        ]
+      },
+      {
+        "request": "go depth 7 searchmoves c8f5",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "c8f5",
+        "legal": true,
+        "exact_reference": true,
+        "uci_output": [
+          "info depth 7 nodes 665339 time 5042 score cp -13 pv c8f5",
+          "info string pandafish {\"depth\":7,\"nodes\":665339,\"elapsed_ms\":5042.357917,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-13,\"pv\":[\"c8f5\"]}",
+          "bestmove c8f5"
+        ]
+      }
+    ]
+  },
+  {
+    "input": {
+      "game": "https://lichess.org/game/HhPI3vCx",
+      "ply": 25,
+      "split": "",
+      "fen": "r2q1b1r/ppp1k1pp/4pn2/6BQ/2p5/2N5/PP3PPP/R4RK1 b - - 5 13",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4e5 f7f6 f1b5 f6e5 d4e5 e7e6 g1f3 c8d7 e1g1 c6e5 f3e5 d7b5 c2c4 b5c4 e5c4 d5c4 d1h5 e8e7 c1g5 g8f6 b1c3",
+      "reference": "d8e8",
+      "depth": 6,
+      "played": "d8d6"
+    },
+    "probes": [
+      {
+        "request": "go depth 6 searchmoves d8d6 d8e8",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "d8d6",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 6 nodes 234594 time 1232 score cp 161 pv d8d6",
+          "info string pandafish {\"depth\":6,\"nodes\":234594,\"elapsed_ms\":1232.106792,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":161,\"pv\":[\"d8d6\"]}",
+          "bestmove d8d6"
+        ]
+      },
+      {
+        "request": "go depth 7 searchmoves d8d6 d8e8",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "d8d6",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 7 nodes 1430666 time 9669 score cp 159 pv d8d6",
+          "info string pandafish {\"depth\":7,\"nodes\":1430666,\"elapsed_ms\":9669.64275,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":159,\"pv\":[\"d8d6\"]}",
+          "bestmove d8d6"
+        ]
+      },
+      {
+        "request": "go depth 7 searchmoves d8e8",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "d8e8",
+        "legal": true,
+        "exact_reference": true,
+        "uci_output": [
+          "info depth 7 nodes 261651 time 1514 score cp 93 pv d8e8",
+          "info string pandafish {\"depth\":7,\"nodes\":261651,\"elapsed_ms\":1514.873375,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":93,\"pv\":[\"d8e8\"]}",
+          "bestmove d8e8"
+        ]
+      }
+    ]
+  },
+  {
+    "input": {
+      "game": "https://lichess.org/game/B1WTqhJy",
+      "ply": 25,
+      "split": "",
+      "fen": "r2q1rk1/ppp2ppp/2n5/3pP3/3P2b1/2PBpN2/P1P1Q1PP/R4RK1 b - - 3 13",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 e7e5 f2f4 e5f4 g1f3 b8c6 d2d4 g8f6 b1c3 f8b4 e4e5 f6d5 c1d2 b4c3 b2c3 e8g8 f1c4 d5e3 d2e3 f4e3 e1g1 d7d5 c4d3 c8g4 d1e2",
+      "reference": "f7f6",
+      "depth": 4,
+      "played": "g4f3"
+    },
+    "probes": [
+      {
+        "request": "go depth 4 searchmoves g4f3 f7f6",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "f7f6",
+        "legal": true,
+        "exact_reference": true,
+        "uci_output": [
+          "info depth 4 nodes 6140 time 35 score cp -8 pv f7f6",
+          "info string pandafish {\"depth\":4,\"nodes\":6140,\"elapsed_ms\":35.034083,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-8,\"pv\":[\"f7f6\"]}",
+          "bestmove f7f6"
+        ]
+      },
+      {
+        "request": "go depth 5 searchmoves g4f3 f7f6",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "f7f6",
+        "legal": true,
+        "exact_reference": true,
+        "uci_output": [
+          "info depth 5 nodes 32202 time 191 score cp -8 pv f7f6",
+          "info string pandafish {\"depth\":5,\"nodes\":32202,\"elapsed_ms\":191.787166,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-8,\"pv\":[\"f7f6\"]}",
+          "bestmove f7f6"
+        ]
+      },
+      {
+        "request": "go depth 5 searchmoves g4f3",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "g4f3",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 5 nodes 16242 time 101 score cp -26 pv g4f3",
+          "info string pandafish {\"depth\":5,\"nodes\":16242,\"elapsed_ms\":101.347791,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-26,\"pv\":[\"g4f3\"]}",
+          "bestmove g4f3"
+        ]
+      }
+    ]
+  },
+  {
+    "input": {
+      "game": "https://lichess.org/game/DsqFd5Kj",
+      "ply": 63,
+      "split": "",
+      "fen": "6k1/6p1/3rp1p1/ppR5/7P/P7/1P3PP1/6K1 b - - 1 32",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4d5 d8d5 g1f3 e7e6 b1c3 f8b4 c1d2 b4c3 d2c3 g8e7 f1d3 e8g8 e1g1 c8d7 f1e1 d5d6 f3g5 h7h6 g5e4 d6d5 e4c5 b7b6 c5d7 d5d7 d1g4 e7d5 a2a3 d5f6 g4h4 a8d8 d3b5 f6d5 b5c6 d7c6 h4g3 a7a5 c3d2 c6c2 d2h6 c2g6 g3g6 f7g6 h6g5 d8d6 a1c1 f8f7 h2h4 b6b5 c1c5 c7c6 e1c1 d5f4 g5f4 f7f4 c5c6 f4d4 c6d6 d4d6 c1c5",
+      "reference": "d6d1",
+      "depth": 8,
+      "played": "d6d5"
+    },
+    "probes": [
+      {
+        "request": "go depth 8 searchmoves d6d5 d6d1",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "d6d5",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 8 nodes 119135 time 342 score cp 14 pv d6d5",
+          "info string pandafish {\"depth\":8,\"nodes\":119135,\"elapsed_ms\":342.883208,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":14,\"pv\":[\"d6d5\"]}",
+          "bestmove d6d5"
+        ]
+      },
+      {
+        "request": "go depth 9 searchmoves d6d5 d6d1",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "d6d5",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 9 nodes 552287 time 1725 score cp 25 pv d6d5",
+          "info string pandafish {\"depth\":9,\"nodes\":552287,\"elapsed_ms\":1725.599917,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":25,\"pv\":[\"d6d5\"]}",
+          "bestmove d6d5"
+        ]
+      },
+      {
+        "request": "go depth 9 searchmoves d6d1",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "d6d1",
+        "legal": true,
+        "exact_reference": true,
+        "uci_output": [
+          "info depth 9 nodes 192268 time 526 score cp 22 pv d6d1",
+          "info string pandafish {\"depth\":9,\"nodes\":192268,\"elapsed_ms\":526.4025,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":22,\"pv\":[\"d6d1\"]}",
+          "bestmove d6d1"
+        ]
+      }
+    ]
+  },
+  {
+    "input": {
+      "game": "https://lichess.org/game/L0mwQLiR",
+      "ply": 64,
+      "split": "",
+      "fen": "6k1/2p2p2/R5p1/2PP4/4rp1p/2b2N2/P5PP/5K2 w - - 0 33",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves g1f3 g8f6 e2e3 g7g6 b1c3 f8g7 d2d4 e8g8 e3e4 d7d5 e4d5 f6d5 f1c4 c8e6 c3d5 e6d5 c4d5 d8d5 c1e3 b8c6 d1d3 a8d8 c2c4 d5a5 d3c3 a5a4 e1g1 a4b4 c3b4 c6b4 a1d1 b4c2 d4d5 c2e3 f2e3 d8d6 f1f2 e7e6 e3e4 e6e5 g1f1 d6f6 c4c5 h7h6 b2b4 f6f4 f3d2 h6h5 f2f4 e5f4 d1c1 h5h4 c1c4 f8e8 b4b5 g7f6 c4a4 a7a5 b5a6 b7a6 a4a6 f6c3 d2f3 e8e4",
+      "reference": "a6a7",
+      "depth": 7,
+      "played": "f3h4"
+    },
+    "probes": [
+      {
+        "request": "go depth 7 searchmoves f3h4 a6a7",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "f3h4",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 7 nodes 352209 time 1704 score cp 128 pv f3h4",
+          "info string pandafish {\"depth\":7,\"nodes\":352209,\"elapsed_ms\":1704.75825,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":128,\"pv\":[\"f3h4\"]}",
+          "bestmove f3h4"
+        ]
+      },
+      {
+        "request": "go depth 8 searchmoves f3h4 a6a7",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "a6a7",
+        "legal": true,
+        "exact_reference": true,
+        "uci_output": [
+          "info depth 8 nodes 1126761 time 3748 score cp 59 pv a6a7",
+          "info string pandafish {\"depth\":8,\"nodes\":1126761,\"elapsed_ms\":3748.987042,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":59,\"pv\":[\"a6a7\"]}",
+          "bestmove a6a7"
+        ]
+      },
+      {
+        "request": "go depth 8 searchmoves f3h4",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "f3h4",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 8 nodes 497686 time 1653 score cp 16 pv f3h4",
+          "info string pandafish {\"depth\":8,\"nodes\":497686,\"elapsed_ms\":1653.951459,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":16,\"pv\":[\"f3h4\"]}",
+          "bestmove f3h4"
+        ]
+      }
+    ]
+  },
+  {
+    "input": {
+      "game": "https://lichess.org/game/PNfQoYP0",
+      "ply": 64,
+      "split": "",
+      "fen": "4r1k1/1pp1rp1p/p3n1p1/P3Pp2/5P2/2P1Q1P1/1P5P/R5K1 w - - 3 33",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves d2d4 g7g6 e2e4 f8g7 g1f3 d7d6 f1c4 e7e6 b1c3 b8d7 c1g5 g7f6 g5f4 d7b6 d1e2 c8d7 e1g1 g8e7 e4e5 d6e5 d4e5 f6g7 c3e4 d8c8 f4g5 d7c6 c4b5 c6b5 e2b5 e7c6 e4c5 e8g8 f1e1 f8e8 a2a4 a8b8 a4a5 b6d7 c5d7 c8d7 e1d1 d7c8 c2c3 a7a6 b5c5 g7f8 c5e3 f8e7 f3d4 c6d8 g5e7 e8e7 g1h1 c8d7 d4f5 e6f5 d1d7 e7d7 g2g3 d7e7 f2f4 d8e6 h1g1 b8e8",
+      "reference": "e3f3",
+      "depth": 6,
+      "played": "h2h4"
+    },
+    "probes": [
+      {
+        "request": "go depth 6 searchmoves h2h4 e3f3",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "h2h4",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 6 nodes 42360 time 180 score cp 112 pv h2h4",
+          "info string pandafish {\"depth\":6,\"nodes\":42360,\"elapsed_ms\":180.352958,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":112,\"pv\":[\"h2h4\"]}",
+          "bestmove h2h4"
+        ]
+      },
+      {
+        "request": "go depth 7 searchmoves h2h4 e3f3",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "h2h4",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 7 nodes 248110 time 1161 score cp 112 pv h2h4",
+          "info string pandafish {\"depth\":7,\"nodes\":248110,\"elapsed_ms\":1161.319125,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":112,\"pv\":[\"h2h4\"]}",
+          "bestmove h2h4"
+        ]
+      },
+      {
+        "request": "go depth 7 searchmoves e3f3",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "e3f3",
+        "legal": true,
+        "exact_reference": true,
+        "uci_output": [
+          "info depth 7 nodes 121456 time 527 score cp 112 pv e3f3",
+          "info string pandafish {\"depth\":7,\"nodes\":121456,\"elapsed_ms\":527.7085,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":112,\"pv\":[\"e3f3\"]}",
+          "bestmove e3f3"
+        ]
+      }
+    ]
+  },
+  {
+    "input": {
+      "game": "https://lichess.org/game/rpk4dbYK",
+      "ply": 27,
+      "split": "",
+      "fen": "r4r2/pppbn1pQ/2nqp1k1/5pN1/3P4/2B5/PPP2PPP/R3K2R b KQ - 3 14",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4d5 d8d5 g1f3 e7e6 b1c3 f8b4 c1d2 b4c3 d2c3 g8e7 f1d3 e8g8 d1e2 d5d6 d3h7 g8h7 f3g5 h7g6 e2g4 f7f5 g4h4 c8d7 h4h7",
+      "reference": "g6f6",
+      "depth": 6,
+      "played": "g6g5"
+    },
+    "probes": [
+      {
+        "request": "go depth 6 searchmoves g6g5 g6f6",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "g6g5",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 6 nodes 155197 time 998 score cp 400 pv g6g5",
+          "info string pandafish {\"depth\":6,\"nodes\":155197,\"elapsed_ms\":998.71475,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":400,\"pv\":[\"g6g5\"]}",
+          "bestmove g6g5"
+        ]
+      },
+      {
+        "request": "go depth 7 searchmoves g6g5 g6f6",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "g6g5",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 7 nodes 967563 time 7941 score cp 400 pv g6g5",
+          "info string pandafish {\"depth\":7,\"nodes\":967563,\"elapsed_ms\":7941.907917,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":400,\"pv\":[\"g6g5\"]}",
+          "bestmove g6g5"
+        ]
+      },
+      {
+        "request": "go depth 7 searchmoves g6f6",
+        "engine": "Pandafish v0.15",
+        "binary_sha256": "26f9af01670cfcb1bae9c261adf731cf7e2726034b717323130f8d0422abfdca",
+        "move": "g6f6",
+        "legal": true,
+        "exact_reference": true,
+        "uci_output": [
+          "info depth 7 nodes 668530 time 5621 score cp 215 pv g6f6",
+          "info string pandafish {\"depth\":7,\"nodes\":668530,\"elapsed_ms\":5621.651625,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":215,\"pv\":[\"g6f6\"]}",
+          "bestmove g6f6"
+        ]
+      }
+    ]
+  }
+]

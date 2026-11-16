@@ -1,0 +1,40 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
+func safeQ(engine string, p position, request string) (r probe) {
+	defer func() {
+		if e := recover(); e != nil {
+			r = probe{Engine: engine, Request: request, Error: fmt.Sprint(e)}
+		}
+	}()
+	return search(engine, p, request)
+}
+func main() {
+	base := os.Args[1]
+	b, _ := os.ReadFile(base + "/analysis/engine-replay/inputs.json")
+	var cases []position
+	json.Unmarshal(b, &cases)
+	var rows []audited
+	for _, p := range cases {
+		if p.Played != "c6d4" && p.Played != "g6g5" {
+			continue
+		}
+		r := audited{position: p}
+		r.Probes = append(r.Probes, safeQ("/tmp/pandafish-v015-qchecks", p, fmt.Sprintf("go depth %d searchmoves %s %s", p.Depth, p.Played, p.Reference)))
+		q := r.Probes[0]
+		other := p.Reference
+		if q.Move == p.Reference {
+			other = p.Played
+		}
+		r.Probes = append(r.Probes, safeQ("/tmp/pandafish-v015-qchecks", p, fmt.Sprintf("go depth %d searchmoves %s", p.Depth, other)))
+		rows = append(rows, r)
+		out, _ := json.MarshalIndent(rows, "", "  ")
+		os.WriteFile(base+"/analysis/engine-replay/qchecks-results.json", append(out, '\n'), 0644)
+		fmt.Println("Quiet-check diagnostic", p.Game)
+	}
+}

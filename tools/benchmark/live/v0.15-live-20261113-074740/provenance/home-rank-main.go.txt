@@ -1,0 +1,27 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
+func main() {
+	base := os.Args[1]
+	b, _ := os.ReadFile(base + "/analysis/engine-replay/inputs.json")
+	var cases []position
+	json.Unmarshal(b, &cases)
+	var rows []audited
+	for _, p := range cases {
+		if p.Played != "e8f7" && p.Played != "g6g5" {
+			continue
+		}
+		r := audited{position: p}
+		for _, depth := range []int{p.Depth, p.Depth + 1} {
+			r.Probes = append(r.Probes, search("/tmp/pandafish-v015-home-rank", p, fmt.Sprintf("go depth %d searchmoves %s %s", depth, p.Played, p.Reference)))
+		}
+		rows = append(rows, r)
+	}
+	out, _ := json.MarshalIndent(rows, "", "  ")
+	os.WriteFile(base+"/analysis/engine-replay/home-rank-results.json", append(out, '\n'), 0644)
+}

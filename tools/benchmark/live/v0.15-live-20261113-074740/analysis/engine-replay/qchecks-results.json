@@ -1,0 +1,72 @@
+[
+  {
+    "game": "https://lichess.org/game/16G1f9rx",
+    "ply": 9,
+    "split": "",
+    "fen": "r1bqk2r/pppp1ppp/2nb1n2/1B2p3/4P3/3P1N2/PPP2PPP/RNBQ1RK1 b kq - 2 5",
+    "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 d2d3 f8d6 e1g1",
+    "reference": "e8g8",
+    "depth": 7,
+    "played": "c6d4",
+    "probes": [
+      {
+        "request": "go depth 7 searchmoves c6d4 e8g8",
+        "engine": "Pandafish v0.15-qchecks-diagnostic",
+        "binary_sha256": "edbf733451c19eb485f4b9f0bfc820c9f359ca48d3b0b75c29290508861a681e",
+        "move": "c6d4",
+        "legal": true,
+        "exact_reference": false,
+        "uci_output": [
+          "info depth 7 nodes 417462 time 2278 score cp -12 pv c6d4",
+          "info string pandafish {\"depth\":7,\"nodes\":417462,\"elapsed_ms\":2278.053083,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-12,\"pv\":[\"c6d4\"]}",
+          "bestmove c6d4"
+        ]
+      },
+      {
+        "request": "go depth 7 searchmoves e8g8",
+        "engine": "Pandafish v0.15-qchecks-diagnostic",
+        "binary_sha256": "edbf733451c19eb485f4b9f0bfc820c9f359ca48d3b0b75c29290508861a681e",
+        "move": "e8g8",
+        "legal": true,
+        "exact_reference": true,
+        "uci_output": [
+          "info depth 7 nodes 563565 time 3568 score cp -18 pv e8g8",
+          "info string pandafish {\"depth\":7,\"nodes\":563565,\"elapsed_ms\":3568.247208,\"timed\":false,\"soft_ms\":0,\"hard_ms\":0,\"reason\":\"depth\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-18,\"pv\":[\"e8g8\"]}",
+          "bestmove e8g8"
+        ]
+      }
+    ]
+  },
+  {
+    "game": "https://lichess.org/game/rpk4dbYK",
+    "ply": 27,
+    "split": "",
+    "fen": "r4r2/pppbn1pQ/2nqp1k1/5pN1/3P4/2B5/PPP2PPP/R3K2R b KQ - 3 14",
+    "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4d5 d8d5 g1f3 e7e6 b1c3 f8b4 c1d2 b4c3 d2c3 g8e7 f1d3 e8g8 d1e2 d5d6 d3h7 g8h7 f3g5 h7g6 e2g4 f7f5 g4h4 c8d7 h4h7",
+    "reference": "g6f6",
+    "depth": 6,
+    "played": "g6g5",
+    "probes": [
+      {
+        "request": "go depth 6 searchmoves g6g5 g6f6",
+        "engine": "/tmp/pandafish-v015-qchecks",
+        "binary_sha256": "",
+        "move": "",
+        "legal": false,
+        "exact_reference": false,
+        "uci_output": null,
+        "error": "missing UCI response: bestmove "
+      },
+      {
+        "request": "go depth 6 searchmoves g6f6",
+        "engine": "/tmp/pandafish-v015-qchecks",
+        "binary_sha256": "",
+        "move": "",
+        "legal": false,
+        "exact_reference": false,
+        "uci_output": null,
+        "error": "missing UCI response: bestmove "
+      }
+    ]
+  }
+]

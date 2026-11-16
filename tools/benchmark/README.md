@@ -241,7 +241,7 @@ one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.15 --previous-version v0.15 \
+  --previous tools/benchmark/bin/pandafish-v0.15.1 --previous-version v0.15.1 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -367,6 +367,13 @@ if you want results recorded for that exact released binary.
 | Optional larger screen (`--pairs 50`) | 100 | Get more evidence when a close result matters |
 | Optional extended comparison (`--pairs 500`) | 1,000 | Resolve small differences or support a planned skill-level advancement |
 
+The [v0.15.1 sampling review](live/v0.15-live-20261113-074740/TESTING.md)
+quantifies how noisy a small lead can be. It proposes a separately planned
+200-game confirmation on the broader book for promising strength candidates.
+That proposal does not change the current 50-game default or require a longer
+match for tooling/correctness releases. Keep screening and confirmation results
+separate and decide sample sizes before running.
+
 After v0.13, the routine is 50 games per opponent. A promising
 screening result does not automatically trigger a longer run, and a longer run
 is not required for every release. Use focused tests and the short matches to
@@ -400,7 +407,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.15 --previous-version v0.15 \
+  --previous tools/benchmark/bin/pandafish-v0.15.1 --previous-version v0.15.1 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -623,7 +630,7 @@ reproduce earlier profiles. For example, a future Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.15 --previous-version v0.15 \
+  --previous tools/benchmark/bin/pandafish-v0.15.1 --previous-version v0.15.1 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```
@@ -713,7 +720,7 @@ is required for this tooling increment. Level 1 remains the target.
 See the [session tool documentation](../lichess/README.md) for commands,
 recording limits, and offline reporting. Future changes to move selection or
 time allocation use the routine comparison workflow above with the latest
-release as the baseline, currently v0.15.
+release as the baseline, currently v0.15.1.
 
 
 ## v0.10 transposition-table candidate
@@ -935,3 +942,16 @@ labels/hashes stay unchanged. It is not a demonstrated broad strength leap.
 The [extended live-test plan](live/v0.15-test-plan/README.md) targets roughly 200
 completed games across multiple sessions with one fixed build, preserving raw
 records and separating diagnostic evidence from controlled strength tests.
+
+## v0.15.1 extended live research
+
+The [completed live investigation](live/v0.15-live-20261113-074740/README.md)
+archives 269 unique games (265 completed), a full 100,000-node survey and
+30 targeted 500,000-node confirmations. All 12,091 searches completed legally;
+the reporting repair recovers 406 links while preserving genuine ambiguity.
+No new engine-strength match was run and playing behavior remains v0.15.
+See the [ranked recommendations](live/v0.15-live-20261113-074740/REVIEW.md),
+[sample-size review](live/v0.15-live-20261113-074740/TESTING.md) and
+[fresh-context handoff](live/v0.15-live-20261113-074740/HANDOFF.md).
+The next strength hypothesis is narrow board-aware piece safety, tested first
+against explained quiet-leaf mistakes with fixed search and clocks.

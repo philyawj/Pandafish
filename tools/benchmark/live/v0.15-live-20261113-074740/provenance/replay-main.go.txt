@@ -1,0 +1,64 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"strings"
+)
+
+type result struct {
+	Input  position `json:"input"`
+	Probes []probe  `json:"probes"`
+}
+
+func safe(engine string, p position, request string) (r probe) {
+	defer func() {
+		if e := recover(); e != nil {
+			r = probe{Engine: engine, Request: request, Error: fmt.Sprint(e)}
+		}
+	}()
+	return search(engine, p, request)
+}
+func main() {
+	base := os.Args[1]
+	data, e := os.ReadFile(base + "/analysis/engine-replay/inputs.json")
+	if e != nil {
+		panic(e)
+	}
+	var cases []position
+	if e = json.Unmarshal(data, &cases); e != nil {
+		panic(e)
+	}
+	var rows []result
+	engine := base + "/raw/pandafish"
+	for i, p := range cases {
+		r := result{Input: p}
+		for _, depth := range []int{p.Depth, p.Depth + 1} {
+			r.Probes = append(r.Probes, safe(engine, p, fmt.Sprintf("go depth %d searchmoves %s %s", depth, p.Played, p.Reference)))
+		}
+		q := r.Probes[len(r.Probes)-1]
+		other := p.Reference
+		if q.Move == p.Reference {
+			other = p.Played
+		}
+		r.Probes = append(r.Probes, safe(engine, p, fmt.Sprintf("go depth %d searchmoves %s", p.Depth+1, other)))
+		// No invented score for watchdog/timeouts. Preserve all successful UCI output.
+		for _, q := range r.Probes {
+			for _, line := range q.Output {
+				if strings.HasPrefix(line, "info string pandafish ") {
+					var x map[string]any
+					if json.Unmarshal([]byte(strings.TrimPrefix(line, "info string pandafish ")), &x) != nil {
+						panic("bad metrics")
+					}
+				}
+			}
+		}
+		rows = append(rows, r)
+		out, _ := json.MarshalIndent(rows, "", "  ")
+		if e = os.WriteFile(base+"/analysis/engine-replay/results.json", append(out, '\n'), 0644); e != nil {
+			panic(e)
+		}
+		fmt.Printf("Replayed case %d/%d %s\n", i+1, len(cases), p.Game)
+	}
+}

@@ -274,14 +274,18 @@ func matchingPly(row *searchRecord, g savedGame) (int, bool) {
 	if err != nil {
 		return 0, false
 	}
-	history := request.Moves()
 	positions := request.Positions()
 	if len(positions) == 0 {
 		return 0, false
 	}
+	return matchingHistoryPly(row, g, request.Moves(), positions[0].String())
+}
+
+// Parse each recorded history once when matching many saved games.
+func matchingHistoryPly(row *searchRecord, g savedGame, history []*chess.Move, initialFEN string) (int, bool) {
 	for base, p := range g.positions {
 		ply := base + len(history)
-		if p != positions[0].String() || ply >= len(g.positions) || g.positions[ply] != row.FEN {
+		if p != initialFEN || ply >= len(g.positions) || g.positions[ply] != row.FEN {
 			continue
 		}
 		ok := true
@@ -309,35 +313,63 @@ func correlate(rows []*searchRecord, games []savedGame) {
 		groups[key] = append(groups[key], r)
 	}
 	for _, group := range groups {
-		var candidates []savedGame
-		for _, g := range games {
-			ok := true
-			for _, r := range group {
-				if _, match := matchingPly(r, g); !match {
-					ok = false
-					break
+		type match struct{ game, ply int }
+		individual := make([][]match, len(group))
+		var common map[int]bool
+		seenEvidence := false
+		for i, row := range group {
+			request, err := positionGame(row.Position)
+			if err != nil {
+				continue
+			}
+			positions := request.Positions()
+			if len(positions) == 0 {
+				continue
+			}
+			history, initial := request.Moves(), positions[0].String()
+			matches := map[int]bool{}
+			for j, game := range games {
+				if ply, ok := matchingHistoryPly(row, game, history, initial); ok {
+					individual[i] = append(individual[i], match{j, ply})
+					matches[j] = true
 				}
 			}
-			if ok {
-				candidates = append(candidates, g)
+			// An unplayed/unknown request supplies no game evidence. It must
+			// not erase valid matches for every other request in the process.
+			if len(matches) == 0 {
+				continue
+			}
+			if !seenEvidence {
+				common, seenEvidence = matches, true
+			} else {
+				for j := range common {
+					if !matches[j] {
+						delete(common, j)
+					}
+				}
 			}
 		}
-		for _, r := range group {
-			r.Correlation = "missing"
-			r.Candidates = nil
-			r.Game = ""
-			r.Ply = nil
-			for _, g := range candidates {
-				r.Candidates = append(r.Candidates, g.id)
+		for i, row := range group {
+			row.Correlation, row.Game, row.Ply = "missing", "", nil
+			row.Candidates = nil
+			var chosen []match
+			for _, m := range individual[i] {
+				// Use process evidence only when all matchable requests are
+				// consistent. Conflicting evidence keeps per-request ambiguity.
+				if len(common) == 0 || common[m.game] {
+					chosen = append(chosen, m)
+				}
 			}
-			if len(candidates) > 1 {
-				r.Correlation = "ambiguous"
+			for _, m := range chosen {
+				row.Candidates = append(row.Candidates, games[m.game].id)
 			}
-			if len(candidates) == 1 {
-				r.Correlation = "matched"
-				r.Game = candidates[0].id
-				ply, _ := matchingPly(r, candidates[0])
-				r.Ply = &ply
+			if len(chosen) > 1 {
+				row.Correlation = "ambiguous"
+			}
+			if len(chosen) == 1 {
+				row.Correlation, row.Game = "matched", games[chosen[0].game].id
+				ply := chosen[0].ply
+				row.Ply = &ply
 			}
 		}
 	}
@@ -472,7 +504,7 @@ func report(session string) error {
 		text += fmt.Sprintf("| %s | %d |\n", reason, result.StopReasons[reason])
 	}
 	text += "\n"
-	text += "Engine elapsed time and response time are separate measurements. Small hard-budget overruns can occur while an in-progress node finishes; inspect their size in `moves.jsonl`. Client submission and network latency are not measured. Scores use the root side's perspective; mate scores give a sign without distance. PV currently contains only the chosen root move.\n\n"
+	text += "Engine elapsed time and response time are separate measurements. Small hard-budget overruns can occur while an in-progress node finishes; inspect their size in `moves.jsonl`. Client submission and network latency are not measured. Scores use the root side's perspective; mate scores are sign-only through v0.14.4 and signed moves to mate from v0.15 onward. PV currently contains only the chosen root move.\n\n"
 	if len(result.Warnings) > 0 {
 		text += "## Recording warnings\n\n"
 		for _, w := range result.Warnings {

@@ -4,12 +4,13 @@ Recorded real-game sessions and their offline analyses belong here. Capture and
 analysis programs live in [tools/lichess](../../lichess/README.md). Controlled
 engine matches remain in [results](../results/README.md).
 
-[Next: extended v0.15 live-test plan](v0.15-test-plan/README.md), targeting roughly
-200 completed games across multiple sessions. This is a plan, not a completed
-archive or a claimed sample size.
+The [completed v0.15 investigation](v0.15-live-20261113-074740/README.md)
+now follows the [original collection plan](v0.15-test-plan/README.md).
+Read its [handoff](v0.15-live-20261113-074740/HANDOFF.md) for the next experiment.
 
 | Session | Engine | Hardware/workload | Games | Status |
 | --- | --- | --- | --- | --- |
+| [Extended v0.15 test](v0.15-live-20261113-074740/README.md) | v0.15 | M2 MacBook Air, terminal with light browsing/music; no stream | 265 completed + 4 unfinished | Full survey, 30 confirmations, replay, linker repair and ranked recommendations |
 | [v0.10 Twitch stream](v0.10-twitch-m2-20261112/README.md) | v0.10 | M2 MacBook Air, browser and Twitch; unintended overlap documented | 13 played + 1 abandoned | Complete survey, confirmation, depth replay, and client investigation |
 | [First Twitch stress test](v0.8-twitch-m2-20261111/README.md) | v0.8 | M2 MacBook Air, browser and Twitch streaming | 38 | Complete survey, targeted confirmation, and review |
 
