@@ -1,0 +1,7564 @@
+{
+  "cases": [
+    {
+      "id": "0-original",
+      "fen": "r1b1k2r/p1ppqppp/2p5/4N3/4n3/2P5/P1PP1PPP/R1BQ1RK1 w kq - 1 9",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -1,
+          -5,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "0-mirror",
+      "fen": "r1bq1rk1/p1pp1ppp/2p5/4N3/4n3/2P5/P1PPQPPP/R1B1K2R b KQ - 1 9",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          1,
+          5,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "1-original",
+      "fen": "1r2r1k1/p1p2p1p/2p2p2/4p3/3Pp3/2P5/P1P2PPP/3RRK2 w - - 0 17",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -6,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          3,
+          2,
+          2
+        ],
+        "Phase": 8
+      }
+    },
+    {
+      "id": "1-mirror",
+      "fen": "3rrk2/p1p2ppp/2p5/3pP3/4P3/2P2P2/P1P2P1P/1R2R1K1 b - - 0 17",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          6,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -3,
+          -2,
+          -2
+        ],
+        "Phase": 8
+      }
+    },
+    {
+      "id": "2-original",
+      "fen": "r4rk1/1bp3p1/p1n1p3/1p5q/3PNn2/3B1NQP/PP3PK1/R5R1 w - - 5 25",
+      "expected": {
+        "Values": [
+          -3,
+          3,
+          -1,
+          -5,
+          -3,
+          -3,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "2-mirror",
+      "fen": "r5r1/pp3pk1/3b1nqp/3pnN2/1P5Q/P1N1P3/1BP3P1/R4RK1 b - - 5 25",
+      "expected": {
+        "Values": [
+          3,
+          -3,
+          1,
+          5,
+          3,
+          3,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "3-original",
+      "fen": "1r5k/7p/8/2nB4/6p1/6P1/PP1R1P1r/3K1R2 w - - 11 33",
+      "expected": {
+        "Values": [
+          -7,
+          11,
+          -10,
+          0,
+          1,
+          1,
+          -1,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 10
+      }
+    },
+    {
+      "id": "3-mirror",
+      "fen": "3k1r2/pp1r1p1R/6p1/6P1/2Nb4/8/7P/1R5K b - - 11 33",
+      "expected": {
+        "Values": [
+          7,
+          -11,
+          10,
+          0,
+          -1,
+          -1,
+          1,
+          -2,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 10
+      }
+    },
+    {
+      "id": "4-original",
+      "fen": "r3kb1r/pp1q1ppp/3p1n2/2p1p3/4P1b1/2NP1N2/PPP2PPP/R1BQ1RK1 w kq - 0 9",
+      "expected": {
+        "Values": [
+          7,
+          0,
+          -2,
+          -5,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "4-mirror",
+      "fen": "r1bq1rk1/ppp2ppp/2np1n2/4p1B1/2P1P3/3P1N2/PP1Q1PPP/R3KB1R b KQ - 0 9",
+      "expected": {
+        "Values": [
+          -7,
+          0,
+          2,
+          5,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "5-original",
+      "fen": "2kr1b1r/p4ppp/2p5/3bpP2/3q4/3PN3/PP2Q1PP/R1B2RK1 w - e6 0 17",
+      "expected": {
+        "Values": [
+          4,
+          -5,
+          1,
+          -2,
+          -1,
+          -1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          -1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "5-mirror",
+      "fen": "r1b2rk1/pp2q1pp/3pn3/3Q4/3BPp2/2P5/P4PPP/2KR1B1R b - e3 0 17",
+      "expected": {
+        "Values": [
+          -4,
+          5,
+          -1,
+          2,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          -1,
+          0,
+          1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "6-original",
+      "fen": "r3r2k/2pbqp2/pp1p1n1p/1P1Pp3/2P1Pp2/2QB1N1P/PR3PP1/4R2K w - - 0 25",
+      "expected": {
+        "Values": [
+          0,
+          3,
+          4,
+          4,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "6-mirror",
+      "fen": "4r2k/pr3pp1/2qb1n1p/2p1pP2/1p1pP3/PP1P1N1P/2PBQP2/R3R2K b - - 0 25",
+      "expected": {
+        "Values": [
+          0,
+          -3,
+          -4,
+          -4,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          -1,
+          -1,
+          -1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "7-original",
+      "fen": "r4r1k/5p2/1pbp4/p3p3/P1PNPp1q/RP1B4/4QP2/6RK w - - 0 33",
+      "expected": {
+        "Values": [
+          5,
+          -2,
+          2,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "7-mirror",
+      "fen": "6rk/4qp2/rp1b4/p1pnpP1Q/P3P3/1PBP4/5P2/R4R1K b - - 0 33",
+      "expected": {
+        "Values": [
+          -5,
+          2,
+          -2,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "8-original",
+      "fen": "r1bq1rk1/ppp1bppp/3p1n2/3Nn3/2PN4/4Q3/PP2PPPP/R1B1KB1R w KQ - 4 9",
+      "expected": {
+        "Values": [
+          0,
+          -3,
+          0,
+          9,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "8-mirror",
+      "fen": "r1b1kb1r/pp2pppp/4q3/2pn4/3nN3/3P1N2/PPP1BPPP/R1BQ1RK1 b kq - 4 9",
+      "expected": {
+        "Values": [
+          0,
+          3,
+          0,
+          -9,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "9-original",
+      "fen": "r4rk1/ppp1q1pp/3p4/8/1nP2Pn1/3Q4/PP2P1PP/R1B1KB1R w KQ - 5 17",
+      "expected": {
+        "Values": [
+          -9,
+          2,
+          -10,
+          6,
+          -1,
+          -3,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "9-mirror",
+      "fen": "r1b1kb1r/pp2p1pp/3q4/1Np2pN1/8/3P4/PPP1Q1PP/R4RK1 b kq - 5 17",
+      "expected": {
+        "Values": [
+          9,
+          -2,
+          10,
+          -6,
+          1,
+          3,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "10-original",
+      "fen": "6k1/p1p3pp/2p1p3/3pP3/P1b5/2P1q3/2P4P/3QK2R w - - 2 24",
+      "expected": {
+        "Values": [
+          0,
+          -4,
+          2,
+          -6,
+          -6,
+          -4,
+          -2,
+          0,
+          0,
+          -4,
+          0,
+          -1
+        ],
+        "Phase": 11
+      }
+    },
+    {
+      "id": "10-mirror",
+      "fen": "3qk2r/2p4p/2p1Q3/p1B5/3Pp3/2P1P3/P1P3PP/6K1 b - - 2 24",
+      "expected": {
+        "Values": [
+          0,
+          4,
+          -2,
+          6,
+          6,
+          4,
+          2,
+          0,
+          0,
+          4,
+          0,
+          1
+        ],
+        "Phase": 11
+      }
+    },
+    {
+      "id": "11-original",
+      "fen": "4r3/p1p2pkp/1p1q1p2/5Q1P/P1PP1p2/1P2rP2/3R2P1/1R5K w - - 3 33",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -2,
+          3,
+          4,
+          4,
+          0,
+          0,
+          0,
+          4,
+          2,
+          2
+        ],
+        "Phase": 16
+      }
+    },
+    {
+      "id": "11-mirror",
+      "fen": "1r5k/3r2p1/1p2Rp2/p1pp1P2/5q1p/1P1Q1P2/P1P2PKP/4R3 b - - 3 33",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          2,
+          -3,
+          -4,
+          -4,
+          0,
+          0,
+          0,
+          -4,
+          -2,
+          -2
+        ],
+        "Phase": 16
+      }
+    },
+    {
+      "id": "12-original",
+      "fen": "r1bqk2r/pppn1ppp/4p3/3pP3/3b4/3B1P2/PPP1Q1PP/RNB2KNR w kq - 2 9",
+      "expected": {
+        "Values": [
+          -1,
+          -1,
+          -3,
+          2,
+          -2,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "12-mirror",
+      "fen": "rnb2knr/ppp1q1pp/3b1p2/3B4/3Pp3/4P3/PPPN1PPP/R1BQK2R b KQ - 2 9",
+      "expected": {
+        "Values": [
+          1,
+          1,
+          3,
+          -2,
+          2,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "13-original",
+      "fen": "r1bq3r/p1p2kpp/4p1n1/1p2Pp1Q/3P1b2/2P1NR2/PP1B2PP/R5K1 w - - 0 17",
+      "expected": {
+        "Values": [
+          0,
+          -5,
+          6,
+          -4,
+          1,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2
+        ],
+        "Phase": 21
+      }
+    },
+    {
+      "id": "13-mirror",
+      "fen": "r5k1/pp1b2pp/2p1nr2/3p1B2/1P2pP1q/4P1N1/P1P2KPP/R1BQ3R b - - 0 17",
+      "expected": {
+        "Values": [
+          0,
+          5,
+          -6,
+          4,
+          -1,
+          -3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -2
+        ],
+        "Phase": 21
+      }
+    },
+    {
+      "id": "14-original",
+      "fen": "rr4k1/1pq2p2/pRn1bp2/2N1p3/P2p3p/2PBBP2/2P1Q1PP/1R5K w - - 0 25",
+      "expected": {
+        "Values": [
+          0,
+          3,
+          8,
+          -1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          -2,
+          0,
+          2
+        ],
+        "Phase": 21
+      }
+    },
+    {
+      "id": "14-mirror",
+      "fen": "1r5k/2p1q1pp/2pbbp2/p2P3P/2n1P3/PrN1BP2/1PQ2P2/RR4K1 b - - 0 25",
+      "expected": {
+        "Values": [
+          0,
+          -3,
+          -8,
+          1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          2,
+          0,
+          -2
+        ],
+        "Phase": 21
+      }
+    },
+    {
+      "id": "15-original",
+      "fen": "6r1/1p1k4/2b1p3/p2pP1pp/P1pP4/2P1K1PP/R1P1N3/8 w - - 3 33",
+      "expected": {
+        "Values": [
+          2,
+          -1,
+          -6,
+          0,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          -1
+        ],
+        "Phase": 6
+      }
+    },
+    {
+      "id": "15-mirror",
+      "fen": "8/r1p1n3/2p1k1pp/p1Pp4/P2Pp1PP/2B1P3/1P1K4/6R1 b - - 3 33",
+      "expected": {
+        "Values": [
+          -2,
+          1,
+          6,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1
+        ],
+        "Phase": 6
+      }
+    },
+    {
+      "id": "16-original",
+      "fen": "r2qk2r/ppp2ppp/2n2n2/3p1pB1/1b1P4/2N1PN2/PPP2PPP/R2QK2R w KQkq - 2 9",
+      "expected": {
+        "Values": [
+          1,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "16-mirror",
+      "fen": "r2qk2r/ppp2ppp/2n1pn2/1B1p4/3P1Pb1/2N2N2/PPP2PPP/R2QK2R b KQkq - 2 9",
+      "expected": {
+        "Values": [
+          -1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "17-original",
+      "fen": "1rr4k/p1p1q1pp/b2bp3/2ppB3/2PPp3/1P1QPN1P/P4PP1/R4R1K w - - 0 17",
+      "expected": {
+        "Values": [
+          6,
+          3,
+          1,
+          -2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          2,
+          1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "17-mirror",
+      "fen": "r4r1k/p4pp1/1p1qpn1p/2ppP3/2PPb3/B2BP3/P1P1Q1PP/1RR4K b - - 0 17",
+      "expected": {
+        "Values": [
+          -6,
+          -3,
+          -1,
+          2,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          -1,
+          -2,
+          -1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "18-original",
+      "fen": "r2r3k/5p1p/3p1q2/p1pP2p1/1p1bQ3/1P2B3/P1P2PPP/4RR1K w - - 4 25",
+      "expected": {
+        "Values": [
+          0,
+          -1,
+          -4,
+          -1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "18-mirror",
+      "fen": "4rr1k/p1p2ppp/1p2b3/1P1Bq3/P1Pp2P1/3P1Q2/5P1P/R2R3K b - - 4 25",
+      "expected": {
+        "Values": [
+          0,
+          1,
+          4,
+          1,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "19-original",
+      "fen": "8/p5k1/1p3p2/4p2p/7P/5K2/P1r2PP1/R7 w - h6 0 33",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -5,
+          0,
+          -4,
+          -4,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "19-mirror",
+      "fen": "r7/p1R2pp1/5k2/7p/4P2P/1P3P2/P5K1/8 b - h3 0 33",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          5,
+          0,
+          4,
+          4,
+          2,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "20-original",
+      "fen": "r1b2rk1/pp1p1ppp/1q1b1n2/2p1p3/2BnP3/2NPBN2/PPP2PPP/R2Q1RK1 w - - 2 9",
+      "expected": {
+        "Values": [
+          2,
+          4,
+          0,
+          -3,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "20-mirror",
+      "fen": "r2q1rk1/ppp2ppp/2npbn2/2bNp3/2P1P3/1Q1B1N2/PP1P1PPP/R1B2RK1 b - - 2 9",
+      "expected": {
+        "Values": [
+          -2,
+          -4,
+          0,
+          3,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "21-original",
+      "fen": "r1bqr3/p1pp4/2p2n2/2k1N2p/5B2/1QP5/PPP2PPP/2KR2R1 b - - 1 14",
+      "expected": {
+        "Values": [
+          1,
+          3,
+          2,
+          7,
+          12,
+          16,
+          3,
+          1,
+          0,
+          2,
+          0,
+          0
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "21-mirror",
+      "fen": "2kr2r1/ppp2ppp/1qp5/5b2/2K1n2P/2P2N2/P1PP4/R1BQR3 w - - 1 14",
+      "expected": {
+        "Values": [
+          -1,
+          -3,
+          -2,
+          -7,
+          -12,
+          -16,
+          -3,
+          -1,
+          0,
+          -2,
+          0,
+          0
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "22-original",
+      "fen": "3r1r1k/2p1n2p/3q1nb1/1p1p2p1/p2P4/P2NBP1B/1P2P1QP/K5RR w - - 1 25",
+      "expected": {
+        "Values": [
+          -2,
+          5,
+          -3,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          -2
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "22-mirror",
+      "fen": "k5rr/1p2p1qp/p2nbp1b/P2p4/1P1P2P1/3Q1NB1/2P1N2P/3R1R1K b - - 1 25",
+      "expected": {
+        "Values": [
+          2,
+          -5,
+          3,
+          2,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          2
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "23-original",
+      "fen": "4q1k1/pp3rp1/8/1P2P2p/2Q5/8/6PP/5RK1 w - - 0 33",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          2,
+          9,
+          0,
+          3,
+          1,
+          16,
+          -6,
+          -2,
+          0,
+          0
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "23-mirror",
+      "fen": "5rk1/6pp/8/2q5/1p2p2P/8/PP3RP1/4Q1K1 b - - 0 33",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -2,
+          -9,
+          0,
+          -3,
+          -1,
+          -16,
+          6,
+          2,
+          0,
+          0
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "24-original",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "24-mirror",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "25-original",
+      "fen": "4k1n1/8/2n5/8/8/2N5/8/4K1N1 w - - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "25-mirror",
+      "fen": "4k1n1/8/2n5/8/8/2N5/8/4K1N1 b - - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "26-original",
+      "fen": "4k3/8/5n2/8/8/8/8/3QK1N1 b - - 7 4",
+      "expected": {
+        "Values": [
+          -4,
+          0,
+          0,
+          17,
+          2,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 6
+      }
+    },
+    {
+      "id": "26-mirror",
+      "fen": "3qk1n1/8/8/8/8/5N2/8/4K3 w - - 7 4",
+      "expected": {
+        "Values": [
+          4,
+          0,
+          0,
+          -17,
+          -2,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 6
+      }
+    },
+    {
+      "id": "27-original",
+      "fen": "r1bqk2r/pppp1ppp/2nb1n2/1B2p3/4P3/3P1N2/PPP2PPP/RNBQ1RK1 b kq - 2 5",
+      "expected": {
+        "Values": [
+          0,
+          1,
+          -2,
+          2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "27-mirror",
+      "fen": "rnbq1rk1/ppp2ppp/3p1n2/4p3/1b2P3/2NB1N2/PPPP1PPP/R1BQK2R w KQ - 2 5",
+      "expected": {
+        "Values": [
+          0,
+          -1,
+          2,
+          -2,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "28-original",
+      "fen": "r1bqkb1r/ppp1p1pp/2n4n/3pP3/3P4/8/PPP1B1PP/RNBQK1NR b KQkq - 0 6",
+      "expected": {
+        "Values": [
+          -3,
+          6,
+          -2,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "28-mirror",
+      "fen": "rnbqk1nr/ppp1b1pp/8/3p4/3Pp3/2N4N/PPP1P1PP/R1BQKB1R w KQkq - 0 6",
+      "expected": {
+        "Values": [
+          3,
+          -6,
+          2,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          -2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "29-original",
+      "fen": "r2q1b1r/ppp1k1pp/4pn2/6BQ/2p5/2N5/PP3PPP/R4RK1 b - - 5 13",
+      "expected": {
+        "Values": [
+          -1,
+          5,
+          5,
+          -1,
+          3,
+          4,
+          2,
+          0,
+          0,
+          1,
+          1,
+          1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "29-mirror",
+      "fen": "r4rk1/pp3ppp/2n5/2P5/6bq/4PN2/PPP1K1PP/R2Q1B1R w - - 5 13",
+      "expected": {
+        "Values": [
+          1,
+          -5,
+          -5,
+          1,
+          -3,
+          -4,
+          -2,
+          0,
+          0,
+          -1,
+          -1,
+          -1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "30-original",
+      "fen": "r2q1rk1/ppp2ppp/2n5/3pP3/3P2b1/2PBpN2/P1P1Q1PP/R4RK1 b - - 3 13",
+      "expected": {
+        "Values": [
+          0,
+          -2,
+          5,
+          -4,
+          0,
+          0,
+          -1,
+          -25,
+          12,
+          -1,
+          -1,
+          1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "30-mirror",
+      "fen": "r4rk1/p1p1q1pp/2pbPn2/3p2B1/3Pp3/2N5/PPP2PPP/R2Q1RK1 w - - 3 13",
+      "expected": {
+        "Values": [
+          0,
+          2,
+          -5,
+          4,
+          0,
+          0,
+          1,
+          25,
+          -12,
+          1,
+          1,
+          -1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "31-original",
+      "fen": "6k1/6p1/3rp1p1/ppR5/7P/P7/1P3PP1/6K1 b - - 1 32",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          1,
+          1
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "31-mirror",
+      "fen": "6k1/1p3pp1/p7/7p/PPr5/3RP1P1/6P1/6K1 w - - 1 32",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -3,
+          -1,
+          -1
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "32-original",
+      "fen": "6k1/2p2p2/R5p1/2PP4/4rp1p/2b2N2/P5PP/5K2 w - - 0 33",
+      "expected": {
+        "Values": [
+          7,
+          -11,
+          -3,
+          0,
+          -3,
+          -4,
+          -1,
+          1,
+          0,
+          0,
+          1,
+          1
+        ],
+        "Phase": 6
+      }
+    },
+    {
+      "id": "32-mirror",
+      "fen": "5k2/p5pp/2B2n2/4RP1P/2pp4/r5P1/2P2P2/6K1 b - - 0 33",
+      "expected": {
+        "Values": [
+          -7,
+          11,
+          3,
+          0,
+          3,
+          4,
+          1,
+          -1,
+          0,
+          0,
+          -1,
+          -1
+        ],
+        "Phase": 6
+      }
+    },
+    {
+      "id": "33-original",
+      "fen": "4r1k1/1pp1rp1p/p3n1p1/P3Pp2/5P2/2P1Q1P1/1P5P/R5K1 w - - 3 33",
+      "expected": {
+        "Values": [
+          -4,
+          0,
+          2,
+          10,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          -1
+        ],
+        "Phase": 11
+      }
+    },
+    {
+      "id": "33-mirror",
+      "fen": "r5k1/1p5p/2p1q1p1/5p2/p3pP2/P3N1P1/1PP1RP1P/4R1K1 b - - 3 33",
+      "expected": {
+        "Values": [
+          4,
+          0,
+          -2,
+          -10,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          1
+        ],
+        "Phase": 11
+      }
+    },
+    {
+      "id": "34-original",
+      "fen": "r4r2/pppbn1pQ/2nqp1k1/5pN1/3P4/2B5/PPP2PPP/R3K2R b KQ - 3 14",
+      "expected": {
+        "Values": [
+          -4,
+          1,
+          -7,
+          2,
+          6,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 21
+      }
+    },
+    {
+      "id": "34-mirror",
+      "fen": "r3k2r/ppp2ppp/2b5/3p4/5Pn1/2NQP1K1/PPPBN1Pq/R4R2 w kq - 3 14",
+      "expected": {
+        "Values": [
+          4,
+          -1,
+          7,
+          -2,
+          -6,
+          -4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 21
+      }
+    },
+    {
+      "id": "35-original",
+      "fen": "6k1/6p1/6p1/pp1p4/7P/P7/1P3PP1/6K1 w - - 0 34",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -9,
+          1,
+          3,
+          1,
+          1
+        ],
+        "Phase": 0
+      }
+    },
+    {
+      "id": "35-mirror",
+      "fen": "6k1/1p3pp1/p7/7p/PP1P4/6P1/6P1/6K1 b - - 0 34",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          9,
+          -1,
+          -3,
+          -1,
+          -1
+        ],
+        "Phase": 0
+      }
+    },
+    {
+      "id": "36-original",
+      "fen": "r1bqk2r/p1pp1ppp/2p2n2/4N3/4P3/2b5/PPPP1PPP/R1BQK2R w KQkq - 0 7",
+      "expected": {
+        "Values": [
+          2,
+          -8,
+          0,
+          3,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "Phase": 21
+      }
+    },
+    {
+      "id": "36-mirror",
+      "fen": "r1bqk2r/pppp1ppp/2B5/4p3/4n3/2P2N2/P1PP1PPP/R1BQK2R b KQkq - 0 7",
+      "expected": {
+        "Values": [
+          -2,
+          8,
+          0,
+          -3,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          0
+        ],
+        "Phase": 21
+      }
+    },
+    {
+      "id": "37-original",
+      "fen": "r4rk1/p1p1qp1p/2pp1p2/4p3/2bPP3/P1P2N2/2P2PPP/R2QR1K1 b - - 0 13",
+      "expected": {
+        "Values": [
+          2,
+          -6,
+          -2,
+          1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          -1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "37-mirror",
+      "fen": "r2qr1k1/2p2ppp/p1p2n2/2Bpp3/4P3/2PP1P2/P1P1QP1P/R4RK1 w - - 0 13",
+      "expected": {
+        "Values": [
+          -2,
+          6,
+          2,
+          -1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "38-original",
+      "fen": "5k1r/p4ppp/1np2n2/4P3/8/1r3PP1/PP2K2P/1R5R w - - 0 21",
+      "expected": {
+        "Values": [
+          -11,
+          0,
+          4,
+          0,
+          -3,
+          -1,
+          -1,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        "Phase": 10
+      }
+    },
+    {
+      "id": "38-mirror",
+      "fen": "1r5r/pp2k2p/1R3pp1/8/4p3/1NP2N2/P4PPP/5K1R b - - 0 21",
+      "expected": {
+        "Values": [
+          11,
+          0,
+          -4,
+          0,
+          3,
+          1,
+          1,
+          0,
+          0,
+          -2,
+          0,
+          0
+        ],
+        "Phase": 10
+      }
+    },
+    {
+      "id": "39-original",
+      "fen": "5k2/p2r2p1/1p2rp2/1P5p/3Pp2P/4P3/5PP1/R1R2K2 b - - 0 33",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          5,
+          0,
+          0,
+          0,
+          1,
+          9,
+          -1,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 8
+      }
+    },
+    {
+      "id": "39-mirror",
+      "fen": "r1r2k2/5pp1/4p3/3pP2p/1p5P/1P2RP2/P2R2P1/5K2 w - - 0 33",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -5,
+          0,
+          0,
+          0,
+          -1,
+          -9,
+          1,
+          1,
+          0,
+          0
+        ],
+        "Phase": 8
+      }
+    },
+    {
+      "id": "40-original",
+      "fen": "5k2/5p1p/1p4p1/p5P1/1r5P/3P4/P3RK2/8 w - - 10 37",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          1,
+          0,
+          2,
+          1,
+          -2,
+          4,
+          0,
+          -2,
+          0,
+          0
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "40-mirror",
+      "fen": "8/p3rk2/3p4/1R5p/P5p1/1P4P1/5P1P/5K2 b - - 10 37",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -1,
+          0,
+          -2,
+          -1,
+          2,
+          -4,
+          0,
+          2,
+          0,
+          0
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "41-original",
+      "fen": "5r1k/p1N1r1bp/3p4/2p2pp1/1p1PP3/2P2P2/PP5P/1R1R2K1 w - - 6 28",
+      "expected": {
+        "Values": [
+          6,
+          -2,
+          -6,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 10
+      }
+    },
+    {
+      "id": "41-mirror",
+      "fen": "1r1r2k1/pp5p/2p2p2/1P1pp3/2P2PP1/3P4/P1n1R1BP/5R1K b - - 6 28",
+      "expected": {
+        "Values": [
+          -6,
+          2,
+          6,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "Phase": 10
+      }
+    },
+    {
+      "id": "42-original",
+      "fen": "rnbq1rk1/pp1p1ppp/4pn2/2p5/2PP4/P3PN2/1P1b1PPP/R1BQKB1R w KQ - 0 7",
+      "expected": {
+        "Values": [
+          -1,
+          0,
+          2,
+          0,
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "42-mirror",
+      "fen": "r1bqkb1r/1p1B1ppp/p3pn2/2pp4/2P5/4PN2/PP1P1PPP/RNBQ1RK1 b kq - 0 7",
+      "expected": {
+        "Values": [
+          1,
+          0,
+          -2,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "43-original",
+      "fen": "r2r2k1/ppp2ppp/2nqbn2/4p3/2P1P3/2B5/PP1NBPPP/R2Q1RK1 b - - 4 13",
+      "expected": {
+        "Values": [
+          -7,
+          3,
+          -4,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "43-mirror",
+      "fen": "r2q1rk1/pp1nbppp/2b5/2p1p3/4P3/2NQBN2/PPP2PPP/R2R2K1 w - - 4 13",
+      "expected": {
+        "Values": [
+          7,
+          -3,
+          4,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -2
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "44-original",
+      "fen": "r4k1r/p1pp1ppp/1p1b4/8/4nP1B/P1R1P3/1P2B1PP/2K4R w - - 3 21",
+      "expected": {
+        "Values": [
+          -4,
+          13,
+          4,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "44-mirror",
+      "fen": "2k4r/1p2b1pp/p1r1p3/4Np1b/8/1P1B4/P1PP1PPP/R4K1R b - - 3 21",
+      "expected": {
+        "Values": [
+          4,
+          -13,
+          -4,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "45-original",
+      "fen": "7k/p6p/1p3qp1/2pB1r2/2P2P2/1Q4P1/P6P/2K1R3 b - - 2 33",
+      "expected": {
+        "Values": [
+          0,
+          10,
+          10,
+          -1,
+          0,
+          0,
+          -2,
+          0,
+          0,
+          -2,
+          0,
+          -1
+        ],
+        "Phase": 13
+      }
+    },
+    {
+      "id": "45-mirror",
+      "fen": "2k1r3/p6p/1q4p1/2p2p2/2Pb1R2/1P3QP1/P6P/7K w - - 2 33",
+      "expected": {
+        "Values": [
+          0,
+          -10,
+          -10,
+          1,
+          0,
+          0,
+          2,
+          0,
+          0,
+          2,
+          0,
+          1
+        ],
+        "Phase": 13
+      }
+    },
+    {
+      "id": "46-original",
+      "fen": "7k/6pp/4p3/2p3K1/8/7r/8/1q6 w - - 0 46",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -12,
+          -20,
+          -9,
+          -9,
+          -2,
+          -15,
+          1,
+          2,
+          0,
+          0
+        ],
+        "Phase": 6
+      }
+    },
+    {
+      "id": "46-mirror",
+      "fen": "1Q6/8/7R/8/2P3k1/4P3/6PP/7K b - - 0 46",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          12,
+          20,
+          9,
+          9,
+          2,
+          15,
+          -1,
+          -2,
+          0,
+          0
+        ],
+        "Phase": 6
+      }
+    },
+    {
+      "id": "47-original",
+      "fen": "r2n4/1k2Pp2/1p1Q4/p2R1P2/P6P/8/5P2/7K w - - 1 61",
+      "expected": {
+        "Values": [
+          -1,
+          0,
+          2,
+          13,
+          4,
+          1,
+          -2,
+          45,
+          -14,
+          -1,
+          -1,
+          0
+        ],
+        "Phase": 9
+      }
+    },
+    {
+      "id": "47-mirror",
+      "fen": "7k/5p2/8/p6p/P2r1p2/1P1q4/1K2pP2/R2N4 b - - 1 61",
+      "expected": {
+        "Values": [
+          1,
+          0,
+          -2,
+          -13,
+          -4,
+          -1,
+          2,
+          -45,
+          14,
+          1,
+          1,
+          0
+        ],
+        "Phase": 9
+      }
+    },
+    {
+      "id": "48-original",
+      "fen": "r1bqk2r/pppn1ppp/2pb4/4p3/4P3/2N2N2/PPPP1PPP/R1BQ1RK1 w kq - 2 7",
+      "expected": {
+        "Values": [
+          2,
+          -4,
+          -1,
+          -2,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          1,
+          -1
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "48-mirror",
+      "fen": "r1bq1rk1/pppp1ppp/2n2n2/4p3/4P3/2PB4/PPPN1PPP/R1BQK2R b KQ - 2 7",
+      "expected": {
+        "Values": [
+          -2,
+          4,
+          1,
+          2,
+          0,
+          0,
+          -2,
+          0,
+          0,
+          0,
+          -1,
+          1
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "49-original",
+      "fen": "r2q1rk1/pp3pp1/4bn1p/2pPn3/8/2N4P/PPPQBPP1/R1B1K2R b KQ - 0 13",
+      "expected": {
+        "Values": [
+          -4,
+          4,
+          1,
+          -6,
+          0,
+          0,
+          -2,
+          16,
+          -4,
+          0,
+          0,
+          0
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "49-mirror",
+      "fen": "r1b1k2r/pppqbpp1/2n4p/8/2PpN3/4BN1P/PP3PP1/R2Q1RK1 w kq - 0 13",
+      "expected": {
+        "Values": [
+          4,
+          -4,
+          -1,
+          6,
+          0,
+          0,
+          2,
+          -16,
+          4,
+          0,
+          0,
+          0
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "50-original",
+      "fen": "2rr4/1p1nkpp1/2p1b2p/p3N3/3PN1PP/5P2/PP6/R4RK1 w - - 0 21",
+      "expected": {
+        "Values": [
+          6,
+          -3,
+          2,
+          0,
+          4,
+          4,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "50-mirror",
+      "fen": "r4rk1/pp6/5p2/3pn1pp/P3n3/2P1B2P/1P1NKPP1/2RR4 b - - 0 21",
+      "expected": {
+        "Values": [
+          -6,
+          3,
+          -2,
+          0,
+          -4,
+          -4,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "51-original",
+      "fen": "4r1k1/p2B2p1/4p1q1/5p1p/2Q4P/P4NP1/5PK1/8 b - - 3 33",
+      "expected": {
+        "Values": [
+          7,
+          6,
+          -6,
+          14,
+          -1,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "51-mirror",
+      "fen": "8/5pk1/p4np1/2q4p/5P1P/4P1Q1/P2b2P1/4R1K1 w - - 3 33",
+      "expected": {
+        "Values": [
+          -7,
+          -6,
+          6,
+          -14,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "52-original",
+      "fen": "8/R5k1/p4pp1/8/1pp2Qp1/2P5/PP2BPPP/5RK1 b - - 3 34",
+      "expected": {
+        "Values": [
+          0,
+          3,
+          13,
+          13,
+          4,
+          4,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "Phase": 9
+      }
+    },
+    {
+      "id": "52-mirror",
+      "fen": "5rk1/pp2bppp/2p5/1PP2qP1/8/P4PP1/r5K1/8 w - - 3 34",
+      "expected": {
+        "Values": [
+          0,
+          -3,
+          -13,
+          -13,
+          -4,
+          -4,
+          -1,
+          0,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "Phase": 9
+      }
+    },
+    {
+      "id": "53-original",
+      "fen": "r6r/1p5p/8/p4p1k/1n6/3qK1Q1/5P2/1R6 w - - 2 35",
+      "expected": {
+        "Values": [
+          -5,
+          0,
+          -5,
+          -4,
+          -3,
+          -8,
+          0,
+          -11,
+          3,
+          1,
+          0,
+          0
+        ],
+        "Phase": 15
+      }
+    },
+    {
+      "id": "53-mirror",
+      "fen": "1r6/5p2/3Qk1q1/1N6/P4P1K/8/1P5P/R6R b - - 2 35",
+      "expected": {
+        "Values": [
+          5,
+          0,
+          5,
+          4,
+          3,
+          8,
+          0,
+          11,
+          -3,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 15
+      }
+    },
+    {
+      "id": "54-original",
+      "fen": "r1b1k2r/ppp1bppp/2n1pn2/3q4/3P4/4PN2/PP1N1PPP/R1BQKB1R w KQkq - 1 7",
+      "expected": {
+        "Values": [
+          -1,
+          -1,
+          -1,
+          -7,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "54-mirror",
+      "fen": "r1bqkb1r/pp1n1ppp/4pn2/3p4/3Q4/2N1PN2/PPP1BPPP/R1B1K2R b KQkq - 1 7",
+      "expected": {
+        "Values": [
+          1,
+          1,
+          1,
+          7,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "55-original",
+      "fen": "r1b2rk1/1ppp1ppp/2n1pq2/p7/Q1PPn3/P2BP1PP/1P3P1R/R1B1K1N1 b - - 2 13",
+      "expected": {
+        "Values": [
+          -6,
+          6,
+          -1,
+          -3,
+          -3,
+          -4,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "55-mirror",
+      "fen": "r1b1k1n1/1p3p1r/p2bp1pp/q1ppN3/P7/2N1PQ2/1PPP1PPP/R1B2RK1 w - - 2 13",
+      "expected": {
+        "Values": [
+          6,
+          -6,
+          1,
+          3,
+          3,
+          4,
+          1,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "56-original",
+      "fen": "1Bb1k2r/2p2pp1/7p/2pP4/4P3/2N5/PP3n1P/R1K2B2 w - - 0 21",
+      "expected": {
+        "Values": [
+          -1,
+          4,
+          -2,
+          0,
+          -1,
+          -1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          0
+        ],
+        "Phase": 9
+      }
+    },
+    {
+      "id": "56-mirror",
+      "fen": "r1k2b2/pp3N1p/2n5/4p3/2Pp4/7P/2P2PP1/1bB1K2R b - - 0 21",
+      "expected": {
+        "Values": [
+          1,
+          -4,
+          2,
+          0,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          -1,
+          -1,
+          0
+        ],
+        "Phase": 9
+      }
+    },
+    {
+      "id": "57-original",
+      "fen": "1R6/r4pkp/2bp1p2/p1bNp3/2p1B1P1/4P2P/5P2/4K3 b - - 8 33",
+      "expected": {
+        "Values": [
+          5,
+          -3,
+          6,
+          0,
+          6,
+          9,
+          1,
+          -25,
+          6,
+          2,
+          1,
+          2
+        ],
+        "Phase": 8
+      }
+    },
+    {
+      "id": "57-mirror",
+      "fen": "4k3/5p2/4p2p/2P1b1p1/P1BnP3/2BP1P2/R4PKP/1r6 w - - 8 33",
+      "expected": {
+        "Values": [
+          -5,
+          3,
+          -6,
+          0,
+          -6,
+          -9,
+          -1,
+          25,
+          -6,
+          -2,
+          -1,
+          -2
+        ],
+        "Phase": 8
+      }
+    },
+    {
+      "id": "58-original",
+      "fen": "q1r3k1/3bQ1b1/8/1p1P1PpB/3P4/3P4/4N2P/rK3R1R w - - 7 41",
+      "expected": {
+        "Values": [
+          4,
+          -2,
+          -8,
+          7,
+          -2,
+          -5,
+          0,
+          36,
+          -9,
+          -3,
+          -2,
+          -2
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "58-mirror",
+      "fen": "Rk3r1r/4n2p/3p4/3p4/1P1p1pPb/8/3Bq1B1/Q1R3K1 b - - 7 41",
+      "expected": {
+        "Values": [
+          -4,
+          2,
+          8,
+          -7,
+          2,
+          5,
+          0,
+          -36,
+          9,
+          3,
+          2,
+          2
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "59-original",
+      "fen": "8/4k1p1/p4p2/R6p/6K1/3r4/p7/8 w - - 0 61",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -6,
+          0,
+          -5,
+          -4,
+          -1,
+          -54,
+          2,
+          2,
+          1,
+          1
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "59-mirror",
+      "fen": "8/P7/3R4/6k1/r6P/P4P2/4K1P1/8 b - - 0 61",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          6,
+          0,
+          5,
+          4,
+          1,
+          54,
+          -2,
+          -2,
+          -1,
+          -1
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "60-original",
+      "fen": "r2qk2r/ppp2ppp/2p2n2/4p3/1b2P1b1/2N2N2/PPPP1PPP/R1BQ1RK1 w kq - 4 7",
+      "expected": {
+        "Values": [
+          3,
+          -9,
+          -2,
+          -5,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "60-mirror",
+      "fen": "r1bq1rk1/pppp1ppp/2n2n2/1B2p1B1/4P3/2P2N2/PPP2PPP/R2QK2R b KQ - 4 7",
+      "expected": {
+        "Values": [
+          -3,
+          9,
+          2,
+          5,
+          0,
+          0,
+          -2,
+          0,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "61-original",
+      "fen": "r3k2r/p1p3pp/2p1pn2/4p3/3b1P2/8/PPPPN1PP/R1B1K2R b KQkq - 1 13",
+      "expected": {
+        "Values": [
+          -3,
+          -5,
+          -2,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          5,
+          2,
+          2
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "61-mirror",
+      "fen": "r1b1k2r/ppppn1pp/8/3B1p2/4P3/2P1PN2/P1P3PP/R3K2R w KQkq - 1 13",
+      "expected": {
+        "Values": [
+          3,
+          5,
+          2,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          -5,
+          -2,
+          -2
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "62-original",
+      "fen": "r4k1r/pbR2ppp/4p3/8/1q2N3/8/PP1N1PPP/3Q1RK1 w - - 1 21",
+      "expected": {
+        "Values": [
+          9,
+          -5,
+          7,
+          -1,
+          2,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "62-mirror",
+      "fen": "3q1rk1/pp1n1ppp/8/1Q2n3/8/4P3/PBr2PPP/R4K1R b - - 1 21",
+      "expected": {
+        "Values": [
+          -9,
+          5,
+          -7,
+          1,
+          -2,
+          -1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "63-original",
+      "fen": "r3k1r1/ppR1R3/1n1B3p/3pNb2/3Pp1p1/PP6/5PPP/6K1 b - - 9 25",
+      "expected": {
+        "Values": [
+          2,
+          -3,
+          5,
+          0,
+          8,
+          16,
+          3,
+          0,
+          0,
+          -1,
+          0,
+          1
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "63-mirror",
+      "fen": "6k1/5ppp/pp6/3pP1P1/3PnB2/1N1b3P/PPr1r3/R3K1R1 w - - 9 25",
+      "expected": {
+        "Values": [
+          -2,
+          3,
+          -5,
+          0,
+          -8,
+          -16,
+          -3,
+          0,
+          0,
+          1,
+          0,
+          -1
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "64-original",
+      "fen": "2k5/5p2/8/3p2P1/8/r3BK1P/1b6/8 w - - 3 46",
+      "expected": {
+        "Values": [
+          0,
+          2,
+          -11,
+          0,
+          -2,
+          -4,
+          1,
+          -5,
+          2,
+          2,
+          0,
+          0
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "64-mirror",
+      "fen": "8/1B6/R3bk1p/8/3P2p1/8/5P2/2K5 b - - 3 46",
+      "expected": {
+        "Values": [
+          0,
+          -2,
+          11,
+          0,
+          2,
+          4,
+          -1,
+          5,
+          -2,
+          -2,
+          0,
+          0
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "65-original",
+      "fen": "8/5R2/4B3/3Pk3/4P3/5P2/5rPK/8 w - - 5 61",
+      "expected": {
+        "Values": [
+          0,
+          5,
+          4,
+          0,
+          8,
+          8,
+          0,
+          30,
+          -9,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 5
+      }
+    },
+    {
+      "id": "65-mirror",
+      "fen": "8/5Rpk/5p2/4p3/3pK3/4b3/5r2/8 b - - 5 61",
+      "expected": {
+        "Values": [
+          0,
+          -5,
+          -4,
+          0,
+          -8,
+          -8,
+          0,
+          -30,
+          9,
+          0,
+          0,
+          1
+        ],
+        "Phase": 5
+      }
+    },
+    {
+      "id": "66-original",
+      "fen": "r1bqk2r/1ppp1ppp/2n1p3/p6n/1bPPP3/3B1N2/PP1N1PPP/R1BQK2R w KQkq - 3 7",
+      "expected": {
+        "Values": [
+          1,
+          0,
+          -2,
+          0,
+          -1,
+          -1,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "66-mirror",
+      "fen": "r1bqk2r/pp1n1ppp/3b1n2/1Bppp3/P6N/2N1P3/1PPP1PPP/R1BQK2R b KQkq - 3 7",
+      "expected": {
+        "Values": [
+          -1,
+          0,
+          2,
+          0,
+          1,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "67-original",
+      "fen": "r2q1rk1/p1pp2pp/1pnnp3/5p2/P1bP4/B1P1QPPN/4P2P/R3KB1R b KQ - 1 13",
+      "expected": {
+        "Values": [
+          -3,
+          -1,
+          0,
+          2,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          -1
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "67-mirror",
+      "fen": "r3kb1r/4p2p/b1p1qppn/p1Bp4/5P2/1PNNP3/P1PP2PP/R2Q1RK1 w kq - 1 13",
+      "expected": {
+        "Values": [
+          3,
+          1,
+          0,
+          -2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "Phase": 22
+      }
+    },
+    {
+      "id": "68-original",
+      "fen": "5rk1/p5pp/b2b4/2pp1p2/P2P4/3RP3/1P2KPPP/2B4R w - - 3 21",
+      "expected": {
+        "Values": [
+          0,
+          -7,
+          2,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "Phase": 9
+      }
+    },
+    {
+      "id": "68-mirror",
+      "fen": "2b4r/1p2kppp/3rp3/p2p4/2PP1P2/B2B4/P5PP/5RK1 b - - 3 21",
+      "expected": {
+        "Values": [
+          0,
+          7,
+          -2,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          -1
+        ],
+        "Phase": 9
+      }
+    },
+    {
+      "id": "69-original",
+      "fen": "5k2/3prbp1/p1p2PRp/2P1r3/1P6/P2Qp1P1/4P3/4KB2 b - - 0 33",
+      "expected": {
+        "Values": [
+          0,
+          -6,
+          -6,
+          13,
+          1,
+          3,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "69-mirror",
+      "fen": "4kb2/4p3/p2qP1p1/1p6/2p1R3/P1P2prP/3PRBP1/5K2 w - - 0 33",
+      "expected": {
+        "Values": [
+          0,
+          6,
+          6,
+          -13,
+          -1,
+          -3,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 12
+      }
+    },
+    {
+      "id": "70-original",
+      "fen": "5r2/2p3pk/2N5/6Bp/p1n2P2/q6b/4r2P/3RK2R w - - 0 34",
+      "expected": {
+        "Values": [
+          2,
+          -4,
+          -13,
+          -13,
+          -4,
+          -8,
+          -1,
+          -17,
+          6,
+          0,
+          0,
+          1
+        ],
+        "Phase": 16
+      }
+    },
+    {
+      "id": "70-mirror",
+      "fen": "3rk2r/4R2p/Q6B/P1N2p2/6bP/2n5/2P3PK/5R2 b - - 0 34",
+      "expected": {
+        "Values": [
+          -2,
+          4,
+          13,
+          13,
+          4,
+          8,
+          1,
+          17,
+          -6,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 16
+      }
+    },
+    {
+      "id": "71-original",
+      "fen": "4R3/5k1p/7r/3P4/4R3/8/2r2P2/6K1 w - - 11 61",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          2,
+          0,
+          5,
+          5,
+          1,
+          16,
+          -6,
+          -1,
+          0,
+          1
+        ],
+        "Phase": 8
+      }
+    },
+    {
+      "id": "71-mirror",
+      "fen": "6k1/2R2p2/8/4r3/3p4/7R/5K1P/4r3 b - - 11 61",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -2,
+          0,
+          -5,
+          -5,
+          -1,
+          -16,
+          6,
+          1,
+          0,
+          -1
+        ],
+        "Phase": 8
+      }
+    },
+    {
+      "id": "72-original",
+      "fen": "r3k2r/ppp2ppp/2n5/3pp3/3PP3/2N5/PPP2PPP/R3K2R w KQkq - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 10
+      }
+    },
+    {
+      "id": "72-mirror",
+      "fen": "r3k2r/ppp2ppp/2n5/3pp3/3PP3/2N5/PPP2PPP/R3K2R b KQkq - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 10
+      }
+    },
+    {
+      "id": "73-original",
+      "fen": "r3k2r/ppp2ppp/2n5/3pp3/3PP3/2N5/PPP2PPP/R3K2R b KQkq - 17 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 10
+      }
+    },
+    {
+      "id": "73-mirror",
+      "fen": "r3k2r/ppp2ppp/2n5/3pp3/3PP3/2N5/PPP2PPP/R3K2R w KQkq - 17 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 10
+      }
+    },
+    {
+      "id": "74-original",
+      "fen": "4k3/8/8/3pP3/8/8/8/4K3 w - d6 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          7,
+          -5,
+          0,
+          0,
+          0
+        ],
+        "Phase": 0
+      }
+    },
+    {
+      "id": "74-mirror",
+      "fen": "4k3/8/8/8/3Pp3/8/8/4K3 b - d3 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -7,
+          5,
+          0,
+          0,
+          0
+        ],
+        "Phase": 0
+      }
+    },
+    {
+      "id": "75-original",
+      "fen": "k3r3/8/8/3pP3/8/8/8/4K3 w - d6 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -9,
+          0,
+          0,
+          0,
+          0,
+          7,
+          -1,
+          0,
+          0,
+          0
+        ],
+        "Phase": 2
+      }
+    },
+    {
+      "id": "75-mirror",
+      "fen": "4k3/8/8/8/3Pp3/8/8/K3R3 b - d3 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          9,
+          0,
+          0,
+          0,
+          0,
+          -7,
+          1,
+          0,
+          0,
+          0
+        ],
+        "Phase": 2
+      }
+    },
+    {
+      "id": "76-original",
+      "fen": "7k/P7/8/8/8/8/8/4K3 w - - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          36,
+          0,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 0
+      }
+    },
+    {
+      "id": "76-mirror",
+      "fen": "4k3/8/8/8/8/8/p7/7K b - - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -36,
+          0,
+          1,
+          0,
+          0
+        ],
+        "Phase": 0
+      }
+    },
+    {
+      "id": "77-original",
+      "fen": "r6k/1P6/8/8/8/8/8/7K w - - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -12,
+          0,
+          0,
+          0,
+          0,
+          36,
+          -4,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 2
+      }
+    },
+    {
+      "id": "77-mirror",
+      "fen": "7k/8/8/8/8/8/1p6/R6K b - - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          -36,
+          4,
+          1,
+          0,
+          0
+        ],
+        "Phase": 2
+      }
+    },
+    {
+      "id": "78-original",
+      "fen": "8/k1P5/2K5/8/8/8/8/8 w - - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          36,
+          0,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 0
+      }
+    },
+    {
+      "id": "78-mirror",
+      "fen": "8/8/8/8/8/2k5/K1p5/8 b - - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          -1,
+          -1,
+          -36,
+          0,
+          1,
+          0,
+          0
+        ],
+        "Phase": 0
+      }
+    },
+    {
+      "id": "79-original",
+      "fen": "7r/8/8/8/8/6k1/8/6BK w - - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          7,
+          -14,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 3
+      }
+    },
+    {
+      "id": "79-mirror",
+      "fen": "6bk/8/6K1/8/8/8/8/7R b - - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          -7,
+          14,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 3
+      }
+    },
+    {
+      "id": "80-original",
+      "fen": "7k/5Q2/5K2/8/8/8/8/8 w - - 99 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          17,
+          3,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "80-mirror",
+      "fen": "8/8/8/8/8/5k2/5q2/7K b - - 99 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          -17,
+          -3,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "81-original",
+      "fen": "7k/8/5Q2/5K2/8/8/8/8 b - - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          20,
+          2,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "81-mirror",
+      "fen": "8/8/8/8/5k2/5q2/8/7K w - - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          -20,
+          -2,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 4
+      }
+    },
+    {
+      "id": "82-original",
+      "fen": "8/8/4k3/3p4/3P4/4K3/8/8 w - - 34 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 0
+      }
+    },
+    {
+      "id": "82-mirror",
+      "fen": "8/8/4k3/3p4/3P4/4K3/8/8 b - - 34 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 0
+      }
+    },
+    {
+      "id": "83-original",
+      "fen": "r6r/pppbn1Q1/2nqp3/5p2/3P1P1k/2B4P/PPP3P1/R4RK1 w - - 1 19",
+      "expected": {
+        "Values": [
+          -9,
+          2,
+          -5,
+          8,
+          6,
+          4,
+          2,
+          4,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "83-mirror",
+      "fen": "r4rk1/ppp3p1/2b4p/3p1p1K/5P2/2NQP3/PPPBN1q1/R6R b - - 1 19",
+      "expected": {
+        "Values": [
+          9,
+          -2,
+          5,
+          -8,
+          -6,
+          -4,
+          -2,
+          -4,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "84-original",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "84-mirror",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "85-original",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/P7/1PPPPPPP/RNBQKBNR b KQkq - 0 1",
+      "expected": {
+        "Values": [
+          -1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "85-mirror",
+      "fen": "rnbqkbnr/1ppppppp/p7/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "expected": {
+        "Values": [
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "86-original",
+      "fen": "rnbqkbnr/ppppppp1/7p/8/8/P7/1PPPPPPP/RNBQKBNR w KQkq - 0 2",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "86-mirror",
+      "fen": "rnbqkbnr/1ppppppp/p7/8/8/7P/PPPPPPP1/RNBQKBNR b KQkq - 0 2",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "87-original",
+      "fen": "rnbqkbnr/ppppppp1/7p/8/8/P6N/1PPPPPPP/RNBQKB1R b KQkq - 1 2",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "87-mirror",
+      "fen": "rnbqkb1r/1ppppppp/p6n/8/8/7P/PPPPPPP1/RNBQKBNR w KQkq - 1 2",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "88-original",
+      "fen": "rnbqkbnr/pppp1pp1/7p/4p3/8/P6N/1PPPPPPP/RNBQKB1R w KQkq e6 0 3",
+      "expected": {
+        "Values": [
+          -2,
+          -3,
+          1,
+          -4,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "88-mirror",
+      "fen": "rnbqkb1r/1ppppppp/p6n/8/4P3/7P/PPPP1PP1/RNBQKBNR b KQkq e3 0 3",
+      "expected": {
+        "Values": [
+          2,
+          3,
+          -1,
+          4,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "89-original",
+      "fen": "rnbqkbnr/pppp1pp1/7p/4p3/4P3/P6N/1PPP1PPP/RNBQKB1R b KQkq e3 0 3",
+      "expected": {
+        "Values": [
+          -2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "89-mirror",
+      "fen": "rnbqkb1r/1ppp1ppp/p6n/4p3/4P3/7P/PPPP1PP1/RNBQKBNR w KQkq e6 0 3",
+      "expected": {
+        "Values": [
+          2,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "90-original",
+      "fen": "rnbqkbn1/pppp1ppr/7p/4p3/4P3/P6N/1PPP1PPP/RNBQKB1R w KQq - 1 4",
+      "expected": {
+        "Values": [
+          -2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "90-mirror",
+      "fen": "rnbqkb1r/1ppp1ppp/p6n/4p3/4P3/7P/PPPP1PPR/RNBQKBN1 b Qkq - 1 4",
+      "expected": {
+        "Values": [
+          2,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "91-original",
+      "fen": "rnbqkbn1/pppp1ppr/7p/4p3/3PP3/P6N/1PP2PPP/RNBQKB1R b KQq d3 0 4",
+      "expected": {
+        "Values": [
+          -1,
+          4,
+          1,
+          2,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "91-mirror",
+      "fen": "rnbqkb1r/1pp2ppp/p6n/3pp3/4P3/7P/PPPP1PPR/RNBQKBN1 w Qkq d6 0 4",
+      "expected": {
+        "Values": [
+          1,
+          -4,
+          -1,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "92-original",
+      "fen": "rnbqk1n1/pppp1ppr/3b3p/4p3/3PP3/P6N/1PP2PPP/RNBQKB1R w KQq - 1 5",
+      "expected": {
+        "Values": [
+          -1,
+          4,
+          1,
+          2,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "92-mirror",
+      "fen": "rnbqkb1r/1pp2ppp/p6n/3pp3/4P3/3B3P/PPPP1PPR/RNBQK1N1 b Qkq - 1 5",
+      "expected": {
+        "Values": [
+          1,
+          -4,
+          -1,
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "93-original",
+      "fen": "rnbqk1n1/pppp1ppr/3b3p/4p3/3PP1Q1/P6N/1PP2PPP/RNB1KB1R b KQq - 2 5",
+      "expected": {
+        "Values": [
+          -1,
+          4,
+          1,
+          5,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "93-mirror",
+      "fen": "rnb1kb1r/1pp2ppp/p6n/3pp1q1/4P3/3B3P/PPPP1PPR/RNBQK1N1 w Qkq - 2 5",
+      "expected": {
+        "Values": [
+          1,
+          -4,
+          -1,
+          -5,
+          -1,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "94-original",
+      "fen": "rnbqk1n1/pppp1ppr/7p/2b1p3/3PP1Q1/P6N/1PP2PPP/RNB1KB1R w KQq - 3 6",
+      "expected": {
+        "Values": [
+          -1,
+          1,
+          1,
+          5,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "94-mirror",
+      "fen": "rnb1kb1r/1pp2ppp/p6n/3pp1q1/2B1P3/7P/PPPP1PPR/RNBQK1N1 b Qkq - 3 6",
+      "expected": {
+        "Values": [
+          1,
+          -1,
+          -1,
+          -5,
+          -1,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "95-original",
+      "fen": "rnbqk1n1/pppp1ppr/7B/2b1p3/3PP1Q1/P6N/1PP2PPP/RN2KB1R b KQq - 0 6",
+      "expected": {
+        "Values": [
+          -1,
+          4,
+          0,
+          6,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "95-mirror",
+      "fen": "rn2kb1r/1pp2ppp/p6n/3pp1q1/2B1P3/7b/PPPP1PPR/RNBQK1N1 w Qkq - 0 6",
+      "expected": {
+        "Values": [
+          1,
+          -4,
+          0,
+          -6,
+          -1,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "96-original",
+      "fen": "rnbqk1n1/ppppbppr/7B/4p3/3PP1Q1/P6N/1PP2PPP/RN2KB1R w KQq - 1 7",
+      "expected": {
+        "Values": [
+          0,
+          4,
+          0,
+          10,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "96-mirror",
+      "fen": "rn2kb1r/1pp2ppp/p6n/3pp1q1/4P3/7b/PPPPBPPR/RNBQK1N1 b Qkq - 1 7",
+      "expected": {
+        "Values": [
+          0,
+          -4,
+          0,
+          -10,
+          -1,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "97-original",
+      "fen": "rnbqk1n1/ppppbppr/7B/1B2p3/3PP1Q1/P6N/1PP2PPP/RN2K2R b KQq - 2 7",
+      "expected": {
+        "Values": [
+          0,
+          6,
+          1,
+          10,
+          2,
+          4,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "97-mirror",
+      "fen": "rn2k2r/1pp2ppp/p6n/3pp1q1/1b2P3/7b/PPPPBPPR/RNBQK1N1 w Qkq - 2 7",
+      "expected": {
+        "Values": [
+          0,
+          -6,
+          -1,
+          -10,
+          -2,
+          -4,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "98-original",
+      "fen": "rnbqk1n1/1pppbppr/7B/pB2p3/3PP1Q1/P6N/1PP2PPP/RN2K2R w KQq a6 0 8",
+      "expected": {
+        "Values": [
+          0,
+          6,
+          -1,
+          10,
+          2,
+          4,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "98-mirror",
+      "fen": "rn2k2r/1pp2ppp/p6n/3pp1q1/Pb2P3/7b/1PPPBPPR/RNBQK1N1 b Qkq a3 0 8",
+      "expected": {
+        "Values": [
+          0,
+          -6,
+          1,
+          -10,
+          -2,
+          -4,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "99-original",
+      "fen": "rnbqk1n1/1pppbppr/7B/p3p3/3PP1Q1/P6N/1PP1BPPP/RN2K2R b KQq - 1 8",
+      "expected": {
+        "Values": [
+          0,
+          6,
+          -1,
+          8,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "99-mirror",
+      "fen": "rn2k2r/1pp1bppp/p6n/3pp1q1/P3P3/7b/1PPPBPPR/RNBQK1N1 w Qkq - 1 8",
+      "expected": {
+        "Values": [
+          0,
+          -6,
+          1,
+          -8,
+          -1,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "100-original",
+      "fen": "rnbqk1n1/1pppbppr/7B/p7/3pP1Q1/P6N/1PP1BPPP/RN2K2R w KQq - 0 9",
+      "expected": {
+        "Values": [
+          0,
+          5,
+          -1,
+          9,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "100-mirror",
+      "fen": "rn2k2r/1pp1bppp/p6n/3Pp1q1/P7/7b/1PPPBPPR/RNBQK1N1 b Qkq - 0 9",
+      "expected": {
+        "Values": [
+          0,
+          -5,
+          1,
+          -9,
+          -1,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "101-original",
+      "fen": "rnbqk1n1/1pppbppr/7B/p7/3pP1Q1/P5PN/1PP1BP1P/RN2K2R b KQq - 0 9",
+      "expected": {
+        "Values": [
+          0,
+          6,
+          -1,
+          8,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          -2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "101-mirror",
+      "fen": "rn2k2r/1pp1bp1p/p5pn/3Pp1q1/P7/7b/1PPPBPPR/RNBQK1N1 w Qkq - 0 9",
+      "expected": {
+        "Values": [
+          0,
+          -6,
+          1,
+          -8,
+          -1,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "102-original",
+      "fen": "rnbqk1n1/1ppp1ppr/7B/p7/1b1pP1Q1/P5PN/1PP1BP1P/RN2K2R w KQq - 1 10",
+      "expected": {
+        "Values": [
+          -1,
+          5,
+          -1,
+          5,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          -2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "102-mirror",
+      "fen": "rn2k2r/1pp1bp1p/p5pn/1B1Pp1q1/P7/7b/1PPP1PPR/RNBQK1N1 b Qkq - 1 10",
+      "expected": {
+        "Values": [
+          1,
+          -5,
+          1,
+          -5,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "103-original",
+      "fen": "rnbqk1n1/1ppp1ppr/7B/p7/1b1pP1Q1/P5PN/1PP1BP1P/RN1K3R b q - 2 10",
+      "expected": {
+        "Values": [
+          -1,
+          4,
+          0,
+          5,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          -2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "103-mirror",
+      "fen": "rn1k3r/1pp1bp1p/p5pn/1B1Pp1q1/P7/7b/1PPP1PPR/RNBQK1N1 w Q - 2 10",
+      "expected": {
+        "Values": [
+          1,
+          -4,
+          0,
+          -5,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "104-original",
+      "fen": "rnbqk1nr/1ppp1pp1/7B/p7/1b1pP1Q1/P5PN/1PP1BP1P/RN1K3R w q - 3 11",
+      "expected": {
+        "Values": [
+          -1,
+          4,
+          0,
+          5,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          1,
+          -2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "104-mirror",
+      "fen": "rn1k3r/1pp1bp1p/p5pn/1B1Pp1q1/P7/7b/1PPP1PP1/RNBQK1NR b Q - 3 11",
+      "expected": {
+        "Values": [
+          1,
+          -4,
+          0,
+          -5,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "105-original",
+      "fen": "rnbqk1nr/1ppp1pp1/7B/p7/1bPpP1Q1/P5PN/1P2BP1P/RN1K3R b q c3 0 11",
+      "expected": {
+        "Values": [
+          -1,
+          2,
+          0,
+          5,
+          -1,
+          0,
+          -2,
+          -16,
+          6,
+          0,
+          1,
+          -2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "105-mirror",
+      "fen": "rn1k3r/1p2bp1p/p5pn/1BpPp1q1/P7/7b/1PPP1PP1/RNBQK1NR w Q c6 0 11",
+      "expected": {
+        "Values": [
+          1,
+          -2,
+          0,
+          -5,
+          1,
+          0,
+          2,
+          16,
+          -6,
+          0,
+          -1,
+          2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "106-original",
+      "fen": "rnbqk1nr/1pp2pp1/7B/p2p4/1bPpP1Q1/P5PN/1P2BP1P/RN1K3R w q d6 0 12",
+      "expected": {
+        "Values": [
+          -2,
+          -1,
+          0,
+          4,
+          -1,
+          0,
+          -1,
+          -16,
+          6,
+          0,
+          1,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "106-mirror",
+      "fen": "rn1k3r/1p2bp1p/p5pn/1BpPp1q1/P2P4/7b/1PP2PP1/RNBQK1NR b Q d3 0 12",
+      "expected": {
+        "Values": [
+          2,
+          1,
+          0,
+          -4,
+          1,
+          0,
+          1,
+          16,
+          -6,
+          0,
+          -1,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "107-original",
+      "fen": "rnbqk1nr/1pp2pp1/7B/p2p4/1bPpPQ2/P5PN/1P2BP1P/RN1K3R b q - 1 12",
+      "expected": {
+        "Values": [
+          -3,
+          -3,
+          0,
+          5,
+          -1,
+          0,
+          -1,
+          -16,
+          6,
+          0,
+          1,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "107-mirror",
+      "fen": "rn1k3r/1p2bp1p/p5pn/1BpPpq2/P2P4/7b/1PP2PP1/RNBQK1NR w Q - 1 12",
+      "expected": {
+        "Values": [
+          3,
+          3,
+          0,
+          -5,
+          1,
+          0,
+          1,
+          16,
+          -6,
+          0,
+          -1,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "108-original",
+      "fen": "rnbqk1n1/1pp2ppr/7B/p2p4/1bPpPQ2/P5PN/1P2BP1P/RN1K3R w q - 2 13",
+      "expected": {
+        "Values": [
+          -3,
+          -3,
+          0,
+          5,
+          -1,
+          0,
+          -1,
+          -16,
+          6,
+          0,
+          1,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "108-mirror",
+      "fen": "rn1k3r/1p2bp1p/p5pn/1BpPpq2/P2P4/7b/1PP2PPR/RNBQK1N1 b Q - 2 13",
+      "expected": {
+        "Values": [
+          3,
+          3,
+          0,
+          -5,
+          1,
+          0,
+          1,
+          16,
+          -6,
+          0,
+          -1,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "109-original",
+      "fen": "rnbqk1n1/1pp2ppr/7B/p2p4/1bPpPQ2/P5PN/1P2BP1P/RN1KR3 b q - 3 13",
+      "expected": {
+        "Values": [
+          -3,
+          -3,
+          0,
+          5,
+          -1,
+          0,
+          -1,
+          -16,
+          6,
+          0,
+          1,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "109-mirror",
+      "fen": "rn1kr3/1p2bp1p/p5pn/1BpPpq2/P2P4/7b/1PP2PPR/RNBQK1N1 w Q - 3 13",
+      "expected": {
+        "Values": [
+          3,
+          3,
+          0,
+          -5,
+          1,
+          0,
+          1,
+          16,
+          -6,
+          0,
+          -1,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "110-original",
+      "fen": "rnbqk1n1/1pp2ppr/7B/p1bp4/2PpPQ2/P5PN/1P2BP1P/RN1KR3 w q - 4 14",
+      "expected": {
+        "Values": [
+          -3,
+          -2,
+          0,
+          5,
+          1,
+          1,
+          -1,
+          -16,
+          6,
+          0,
+          1,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "110-mirror",
+      "fen": "rn1kr3/1p2bp1p/p5pn/2pPpq2/P1BP4/7b/1PP2PPR/RNBQK1N1 b Q - 4 14",
+      "expected": {
+        "Values": [
+          3,
+          2,
+          0,
+          -5,
+          -1,
+          -1,
+          1,
+          16,
+          -6,
+          0,
+          -1,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "111-original",
+      "fen": "rnbqk1n1/1pp2ppr/7B/p1bp3B/2PpPQ2/P5PN/1P3P1P/RN1KR3 b q - 5 14",
+      "expected": {
+        "Values": [
+          -3,
+          -3,
+          1,
+          5,
+          2,
+          4,
+          -1,
+          -16,
+          6,
+          0,
+          1,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "111-mirror",
+      "fen": "rn1kr3/1p3p1p/p5pn/2pPpq2/P1BP3b/7b/1PP2PPR/RNBQK1N1 w Q - 5 14",
+      "expected": {
+        "Values": [
+          3,
+          3,
+          -1,
+          -5,
+          -2,
+          -4,
+          1,
+          16,
+          -6,
+          0,
+          -1,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "112-original",
+      "fen": "rnbqk1n1/1pp1bppr/7B/p2p3B/2PpPQ2/P5PN/1P3P1P/RN1KR3 w q - 6 15",
+      "expected": {
+        "Values": [
+          -2,
+          -3,
+          1,
+          8,
+          2,
+          4,
+          -1,
+          -16,
+          6,
+          0,
+          1,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "112-mirror",
+      "fen": "rn1kr3/1p3p1p/p5pn/2pPpq2/P2P3b/7b/1PP1BPPR/RNBQK1N1 b Q - 6 15",
+      "expected": {
+        "Values": [
+          2,
+          3,
+          -1,
+          -8,
+          -2,
+          -4,
+          1,
+          16,
+          -6,
+          0,
+          -1,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "113-original",
+      "fen": "rnbqk1n1/1pp1bppr/7B/p2p3B/2PpPQ2/P5PN/1P2KP1P/RN2R3 b q - 7 15",
+      "expected": {
+        "Values": [
+          -2,
+          -4,
+          2,
+          8,
+          1,
+          3,
+          0,
+          -16,
+          8,
+          0,
+          1,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "113-mirror",
+      "fen": "rn2r3/1p2kp1p/p5pn/2pPpq2/P2P3b/7b/1PP1BPPR/RNBQK1N1 w Q - 7 15",
+      "expected": {
+        "Values": [
+          2,
+          4,
+          -2,
+          -8,
+          -1,
+          -3,
+          0,
+          16,
+          -8,
+          0,
+          -1,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "114-original",
+      "fen": "rnbqk1n1/1pp2ppr/7B/p1bp3B/2PpPQ2/P5PN/1P2KP1P/RN2R3 w q - 8 16",
+      "expected": {
+        "Values": [
+          -3,
+          -4,
+          2,
+          5,
+          1,
+          3,
+          0,
+          -16,
+          8,
+          0,
+          1,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "114-mirror",
+      "fen": "rn2r3/1p2kp1p/p5pn/2pPpq2/P1BP3b/7b/1PP2PPR/RNBQK1N1 b Q - 8 16",
+      "expected": {
+        "Values": [
+          3,
+          4,
+          -2,
+          -5,
+          -1,
+          -3,
+          0,
+          16,
+          -8,
+          0,
+          -1,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "115-original",
+      "fen": "rnbqk1n1/1pp2ppr/7B/p1bp3B/2PpPQ2/P5PN/1P1NKP1P/R3R3 b q - 9 16",
+      "expected": {
+        "Values": [
+          0,
+          -4,
+          6,
+          3,
+          1,
+          3,
+          0,
+          -16,
+          8,
+          0,
+          1,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "115-mirror",
+      "fen": "r3r3/1p1nkp1p/p5pn/2pPpq2/P1BP3b/7b/1PP2PPR/RNBQK1N1 w Q - 9 16",
+      "expected": {
+        "Values": [
+          0,
+          4,
+          -6,
+          -3,
+          -1,
+          -3,
+          0,
+          16,
+          -8,
+          0,
+          -1,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "116-original",
+      "fen": "rnbqk1n1/1pp2ppr/7B/p2p3B/2PpPQ2/b5PN/1P1NKP1P/R3R3 w q - 0 17",
+      "expected": {
+        "Values": [
+          0,
+          -5,
+          7,
+          3,
+          1,
+          3,
+          0,
+          -16,
+          8,
+          0,
+          1,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "116-mirror",
+      "fen": "r3r3/1p1nkp1p/B5pn/2pPpq2/P2P3b/7b/1PP2PPR/RNBQK1N1 b Q - 0 17",
+      "expected": {
+        "Values": [
+          0,
+          5,
+          -7,
+          -3,
+          -1,
+          -3,
+          0,
+          16,
+          -8,
+          0,
+          -1,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "117-original",
+      "fen": "rnbqk1n1/1pp2ppr/7B/p2p3B/2PpP3/b4QPN/1P1NKP1P/R3R3 b q - 1 17",
+      "expected": {
+        "Values": [
+          0,
+          -5,
+          7,
+          4,
+          1,
+          3,
+          0,
+          -16,
+          8,
+          0,
+          1,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "117-mirror",
+      "fen": "r3r3/1p1nkp1p/B4qpn/2pPp3/P2P3b/7b/1PP2PPR/RNBQK1N1 w Q - 1 17",
+      "expected": {
+        "Values": [
+          0,
+          5,
+          -7,
+          -4,
+          -1,
+          -3,
+          0,
+          16,
+          -8,
+          0,
+          -1,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "118-original",
+      "fen": "rnbqk1n1/1pp2ppr/7B/p2p3B/1bPpP3/5QPN/1P1NKP1P/R3R3 w q - 2 18",
+      "expected": {
+        "Values": [
+          0,
+          -4,
+          9,
+          4,
+          0,
+          0,
+          0,
+          -16,
+          8,
+          0,
+          1,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "118-mirror",
+      "fen": "r3r3/1p1nkp1p/5qpn/1BpPp3/P2P3b/7b/1PP2PPR/RNBQK1N1 b Q - 2 18",
+      "expected": {
+        "Values": [
+          0,
+          4,
+          -9,
+          -4,
+          0,
+          0,
+          0,
+          16,
+          -8,
+          0,
+          -1,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "119-original",
+      "fen": "rnbqk1n1/1pp2ppr/7B/p2p4/1bPpP1B1/5QPN/1P1NKP1P/R3R3 b q - 3 18",
+      "expected": {
+        "Values": [
+          0,
+          -1,
+          9,
+          3,
+          0,
+          0,
+          0,
+          -16,
+          8,
+          0,
+          1,
+          -2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "119-mirror",
+      "fen": "r3r3/1p1nkp1p/5qpn/1BpPp1b1/P2P4/7b/1PP2PPR/RNBQK1N1 w Q - 3 18",
+      "expected": {
+        "Values": [
+          0,
+          1,
+          -9,
+          -3,
+          0,
+          0,
+          0,
+          16,
+          -8,
+          0,
+          -1,
+          2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "120-original",
+      "fen": "rnbqk1n1/1pp2ppr/7B/p1bp4/2PpP1B1/5QPN/1P1NKP1P/R3R3 w q - 4 19",
+      "expected": {
+        "Values": [
+          0,
+          -2,
+          9,
+          3,
+          1,
+          3,
+          0,
+          -16,
+          8,
+          0,
+          1,
+          -3
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "120-mirror",
+      "fen": "r3r3/1p1nkp1p/5qpn/2pPp1b1/P1BP4/7b/1PP2PPR/RNBQK1N1 b Q - 4 19",
+      "expected": {
+        "Values": [
+          0,
+          2,
+          -9,
+          -3,
+          -1,
+          -3,
+          0,
+          16,
+          -8,
+          0,
+          -1,
+          3
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "121-original",
+      "fen": "rnbqk1n1/1pp2ppr/7B/p1bP4/3pP1B1/5QPN/1P1NKP1P/R3R3 b q - 0 19",
+      "expected": {
+        "Values": [
+          2,
+          -1,
+          9,
+          3,
+          1,
+          3,
+          0,
+          -16,
+          8,
+          -1,
+          0,
+          -3
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "121-mirror",
+      "fen": "r3r3/1p1nkp1p/5qpn/3Pp1b1/P1Bp4/7b/1PP2PPR/RNBQK1N1 w Q - 0 19",
+      "expected": {
+        "Values": [
+          -2,
+          1,
+          -9,
+          -3,
+          -1,
+          -3,
+          0,
+          16,
+          -8,
+          1,
+          0,
+          3
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "122-original",
+      "fen": "rnbqk1n1/1p3ppr/2p4B/p1bP4/3pP1B1/5QPN/1P1NKP1P/R3R3 w q - 0 20",
+      "expected": {
+        "Values": [
+          2,
+          -1,
+          9,
+          1,
+          1,
+          3,
+          0,
+          -16,
+          8,
+          -1,
+          0,
+          -2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "122-mirror",
+      "fen": "r3r3/1p1nkp1p/5qpn/3Pp1b1/P1Bp4/2P4b/1P3PPR/RNBQK1N1 b Q - 0 20",
+      "expected": {
+        "Values": [
+          -2,
+          1,
+          -9,
+          -1,
+          -1,
+          -3,
+          0,
+          16,
+          -8,
+          1,
+          0,
+          2
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "123-original",
+      "fen": "rnbqk1n1/1p3ppr/2p4B/p1bP4/3pPQB1/6PN/1P1NKP1P/R3R3 b q - 1 20",
+      "expected": {
+        "Values": [
+          2,
+          -1,
+          9,
+          1,
+          1,
+          3,
+          0,
+          -16,
+          8,
+          -1,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "123-mirror",
+      "fen": "r3r3/1p1nkp1p/6pn/3Ppqb1/P1Bp4/2P4b/1P3PPR/RNBQK1N1 w Q - 1 20",
+      "expected": {
+        "Values": [
+          -2,
+          1,
+          -9,
+          -1,
+          -1,
+          -3,
+          0,
+          16,
+          -8,
+          1,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "124-original",
+      "fen": "rnbq2n1/1p2kppr/2p4B/p1bP4/3pPQB1/6PN/1P1NKP1P/R3R3 w - - 2 21",
+      "expected": {
+        "Values": [
+          3,
+          1,
+          9,
+          2,
+          5,
+          8,
+          1,
+          -16,
+          6,
+          -1,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "124-mirror",
+      "fen": "r3r3/1p1nkp1p/6pn/3Ppqb1/P1Bp4/2P4b/1P2KPPR/RNBQ2N1 b - - 2 21",
+      "expected": {
+        "Values": [
+          -3,
+          -1,
+          -9,
+          -2,
+          -5,
+          -8,
+          -1,
+          16,
+          -6,
+          1,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "125-original",
+      "fen": "rnbq2n1/1p2kppr/2p4B/p1bP1Q2/3pP1B1/6PN/1P1NKP1P/R3R3 b - - 3 21",
+      "expected": {
+        "Values": [
+          4,
+          0,
+          9,
+          3,
+          4,
+          3,
+          1,
+          -16,
+          6,
+          -1,
+          0,
+          -1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "125-mirror",
+      "fen": "r3r3/1p1nkp1p/6pn/3Pp1b1/P1Bp1q2/2P4b/1P2KPPR/RNBQ2N1 w - - 3 21",
+      "expected": {
+        "Values": [
+          -4,
+          0,
+          -9,
+          -3,
+          -4,
+          -3,
+          -1,
+          16,
+          -6,
+          1,
+          0,
+          1
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "126-original",
+      "fen": "rn1q2n1/1p2kppr/2p4B/p1bP1b2/3pP1B1/6PN/1P1NKP1P/R3R3 w - - 0 22",
+      "expected": {
+        "Values": [
+          4,
+          -3,
+          9,
+          -7,
+          0,
+          0,
+          1,
+          -16,
+          6,
+          -1,
+          0,
+          -1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "126-mirror",
+      "fen": "r3r3/1p1nkp1p/6pn/3Pp1b1/P1Bp1B2/2P4b/1P2KPPR/RN1Q2N1 b - - 0 22",
+      "expected": {
+        "Values": [
+          -4,
+          3,
+          -9,
+          7,
+          0,
+          0,
+          -1,
+          16,
+          -6,
+          1,
+          0,
+          1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "127-original",
+      "fen": "rn1q2n1/1p2kppr/2p4B/p1bP1b2/3pP1B1/5KPN/1P1N1P1P/R3R3 b - - 1 22",
+      "expected": {
+        "Values": [
+          3,
+          -4,
+          10,
+          -7,
+          -2,
+          -3,
+          1,
+          -16,
+          4,
+          -1,
+          0,
+          -2
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "127-mirror",
+      "fen": "r3r3/1p1n1p1p/5kpn/3Pp1b1/P1Bp1B2/2P4b/1P2KPPR/RN1Q2N1 w - - 1 22",
+      "expected": {
+        "Values": [
+          -3,
+          4,
+          -10,
+          7,
+          2,
+          3,
+          -1,
+          16,
+          -4,
+          1,
+          0,
+          2
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "128-original",
+      "fen": "rn1q4/1p2kppr/2p2n1B/p1bP1b2/3pP1B1/5KPN/1P1N1P1P/R3R3 w - - 2 23",
+      "expected": {
+        "Values": [
+          -1,
+          -4,
+          10,
+          -9,
+          -4,
+          -8,
+          1,
+          -16,
+          4,
+          -1,
+          0,
+          -1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "128-mirror",
+      "fen": "r3r3/1p1n1p1p/5kpn/3Pp1b1/P1Bp1B2/2P2N1b/1P2KPPR/RN1Q4 b - - 2 23",
+      "expected": {
+        "Values": [
+          1,
+          4,
+          -10,
+          9,
+          4,
+          8,
+          -1,
+          16,
+          -4,
+          1,
+          0,
+          1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "129-original",
+      "fen": "rn1q4/1p2kppr/2p2n1B/p1bP1b2/3pP1B1/5KPN/1P1N1P1P/1R2R3 b - - 3 23",
+      "expected": {
+        "Values": [
+          -2,
+          -4,
+          5,
+          -9,
+          -4,
+          -8,
+          1,
+          -16,
+          4,
+          -1,
+          0,
+          -1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "129-mirror",
+      "fen": "1r2r3/1p1n1p1p/5kpn/3Pp1b1/P1Bp1B2/2P2N1b/1P2KPPR/RN1Q4 w - - 3 23",
+      "expected": {
+        "Values": [
+          2,
+          4,
+          -5,
+          9,
+          4,
+          8,
+          -1,
+          16,
+          -4,
+          1,
+          0,
+          1
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "130-original",
+      "fen": "rn1q4/bp2kppr/2p2n1B/p2P1b2/3pP1B1/5KPN/1P1N1P1P/1R2R3 w - - 4 24",
+      "expected": {
+        "Values": [
+          -2,
+          -2,
+          7,
+          -9,
+          -4,
+          -8,
+          1,
+          -16,
+          4,
+          -1,
+          0,
+          -2
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "130-mirror",
+      "fen": "1r2r3/1p1n1p1p/5kpn/3Pp1b1/P2p1B2/2P2N1b/BP2KPPR/RN1Q4 b - - 4 24",
+      "expected": {
+        "Values": [
+          2,
+          2,
+          -7,
+          9,
+          4,
+          8,
+          -1,
+          16,
+          -4,
+          1,
+          0,
+          2
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "131-original",
+      "fen": "rn1q4/bp2kppr/2p2n1B/p2P1b2/3pP1B1/5KPN/1P1N1P1P/1R1R4 b - - 5 24",
+      "expected": {
+        "Values": [
+          -2,
+          -2,
+          5,
+          -9,
+          -4,
+          -8,
+          1,
+          -16,
+          4,
+          -1,
+          0,
+          -2
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "131-mirror",
+      "fen": "1r1r4/1p1n1p1p/5kpn/3Pp1b1/P2p1B2/2P2N1b/BP2KPPR/RN1Q4 w - - 5 24",
+      "expected": {
+        "Values": [
+          2,
+          2,
+          -5,
+          9,
+          4,
+          8,
+          -1,
+          16,
+          -4,
+          1,
+          0,
+          2
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "132-original",
+      "fen": "rn6/bp1qkppr/2p2n1B/p2P1b2/3pP1B1/5KPN/1P1N1P1P/1R1R4 w - - 6 25",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          5,
+          -5,
+          -4,
+          -8,
+          1,
+          -16,
+          4,
+          -1,
+          0,
+          -2
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "132-mirror",
+      "fen": "1r1r4/1p1n1p1p/5kpn/3Pp1b1/P2p1B2/2P2N1b/BP1QKPPR/RN6 b - - 6 25",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -5,
+          5,
+          4,
+          8,
+          -1,
+          16,
+          -4,
+          1,
+          0,
+          2
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "133-original",
+      "fen": "rn6/bp1qkppr/2p2n1B/p2P1b2/3pP1B1/5KPN/1P1N1P1P/1RR5 b - - 7 25",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          7,
+          -5,
+          -4,
+          -8,
+          1,
+          -16,
+          4,
+          -1,
+          0,
+          -2
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "133-mirror",
+      "fen": "1rr5/1p1n1p1p/5kpn/3Pp1b1/P2p1B2/2P2N1b/BP1QKPPR/RN6 w - - 7 25",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          -7,
+          5,
+          4,
+          8,
+          -1,
+          16,
+          -4,
+          1,
+          0,
+          2
+        ],
+        "Phase": 20
+      }
+    },
+    {
+      "id": "134-original",
+      "fen": "rn6/bp1qkppr/2p2n1B/p2P4/3pP1b1/5KPN/1P1N1P1P/1RR5 w - - 0 26",
+      "expected": {
+        "Values": [
+          1,
+          -2,
+          7,
+          -5,
+          -4,
+          -15,
+          1,
+          -16,
+          4,
+          -1,
+          0,
+          -2
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "134-mirror",
+      "fen": "1rr5/1p1n1p1p/5kpn/3Pp1B1/P2p4/2P2N1b/BP1QKPPR/RN6 b - - 0 26",
+      "expected": {
+        "Values": [
+          -1,
+          2,
+          -7,
+          5,
+          4,
+          15,
+          -1,
+          16,
+          -4,
+          1,
+          0,
+          2
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "135-original",
+      "fen": "rn6/bp1qkppr/2p2n1B/p2P4/3pP1b1/6PN/1P1N1PKP/1RR5 b - - 1 26",
+      "expected": {
+        "Values": [
+          2,
+          -4,
+          7,
+          -5,
+          -1,
+          0,
+          1,
+          -16,
+          2,
+          -1,
+          0,
+          -1
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "135-mirror",
+      "fen": "1rr5/1p1n1pkp/6pn/3Pp1B1/P2p4/2P2N1b/BP1QKPPR/RN6 w - - 1 26",
+      "expected": {
+        "Values": [
+          -2,
+          4,
+          -7,
+          5,
+          1,
+          0,
+          -1,
+          16,
+          -2,
+          1,
+          0,
+          1
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "136-original",
+      "fen": "rn6/bp1qkppr/2p2n1B/p2P4/4P1b1/3p2PN/1P1N1PKP/1RR5 w - - 0 27",
+      "expected": {
+        "Values": [
+          2,
+          -5,
+          7,
+          -5,
+          -2,
+          -3,
+          1,
+          -25,
+          6,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "136-mirror",
+      "fen": "1rr5/1p1n1pkp/3P2pn/4p1B1/P2p4/2P2N1b/BP1QKPPR/RN6 b - - 0 27",
+      "expected": {
+        "Values": [
+          -2,
+          5,
+          -7,
+          5,
+          2,
+          3,
+          -1,
+          25,
+          -6,
+          1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "137-original",
+      "fen": "rn6/bp1qkppr/2p2n1B/p2P4/2N1P1b1/3p2PN/1P3PKP/1RR5 b - - 1 27",
+      "expected": {
+        "Values": [
+          5,
+          -4,
+          5,
+          -5,
+          -1,
+          0,
+          1,
+          -25,
+          6,
+          -1,
+          0,
+          -1
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "137-mirror",
+      "fen": "1rr5/1p3pkp/3P2pn/2n1p1B1/P2p4/2P2N1b/BP1QKPPR/RN6 w - - 1 27",
+      "expected": {
+        "Values": [
+          -5,
+          4,
+          -5,
+          5,
+          1,
+          0,
+          -1,
+          25,
+          -6,
+          1,
+          0,
+          1
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "138-original",
+      "fen": "rn6/bp1qkppr/2p2n1B/p2P3b/2N1P3/3p2PN/1P3PKP/1RR5 w - - 2 28",
+      "expected": {
+        "Values": [
+          5,
+          -4,
+          5,
+          -7,
+          -1,
+          -5,
+          1,
+          -25,
+          6,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "138-mirror",
+      "fen": "1rr5/1p3pkp/3P2pn/2n1p3/P2p3B/2P2N1b/BP1QKPPR/RN6 b - - 2 28",
+      "expected": {
+        "Values": [
+          -5,
+          4,
+          -5,
+          7,
+          1,
+          5,
+          -1,
+          25,
+          -6,
+          1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "139-original",
+      "fen": "rn6/bp1qkppr/2p2n2/p2P3b/2N1P3/3p2PN/1P1B1PKP/1RR5 b - - 3 28",
+      "expected": {
+        "Values": [
+          4,
+          -3,
+          5,
+          -7,
+          -1,
+          -5,
+          1,
+          -25,
+          6,
+          -1,
+          0,
+          1
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "139-mirror",
+      "fen": "1rr5/1p1b1pkp/3P2pn/2n1p3/P2p3B/2P2N2/BP1QKPPR/RN6 w - - 3 28",
+      "expected": {
+        "Values": [
+          -4,
+          3,
+          -5,
+          7,
+          1,
+          5,
+          -1,
+          25,
+          -6,
+          1,
+          0,
+          -1
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "140-original",
+      "fen": "rnq5/bp2kppr/2p2n2/p2P3b/2N1P3/3p2PN/1P1B1PKP/1RR5 w - - 4 29",
+      "expected": {
+        "Values": [
+          2,
+          -3,
+          5,
+          -9,
+          -1,
+          -5,
+          1,
+          -25,
+          6,
+          -1,
+          0,
+          1
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "140-mirror",
+      "fen": "1rr5/1p1b1pkp/3P2pn/2n1p3/P2p3B/2P2N2/BP2KPPR/RNQ5 b - - 4 29",
+      "expected": {
+        "Values": [
+          -2,
+          3,
+          -5,
+          9,
+          1,
+          5,
+          -1,
+          25,
+          -6,
+          1,
+          0,
+          -1
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "141-original",
+      "fen": "rnq5/bp2kppr/2p2n2/p2P3b/2N1P3/3pB1PN/1P3PKP/1RR5 b - - 5 29",
+      "expected": {
+        "Values": [
+          2,
+          -1,
+          5,
+          -9,
+          0,
+          0,
+          1,
+          -25,
+          6,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "141-mirror",
+      "fen": "1rr5/1p3pkp/3Pb1pn/2n1p3/P2p3B/2P2N2/BP2KPPR/RNQ5 w - - 5 29",
+      "expected": {
+        "Values": [
+          -2,
+          1,
+          -5,
+          9,
+          0,
+          0,
+          -1,
+          25,
+          -6,
+          1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "142-original",
+      "fen": "rnq5/bp2kppr/2p2n2/p2P4/2N1P3/3pB1PN/1P3PKP/1RRb4 w - - 6 30",
+      "expected": {
+        "Values": [
+          1,
+          -3,
+          -1,
+          -9,
+          -1,
+          -5,
+          1,
+          -25,
+          6,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "142-mirror",
+      "fen": "1rrB4/1p3pkp/3Pb1pn/2n1p3/P2p4/2P2N2/BP2KPPR/RNQ5 b - - 6 30",
+      "expected": {
+        "Values": [
+          -1,
+          3,
+          1,
+          9,
+          1,
+          5,
+          -1,
+          25,
+          -6,
+          1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "143-original",
+      "fen": "rnq5/bp2kppr/2p2n2/p2P4/2N1P3/1P1pB1PN/5PKP/1RRb4 b - - 0 30",
+      "expected": {
+        "Values": [
+          2,
+          -2,
+          0,
+          -9,
+          -1,
+          -5,
+          1,
+          -25,
+          6,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "143-mirror",
+      "fen": "1rrB4/5pkp/1p1Pb1pn/2n1p3/P2p4/2P2N2/BP2KPPR/RNQ5 w - - 0 30",
+      "expected": {
+        "Values": [
+          -2,
+          2,
+          0,
+          9,
+          1,
+          5,
+          -1,
+          25,
+          -6,
+          1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "144-original",
+      "fen": "rnq4r/bp2kpp1/2p2n2/p2P4/2N1P3/1P1pB1PN/5PKP/1RRb4 w - - 1 31",
+      "expected": {
+        "Values": [
+          1,
+          -2,
+          -4,
+          -8,
+          -1,
+          -5,
+          1,
+          -25,
+          6,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "144-mirror",
+      "fen": "1rrB4/5pkp/1p1Pb1pn/2n1p3/P2p4/2P2N2/BP2KPP1/RNQ4R b - - 1 31",
+      "expected": {
+        "Values": [
+          -1,
+          2,
+          4,
+          8,
+          1,
+          5,
+          -1,
+          25,
+          -6,
+          1,
+          0,
+          0
+        ],
+        "Phase": 19
+      }
+    },
+    {
+      "id": "145-original",
+      "fen": "rnq4r/bp2kpp1/2p2n2/p2P4/2N1P3/1P1pB1PN/5PKP/1R1R4 b - - 0 31",
+      "expected": {
+        "Values": [
+          1,
+          5,
+          2,
+          -8,
+          0,
+          0,
+          1,
+          -25,
+          6,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "145-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1pn/2n1p3/P2p4/2P2N2/BP2KPP1/RNQ4R w - - 0 31",
+      "expected": {
+        "Values": [
+          -1,
+          -5,
+          -2,
+          8,
+          0,
+          0,
+          -1,
+          25,
+          -6,
+          1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "146-original",
+      "fen": "rnqr4/bp2kpp1/2p2n2/p2P4/2N1P3/1P1pB1PN/5PKP/1R1R4 w - - 1 32",
+      "expected": {
+        "Values": [
+          1,
+          5,
+          4,
+          -4,
+          1,
+          3,
+          1,
+          -25,
+          6,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "146-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1pn/2n1p3/P2p4/2P2N2/BP2KPP1/RNQR4 b - - 1 32",
+      "expected": {
+        "Values": [
+          -1,
+          -5,
+          -4,
+          4,
+          -1,
+          -3,
+          -1,
+          25,
+          -6,
+          1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "147-original",
+      "fen": "rnqr4/bp2kpp1/2P2n2/p7/2N1P3/1P1pB1PN/5PKP/1R1R4 b - - 0 32",
+      "expected": {
+        "Values": [
+          2,
+          5,
+          4,
+          -5,
+          1,
+          3,
+          1,
+          -25,
+          6,
+          1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "147-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1pn/2n1p3/P7/2p2N2/BP2KPP1/RNQR4 w - - 0 32",
+      "expected": {
+        "Values": [
+          -2,
+          -5,
+          -4,
+          5,
+          -1,
+          -3,
+          -1,
+          25,
+          -6,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "148-original",
+      "fen": "rnq5/bp2kpp1/2Pr1n2/p7/2N1P3/1P1pB1PN/5PKP/1R1R4 w - - 1 33",
+      "expected": {
+        "Values": [
+          2,
+          5,
+          6,
+          -10,
+          1,
+          3,
+          1,
+          -25,
+          6,
+          1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "148-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1pn/2n1p3/P7/2pR1N2/BP2KPP1/RNQ5 b - - 1 33",
+      "expected": {
+        "Values": [
+          -2,
+          -5,
+          -6,
+          10,
+          -1,
+          -3,
+          -1,
+          25,
+          -6,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "149-original",
+      "fen": "rnq5/bp2kpp1/2Pr1n2/p7/4P3/1P1pB1PN/3N1PKP/1R1R4 b - - 2 33",
+      "expected": {
+        "Values": [
+          -2,
+          3,
+          4,
+          -10,
+          0,
+          0,
+          1,
+          -25,
+          6,
+          1,
+          0,
+          1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "149-mirror",
+      "fen": "1r1r4/3n1pkp/1p1Pb1pn/4p3/P7/2pR1N2/BP2KPP1/RNQ5 w - - 2 33",
+      "expected": {
+        "Values": [
+          2,
+          -3,
+          -4,
+          10,
+          0,
+          0,
+          -1,
+          25,
+          -6,
+          -1,
+          0,
+          -1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "150-original",
+      "fen": "rnq5/1p2kpp1/1bPr1n2/p7/4P3/1P1pB1PN/3N1PKP/1R1R4 w - - 3 34",
+      "expected": {
+        "Values": [
+          -2,
+          0,
+          2,
+          -10,
+          0,
+          0,
+          1,
+          -25,
+          6,
+          1,
+          0,
+          2
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "150-mirror",
+      "fen": "1r1r4/3n1pkp/1p1Pb1pn/4p3/P7/1BpR1N2/1P2KPP1/RNQ5 b - - 3 34",
+      "expected": {
+        "Values": [
+          2,
+          0,
+          -2,
+          10,
+          0,
+          0,
+          -1,
+          25,
+          -6,
+          -1,
+          0,
+          -2
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "151-original",
+      "fen": "rnq5/1p2kpp1/1bPr1n2/p7/2N1P3/1P1pB1PN/5PKP/1R1R4 b - - 4 34",
+      "expected": {
+        "Values": [
+          2,
+          2,
+          4,
+          -10,
+          1,
+          3,
+          1,
+          -25,
+          6,
+          1,
+          0,
+          1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "151-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1pn/2n1p3/P7/1BpR1N2/1P2KPP1/RNQ5 w - - 4 34",
+      "expected": {
+        "Values": [
+          -2,
+          -2,
+          -4,
+          10,
+          -1,
+          -3,
+          -1,
+          25,
+          -6,
+          -1,
+          0,
+          -1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "152-original",
+      "fen": "rnqk4/1p3pp1/1bPr1n2/p7/2N1P3/1P1pB1PN/5PKP/1R1R4 w - - 5 35",
+      "expected": {
+        "Values": [
+          2,
+          3,
+          5,
+          -5,
+          0,
+          0,
+          1,
+          -25,
+          9,
+          1,
+          0,
+          1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "152-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1pn/2n1p3/P7/1BpR1N2/1P3PP1/RNQK4 b - - 5 35",
+      "expected": {
+        "Values": [
+          -2,
+          -3,
+          -5,
+          5,
+          0,
+          0,
+          -1,
+          25,
+          -9,
+          -1,
+          0,
+          -1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "153-original",
+      "fen": "rnqk4/1pP2pp1/1b1r1n2/p7/2N1P3/1P1pB1PN/5PKP/1R1R4 b - - 0 35",
+      "expected": {
+        "Values": [
+          0,
+          3,
+          4,
+          -5,
+          0,
+          0,
+          1,
+          11,
+          -11,
+          1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "153-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1pn/2n1p3/P7/1B1R1N2/1Pp2PP1/RNQK4 w - - 0 35",
+      "expected": {
+        "Values": [
+          0,
+          -3,
+          -4,
+          5,
+          0,
+          0,
+          -1,
+          -11,
+          11,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "154-original",
+      "fen": "rnqk4/1pb2pp1/3r1n2/p7/2N1P3/1P1pB1PN/5PKP/1R1R4 w - - 0 36",
+      "expected": {
+        "Values": [
+          0,
+          7,
+          2,
+          -4,
+          -1,
+          -1,
+          1,
+          -25,
+          9,
+          0,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "154-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1pn/2n1p3/P7/3R1N2/1PB2PP1/RNQK4 b - - 0 36",
+      "expected": {
+        "Values": [
+          0,
+          -7,
+          -2,
+          4,
+          1,
+          1,
+          -1,
+          25,
+          -9,
+          0,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "155-original",
+      "fen": "rnqk4/1pb2pp1/3r1n2/p5N1/2N1P3/1P1pB1P1/5PKP/1R1R4 b - - 1 36",
+      "expected": {
+        "Values": [
+          1,
+          6,
+          2,
+          -4,
+          -1,
+          -1,
+          1,
+          -25,
+          9,
+          0,
+          0,
+          1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "155-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1p1/2n1p3/P5n1/3R1N2/1PB2PP1/RNQK4 w - - 1 36",
+      "expected": {
+        "Values": [
+          -1,
+          -6,
+          -2,
+          4,
+          1,
+          1,
+          -1,
+          25,
+          -9,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "156-original",
+      "fen": "rnqk4/1pb2pp1/5n2/p5N1/2NrP3/1P1pB1P1/5PKP/1R1R4 w - - 2 37",
+      "expected": {
+        "Values": [
+          1,
+          1,
+          5,
+          -4,
+          -2,
+          -4,
+          1,
+          -25,
+          9,
+          0,
+          0,
+          1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "156-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1p1/2nRp3/P5n1/5N2/1PB2PP1/RNQK4 b - - 2 37",
+      "expected": {
+        "Values": [
+          -1,
+          -1,
+          -5,
+          4,
+          2,
+          4,
+          -1,
+          25,
+          -9,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "157-original",
+      "fen": "rnqk4/1pb2pp1/5n2/p3P1N1/2Nr4/1P1pB1P1/5PKP/1R1R4 b - - 0 37",
+      "expected": {
+        "Values": [
+          0,
+          2,
+          4,
+          -5,
+          -1,
+          -1,
+          1,
+          -25,
+          9,
+          0,
+          0,
+          1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "157-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1p1/2nR4/P3p1n1/5N2/1PB2PP1/RNQK4 w - - 0 37",
+      "expected": {
+        "Values": [
+          0,
+          -2,
+          -4,
+          5,
+          1,
+          1,
+          -1,
+          25,
+          -9,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "158-original",
+      "fen": "rnqk4/1pb2pp1/5n2/p3P1N1/2N3r1/1P1pB1P1/5PKP/1R1R4 w - - 1 38",
+      "expected": {
+        "Values": [
+          1,
+          5,
+          5,
+          -3,
+          -1,
+          -1,
+          1,
+          -25,
+          9,
+          0,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "158-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1p1/2n3R1/P3p1n1/5N2/1PB2PP1/RNQK4 b - - 1 38",
+      "expected": {
+        "Values": [
+          -1,
+          -5,
+          -5,
+          3,
+          1,
+          1,
+          -1,
+          25,
+          -9,
+          0,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "159-original",
+      "fen": "rnqk4/1pb2pp1/5n2/N3P1N1/6r1/1P1pB1P1/5PKP/1R1R4 b - - 0 38",
+      "expected": {
+        "Values": [
+          -3,
+          4,
+          3,
+          -3,
+          -1,
+          -1,
+          1,
+          -25,
+          9,
+          1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "159-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1p1/6R1/n3p1n1/5N2/1PB2PP1/RNQK4 w - - 0 38",
+      "expected": {
+        "Values": [
+          3,
+          -4,
+          -3,
+          3,
+          1,
+          1,
+          -1,
+          25,
+          -9,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "160-original",
+      "fen": "rnqk4/2b2pp1/1p3n2/N3P1N1/6r1/1P1pB1P1/5PKP/1R1R4 w - - 0 39",
+      "expected": {
+        "Values": [
+          -2,
+          4,
+          3,
+          -5,
+          -1,
+          -1,
+          1,
+          -25,
+          9,
+          1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "160-mirror",
+      "fen": "1r1r4/5pkp/1p1Pb1p1/6R1/n3p1n1/1P3N2/2B2PP1/RNQK4 b - - 0 39",
+      "expected": {
+        "Values": [
+          2,
+          -4,
+          -3,
+          5,
+          1,
+          1,
+          -1,
+          25,
+          -9,
+          -1,
+          0,
+          0
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "161-original",
+      "fen": "rnqk4/2b2pp1/1p3n2/N3P1N1/6r1/1P1pB1PK/5P1P/1R1R4 b - - 1 39",
+      "expected": {
+        "Values": [
+          -3,
+          4,
+          3,
+          -5,
+          -4,
+          -9,
+          0,
+          -25,
+          6,
+          1,
+          0,
+          -1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "161-mirror",
+      "fen": "1r1r4/5p1p/1p1Pb1pk/6R1/n3p1n1/1P3N2/2B2PP1/RNQK4 w - - 1 39",
+      "expected": {
+        "Values": [
+          3,
+          -4,
+          -3,
+          5,
+          4,
+          9,
+          0,
+          25,
+          -6,
+          -1,
+          0,
+          1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "162-original",
+      "fen": "rn1k4/2b2pp1/1p3n2/N3PqN1/6r1/1P1pB1PK/5P1P/1R1R4 w - - 2 40",
+      "expected": {
+        "Values": [
+          -3,
+          4,
+          3,
+          -10,
+          -4,
+          -9,
+          0,
+          -25,
+          6,
+          1,
+          0,
+          -1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "162-mirror",
+      "fen": "1r1r4/5p1p/1p1Pb1pk/6R1/n3pQn1/1P3N2/2B2PP1/RN1K4 b - - 2 40",
+      "expected": {
+        "Values": [
+          3,
+          -4,
+          -3,
+          10,
+          4,
+          9,
+          0,
+          25,
+          -6,
+          -1,
+          0,
+          1
+        ],
+        "Phase": 18
+      }
+    },
+    {
+      "id": "163-original",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "163-mirror",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1",
+      "expected": {
+        "Values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "164-original",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/P7/1PPPPPPP/RNBQKBNR b KQkq - 0 1",
+      "expected": {
+        "Values": [
+          -1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "164-mirror",
+      "fen": "rnbqkbnr/1ppppppp/p7/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "expected": {
+        "Values": [
+          1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "165-original",
+      "fen": "rnbqkbnr/pppppp1p/8/6p1/8/P7/1PPPPPPP/RNBQKBNR w KQkq g6 0 2",
+      "expected": {
+        "Values": [
+          -1,
+          -2,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "165-mirror",
+      "fen": "rnbqkbnr/1ppppppp/p7/8/6P1/8/PPPPPP1P/RNBQKBNR b KQkq g3 0 2",
+      "expected": {
+        "Values": [
+          1,
+          2,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "166-original",
+      "fen": "rnbqkbnr/pppppp1p/8/6p1/8/PP6/2PPPPPP/RNBQKBNR b KQkq - 0 2",
+      "expected": {
+        "Values": [
+          -1,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "166-mirror",
+      "fen": "rnbqkbnr/2pppppp/pp6/8/6P1/8/PPPPPP1P/RNBQKBNR w KQkq - 0 2",
+      "expected": {
+        "Values": [
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "167-original",
+      "fen": "rnbqk1nr/ppppppbp/8/6p1/8/PP6/2PPPPPP/RNBQKBNR w KQkq - 1 3",
+      "expected": {
+        "Values": [
+          -1,
+          -6,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "167-mirror",
+      "fen": "rnbqkbnr/2pppppp/pp6/8/6P1/8/PPPPPPBP/RNBQK1NR b KQkq - 1 3",
+      "expected": {
+        "Values": [
+          1,
+          6,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "168-original",
+      "fen": "rnbqk1nr/ppppppbp/8/6p1/8/PP3P2/2PPP1PP/RNBQKBNR b KQkq - 0 3",
+      "expected": {
+        "Values": [
+          -2,
+          -6,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "168-mirror",
+      "fen": "rnbqkbnr/2ppp1pp/pp3p2/8/6P1/8/PPPPPPBP/RNBQK1NR w KQkq - 0 3",
+      "expected": {
+        "Values": [
+          2,
+          6,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "169-original",
+      "fen": "rnbqk1nr/pppp1pbp/4p3/6p1/8/PP3P2/2PPP1PP/RNBQKBNR w KQkq - 0 4",
+      "expected": {
+        "Values": [
+          -3,
+          -6,
+          1,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "169-mirror",
+      "fen": "rnbqkbnr/2ppp1pp/pp3p2/8/6P1/4P3/PPPP1PBP/RNBQK1NR b KQkq - 0 4",
+      "expected": {
+        "Values": [
+          3,
+          6,
+          -1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "170-original",
+      "fen": "rnbqk1nr/pppp1pbp/4p3/6p1/8/PP3P2/1BPPP1PP/RN1QKBNR b KQkq - 1 4",
+      "expected": {
+        "Values": [
+          -3,
+          0,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "170-mirror",
+      "fen": "rn1qkbnr/1bppp1pp/pp3p2/8/6P1/4P3/PPPP1PBP/RNBQK1NR w KQkq - 1 4",
+      "expected": {
+        "Values": [
+          3,
+          0,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "171-original",
+      "fen": "rnbqk1nr/ppp2pbp/3pp3/6p1/8/PP3P2/1BPPP1PP/RN1QKBNR w KQkq - 0 5",
+      "expected": {
+        "Values": [
+          -4,
+          -2,
+          1,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "171-mirror",
+      "fen": "rn1qkbnr/1bppp1pp/pp3p2/8/6P1/3PP3/PPP2PBP/RNBQK1NR b KQkq - 0 5",
+      "expected": {
+        "Values": [
+          4,
+          2,
+          -1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 24
+      }
+    },
+    {
+      "id": "172-original",
+      "fen": "rnbqk1nr/ppp2pBp/3pp3/6p1/8/PP3P2/2PPP1PP/RN1QKBNR b KQkq - 0 5",
+      "expected": {
+        "Values": [
+          -4,
+          6,
+          1,
+          -2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "172-mirror",
+      "fen": "rn1qkbnr/2ppp1pp/pp3p2/8/6P1/3PP3/PPP2PbP/RNBQK1NR w KQkq - 0 5",
+      "expected": {
+        "Values": [
+          4,
+          -6,
+          -1,
+          2,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "173-original",
+      "fen": "rnbqk2r/ppp2pBp/3pp2n/6p1/8/PP3P2/2PPP1PP/RN1QKBNR w KQkq - 1 6",
+      "expected": {
+        "Values": [
+          -3,
+          6,
+          -1,
+          -2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "173-mirror",
+      "fen": "rn1qkbnr/2ppp1pp/pp3p2/8/6P1/3PP2N/PPP2PbP/RNBQK2R b KQkq - 1 6",
+      "expected": {
+        "Values": [
+          3,
+          -6,
+          1,
+          2,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "174-original",
+      "fen": "rnbqk2r/ppp2pBp/3pp2n/6p1/P7/1P3P2/2PPP1PP/RN1QKBNR b KQkq - 0 6",
+      "expected": {
+        "Values": [
+          -2,
+          6,
+          0,
+          -2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "174-mirror",
+      "fen": "rn1qkbnr/2ppp1pp/1p3p2/p7/6P1/3PP2N/PPP2PbP/RNBQK2R w KQkq - 0 6",
+      "expected": {
+        "Values": [
+          2,
+          -6,
+          0,
+          2,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "175-original",
+      "fen": "rnbqk2r/pp3pBp/3pp2n/2p3p1/P7/1P3P2/2PPP1PP/RN1QKBNR w KQkq c6 0 7",
+      "expected": {
+        "Values": [
+          -2,
+          5,
+          0,
+          -5,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "175-mirror",
+      "fen": "rn1qkbnr/2ppp1pp/1p3p2/p7/2P3P1/3PP2N/PP3PbP/RNBQK2R b KQkq c3 0 7",
+      "expected": {
+        "Values": [
+          2,
+          -5,
+          0,
+          5,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "176-original",
+      "fen": "rnbqk2r/pp3p1p/3pp2n/2p3p1/P7/1PB2P2/2PPP1PP/RN1QKBNR b KQkq - 1 7",
+      "expected": {
+        "Values": [
+          -3,
+          4,
+          0,
+          -5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "176-mirror",
+      "fen": "rn1qkbnr/2ppp1pp/1pb2p2/p7/2P3P1/3PP2N/PP3P1P/RNBQK2R w KQkq - 1 7",
+      "expected": {
+        "Values": [
+          3,
+          -4,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "177-original",
+      "fen": "rnbqk2r/pp3p1p/3pp2n/6p1/P1p5/1PB2P2/2PPP1PP/RN1QKBNR w KQkq - 0 8",
+      "expected": {
+        "Values": [
+          -3,
+          6,
+          0,
+          -5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "177-mirror",
+      "fen": "rn1qkbnr/2ppp1pp/1pb2p2/p1P5/6P1/3PP2N/PP3P1P/RNBQK2R b KQkq - 0 8",
+      "expected": {
+        "Values": [
+          3,
+          -6,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "178-original",
+      "fen": "rnbqk2r/pp3p1p/3pp2n/6p1/P1p5/1PB2PP1/2PPP2P/RN1QKBNR b KQkq - 0 8",
+      "expected": {
+        "Values": [
+          -3,
+          8,
+          0,
+          -5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "178-mirror",
+      "fen": "rn1qkbnr/2ppp2p/1pb2pp1/p1P5/6P1/3PP2N/PP3P1P/RNBQK2R w KQkq - 0 8",
+      "expected": {
+        "Values": [
+          3,
+          -8,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "179-original",
+      "fen": "rnbqk2r/pp3p1p/3p3n/4p1p1/P1p5/1PB2PP1/2PPP2P/RN1QKBNR w KQkq - 0 9",
+      "expected": {
+        "Values": [
+          -3,
+          1,
+          0,
+          -5,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "Phase": 23
+      }
+    },
+    {
+      "id": "179-mirror",
+      "fen": "rn1qkbnr/2ppp2p/1pb2pp1/p1P5/4P1P1/3P3N/PP3P1P/RNBQK2R b KQkq - 0 9",
+      "expected": {
+        "Values": [
+          3,
+          -1,
+          0,
+          5,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "Phase": 23
+      }
+    }
+  ]
+}

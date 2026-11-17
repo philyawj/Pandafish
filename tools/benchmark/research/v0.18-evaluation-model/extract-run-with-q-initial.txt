@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.18-evaluation-model/extract.py", line 22, in <module>
+    (r/'feature-oracle-results.json').write_text(json.dumps({'positions':len(expected),'passed':len(expected)-len(errors),'failures':errors},indent=2)+'\n');assert not errors,errors[:3]
+                                                                                                                                                                    ^^^^^^^^^^
+AssertionError: [{'id': '0-original', 'actual': {'Values': [0, 0, -1, -5, 1, 0, 0, 0, 0, 0, 0, 0], 'Phase': 20}, 'expected': {'Values': [0, 0, -1, -5, 1, 0, 1, 0, 0, 0, 0, 0], 'Phase': 20}}, {'id': '0-mirror', 'actual': {'Values': [0, 0, 1, 5, -1, 0, 0, 0, 0, 0, 0, 0], 'Phase': 20}, 'expected': {'Values': [0, 0, 1, 5, -1, 0, -1, 0, 0, 0, 0, 0], 'Phase': 20}}, {'id': '1-original', 'actual': {'Values': [0, 0, -6, 0, 0, 0, 0, -19, 6, 3, 2, 2], 'Phase': 8}, 'expected': {'Values': [0, 0, -6, 0, 0, 0, -1, 0, 0, 3, 2, 2], 'Phase': 8}}]

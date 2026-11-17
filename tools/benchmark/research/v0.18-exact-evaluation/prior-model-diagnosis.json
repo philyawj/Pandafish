@@ -1,0 +1,5249 @@
+{
+  "scope": "Descriptive reuse of inspected evidence; no fresh validation or coefficient selection. Loss is finite-node reference CP estimate, not certain chess truth.",
+  "budgets": {
+    "100": {
+      "positions": 67,
+      "worse": 19,
+      "better": 16,
+      "equal": 32,
+      "top_regression_contribution_to_mean_cp": 14.313432835820896,
+      "all_cases": [
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 d2d3 f8d6 e1g1",
+          "fitted_minus_exact_base_loss_cp": 423.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "e8g8",
+                "e8g8",
+                "e8g8"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 423.0,
+              "trial_losses": [
+                423,
+                423,
+                423
+              ],
+              "moves": [
+                "c6d4",
+                "c6d4",
+                "c6d4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "e8g8",
+                "e8g8",
+                "e8g8"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d4 e5d4 d1d4 b8c6 d4e3 f8e7 g1f3 e8g8 c3d5 d7d6 f3d4 c6e5 f2f4 f6g4 e3e4 f7f5 d5e7 d8e7 e4d5 e5f7 d4f5 c8f5 d5f5 f7e5 f5c2 e5c6 c2d3 c6b4",
+          "fitted_minus_exact_base_loss_cp": 294.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "d3b3",
+                "d3b3",
+                "d3b3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 294.0,
+              "trial_losses": [
+                294,
+                294,
+                294
+              ],
+              "moves": [
+                "d3c3",
+                "d3c3",
+                "d3c3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "d3b3",
+                "d3b3",
+                "d3b3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4e5 f7f6 f1b5 f6e5 d4e5 e7e6 g1f3 c8d7 e1g1 c6e5 f3e5 d7b5 c2c4 b5c4 e5c4 d5c4 d1h5 e8e7 c1g5 g8f6 b1c3",
+          "fitted_minus_exact_base_loss_cp": 242.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 206.0,
+              "trial_losses": [
+                206,
+                206,
+                206
+              ],
+              "moves": [
+                "d8d3",
+                "d8d3",
+                "d8d3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 448.0,
+              "trial_losses": [
+                448,
+                448,
+                448
+              ],
+              "moves": [
+                "d8d2",
+                "d8d2",
+                "d8d2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 206.0,
+              "trial_losses": [
+                206,
+                206,
+                206
+              ],
+              "moves": [
+                "d8d3",
+                "d8d3",
+                "d8d3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 c8e6 e1g1 b8c6 d3b5 g8f6 b1c3 d6d5 f3e5 d8d6 e4d5 f6d5 c3d5 d6e5 d5e3 e8c8 b5c6 b7c6 f2f4 e5d4 d2d3 c5c4 f4f5 e6d5 d1e2 c4d3 c2d3 e7e5",
+          "fitted_minus_exact_base_loss_cp": 148.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 48.0,
+              "trial_losses": [
+                48,
+                48,
+                48
+              ],
+              "moves": [
+                "f5e6",
+                "f5e6",
+                "f5e6"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 196.0,
+              "trial_losses": [
+                196,
+                196,
+                196
+              ],
+              "moves": [
+                "e2c2",
+                "e2c2",
+                "e2c2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 48.0,
+              "trial_losses": [
+                48,
+                48,
+                48
+              ],
+              "moves": [
+                "f5e6",
+                "f5e6",
+                "f5e6"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves g1f3 g8f6 e2e3 g7g6 b1c3 f8g7 d2d4 e8g8 e3e4 d7d5 e4d5 f6d5 f1c4 c8e6 c3d5 e6d5 c4d5 d8d5 c1e3 b8c6 d1d3 a8d8 c2c4 d5a5 d3c3 a5a4 e1g1 a4b4 c3b4 c6b4 a1d1 b4c2 d4d5 c2e3 f2e3 d8d6 f1f2 e7e6 e3e4 e6e5 g1f1 d6f6 c4c5 h7h6 b2b4 f6f4 f3d2 h6h5 f2f4 e5f4 d1c1 h5h4 c1c4 f8e8 b4b5 g7f6 c4a4 a7a5 b5a6 b7a6 a4a6 f6c3 d2f3 e8e4",
+          "fitted_minus_exact_base_loss_cp": 115.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 14.0,
+              "trial_losses": [
+                14,
+                14,
+                14
+              ],
+              "moves": [
+                "a6a7",
+                "a6a7",
+                "a6a7"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 129.0,
+              "trial_losses": [
+                129,
+                129,
+                129
+              ],
+              "moves": [
+                "a6a8",
+                "a6a8",
+                "a6a8"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 14.0,
+              "trial_losses": [
+                14,
+                14,
+                14
+              ],
+              "moves": [
+                "a6a7",
+                "a6a7",
+                "a6a7"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 f1c4 g8f6 g1f3 b8c6 b1c3 f8b4 c4d5 b4c3 b2c3 e8g8 d2d4 d8e8 d4e5 c6e5 c1g5 c7c6 f3e5 e8e5 g5f6 g7f6 d1g4 g8h8 d5b3 d7d5 g4g3 e5e4 e1f1 c8e6 a1e1 e4f5 g3d3 f5f4 d3d4 f4f5 c3c4 b7b6 c4d5 c6d5 c2c4 d5c4 b3c4 a8d8 c4e6 f7e6 d4e4 f5e4 e1e4 e6e5 f1e2 d8c8 e2f3 c8c3 e4e3 c3c2 e3e2 f8c8 e2c2 c8c2 h1a1 h8g7 h2h4 h7h5",
+          "fitted_minus_exact_base_loss_cp": 99.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "a2a4",
+                "a2a4",
+                "a2a4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 99.0,
+              "trial_losses": [
+                99,
+                99,
+                99
+              ],
+              "moves": [
+                "f3e3",
+                "f3e3",
+                "f3e3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "a2a4",
+                "a2a4",
+                "a2a4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 g1f3 g8f6 b1c3 b8c6 c1f4 c8f5 e2e3 e7e6 f1d3 f8d6 d3f5 e6f5 f4g5 d6b4",
+          "fitted_minus_exact_base_loss_cp": 91.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 41.0,
+              "trial_losses": [
+                41,
+                41,
+                41
+              ],
+              "moves": [
+                "g5f6",
+                "g5f6",
+                "g5f6"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 102.0,
+              "trial_losses": [
+                102,
+                102,
+                102
+              ],
+              "moves": [
+                "e1f1",
+                "e1f1",
+                "e1f1"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 11.0,
+              "trial_losses": [
+                11,
+                11,
+                11
+              ],
+              "moves": [
+                "d1d3",
+                "d1d3",
+                "d1d3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 f1c4 g8f6 b1c3 d7d6 g1f3 c8e6 c4d3 f8e7 e1g1 b8c6 d3b5 e8g8 d2d4 e5d4 f3d4 c6d4 d1d4 c7c5 d4d3 a7a6 b5c4 e6c4 d3c4 b7b5 c4e2 b5b4 c3d5 f6d5 e4d5 e7f6 a1b1 f6d4 b2b3 d8e8 e2f3 e8e7 c1f4 a6a5 b1e1 e7f6 f3e4 g7g5 f4e3 g8h8 g1h1 f8d8",
+          "fitted_minus_exact_base_loss_cp": 41.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 107.0,
+              "trial_losses": [
+                107,
+                107,
+                107
+              ],
+              "moves": [
+                "e1d1",
+                "e1d1",
+                "e1d1"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 148.0,
+              "trial_losses": [
+                148,
+                148,
+                148
+              ],
+              "moves": [
+                "e4e7",
+                "e4e7",
+                "e4e7"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 107.0,
+              "trial_losses": [
+                107,
+                107,
+                107
+              ],
+              "moves": [
+                "e1d1",
+                "e1d1",
+                "e1d1"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 b1c3 b8d7 h2h4 g8f6 a2a4 d7e5 f3e5 d6e5 f1b5 c8d7 b5d3 e7e6 d1f3 f8d6 d3c4 e8g8 d2d3 d7c6 e1g1 d8b6 f3g3 g8h8 a4a5 b6b4 f2f3 b7b5 a5b6 a7b6 a1a8 f8a8 c3e2 c6b5 c2c3 b4a4 b2b3 a4a2 c4b5 a2e2 c1g5 a8a2 g3f2 e2c2 f2c2 a2c2 f1c1 c2b2 b5c4 h8g8 c1a1 g8f8 a1a6 f6d7 c4b5 b2b1 g1h2 d7b8 a6b6 d6c7 b6b7 f7f6 b7c7 f6g5 h4g5 b1b3 c7c8 f8f7 c8b8 b3c3 b8b6 h7h6 g5h6 g7h6 b6c6 c3c2 b5c4 h6h5 c4e6 f7e7 e6c4 e7d7 c6c5 d7d6 c5c8 d6e7 c8c6 e7d7 c6h6 h5h4 h6h4 d7d6 h4h6 d6c5 h6a6 c2e2 a6a5 c5c6 a5e5 c6d6 e5h5 e2c2 h5h7 d6e5 h7f7 c2b2 f7d7 e5f4 c4f7 b2d2 d3d4 f4e3 d4d5 e3d4 f7e6 d4e5 d7f7 d2f2",
+          "fitted_minus_exact_base_loss_cp": 34.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2,
+                2,
+                2
+              ],
+              "moves": [
+                "h2g3",
+                "h2g3",
+                "h2g3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 36.0,
+              "trial_losses": [
+                36,
+                36,
+                36
+              ],
+              "moves": [
+                "f7e7",
+                "f7e7",
+                "f7e7"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2,
+                2,
+                2
+              ],
+              "moves": [
+                "h2g3",
+                "h2g3",
+                "h2g3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 f3g5 f8c5 b5c6 b7c6 d1e2 d7d5 e4d5 d8d5 b1c3 d5d6 f2f4 c5d4 e2c4 c8e6 g5e6 d6e6 c4e6 f7e6 c3e2",
+          "fitted_minus_exact_base_loss_cp": 31.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 94.0,
+              "trial_losses": [
+                94,
+                94,
+                94
+              ],
+              "moves": [
+                "f6g4",
+                "f6g4",
+                "f6g4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 125.0,
+              "trial_losses": [
+                125,
+                125,
+                125
+              ],
+              "moves": [
+                "f6e4",
+                "f6e4",
+                "f6e4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 94.0,
+              "trial_losses": [
+                94,
+                94,
+                94
+              ],
+              "moves": [
+                "f6g4",
+                "f6g4",
+                "f6g4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 g1f3 g8f6 c1f4 b8c6 e2e3 e7e6 f1b5 f8d6 b5c6 b7c6 f4e5 e8g8 b1d2 a8b8 b2b3 c8a6 c2c4 f6e4 e1g1 f7f5 g1h1 g8h8 d1e2 d8e7 e2d3 f8c8 h2h3 c6c5 d2e4 f5e4",
+          "fitted_minus_exact_base_loss_cp": 30.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "d3e2",
+                "d3e2",
+                "d3e2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 30.0,
+              "trial_losses": [
+                30,
+                30,
+                30
+              ],
+              "moves": [
+                "d3c2",
+                "d3c2",
+                "d3c2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "d3e2",
+                "d3e2",
+                "d3e2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d4 e5d4 d1d4 b8c6 d4e3 f8e7 g1f3 d7d6 c3d5 e8g8 f3d4 c6e5",
+          "fitted_minus_exact_base_loss_cp": 28.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 80.0,
+              "trial_losses": [
+                80,
+                80,
+                80
+              ],
+              "moves": [
+                "f2f4",
+                "f2f4",
+                "f2f4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 108.0,
+              "trial_losses": [
+                108,
+                108,
+                108
+              ],
+              "moves": [
+                "c1d2",
+                "c1d2",
+                "c1d2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 80.0,
+              "trial_losses": [
+                80,
+                80,
+                80
+              ],
+              "moves": [
+                "f2f4",
+                "f2f4",
+                "f2f4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 c8e6 e1g1 g8f6 b1c3 b8d7 d3b5 e6g4 d2d3 e7e5 b5d7 d8d7",
+          "fitted_minus_exact_base_loss_cp": 23.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 23.0,
+              "trial_losses": [
+                23,
+                23,
+                23
+              ],
+              "moves": [
+                "c1g5",
+                "c1g5",
+                "c1g5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 46.0,
+              "trial_losses": [
+                46,
+                46,
+                46
+              ],
+              "moves": [
+                "c1d2",
+                "c1d2",
+                "c1d2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 23.0,
+              "trial_losses": [
+                23,
+                23,
+                23
+              ],
+              "moves": [
+                "c1g5",
+                "c1g5",
+                "c1g5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 e6d5 b1d2 b8c6 g1f3 c8f5 e2e3 g8f6 f1e2 f8b4 e1g1 e8g8 a2a3 b4d2 c1d2 f6e4 d2b4 c6b4 a3b4 d8d6 b4b5 d6b4 d1c1 f5g4 c1c7 b4b2 a1e1 a8b8 c7e5 b2b3 e1b1 b3a2 e2d3 b8e8 e5c7 a2a3 d3e4 d5e4 f3e5 g4e2 f1e1 e8e7 c7c1 a3c1 e1c1 f7f6 e5c4 e7d7 b1a1 b7b6 c4d2 f8e8 d2c4 e2c4 c1c4 g8f8 g1f1 e8e6 c4c1 h7h5 h2h4",
+          "fitted_minus_exact_base_loss_cp": 23.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 5.0,
+              "trial_losses": [
+                5,
+                5,
+                5
+              ],
+              "moves": [
+                "f8f7",
+                "f8f7",
+                "f8f7"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 28.0,
+              "trial_losses": [
+                28,
+                28,
+                28
+              ],
+              "moves": [
+                "e6e8",
+                "e6e8",
+                "e6e8"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 5.0,
+              "trial_losses": [
+                5,
+                5,
+                5
+              ],
+              "moves": [
+                "f8f7",
+                "f8f7",
+                "f8f7"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 e6d5 b1d2 b8c6 g1f3 c8f5 e2e3 g8f6 f1e2 f8b4 e1g1 e8g8 a2a3 b4d2 c1d2 f6e4 d2b4 c6b4 a3b4 d8d6 b4b5 d6b4 d1c1 f5g4 c1c7 b4b2 a1e1 f8b8 c7e5 b2b3 e1b1 b3a2 e2d3 b8e8 e5c7 a2a3 d3e4 d5e4 f3e5 e8e7 c7c4 g4e6 d4d5 a3d6 d5e6 d6e5 e6f7 e7f7 f2f3 e4f3 f1f3 a8f8 b1f1 e5e8 e3e4 h7h6 e4e5 h6h5 f3f7 f8f7",
+          "fitted_minus_exact_base_loss_cp": 19.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 26.0,
+              "trial_losses": [
+                26,
+                26,
+                26
+              ],
+              "moves": [
+                "g2g3",
+                "g2g3",
+                "g2g3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 45.0,
+              "trial_losses": [
+                45,
+                45,
+                45
+              ],
+              "moves": [
+                "f1f4",
+                "f1f4",
+                "f1f4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 26.0,
+              "trial_losses": [
+                26,
+                26,
+                26
+              ],
+              "moves": [
+                "g2g3",
+                "g2g3",
+                "g2g3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c6 d2d4 d7d5 f1d3 g8f6 e4e5 c8g4 f2f3 g4e6 e5f6 g7f6 g1e2 c6c5 d3b5 e6d7 b1c3 c5d4 e2d4 e7e5 d1e2 f8c5 d4b3 c5b4 c1e3 b4c3 b2c3 a7a6 b5d3 e8g8 e3c5 f8e8 e1g1 b8c6 c5e3 d8e7 g1h1 d7e6 a2a4 h7h5 b3c5 h5h4 f1b1 e8b8 b1b6 e7c7 a1b1 d5d4",
+          "fitted_minus_exact_base_loss_cp": 13.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 5.0,
+              "trial_losses": [
+                5,
+                5,
+                5
+              ],
+              "moves": [
+                "e3f2",
+                "e3f2",
+                "e3f2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 18.0,
+              "trial_losses": [
+                18,
+                18,
+                18
+              ],
+              "moves": [
+                "c3d4",
+                "c3d4",
+                "c3d4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 5.0,
+              "trial_losses": [
+                5,
+                5,
+                5
+              ],
+              "moves": [
+                "e3f2",
+                "e3f2",
+                "e3f2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 f8b4 c1d2 b4d2 b1d2 d8d5 e2e3 g8e7 g1f3 b8c6 f1c4 d5f5 e3e4 f5g4 e1g1 e8g8 d1b3 h7h5 b3b5 a7a6 b5c5 b7b6 c5a3 c8b7 a3e3 h5h4 h2h3 g4h5 e3f4 f8c8 g2g4 h4g3 f4g3 b6b5 c4d3 f7f5 g1h1 f5e4 d2e4 c8f8 h1g2 e7g6 f1g1 g6f4",
+          "fitted_minus_exact_base_loss_cp": 9.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6,
+                6,
+                6
+              ],
+              "moves": [
+                "g2f1",
+                "g2f1",
+                "g2f1"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 15.0,
+              "trial_losses": [
+                15,
+                15,
+                15
+              ],
+              "moves": [
+                "g2h2",
+                "g2h2",
+                "g2h2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6,
+                6,
+                6
+              ],
+              "moves": [
+                "g2f1",
+                "g2f1",
+                "g2f1"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b5c6 b7c6 b1c3 f8b4 d2d3 b4c3 b2c3 d7d6 e1g1 c8e6 c1g5 e8g8 d3d4 e6c4 f1e1 d8e7 g5f6 g7f6 a2a3",
+          "fitted_minus_exact_base_loss_cp": 6.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 33.0,
+              "trial_losses": [
+                33,
+                33,
+                33
+              ],
+              "moves": [
+                "f8d8",
+                "f8d8",
+                "f8d8"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 39.0,
+              "trial_losses": [
+                39,
+                39,
+                39
+              ],
+              "moves": [
+                "a8b8",
+                "a8b8",
+                "a8b8"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 33.0,
+              "trial_losses": [
+                33,
+                33,
+                33
+              ],
+              "moves": [
+                "f8d8",
+                "f8d8",
+                "f8d8"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen r3k2r/ppp2ppp/2n5/3pp3/3PP3/2N5/PPP2PPP/R3K2R w KQkq - 0 1",
+          "fitted_minus_exact_base_loss_cp": 4.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "c3d5",
+                "c3d5",
+                "c3d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 4.0,
+              "trial_losses": [
+                4,
+                4,
+                4
+              ],
+              "moves": [
+                "d4e5",
+                "d4e5",
+                "d4e5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "c3d5",
+                "c3d5",
+                "c3d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b1c3 f8b4 b5c6 b7c6 d2d3 b4c3 b2c3 d7d6 e1g1 e8g8 c1g5 c8g4 d3d4 g4f3 d1f3 f8e8 g5f6 d8f6 f1e1 d6d5 f3f6 g7f6 g1f1 a8b8 a1d1 d5e4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 4.0,
+              "trial_losses": [
+                4,
+                4,
+                4
+              ],
+              "moves": [
+                "e1e4",
+                "e1e4",
+                "e1e4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 4.0,
+              "trial_losses": [
+                4,
+                4,
+                4
+              ],
+              "moves": [
+                "e1e4",
+                "e1e4",
+                "e1e4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 4.0,
+              "trial_losses": [
+                4,
+                4,
+                4
+              ],
+              "moves": [
+                "e1e4",
+                "e1e4",
+                "e1e4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 e6d5 g1f3 g8f6 b1c3 b8c6 c1f4 f8d6 d1d2 d6f4 d2f4 c8e6 c3b5 a8c8 f3e5 a7a6 b5c3 e8g8 e1c1 c6e5 d4e5 f6h5 f4e3 g7g5 g2g3 g5g4 f1g2 c7c6 e3h6 h5g7 e2e4 f7f6 e5f6 d8f6 h6f6 f8f6 h1f1 f6h6 e4d5 e6d5 c3d5 c6d5 c1b1 h6h2 g2d5 g8h8 d5b7 c8f8 b7a6 h2g2 d1d2 g7e6 a6b7 g2h2 b1c1 e6c5 b7d5 f8c8 c1d1 c8b8",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 7.0,
+              "trial_losses": [
+                7,
+                7,
+                7
+              ],
+              "moves": [
+                "f1e1",
+                "f1e1",
+                "f1e1"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 7.0,
+              "trial_losses": [
+                7,
+                7,
+                7
+              ],
+              "moves": [
+                "f1e1",
+                "f1e1",
+                "f1e1"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 7.0,
+              "trial_losses": [
+                7,
+                7,
+                7
+              ],
+              "moves": [
+                "f1e1",
+                "f1e1",
+                "f1e1"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e6 d2d4 d7d5 f1d3 b8d7 e1f1 g8f6 e4e5 f6e4 f2f3 e4c5 d4c5 f8c5 d1e2 c5d4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 29.0,
+              "trial_losses": [
+                29,
+                29,
+                29
+              ],
+              "moves": [
+                "f3f4",
+                "f3f4",
+                "f3f4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 29.0,
+              "trial_losses": [
+                29,
+                29,
+                29
+              ],
+              "moves": [
+                "f3f4",
+                "f3f4",
+                "f3f4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 29.0,
+              "trial_losses": [
+                29,
+                29,
+                29
+              ],
+              "moves": [
+                "f3f4",
+                "f3f4",
+                "f3f4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e6 d2d4 d7d5 f1d3 b8d7 g1e2 g8f6 e4e5 f6e4 d3e4 d5e4 b1d2 f7f5 e1g1 f8b4 c2c3 b4e7 e2f4 d7f8 d2c4 b7b5 c4e3 f8g6 d1h5 e8f7 f2f3 e4f3 f1f3 e7g5 c1d2 g5f4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 7.0,
+              "trial_losses": [
+                7,
+                7,
+                7
+              ],
+              "moves": [
+                "f3f4",
+                "f3f4",
+                "f3f4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 7.0,
+              "trial_losses": [
+                7,
+                7,
+                7
+              ],
+              "moves": [
+                "f3f4",
+                "f3f4",
+                "f3f4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 7.0,
+              "trial_losses": [
+                7,
+                7,
+                7
+              ],
+              "moves": [
+                "f3f4",
+                "f3f4",
+                "f3f4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c6 d2d4 d7d5 f1d3 b8d7 b1c3 e7e6 g1e2 g8f6 e4e5 f6g4 h2h3 g4h6 c1h6 g7h6 e1g1 f8b4 d1d2 d8g5 f2f4 b4c3 b2c3 g5g7 f4f5 g7g5 d2g5 h6g5 a1c1 c6c5 d3b5 c5c4 c1b1 a8b8 f5e6 f7e6 f1f6 e8e7 f6f2 a7a6 b5d7 c8d7 f2f6 d7b5 b1b4 b8g8 g1f1 g8f8 a2a4 b5c6 f6f2 f8f2 f1f2 a6a5 b4b1 h7h5 f2e3 h8b8 b1a1 e7d7 g2g3 b8a8 a1a2 a8g8",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 22.0,
+              "trial_losses": [
+                22,
+                22,
+                22
+              ],
+              "moves": [
+                "a2a1",
+                "a2a1",
+                "a2a1"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 22.0,
+              "trial_losses": [
+                22,
+                22,
+                22
+              ],
+              "moves": [
+                "a2a1",
+                "a2a1",
+                "a2a1"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 22.0,
+              "trial_losses": [
+                22,
+                22,
+                22
+              ],
+              "moves": [
+                "a2a1",
+                "a2a1",
+                "a2a1"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 e1g1 c6d4 b1c3 f8d6 d2d3 e8g8 c1e3 c7c5 b5c4 d8b6",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 24.0,
+              "trial_losses": [
+                24,
+                24,
+                24
+              ],
+              "moves": [
+                "a1b1",
+                "a1b1",
+                "a1b1"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 24.0,
+              "trial_losses": [
+                24,
+                24,
+                24
+              ],
+              "moves": [
+                "a1b1",
+                "a1b1",
+                "a1b1"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 24.0,
+              "trial_losses": [
+                24,
+                24,
+                24
+              ],
+              "moves": [
+                "a1b1",
+                "a1b1",
+                "a1b1"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 e6d5 b1c3 b8c6 g1f3 c8f5 c1f4 g8f6 d1b3 f8b4 f3e5 b4c3 b3c3 c6e7 e1c1 f6e4 c3f3 f7f6 e5d3 e8g8 g2g4 f5e6 f1h3 g7g5 f4e3 d8d6 c1b1 b7b5 a2a3 a7a5 b1a1 a5a4 d1b1 a8d8 b1c1 f6f5 g4f5 e6f5 c1g1 f5g6 f3g2 g8h8 f2f3 e4f6",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 44.0,
+              "trial_losses": [
+                44,
+                44,
+                44
+              ],
+              "moves": [
+                "g2g5",
+                "g2g5",
+                "g2g5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 44.0,
+              "trial_losses": [
+                44,
+                44,
+                44
+              ],
+              "moves": [
+                "g2g5",
+                "g2g5",
+                "g2g5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 44.0,
+              "trial_losses": [
+                44,
+                44,
+                44
+              ],
+              "moves": [
+                "g2g5",
+                "g2g5",
+                "g2g5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen 4k1n1/8/8/8/8/8/8/3QK1N1 w - - 0 1 moves g1f3 g8f6 f3g1 f6g8 g1f3 g8f6 f3g1",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "f6g8",
+                "f6g8",
+                "f6g8"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "f6g8",
+                "f6g8",
+                "f6g8"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "f6g8",
+                "f6g8",
+                "f6g8"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4d5 d8d5 g1f3 e7e6 b1c3 f8b4 c1d2 b4c3 d2c3 g8e7 f1d3 e8g8 e1g1 c8d7 f1e1 d5d6 f3g5 h7h6 g5e4 d6d5 e4c5 b7b6 c5d7 d5d7 d1g4 e7d5 a2a3 d5f6 g4h4 a8d8 d3b5 f6d5 b5c6 d7c6 h4g3 a7a5 c3d2 c6c2 d2h6 c2g6 g3g6 f7g6 h6g5 d8d6 a1c1 f8f7 h2h4 b6b5 c1c5 c7c6 e1c1 d5f4 g5f4 f7f4 c5c6 f4d4 c6d6 d4d6 c1c5",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6,
+                6,
+                6
+              ],
+              "moves": [
+                "d6d1",
+                "d6d1",
+                "d6d1"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6,
+                6,
+                6
+              ],
+              "moves": [
+                "d6d1",
+                "d6d1",
+                "d6d1"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6,
+                6,
+                6
+              ],
+              "moves": [
+                "d6d1",
+                "d6d1",
+                "d6d1"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4d5 d8d5 g1f3 e7e6 b1c3 f8b4 c1d2 b4c3 d2c3 g8e7 f1d3 e8g8 d1e2 d5d6 d3h7 g8h7 f3g5 h7g6 e2g4 f7f5 g4h4 c8d7 h4h7",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 1000.0,
+              "trial_losses": [
+                1000,
+                1000,
+                1000
+              ],
+              "moves": [
+                "g6g5",
+                "g6g5",
+                "g6g5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 1000.0,
+              "trial_losses": [
+                1000,
+                1000,
+                1000
+              ],
+              "moves": [
+                "g6g5",
+                "g6g5",
+                "g6g5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 1000.0,
+              "trial_losses": [
+                1000,
+                1000,
+                1000
+              ],
+              "moves": [
+                "g6g5",
+                "g6g5",
+                "g6g5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 b8c6 d2d4 d7d5 e4d5 d8d5 g1f3 e7e6 b1c3 f8b4 c1d2 b4c3 d2c3 g8e7 f1d3 e8g8 e1g1 c8d7 f1e1 d5d6 f3g5 h7h6 g5e4 d6d5 e4c5 b7b6 c5d7 d5d7 d1g4 e7d5 a2a3 d5f6 g4h4 a8d8 d3b5 f6d5 b5c6 d7c6 h4g3 a7a5 c3d2 c6c2 d2h6 c2g6 g3g6 f7g6 h6g5 d8d6 a1c1 f8f7 h2h4 b6b5 c1c5 c7c6 e1c1 d5f4 g5f4 f7f4 c5c6 f4d4 c6d6 d4d6 c1c5 d6d5 c5d5 e6d5",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 55.0,
+              "trial_losses": [
+                55,
+                55,
+                55
+              ],
+              "moves": [
+                "f2f4",
+                "f2f4",
+                "f2f4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 55.0,
+              "trial_losses": [
+                55,
+                55,
+                55
+              ],
+              "moves": [
+                "f2f4",
+                "f2f4",
+                "f2f4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 55.0,
+              "trial_losses": [
+                55,
+                55,
+                55
+              ],
+              "moves": [
+                "f2f4",
+                "f2f4",
+                "f2f4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b1c3 f8b4 b5c6 b7c6 f3e5 b4c3",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "b2c3",
+                "b2c3",
+                "b2c3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "b2c3",
+                "b2c3",
+                "b2c3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "b2c3",
+                "b2c3",
+                "b2c3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 f8b4 c1d2 b4d2 b1d2 d8d5 g1f3 g8f6 e2e3 d5f5 f1c4 b8d7 d1b1 f5b1 a1b1 c7c5 e1f1 c5d4 e3d4 e8f8 g2g3 d7b6 f3e5 c8d7 f2f3 d7c6 c4d3 a8d8 e5c6 b7c6 d2b3 e6e5 d4e5 d8d3 f1e2 d3b3",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "a2b3",
+                "a2b3",
+                "a2b3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "a2b3",
+                "a2b3",
+                "a2b3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "a2b3",
+                "a2b3",
+                "a2b3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 c8e6 e1g1 b8d7 d3b5 g8f6 b1c3 e6g4 d2d3 e7e5 b5d7 d8d7 c1g5 f8e7 h2h3 g4f3 d1f3 e8g8 g5f6 e7f6 c3d5 f6g5 g2g4 g7g6 f3f6 d7d8 f6d8 a8d8 f2f4 g5f4 d5f4 e5f4 f1f4 d6d5 g4g5 d5e4 f4e4 d8d7 e4e5 f8c8 g1f1 c5c4 e5e3 c4d3 e3d3 d7d3 c2d3 c8c2 a1e1 c2b2 e1e2 b2b5 e2e8 g8g7 h3h4 a7a5 e8e7 b7b6 f1f2 g7f8 e7e4 b5b2 e4e2 b2b4 e2e4 b4b2 e4e2 b2b4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 123.0,
+              "trial_losses": [
+                123,
+                123,
+                123
+              ],
+              "moves": [
+                "e2e4",
+                "e2e4",
+                "e2e4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 123.0,
+              "trial_losses": [
+                123,
+                123,
+                123
+              ],
+              "moves": [
+                "e2e4",
+                "e2e4",
+                "e2e4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 123.0,
+              "trial_losses": [
+                123,
+                123,
+                123
+              ],
+              "moves": [
+                "e2e4",
+                "e2e4",
+                "e2e4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 c8e6 e1g1 b8d7 d3b5 g8f6 b1c3 e6g4 d2d3 e7e5 b5d7 d8d7 c1g5 f8e7 g5f6 e7f6 c3d5 e8g8 d1d2 g4f3 g2f3 b7b5 c2c3 g8h8 f3f4 d7g4 g1h1 g4f3 h1g1 e5f4 d2f4 f3f4 d5f4 f6e5 f4d5 g7g5 f1d1 b5b4 d3d4 e5g7 a1b1 a8e8 f2f3 f7f5 d5c7 e8e7 c7d5 e7e8 d5c7 e8e7",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 1.0,
+              "trial_losses": [
+                1,
+                1,
+                1
+              ],
+              "moves": [
+                "c7d5",
+                "c7d5",
+                "c7d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 1.0,
+              "trial_losses": [
+                1,
+                1,
+                1
+              ],
+              "moves": [
+                "c7d5",
+                "c7d5",
+                "c7d5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 1.0,
+              "trial_losses": [
+                1,
+                1,
+                1
+              ],
+              "moves": [
+                "c7d5",
+                "c7d5",
+                "c7d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1d2 f8b4 g1f3 e8g8 e2e3 c7c5 a2a3 b4d2",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "c1d2",
+                "c1d2",
+                "c1d2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "c1d2",
+                "c1d2",
+                "c1d2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "c1d2",
+                "c1d2",
+                "c1d2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1d2 b8c6 g1f3 f8b4 e2e3 e8g8 f1d3 b4d2 c1d2 d7d6 e1g1 e6e5 d4e5 d6e5 d2c3 d8d6 e3e4 f8d8 d3e2 c8e6 f3d2",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 1.0,
+              "trial_losses": [
+                1,
+                1,
+                1
+              ],
+              "moves": [
+                "c6d4",
+                "c6d4",
+                "c6d4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 1.0,
+              "trial_losses": [
+                1,
+                1,
+                1
+              ],
+              "moves": [
+                "c6d4",
+                "c6d4",
+                "c6d4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 1.0,
+              "trial_losses": [
+                1,
+                1,
+                1
+              ],
+              "moves": [
+                "c6d4",
+                "c6d4",
+                "c6d4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 b1c3 f8c5 f3e5 c6e5 d2d3 d7d6 h2h3 g8f6 d3d4 c5d4 d1d4 c7c5 d4d2 e8g8 f1e2 c8e6 d2g5 h7h6 g5d2 d6d5 e4d5",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2,
+                2,
+                2
+              ],
+              "moves": [
+                "f6d5",
+                "f6d5",
+                "f6d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2,
+                2,
+                2
+              ],
+              "moves": [
+                "f6d5",
+                "f6d5",
+                "f6d5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2,
+                2,
+                2
+              ],
+              "moves": [
+                "f6d5",
+                "f6d5",
+                "f6d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 b1d2 d5c4 g1f3 f8b4 g2g3 b8c6 a2a3 b4d2 f3d2 d8d4 e2e3 d4c5 f1c4 g8f6 b2b4 c5e5 a1a2 f6d5 a2c2 c6d4 c1b2 d4c2 d1c2 e5g5 d2f3 g5h5 c4e2 e8g8 h2h4 h5g6 e3e4 h7h5 b2c1 d5f6 e2d3 c7c6 c1g5 f8d8 e1g1 g6h7 f1d1 d8d7 b4b5 f6e4 b5c6 b7c6 d3e4 d7d1 g1g2 f7f5 e4c6 c8b7 c6b7 a8d8 b7c8 h7g6 g5d8 d1d8 c2c4 d8e8 c8d7",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2,
+                2,
+                2
+              ],
+              "moves": [
+                "e8f8",
+                "e8f8",
+                "e8f8"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2,
+                2,
+                2
+              ],
+              "moves": [
+                "e8f8",
+                "e8f8",
+                "e8f8"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2,
+                2,
+                2
+              ],
+              "moves": [
+                "e8f8",
+                "e8f8",
+                "e8f8"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1d2 b8c6 g1f3 d7d5 c4d5 d8d5 e2e3 f8e7",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 13.0,
+              "trial_losses": [
+                13,
+                13,
+                13
+              ],
+              "moves": [
+                "f1c4",
+                "f1c4",
+                "f1c4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 13.0,
+              "trial_losses": [
+                13,
+                13,
+                13
+              ],
+              "moves": [
+                "f1c4",
+                "f1c4",
+                "f1c4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 13.0,
+              "trial_losses": [
+                13,
+                13,
+                13
+              ],
+              "moves": [
+                "f1c4",
+                "f1c4",
+                "f1c4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 e2e3 f8b4 b1d2 b8c6 h2h3 e8g8 d1c2 b4d2 e1d2 c6b4 c2a4 f6e4 d2e1 d8h4 g2g3 h4f6 h1h2 a7a5 a2a3 b4c6 f1d3",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 14.0,
+              "trial_losses": [
+                14,
+                14,
+                14
+              ],
+              "moves": [
+                "d7d5",
+                "d7d5",
+                "d7d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 14.0,
+              "trial_losses": [
+                14,
+                14,
+                14
+              ],
+              "moves": [
+                "d7d5",
+                "d7d5",
+                "d7d5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 14.0,
+              "trial_losses": [
+                14,
+                14,
+                14
+              ],
+              "moves": [
+                "d7d5",
+                "d7d5",
+                "d7d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d4 d7d6 g1f3 e5d4 f3d4 f8e7 c1f4 b8c6 d4c6 b7c6 e2e4 a8b8 d1d2 h7h6 f4e3 f6g4 e3a7 e7h4 a7b8 g4f2 g2g3 f2h1 g3h4 d8h4 e1d1 e8d8 b8a7 c6c5 d1c1 d8e8 a7b8 d6d5 c4d5 h4f2 d2f2 h1f2",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 12.0,
+              "trial_losses": [
+                12,
+                12,
+                12
+              ],
+              "moves": [
+                "b8c7",
+                "b8c7",
+                "b8c7"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 12.0,
+              "trial_losses": [
+                12,
+                12,
+                12
+              ],
+              "moves": [
+                "b8c7",
+                "b8c7",
+                "b8c7"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 12.0,
+              "trial_losses": [
+                12,
+                12,
+                12
+              ],
+              "moves": [
+                "b8c7",
+                "b8c7",
+                "b8c7"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 a2a3 f8d6 c3b5 b8c6 g2g3 e8g8 a1b1 a7a6 b5c3 g8h8 d2d3 c6d4 c1g5 b7b5 c3d5 b5c4 g5f6 g7f6 e2e3 c7c6 d3c4 c6d5 f1h3 d8a5 d1d2 d4c2 e1d1 a5d2 d1d2 c2a3 b2a3 d5c4 g1e2 d6a3 e2c3 a8a7 h3g2 d7d6 b1b8 h8g7 h1b1 a3c5 h2h3 c8f5 b8f8 g7f8 b1b8 f8g7 d2d1 a6a5 c3b5 a7a6 g3g4 f5d7 b5c7 d7a4 d1e1 a6a7 c7d5 a4c6 g2e4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 204.0,
+              "trial_losses": [
+                204,
+                204,
+                204
+              ],
+              "moves": [
+                "c6d5",
+                "c6d5",
+                "c6d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 204.0,
+              "trial_losses": [
+                204,
+                204,
+                204
+              ],
+              "moves": [
+                "c5b4",
+                "c5b4",
+                "c5b4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 204.0,
+              "trial_losses": [
+                204,
+                204,
+                204
+              ],
+              "moves": [
+                "c6d5",
+                "c6d5",
+                "c6d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves g1f3 d7d5 d2d4 g8f6 e2e3 b8c6 c2c4 c8g4 d1b3 g4f3 g2f3 a8b8 c1d2 e7e5 c4d5 d8d5 b3d5 f6d5 b1a3 f8a3 b2a3 e5d4 f1b5 d4e3 d2c1 e3f2 e1d2 e8f8 d2d3 c6e5 d3c2 e5f3 a3a4 f3d4 c2d3 d4e6 c1a3 c7c5 b5d7 e6f4 d3e4 f8e7 a3c1 f4e6 c1b2 e6c7 d7h3 e7f8 e4f3 f2f1n h1f1 b7b5 f1c1 f7f6 c1c5 b5a4 b2c3 b8e8 c3d4 e8a8 a1b1 f8e7 b1c1 e7d8 d4f2 h8e8 c1d1 e8e5 d1d4 a4a3 d4d1 e5h5 f2g3 h5h3 f3g2 h3g3 g2g3 d8e7 c5d5 c7d5 d1d5 a8d8 d5c5 d8d3 g3f2 d3d2 f2g1 d2d1 g1f2 d1d2 f2f3 d2h2 f3g3 h2a2 g3h3 a2d2 c5a5 d2d3 h3g4 a7a6 a5c5 d3d4 g4f3 a3a2 c5a5 d4d3 f3g4 d3d4 g4f3 d4d3 f3g2 d3d2 g2g3 d2d3 g3h2 d3d2 h2h3 d2d3 h3g4 h7h5",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 34.0,
+              "trial_losses": [
+                34,
+                34,
+                34
+              ],
+              "moves": [
+                "g4f4",
+                "g4f4",
+                "g4f4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 34.0,
+              "trial_losses": [
+                34,
+                34,
+                34
+              ],
+              "moves": [
+                "g4f4",
+                "g4f4",
+                "g4f4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 34.0,
+              "trial_losses": [
+                34,
+                34,
+                34
+              ],
+              "moves": [
+                "g4f4",
+                "g4f4",
+                "g4f4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b5c6 d7c6 b1c3 c8g4 e1g1 f8b4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 8.0,
+              "trial_losses": [
+                8,
+                8,
+                8
+              ],
+              "moves": [
+                "d2d3",
+                "d2d3",
+                "d2d3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 8.0,
+              "trial_losses": [
+                8,
+                8,
+                8
+              ],
+              "moves": [
+                "d2d3",
+                "d2d3",
+                "d2d3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 8.0,
+              "trial_losses": [
+                8,
+                8,
+                8
+              ],
+              "moves": [
+                "d2d3",
+                "d2d3",
+                "d2d3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 f8b4 c1d2 b4d2 b1d2 d8d5 g1f3 g8f6 e2e3 b7b5 f1d3 b8c6 e3e4 d5h5 e4e5 f6d7 a1c1 c8b7 d3b5 c6d4 b5d7 e8d7 f3d4 h5e5 d4e2 e5a5 e2c3 d7e7 e1g1 a5g5 c3e4 g5a5 c1c5 a5b4 c5c7 e7f8",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 138.0,
+              "trial_losses": [
+                138,
+                138,
+                138
+              ],
+              "moves": [
+                "d1h5",
+                "d1h5",
+                "d1h5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 138.0,
+              "trial_losses": [
+                138,
+                138,
+                138
+              ],
+              "moves": [
+                "d1h5",
+                "d1h5",
+                "d1h5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 138.0,
+              "trial_losses": [
+                138,
+                138,
+                138
+              ],
+              "moves": [
+                "d1h5",
+                "d1h5",
+                "d1h5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1d2 b8c6 g1f3 a7a5 e2e4 f8b4 f1d3 f6h5",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 20.0,
+              "trial_losses": [
+                20,
+                20,
+                20
+              ],
+              "moves": [
+                "e1g1",
+                "e1g1",
+                "e1g1"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 20.0,
+              "trial_losses": [
+                20,
+                20,
+                20
+              ],
+              "moves": [
+                "e1g1",
+                "e1g1",
+                "e1g1"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 20.0,
+              "trial_losses": [
+                20,
+                20,
+                20
+              ],
+              "moves": [
+                "e1g1",
+                "e1g1",
+                "e1g1"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d3 f8d6 g1f3 b8c6 c1g5 e8g8 c3d5 c6d4 d1a4 c7c6 d5c3 h7h6 g5f6 d8f6 c3e4 f6e7 a2a3 b7b5 a4d1 b5c4 d3c4 f7f5 e4d6 e7d6 f3d2 e5e4 d2b3 d4b3 d1d6 b3a1 d6d1 c8a6 c4c5 a6c4 d1c1 c4d5 c1a1 f5f4 f2f3 e4e3 g2g3 a8d8 b2b4 f4g3 h2g3 f8e8 h1h4 e8e7 h4g4 d8e8 f3f4 g8f8 f4f5 e7e5 a1d4 a7a6 g4g6 e8e7 d4d3 d5f7 f5f6",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "g7f6",
+                "g7f6",
+                "g7f6"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "g7f6",
+                "g7f6",
+                "g7f6"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "g7f6",
+                "g7f6",
+                "g7f6"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves g1f3 d7d5 d2d4 g8f6 e2e3 b8c6 h2h3 f6e4 f1d3 c8f5 g2g4 f5e6 b1c3 f7f5 g4f5 e6f5 d3b5 d8d6 f3h4 g7g6 h4f5 g6f5 d1f3 e7e6 f3h5 e8d8 c1d2 d8c8 h5e8 c6d8 c3e4 f5e4 d2a5 a7a6 b5a4 b7b5 a4b3 d6b4 a5b4 f8b4 c2c3 b4c3 b2c3 h8e8 a2a4 a8b8 a4b5 a6b5 a1a6 e8h8 h1g1 b5b4 c3c4 c8b7 a6a4 b7c6 c4d5 e6d5 a4a5 d8e6 b3d5 c6b6 a5a2 b8e8 a2c2 c7c5 c2c4 b4b3 e1d2 h8f8 g1f1 f8f3 d5e4 f3h3 e4f5 h3h5 f5e6 e8e6 f1b1 c5d4 b1b3 b6a5 e3d4 e6f6 d2e2 h5h2 b3f3 f6e6 e2f1 e6d6 f3f5 a5b6 c4b4 b6c6 f5c5 c6d7 b4b7 d7e6 c5e5 e6f6 e5e4 f6f5 b7e7 d6c6 f1g1 h2h6 e7e5 f5g6 d4d5 c6c2 e5e6 g6g7 e6e7 g7f8 e7e8 f8f7 e8e7 f7f8 e7e8 f8f7",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6,
+                6,
+                6
+              ],
+              "moves": [
+                "e4e7",
+                "e4e7",
+                "e4e7"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6,
+                6,
+                6
+              ],
+              "moves": [
+                "e4e7",
+                "e4e7",
+                "e4e7"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6,
+                6,
+                6
+              ],
+              "moves": [
+                "e4e7",
+                "e4e7",
+                "e4e7"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen 4k3/8/8/3pP3/8/8/8/4K3 w - d6 0 1",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "e1d2",
+                "e1d2",
+                "e1d2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "e1d2",
+                "e1d2",
+                "e1d2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "e1d2",
+                "e1d2",
+                "e1d2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen k3r3/8/8/3pP3/8/8/8/4K3 w - d6 0 1",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 47.0,
+              "trial_losses": [
+                47,
+                47,
+                47
+              ],
+              "moves": [
+                "e1d2",
+                "e1d2",
+                "e1d2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 47.0,
+              "trial_losses": [
+                47,
+                47,
+                47
+              ],
+              "moves": [
+                "e1d2",
+                "e1d2",
+                "e1d2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 47.0,
+              "trial_losses": [
+                47,
+                47,
+                47
+              ],
+              "moves": [
+                "e1d2",
+                "e1d2",
+                "e1d2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen 8/8/4k3/3p4/3P4/4K3/8/8 w - - 34 1",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "e3e2",
+                "e3e2",
+                "e3e2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "e3e2",
+                "e3e2",
+                "e3e2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "e3e2",
+                "e3e2",
+                "e3e2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 e1g1 f8d6 b5c6 d7c6 b1c3 f6d7",
+          "fitted_minus_exact_base_loss_cp": -1.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2,
+                2,
+                2
+              ],
+              "moves": [
+                "d2d4",
+                "d2d4",
+                "d2d4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 1.0,
+              "trial_losses": [
+                1,
+                1,
+                1
+              ],
+              "moves": [
+                "d2d3",
+                "d2d3",
+                "d2d3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2,
+                2,
+                2
+              ],
+              "moves": [
+                "d2d4",
+                "d2d4",
+                "d2d4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen 4k1n1/8/2n5/8/8/2N5/8/4K1N1 w - - 0 1",
+          "fitted_minus_exact_base_loss_cp": -2.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 3.0,
+              "trial_losses": [
+                3,
+                3,
+                3
+              ],
+              "moves": [
+                "e1d2",
+                "e1d2",
+                "e1d2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 1.0,
+              "trial_losses": [
+                1,
+                1,
+                1
+              ],
+              "moves": [
+                "g1h3",
+                "g1h3",
+                "g1h3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 3.0,
+              "trial_losses": [
+                3,
+                3,
+                3
+              ],
+              "moves": [
+                "e1d2",
+                "e1d2",
+                "e1d2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen r3k2r/ppp2ppp/2n5/3pp3/3PP3/2N5/PPP2PPP/R3K2R b KQkq - 17 1",
+          "fitted_minus_exact_base_loss_cp": -4.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 4.0,
+              "trial_losses": [
+                4,
+                4,
+                4
+              ],
+              "moves": [
+                "c6d4",
+                "c6d4",
+                "c6d4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "d5e4",
+                "d5e4",
+                "d5e4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 4.0,
+              "trial_losses": [
+                4,
+                4,
+                4
+              ],
+              "moves": [
+                "c6d4",
+                "c6d4",
+                "c6d4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 b8c6 e1g1 g8f6 b1c3 c8g4 c3d5 f6d5 e4d5 c6b4 h2h3 g4d7 d3c4 b7b5 c2c3 b5c4 c3b4 c5b4 d1e2 d8b6 e2c4 d7b5 c4b4 b5f1 b4b6 a7b6 g1f1 a8a5 d2d4 a5d5 c1e3 d5b5 b2b3 b5f5 a1c1 e8d8 f3g5 h7h6 g5e4 d6d5 g2g4 f5f3 e4c3 e7e6 f1g2 f3f6 c3b5 f8b4 a2a3 b4e7 c1c6 e6e5 c6f6 e7f6 d4e5 f6e5 f2f4 e5b2 e3b6 d8d7 a3a4 h8e8 g2f3 e8e4 b6c5 g7g5 c5e3 e4b4 f4g5 b4b3 f3f2 h6g5 e3g5 b3b4 f2f3 b4a4 g5d2 d7c6 b5c7 c6c7 d2f4 c7c8 g4g5 a4a2 f4e3 a2a3",
+          "fitted_minus_exact_base_loss_cp": -5.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 5.0,
+              "trial_losses": [
+                5,
+                5,
+                5
+              ],
+              "moves": [
+                "f3f2",
+                "f3f2",
+                "f3f2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "f3e2",
+                "f3e2",
+                "f3e2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 5.0,
+              "trial_losses": [
+                5,
+                5,
+                5
+              ],
+              "moves": [
+                "f3f2",
+                "f3f2",
+                "f3f2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 g1f3 b8c6 d2d4 f8d6 d4d5 c6e7 c4c5 d6c5 f3e5 c5b4 c1g5 f6d5 d1d5 e7d5 g5d8 d5c3 a2a3 b4d6 e5d3 c3e4 d8h4 e8f8 f2f3 e4c5 e2e3 c5e6 f1e2 b7b6 e1c1 c8a6 f3f4 a6d3 d1d3 e6c5 d3c3 c5e4",
+          "fitted_minus_exact_base_loss_cp": -11.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 17.0,
+              "trial_losses": [
+                17,
+                17,
+                17
+              ],
+              "moves": [
+                "e2f3",
+                "e2f3",
+                "e2f3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6,
+                6,
+                6
+              ],
+              "moves": [
+                "c3c4",
+                "c3c4",
+                "c3c4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 17.0,
+              "trial_losses": [
+                17,
+                17,
+                17
+              ],
+              "moves": [
+                "e2f3",
+                "e2f3",
+                "e2f3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d4 e5d4 d1d4 b8c6 d4e3 f8e7 g1f3 d7d6 c3d5 e8g8 f3d4 c6e5 f2f4 f6g4 e3e4 f7f5 d5e7 d8e7 e4d5 e5f7 d4f5 c8f5 d5f5 f7e5 f5c2 e5c6 c2d3 c6b4 d3c3 d6d5 c1d2 c7c5 c4d5 b4d5 c3g3 g4f6 g3b3 e7d7 b3c4 d7d6 e2e3 a8e8 e1c1 e8e4 c4b3 b7b6 f1c4 g7g6 d2c3 e4e3 d1d5 e3c3 b2c3 f6d5 c4d5 g8h8 g2g3 f8f5 c3c4 d6f6 h1e1",
+          "fitted_minus_exact_base_loss_cp": -18.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 24.0,
+              "trial_losses": [
+                12,
+                30,
+                30
+              ],
+              "moves": [
+                "f6a1",
+                "h8g7",
+                "h8g7"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 12.0,
+              "trial_losses": [
+                12,
+                12,
+                12
+              ],
+              "moves": [
+                "f6a1",
+                "f6a1",
+                "f6a1"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 30.0,
+              "trial_losses": [
+                30,
+                30,
+                30
+              ],
+              "moves": [
+                "h8g7",
+                "h8g7",
+                "h8g7"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos",
+          "fitted_minus_exact_base_loss_cp": -19.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 37.0,
+              "trial_losses": [
+                37,
+                37,
+                37
+              ],
+              "moves": [
+                "b1c3",
+                "b1c3",
+                "b1c3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 18.0,
+              "trial_losses": [
+                18,
+                18,
+                18
+              ],
+              "moves": [
+                "g1f3",
+                "g1f3",
+                "g1f3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 37.0,
+              "trial_losses": [
+                37,
+                37,
+                37
+              ],
+              "moves": [
+                "b1c3",
+                "b1c3",
+                "b1c3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b1c3 f8b4 b5c6 b7c6 e1g1 b4c3 b2c3 f6e4 f3e5 d8e7",
+          "fitted_minus_exact_base_loss_cp": -53.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 60.0,
+              "trial_losses": [
+                60,
+                60,
+                60
+              ],
+              "moves": [
+                "e5d3",
+                "e5d3",
+                "e5d3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 7.0,
+              "trial_losses": [
+                7,
+                7,
+                7
+              ],
+              "moves": [
+                "d2d4",
+                "d2d4",
+                "d2d4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 60.0,
+              "trial_losses": [
+                60,
+                60,
+                60
+              ],
+              "moves": [
+                "e5d3",
+                "e5d3",
+                "e5d3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 e6d5 b1c3 c8e6 g1f3 f8b4 c1f4 c7c6 d1b3 d8a5 e2e3 g8f6 f1d3 f6h5 e1g1 h7h6 f4c7 a5c7 b3b4 h5f6 f3e5 c7e7 b4e7 e8e7 e3e4 f6e4 d3e4 d5e4 c3e4 b8d7 f2f3 h8d8 g2g4 a8c8 h2h4 a7a5",
+          "fitted_minus_exact_base_loss_cp": -58.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 63.0,
+              "trial_losses": [
+                63,
+                63,
+                63
+              ],
+              "moves": [
+                "g4g5",
+                "g4g5",
+                "g4g5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 5.0,
+              "trial_losses": [
+                5,
+                5,
+                5
+              ],
+              "moves": [
+                "b2b3",
+                "b2b3",
+                "b2b3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 63.0,
+              "trial_losses": [
+                63,
+                63,
+                63
+              ],
+              "moves": [
+                "g4g5",
+                "g4g5",
+                "g4g5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 e7e5 f2f4 e5f4 g1f3 b8c6 d2d4 g8f6 b1c3 f8b4 e4e5 f6d5 c1d2 b4c3 b2c3 e8g8 f1c4 d5e3 d2e3 f4e3 e1g1 d7d5 c4d3 c8g4 d1e2",
+          "fitted_minus_exact_base_loss_cp": -59.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 223.0,
+              "trial_losses": [
+                223,
+                223,
+                223
+              ],
+              "moves": [
+                "g4f3",
+                "g4f3",
+                "g4f3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 164.0,
+              "trial_losses": [
+                164,
+                164,
+                164
+              ],
+              "moves": [
+                "f8e8",
+                "f8e8",
+                "f8e8"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 223.0,
+              "trial_losses": [
+                223,
+                223,
+                223
+              ],
+              "moves": [
+                "g4f3",
+                "g4f3",
+                "g4f3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1c3 f8b4 d1a4 b4c3 b2c3 f6e4 a4c2 f7f5 g2g3 b8c6 a2a4 e8g8 f2f3 e4d6 c2d3 b7b6 g1h3 c8a6 c1a3 a6c4 d3e3",
+          "fitted_minus_exact_base_loss_cp": -76.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 106.0,
+              "trial_losses": [
+                106,
+                106,
+                106
+              ],
+              "moves": [
+                "c4d5",
+                "c4d5",
+                "c4d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 30.0,
+              "trial_losses": [
+                30,
+                30,
+                30
+              ],
+              "moves": [
+                "d8f6",
+                "d8f6",
+                "d8f6"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 106.0,
+              "trial_losses": [
+                106,
+                106,
+                106
+              ],
+              "moves": [
+                "c4d5",
+                "c4d5",
+                "c4d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4e5 f7f6 f2f4 g8h6 f1e2 f6e5 f4e5",
+          "fitted_minus_exact_base_loss_cp": -84.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 84.0,
+              "trial_losses": [
+                84,
+                84,
+                84
+              ],
+              "moves": [
+                "h6f5",
+                "h6f5",
+                "h6f5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "c8f5",
+                "c8f5",
+                "c8f5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 84.0,
+              "trial_losses": [
+                84,
+                84,
+                84
+              ],
+              "moves": [
+                "h6f5",
+                "h6f5",
+                "h6f5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1d2 f8b4 g1f3 b8c6 e2e3 e8g8 f1d3 b4d2 c1d2 g8h8 e1g1 d7d6 e3e4 e6e5 d4d5 c6e7 d1b3 b7b6 h2h3 h7h6 d2e3 g7g5 b3c3 c8d7 c3d2 e7g6 g1h1 d8e7 b2b4 f8c8 b4b5 g6f4 a1d1 c8f8 d1b1 f8c8 d2c3 a7a6 b1b2 c8b8 f1e1 b8e8 e3f4 g5f4",
+          "fitted_minus_exact_base_loss_cp": -106.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 167.0,
+              "trial_losses": [
+                167,
+                167,
+                167
+              ],
+              "moves": [
+                "c3d2",
+                "c3d2",
+                "c3d2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 61.0,
+              "trial_losses": [
+                61,
+                61,
+                61
+              ],
+              "moves": [
+                "b5a6",
+                "b5a6",
+                "b5a6"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 167.0,
+              "trial_losses": [
+                167,
+                167,
+                167
+              ],
+              "moves": [
+                "c3d2",
+                "c3d2",
+                "c3d2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves g1f3 d7d5 d2d4 g8f6 b1c3 b8c6 c1f4 c8f5 e2e3 e7e6 f1d3 f8d6 d3f5 e6f5 f4g5 d6b4 e1g1 e8g8 g5f6 g7f6 c3e2 b4d6 f3e1 d8e7 g1h1 g8h8 e1d3 a8c8 a2a4 b7b6 h2h4 e7e4 d3f4 d6f4 e2f4 c6b4 c2c3 b4c6 f2f3 e4e3 f4d5 e3e6 c3c4 f5f4 d1d3 e6d6 h4h5 h8g7 d3e4 f8e8 e4d3 c6e7 d5e7 d6e7 d3f5 e7d6 a1d1 c8b8 d1d2 b8d8 b2b3 e8e3 f1b1 d8e8",
+          "fitted_minus_exact_base_loss_cp": -128.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 128.0,
+              "trial_losses": [
+                128,
+                128,
+                128
+              ],
+              "moves": [
+                "d4d5",
+                "d4d5",
+                "d4d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "h1h2",
+                "h1h2",
+                "h1h2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 128.0,
+              "trial_losses": [
+                128,
+                128,
+                128
+              ],
+              "moves": [
+                "d4d5",
+                "d4d5",
+                "d4d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves d2d4 g7g6 e2e4 f8g7 g1f3 d7d6 f1c4 e7e6 b1c3 b8d7 c1g5 g7f6 g5f4 d7b6 d1e2 c8d7 e1g1 g8e7 e4e5 d6e5 d4e5 f6g7 c3e4 d8c8 f4g5 d7c6 c4b5 c6b5 e2b5 e7c6 e4c5 e8g8 f1e1 f8e8 a2a4 a8b8 a4a5 b6d7 c5d7 c8d7 e1d1 d7c8 c2c3 a7a6 b5c5 g7f8 c5e3 f8e7 f3d4 c6d8 g5e7 e8e7 g1h1 c8d7 d4f5 e6f5 d1d7 e7d7 g2g3 d7e7 f2f4 d8e6 h1g1 b8e8",
+          "fitted_minus_exact_base_loss_cp": -137.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 137.0,
+              "trial_losses": [
+                137,
+                137,
+                137
+              ],
+              "moves": [
+                "b2b3",
+                "b2b3",
+                "b2b3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "a1d1",
+                "a1d1",
+                "a1d1"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 137.0,
+              "trial_losses": [
+                137,
+                137,
+                137
+              ],
+              "moves": [
+                "b2b3",
+                "b2b3",
+                "b2b3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 g1f3 e5e4 f3g5 d8e7 d1c2 b8c6 g5e4 f6e4 c2e4 e7e4 c3e4 f7f5 e4c3 c6d4 c3b5 d4b5 c4b5 d7d5 d2d4 c7c5 b5c6 b7c6 e2e3 a8b8 f1d3 c6c5 e1f1 f8d6 a2a4 b8b3 a1a3 b3d3 a3d3 c8a6 f1e2 e8g8",
+          "fitted_minus_exact_base_loss_cp": -154.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 154.0,
+              "trial_losses": [
+                154,
+                154,
+                154
+              ],
+              "moves": [
+                "c1d2",
+                "c1d2",
+                "c1d2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0,
+                0,
+                0
+              ],
+              "moves": [
+                "d4c5",
+                "d4c5",
+                "d4c5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 154.0,
+              "trial_losses": [
+                154,
+                154,
+                154
+              ],
+              "moves": [
+                "c1d2",
+                "c1d2",
+                "c1d2"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "1000": {
+      "positions": 67,
+      "worse": 12,
+      "better": 21,
+      "equal": 34,
+      "top_regression_contribution_to_mean_cp": 7.014925373134329,
+      "all_cases": [
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d4 e5d4 d1d4 b8c6 d4e3 f8e7 g1f3 e8g8 c3d5 d7d6 f3d4 c6e5 f2f4 f6g4 e3e4 f7f5 d5e7 d8e7 e4d5 e5f7 d4f5 c8f5 d5f5 f7e5 f5c2 e5c6 c2d3 c6b4",
+          "fitted_minus_exact_base_loss_cp": 294.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "d3b3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 294.0,
+              "trial_losses": [
+                294
+              ],
+              "moves": [
+                "d3c3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "d3b3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves g1f3 g8f6 e2e3 g7g6 b1c3 f8g7 d2d4 e8g8 e3e4 d7d5 e4d5 f6d5 f1c4 c8e6 c3d5 e6d5 c4d5 d8d5 c1e3 b8c6 d1d3 a8d8 c2c4 d5a5 d3c3 a5a4 e1g1 a4b4 c3b4 c6b4 a1d1 b4c2 d4d5 c2e3 f2e3 d8d6 f1f2 e7e6 e3e4 e6e5 g1f1 d6f6 c4c5 h7h6 b2b4 f6f4 f3d2 h6h5 f2f4 e5f4 d1c1 h5h4 c1c4 f8e8 b4b5 g7f6 c4a4 a7a5 b5a6 b7a6 a4a6 f6c3 d2f3 e8e4",
+          "fitted_minus_exact_base_loss_cp": 115.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 14.0,
+              "trial_losses": [
+                14
+              ],
+              "moves": [
+                "a6a7"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 129.0,
+              "trial_losses": [
+                129
+              ],
+              "moves": [
+                "a6a8"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 14.0,
+              "trial_losses": [
+                14
+              ],
+              "moves": [
+                "a6a7"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4e5 f7f6 f1b5 f6e5 d4e5 e7e6 g1f3 c8d7 e1g1 c6e5 f3e5 d7b5 c2c4 b5c4 e5c4 d5c4 d1h5 e8e7 c1g5 g8f6 b1c3",
+          "fitted_minus_exact_base_loss_cp": 61.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 387.0,
+              "trial_losses": [
+                387
+              ],
+              "moves": [
+                "d8d6"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 448.0,
+              "trial_losses": [
+                448
+              ],
+              "moves": [
+                "d8d2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 387.0,
+              "trial_losses": [
+                387
+              ],
+              "moves": [
+                "d8d6"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 e1g1 c6d4 b1c3 f8d6 d2d3 e8g8 c1e3 c7c5 b5c4 d8b6",
+          "fitted_minus_exact_base_loss_cp": 56.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 24.0,
+              "trial_losses": [
+                24
+              ],
+              "moves": [
+                "a1b1"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 80.0,
+              "trial_losses": [
+                80
+              ],
+              "moves": [
+                "c3a4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 24.0,
+              "trial_losses": [
+                24
+              ],
+              "moves": [
+                "a1b1"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 e7e5 f2f4 e5f4 g1f3 b8c6 d2d4 g8f6 b1c3 f8b4 e4e5 f6d5 c1d2 b4c3 b2c3 e8g8 f1c4 d5e3 d2e3 f4e3 e1g1 d7d5 c4d3 c8g4 d1e2",
+          "fitted_minus_exact_base_loss_cp": 53.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "f7f6"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 53.0,
+              "trial_losses": [
+                53
+              ],
+              "moves": [
+                "d8e7"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "f7f6"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 f1c4 g8f6 g1f3 b8c6 b1c3 f8b4 c4d5 b4c3 b2c3 e8g8 d2d4 d8e8 d4e5 c6e5 c1g5 c7c6 f3e5 e8e5 g5f6 g7f6 d1g4 g8h8 d5b3 d7d5 g4g3 e5e4 e1f1 c8e6 a1e1 e4f5 g3d3 f5f4 d3d4 f4f5 c3c4 b7b6 c4d5 c6d5 c2c4 d5c4 b3c4 a8d8 c4e6 f7e6 d4e4 f5e4 e1e4 e6e5 f1e2 d8c8 e2f3 c8c3 e4e3 c3c2 e3e2 f8c8 e2c2 c8c2 h1a1 h8g7 h2h4 h7h5",
+          "fitted_minus_exact_base_loss_cp": 50.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "a2a4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 50.0,
+              "trial_losses": [
+                50
+              ],
+              "moves": [
+                "g2g3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "a2a4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 g1f3 g8f6 c1f4 b8c6 e2e3 e7e6 f1b5 f8d6 b5c6 b7c6 f4e5 e8g8 b1d2 a8b8 b2b3 c8a6 c2c4 f6e4 e1g1 f7f5 g1h1 g8h8 d1e2 d8e7 e2d3 f8c8 h2h3 c6c5 d2e4 f5e4",
+          "fitted_minus_exact_base_loss_cp": 30.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "d3e2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 30.0,
+              "trial_losses": [
+                30
+              ],
+              "moves": [
+                "d3c2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "d3e2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d4 e5d4 d1d4 b8c6 d4e3 f8e7 g1f3 d7d6 c3d5 e8g8 f3d4 c6e5",
+          "fitted_minus_exact_base_loss_cp": 28.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 80.0,
+              "trial_losses": [
+                80
+              ],
+              "moves": [
+                "f2f4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 108.0,
+              "trial_losses": [
+                108
+              ],
+              "moves": [
+                "c1d2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 80.0,
+              "trial_losses": [
+                80
+              ],
+              "moves": [
+                "f2f4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 e6d5 b1d2 b8c6 g1f3 c8f5 e2e3 g8f6 f1e2 f8b4 e1g1 e8g8 a2a3 b4d2 c1d2 f6e4 d2b4 c6b4 a3b4 d8d6 b4b5 d6b4 d1c1 f5g4 c1c7 b4b2 a1e1 a8b8 c7e5 b2b3 e1b1 b3a2 e2d3 b8e8 e5c7 a2a3 d3e4 d5e4 f3e5 g4e2 f1e1 e8e7 c7c1 a3c1 e1c1 f7f6 e5c4 e7d7 b1a1 b7b6 c4d2 f8e8 d2c4 e2c4 c1c4 g8f8 g1f1 e8e6 c4c1 h7h5 h2h4",
+          "fitted_minus_exact_base_loss_cp": 23.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 5.0,
+              "trial_losses": [
+                5
+              ],
+              "moves": [
+                "f8f7"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 28.0,
+              "trial_losses": [
+                28
+              ],
+              "moves": [
+                "e6e8"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 5.0,
+              "trial_losses": [
+                5
+              ],
+              "moves": [
+                "f8f7"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 e6d5 b1d2 b8c6 g1f3 c8f5 e2e3 g8f6 f1e2 f8b4 e1g1 e8g8 a2a3 b4d2 c1d2 f6e4 d2b4 c6b4 a3b4 d8d6 b4b5 d6b4 d1c1 f5g4 c1c7 b4b2 a1e1 f8b8 c7e5 b2b3 e1b1 b3a2 e2d3 b8e8 e5c7 a2a3 d3e4 d5e4 f3e5 e8e7 c7c4 g4e6 d4d5 a3d6 d5e6 d6e5 e6f7 e7f7 f2f3 e4f3 f1f3 a8f8 b1f1 e5e8 e3e4 h7h6 e4e5 h6h5 f3f7 f8f7",
+          "fitted_minus_exact_base_loss_cp": 14.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 28.0,
+              "trial_losses": [
+                28
+              ],
+              "moves": [
+                "h2h4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 42.0,
+              "trial_losses": [
+                42
+              ],
+              "moves": [
+                "f1f3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 28.0,
+              "trial_losses": [
+                28
+              ],
+              "moves": [
+                "h2h4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 f8b4 c1d2 b4d2 b1d2 d8d5 e2e3 g8e7 g1f3 b8c6 f1c4 d5f5 e3e4 f5g4 e1g1 e8g8 d1b3 h7h5 b3b5 a7a6 b5c5 b7b6 c5a3 c8b7 a3e3 h5h4 h2h3 g4h5 e3f4 f8c8 g2g4 h4g3 f4g3 b6b5 c4d3 f7f5 g1h1 f5e4 d2e4 c8f8 h1g2 e7g6 f1g1 g6f4",
+          "fitted_minus_exact_base_loss_cp": 9.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6
+              ],
+              "moves": [
+                "g2f1"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 15.0,
+              "trial_losses": [
+                15
+              ],
+              "moves": [
+                "g2h2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6
+              ],
+              "moves": [
+                "g2f1"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen 4k1n1/8/2n5/8/8/2N5/8/4K1N1 w - - 0 1",
+          "fitted_minus_exact_base_loss_cp": 3.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "e1e2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 3.0,
+              "trial_losses": [
+                3
+              ],
+              "moves": [
+                "e1d2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "e1e2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b1c3 f8b4 b5c6 b7c6 d2d3 b4c3 b2c3 d7d6 e1g1 e8g8 c1g5 c8g4 d3d4 g4f3 d1f3 f8e8 g5f6 d8f6 f1e1 d6d5 f3f6 g7f6 g1f1 a8b8 a1d1 d5e4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 4.0,
+              "trial_losses": [
+                4
+              ],
+              "moves": [
+                "e1e4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 4.0,
+              "trial_losses": [
+                4
+              ],
+              "moves": [
+                "e1e4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 4.0,
+              "trial_losses": [
+                4
+              ],
+              "moves": [
+                "e1e4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 c8e6 e1g1 b8c6 d3b5 g8f6 b1c3 d6d5 f3e5 d8d6 e4d5 f6d5 c3d5 d6e5 d5e3 e8c8 b5c6 b7c6 f2f4 e5d4 d2d3 c5c4 f4f5 e6d5 d1e2 c4d3 c2d3 e7e5",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 48.0,
+              "trial_losses": [
+                48
+              ],
+              "moves": [
+                "f5e6"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 48.0,
+              "trial_losses": [
+                48
+              ],
+              "moves": [
+                "f5e6"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 48.0,
+              "trial_losses": [
+                48
+              ],
+              "moves": [
+                "f5e6"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1d2 f8b4 g1f3 b8c6 e2e3 e8g8 f1d3 b4d2 c1d2 g8h8 e1g1 d7d6 e3e4 e6e5 d4d5 c6e7 d1b3 b7b6 h2h3 h7h6 d2e3 g7g5 b3c3 c8d7 c3d2 e7g6 g1h1 d8e7 b2b4 f8c8 b4b5 g6f4 a1d1 c8f8 d1b1 f8c8 d2c3 a7a6 b1b2 c8b8 f1e1 b8e8 e3f4 g5f4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 61.0,
+              "trial_losses": [
+                61
+              ],
+              "moves": [
+                "b5a6"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 61.0,
+              "trial_losses": [
+                61
+              ],
+              "moves": [
+                "b5a6"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 61.0,
+              "trial_losses": [
+                61
+              ],
+              "moves": [
+                "b5a6"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e6 d2d4 d7d5 f1d3 b8d7 e1f1 g8f6 e4e5 f6e4 f2f3 e4c5 d4c5 f8c5 d1e2 c5d4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 29.0,
+              "trial_losses": [
+                29
+              ],
+              "moves": [
+                "f3f4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 29.0,
+              "trial_losses": [
+                29
+              ],
+              "moves": [
+                "f3f4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 29.0,
+              "trial_losses": [
+                29
+              ],
+              "moves": [
+                "f3f4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e6 d2d4 d7d5 f1d3 b8d7 g1e2 g8f6 e4e5 f6e4 d3e4 d5e4 b1d2 f7f5 e1g1 f8b4 c2c3 b4e7 e2f4 d7f8 d2c4 b7b5 c4e3 f8g6 d1h5 e8f7 f2f3 e4f3 f1f3 e7g5 c1d2 g5f4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 7.0,
+              "trial_losses": [
+                7
+              ],
+              "moves": [
+                "f3f4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 7.0,
+              "trial_losses": [
+                7
+              ],
+              "moves": [
+                "f3f4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 7.0,
+              "trial_losses": [
+                7
+              ],
+              "moves": [
+                "f3f4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c6 d2d4 d7d5 f1d3 g8f6 e4e5 c8g4 f2f3 g4e6 e5f6 g7f6 g1e2 c6c5 d3b5 e6d7 b1c3 c5d4 e2d4 e7e5 d1e2 f8c5 d4b3 c5b4 c1e3 b4c3 b2c3 a7a6 b5d3 e8g8 e3c5 f8e8 e1g1 b8c6 c5e3 d8e7 g1h1 d7e6 a2a4 h7h5 b3c5 h5h4 f1b1 e8b8 b1b6 e7c7 a1b1 d5d4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 18.0,
+              "trial_losses": [
+                18
+              ],
+              "moves": [
+                "c3d4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 18.0,
+              "trial_losses": [
+                18
+              ],
+              "moves": [
+                "c3d4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 18.0,
+              "trial_losses": [
+                18
+              ],
+              "moves": [
+                "c3d4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 g1f3 g8f6 b1c3 b8c6 c1f4 c8f5 e2e3 e7e6 f1d3 f8d6 d3f5 e6f5 f4g5 d6b4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 5.0,
+              "trial_losses": [
+                5
+              ],
+              "moves": [
+                "e1g1"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 5.0,
+              "trial_losses": [
+                5
+              ],
+              "moves": [
+                "e1g1"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 5.0,
+              "trial_losses": [
+                5
+              ],
+              "moves": [
+                "e1g1"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 f1c4 g8f6 b1c3 d7d6 g1f3 c8e6 c4d3 f8e7 e1g1 b8c6 d3b5 e8g8 d2d4 e5d4 f3d4 c6d4 d1d4 c7c5 d4d3 a7a6 b5c4 e6c4 d3c4 b7b5 c4e2 b5b4 c3d5 f6d5 e4d5 e7f6 a1b1 f6d4 b2b3 d8e8 e2f3 e8e7 c1f4 a6a5 b1e1 e7f6 f3e4 g7g5 f4e3 g8h8 g1h1 f8d8",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 18.0,
+              "trial_losses": [
+                18
+              ],
+              "moves": [
+                "e3d4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 18.0,
+              "trial_losses": [
+                18
+              ],
+              "moves": [
+                "e3d4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 18.0,
+              "trial_losses": [
+                18
+              ],
+              "moves": [
+                "e3d4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 e6d5 b1c3 b8c6 g1f3 c8f5 c1f4 g8f6 d1b3 f8b4 f3e5 b4c3 b3c3 c6e7 e1c1 f6e4 c3f3 f7f6 e5d3 e8g8 g2g4 f5e6 f1h3 g7g5 f4e3 d8d6 c1b1 b7b5 a2a3 a7a5 b1a1 a5a4 d1b1 a8d8 b1c1 f6f5 g4f5 e6f5 c1g1 f5g6 f3g2 g8h8 f2f3 e4f6",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 44.0,
+              "trial_losses": [
+                44
+              ],
+              "moves": [
+                "g2g5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 44.0,
+              "trial_losses": [
+                44
+              ],
+              "moves": [
+                "g2g5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 44.0,
+              "trial_losses": [
+                44
+              ],
+              "moves": [
+                "g2g5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen 4k1n1/8/8/8/8/8/8/3QK1N1 w - - 0 1 moves g1f3 g8f6 f3g1 f6g8 g1f3 g8f6 f3g1",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "f6g8"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "f6g8"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "f6g8"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4d5 d8d5 g1f3 e7e6 b1c3 f8b4 c1d2 b4c3 d2c3 g8e7 f1d3 e8g8 d1e2 d5d6 d3h7 g8h7 f3g5 h7g6 e2g4 f7f5 g4h4 c8d7 h4h7",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 1000.0,
+              "trial_losses": [
+                1000
+              ],
+              "moves": [
+                "g6g5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 1000.0,
+              "trial_losses": [
+                1000
+              ],
+              "moves": [
+                "g6g5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 1000.0,
+              "trial_losses": [
+                1000
+              ],
+              "moves": [
+                "g6g5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b1c3 f8b4 b5c6 b7c6 f3e5 b4c3",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "b2c3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "b2c3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "b2c3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b5c6 b7c6 b1c3 f8b4 d2d3 b4c3 b2c3 d7d6 e1g1 c8e6 c1g5 e8g8 d3d4 e6c4 f1e1 d8e7 g5f6 g7f6 a2a3",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 39.0,
+              "trial_losses": [
+                39
+              ],
+              "moves": [
+                "a8b8"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 39.0,
+              "trial_losses": [
+                39
+              ],
+              "moves": [
+                "a8b8"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 39.0,
+              "trial_losses": [
+                39
+              ],
+              "moves": [
+                "a8b8"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 f8b4 c1d2 b4d2 b1d2 d8d5 g1f3 g8f6 e2e3 d5f5 f1c4 b8d7 d1b1 f5b1 a1b1 c7c5 e1f1 c5d4 e3d4 e8f8 g2g3 d7b6 f3e5 c8d7 f2f3 d7c6 c4d3 a8d8 e5c6 b7c6 d2b3 e6e5 d4e5 d8d3 f1e2 d3b3",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "a2b3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "a2b3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "a2b3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 c8e6 e1g1 b8d7 d3b5 g8f6 b1c3 e6g4 d2d3 e7e5 b5d7 d8d7 c1g5 f8e7 h2h3 g4f3 d1f3 e8g8 g5f6 e7f6 c3d5 f6g5 g2g4 g7g6 f3f6 d7d8 f6d8 a8d8 f2f4 g5f4 d5f4 e5f4 f1f4 d6d5 g4g5 d5e4 f4e4 d8d7 e4e5 f8c8 g1f1 c5c4 e5e3 c4d3 e3d3 d7d3 c2d3 c8c2 a1e1 c2b2 e1e2 b2b5 e2e8 g8g7 h3h4 a7a5 e8e7 b7b6 f1f2 g7f8 e7e4 b5b2 e4e2 b2b4 e2e4 b4b2 e4e2 b2b4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 123.0,
+              "trial_losses": [
+                123
+              ],
+              "moves": [
+                "e2e4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 123.0,
+              "trial_losses": [
+                123
+              ],
+              "moves": [
+                "e2e4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 123.0,
+              "trial_losses": [
+                123
+              ],
+              "moves": [
+                "e2e4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 c8e6 e1g1 b8d7 d3b5 g8f6 b1c3 e6g4 d2d3 e7e5 b5d7 d8d7 c1g5 f8e7 g5f6 e7f6 c3d5 e8g8 d1d2 g4f3 g2f3 b7b5 c2c3 g8h8 f3f4 d7g4 g1h1 g4f3 h1g1 e5f4 d2f4 f3f4 d5f4 f6e5 f4d5 g7g5 f1d1 b5b4 d3d4 e5g7 a1b1 a8e8 f2f3 f7f5 d5c7 e8e7 c7d5 e7e8 d5c7 e8e7",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 1.0,
+              "trial_losses": [
+                1
+              ],
+              "moves": [
+                "c7d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 1.0,
+              "trial_losses": [
+                1
+              ],
+              "moves": [
+                "c7d5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 1.0,
+              "trial_losses": [
+                1
+              ],
+              "moves": [
+                "c7d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1d2 f8b4 g1f3 e8g8 e2e3 c7c5 a2a3 b4d2",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "c1d2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "c1d2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "c1d2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 b1d2 d5c4 g1f3 f8b4 g2g3 b8c6 a2a3 b4d2 f3d2 d8d4 e2e3 d4c5 f1c4 g8f6 b2b4 c5e5 a1a2 f6d5 a2c2 c6d4 c1b2 d4c2 d1c2 e5g5 d2f3 g5h5 c4e2 e8g8 h2h4 h5g6 e3e4 h7h5 b2c1 d5f6 e2d3 c7c6 c1g5 f8d8 e1g1 g6h7 f1d1 d8d7 b4b5 f6e4 b5c6 b7c6 d3e4 d7d1 g1g2 f7f5 e4c6 c8b7 c6b7 a8d8 b7c8 h7g6 g5d8 d1d8 c2c4 d8e8 c8d7",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2
+              ],
+              "moves": [
+                "e8f8"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2
+              ],
+              "moves": [
+                "e8f8"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2
+              ],
+              "moves": [
+                "e8f8"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1d2 b8c6 g1f3 d7d5 c4d5 d8d5 e2e3 f8e7",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 13.0,
+              "trial_losses": [
+                13
+              ],
+              "moves": [
+                "f1c4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 13.0,
+              "trial_losses": [
+                13
+              ],
+              "moves": [
+                "f1c4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 13.0,
+              "trial_losses": [
+                13
+              ],
+              "moves": [
+                "f1c4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 e2e3 f8b4 b1d2 b8c6 h2h3 e8g8 d1c2 b4d2 e1d2 c6b4 c2a4 f6e4 d2e1 d8h4 g2g3 h4f6 h1h2 a7a5 a2a3 b4c6 f1d3",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 14.0,
+              "trial_losses": [
+                14
+              ],
+              "moves": [
+                "d7d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 14.0,
+              "trial_losses": [
+                14
+              ],
+              "moves": [
+                "d7d5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 14.0,
+              "trial_losses": [
+                14
+              ],
+              "moves": [
+                "d7d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d4 d7d6 g1f3 e5d4 f3d4 f8e7 c1f4 b8c6 d4c6 b7c6 e2e4 a8b8 d1d2 h7h6 f4e3 f6g4 e3a7 e7h4 a7b8 g4f2 g2g3 f2h1 g3h4 d8h4 e1d1 e8d8 b8a7 c6c5 d1c1 d8e8 a7b8 d6d5 c4d5 h4f2 d2f2 h1f2",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 12.0,
+              "trial_losses": [
+                12
+              ],
+              "moves": [
+                "b8c7"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 12.0,
+              "trial_losses": [
+                12
+              ],
+              "moves": [
+                "b8c7"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 12.0,
+              "trial_losses": [
+                12
+              ],
+              "moves": [
+                "b8c7"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 a2a3 f8d6 c3b5 b8c6 g2g3 e8g8 a1b1 a7a6 b5c3 g8h8 d2d3 c6d4 c1g5 b7b5 c3d5 b5c4 g5f6 g7f6 e2e3 c7c6 d3c4 c6d5 f1h3 d8a5 d1d2 d4c2 e1d1 a5d2 d1d2 c2a3 b2a3 d5c4 g1e2 d6a3 e2c3 a8a7 h3g2 d7d6 b1b8 h8g7 h1b1 a3c5 h2h3 c8f5 b8f8 g7f8 b1b8 f8g7 d2d1 a6a5 c3b5 a7a6 g3g4 f5d7 b5c7 d7a4 d1e1 a6a7 c7d5 a4c6 g2e4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 204.0,
+              "trial_losses": [
+                204
+              ],
+              "moves": [
+                "c6d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 204.0,
+              "trial_losses": [
+                204
+              ],
+              "moves": [
+                "c5b4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 204.0,
+              "trial_losses": [
+                204
+              ],
+              "moves": [
+                "c6d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves g1f3 d7d5 d2d4 g8f6 e2e3 b8c6 c2c4 c8g4 d1b3 g4f3 g2f3 a8b8 c1d2 e7e5 c4d5 d8d5 b3d5 f6d5 b1a3 f8a3 b2a3 e5d4 f1b5 d4e3 d2c1 e3f2 e1d2 e8f8 d2d3 c6e5 d3c2 e5f3 a3a4 f3d4 c2d3 d4e6 c1a3 c7c5 b5d7 e6f4 d3e4 f8e7 a3c1 f4e6 c1b2 e6c7 d7h3 e7f8 e4f3 f2f1n h1f1 b7b5 f1c1 f7f6 c1c5 b5a4 b2c3 b8e8 c3d4 e8a8 a1b1 f8e7 b1c1 e7d8 d4f2 h8e8 c1d1 e8e5 d1d4 a4a3 d4d1 e5h5 f2g3 h5h3 f3g2 h3g3 g2g3 d8e7 c5d5 c7d5 d1d5 a8d8 d5c5 d8d3 g3f2 d3d2 f2g1 d2d1 g1f2 d1d2 f2f3 d2h2 f3g3 h2a2 g3h3 a2d2 c5a5 d2d3 h3g4 a7a6 a5c5 d3d4 g4f3 a3a2 c5a5 d4d3 f3g4 d3d4 g4f3 d4d3 f3g2 d3d2 g2g3 d2d3 g3h2 d3d2 h2h3 d2d3 h3g4 h7h5",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 34.0,
+              "trial_losses": [
+                34
+              ],
+              "moves": [
+                "g4f4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 34.0,
+              "trial_losses": [
+                34
+              ],
+              "moves": [
+                "g4f4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 34.0,
+              "trial_losses": [
+                34
+              ],
+              "moves": [
+                "g4f4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b5c6 d7c6 b1c3 c8g4 e1g1 f8b4",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 8.0,
+              "trial_losses": [
+                8
+              ],
+              "moves": [
+                "d2d3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 8.0,
+              "trial_losses": [
+                8
+              ],
+              "moves": [
+                "d2d3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 8.0,
+              "trial_losses": [
+                8
+              ],
+              "moves": [
+                "d2d3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 f3g5 f8c5 b5c6 b7c6 d1e2 d7d5 e4d5 d8d5 b1c3 d5d6 f2f4 c5d4 e2c4 c8e6 g5e6 d6e6 c4e6 f7e6 c3e2",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 94.0,
+              "trial_losses": [
+                94
+              ],
+              "moves": [
+                "f6g4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 94.0,
+              "trial_losses": [
+                94
+              ],
+              "moves": [
+                "f6g4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 94.0,
+              "trial_losses": [
+                94
+              ],
+              "moves": [
+                "f6g4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 b8c6 e1g1 g8f6 b1c3 c8g4 c3d5 f6d5 e4d5 c6b4 h2h3 g4d7 d3c4 b7b5 c2c3 b5c4 c3b4 c5b4 d1e2 d8b6 e2c4 d7b5 c4b4 b5f1 b4b6 a7b6 g1f1 a8a5 d2d4 a5d5 c1e3 d5b5 b2b3 b5f5 a1c1 e8d8 f3g5 h7h6 g5e4 d6d5 g2g4 f5f3 e4c3 e7e6 f1g2 f3f6 c3b5 f8b4 a2a3 b4e7 c1c6 e6e5 c6f6 e7f6 d4e5 f6e5 f2f4 e5b2 e3b6 d8d7 a3a4 h8e8 g2f3 e8e4 b6c5 g7g5 c5e3 e4b4 f4g5 b4b3 f3f2 h6g5 e3g5 b3b4 f2f3 b4a4 g5d2 d7c6 b5c7 c6c7 d2f4 c7c8 g4g5 a4a2 f4e3 a2a3",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "f3f4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "f3e2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "f3f4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1d2 b8c6 g1f3 a7a5 e2e4 f8b4 f1d3 f6h5",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 72.0,
+              "trial_losses": [
+                72
+              ],
+              "moves": [
+                "g2g3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 72.0,
+              "trial_losses": [
+                72
+              ],
+              "moves": [
+                "g2g3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 72.0,
+              "trial_losses": [
+                72
+              ],
+              "moves": [
+                "g2g3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d3 f8d6 g1f3 b8c6 c1g5 e8g8 c3d5 c6d4 d1a4 c7c6 d5c3 h7h6 g5f6 d8f6 c3e4 f6e7 a2a3 b7b5 a4d1 b5c4 d3c4 f7f5 e4d6 e7d6 f3d2 e5e4 d2b3 d4b3 d1d6 b3a1 d6d1 c8a6 c4c5 a6c4 d1c1 c4d5 c1a1 f5f4 f2f3 e4e3 g2g3 a8d8 b2b4 f4g3 h2g3 f8e8 h1h4 e8e7 h4g4 d8e8 f3f4 g8f8 f4f5 e7e5 a1d4 a7a6 g4g6 e8e7 d4d3 d5f7 f5f6",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "g7f6"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "g7f6"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "g7f6"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves g1f3 d7d5 d2d4 g8f6 e2e3 b8c6 h2h3 f6e4 f1d3 c8f5 g2g4 f5e6 b1c3 f7f5 g4f5 e6f5 d3b5 d8d6 f3h4 g7g6 h4f5 g6f5 d1f3 e7e6 f3h5 e8d8 c1d2 d8c8 h5e8 c6d8 c3e4 f5e4 d2a5 a7a6 b5a4 b7b5 a4b3 d6b4 a5b4 f8b4 c2c3 b4c3 b2c3 h8e8 a2a4 a8b8 a4b5 a6b5 a1a6 e8h8 h1g1 b5b4 c3c4 c8b7 a6a4 b7c6 c4d5 e6d5 a4a5 d8e6 b3d5 c6b6 a5a2 b8e8 a2c2 c7c5 c2c4 b4b3 e1d2 h8f8 g1f1 f8f3 d5e4 f3h3 e4f5 h3h5 f5e6 e8e6 f1b1 c5d4 b1b3 b6a5 e3d4 e6f6 d2e2 h5h2 b3f3 f6e6 e2f1 e6d6 f3f5 a5b6 c4b4 b6c6 f5c5 c6d7 b4b7 d7e6 c5e5 e6f6 e5e4 f6f5 b7e7 d6c6 f1g1 h2h6 e7e5 f5g6 d4d5 c6c2 e5e6 g6g7 e6e7 g7f8 e7e8 f8f7 e8e7 f7f8 e7e8 f8f7",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6
+              ],
+              "moves": [
+                "e4e7"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6
+              ],
+              "moves": [
+                "e4e7"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6
+              ],
+              "moves": [
+                "e4e7"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen r3k2r/ppp2ppp/2n5/3pp3/3PP3/2N5/PPP2PPP/R3K2R w KQkq - 0 1",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "c3d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "c3d5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "c3d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen r3k2r/ppp2ppp/2n5/3pp3/3PP3/2N5/PPP2PPP/R3K2R b KQkq - 17 1",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 4.0,
+              "trial_losses": [
+                4
+              ],
+              "moves": [
+                "c6d4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 4.0,
+              "trial_losses": [
+                4
+              ],
+              "moves": [
+                "c6d4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 4.0,
+              "trial_losses": [
+                4
+              ],
+              "moves": [
+                "c6d4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen 4k3/8/8/3pP3/8/8/8/4K3 w - d6 0 1",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "e1d2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "e1d2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "e1d2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen k3r3/8/8/3pP3/8/8/8/4K3 w - d6 0 1",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 47.0,
+              "trial_losses": [
+                47
+              ],
+              "moves": [
+                "e1d2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 47.0,
+              "trial_losses": [
+                47
+              ],
+              "moves": [
+                "e1d2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 47.0,
+              "trial_losses": [
+                47
+              ],
+              "moves": [
+                "e1d2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen 8/8/4k3/3p4/3P4/4K3/8/8 w - - 34 1",
+          "fitted_minus_exact_base_loss_cp": 0.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "e3e2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "e3e2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "e3e2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 e1g1 f8d6 b5c6 d7c6 b1c3 f6d7",
+          "fitted_minus_exact_base_loss_cp": -1.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2
+              ],
+              "moves": [
+                "d2d4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 1.0,
+              "trial_losses": [
+                1
+              ],
+              "moves": [
+                "d2d3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2
+              ],
+              "moves": [
+                "d2d4"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d4 e5d4 d1d4 b8c6 d4e3 f8e7 g1f3 d7d6 c3d5 e8g8 f3d4 c6e5 f2f4 f6g4 e3e4 f7f5 d5e7 d8e7 e4d5 e5f7 d4f5 c8f5 d5f5 f7e5 f5c2 e5c6 c2d3 c6b4 d3c3 d6d5 c1d2 c7c5 c4d5 b4d5 c3g3 g4f6 g3b3 e7d7 b3c4 d7d6 e2e3 a8e8 e1c1 e8e4 c4b3 b7b6 f1c4 g7g6 d2c3 e4e3 d1d5 e3c3 b2c3 f6d5 c4d5 g8h8 g2g3 f8f5 c3c4 d6f6 h1e1",
+          "fitted_minus_exact_base_loss_cp": -18.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 30.0,
+              "trial_losses": [
+                30
+              ],
+              "moves": [
+                "h8g7"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 12.0,
+              "trial_losses": [
+                12
+              ],
+              "moves": [
+                "f6a1"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 30.0,
+              "trial_losses": [
+                30
+              ],
+              "moves": [
+                "h8g7"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos",
+          "fitted_minus_exact_base_loss_cp": -19.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 37.0,
+              "trial_losses": [
+                37
+              ],
+              "moves": [
+                "b1c3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 18.0,
+              "trial_losses": [
+                18
+              ],
+              "moves": [
+                "g1f3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 37.0,
+              "trial_losses": [
+                37
+              ],
+              "moves": [
+                "b1c3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c6 d2d4 d7d5 f1d3 b8d7 b1c3 e7e6 g1e2 g8f6 e4e5 f6g4 h2h3 g4h6 c1h6 g7h6 e1g1 f8b4 d1d2 d8g5 f2f4 b4c3 b2c3 g5g7 f4f5 g7g5 d2g5 h6g5 a1c1 c6c5 d3b5 c5c4 c1b1 a8b8 f5e6 f7e6 f1f6 e8e7 f6f2 a7a6 b5d7 c8d7 f2f6 d7b5 b1b4 b8g8 g1f1 g8f8 a2a4 b5c6 f6f2 f8f2 f1f2 a6a5 b4b1 h7h5 f2e3 h8b8 b1a1 e7d7 g2g3 b8a8 a1a2 a8g8",
+          "fitted_minus_exact_base_loss_cp": -20.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 67.0,
+              "trial_losses": [
+                67
+              ],
+              "moves": [
+                "a2b2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 47.0,
+              "trial_losses": [
+                47
+              ],
+              "moves": [
+                "e3d2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 67.0,
+              "trial_losses": [
+                67
+              ],
+              "moves": [
+                "a2b2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 c8e6 e1g1 g8f6 b1c3 b8d7 d3b5 e6g4 d2d3 e7e5 b5d7 d8d7",
+          "fitted_minus_exact_base_loss_cp": -23.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 23.0,
+              "trial_losses": [
+                23
+              ],
+              "moves": [
+                "c1g5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "h2h3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 23.0,
+              "trial_losses": [
+                23
+              ],
+              "moves": [
+                "c1g5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1c3 f8b4 d1a4 b4c3 b2c3 f6e4 a4c2 f7f5 g2g3 b8c6 a2a4 e8g8 f2f3 e4d6 c2d3 b7b6 g1h3 c8a6 c1a3 a6c4 d3e3",
+          "fitted_minus_exact_base_loss_cp": -25.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 102.0,
+              "trial_losses": [
+                102
+              ],
+              "moves": [
+                "c6e7"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 77.0,
+              "trial_losses": [
+                77
+              ],
+              "moves": [
+                "d8e7"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 102.0,
+              "trial_losses": [
+                102
+              ],
+              "moves": [
+                "c6e7"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 b1c3 f8c5 f3e5 c6e5 d2d3 d7d6 h2h3 g8f6 d3d4 c5d4 d1d4 c7c5 d4d2 e8g8 f1e2 c8e6 d2g5 h7h6 g5d2 d6d5 e4d5",
+          "fitted_minus_exact_base_loss_cp": -26.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 28.0,
+              "trial_losses": [
+                28
+              ],
+              "moves": [
+                "e6d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2
+              ],
+              "moves": [
+                "f6d5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 28.0,
+              "trial_losses": [
+                28
+              ],
+              "moves": [
+                "e6d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 g8f6 c2c4 e7e6 b1d2 b8c6 g1f3 f8b4 e2e3 e8g8 f1d3 b4d2 c1d2 d7d6 e1g1 e6e5 d4e5 d6e5 d2c3 d8d6 e3e4 f8d8 d3e2 c8e6 f3d2",
+          "fitted_minus_exact_base_loss_cp": -27.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 28.0,
+              "trial_losses": [
+                28
+              ],
+              "moves": [
+                "f6d7"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 1.0,
+              "trial_losses": [
+                1
+              ],
+              "moves": [
+                "c6d4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 28.0,
+              "trial_losses": [
+                28
+              ],
+              "moves": [
+                "f6d7"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 b1c3 b8d7 h2h4 g8f6 a2a4 d7e5 f3e5 d6e5 f1b5 c8d7 b5d3 e7e6 d1f3 f8d6 d3c4 e8g8 d2d3 d7c6 e1g1 d8b6 f3g3 g8h8 a4a5 b6b4 f2f3 b7b5 a5b6 a7b6 a1a8 f8a8 c3e2 c6b5 c2c3 b4a4 b2b3 a4a2 c4b5 a2e2 c1g5 a8a2 g3f2 e2c2 f2c2 a2c2 f1c1 c2b2 b5c4 h8g8 c1a1 g8f8 a1a6 f6d7 c4b5 b2b1 g1h2 d7b8 a6b6 d6c7 b6b7 f7f6 b7c7 f6g5 h4g5 b1b3 c7c8 f8f7 c8b8 b3c3 b8b6 h7h6 g5h6 g7h6 b6c6 c3c2 b5c4 h6h5 c4e6 f7e7 e6c4 e7d7 c6c5 d7d6 c5c8 d6e7 c8c6 e7d7 c6h6 h5h4 h6h4 d7d6 h4h6 d6c5 h6a6 c2e2 a6a5 c5c6 a5e5 c6d6 e5h5 e2c2 h5h7 d6e5 h7f7 c2b2 f7d7 e5f4 c4f7 b2d2 d3d4 f4e3 d4d5 e3d4 f7e6 d4e5 d7f7 d2f2",
+          "fitted_minus_exact_base_loss_cp": -39.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 41.0,
+              "trial_losses": [
+                41
+              ],
+              "moves": [
+                "h2h3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 2.0,
+              "trial_losses": [
+                2
+              ],
+              "moves": [
+                "h2g3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 41.0,
+              "trial_losses": [
+                41
+              ],
+              "moves": [
+                "h2h3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 e6d5 g1f3 g8f6 b1c3 b8c6 c1f4 f8d6 d1d2 d6f4 d2f4 c8e6 c3b5 a8c8 f3e5 a7a6 b5c3 e8g8 e1c1 c6e5 d4e5 f6h5 f4e3 g7g5 g2g3 g5g4 f1g2 c7c6 e3h6 h5g7 e2e4 f7f6 e5f6 d8f6 h6f6 f8f6 h1f1 f6h6 e4d5 e6d5 c3d5 c6d5 c1b1 h6h2 g2d5 g8h8 d5b7 c8f8 b7a6 h2g2 d1d2 g7e6 a6b7 g2h2 b1c1 e6c5 b7d5 f8c8 c1d1 c8b8",
+          "fitted_minus_exact_base_loss_cp": -47.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 54.0,
+              "trial_losses": [
+                54
+              ],
+              "moves": [
+                "b2b3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 7.0,
+              "trial_losses": [
+                7
+              ],
+              "moves": [
+                "f1e1"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 54.0,
+              "trial_losses": [
+                54
+              ],
+              "moves": [
+                "b2b3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 g1f3 b8c6 d2d4 f8d6 d4d5 c6e7 c4c5 d6c5 f3e5 c5b4 c1g5 f6d5 d1d5 e7d5 g5d8 d5c3 a2a3 b4d6 e5d3 c3e4 d8h4 e8f8 f2f3 e4c5 e2e3 c5e6 f1e2 b7b6 e1c1 c8a6 f3f4 a6d3 d1d3 e6c5 d3c3 c5e4",
+          "fitted_minus_exact_base_loss_cp": -48.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 54.0,
+              "trial_losses": [
+                54
+              ],
+              "moves": [
+                "c3d3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6
+              ],
+              "moves": [
+                "c3c4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 54.0,
+              "trial_losses": [
+                54
+              ],
+              "moves": [
+                "c3d3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b1c3 f8b4 b5c6 b7c6 e1g1 b4c3 b2c3 f6e4 f3e5 d8e7",
+          "fitted_minus_exact_base_loss_cp": -53.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 60.0,
+              "trial_losses": [
+                60
+              ],
+              "moves": [
+                "e5d3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 7.0,
+              "trial_losses": [
+                7
+              ],
+              "moves": [
+                "d2d4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 60.0,
+              "trial_losses": [
+                60
+              ],
+              "moves": [
+                "e5d3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 e6d5 b1c3 c8e6 g1f3 f8b4 c1f4 c7c6 d1b3 d8a5 e2e3 g8f6 f1d3 f6h5 e1g1 h7h6 f4c7 a5c7 b3b4 h5f6 f3e5 c7e7 b4e7 e8e7 e3e4 f6e4 d3e4 d5e4 c3e4 b8d7 f2f3 h8d8 g2g4 a8c8 h2h4 a7a5",
+          "fitted_minus_exact_base_loss_cp": -58.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 63.0,
+              "trial_losses": [
+                63
+              ],
+              "moves": [
+                "g4g5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 5.0,
+              "trial_losses": [
+                5
+              ],
+              "moves": [
+                "b2b3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 63.0,
+              "trial_losses": [
+                63
+              ],
+              "moves": [
+                "g4g5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4e5 f7f6 f2f4 g8h6 f1e2 f6e5 f4e5",
+          "fitted_minus_exact_base_loss_cp": -84.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 84.0,
+              "trial_losses": [
+                84
+              ],
+              "moves": [
+                "h6f5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "c8f5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 84.0,
+              "trial_losses": [
+                84
+              ],
+              "moves": [
+                "h6f5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 f8b4 c1d2 b4d2 b1d2 d8d5 g1f3 g8f6 e2e3 b7b5 f1d3 b8c6 e3e4 d5h5 e4e5 f6d7 a1c1 c8b7 d3b5 c6d4 b5d7 e8d7 f3d4 h5e5 d4e2 e5a5 e2c3 d7e7 e1g1 a5g5 c3e4 g5a5 c1c5 a5b4 c5c7 e7f8",
+          "fitted_minus_exact_base_loss_cp": -105.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 138.0,
+              "trial_losses": [
+                138
+              ],
+              "moves": [
+                "d1h5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 33.0,
+              "trial_losses": [
+                33
+              ],
+              "moves": [
+                "d1f3"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 138.0,
+              "trial_losses": [
+                138
+              ],
+              "moves": [
+                "d1h5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves e2e4 b8c6 d2d4 d7d5 e4d5 d8d5 g1f3 e7e6 b1c3 f8b4 c1d2 b4c3 d2c3 g8e7 f1d3 e8g8 e1g1 c8d7 f1e1 d5d6 f3g5 h7h6 g5e4 d6d5 e4c5 b7b6 c5d7 d5d7 d1g4 e7d5 a2a3 d5f6 g4h4 a8d8 d3b5 f6d5 b5c6 d7c6 h4g3 a7a5 c3d2 c6c2 d2h6 c2g6 g3g6 f7g6 h6g5 d8d6 a1c1 f8f7 h2h4 b6b5 c1c5 c7c6 e1c1 d5f4 g5f4 f7f4 c5c6 f4d4 c6d6 d4d6 c1c5 d6d5 c5d5 e6d5",
+          "fitted_minus_exact_base_loss_cp": -110.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 165.0,
+              "trial_losses": [
+                165
+              ],
+              "moves": [
+                "g1h2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 55.0,
+              "trial_losses": [
+                55
+              ],
+              "moves": [
+                "f2f4"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 165.0,
+              "trial_losses": [
+                165
+              ],
+              "moves": [
+                "g1h2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves g1f3 d7d5 d2d4 g8f6 b1c3 b8c6 c1f4 c8f5 e2e3 e7e6 f1d3 f8d6 d3f5 e6f5 f4g5 d6b4 e1g1 e8g8 g5f6 g7f6 c3e2 b4d6 f3e1 d8e7 g1h1 g8h8 e1d3 a8c8 a2a4 b7b6 h2h4 e7e4 d3f4 d6f4 e2f4 c6b4 c2c3 b4c6 f2f3 e4e3 f4d5 e3e6 c3c4 f5f4 d1d3 e6d6 h4h5 h8g7 d3e4 f8e8 e4d3 c6e7 d5e7 d6e7 d3f5 e7d6 a1d1 c8b8 d1d2 b8d8 b2b3 e8e3 f1b1 d8e8",
+          "fitted_minus_exact_base_loss_cp": -128.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 128.0,
+              "trial_losses": [
+                128
+              ],
+              "moves": [
+                "d4d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "h1h2"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 128.0,
+              "trial_losses": [
+                128
+              ],
+              "moves": [
+                "d4d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves d2d4 g7g6 e2e4 f8g7 g1f3 d7d6 f1c4 e7e6 b1c3 b8d7 c1g5 g7f6 g5f4 d7b6 d1e2 c8d7 e1g1 g8e7 e4e5 d6e5 d4e5 f6g7 c3e4 d8c8 f4g5 d7c6 c4b5 c6b5 e2b5 e7c6 e4c5 e8g8 f1e1 f8e8 a2a4 a8b8 a4a5 b6d7 c5d7 c8d7 e1d1 d7c8 c2c3 a7a6 b5c5 g7f8 c5e3 f8e7 f3d4 c6d8 g5e7 e8e7 g1h1 c8d7 d4f5 e6f5 d1d7 e7d7 g2g3 d7e7 f2f4 d8e6 h1g1 b8e8",
+          "fitted_minus_exact_base_loss_cp": -137.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 137.0,
+              "trial_losses": [
+                137
+              ],
+              "moves": [
+                "b2b3"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "a1d1"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 137.0,
+              "trial_losses": [
+                137
+              ],
+              "moves": [
+                "b2b3"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 g1f3 e5e4 f3g5 d8e7 d1c2 b8c6 g5e4 f6e4 c2e4 e7e4 c3e4 f7f5 e4c3 c6d4 c3b5 d4b5 c4b5 d7d5 d2d4 c7c5 b5c6 b7c6 e2e3 a8b8 f1d3 c6c5 e1f1 f8d6 a2a4 b8b3 a1a3 b3d3 a3d3 c8a6 f1e2 e8g8",
+          "fitted_minus_exact_base_loss_cp": -160.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 160.0,
+              "trial_losses": [
+                160
+              ],
+              "moves": [
+                "e2d2"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "d4c5"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 160.0,
+              "trial_losses": [
+                160
+              ],
+              "moves": [
+                "e2d2"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4d5 d8d5 g1f3 e7e6 b1c3 f8b4 c1d2 b4c3 d2c3 g8e7 f1d3 e8g8 e1g1 c8d7 f1e1 d5d6 f3g5 h7h6 g5e4 d6d5 e4c5 b7b6 c5d7 d5d7 d1g4 e7d5 a2a3 d5f6 g4h4 a8d8 d3b5 f6d5 b5c6 d7c6 h4g3 a7a5 c3d2 c6c2 d2h6 c2g6 g3g6 f7g6 h6g5 d8d6 a1c1 f8f7 h2h4 b6b5 c1c5 c7c6 e1c1 d5f4 g5f4 f7f4 c5c6 f4d4 c6d6 d4d6 c1c5",
+          "fitted_minus_exact_base_loss_cp": -275.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 281.0,
+              "trial_losses": [
+                281
+              ],
+              "moves": [
+                "d6d5"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 6.0,
+              "trial_losses": [
+                6
+              ],
+              "moves": [
+                "d6d1"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 281.0,
+              "trial_losses": [
+                281
+              ],
+              "moves": [
+                "d6d5"
+              ]
+            }
+          }
+        },
+        {
+          "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 d2d3 f8d6 e1g1",
+          "fitted_minus_exact_base_loss_cp": -423.0,
+          "actors": {
+            "baseline": {
+              "mean_loss_cp": 423.0,
+              "trial_losses": [
+                423
+              ],
+              "moves": [
+                "c6d4"
+              ]
+            },
+            "candidate": {
+              "mean_loss_cp": 0.0,
+              "trial_losses": [
+                0
+              ],
+              "moves": [
+                "a7a6"
+              ]
+            },
+            "fast-base": {
+              "mean_loss_cp": 423.0,
+              "trial_losses": [
+                423
+              ],
+              "moves": [
+                "c6d4"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/philyawj/Pandafish
+cpu: Apple M2
+BenchmarkEvaluationModelCost/baseline-8         	  994882	       577.5 ns/op	       0 B/op	       0 allocs/op
+BenchmarkEvaluationModelCost/features-8         	 3016532	       203.0 ns/op	       0 B/op	       0 allocs/op
+BenchmarkEvaluationModelCost/combined-cost-only-8         	  734671	       798.4 ns/op	       0 B/op	       0 allocs/op
+BenchmarkEvaluationModelCost/fitted-model-8               	  758809	       791.3 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/philyawj/Pandafish	3.471s

@@ -1,0 +1,50 @@
+{
+  "base_tag": "v0.17",
+  "feature_count": 12,
+  "feature_names": [
+    "knight-safe-mobility",
+    "bishop-safe-mobility",
+    "rook-safe-mobility",
+    "queen-safe-mobility",
+    "king-zone-pressure",
+    "coordinated-attackers-squared",
+    "pawn-shelter",
+    "passed-pawn-progress",
+    "passed-pawn-king-access",
+    "negative-isolated-pawns",
+    "negative-doubled-pawns",
+    "negative-blocked-pawns"
+  ],
+  "selected_on": "validation only, after integer rounding",
+  "regularization": 1,
+  "middle": [
+    0,
+    8,
+    6,
+    0,
+    13,
+    4,
+    14,
+    2,
+    0,
+    1,
+    0,
+    7
+  ],
+  "ending": [
+    0,
+    8,
+    6,
+    0,
+    0,
+    0,
+    0,
+    0,
+    4,
+    0,
+    0,
+    4
+  ],
+  "source_corpus_sha256": "293fffd28b0a3178888f4b08ea3e2568a793f411a3da9b1dcd98324b9d42d270",
+  "calibration_plan_sha256": "1fe61a45b323438ef7b48a96758fc138e6e3ad2ec71d9b546d98ec229a1411de"
+}

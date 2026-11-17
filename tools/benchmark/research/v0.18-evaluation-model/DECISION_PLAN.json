@@ -1,0 +1,8 @@
+{
+  "stage": "Frozen before native equal-time probes and reference move-quality results",
+  "corpus": "The existing 84 full-history regression/control inputs, with 100ms three trials and 1000ms one trial, plus the prespecified three-search/warm timing schedule. Public and correlated; this is a diagnostic gate, not blind strength validation.",
+  "reference": "Pinned full-strength Stockfish, fresh Hash64, one thread, 100000 nodes per distinct position/unrestricted or actually selected move. Keep all score-bearing iterations and use the last completed exact result. Evaluate actual moves, allow any sound alternative, do not require matching a unique PV.",
+  "measure": "For cases with finite CP values for both unrestricted and selected move, clamp each selected-move loss at zero and 1000cp, average over trials per actor/position and then over positions. Keep mate-valued cases separate as qualitative controls. Record the entire raw stream; finite-node references are estimates.",
+  "gate": "No protocol/legality/control failure; at each serial budget candidate mean CP loss must not exceed baseline by more than max(10%, 5cp), and position-average losses >300cp must not increase by more than two positions. A passing diagnostic plus acceptable cost can justify the standard concurrent 50 games per opponent; no strength claim follows from this gate alone.",
+  "no_retuning": "The fitted weights remain frozen. If the gate fails, preserve the candidate/findings and revise the hypothesis after review; do not rerun or tune until favorable. No larger confirmation or live play."
+}

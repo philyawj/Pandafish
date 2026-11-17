@@ -1,0 +1,48 @@
+{
+  "slow": [
+    {
+      "name": "tests",
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./..."
+      ],
+      "exit": 0
+    },
+    {
+      "name": "build",
+      "command": [
+        "go",
+        "build",
+        "-o",
+        "pandafish-replayed",
+        "."
+      ],
+      "exit": 0
+    }
+  ],
+  "fast": [
+    {
+      "name": "tests",
+      "command": [
+        "go",
+        "test",
+        "-count=1",
+        "./..."
+      ],
+      "exit": 0
+    },
+    {
+      "name": "build",
+      "command": [
+        "go",
+        "build",
+        "-o",
+        "pandafish-replayed",
+        "."
+      ],
+      "exit": 0
+    }
+  ]
+}

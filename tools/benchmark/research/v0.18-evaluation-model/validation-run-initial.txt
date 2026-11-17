@@ -1,0 +1,20 @@
+format 0
+race 0
+vet 0
+candidate-build 0
+arm64 0
+wrapper 0
+upstream-library-tests 0
+baseline-fixed 0
+baseline-deep 0
+baseline-ghi 0
+Traceback (most recent call last):
+  File "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.18-evaluation-model/validate.py", line 35, in <module>
+    shutil.copytree(repo/'third_party',tree/'third_party')
+  File "/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/shutil.py", line 600, in copytree
+    return _copytree(entries=entries, src=src, dst=dst, symlinks=symlinks,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/shutil.py", line 498, in _copytree
+    os.makedirs(dst, exist_ok=dirs_exist_ok)
+  File "<frozen os>", line 225, in makedirs
+FileExistsError: [Errno 17] File exists: '/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-check-6oz0e511/candidate/third_party'

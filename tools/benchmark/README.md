@@ -78,7 +78,19 @@ and cut timed-kernel allocation from about 71 MB to 9.5 MB/request. Its concurre
 50-game screens score 59% against v0.16 and 53% each against Skill 2 and pinned
 Sacrifice, with zero unfinished games/forfeits. I approved promotion as v0.17 under the practical gate, retaining the
 finite-sample/color limits. The proposed larger confirmation remains deferred;
-future candidates compare against tagged v0.17.
+the next candidate compared against tagged v0.17.
+
+The promoted [exact evaluation revision](research/v0.18-exact-evaluation/README.md)
+isolated the useful computation kernel from the failed fitted model. It preserves
+all 192 fixed-depth node/score/move pairs, reduces selected fixed-work elapsed
+time about 12–15%, and completes 2,046 native requests correctly. Its concurrent
+50-game screens score 57% against tagged v0.17, 73% against Skill 2 and 51%
+against pinned Sacrifice, with zero forfeits/unfinished games and 150 independent
+legal PGN replays. I approved promotion as v0.18 under the practical gate, while keeping
+the fitted values archived. Opening concentration and wide uncertainty limit
+strength claims; a broader confirmation is justified before raising the target
+or claiming a large general gain. The larger confirmation remains deferred; future candidates compare against
+tagged v0.18.
 
 ## Why this exists
 
@@ -188,6 +200,10 @@ git archive v0.16 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.17 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.17" .)
+
+build_dir=$(mktemp -d)
+git archive v0.18 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.18" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -270,12 +286,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.17 tagged baseline as above for the next engine change. Then run
+Build the v0.18 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.17 --previous-version v0.17 \
+  --previous tools/benchmark/bin/pandafish-v0.18 --previous-version v0.18 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -441,7 +457,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.17 --previous-version v0.17 \
+  --previous tools/benchmark/bin/pandafish-v0.18 --previous-version v0.18 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -664,7 +680,7 @@ reproduce earlier profiles. For example, a future Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.17 --previous-version v0.17 \
+  --previous tools/benchmark/bin/pandafish-v0.18 --previous-version v0.18 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```

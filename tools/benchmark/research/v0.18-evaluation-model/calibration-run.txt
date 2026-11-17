@@ -1,0 +1,99 @@
+{
+  "rows": {
+    "train": 230,
+    "validation": 83,
+    "holdout": 91
+  },
+  "weights": {
+    "base_tag": "v0.17",
+    "feature_count": 12,
+    "feature_names": [
+      "knight-safe-mobility",
+      "bishop-safe-mobility",
+      "rook-safe-mobility",
+      "queen-safe-mobility",
+      "king-zone-pressure",
+      "coordinated-attackers-squared",
+      "pawn-shelter",
+      "passed-pawn-progress",
+      "passed-pawn-king-access",
+      "negative-isolated-pawns",
+      "negative-doubled-pawns",
+      "negative-blocked-pawns"
+    ],
+    "selected_on": "validation only, after integer rounding",
+    "regularization": 1,
+    "middle": [
+      0,
+      8,
+      6,
+      0,
+      13,
+      4,
+      14,
+      2,
+      0,
+      1,
+      0,
+      7
+    ],
+    "ending": [
+      0,
+      8,
+      6,
+      0,
+      0,
+      0,
+      0,
+      0,
+      4,
+      0,
+      0,
+      4
+    ],
+    "source_corpus_sha256": "293fffd28b0a3178888f4b08ea3e2568a793f411a3da9b1dcd98324b9d42d270",
+    "calibration_plan_sha256": "1fe61a45b323438ef7b48a96758fc138e6e3ad2ec71d9b546d98ec229a1411de"
+  },
+  "quality": {
+    "train": {
+      "baseline": {
+        "rows": 230,
+        "clipped_mae_cp": 177.18260869565216,
+        "raw_catastrophes_over_300cp": 43
+      },
+      "candidate": {
+        "rows": 230,
+        "clipped_mae_cp": 155.7521739130435,
+        "raw_catastrophes_over_300cp": 35
+      },
+      "relative_mae_improvement": 0.12095111896348631
+    },
+    "validation": {
+      "baseline": {
+        "rows": 83,
+        "clipped_mae_cp": 185.34939759036143,
+        "raw_catastrophes_over_300cp": 21
+      },
+      "candidate": {
+        "rows": 83,
+        "clipped_mae_cp": 175.3855421686747,
+        "raw_catastrophes_over_300cp": 20
+      },
+      "relative_mae_improvement": 0.05375715028601136
+    },
+    "holdout": {
+      "baseline": {
+        "rows": 91,
+        "clipped_mae_cp": 219.3846153846154,
+        "raw_catastrophes_over_300cp": 28
+      },
+      "candidate": {
+        "rows": 91,
+        "clipped_mae_cp": 203.93406593406593,
+        "raw_catastrophes_over_300cp": 27
+      },
+      "relative_mae_improvement": 0.07042676818272897
+    }
+  },
+  "holdout_gate_passed": true
+}

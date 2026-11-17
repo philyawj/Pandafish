@@ -1,6 +1,9 @@
 package main
 
-import "github.com/corentings/chess/v2"
+import (
+	"github.com/corentings/chess/v2"
+	"math/bits"
+)
 
 // All evaluation/search scores are centipawns. Mate exceeds any legal material
 // balance plus positional terms, including positions with promoted pieces.
@@ -74,28 +77,22 @@ func phaseWeight(piece chess.PieceType) int {
 	return 0
 }
 func staticScore(position *chess.Position, perspective chess.Color) int {
-	board := position.Board()
+	pieces := position.Board().EvaluationPieces()
 	phase := 0
-	for square := chess.A1; square <= chess.H8; square++ {
-		phase += phaseWeight(board.Piece(square).Type())
+	for index, mask := range pieces {
+		phase += bits.OnesCount64(mask) * phaseWeight(evaluationPieceTypes[index])
 	}
 	phase = min(24, phase)
 	score := 0
-	for square := chess.A1; square <= chess.H8; square++ {
-		piece := board.Piece(square)
-		if piece == chess.NoPiece {
-			continue
+	for index, mask := range pieces {
+		for mask != 0 {
+			sq := bits.LeadingZeros64(mask)
+			mask &^= uint64(1) << uint(63-sq)
+			score += int(basePieceScores[phase][index][sq])
 		}
-		file, rank := int(square)%8, int(square)/8
-		if piece.Color() == chess.Black {
-			rank = 7 - rank
-		}
-		value := pieceValues[piece.Type()] + placement(piece.Type(), file, rank, phase)
-		if piece.Color() == perspective {
-			score += value
-		} else {
-			score -= value
-		}
+	}
+	if perspective == chess.Black {
+		return -score
 	}
 	return score
 }
