@@ -62,6 +62,14 @@ The older [v0.10 priorities](live/v0.10-twitch-m2-20261112/REVIEW.md#current-str
 describe earlier groundwork. Prefer meaningful strength experiments now; defer
 small optimizations unless profiling shows a specific need.
 
+The promoted [coordinated search-core candidate](research/v0.16-search-core/README.md)
+implements the first architecture experiment from v0.15.3. It passes exact-score,
+best-move membership, rule/cancellation and equal-time checks. Its concurrent
+50-game screens score 65% against tagged v0.15.3, 43% against Skill 2 and 49%
+against pinned Sacrifice, with no unfinished games or forfeits. I approved
+promotion as v0.16 from this screen, with the original uncertainty retained. The proposed larger confirmation was deferred. Future candidates
+compare against tagged v0.16; no new feature is bundled into this promotion.
+
 ## Why this exists
 
 This benchmark runner was created without knowing how Fishtest works. After
@@ -162,11 +170,15 @@ git archive v0.15.2 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.15.3 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.15.3" .)
+
+build_dir=$(mktemp -d)
+git archive v0.16 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.16" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
 deleted after building. Keep the released binaries as baselines. The Go runner
-accepts executable paths directly and contains no paths to the maintainer's machine.
+accepts executable paths directly and contains no paths to my machine.
 Official Stockfish builds include their default neural network. Custom engine
 builds requiring external data files need those files available independently;
 only the executable is copied into the benchmark's temporary snapshot.
@@ -244,12 +256,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.15.3 tagged baseline as above for the next engine change. Then run
+Build the v0.16 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.15.3 --previous-version v0.15.3 \
+  --previous tools/benchmark/bin/pandafish-v0.16 --previous-version v0.16 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -292,7 +304,7 @@ result folders. Direct match mode also supports historical two-opponent runs.
 
 ### Why routine comparisons are concurrent
 
-The maintainer accepted a modest throughput cost to shorten the development
+I accepted a modest throughput cost to shorten the development
 loop. The [v0.13 calibration](results/v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/README.md)
 compared unchanged opponents with published results and measured search work
 under one-search and three-search loads. All 150 games completed in about
@@ -415,7 +427,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.15.3 --previous-version v0.15.3 \
+  --previous tools/benchmark/bin/pandafish-v0.16 --previous-version v0.16 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -614,7 +626,7 @@ separately from routine results.
 ## Stockfish skill progression
 
 The ladder began at Skill Level 1. Starting with the post-v0.13 workflow,
-**Skill Level 2 is the standard reference**. The maintainer selected it after
+**Skill Level 2 is the standard reference**. I selected it after
 the Skill 1 results and a 60% first 50-game screen at Skill 2. This is a practical
 comparison point, not proof of a reliable above-50% rate at that level.
 
@@ -638,7 +650,7 @@ reproduce earlier profiles. For example, a future Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.15.3 --previous-version v0.15.3 \
+  --previous tools/benchmark/bin/pandafish-v0.16 --previous-version v0.16 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```
@@ -818,7 +830,7 @@ assess selective quiescence, selective main search, and richer classical
 scoring. The review includes a reproducible ordinary-exchange cutoff example
 and separates measured efficiency from external strength. These are research
 options. Recommendation 1 was subsequently selected for the local v0.13
-experiment; recommendations 2 and 3 remain future alternatives. The maintainer
+experiment; recommendations 2 and 3 remain future alternatives. I
 approved the selected candidate for v0.13.
 
 The local [v0.13 selective-quiescence experiment](research/v0.13-candidates/selective-quiescence-audit/README.md)

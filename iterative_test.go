@@ -17,10 +17,7 @@ func TestIterativeMatchesFixedDepth(t *testing.T) {
 			t.Fatal(err)
 		}
 		moves := rootMoves(game.Position(), nil)
-		best, score, complete := (&searcher{}).root(game.Position(), moves, 3)
-		if !complete {
-			t.Fatal("unlimited reference interrupted")
-		}
+		best, score := fullWindowRoot(t, game.Position(), moves, 3, nil)
 		before := game.FEN()
 		got := iterativeSearch(context.Background(), game.Position(), goLimits{depth: 3}, timeBudget{}, time.Now())
 		if got.depth != 3 || got.score != score || !slices.Contains(best, got.move) {

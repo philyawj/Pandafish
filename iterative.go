@@ -93,16 +93,18 @@ func (worker *searcher) iterate(position *chess.Position, moves []chess.Move, de
 		if !complete {
 			break
 		}
-		result = searchResult{move: best[rand.IntN(len(best))], depth: depth, score: score}
+		result = searchResult{move: best[0], depth: depth, score: score}
 		reason = "depth"
-		// The previous iteration's choice is a useful first candidate, without
-		// changing scores or random selection among equally best moves.
+		// Search the previous iteration's proven best move first.
 		i := slices.IndexFunc(moves, func(move chess.Move) bool { return move.String() == result.move })
 		moves[0], moves[i] = moves[i], moves[0]
 	}
 	return result
 }
 
+// root returns one proven best move and its exact score on completion. The
+// slice contains exactly one move for a nonempty root; it does not enumerate
+// ties. Search each alternative separately with a full window for diagnostics.
 func (worker *searcher) root(position *chess.Position, moves []chess.Move, depth int) ([]string, int, bool) {
 	worker.pushPosition(position)
 	defer worker.popPosition(position)
@@ -112,9 +114,9 @@ func (worker *searcher) root(position *chess.Position, moves []chess.Move, depth
 		if worker.stopped() {
 			return nil, 0, false
 		}
-		// The one-point margin keeps tied root scores exact. Inferior moves
-		// may return bounds and cannot join the best-move list.
-		score, complete := worker.searchAtPly(position.Update(&move), depth-1, -searchInfinity, 1-bestScore, move.HasTag(chess.Check), 1)
+		// A fail-high in the child proves the move cannot beat the incumbent.
+		// Only a strict improvement replaces it; ties need no exact re-search.
+		score, complete := worker.childSearch(position.Update(&move), depth-1, -searchInfinity, -bestScore, move.HasTag(chess.Check), 1)
 		if !complete {
 			return nil, 0, false
 		}
@@ -122,7 +124,7 @@ func (worker *searcher) root(position *chess.Position, moves []chess.Move, depth
 		if score > bestScore {
 			bestScore, best = score, best[:0]
 		}
-		if score == bestScore {
+		if score == bestScore && len(best) == 0 {
 			best = append(best, move.String())
 		}
 	}

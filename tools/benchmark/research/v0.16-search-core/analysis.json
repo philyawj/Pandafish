@@ -1,0 +1,550 @@
+{
+  "fixed": {
+    "rows": 168,
+    "failures": [],
+    "groups": {
+      "3/all": {
+        "cases": 84,
+        "baseline_nodes": 238932,
+        "candidate_nodes": 227579,
+        "baseline_ms": 1493.1077909999997,
+        "candidate_ms": 1011.3109969999998,
+        "node_ratio": 0.9524843888637772,
+        "elapsed_ratio": 0.6773194829575436
+      },
+      "3/neutral": {
+        "cases": 24,
+        "baseline_nodes": 98653,
+        "candidate_nodes": 89209,
+        "baseline_ms": 667.185918,
+        "candidate_ms": 415.793376,
+        "node_ratio": 0.9042705239577103,
+        "elapsed_ratio": 0.6232046642207457
+      },
+      "4/all": {
+        "cases": 84,
+        "baseline_nodes": 1185507,
+        "candidate_nodes": 1010100,
+        "baseline_ms": 7137.880622000001,
+        "candidate_ms": 4997.515579000001,
+        "node_ratio": 0.8520405193727241,
+        "elapsed_ratio": 0.7001399776282221
+      },
+      "4/neutral": {
+        "cases": 24,
+        "baseline_nodes": 531308,
+        "candidate_nodes": 428486,
+        "baseline_ms": 3341.5034960000003,
+        "candidate_ms": 2253.230122,
+        "node_ratio": 0.8064738343860811,
+        "elapsed_ratio": 0.6743162545534562
+      },
+      "3/control": {
+        "cases": 2,
+        "baseline_nodes": 1402,
+        "candidate_nodes": 1487,
+        "baseline_ms": 3.5966240000000003,
+        "candidate_ms": 3.219917,
+        "node_ratio": 1.0606276747503567,
+        "elapsed_ratio": 0.8952609447081485
+      },
+      "4/control": {
+        "cases": 2,
+        "baseline_nodes": 6645,
+        "candidate_nodes": 5803,
+        "baseline_ms": 20.736917,
+        "candidate_ms": 14.776251,
+        "node_ratio": 0.873288186606471,
+        "elapsed_ratio": 0.7125577538840514
+      },
+      "3/rule_control": {
+        "cases": 1,
+        "baseline_nodes": 719,
+        "candidate_nodes": 702,
+        "baseline_ms": 2.282542,
+        "candidate_ms": 1.455458,
+        "node_ratio": 0.9763560500695411,
+        "elapsed_ratio": 0.6376478505105273
+      },
+      "4/rule_control": {
+        "cases": 1,
+        "baseline_nodes": 3694,
+        "candidate_nodes": 2504,
+        "baseline_ms": 11.267458,
+        "candidate_ms": 7.071,
+        "node_ratio": 0.6778559826746074,
+        "elapsed_ratio": 0.6275594725979897
+      },
+      "3/saved_error": {
+        "cases": 8,
+        "baseline_nodes": 21664,
+        "candidate_nodes": 20918,
+        "baseline_ms": 131.900083,
+        "candidate_ms": 90.78499900000001,
+        "node_ratio": 0.9655649926144756,
+        "elapsed_ratio": 0.6882861400473873
+      },
+      "4/saved_error": {
+        "cases": 8,
+        "baseline_nodes": 103607,
+        "candidate_nodes": 86046,
+        "baseline_ms": 634.642375,
+        "candidate_ms": 405.64870799999994,
+        "node_ratio": 0.8305037304429237,
+        "elapsed_ratio": 0.639176840342563
+      },
+      "3/saved_ending": {
+        "cases": 1,
+        "baseline_nodes": 157,
+        "candidate_nodes": 158,
+        "baseline_ms": 0.359333,
+        "candidate_ms": 0.405833,
+        "node_ratio": 1.0063694267515924,
+        "elapsed_ratio": 1.1294064280208052
+      },
+      "4/saved_ending": {
+        "cases": 1,
+        "baseline_nodes": 352,
+        "candidate_nodes": 355,
+        "baseline_ms": 1.137042,
+        "candidate_ms": 1.065417,
+        "node_ratio": 1.0085227272727273,
+        "elapsed_ratio": 0.9370076039407514
+      },
+      "3/broader-previous": {
+        "cases": 12,
+        "baseline_nodes": 36636,
+        "candidate_nodes": 31586,
+        "baseline_ms": 200.35112400000003,
+        "candidate_ms": 108.352084,
+        "node_ratio": 0.8621574407686429,
+        "elapsed_ratio": 0.5408109614598419
+      },
+      "4/broader-previous": {
+        "cases": 12,
+        "baseline_nodes": 178367,
+        "candidate_nodes": 162485,
+        "baseline_ms": 1011.7700809999999,
+        "candidate_ms": 726.972707,
+        "node_ratio": 0.9109588657094642,
+        "elapsed_ratio": 0.7185157187900678
+      },
+      "3/broader-stockfish": {
+        "cases": 12,
+        "baseline_nodes": 36130,
+        "candidate_nodes": 37479,
+        "baseline_ms": 219.777002,
+        "candidate_ms": 181.574916,
+        "node_ratio": 1.0373373927484084,
+        "elapsed_ratio": 0.82617796378895
+      },
+      "4/broader-stockfish": {
+        "cases": 12,
+        "baseline_nodes": 173291,
+        "candidate_nodes": 163635,
+        "baseline_ms": 949.7005019999999,
+        "candidate_ms": 778.366667,
+        "node_ratio": 0.9442786988360619,
+        "elapsed_ratio": 0.8195917190322809
+      },
+      "3/broader-sacrifice": {
+        "cases": 12,
+        "baseline_nodes": 36308,
+        "candidate_nodes": 38576,
+        "baseline_ms": 232.933709,
+        "candidate_ms": 178.19812399999995,
+        "node_ratio": 1.0624655723256582,
+        "elapsed_ratio": 0.7650164708449302
+      },
+      "4/broader-sacrifice": {
+        "cases": 12,
+        "baseline_nodes": 161059,
+        "candidate_nodes": 134774,
+        "baseline_ms": 984.861541,
+        "candidate_ms": 666.052125,
+        "node_ratio": 0.8367989370354963,
+        "elapsed_ratio": 0.6762901151807694
+      },
+      "3/special": {
+        "cases": 12,
+        "baseline_nodes": 7263,
+        "candidate_nodes": 7464,
+        "baseline_ms": 34.721455999999996,
+        "candidate_ms": 31.526290000000003,
+        "node_ratio": 1.0276745146633623,
+        "elapsed_ratio": 0.9079771885142146
+      },
+      "4/special": {
+        "cases": 12,
+        "baseline_nodes": 27184,
+        "candidate_nodes": 26012,
+        "baseline_ms": 182.26120999999998,
+        "candidate_ms": 144.332582,
+        "node_ratio": 0.9568864037669217,
+        "elapsed_ratio": 0.7918996148439924
+      }
+    }
+  },
+  "deep": {
+    "rows": 24,
+    "failures": [],
+    "groups": {
+      "5/all": {
+        "cases": 12,
+        "baseline_nodes": 1178150,
+        "candidate_nodes": 829743,
+        "baseline_ms": 6715.903166,
+        "candidate_ms": 3524.799335,
+        "node_ratio": 0.7042761957305945,
+        "elapsed_ratio": 0.5248436804218211
+      },
+      "5/neutral": {
+        "cases": 4,
+        "baseline_nodes": 444347,
+        "candidate_nodes": 282990,
+        "baseline_ms": 2825.6919989999997,
+        "candidate_ms": 1313.4050419999999,
+        "node_ratio": 0.6368671331189363,
+        "elapsed_ratio": 0.46480828146337544
+      },
+      "6/all": {
+        "cases": 12,
+        "baseline_nodes": 5650566,
+        "candidate_nodes": 3658933,
+        "baseline_ms": 29983.110123,
+        "candidate_ms": 16275.72796,
+        "node_ratio": 0.6475338930648717,
+        "elapsed_ratio": 0.5428298763281036
+      },
+      "6/neutral": {
+        "cases": 4,
+        "baseline_nodes": 2217872,
+        "candidate_nodes": 1435478,
+        "baseline_ms": 12286.942333,
+        "candidate_ms": 6610.993876,
+        "node_ratio": 0.6472321216012465,
+        "elapsed_ratio": 0.5380503706153431
+      },
+      "5/control": {
+        "cases": 2,
+        "baseline_nodes": 41154,
+        "candidate_nodes": 24742,
+        "baseline_ms": 133.03704199999999,
+        "candidate_ms": 56.960459,
+        "node_ratio": 0.6012052291393303,
+        "elapsed_ratio": 0.42815488185613754
+      },
+      "6/control": {
+        "cases": 2,
+        "baseline_nodes": 187765,
+        "candidate_nodes": 82272,
+        "baseline_ms": 754.642417,
+        "candidate_ms": 305.303292,
+        "node_ratio": 0.4381647271855777,
+        "elapsed_ratio": 0.40456683208147837
+      },
+      "5/broader-previous": {
+        "cases": 2,
+        "baseline_nodes": 177916,
+        "candidate_nodes": 163398,
+        "baseline_ms": 806.1505,
+        "candidate_ms": 600.771,
+        "node_ratio": 0.9183996942377302,
+        "elapsed_ratio": 0.7452342955812841
+      },
+      "6/broader-previous": {
+        "cases": 2,
+        "baseline_nodes": 1022103,
+        "candidate_nodes": 640920,
+        "baseline_ms": 6207.667458,
+        "candidate_ms": 3137.828042,
+        "node_ratio": 0.6270600908127655,
+        "elapsed_ratio": 0.5054761813885811
+      },
+      "5/broader-stockfish": {
+        "cases": 2,
+        "baseline_nodes": 226126,
+        "candidate_nodes": 188234,
+        "baseline_ms": 1195.31775,
+        "candidate_ms": 813.498375,
+        "node_ratio": 0.8324297073313108,
+        "elapsed_ratio": 0.6805708147477941
+      },
+      "6/broader-stockfish": {
+        "cases": 2,
+        "baseline_nodes": 1115145,
+        "candidate_nodes": 802894,
+        "baseline_ms": 6295.700666000001,
+        "candidate_ms": 3736.103,
+        "node_ratio": 0.7199906738585565,
+        "elapsed_ratio": 0.5934372039282084
+      },
+      "5/broader-sacrifice": {
+        "cases": 2,
+        "baseline_nodes": 288607,
+        "candidate_nodes": 170379,
+        "baseline_ms": 1755.7058749999999,
+        "candidate_ms": 740.1644590000001,
+        "node_ratio": 0.5903495064222282,
+        "elapsed_ratio": 0.42157656902526464
+      },
+      "6/broader-sacrifice": {
+        "cases": 2,
+        "baseline_nodes": 1107681,
+        "candidate_nodes": 697369,
+        "baseline_ms": 4438.157249,
+        "candidate_ms": 2485.49975,
+        "node_ratio": 0.6295756630293379,
+        "elapsed_ratio": 0.5600296723510708
+      }
+    }
+  },
+  "uci": {
+    "requests": 2046,
+    "blocks": {
+      "serial/100/baseline": {
+        "requests": 252,
+        "nonterminal_completed": 252,
+        "terminal_nulls": 0,
+        "failures": [],
+        "mean_depth": 4.357142857142857,
+        "total_nodes": 5179993,
+        "mean_response_ms": 93.92935186088647,
+        "p95_response_ms": 95.71858309209347,
+        "max_response_ms": 96.17475001141429
+      },
+      "serial/100/candidate": {
+        "requests": 252,
+        "nonterminal_completed": 252,
+        "terminal_nulls": 0,
+        "failures": [],
+        "mean_depth": 4.686507936507937,
+        "total_nodes": 6143834,
+        "mean_response_ms": 93.24296925859969,
+        "p95_response_ms": 95.87645786814392,
+        "max_response_ms": 96.48187481798232
+      },
+      "serial/1000/candidate": {
+        "requests": 84,
+        "nonterminal_completed": 84,
+        "terminal_nulls": 0,
+        "failures": [],
+        "mean_depth": 6.404761904761905,
+        "total_nodes": 21685326,
+        "mean_response_ms": 979.5867083317023,
+        "p95_response_ms": 996.1150418967009,
+        "max_response_ms": 996.696291025728
+      },
+      "serial/1000/baseline": {
+        "requests": 84,
+        "nonterminal_completed": 84,
+        "terminal_nulls": 0,
+        "failures": [],
+        "mean_depth": 5.976190476190476,
+        "total_nodes": 18305404,
+        "mean_response_ms": 971.5471468211729,
+        "p95_response_ms": 995.9833330940455,
+        "max_response_ms": 996.4092089794576
+      },
+      "three-search/100/baseline": {
+        "requests": 504,
+        "nonterminal_completed": 504,
+        "terminal_nulls": 0,
+        "failures": [],
+        "mean_depth": 4.309523809523809,
+        "total_nodes": 9636889,
+        "mean_response_ms": 96.46853754557448,
+        "p95_response_ms": 107.39679192192852,
+        "max_response_ms": 116.64412496611476
+      },
+      "three-search/100/candidate": {
+        "requests": 504,
+        "nonterminal_completed": 504,
+        "terminal_nulls": 0,
+        "failures": [],
+        "mean_depth": 4.619047619047619,
+        "total_nodes": 11426290,
+        "mean_response_ms": 94.90971328526189,
+        "p95_response_ms": 107.6826669741422,
+        "max_response_ms": 115.308916894719
+      },
+      "warm/100/baseline": {
+        "requests": 183,
+        "nonterminal_completed": 169,
+        "terminal_nulls": 14,
+        "failures": [],
+        "mean_depth": 3.905325443786982,
+        "total_nodes": 3092646,
+        "mean_response_ms": 93.86754733063943,
+        "p95_response_ms": 96.21037496253848,
+        "max_response_ms": 96.43899998627603
+      },
+      "warm/100/candidate": {
+        "requests": 183,
+        "nonterminal_completed": 169,
+        "terminal_nulls": 14,
+        "failures": [],
+        "mean_depth": 4.272189349112426,
+        "total_nodes": 3723894,
+        "mean_response_ms": 92.42672412022507,
+        "p95_response_ms": 96.12704114988446,
+        "max_response_ms": 96.47204214707017
+      }
+    },
+    "paired_depths": {
+      "serial/100": {
+        "pairs": 252,
+        "deeper": 80,
+        "equal": 172,
+        "shallower": 0,
+        "mean_depth_gain": 0.32936507936507936,
+        "by_group": {
+          "neutral": {
+            "pairs": 72,
+            "mean_depth_gain": 0.4305555555555556
+          },
+          "control": {
+            "pairs": 6,
+            "mean_depth_gain": 0.5
+          },
+          "rule_control": {
+            "pairs": 3,
+            "mean_depth_gain": 0
+          },
+          "saved_error": {
+            "pairs": 24,
+            "mean_depth_gain": 0.4583333333333333
+          },
+          "saved_ending": {
+            "pairs": 3,
+            "mean_depth_gain": 0.3333333333333333
+          },
+          "broader-previous": {
+            "pairs": 36,
+            "mean_depth_gain": 0.25
+          },
+          "broader-stockfish": {
+            "pairs": 36,
+            "mean_depth_gain": 0.3888888888888889
+          },
+          "broader-sacrifice": {
+            "pairs": 36,
+            "mean_depth_gain": 0.1111111111111111
+          },
+          "special": {
+            "pairs": 36,
+            "mean_depth_gain": 0.2777777777777778
+          }
+        }
+      },
+      "serial/1000": {
+        "pairs": 84,
+        "deeper": 33,
+        "equal": 51,
+        "shallower": 0,
+        "mean_depth_gain": 0.42857142857142855,
+        "by_group": {
+          "neutral": {
+            "pairs": 24,
+            "mean_depth_gain": 0.375
+          },
+          "control": {
+            "pairs": 2,
+            "mean_depth_gain": 1
+          },
+          "rule_control": {
+            "pairs": 1,
+            "mean_depth_gain": 0
+          },
+          "saved_error": {
+            "pairs": 8,
+            "mean_depth_gain": 0.5
+          },
+          "saved_ending": {
+            "pairs": 1,
+            "mean_depth_gain": 1
+          },
+          "broader-previous": {
+            "pairs": 12,
+            "mean_depth_gain": 0.5
+          },
+          "broader-stockfish": {
+            "pairs": 12,
+            "mean_depth_gain": 0.5
+          },
+          "broader-sacrifice": {
+            "pairs": 12,
+            "mean_depth_gain": 0.25
+          },
+          "special": {
+            "pairs": 12,
+            "mean_depth_gain": 0.4166666666666667
+          }
+        }
+      },
+      "three-search/100": {
+        "pairs": 504,
+        "deeper": 150,
+        "equal": 354,
+        "shallower": 0,
+        "mean_depth_gain": 0.30952380952380953,
+        "by_group": {
+          "neutral": {
+            "pairs": 144,
+            "mean_depth_gain": 0.4166666666666667
+          },
+          "special": {
+            "pairs": 72,
+            "mean_depth_gain": 0.2361111111111111
+          },
+          "broader-sacrifice": {
+            "pairs": 72,
+            "mean_depth_gain": 0.2638888888888889
+          },
+          "control": {
+            "pairs": 12,
+            "mean_depth_gain": 0.5
+          },
+          "broader-stockfish": {
+            "pairs": 72,
+            "mean_depth_gain": 0.25
+          },
+          "rule_control": {
+            "pairs": 6,
+            "mean_depth_gain": 0
+          },
+          "saved_error": {
+            "pairs": 48,
+            "mean_depth_gain": 0.375
+          },
+          "saved_ending": {
+            "pairs": 6,
+            "mean_depth_gain": 0
+          },
+          "broader-previous": {
+            "pairs": 72,
+            "mean_depth_gain": 0.25
+          }
+        }
+      }
+    },
+    "warm": {
+      "baseline": {
+        "nonterminal_pairs": 54,
+        "warm_deeper": 2,
+        "equal": 50,
+        "warm_shallower": 2,
+        "warm_nodes": 991064,
+        "cold_nodes": 981698
+      },
+      "candidate": {
+        "nonterminal_pairs": 54,
+        "warm_deeper": 2,
+        "equal": 51,
+        "warm_shallower": 1,
+        "warm_nodes": 1192954,
+        "cold_nodes": 1181142
+      }
+    }
+  }
+}

@@ -128,9 +128,10 @@ func TestDelayForcedMateMatchesIndependentProof(t *testing.T) {
 		}
 	}
 	best, score, ok := (&searcher{table: newTable()}).root(p, rootMoves(p, nil), 7)
-	slices.Sort(best)
 	slices.Sort(want)
-	if !ok || !slices.Equal(best, want) || score != -mateScore+proof.distance {
+	// Production promises one best move, not an enumeration of all ties.
+	// The independent proof still establishes every longest-resistance move.
+	if !ok || len(best) != 1 || !slices.Contains(want, best[0]) || score != -mateScore+proof.distance {
 		t.Fatalf("delay best%v want%v score%d proof%+v", best, want, score, proof)
 	}
 	t.Logf("proven losing distance%d; longest resistance%v", proof.distance, want)

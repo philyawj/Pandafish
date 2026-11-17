@@ -10,7 +10,7 @@ No routine match screen was started: the prerequisite mechanism/cost assessment
 was not promising. Consequently there are no new results against tagged
 v0.15.1, Stockfish Skill 2 or pinned Sacrifice, and no previous-release gate
 claim. No larger confirmation is justified for this source. No live Lichess client
-was started. The maintainer subsequently authorized publishing these findings
+was started. I subsequently authorized publishing these findings
 as the v0.15.2 research release, with released playing behavior unchanged.
 
 ## Scope and frozen inputs
@@ -286,7 +286,7 @@ these penalties or forcing Nd4/Qd6 alternatives is not justified.
 to Rd1. Trace king access, blocked paths and races before adding a bonus;
 keep PNfQoYP0 and mirrored/side-to-move race controls separate. This is a provisional recommendation because it has a concrete resulting
 position to explain, not an instruction to follow the old ranking in order.
-The maintainer requested a fresh reassessment after publication. It does not validate the old bundled pawn scores. King exposure
+I requested a fresh reassessment after publication. It does not validate the old bundled pawn scores. King exposure
 remains a later separate experiment. No next feature is implemented here.
 
 ## Reproduce offline without overwriting this record

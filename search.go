@@ -79,13 +79,27 @@ func (worker *searcher) searchAtPly(position *chess.Position, depth, alpha, beta
 	worker.killers.order(moves, ply)
 	if hit {
 		preferMove(moves, entry.move)
+	} else {
+		preferMove(moves, worker.table.boardHint(position))
 	}
 	best, bestMove := -searchInfinity, uint16(0)
-	for _, move := range moves {
+	for moveIndex, move := range moves {
 		if worker.stopped() {
 			return 0, false
 		}
-		score, complete := worker.searchAtPly(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
+		child := position.Update(&move)
+		var score int
+		var complete bool
+		if moveIndex == 0 {
+			score, complete = worker.childSearch(child, depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
+		} else {
+			// Scout later moves with a null window. Re-search an in-window
+			// improvement at full depth; this introduces no move reductions.
+			score, complete = worker.childSearch(child, depth-1, -alpha-1, -alpha, move.HasTag(chess.Check), ply+1)
+			if complete && -score > alpha && -score < beta {
+				score, complete = worker.childSearch(child, depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
+			}
+		}
 		if !complete {
 			return 0, false
 		}
@@ -103,6 +117,7 @@ func (worker *searcher) searchAtPly(position *chess.Position, depth, alpha, beta
 		return 0, false
 	}
 	worker.table.store(position, depth, scoreToTable(best, ply), scoreToTable(originalAlpha, ply), scoreToTable(beta, ply), bestMove, worker.historyKey)
+	worker.table.storeHint(position, bestMove)
 	return best, true
 }
 
@@ -143,7 +158,13 @@ func (worker *searcher) quietAtPly(position *chess.Position, depth, alpha, beta 
 		}
 		alpha = max(alpha, best)
 	}
-	for _, move := range orderedMoves(position) {
+	var moves []chess.Move
+	if checked {
+		moves = orderedMoves(position)
+	} else {
+		moves = orderedTacticalMoves(position)
+	}
+	for _, move := range moves {
 		if worker.stopped() {
 			return 0, false
 		}
@@ -162,7 +183,7 @@ func (worker *searcher) quietAtPly(position *chess.Position, depth, alpha, beta 
 				continue
 			}
 		}
-		score, complete := worker.quietAtPly(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
+		score, complete := worker.childQuiet(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
 		if !complete {
 			return 0, false
 		}
@@ -197,6 +218,33 @@ func inCheck(position *chess.Position) bool {
 // ValidMoves returns a copy, so reordering does not change the position.
 func orderedMoves(position *chess.Position) []chess.Move {
 	moves := position.ValidMoves()
+	priority := func(move chess.Move) int {
+		value := pieceValues[move.Promo()]
+		if move.HasTag(chess.Capture) || move.HasTag(chess.EnPassant) {
+			victim := pieceValues[position.Board().Piece(move.S2()).Type()]
+			if move.HasTag(chess.EnPassant) {
+				victim = pieceValues[chess.Pawn]
+			}
+			value += 10000 + 10*victim - pieceValues[position.Board().Piece(move.S1()).Type()]
+		}
+		return value
+	}
+	slices.SortStableFunc(moves, func(a, b chess.Move) int {
+		return priority(b) - priority(a)
+	})
+	return moves
+}
+
+// The library still generates the full legal list. Copy eligible moves before
+// sorting so its cached list is never mutated. Specialized generation is a
+// separate experiment; eligibility and stable tactical ordering stay unchanged.
+func orderedTacticalMoves(position *chess.Position) []chess.Move {
+	var moves []chess.Move
+	for _, m := range position.ValidMovesUnsafe() {
+		if m.HasTag(chess.Capture) || m.HasTag(chess.EnPassant) || m.Promo() != chess.NoPieceType {
+			moves = append(moves, m)
+		}
+	}
 	priority := func(move chess.Move) int {
 		value := pieceValues[move.Promo()]
 		if move.HasTag(chess.Capture) || move.HasTag(chess.EnPassant) {

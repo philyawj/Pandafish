@@ -7,7 +7,7 @@ Keep repetition correctness throughout.** These are ranked experiments, not
 promised Elo gains or a fixed checklist. Reassess after each result.
 
 The bishop-pair source stays archived. Its practical 57% direct screen is not
-a demonstrated broad gain. The maintainer chose unchanged released play for
+a demonstrated broad gain. I chose unchanged released play for
 v0.15.3 and broader architectural research ahead of its optional confirmation.
 
 ## 1. Search core: useful depth with much less work

@@ -98,19 +98,18 @@ func TestCachedSearchMatchesUncachedWindows(t *testing.T) {
 	}
 }
 
-func TestCacheReuseReducesNodesAndPreservesRootTies(t *testing.T) {
+func TestCacheReuseReducesNodesAndPreservesBestMove(t *testing.T) {
 	p := chess.StartingPosition()
 	moves := rootMoves(p, nil)
 	baseline := searcher{}
-	best, score, _ := baseline.root(p, moves, 3)
+	baseline.root(p, moves, 3)
+	best, score := fullWindowRoot(t, p, moves, 3, nil)
 	worker := searcher{table: newTable()}
 	for i := 0; i < 2; i++ {
 		worker.nodes = 0
 		got, value, complete := worker.root(p, moves, 3)
-		slices.Sort(got)
-		slices.Sort(best)
-		if !complete || value != score || !slices.Equal(got, best) {
-			t.Fatal("cache changed root ties or score")
+		if !complete || value != score || len(got) != 1 || !slices.Contains(best, got[0]) {
+			t.Fatal("cache changed best score or selected an inferior move")
 		}
 		t.Logf("root nodes: uncached=%d cached_pass_%d=%d", baseline.nodes, i+1, worker.nodes)
 		if i == 1 && worker.nodes >= baseline.nodes {
@@ -171,7 +170,7 @@ func TestTablePersistsAcrossSearchesAndRestrictedRootIsSafe(t *testing.T) {
 	for _, restrict := range [][]string{{"a2a3"}, nil, {"e2e4"}, nil} {
 		limits := goLimits{depth: 3, searchMoves: restrict}
 		result := iterativeSearchWithTable(context.Background(), p, limits, timeBudget{}, time.Now(), table)
-		best, score, _ := (&searcher{}).root(p, rootMoves(p, restrict), 3)
+		best, score := fullWindowRoot(t, p, rootMoves(p, restrict), 3, nil)
 		if result.score != score || !slices.Contains(best, result.move) {
 			t.Fatal("restricted search poisoned cache")
 		}
