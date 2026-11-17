@@ -1,0 +1,25 @@
+{
+  "base_tag": "v0.16",
+  "base_commit": "4ae65b14f69d95a1ad498baa759fec5e6bd0a1a6",
+  "command": [
+    "go",
+    "-C",
+    "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-profile-hm1eq13m",
+    "test",
+    "-run",
+    "^$",
+    "-bench",
+    "^BenchmarkArchitectureProfile$",
+    "-benchtime",
+    "60x",
+    "-cpuprofile",
+    "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.17-search-moves/baseline-cpu.pb.gz",
+    "-o",
+    "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-profile-hm1eq13m/profile.test"
+  ],
+  "exit": 0,
+  "elapsed_s": 7.069800332887098,
+  "tree": "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-profile-hm1eq13m",
+  "cpu_allocation_stack_sampling_disabled": true,
+  "collector": "same 24 neutral-position 100ms kernel as v0.15.3 architecture report; no other engine workloads run concurrently"
+}

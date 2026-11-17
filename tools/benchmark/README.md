@@ -70,6 +70,16 @@ against pinned Sacrifice, with no unfinished games or forfeits. I approved
 promotion as v0.16 from this screen, with the original uncertainty retained. The proposed larger confirmation was deferred. Future candidates
 compare against tagged v0.16; no new feature is bundled into this promotion.
 
+The promoted [legal tactical generation/storage candidate](research/v0.17-search-moves/README.md)
+was selected after profiling tagged v0.16 and reassessing evaluation/threat
+work. Its additive pinned-library API and per-ply buffers preserve all tested
+fixed-depth nodes, scores and moves, reduce fixed-work time by about 39–43%,
+and cut timed-kernel allocation from about 71 MB to 9.5 MB/request. Its concurrent
+50-game screens score 59% against v0.16 and 53% each against Skill 2 and pinned
+Sacrifice, with zero unfinished games/forfeits. I approved promotion as v0.17 under the practical gate, retaining the
+finite-sample/color limits. The proposed larger confirmation remains deferred;
+future candidates compare against tagged v0.17.
+
 ## Why this exists
 
 This benchmark runner was created without knowing how Fishtest works. After
@@ -174,6 +184,10 @@ git archive v0.15.3 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.16 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.16" .)
+
+build_dir=$(mktemp -d)
+git archive v0.17 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.17" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -256,12 +270,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.16 tagged baseline as above for the next engine change. Then run
+Build the v0.17 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.16 --previous-version v0.16 \
+  --previous tools/benchmark/bin/pandafish-v0.17 --previous-version v0.17 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -427,7 +441,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.16 --previous-version v0.16 \
+  --previous tools/benchmark/bin/pandafish-v0.17 --previous-version v0.17 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -650,7 +664,7 @@ reproduce earlier profiles. For example, a future Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.16 --previous-version v0.16 \
+  --previous tools/benchmark/bin/pandafish-v0.17 --previous-version v0.17 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```
