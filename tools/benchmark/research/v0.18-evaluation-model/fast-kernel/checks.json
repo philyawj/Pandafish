@@ -1,0 +1,133 @@
+[
+  {
+    "name": "race",
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 30.638204750139266
+  },
+  {
+    "name": "vet",
+    "command": [
+      "go",
+      "vet",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.25705674989148974
+  },
+  {
+    "name": "candidate-build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-fast-7qbq2efa/candidate",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/pandafish-v0.18-evaluation-model-fast-dev",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.6328952079638839
+  },
+  {
+    "name": "candidate-fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-fast-7qbq2efa/candidate",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "15m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.376130625139922
+  },
+  {
+    "name": "candidate-deep",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-fast-7qbq2efa/candidate",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "15m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 12.71011891704984
+  },
+  {
+    "name": "candidate-ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-fast-7qbq2efa/candidate",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4233078339602798
+  },
+  {
+    "name": "fast-base-build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-fast-7qbq2efa/fast-base",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/pandafish-v0.18-fast-base-diagnostic",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4240981659386307
+  },
+  {
+    "name": "fast-base-fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-fast-7qbq2efa/fast-base",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "15m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 3.549296625191346
+  },
+  {
+    "name": "fast-base-ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-fast-7qbq2efa/fast-base",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4312270418740809
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "hypothesis": "Keep exactly the v0.17 material/placement evaluator, but compute it with precomputed integer phase/piece/square values over value-copied bitboards. Test whether reduced inference cost improves equal-time play without fitted residuals.",
+  "base_tag": "v0.17",
+  "base_commit": "76e73c8716d2ddcc826bdf349ff1c7a7ac71ecf3",
+  "scope": "Separate follow-up to the reviewed fast-base ablation. No model features or weights in the candidate build. No search, material, placement, quiescence, TT, clocks, dependencies or board updates changed.",
+  "known_results": "The prior fast-base ablation was decision-neutral on inspected diagnostics. This is disclosed evidence for selecting the revision, not blind validation. It has not played the standard screen.",
+  "correctness": "Original v0.17 root tests unchanged except development identity; exact original base oracle on 596 positions/both perspectives and all19200 table entries; value-copy immutability and promotion phase cap controls; all192 fixed-depth nodes/scores/moves identical; history/race/vet/native/ARM64/public offline wrapper.",
+  "performance": "One balanced native schedule: serial100ms three trials, serial1000ms one trial, three-search100ms six trials, warm episodes. Fixed-work depth4 and6 aggregate elapsed ratio <=0.90 to justify games; legal/protocol completions all valid, unchanged watchdog/margins. Report every lower depth/outlier, no favorable reruns.",
+  "screen": "If correctness and performance support the mechanism, standard50 games each versus taggedv0.17, StockfishSkill2 and pinnedSacrifice, allthree matchups concurrent at100ms/move and existing10openings. Strict direct score>50% with unfinished as losses, zero forfeits. External outcomes reviewed as evidence, no preciseElo claim. No automatic larger confirmation.",
+  "model_revision": "Keep old weights/gates frozen. Diagnose prior failures descriptively, then plan new independently sourced families and student-budget branch/ranking objective. Do not adjust weights on inspected failing controls.",
+  "authorization": "User asked to continue revisions and report back. No live Lichess, commit, push or PR until check-in."
+}

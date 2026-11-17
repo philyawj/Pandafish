@@ -1,0 +1,11 @@
+{
+  "stage": "Frozen before fitting any weights or inspecting validation/holdout quality",
+  "refinement": "Fit only quiescent-stable rows: baseline v0.17 full-window quiescence and static score must differ by at most 50 cp. The selected features describe quiet positional value; unresolved tactical swings are handled by the unchanged search. All excluded roots/replies and labels remain raw evidence.",
+  "existing_filters": "CP-only, nonchecked, no claimable draw, halfmove<=60, abs(base)<=1500 and abs(teacher)<=1500; deduplicate first-four-FEN-field board identity globally, retaining exclusions and grouping all related rows by opening family.",
+  "target": "teacher White cp minus baseline static White cp, clipped to +/-400 cp; no intercept",
+  "regularization": [0.001, 0.01, 0.1, 1, 10],
+  "middle_bounds": [8, 8, 6, 4, 15, 20, 25, 8, 6, 25, 25, 20],
+  "end_bounds": [8, 8, 6, 4, 10, 10, 5, 12, 8, 25, 25, 20],
+  "selection": "Bounded nonnegative ridge in RMS-standardized feature coordinates; integer-round weights and select by validation MAE after clipping both teacher and prediction to +/-1000 cp. Write selected weights before unlocking holdout metrics.",
+  "gate": "Holdout clipped CP MAE improves >=5% and raw absolute errors >300 cp do not increase more than 10%; candidate must beat baseline, not merely choose a teacher PV. Runtime and independent geometry gates also required. No retuning to holdout."
+}

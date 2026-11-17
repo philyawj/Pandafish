@@ -1,0 +1,17 @@
+--- FAIL: TestSearchFindsBestCapture (0.00s)
+    main_test.go:147: black search score = 588, want about 400 cp
+--- FAIL: TestQuiescence (0.00s)
+    --- FAIL: TestQuiescence/quiet_king_evasions_lose_queen (0.00s)
+        quiescence_test.go:43: quiescence score = -1027, want -9
+    --- FAIL: TestQuiescence/only_escape_is_quiet_block (0.00s)
+        quiescence_test.go:43: quiescence score = -616, want -5
+--- FAIL: TestQuiescenceHorizonQuietEvasion (0.00s)
+    quiescence_test.go:159: score -616, want forced quiet evasion score -616
+--- FAIL: TestQuiescenceContinuesOrdinaryExchanges (0.00s)
+    quiescence_test.go:266: exchange score 69, old horizon -127, complete true
+FAIL
+FAIL	github.com/philyawj/Pandafish	6.084s
+ok  	github.com/philyawj/Pandafish/internal/telemetry	0.590s
+ok  	github.com/philyawj/Pandafish/tools/benchmark	1.031s
+ok  	github.com/philyawj/Pandafish/tools/lichess	2.065s
+FAIL

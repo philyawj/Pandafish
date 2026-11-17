@@ -1,0 +1,32 @@
+[
+  {
+    "label": "oracle",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-features-s4wa9mbq",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestExportEvaluationFeatures$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.9609014999587089
+  },
+  {
+    "label": "corpus",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-features-s4wa9mbq",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestExportEvaluationFeatures$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4735793338622898
+  }
+]

@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.17 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.18 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
@@ -9,7 +9,10 @@ The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`,
 `evaluation.go`, `mate.go`, and `repetition.go`.
 A pinned local copy of [corentings/chess](https://github.com/corentings/chess)
 with an additive search API handles chess rules,
-including castling, en passant, and promotions. The engine assigns values of
+including castling, en passant, and promotions. The
+[local search-backend note](docs/CHESS_SEARCH_BACKEND.md) explains the v0.17
+library replacement, its benefits, maintenance cost and future uses.
+The engine assigns values of
 1 to pawns, 3 to knights and bishops, 5 to rooks, and 9 to queens. It picks a
 legal move by completing successively deeper searches, assuming each side
 chooses its best continuation. It keeps the last fully completed result when
@@ -338,6 +341,12 @@ by active ply. Preserve fixed-depth scores, chosen moves and node counts,
 with the original library methods and license intact. See the
 [implementation, validation and measured limits](tools/benchmark/research/v0.17-search-moves/README.md).
 
-**Next:** Reassess coherent data-calibrated evaluation/threat modeling against
-remaining search-backend opportunities. Choose one bounded experiment from
-current evidence, with independent controls and equal-time validation.
+**v0.18: Compute the same evaluation with less work (complete).** Precompute
+original material/placement formulas and evaluate value-copied piece bitboards.
+Preserve exact scores and fixed-depth search behavior. Archive the unpromoted
+fitted evaluator and its failed gates separately. See the
+[implementation, tests and measured limits](tools/benchmark/research/v0.18-exact-evaluation/README.md).
+
+**Next:** Rank evaluation/data, compact learned representations and remaining
+backend/search opportunities from these results, then test one bounded choice
+with independent controls and equal-time validation.

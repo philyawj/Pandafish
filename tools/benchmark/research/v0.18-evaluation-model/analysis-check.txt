@@ -1,0 +1,129 @@
+{
+  "fixed": {
+    "rows": 168,
+    "failures": [],
+    "depths": {
+      "3": {
+        "cases": 84,
+        "baseline_nodes": 227579,
+        "candidate_nodes": 236484,
+        "baseline_ms": 546.7573710000001,
+        "candidate_ms": 596.4540040000002,
+        "changed_moves": 33,
+        "changed_scores": 69,
+        "node_ratio": 1.0391292693965613,
+        "time_ratio": 1.0908933937353358
+      },
+      "4": {
+        "cases": 84,
+        "baseline_nodes": 1010100,
+        "candidate_nodes": 1176095,
+        "baseline_ms": 2805.755792999999,
+        "candidate_ms": 3442.985047000001,
+        "changed_moves": 28,
+        "changed_scores": 68,
+        "node_ratio": 1.1643352143352144,
+        "time_ratio": 1.2271150096490249
+      }
+    },
+    "note": "Different evaluation changes scores, decisions and pruning; node/time ratios are not fixed-work speedups."
+  },
+  "deep": {
+    "rows": 24,
+    "failures": [],
+    "depths": {
+      "5": {
+        "cases": 12,
+        "baseline_nodes": 829743,
+        "candidate_nodes": 932106,
+        "baseline_ms": 2041.5324179999998,
+        "candidate_ms": 2488.702125,
+        "changed_moves": 8,
+        "changed_scores": 12,
+        "node_ratio": 1.1233671148777393,
+        "time_ratio": 1.21903629991733
+      },
+      "6": {
+        "cases": 12,
+        "baseline_nodes": 3658933,
+        "candidate_nodes": 4167129,
+        "baseline_ms": 9657.57496,
+        "candidate_ms": 11673.576293,
+        "changed_moves": 6,
+        "changed_scores": 11,
+        "node_ratio": 1.1388918572709585,
+        "time_ratio": 1.208748194173996
+      }
+    },
+    "note": "Different evaluation changes scores, decisions and pruning; node/time ratios are not fixed-work speedups."
+  },
+  "uci": {
+    "requests": 2046,
+    "blocks": {
+      "serial/100/baseline": {
+        "requests": 252,
+        "mean_depth": 5.126984126984127,
+        "total_nodes": 10259855,
+        "max_response_ms": 99.66458403505385,
+        "terminal_nulls": 0,
+        "failures": []
+      },
+      "serial/100/candidate": {
+        "requests": 252,
+        "mean_depth": 4.9603174603174605,
+        "total_nodes": 9543537,
+        "max_response_ms": 99.07504194416106,
+        "terminal_nulls": 0,
+        "failures": []
+      },
+      "serial/1000/baseline": {
+        "requests": 84,
+        "mean_depth": 6.714285714285714,
+        "total_nodes": 34127658,
+        "max_response_ms": 996.0656671319157,
+        "terminal_nulls": 0,
+        "failures": []
+      },
+      "serial/1000/candidate": {
+        "requests": 84,
+        "mean_depth": 6.654761904761905,
+        "total_nodes": 32026125,
+        "max_response_ms": 996.7317080590874,
+        "terminal_nulls": 0,
+        "failures": []
+      },
+      "three-search/100/baseline": {
+        "requests": 504,
+        "mean_depth": 5.073412698412699,
+        "total_nodes": 19326425,
+        "max_response_ms": 125.32129185274243,
+        "terminal_nulls": 0,
+        "failures": []
+      },
+      "three-search/100/candidate": {
+        "requests": 504,
+        "mean_depth": 4.934523809523809,
+        "total_nodes": 17993832,
+        "max_response_ms": 114.39033388160169,
+        "terminal_nulls": 0,
+        "failures": []
+      },
+      "warm/100/baseline": {
+        "requests": 183,
+        "mean_depth": 4.627218934911243,
+        "total_nodes": 6194026,
+        "max_response_ms": 107.84575017169118,
+        "terminal_nulls": 14,
+        "failures": []
+      },
+      "warm/100/candidate": {
+        "requests": 183,
+        "mean_depth": 4.485207100591716,
+        "total_nodes": 5748207,
+        "max_response_ms": 96.346375066787,
+        "terminal_nulls": 14,
+        "failures": []
+      }
+    }
+  }
+}

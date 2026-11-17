@@ -1,0 +1,216 @@
+[
+  {
+    "name": "format",
+    "command": [
+      "gofmt",
+      "-l",
+      "evaluation_test.go",
+      "search_core_test.go",
+      "main_test.go",
+      "killers.go",
+      "main.go",
+      "uci_test.go",
+      "limits_test.go",
+      "transposition_test.go",
+      "quiescence_test.go",
+      "exchange_test.go",
+      "reporting.go",
+      "transposition.go",
+      "iterative.go",
+      "killers_test.go",
+      "search_test.go",
+      "repetition.go",
+      "search.go",
+      "evaluation.go",
+      "evaluation_kernel_test.go",
+      "internal/telemetry/telemetry.go",
+      "internal/telemetry/telemetry_test.go",
+      "exchange.go",
+      "search_moves.go",
+      "search_moves_test.go",
+      "mate.go",
+      "evaluation_kernel.go",
+      "reporting_test.go",
+      "iterative_test.go",
+      "repetition_test.go",
+      "tools/lichess/main.go",
+      "tools/lichess/report_test.go",
+      "tools/lichess/report.go",
+      "tools/lichess/stockfish.go",
+      "tools/lichess/record.go",
+      "tools/lichess/archive.go",
+      "tools/lichess/analyse.go",
+      "tools/lichess/record_test.go",
+      "tools/lichess/operational.go",
+      "tools/lichess/process_test.go",
+      "mate_test.go",
+      "search_context.go",
+      "limits.go",
+      "tools/benchmark/checks.go",
+      "tools/benchmark/workflow.go",
+      "tools/benchmark/main_test.go",
+      "tools/benchmark/main.go",
+      "tools/benchmark/report.go",
+      "tools/benchmark/workflow_test.go",
+      "tools/benchmark/uci.go",
+      "tools/benchmark/checks_test.go",
+      "third_party/chess/search_moves.go",
+      "third_party/chess/eval_pieces.go"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.017593583092093468
+  },
+  {
+    "name": "race",
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 25.68528145784512
+  },
+  {
+    "name": "vet",
+    "command": [
+      "go",
+      "vet",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.5421399171464145
+  },
+  {
+    "name": "candidate-build",
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/pandafish-v0.18-exact-evaluation-dev",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.48519070795737207
+  },
+  {
+    "name": "arm64",
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "/tmp/pandafish-v018-exact-search-moves-arm64",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.2642984159756452
+  },
+  {
+    "name": "wrapper",
+    "command": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.18-exact-evaluation/wrapper-check.py"
+    ],
+    "exit": 0,
+    "elapsed_s": 1.6896745420526713
+  },
+  {
+    "name": "baseline-fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-exact-check-0fg7dfo0/baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "15m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.275667209178209
+  },
+  {
+    "name": "baseline-deep",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-exact-check-0fg7dfo0/baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "15m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 12.032126208068803
+  },
+  {
+    "name": "baseline-ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-exact-check-0fg7dfo0/baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4178514580707997
+  },
+  {
+    "name": "candidate-fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-exact-check-0fg7dfo0/candidate",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "15m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 3.839957042131573
+  },
+  {
+    "name": "candidate-deep",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-exact-check-0fg7dfo0/candidate",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "15m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 10.250164833152667
+  },
+  {
+    "name": "candidate-ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v018-exact-check-0fg7dfo0/candidate",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4089285421650857
+  }
+]

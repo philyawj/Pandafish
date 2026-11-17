@@ -1,0 +1,147 @@
+[
+  {
+    "name": "format",
+    "command": [
+      "gofmt",
+      "-l",
+      "evaluation_test.go",
+      "search_core_test.go",
+      "main_test.go",
+      "killers.go",
+      "main.go",
+      "uci_test.go",
+      "limits_test.go",
+      "transposition_test.go",
+      "quiescence_test.go",
+      "exchange_test.go",
+      "reporting.go",
+      "transposition.go",
+      "iterative.go",
+      "killers_test.go",
+      "search_test.go",
+      "repetition.go",
+      "search.go",
+      "evaluation.go",
+      "evaluation_kernel_test.go",
+      "internal/telemetry/telemetry.go",
+      "internal/telemetry/telemetry_test.go",
+      "exchange.go",
+      "search_moves.go",
+      "search_moves_test.go",
+      "mate.go",
+      "evaluation_kernel.go",
+      "reporting_test.go",
+      "iterative_test.go",
+      "repetition_test.go",
+      "tools/lichess/main.go",
+      "tools/lichess/report_test.go",
+      "tools/lichess/report.go",
+      "tools/lichess/stockfish.go",
+      "tools/lichess/record.go",
+      "tools/lichess/archive.go",
+      "tools/lichess/analyse.go",
+      "tools/lichess/record_test.go",
+      "tools/lichess/operational.go",
+      "tools/lichess/process_test.go",
+      "tools/benchmark/workflow.go",
+      "tools/benchmark/main_test.go",
+      "tools/benchmark/main.go",
+      "tools/benchmark/report.go",
+      "tools/benchmark/workflow_test.go",
+      "tools/benchmark/uci.go",
+      "tools/benchmark/checks_test.go",
+      "tools/benchmark/checks.go",
+      "mate_test.go",
+      "limits.go",
+      "search_context.go",
+      "third_party/chess/search_moves.go",
+      "third_party/chess/eval_pieces.go"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.04453666694462299
+  },
+  {
+    "name": "race",
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 25.591145749902353
+  },
+  {
+    "name": "vet",
+    "command": [
+      "go",
+      "vet",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.21230491693131626
+  },
+  {
+    "name": "build",
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "tools/benchmark/bin/pandafish-v0.18-release",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4301804162096232
+  },
+  {
+    "name": "arm64",
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "/tmp/pandafish-v018-release-arm64",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.2592105409130454
+  },
+  {
+    "name": "wrapper",
+    "command": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.18-exact-evaluation/release-wrapper.py"
+    ],
+    "exit": 0,
+    "elapsed_s": 1.6917767499107867
+  },
+  {
+    "name": "smoke",
+    "command": [
+      "tools/benchmark/bin/benchmark",
+      "--candidate",
+      "tools/benchmark/bin/pandafish-v0.18-release",
+      "--version",
+      "v0.18-release-smoke",
+      "--revision",
+      "76e73c8716d2ddcc826bdf349ff1c7a7ac71ecf3-dirty",
+      "--previous",
+      "tools/benchmark/bin/pandafish-v0.17",
+      "--previous-version",
+      "v0.17",
+      "--previous-revision",
+      "76e73c8716d2ddcc826bdf349ff1c7a7ac71ecf3",
+      "--stockfish",
+      "/opt/homebrew/bin/stockfish",
+      "--sacrifice",
+      "tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine",
+      "--pairs",
+      "1",
+      "--parallel-all",
+      "--results",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.18-exact-evaluation/release-smoke"
+    ],
+    "exit": 1,
+    "elapsed_s": 31.661758083850145
+  }
+]

@@ -1,0 +1,161 @@
+{
+  "fixed_rows": 168,
+  "fixed_failures": 0,
+  "deep_rows": 24,
+  "deep_failures": 0,
+  "depth4": {
+    "cases": 84,
+    "baseline_nodes": 1010100,
+    "candidate_nodes": 1010100,
+    "baseline_ms": 2785.36496,
+    "candidate_ms": 2449.7887880000003,
+    "node_ratio": 1.0,
+    "elapsed_ratio": 0.8795216509078223
+  },
+  "depth6": {
+    "cases": 12,
+    "baseline_nodes": 3658933,
+    "candidate_nodes": 3658933,
+    "baseline_ms": 9579.526541000001,
+    "candidate_ms": 8149.791292000001,
+    "node_ratio": 1.0,
+    "elapsed_ratio": 0.8507509486109999
+  },
+  "uci_pairs": {
+    "serial/100": {
+      "pairs": 252,
+      "deeper": 27,
+      "equal": 223,
+      "shallower": 2,
+      "mean_depth_gain": 0.0992063492063492,
+      "by_group": {
+        "neutral": {
+          "pairs": 72,
+          "mean_depth_gain": 0.125
+        },
+        "control": {
+          "pairs": 6,
+          "mean_depth_gain": 0.5
+        },
+        "rule_control": {
+          "pairs": 3,
+          "mean_depth_gain": 0
+        },
+        "saved_error": {
+          "pairs": 24,
+          "mean_depth_gain": 0.125
+        },
+        "saved_ending": {
+          "pairs": 3,
+          "mean_depth_gain": 0
+        },
+        "broader-previous": {
+          "pairs": 36,
+          "mean_depth_gain": 0.05555555555555555
+        },
+        "broader-stockfish": {
+          "pairs": 36,
+          "mean_depth_gain": 0.08333333333333333
+        },
+        "broader-sacrifice": {
+          "pairs": 36,
+          "mean_depth_gain": 0.1388888888888889
+        },
+        "special": {
+          "pairs": 36,
+          "mean_depth_gain": 0
+        }
+      }
+    },
+    "serial/1000": {
+      "pairs": 84,
+      "deeper": 8,
+      "equal": 75,
+      "shallower": 1,
+      "mean_depth_gain": 0.08333333333333333,
+      "by_group": {
+        "neutral": {
+          "pairs": 24,
+          "mean_depth_gain": 0.041666666666666664
+        },
+        "control": {
+          "pairs": 2,
+          "mean_depth_gain": 0
+        },
+        "rule_control": {
+          "pairs": 1,
+          "mean_depth_gain": 1
+        },
+        "saved_error": {
+          "pairs": 8,
+          "mean_depth_gain": 0
+        },
+        "saved_ending": {
+          "pairs": 1,
+          "mean_depth_gain": 0
+        },
+        "broader-previous": {
+          "pairs": 12,
+          "mean_depth_gain": 0.08333333333333333
+        },
+        "broader-stockfish": {
+          "pairs": 12,
+          "mean_depth_gain": 0.16666666666666666
+        },
+        "broader-sacrifice": {
+          "pairs": 12,
+          "mean_depth_gain": 0.25
+        },
+        "special": {
+          "pairs": 12,
+          "mean_depth_gain": -0.08333333333333333
+        }
+      }
+    },
+    "three-search/100": {
+      "pairs": 504,
+      "deeper": 62,
+      "equal": 442,
+      "shallower": 0,
+      "mean_depth_gain": 0.12301587301587301,
+      "by_group": {
+        "neutral": {
+          "pairs": 144,
+          "mean_depth_gain": 0.16666666666666666
+        },
+        "special": {
+          "pairs": 72,
+          "mean_depth_gain": 0
+        },
+        "broader-sacrifice": {
+          "pairs": 72,
+          "mean_depth_gain": 0.3333333333333333
+        },
+        "control": {
+          "pairs": 12,
+          "mean_depth_gain": 0.5
+        },
+        "broader-stockfish": {
+          "pairs": 72,
+          "mean_depth_gain": 0
+        },
+        "rule_control": {
+          "pairs": 6,
+          "mean_depth_gain": 0
+        },
+        "saved_error": {
+          "pairs": 48,
+          "mean_depth_gain": 0.125
+        },
+        "saved_ending": {
+          "pairs": 6,
+          "mean_depth_gain": 0
+        },
+        "broader-previous": {
+          "pairs": 72,
+          "mean_depth_gain": 0.027777777777777776
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,306 @@
+[
+  {
+    "baseline": {
+      "actor": "baseline",
+      "trial": 0,
+      "budget_ms": 100,
+      "load": "serial",
+      "id": "special-ep-pinned",
+      "group": "special",
+      "position": "position fen k3r3/8/8/3pP3/8/8/8/4K3 w - d6 0 1",
+      "response_ms": 95.25041608139873,
+      "output": [
+        "info depth 8 nodes 65090 time 95 score cp -618 pv e1d2",
+        "info string pandafish {\"depth\":8,\"nodes\":65090,\"elapsed_ms\":95.001,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-618,\"pv\":[\"e1d2\"]}",
+        "bestmove e1d2"
+      ],
+      "move": "e1d2",
+      "terminal": false,
+      "legal": true,
+      "valid": true,
+      "depth": 8,
+      "nodes": 65090,
+      "metrics": {
+        "depth": 8,
+        "nodes": 65090,
+        "elapsed_ms": 95.001,
+        "timed": true,
+        "soft_ms": 71.25,
+        "hard_ms": 95,
+        "reason": "deadline",
+        "fallback": false,
+        "score_kind": "cp",
+        "score": -618,
+        "pv": [
+          "e1d2"
+        ]
+      },
+      "completed": true
+    },
+    "candidate": {
+      "actor": "candidate",
+      "trial": 0,
+      "budget_ms": 100,
+      "load": "serial",
+      "id": "special-ep-pinned",
+      "group": "special",
+      "position": "position fen k3r3/8/8/3pP3/8/8/8/4K3 w - d6 0 1",
+      "response_ms": 95.18412500619888,
+      "output": [
+        "info depth 7 nodes 44571 time 95 score cp -605 pv e1d2",
+        "info string pandafish {\"depth\":7,\"nodes\":44571,\"elapsed_ms\":95.003042,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-605,\"pv\":[\"e1d2\"]}",
+        "bestmove e1d2"
+      ],
+      "move": "e1d2",
+      "terminal": false,
+      "legal": true,
+      "valid": true,
+      "depth": 7,
+      "nodes": 44571,
+      "metrics": {
+        "depth": 7,
+        "nodes": 44571,
+        "elapsed_ms": 95.003042,
+        "timed": true,
+        "soft_ms": 71.25,
+        "hard_ms": 95,
+        "reason": "deadline",
+        "fallback": false,
+        "score_kind": "cp",
+        "score": -605,
+        "pv": [
+          "e1d2"
+        ]
+      },
+      "completed": true
+    }
+  },
+  {
+    "baseline": {
+      "actor": "baseline",
+      "trial": 1,
+      "budget_ms": 100,
+      "load": "serial",
+      "id": "broader-sacrifice-10-ply65",
+      "group": "broader-sacrifice",
+      "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d3 f8d6 g1f3 b8c6 c1g5 e8g8 c3d5 c6d4 d1a4 c7c6 d5c3 h7h6 g5f6 d8f6 c3e4 f6e7 a2a3 b7b5 a4d1 b5c4 d3c4 f7f5 e4d6 e7d6 f3d2 e5e4 d2b3 d4b3 d1d6 b3a1 d6d1 c8a6 c4c5 a6c4 d1c1 c4d5 c1a1 f5f4 f2f3 e4e3 g2g3 a8d8 b2b4 f4g3 h2g3 f8e8 h1h4 e8e7 h4g4 d8e8 f3f4 g8f8 f4f5 e7e5 a1d4 a7a6 g4g6 e8e7 d4d3 d5f7 f5f6",
+      "response_ms": 80.41220810264349,
+      "output": [
+        "info depth 6 nodes 28044 time 79 score cp -451 pv g7f6",
+        "info string pandafish {\"depth\":6,\"nodes\":28044,\"elapsed_ms\":79.969292,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-451,\"pv\":[\"g7f6\"]}",
+        "bestmove g7f6"
+      ],
+      "move": "g7f6",
+      "terminal": false,
+      "legal": true,
+      "valid": true,
+      "depth": 6,
+      "nodes": 28044,
+      "metrics": {
+        "depth": 6,
+        "nodes": 28044,
+        "elapsed_ms": 79.969292,
+        "timed": true,
+        "soft_ms": 71.25,
+        "hard_ms": 95,
+        "reason": "soft_limit",
+        "fallback": false,
+        "score_kind": "cp",
+        "score": -451,
+        "pv": [
+          "g7f6"
+        ]
+      },
+      "completed": true
+    },
+    "candidate": {
+      "actor": "candidate",
+      "trial": 1,
+      "budget_ms": 100,
+      "load": "serial",
+      "id": "broader-sacrifice-10-ply65",
+      "group": "broader-sacrifice",
+      "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d3 f8d6 g1f3 b8c6 c1g5 e8g8 c3d5 c6d4 d1a4 c7c6 d5c3 h7h6 g5f6 d8f6 c3e4 f6e7 a2a3 b7b5 a4d1 b5c4 d3c4 f7f5 e4d6 e7d6 f3d2 e5e4 d2b3 d4b3 d1d6 b3a1 d6d1 c8a6 c4c5 a6c4 d1c1 c4d5 c1a1 f5f4 f2f3 e4e3 g2g3 a8d8 b2b4 f4g3 h2g3 f8e8 h1h4 e8e7 h4g4 d8e8 f3f4 g8f8 f4f5 e7e5 a1d4 a7a6 g4g6 e8e7 d4d3 d5f7 f5f6",
+      "response_ms": 95.56558402255177,
+      "output": [
+        "info depth 5 nodes 23054 time 95 score cp -451 pv g7f6",
+        "info string pandafish {\"depth\":5,\"nodes\":23054,\"elapsed_ms\":95.001833,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"cp\",\"score\":-451,\"pv\":[\"g7f6\"]}",
+        "bestmove g7f6"
+      ],
+      "move": "g7f6",
+      "terminal": false,
+      "legal": true,
+      "valid": true,
+      "depth": 5,
+      "nodes": 23054,
+      "metrics": {
+        "depth": 5,
+        "nodes": 23054,
+        "elapsed_ms": 95.001833,
+        "timed": true,
+        "soft_ms": 71.25,
+        "hard_ms": 95,
+        "reason": "deadline",
+        "fallback": false,
+        "score_kind": "cp",
+        "score": -451,
+        "pv": [
+          "g7f6"
+        ]
+      },
+      "completed": true
+    }
+  },
+  {
+    "baseline": {
+      "actor": "baseline",
+      "trial": 0,
+      "budget_ms": 1000,
+      "load": "serial",
+      "id": "special-quiet-mate-threat",
+      "group": "special",
+      "position": "position fen r6r/pppbn1Q1/2nqp3/5p2/3P1P1k/2B4P/PPP3P1/R4RK1 w - - 1 19",
+      "response_ms": 961.4247500430793,
+      "output": [
+        "info depth 6 nodes 195351 time 961 score mate 1 pv g7g5",
+        "info string pandafish {\"depth\":6,\"nodes\":195351,\"elapsed_ms\":961.285458,\"timed\":true,\"soft_ms\":746.25,\"hard_ms\":995,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"mate\",\"score\":1,\"pv\":[\"g7g5\"]}",
+        "bestmove g7g5"
+      ],
+      "move": "g7g5",
+      "terminal": false,
+      "legal": true,
+      "valid": true,
+      "depth": 6,
+      "nodes": 195351,
+      "metrics": {
+        "depth": 6,
+        "nodes": 195351,
+        "elapsed_ms": 961.285458,
+        "timed": true,
+        "soft_ms": 746.25,
+        "hard_ms": 995,
+        "reason": "soft_limit",
+        "fallback": false,
+        "score_kind": "mate",
+        "score": 1,
+        "pv": [
+          "g7g5"
+        ]
+      },
+      "completed": true
+    },
+    "candidate": {
+      "actor": "candidate",
+      "trial": 0,
+      "budget_ms": 1000,
+      "load": "serial",
+      "id": "special-quiet-mate-threat",
+      "group": "special",
+      "position": "position fen r6r/pppbn1Q1/2nqp3/5p2/3P1P1k/2B4P/PPP3P1/R4RK1 w - - 1 19",
+      "response_ms": 995.2748748473823,
+      "output": [
+        "info depth 5 nodes 189179 time 995 score mate 1 pv g7g5",
+        "info string pandafish {\"depth\":5,\"nodes\":189179,\"elapsed_ms\":995.006125,\"timed\":true,\"soft_ms\":746.25,\"hard_ms\":995,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"mate\",\"score\":1,\"pv\":[\"g7g5\"]}",
+        "bestmove g7g5"
+      ],
+      "move": "g7g5",
+      "terminal": false,
+      "legal": true,
+      "valid": true,
+      "depth": 5,
+      "nodes": 189179,
+      "metrics": {
+        "depth": 5,
+        "nodes": 189179,
+        "elapsed_ms": 995.006125,
+        "timed": true,
+        "soft_ms": 746.25,
+        "hard_ms": 995,
+        "reason": "deadline",
+        "fallback": false,
+        "score_kind": "mate",
+        "score": 1,
+        "pv": [
+          "g7g5"
+        ]
+      },
+      "completed": true
+    }
+  },
+  {
+    "baseline": {
+      "actor": "baseline",
+      "trial": 0,
+      "budget_ms": 100,
+      "load": "warm",
+      "id": "broader-previous-11-ply90/warm-next",
+      "group": "broader-previous",
+      "position": "position startpos moves g1f3 d7d5 d2d4 g8f6 c1f4 b8c6 e2e3 e7e6 b1d2 f8d6 f3e5 c8d7 f1d3 e8g8 e1g1 d6e5 f4e5 a7a5 e3e4 a5a4 g1h1 g8h8 d1f3 d8e7 f3e3 f6g4 e3g3 g4e5 d4e5 e7b4 g3f4 b4b2 d2f3 d5d4 a1b1 b2a2 b1b7 a8c8 d3b5 f7f6 b5c6 d7c6 b7a7 f6e5 f4e5 a2c2 f3d4 f8f2 f1e1 c8f8 a7a8 c6a8 h2h3 c2c3 e1d1 c7c5 d4c6 c3e5 c6e5 a8e4 d1g1 a4a3 e5g4 f2g2 g4e3 g2e2 e3g2 e2g2 g1g2 a3a2 h1h2 e4g2 h2g2 a2a1q g2h2 f8f2 h2g3 a1g1 g3h4 f2f6 h4h5 f6f8 h5h4 f8f4 h4h5 f4f3 h5h4 g1b1 h4g5 f3h3 g5g4 b1d3",
+      "response_ms": 74.7052498627454,
+      "output": [
+        "info depth 6 nodes 49871 time 73 score mate -1 pv g4f4",
+        "info string pandafish {\"depth\":6,\"nodes\":49871,\"elapsed_ms\":73.978625,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"soft_limit\",\"fallback\":false,\"score_kind\":\"mate\",\"score\":-1,\"pv\":[\"g4f4\"]}",
+        "bestmove g4f4"
+      ],
+      "move": "g4f4",
+      "terminal": false,
+      "legal": true,
+      "valid": true,
+      "depth": 6,
+      "nodes": 49871,
+      "metrics": {
+        "depth": 6,
+        "nodes": 49871,
+        "elapsed_ms": 73.978625,
+        "timed": true,
+        "soft_ms": 71.25,
+        "hard_ms": 95,
+        "reason": "soft_limit",
+        "fallback": false,
+        "score_kind": "mate",
+        "score": -1,
+        "pv": [
+          "g4f4"
+        ]
+      },
+      "completed": true
+    },
+    "candidate": {
+      "actor": "candidate",
+      "trial": 0,
+      "budget_ms": 100,
+      "load": "warm",
+      "id": "broader-previous-11-ply90/warm-next",
+      "group": "broader-previous",
+      "position": "position startpos moves g1f3 d7d5 d2d4 g8f6 c1f4 b8c6 e2e3 e7e6 b1d2 f8d6 f3e5 c8d7 f1d3 e8g8 e1g1 d6e5 f4e5 a7a5 e3e4 a5a4 g1h1 g8h8 d1f3 d8e7 f3e3 f6g4 e3g3 g4e5 d4e5 e7b4 g3f4 b4b2 d2f3 d5d4 a1b1 b2a2 b1b7 a8c8 d3b5 f7f6 b5c6 d7c6 b7a7 f6e5 f4e5 a2c2 f3d4 f8f2 f1e1 c8f8 a7a8 c6a8 h2h3 c2c3 e1d1 c7c5 d4c6 c3e5 c6e5 a8e4 d1g1 a4a3 e5g4 f2g2 g4e3 g2e2 e3g2 e2g2 g1g2 a3a2 h1h2 e4g2 h2g2 a2a1q g2h2 f8f2 h2g3 a1g1 g3h4 f2f6 h4h5 f6f8 h5h4 f8f4 h4h5 f4f3 h5h4 g1b1 h4g5 f3h3 g5g4 b1d3",
+      "response_ms": 95.74279212392867,
+      "output": [
+        "info depth 5 nodes 51397 time 95 score mate -1 pv g4f4",
+        "info string pandafish {\"depth\":5,\"nodes\":51397,\"elapsed_ms\":95.000917,\"timed\":true,\"soft_ms\":71.25,\"hard_ms\":95,\"reason\":\"deadline\",\"fallback\":false,\"score_kind\":\"mate\",\"score\":-1,\"pv\":[\"g4f4\"]}",
+        "bestmove g4f4"
+      ],
+      "move": "g4f4",
+      "terminal": false,
+      "legal": true,
+      "valid": true,
+      "depth": 5,
+      "nodes": 51397,
+      "metrics": {
+        "depth": 5,
+        "nodes": 51397,
+        "elapsed_ms": 95.000917,
+        "timed": true,
+        "soft_ms": 71.25,
+        "hard_ms": 95,
+        "reason": "deadline",
+        "fallback": false,
+        "score_kind": "mate",
+        "score": -1,
+        "pv": [
+          "g4f4"
+        ]
+      },
+      "completed": true
+    }
+  }
+]

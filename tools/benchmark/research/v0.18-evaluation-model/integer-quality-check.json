@@ -1,0 +1,28 @@
+{
+  "train": {
+    "rows": 230,
+    "baseline_clipped_mae_cp": 177.18260869565216,
+    "candidate_clipped_mae_cp": 155.74347826086955,
+    "relative_improvement": 0.12100019630938363,
+    "baseline_catastrophes": 43,
+    "candidate_catastrophes": 35
+  },
+  "validation": {
+    "rows": 83,
+    "baseline_clipped_mae_cp": 185.34939759036143,
+    "candidate_clipped_mae_cp": 175.40963855421685,
+    "relative_improvement": 0.05362714508580346,
+    "baseline_catastrophes": 21,
+    "candidate_catastrophes": 20
+  },
+  "holdout": {
+    "rows": 91,
+    "baseline_clipped_mae_cp": 219.3846153846154,
+    "candidate_clipped_mae_cp": 203.94505494505495,
+    "relative_improvement": 0.07037667802043679,
+    "baseline_catastrophes": 28,
+    "candidate_catastrophes": 27
+  },
+  "holdout_gate_passed": true,
+  "note": "Recomputed frozen weights using exact integer numerator/truncation as production Go; no fitting or selection was repeated."
+}

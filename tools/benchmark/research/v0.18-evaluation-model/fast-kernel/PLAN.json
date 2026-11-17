@@ -1,0 +1,8 @@
+{
+ "reason": "The slow fitted model passes static holdout but fails the 100ms selected-move gate while improving at 1000ms. Test whether exact inference-cost reduction recovers short-budget usefulness without changing weights or values.",
+ "change": "Precompute original material/placement functions for all 25 phases, 12 colored piece types and 64 squares; iterate value-copied existing piece bitboards. Keep model feature extraction and all frozen weights unchanged.",
+ "correctness": "All 19200 table entries and 596 old/new base evaluations must match the original formulas, and all 686 fitted scalar/perspective cases must match the slow fitted model. Full rule/search/race controls remain. Fixed-depth fast-model scores/nodes/chosen moves must match the preserved slow model.",
+ "comparison": "Native tagged v0.17 baseline versus separately labeled fast-model at the same prespecified serial/three-search/warm budgets. Additionally probe a separately labeled fast-base-only ablation at 100ms three trials and 1000ms one trial, to distinguish the model from its cheaper implementation.",
+ "reference": "Reuse all unchanged position/move reference queries byte-for-byte from the slow model; query only genuinely new selected moves at the same node budget/method. Same mean-loss/severe-case decision gates against the released baseline apply. Report the fast-base-only comparison separately; do not attribute a kernel-only benefit to learned weights.",
+ "limits": "One controlled cost revision; no weight refit, holdout reuse for selection, threshold change or same-source favorable rerun. No automatic larger confirmation, live games, commit, push or PR. Strength screen only after gates and review of ablation."
+}
