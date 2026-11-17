@@ -1,0 +1,77 @@
+{
+  "method": "100000 bootstrap resamples, deterministic seed 160016; color pairs and repeated opening clusters. Conditional on this public book and selected candidate; not calibrated rating intervals, SPRT, or correction for multiple experiments. Opponents remain separate.",
+  "summary": "tools/benchmark/results/v0.16-bishop-pair-dev-vs-v0.15.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json",
+  "seed": 160016,
+  "resamples": 100000,
+  "opponents": [
+    {
+      "opponent": "v0.15.2",
+      "stats": {
+        "wins": 26,
+        "draws": 5,
+        "losses": 19,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 57,
+        "possible_score_lower_percent": 57,
+        "possible_score_upper_percent": 57
+      },
+      "color_pairs": 25,
+      "opening_clusters": 10,
+      "paired_score_interval_95_percent": [
+        44.0,
+        70.0
+      ],
+      "opening_cluster_interval_95_percent": [
+        43.269230769230774,
+        70.1923076923077
+      ]
+    },
+    {
+      "opponent": "Stockfish Skill 2",
+      "stats": {
+        "wins": 21,
+        "draws": 2,
+        "losses": 27,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 44,
+        "possible_score_lower_percent": 44,
+        "possible_score_upper_percent": 44
+      },
+      "color_pairs": 25,
+      "opening_clusters": 10,
+      "paired_score_interval_95_percent": [
+        32.0,
+        56.00000000000001
+      ],
+      "opening_cluster_interval_95_percent": [
+        32.29166666666667,
+        54.46428571428571
+      ]
+    },
+    {
+      "opponent": "Sacrifice v0.2.0 b528f0ba",
+      "stats": {
+        "wins": 7,
+        "draws": 11,
+        "losses": 32,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 25,
+        "possible_score_lower_percent": 25,
+        "possible_score_upper_percent": 25
+      },
+      "color_pairs": 25,
+      "opening_clusters": 10,
+      "paired_score_interval_95_percent": [
+        17.0,
+        33.0
+      ],
+      "opening_cluster_interval_95_percent": [
+        19.0,
+        30.0
+      ]
+    }
+  ]
+}

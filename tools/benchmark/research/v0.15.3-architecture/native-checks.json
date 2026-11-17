@@ -1,0 +1,279 @@
+[
+  {
+    "step": "baseline-tests-corrected",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/baseline",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 9.288826500065625
+  },
+  {
+    "step": "no-tt-tests-corrected",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/no-tt",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 9.313809082843363
+  },
+  {
+    "step": "board-hints-tests-corrected",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/board-hints",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 8.323719624895602
+  },
+  {
+    "step": "trim-history-tests-corrected",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/trim-history",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 8.934046749956906
+  },
+  {
+    "step": "safe-cache-tests-corrected",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/safe-cache",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 8.258702374994755
+  },
+  {
+    "step": "unsafe-board-scores-tests-corrected",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/unsafe-board-scores",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.166672040941194
+  },
+  {
+    "step": "depth-atleast-tests-corrected",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/depth-atleast",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.640124290948734
+  },
+  {
+    "step": "large-tt-tests-corrected",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/large-tt",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.934942500200123
+  },
+  {
+    "step": "root-single-best-tests-corrected",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/root-single-best",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.735366791952401
+  },
+  {
+    "step": "pvs-tests-corrected",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/pvs",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 8.447191999992356
+  },
+  {
+    "step": "pvs-safe-cache-tests-corrected",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/pvs-safe-cache",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 8.163873083889484
+  },
+  {
+    "step": "tactical-ordering-tests-corrected",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/tactical-ordering",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 8.137944667134434
+  },
+  {
+    "step": "instrumented-baseline-tests-corrected",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/instrumented-baseline",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 9.020542541984469
+  },
+  {
+    "step": "native-profile",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/baseline",
+      "test",
+      "-run",
+      "^$",
+      "-bench",
+      "^BenchmarkArchitectureProfile$",
+      "-benchtime=10s",
+      "-memprofilerate=4096",
+      "-cpuprofile",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/native-cpu.pb.gz",
+      "-memprofile",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/native-memory.pb.gz",
+      "-timeout",
+      "3m"
+    ],
+    "exit": 0,
+    "elapsed_s": 21.9103521250654
+  },
+  {
+    "step": "cpu-flat",
+    "command": [
+      "go",
+      "tool",
+      "pprof",
+      "-top",
+      "-nodecount=45",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/native-cpu.pb.gz"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.409893042175099
+  },
+  {
+    "step": "cpu-cumulative",
+    "command": [
+      "go",
+      "tool",
+      "pprof",
+      "-top",
+      "-cum",
+      "-nodecount=45",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/native-cpu.pb.gz"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.44612074992619455
+  },
+  {
+    "step": "alloc_space",
+    "command": [
+      "go",
+      "tool",
+      "pprof",
+      "-sample_index=alloc_space",
+      "-top",
+      "-nodecount=40",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/native-memory.pb.gz"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.20081712491810322
+  },
+  {
+    "step": "alloc_objects",
+    "command": [
+      "go",
+      "tool",
+      "pprof",
+      "-sample_index=alloc_objects",
+      "-top",
+      "-nodecount=40",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/native-memory.pb.gz"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.17371720797382295
+  },
+  {
+    "step": "uci-100ms-check",
+    "command": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/uci_probes.py",
+      "100ms"
+    ],
+    "exit": 0,
+    "elapsed_s": 133.584103415953
+  },
+  {
+    "step": "uci-1000ms-check",
+    "command": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/uci_probes.py",
+      "1000ms"
+    ],
+    "exit": 0,
+    "elapsed_s": 103.66645850008354
+  },
+  {
+    "step": "uci-warm-check",
+    "command": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/uci_probes.py",
+      "warm"
+    ],
+    "exit": 0,
+    "elapsed_s": 20.85910979192704
+  }
+]

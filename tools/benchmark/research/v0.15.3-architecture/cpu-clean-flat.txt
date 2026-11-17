@@ -1,0 +1,58 @@
+File: Pandafish.test
+Type: cpu
+Time: 2026-11-16 10:42:03 PST
+Duration: 21.47s, Total samples = 20.56s (95.75%)
+Showing nodes accounting for 18.06s, 87.84% of 20.56s total
+Dropped 166 nodes (cum <= 0.10s)
+Showing top 50 nodes out of 121
+      flat  flat%   sum%        cum   cum%
+     2.32s 11.28% 11.28%      2.32s 11.28%  runtime.kevent
+     1.13s  5.50% 16.78%      1.13s  5.50%  runtime.duffcopy
+     1.11s  5.40% 22.18%      1.11s  5.40%  github.com/corentings/chess/v2.(*Board).setBBForPiece
+     1.03s  5.01% 27.19%      1.06s  5.16%  runtime.walltime
+     0.98s  4.77% 31.96%      1.56s  7.59%  github.com/corentings/chess/v2.NewPiece (inline)
+     0.96s  4.67% 36.62%      0.96s  4.67%  github.com/corentings/chess/v2.(*Board).bbForPiece (inline)
+     0.94s  4.57% 41.20%      7.97s 38.76%  github.com/corentings/chess/v2.standardMoves
+     0.83s  4.04% 45.23%      3.09s 15.03%  github.com/corentings/chess/v2.(*Board).update
+     0.64s  3.11% 48.35%      0.64s  3.11%  github.com/corentings/chess/v2.Piece.Color (inline)
+     0.63s  3.06% 51.41%      0.63s  3.06%  runtime.pthread_cond_wait
+     0.46s  2.24% 53.65%      0.46s  2.24%  runtime.pthread_kill
+     0.40s  1.95% 55.59%      0.40s  1.95%  github.com/corentings/chess/v2.Piece.Type (inline)
+     0.40s  1.95% 57.54%      1.93s  9.39%  runtime.mapaccess1
+     0.38s  1.85% 59.39%      0.51s  2.48%  github.com/corentings/chess/v2.hvAttack
+     0.38s  1.85% 61.24%      2.99s 14.54%  github.com/corentings/chess/v2.isSquareAttackedBy
+     0.35s  1.70% 62.94%      0.35s  1.70%  aeshashbody
+     0.35s  1.70% 64.64%      0.98s  4.77%  internal/runtime/maps.(*Map).getWithKeySmall
+     0.35s  1.70% 66.34%      0.35s  1.70%  internal/runtime/maps.ctrlGroupMatchH2 (inline)
+     0.35s  1.70% 68.04%      0.35s  1.70%  runtime.usleep
+     0.33s  1.61% 69.65%      0.35s  1.70%  runtime.nanotime1
+     0.27s  1.31% 70.96%      1.29s  6.27%  github.com/philyawj/Pandafish.staticScore
+     0.26s  1.26% 72.23%      0.30s  1.46%  github.com/corentings/chess/v2.diaAttack
+     0.25s  1.22% 73.44%      0.25s  1.22%  github.com/corentings/chess/v2.(*Board).Piece (inline)
+     0.21s  1.02% 74.46%      6.30s 30.64%  github.com/corentings/chess/v2.moveTags
+     0.20s  0.97% 75.44%      0.20s  0.97%  github.com/corentings/chess/v2.bbForSquare (inline)
+     0.20s  0.97% 76.41%      1.75s  8.51%  github.com/philyawj/Pandafish.orderedMoves.func1
+     0.19s  0.92% 77.33%      0.19s  0.92%  runtime.memmove
+     0.19s  0.92% 78.26%      0.19s  0.92%  runtime.pthread_cond_signal
+     0.16s  0.78% 79.04%      0.16s  0.78%  runtime.memequal8
+     0.15s  0.73% 79.77%      0.54s  2.63%  runtime.memhash8
+     0.14s  0.68% 80.45%      0.14s  0.68%  github.com/corentings/chess/v2.(*Board).calcConvienceBBs
+     0.13s  0.63% 81.08%      0.44s  2.14%  runtime.scanobject
+     0.12s  0.58% 81.66%      0.27s  1.31%  runtime.mallocgcSmallScanNoHeader
+     0.11s  0.54% 82.20%      0.67s  3.26%  github.com/philyawj/Pandafish.(*searcher).exchange
+     0.11s  0.54% 82.73%      2.11s 10.26%  github.com/philyawj/Pandafish.orderedMoves.func2
+     0.11s  0.54% 83.27%      0.12s  0.58%  github.com/philyawj/Pandafish.placement
+     0.11s  0.54% 83.80%      0.11s  0.54%  runtime.madvise
+     0.11s  0.54% 84.34%      0.11s  0.54%  runtime.memclrNoHeapPointers
+     0.11s  0.54% 84.87%      0.16s  0.78%  runtime.typePointers.next
+     0.10s  0.49% 85.36%      0.37s  1.80%  github.com/philyawj/Pandafish.(*exchangeBoard).leastAttacker
+     0.09s  0.44% 85.80%      2.27s 11.04%  slices.insertionSortCmpFunc[go.shape.29dc683b0550073a7c7523bb194b96692894fc1513dad32668ceac52ba23ff39] (inline)
+     0.08s  0.39% 86.19%      0.84s  4.09%  runtime.mallocgc
+     0.07s  0.34% 86.53%      0.15s  0.73%  github.com/philyawj/Pandafish.(*exchangeBoard).attacked
+     0.06s  0.29% 86.82%      0.50s  2.43%  slices.symMergeCmpFunc[go.shape.29dc683b0550073a7c7523bb194b96692894fc1513dad32668ceac52ba23ff39]
+     0.05s  0.24% 87.06%      0.40s  1.95%  runtime.nanotime (inline)
+     0.04s  0.19% 87.26%      0.11s  0.54%  runtime.(*mheap).initSpan
+     0.04s  0.19% 87.45%      1.50s  7.30%  time.now
+     0.03s  0.15% 87.60%        13s 63.23%  github.com/philyawj/Pandafish.(*searcher).quietAtPly
+     0.03s  0.15% 87.74%      1.53s  7.44%  time.runtimeNow
+     0.02s 0.097% 87.84%      0.23s  1.12%  github.com/corentings/chess/v2.CastleRights.CanCastle

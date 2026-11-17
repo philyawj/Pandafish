@@ -158,6 +158,10 @@ git archive v0.15 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.15.2 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.15.2" .)
+
+build_dir=$(mktemp -d)
+git archive v0.15.3 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.15.3" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -240,12 +244,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.15.2 tagged baseline as above for the next engine change. Then run
+Build the v0.15.3 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.15.2 --previous-version v0.15.2 \
+  --previous tools/benchmark/bin/pandafish-v0.15.3 --previous-version v0.15.3 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -411,7 +415,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.15.2 --previous-version v0.15.2 \
+  --previous tools/benchmark/bin/pandafish-v0.15.3 --previous-version v0.15.3 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -634,7 +638,7 @@ reproduce earlier profiles. For example, a future Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.15.2 --previous-version v0.15.2 \
+  --previous tools/benchmark/bin/pandafish-v0.15.3 --previous-version v0.15.3 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```
@@ -983,3 +987,34 @@ all diagnostics and limitations. Released playing behavior remains v0.15;
 only release identity changes. The short release smoke checks integration,
 not strength. Reassess the next hypothesis using these findings before the
 next implementation; no fixed checklist or automatic confirmation is adopted.
+
+## Local v0.16 bishop-pair candidate
+
+A [fresh post-v0.15.2 reassessment](research/v0.16-next-assessment/README.md)
+selects bishop pair alone, after pawn-ending counterfactuals fail to support
+simple doubled-pawn/passer fixes. One untuned 25 cp interaction corrects a
+controlled exchange and its mirrors, with about 1.6% fewer equal-time nodes.
+The standard concurrent 50-game screens score 57% against tagged v0.15.2,
+44% against Skill 2 and 25% against pinned Sacrifice, all complete without
+forfeits. [Full evidence and all results](research/v0.16-bishop-pair/README.md).
+Hold the candidate for review; the direct lead is inconclusive. A separately
+approved 200-game confirmation per opponent is justified, but has not started.
+No new playing release, commit or PR is prepared automatically.
+
+
+## v0.15.3 larger-gain research release
+
+Archive the bishop-pair candidate and its entire 150-game screen, without
+promoting the bonus. The [architecture investigation](research/v0.15.3-architecture/README.md)
+measures cache restrictions, repetition-safe alternatives, allocation/move
+pipeline cost, native Sacrifice comparisons and a retrospective released-policy
+control. Diagnostic prototypes remain outside normal builds. Released play
+stays v0.15.2/v0.15; public identity changes only.
+
+The [next-project plan](research/v0.15.3-architecture/NEXT.md) prioritizes a
+coordinated search core and specialized tactical generation, then a coherent
+data-calibrated evaluation/threat model. Same-depth cache safety remains intact.
+The bishop-pair confirmation is deferred in favor of these larger questions;
+no automatic larger sample or live client starts. Prototype node savings are
+not measured Elo gains. All failed controls and revised interpretations remain
+in the research record.

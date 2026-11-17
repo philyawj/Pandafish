@@ -1,0 +1,149 @@
+[
+  {
+    "variant": "baseline",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/private/tmp/pandafish-architecture-archive-smoke/baseline",
+      "build",
+      "-o",
+      "/private/tmp/pandafish-architecture-archive-smoke/pandafish-baseline",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.2606521660927683
+  },
+  {
+    "variant": "baseline",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/private/tmp/pandafish-architecture-archive-smoke/baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.7186939578969032
+  },
+  {
+    "variant": "baseline",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/private/tmp/pandafish-architecture-archive-smoke/baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.9839164589066058
+  },
+  {
+    "variant": "safe-cache",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/private/tmp/pandafish-architecture-archive-smoke/safe-cache",
+      "build",
+      "-o",
+      "/private/tmp/pandafish-architecture-archive-smoke/pandafish-safe-cache",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.24815154215320945
+  },
+  {
+    "variant": "safe-cache",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/private/tmp/pandafish-architecture-archive-smoke/safe-cache",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.6387680000625551
+  },
+  {
+    "variant": "safe-cache",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/private/tmp/pandafish-architecture-archive-smoke/safe-cache",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.972329834010452
+  },
+  {
+    "variant": "coordinated-kernel",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/private/tmp/pandafish-architecture-archive-smoke/coordinated-kernel",
+      "build",
+      "-o",
+      "/private/tmp/pandafish-architecture-archive-smoke/pandafish-coordinated-kernel",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.24674004199914634
+  },
+  {
+    "variant": "coordinated-kernel",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/private/tmp/pandafish-architecture-archive-smoke/coordinated-kernel",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.6316104161087424
+  },
+  {
+    "variant": "coordinated-kernel",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/private/tmp/pandafish-architecture-archive-smoke/coordinated-kernel",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.8353753329720348
+  }
+]

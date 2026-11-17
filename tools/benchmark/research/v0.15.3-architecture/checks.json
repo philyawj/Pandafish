@@ -1,0 +1,1007 @@
+[
+  {
+    "variant": "baseline",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/baseline",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-baseline",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.6007173750549555
+  },
+  {
+    "variant": "baseline",
+    "step": "tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/baseline",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 9.07472166698426
+  },
+  {
+    "variant": "baseline",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.41887916601262987
+  },
+  {
+    "variant": "baseline",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.995357249863446
+  },
+  {
+    "variant": "baseline",
+    "step": "warm",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 10.234912833897397
+  },
+  {
+    "variant": "no-tt",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/no-tt",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-no-tt",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.2503552499692887
+  },
+  {
+    "variant": "no-tt",
+    "step": "tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/no-tt",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.68420641683042
+  },
+  {
+    "variant": "no-tt",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/no-tt",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.43651304207742214
+  },
+  {
+    "variant": "no-tt",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/no-tt",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 5.001685791881755
+  },
+  {
+    "variant": "no-tt",
+    "step": "warm",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/no-tt",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 13.384674708824605
+  },
+  {
+    "variant": "board-hints",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/board-hints",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-board-hints",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.24766037496738136
+  },
+  {
+    "variant": "board-hints",
+    "step": "tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/board-hints",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.212755457963794
+  },
+  {
+    "variant": "board-hints",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/board-hints",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.41166716697625816
+  },
+  {
+    "variant": "board-hints",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/board-hints",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.930115167051554
+  },
+  {
+    "variant": "board-hints",
+    "step": "warm",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/board-hints",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 9.443097917130217
+  },
+  {
+    "variant": "trim-history",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/trim-history",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-trim-history",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.26194304204545915
+  },
+  {
+    "variant": "trim-history",
+    "step": "tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/trim-history",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.623796792002395
+  },
+  {
+    "variant": "trim-history",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/trim-history",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4181880000978708
+  },
+  {
+    "variant": "trim-history",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/trim-history",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.9904294579755515
+  },
+  {
+    "variant": "trim-history",
+    "step": "warm",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/trim-history",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 9.822561708046123
+  },
+  {
+    "variant": "safe-cache",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/safe-cache",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-safe-cache",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.25010737497359514
+  },
+  {
+    "variant": "safe-cache",
+    "step": "tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/safe-cache",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.214290625182912
+  },
+  {
+    "variant": "safe-cache",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/safe-cache",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.3925393749959767
+  },
+  {
+    "variant": "safe-cache",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/safe-cache",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.873986375052482
+  },
+  {
+    "variant": "safe-cache",
+    "step": "warm",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/safe-cache",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 9.383007375057787
+  },
+  {
+    "variant": "unsafe-board-scores",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/unsafe-board-scores",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-unsafe-board-scores",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.24576841690577567
+  },
+  {
+    "variant": "unsafe-board-scores",
+    "step": "tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/unsafe-board-scores",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.005885374965146
+  },
+  {
+    "variant": "unsafe-board-scores",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/unsafe-board-scores",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 1,
+    "elapsed_s": 0.409698624862358
+  },
+  {
+    "variant": "unsafe-board-scores",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/unsafe-board-scores",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.827052624896169
+  },
+  {
+    "variant": "unsafe-board-scores",
+    "step": "warm",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/unsafe-board-scores",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 9.255406124982983
+  },
+  {
+    "variant": "depth-atleast",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/depth-atleast",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-depth-atleast",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.24699866701848805
+  },
+  {
+    "variant": "depth-atleast",
+    "step": "tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/depth-atleast",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.59180129203014
+  },
+  {
+    "variant": "depth-atleast",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/depth-atleast",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.40873520798049867
+  },
+  {
+    "variant": "depth-atleast",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/depth-atleast",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 5.084617666900158
+  },
+  {
+    "variant": "depth-atleast",
+    "step": "warm",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/depth-atleast",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 10.433804042171687
+  },
+  {
+    "variant": "large-tt",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/large-tt",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-large-tt",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.2479547921102494
+  },
+  {
+    "variant": "large-tt",
+    "step": "tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/large-tt",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.667388000059873
+  },
+  {
+    "variant": "large-tt",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/large-tt",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4210815830156207
+  },
+  {
+    "variant": "large-tt",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/large-tt",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.970771667081863
+  },
+  {
+    "variant": "large-tt",
+    "step": "warm",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/large-tt",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 10.212057416792959
+  },
+  {
+    "variant": "root-single-best",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/root-single-best",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-root-single-best",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.2440137502271682
+  },
+  {
+    "variant": "root-single-best",
+    "step": "tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/root-single-best",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.519533667014912
+  },
+  {
+    "variant": "root-single-best",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/root-single-best",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.41141858301125467
+  },
+  {
+    "variant": "root-single-best",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/root-single-best",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.429026082856581
+  },
+  {
+    "variant": "root-single-best",
+    "step": "warm",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/root-single-best",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 9.897071541985497
+  },
+  {
+    "variant": "pvs",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/pvs",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-pvs",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.25307079218328
+  },
+  {
+    "variant": "pvs",
+    "step": "tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/pvs",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.2531325831078
+  },
+  {
+    "variant": "pvs",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/pvs",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4143878750037402
+  },
+  {
+    "variant": "pvs",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/pvs",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 5.202018792042509
+  },
+  {
+    "variant": "pvs",
+    "step": "warm",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/pvs",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 10.53823766601272
+  },
+  {
+    "variant": "pvs-safe-cache",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/pvs-safe-cache",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-pvs-safe-cache",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.26717337500303984
+  },
+  {
+    "variant": "pvs-safe-cache",
+    "step": "tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/pvs-safe-cache",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 7.75121495896019
+  },
+  {
+    "variant": "pvs-safe-cache",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/pvs-safe-cache",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4135088329203427
+  },
+  {
+    "variant": "pvs-safe-cache",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/pvs-safe-cache",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.905474833911285
+  },
+  {
+    "variant": "pvs-safe-cache",
+    "step": "warm",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/pvs-safe-cache",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 9.581152958096936
+  },
+  {
+    "variant": "tactical-ordering",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/tactical-ordering",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-tactical-ordering",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.28733283281326294
+  },
+  {
+    "variant": "tactical-ordering",
+    "step": "tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/tactical-ordering",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 8.27247408311814
+  },
+  {
+    "variant": "tactical-ordering",
+    "step": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/tactical-ordering",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4293493339791894
+  },
+  {
+    "variant": "tactical-ordering",
+    "step": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/tactical-ordering",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.468710917048156
+  },
+  {
+    "variant": "tactical-ordering",
+    "step": "warm",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/tactical-ordering",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 8.707595624960959
+  },
+  {
+    "variant": "instrumented-baseline",
+    "step": "build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/instrumented-baseline",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-instrumented-baseline",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.26069508283399045
+  },
+  {
+    "variant": "instrumented-baseline",
+    "step": "audit",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/instrumented-baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureAudit$",
+      "-timeout",
+      "12m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 5.3991609159857035
+  }
+]

@@ -1,0 +1,144 @@
+tools/benchmark/research/v0.15.3-architecture/uci_probes.py:57: trailing whitespace.
++      
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:7: trailing whitespace.
++ 
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:13: space before tab in indent.
++ 	table.generation++
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:14: space before tab in indent.
++ 	worker := searcher{ctx: ctx, table: table, killers: new(killerTable)}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:18: space before tab in indent.
++ 	if budget.timed {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:19: space before tab in indent.
++ 		worker.deadline = start.Add(budget.hard)
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:20: space before tab in indent.
++ 	}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:22: space before tab in indent.
++ 		}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:23: space before tab in indent.
++ 		if result.depth > 0 {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:24: space before tab in indent.
++ 			result.metrics.ScoreKind, result.metrics.Score = "cp", result.score
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:32: space before tab in indent.
++ 			}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:33: space before tab in indent.
++ 			result.metrics.PV = []string{result.move}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:34: space before tab in indent.
++ 		}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:37: trailing whitespace.
++ 
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:41: space before tab in indent.
++ 	var best []string
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:42: space before tab in indent.
++ 	bestScore := -searchInfinity
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:43: space before tab in indent.
++ 	for _, move := range moves {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:45: space before tab in indent.
++ 		}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:46: space before tab in indent.
++ 		// The one-point margin keeps tied root scores exact. Inferior moves
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:47: space before tab in indent.
++ 		// may return bounds and cannot join the best-move list.
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:50: space before tab in indent.
++ 		if !complete {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:51: space before tab in indent.
++ 			return nil, 0, false
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:52: space before tab in indent.
++ 		}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:131: trailing whitespace.
++ 
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:134: space before tab in indent.
++ 		return 0, false
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:135: space before tab in indent.
++ 	}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:136: space before tab in indent.
++ 	if depth <= 0 {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:139: space before tab in indent.
++ 	}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:140: space before tab in indent.
++ 	worker.nodes++
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:141: space before tab in indent.
++ 	if position.Status() != chess.NoMethod {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:144: space before tab in indent.
++ 	}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:152: space before tab in indent.
++ 	// Equal depth preserves the exact fixed-depth value. Deeper entries still
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:153: space before tab in indent.
++ 	// provide move hints. Quiescence has a separate horizon and is not cached.
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:154: space before tab in indent.
++ 	if hit && int(entry.depth) == depth {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:157: space before tab in indent.
++ 		if entry.bound == exactBound || (entry.bound == lowerBound && score >= beta) || (entry.bound == upperBound && score <= alpha) {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:158: space before tab in indent.
++ 			return score, !worker.stopped()
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:159: space before tab in indent.
++ 		}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:161: space before tab in indent.
++ 	if worker.stopped() {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:162: space before tab in indent.
++ 		return 0, false
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:163: space before tab in indent.
++ 	}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:166: space before tab in indent.
++ 	return best, true
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:168: trailing whitespace.
++ 
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:177: space before tab in indent.
++ 	if worker.stopped() {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:178: space before tab in indent.
++ 		return 0, false
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:179: space before tab in indent.
++ 	}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:180: space before tab in indent.
++ 	worker.nodes++
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:181: space before tab in indent.
++ 	if position.Status() != chess.NoMethod {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:188: space before tab in indent.
++ 	}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:190: space before tab in indent.
++ 	static := staticScore(position, position.Turn())
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:191: space before tab in indent.
++ 	if depth <= -checkEvasionDepth || (depth <= 0 && !checked) {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:192: space before tab in indent.
++ 		return static, !worker.stopped()
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:194: space before tab in indent.
++ 				continue
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:195: space before tab in indent.
++ 			}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:196: space before tab in indent.
++ 		}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:199: space before tab in indent.
++ 		if !complete {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:200: space before tab in indent.
++ 			return 0, false
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:201: space before tab in indent.
++ 		}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:207: space before tab in indent.
++ 	table.generation = 0
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:209: trailing whitespace.
++ 
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:212: space before tab in indent.
++ 	if table == nil {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:213: space before tab in indent.
++ 		return tableEntry{}, false
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:214: space before tab in indent.
++ 	}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:220: space before tab in indent.
++ 	entry := table.entries[key%uint64(len(table.entries))]
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:221: space before tab in indent.
++ 	return entry, entry.bound != noBound && entry.key == key && entry.halfmove == position.HalfMoveClock()
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:223: trailing whitespace.
++ 
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:226: space before tab in indent.
++ 	if table == nil {
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:227: space before tab in indent.
++ 		return
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:228: space before tab in indent.
++ 	}
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:229: space before tab in indent.
++ 	key := position.ZobristHash()
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:233: space before tab in indent.
++ 	entry := &table.entries[key%uint64(len(table.entries))]
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:234: space before tab in indent.
++ 	// Prefer deeper work within a search; allow replacement in a later search.
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.txt:235: space before tab in indent.
++ 	if entry.bound != noBound && entry.generation == table.generation && int(entry.depth) > depth {

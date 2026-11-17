@@ -1,0 +1,13 @@
+package main
+import("encoding/json";"os";"strings";"testing";"github.com/corentings/chess/v2")
+func TestArchitectureQuietMateProof(t *testing.T){
+ if os.Getenv("MATE_PROOF_INPUT")==""{t.Skip("explicit diagnostic only")}
+ data,e:=os.ReadFile(os.Getenv("MATE_PROOF_INPUT"));if e!=nil{t.Fatal(e)}
+ var records []map[string]any;if e=json.Unmarshal(data,&records);e!=nil{t.Fatal(e)}
+ for _,record:=range records{if !strings.HasSuffix(record["game"].(string),"rpk4dbYK")||record["forced_diagnostic_root"]!="g6g5"{continue};fen:=record["leaf_fen"].(string);g,e:=parsePosition(strings.Fields("fen "+fen));if e!=nil{t.Fatal(e)};p:=g.Position();var mating []string
+ for _,m:=range p.ValidMoves(){if p.Update(&m).Status()==chess.Checkmate{mating=append(mating,m.String())}}
+ best,score,ok:=(&searcher{}).root(p,rootMoves(p,nil),1);quiet:=quiescence(p,quiescenceDepth,-searchInfinity,searchInfinity)
+ out:=map[string]any{"fen":fen,"in_check":inCheck(p),"static_black_cp":staticScore(p,chess.Black),"capture_quiescence_from_turn":quiet,"depth1_score_from_turn":score,"depth1_best":best,"independent_legal_mating_moves":mating,"completed":ok};b,_:=json.MarshalIndent(out,"","  ");if e=os.WriteFile(os.Getenv("MATE_PROOF_OUTPUT"),append(b,'\n'),0644);e!=nil{t.Fatal(e)}
+ if !ok||len(mating)==0||score<mateBound||quiet>=mateBound{t.Fatal("control did not demonstrate quiet mate boundary")};return
+ };t.Fatal("missing king-capture leaf")
+}

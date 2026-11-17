@@ -1,0 +1,27 @@
+File: Pandafish.test
+Type: alloc_objects
+Time: 2026-11-16 10:35:15 PST
+Showing nodes accounting for 18526633, 99.79% of 18565111 total
+Dropped 156 nodes (cum <= 92825)
+      flat  flat%   sum%        cum   cum%
+   4393685 23.67% 23.67%    6567204 35.37%  github.com/corentings/chess/v2.castleMoves
+   4385063 23.62% 47.29%    4388653 23.64%  github.com/corentings/chess/v2.standardMoves
+   2917615 15.72% 63.00%    2917615 15.72%  github.com/corentings/chess/v2.(*Board).copy (inline)
+   2879780 15.51% 78.51%    5836628 31.44%  github.com/corentings/chess/v2.(*Position).Update
+   2212752 11.92% 90.43%    2212752 11.92%  strings.(*Builder).grow
+   1484306  8.00% 98.43%    5261770 28.34%  github.com/corentings/chess/v2.(*Position).ValidMoves (inline)
+    251795  1.36% 99.78%   11207652 60.37%  github.com/corentings/chess/v2.engine.CalcMoves
+      1357 0.0073% 99.79%   18503503 99.67%  github.com/philyawj/Pandafish.(*searcher).root
+       280 0.0015% 99.79%   18507237 99.69%  github.com/philyawj/Pandafish.iterativeSearchWithHistory
+         0     0% 99.79%    7421840 39.98%  github.com/corentings/chess/v2.(*Position).Status (inline)
+         0     0% 99.79%    2173519 11.71%  github.com/corentings/chess/v2.CastleRights.CanCastle
+         0     0% 99.79%    7421840 39.98%  github.com/corentings/chess/v2.engine.Status
+         0     0% 99.79%   18506581 99.68%  github.com/philyawj/Pandafish.(*searcher).iterate
+         0     0% 99.79%   13681784 73.70%  github.com/philyawj/Pandafish.(*searcher).quietAtPly
+         0     0% 99.79%   18453584 99.40%  github.com/philyawj/Pandafish.(*searcher).searchAtPly
+         0     0% 99.79%   18555931   100%  github.com/philyawj/Pandafish.BenchmarkArchitectureProfile
+         0     0% 99.79%    5261770 28.34%  github.com/philyawj/Pandafish.orderedMoves
+         0     0% 99.79%    2212752 11.92%  strings.(*Builder).Grow
+         0     0% 99.79%    2173519 11.71%  strings.ToUpper
+         0     0% 99.79%   18476026 99.52%  testing.(*B).launch
+         0     0% 99.79%   18556004   100%  testing.(*B).runN

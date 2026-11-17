@@ -1,0 +1,573 @@
+{
+  "all_complete_legal": true,
+  "fixed_best_sets_changed": 21,
+  "probes_per_engine": 344,
+  "clean_probes_per_engine": 258,
+  "clean_depth_higher_equal_lower": {
+    "lower": 14,
+    "equal": 241,
+    "higher": 3
+  },
+  "clean_node_ratio": 0.9835623677760601,
+  "baseline": {
+    "nodes": 4174263,
+    "mean_depth": 3.7829457364341086,
+    "mean_elapsed_ms": 92.91289858139535,
+    "max_elapsed_ms": 95.053583
+  },
+  "candidate": {
+    "nodes": 4105648,
+    "mean_depth": 3.74031007751938,
+    "mean_elapsed_ms": 93.19419039534884,
+    "max_elapsed_ms": 95.066584
+  },
+  "referee": {
+    "method": "Every fixed best tie averaged, each timed selection scored; repeated cases and geometric mirrors are correlated, no Elo inference. Positive cp favors candidate. Mate transitions kept separate. Existing identical full-history root queries reused from piece-safety archive; newly selected moves get same 100000-node fresh-hash configuration.",
+    "groups": [
+      {
+        "mode": "fixed",
+        "depth": 3,
+        "split": "development",
+        "n": 15,
+        "mean_cp_delta": 6.566666666666666,
+        "better_same_worse": [
+          1,
+          13,
+          1
+        ]
+      },
+      {
+        "mode": "fixed",
+        "depth": 5,
+        "split": "development",
+        "n": 15,
+        "mean_cp_delta": 18.522222222222222,
+        "better_same_worse": [
+          2,
+          13,
+          0
+        ]
+      },
+      {
+        "mode": "fixed",
+        "depth": 3,
+        "split": "public_holdout",
+        "n": 15,
+        "mean_cp_delta": 7.48888888888889,
+        "better_same_worse": [
+          2,
+          11,
+          2
+        ]
+      },
+      {
+        "mode": "fixed",
+        "depth": 5,
+        "split": "public_holdout",
+        "n": 15,
+        "mean_cp_delta": 0.3,
+        "better_same_worse": [
+          1,
+          12,
+          2
+        ]
+      },
+      {
+        "mode": "fixed",
+        "depth": 3,
+        "split": "older_v010",
+        "n": 9,
+        "mean_cp_delta": 5.944444444444445,
+        "better_same_worse": [
+          1,
+          7,
+          1
+        ]
+      },
+      {
+        "mode": "fixed",
+        "depth": 5,
+        "split": "older_v010",
+        "n": 9,
+        "mean_cp_delta": 68.33333333333333,
+        "better_same_worse": [
+          2,
+          7,
+          0
+        ]
+      },
+      {
+        "mode": "fixed",
+        "depth": 3,
+        "split": "development_synthetic",
+        "n": 3,
+        "mean_cp_delta": 235.66666666666666,
+        "better_same_worse": [
+          3,
+          0,
+          0
+        ]
+      },
+      {
+        "mode": "fixed",
+        "depth": 5,
+        "split": "development_synthetic",
+        "n": 3,
+        "mean_cp_delta": 235.66666666666666,
+        "better_same_worse": [
+          3,
+          0,
+          0
+        ]
+      },
+      {
+        "mode": "100ms",
+        "depth": 0,
+        "split": "development",
+        "n": 90,
+        "mean_cp_delta": -15.733333333333333,
+        "better_same_worse": [
+          7,
+          70,
+          13
+        ]
+      },
+      {
+        "mode": "100ms",
+        "depth": 0,
+        "split": "public_holdout",
+        "n": 90,
+        "mean_cp_delta": 7.855555555555555,
+        "better_same_worse": [
+          14,
+          65,
+          11
+        ]
+      },
+      {
+        "mode": "100ms",
+        "depth": 0,
+        "split": "older_v010",
+        "n": 54,
+        "mean_cp_delta": 8.018518518518519,
+        "better_same_worse": [
+          8,
+          40,
+          6
+        ]
+      },
+      {
+        "mode": "100ms",
+        "depth": 0,
+        "split": "development_synthetic",
+        "n": 18,
+        "mean_cp_delta": 235.66666666666666,
+        "better_same_worse": [
+          18,
+          0,
+          0
+        ]
+      }
+    ],
+    "mates": [
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "mode": "fixed",
+        "depth": 3,
+        "baseline": [
+          {
+            "mate": -4
+          },
+          {
+            "mate": -4
+          }
+        ],
+        "candidate": [
+          {
+            "mate": -4
+          },
+          {
+            "mate": -4
+          }
+        ]
+      },
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "mode": "fixed",
+        "depth": 5,
+        "baseline": [
+          {
+            "mate": -4
+          },
+          {
+            "mate": -4
+          }
+        ],
+        "candidate": [
+          {
+            "mate": -4
+          },
+          {
+            "mate": -4
+          }
+        ]
+      },
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "mode": "100ms",
+        "depth": 5,
+        "baseline": [
+          {
+            "mate": -4
+          }
+        ],
+        "candidate": [
+          {
+            "mate": -4
+          }
+        ]
+      },
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "mode": "100ms",
+        "depth": 5,
+        "baseline": [
+          {
+            "mate": -4
+          }
+        ],
+        "candidate": [
+          {
+            "mate": -4
+          }
+        ]
+      },
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "mode": "100ms",
+        "depth": 5,
+        "baseline": [
+          {
+            "mate": -4
+          }
+        ],
+        "candidate": [
+          {
+            "mate": -4
+          }
+        ]
+      },
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "mode": "100ms",
+        "depth": 5,
+        "baseline": [
+          {
+            "mate": -4
+          }
+        ],
+        "candidate": [
+          {
+            "mate": -4
+          }
+        ]
+      },
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "mode": "100ms",
+        "depth": 5,
+        "baseline": [
+          {
+            "mate": -4
+          }
+        ],
+        "candidate": [
+          {
+            "mate": -4
+          }
+        ]
+      },
+      {
+        "game": "https://lichess.org/game/djj7sLqm",
+        "mode": "100ms",
+        "depth": 5,
+        "baseline": [
+          {
+            "mate": -4
+          }
+        ],
+        "candidate": [
+          {
+            "mate": -4
+          }
+        ]
+      }
+    ],
+    "fixed_changes": [
+      {
+        "game": "https://lichess.org/game/16G1f9rx",
+        "split": "development",
+        "depth": 3,
+        "baseline_moves": [
+          "c6d4",
+          "e8g8"
+        ],
+        "candidate_moves": [
+          "a7a6"
+        ],
+        "mean_referee_cp_delta": 210.5
+      },
+      {
+        "game": "https://lichess.org/game/16G1f9rx",
+        "split": "development",
+        "depth": 5,
+        "baseline_moves": [
+          "c6d4",
+          "e8g8"
+        ],
+        "candidate_moves": [
+          "a7a6"
+        ],
+        "mean_referee_cp_delta": 210.5
+      },
+      {
+        "game": "https://lichess.org/game/BhrzqEje",
+        "split": "public_holdout",
+        "depth": 3,
+        "baseline_moves": [
+          "c3e2"
+        ],
+        "candidate_moves": [
+          "f1g1",
+          "d1d3",
+          "a2a4"
+        ],
+        "mean_referee_cp_delta": 76.33333333333334
+      },
+      {
+        "game": "https://lichess.org/game/BhrzqEje",
+        "split": "public_holdout",
+        "depth": 5,
+        "baseline_moves": [
+          "d1d3",
+          "a2a4"
+        ],
+        "candidate_moves": [
+          "b2b4",
+          "g3g4"
+        ],
+        "mean_referee_cp_delta": -13.5
+      },
+      {
+        "game": "https://lichess.org/game/CBtJ5xEy",
+        "split": "public_holdout",
+        "depth": 3,
+        "baseline_moves": [
+          "e4d6"
+        ],
+        "candidate_moves": [
+          "b7b5"
+        ],
+        "mean_referee_cp_delta": -101
+      },
+      {
+        "game": "https://lichess.org/game/O4wRsvjl",
+        "split": "public_holdout",
+        "depth": 3,
+        "baseline_moves": [
+          "h6f5"
+        ],
+        "candidate_moves": [
+          "c8e6",
+          "h6f5"
+        ],
+        "mean_referee_cp_delta": -92
+      },
+      {
+        "game": "https://lichess.org/game/O4wRsvjl",
+        "split": "public_holdout",
+        "depth": 5,
+        "baseline_moves": [
+          "c8f5",
+          "h6f5"
+        ],
+        "candidate_moves": [
+          "e8f7"
+        ],
+        "mean_referee_cp_delta": -211
+      },
+      {
+        "game": "https://lichess.org/game/XzRGgjkv",
+        "split": "development",
+        "depth": 3,
+        "baseline_moves": [
+          "b4c3",
+          "c6e5"
+        ],
+        "candidate_moves": [
+          "c6e5"
+        ],
+        "mean_referee_cp_delta": -112
+      },
+      {
+        "game": "https://lichess.org/game/XzRGgjkv",
+        "split": "development",
+        "depth": 5,
+        "baseline_moves": [
+          "b4c3",
+          "c6e5",
+          "f6e4"
+        ],
+        "candidate_moves": [
+          "f6e4"
+        ],
+        "mean_referee_cp_delta": 67.33333333333333
+      },
+      {
+        "game": "https://lichess.org/game/qaE8fqwI",
+        "split": "public_holdout",
+        "depth": 3,
+        "baseline_moves": [
+          "g4f3"
+        ],
+        "candidate_moves": [
+          "e8c8"
+        ],
+        "mean_referee_cp_delta": 229
+      },
+      {
+        "game": "https://lichess.org/game/qaE8fqwI",
+        "split": "public_holdout",
+        "depth": 5,
+        "baseline_moves": [
+          "g4f3"
+        ],
+        "candidate_moves": [
+          "e8c8"
+        ],
+        "mean_referee_cp_delta": 229
+      },
+      {
+        "game": "https://lichess.org/game/glYlALQg",
+        "split": "older_v010",
+        "depth": 3,
+        "baseline_moves": [
+          "g5f6"
+        ],
+        "candidate_moves": [
+          "e4c5"
+        ],
+        "mean_referee_cp_delta": 148
+      },
+      {
+        "game": "https://lichess.org/game/glYlALQg",
+        "split": "older_v010",
+        "depth": 5,
+        "baseline_moves": [
+          "b4b5"
+        ],
+        "candidate_moves": [
+          "e2e1"
+        ],
+        "mean_referee_cp_delta": 251
+      },
+      {
+        "game": "https://lichess.org/game/y1xXiZbd",
+        "split": "older_v010",
+        "depth": 5,
+        "baseline_moves": [
+          "g8e7"
+        ],
+        "candidate_moves": [
+          "g8f6"
+        ],
+        "mean_referee_cp_delta": 364
+      },
+      {
+        "game": "https://lichess.org/game/dbkD6ZNt",
+        "split": "older_v010",
+        "depth": 3,
+        "baseline_moves": [
+          "b3c4"
+        ],
+        "candidate_moves": [
+          "b3c4",
+          "f3e5"
+        ],
+        "mean_referee_cp_delta": -94.5
+      },
+      {
+        "game": "synthetic/bishop-or-knight-exchange",
+        "split": "development_synthetic",
+        "depth": 3,
+        "baseline_moves": [
+          "f3c6"
+        ],
+        "candidate_moves": [
+          "d4c6"
+        ],
+        "mean_referee_cp_delta": 243
+      },
+      {
+        "game": "synthetic/bishop-or-knight-exchange",
+        "split": "development_synthetic",
+        "depth": 5,
+        "baseline_moves": [
+          "f3c6"
+        ],
+        "candidate_moves": [
+          "d4c6"
+        ],
+        "mean_referee_cp_delta": 243
+      },
+      {
+        "game": "synthetic/bishop-or-knight-exchange/color-mirror",
+        "split": "development_synthetic",
+        "depth": 3,
+        "baseline_moves": [
+          "f6c3"
+        ],
+        "candidate_moves": [
+          "d5c3"
+        ],
+        "mean_referee_cp_delta": 236
+      },
+      {
+        "game": "synthetic/bishop-or-knight-exchange/color-mirror",
+        "split": "development_synthetic",
+        "depth": 5,
+        "baseline_moves": [
+          "f6c3"
+        ],
+        "candidate_moves": [
+          "d5c3"
+        ],
+        "mean_referee_cp_delta": 236
+      },
+      {
+        "game": "synthetic/bishop-or-knight-exchange/file-mirror",
+        "split": "development_synthetic",
+        "depth": 3,
+        "baseline_moves": [
+          "c3f6"
+        ],
+        "candidate_moves": [
+          "e4f6"
+        ],
+        "mean_referee_cp_delta": 228
+      },
+      {
+        "game": "synthetic/bishop-or-knight-exchange/file-mirror",
+        "split": "development_synthetic",
+        "depth": 5,
+        "baseline_moves": [
+          "c3f6"
+        ],
+        "candidate_moves": [
+          "e4f6"
+        ],
+        "mean_referee_cp_delta": 228
+      }
+    ]
+  }
+}
