@@ -65,6 +65,9 @@ Forfeits count as losses for the offending engine. Compare matching profiles bef
 | v0.16-search-core-dev | v0.15.3 | 27 / 11 / 12 | 0 | 0 | 65.0% | 65.0% to 65.0% | [R25](v0.16-search-core-dev-vs-v0.15.3-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.16-search-core-dev-vs-v0.15.3-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.16-search-core-dev-vs-v0.15.3-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/previous.pgn) |
 | v0.16-search-core-dev | Stockfish 19 / Skill 2 | 21 / 1 / 28 | 0 | 0 | 43.0% | 43.0% to 43.0% | [R25](v0.16-search-core-dev-vs-v0.15.3-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.16-search-core-dev-vs-v0.15.3-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.16-search-core-dev-vs-v0.15.3-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/stockfish.pgn) |
 | v0.16-search-core-dev | Sacrifice v0.2.0 b528f0ba | 16 / 17 / 17 | 0 | 0 | 49.0% | 49.0% to 49.0% | [R25](v0.16-search-core-dev-vs-v0.15.3-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.16-search-core-dev-vs-v0.15.3-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.16-search-core-dev-vs-v0.15.3-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/sacrifice.pgn) |
+| v0.17-search-moves-dev | v0.16 | 24 / 11 / 15 | 0 | 0 | 59.0% | 59.0% to 59.0% | [R26](v0.17-search-moves-dev-vs-v0.16-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.17-search-moves-dev-vs-v0.16-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.17-search-moves-dev-vs-v0.16-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/previous.pgn) |
+| v0.17-search-moves-dev | Stockfish 19 / Skill 2 | 25 / 3 / 22 | 0 | 0 | 53.0% | 53.0% to 53.0% | [R26](v0.17-search-moves-dev-vs-v0.16-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.17-search-moves-dev-vs-v0.16-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.17-search-moves-dev-vs-v0.16-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/stockfish.pgn) |
+| v0.17-search-moves-dev | Sacrifice v0.2.0 b528f0ba | 22 / 9 / 19 | 0 | 0 | 53.0% | 53.0% to 53.0% | [R26](v0.17-search-moves-dev-vs-v0.16-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.17-search-moves-dev-vs-v0.16-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.17-search-moves-dev-vs-v0.16-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/sacrifice.pgn) |
 
 ## Run profiles
 
@@ -97,6 +100,7 @@ Times are milliseconds. Compare matching timing policies and settings. Partial r
 | [R23](v0.16-bishop-pair-dev-vs-v0.15.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-16 08:10Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; 3 concurrent matchups; no live client; ordinary background system activity, no thermal telemetry | wall-clock-v2 | 3 (all) | complete |
 | [R24](v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-16 18:50Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; AC power reported; 3 concurrent retrospective control matchups; no other engine probes; no live client or thermal telemetry | wall-clock-v2 | 3 (all) | complete |
 | [R25](v0.16-search-core-dev-vs-v0.15.3-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-17 03:28Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; darwin/arm64; 8 logical CPUs; pmset reports AC Power and discharging (raw captured); three concurrent matchups; no other engine probes or live client; no thermal telemetry | wall-clock-v2 | 3 (all) | complete |
+| [R26](v0.17-search-moves-dev-vs-v0.16-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-17 04:24Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; darwin/arm64; 8 logical CPUs; pmset reports AC Power and discharging (raw captured); three concurrent matchups; no other engine probes or live client; no thermal telemetry | wall-clock-v2 | 3 (all) | complete |
 
 ## Measured timing
 
@@ -163,3 +167,6 @@ Wall time includes sending the position, requesting the move, and receiving best
 | R25 | v0.15.3 | 99.7 | 99.7 | 0 / 0 |
 | R25 | Stockfish 19 / Skill 2 | 99.4 | 104.5 | 0 / 1605 |
 | R25 | Sacrifice v0.2.0 b528f0ba | 98.6 | 103.0 | 0 / 2743 |
+| R26 | v0.16 | 97.6 | 97.7 | 0 / 0 |
+| R26 | Stockfish 19 / Skill 2 | 98.1 | 101.8 | 0 / 1547 |
+| R26 | Sacrifice v0.2.0 b528f0ba | 97.7 | 100.4 | 0 / 3157 |

@@ -6,3 +6,5 @@ require (
 	github.com/corentings/chess/v2 v2.6.1
 	go.yaml.in/yaml/v3 v3.0.4
 )
+
+replace github.com/corentings/chess/v2 => ./third_party/chess

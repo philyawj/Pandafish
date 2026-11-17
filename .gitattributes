@@ -12,6 +12,11 @@ tools/benchmark/research/v0.15.3-architecture/** -text
 tools/benchmark/research/v0.16-bishop-pair/** -text
 tools/benchmark/research/v0.16-next-assessment/** -text
 tools/benchmark/research/v0.16-search-core/** -text
+tools/benchmark/research/v0.17-search-moves/** -text
+# Preserve the pinned library's original source/license hashes across checkouts.
+third_party/chess/** -text
+# The verbatim upstream license contains a final blank line.
+third_party/chess/LICENSE -whitespace
 # Literal patch context and captured whitespace diagnostics are raw evidence.
 tools/benchmark/research/v0.15.3-architecture/v015-history-diff.patch -whitespace
 tools/benchmark/research/v0.15.3-architecture/prepublish-whitespace-check.txt -whitespace

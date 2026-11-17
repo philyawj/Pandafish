@@ -16,6 +16,7 @@ const checkEvasionDepth = 4
 // A zero-value searcher is unlimited, useful for fixed-depth comparisons.
 // Cancellation is distinct from a score, so unfinished nodes never affect ties.
 type searcher struct {
+	moveBuffers [][]chess.Move
 	repetitions map[uint64]int
 	historyKey  uint64
 	nodes       uint64
@@ -57,7 +58,7 @@ func (worker *searcher) searchAtPly(position *chess.Position, depth, alpha, beta
 		return worker.quietAtPly(position, quiescenceDepth, alpha, beta, checked, ply)
 	}
 	worker.nodes++
-	if position.Status() != chess.NoMethod {
+	if position.SearchStatus() != chess.NoMethod {
 		return searchedEvaluation(position, ply), !worker.stopped()
 	}
 	if worker.pushPosition(position) {
@@ -75,7 +76,7 @@ func (worker *searcher) searchAtPly(position *chess.Position, depth, alpha, beta
 		}
 	}
 	originalAlpha := alpha
-	moves := orderedMoves(position)
+	moves := worker.searchMoves(position, ply, false)
 	worker.killers.order(moves, ply)
 	if hit {
 		preferMove(moves, entry.move)
@@ -138,7 +139,7 @@ func (worker *searcher) quietAtPly(position *chess.Position, depth, alpha, beta 
 		return 0, false
 	}
 	worker.nodes++
-	if position.Status() != chess.NoMethod {
+	if position.SearchStatus() != chess.NoMethod {
 		return searchedEvaluation(position, ply), !worker.stopped()
 	}
 	if worker.pushPosition(position) {
@@ -158,12 +159,7 @@ func (worker *searcher) quietAtPly(position *chess.Position, depth, alpha, beta 
 		}
 		alpha = max(alpha, best)
 	}
-	var moves []chess.Move
-	if checked {
-		moves = orderedMoves(position)
-	} else {
-		moves = orderedTacticalMoves(position)
-	}
+	moves := worker.searchMoves(position, ply, !checked)
 	for _, move := range moves {
 		if worker.stopped() {
 			return 0, false

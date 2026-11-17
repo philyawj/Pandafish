@@ -1,7 +1,9 @@
 # Third-party notices
 
 Pandafish uses [corentings/chess](https://github.com/corentings/chess),
-version v2.6.1, a fork of notnil/chess. Its license is reproduced below.
+version v2.6.1, a fork of notnil/chess. The local runtime copy in
+`third_party/chess` adds a search API while preserving the original methods.
+Its upstream license is retained there and reproduced below.
 
 ```text
 The MIT License (MIT)

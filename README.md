@@ -1,13 +1,14 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.16 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.17 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
 The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`,
-`transposition.go`, `search_context.go`, `killers.go`, `exchange.go`,
+`transposition.go`, `search_context.go`, `search_moves.go`, `killers.go`, `exchange.go`,
 `evaluation.go`, `mate.go`, and `repetition.go`.
-[corentings/chess](https://github.com/corentings/chess) handles chess rules,
+A pinned local copy of [corentings/chess](https://github.com/corentings/chess)
+with an additive search API handles chess rules,
 including castling, en passant, and promotions. The engine assigns values of
 1 to pawns, 3 to knights and bishops, 5 to rooks, and 9 to queens. It picks a
 legal move by completing successively deeper searches, assuming each side
@@ -46,8 +47,8 @@ It still has no separate fifty-move draw evaluation.
 
 Quiescence means quietness. At the normal search boundary, it examines
 captures and promotions, and all legal escapes when the king is in check.
-Away from check it sorts a copied tactical subset of the full legal list and
-can keep the current static score instead of making a
+Away from check it generates legal tactical moves directly into reusable
+per-ply storage and can keep the current static score instead of making a
 capture. This helps avoid counting a captured piece before considering the
 recapture. A static exchange estimate skips losing ordinary captures outside
 check, while checking captures, promotions, and required evasions remain eligible.
@@ -330,7 +331,13 @@ and sort only eligible tactical moves outside check. Preserve evaluation,
 quiescence eligibility, mate/repetition correctness and time allocation. See the
 [implementation, validation and measured limits](tools/benchmark/research/v0.16-search-core/README.md).
 
-**Next:** Reassess specialized tactical generation/storage and coherent
-parameter-calibrated evaluation/threat modeling against v0.16. Choose one
-experiment from the measured bottlenecks and reassess after its result;
-these projects are not a fixed checklist.
+**v0.17: Generate legal tactics with reusable storage (complete).** Add a
+search API to the pinned chess library, generate captures/promotions directly,
+check legal-move existence without constructing a list, and reuse move buffers
+by active ply. Preserve fixed-depth scores, chosen moves and node counts,
+with the original library methods and license intact. See the
+[implementation, validation and measured limits](tools/benchmark/research/v0.17-search-moves/README.md).
+
+**Next:** Reassess coherent data-calibrated evaluation/threat modeling against
+remaining search-backend opportunities. Choose one bounded experiment from
+current evidence, with independent controls and equal-time validation.

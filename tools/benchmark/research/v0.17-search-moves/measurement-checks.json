@@ -1,0 +1,67 @@
+[
+  {
+    "name": "oracle",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-check-z6studfx/candidate",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestSearchMoveOracle$",
+      "-timeout",
+      "5m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.8643302500713617
+  },
+  {
+    "name": "candidate-profile",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-check-z6studfx/candidate",
+      "test",
+      "-run",
+      "^$",
+      "-bench",
+      "^BenchmarkArchitectureProfile$",
+      "-benchtime",
+      "60x",
+      "-cpuprofile",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.17-search-moves/candidate-cpu.pb.gz",
+      "-o",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-check-z6studfx/candidate/profile.test"
+    ],
+    "exit": 0,
+    "elapsed_s": 6.380720125045627
+  },
+  {
+    "name": "candidate-cpu-flat",
+    "command": [
+      "go",
+      "tool",
+      "pprof",
+      "-top",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-check-z6studfx/candidate/profile.test",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.17-search-moves/candidate-cpu.pb.gz"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.20460016699507833
+  },
+  {
+    "name": "candidate-cpu-cumulative",
+    "command": [
+      "go",
+      "tool",
+      "pprof",
+      "-top",
+      "-cum",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-check-z6studfx/candidate/profile.test",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.17-search-moves/candidate-cpu.pb.gz"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.11939816689118743
+  }
+]

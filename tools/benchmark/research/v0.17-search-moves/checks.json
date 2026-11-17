@@ -1,0 +1,227 @@
+[
+  {
+    "name": "format",
+    "command": [
+      "gofmt",
+      "-l",
+      "evaluation_test.go",
+      "search_core_test.go",
+      "main_test.go",
+      "killers.go",
+      "main.go",
+      "uci_test.go",
+      "limits_test.go",
+      "transposition_test.go",
+      "quiescence_test.go",
+      "exchange_test.go",
+      "reporting.go",
+      "transposition.go",
+      "iterative.go",
+      "killers_test.go",
+      "search_test.go",
+      "repetition.go",
+      "search.go",
+      "evaluation.go",
+      "internal/telemetry/telemetry.go",
+      "internal/telemetry/telemetry_test.go",
+      "exchange.go",
+      "search_moves.go",
+      "search_moves_test.go",
+      "mate.go",
+      "reporting_test.go",
+      "iterative_test.go",
+      "repetition_test.go",
+      "tools/lichess/main.go",
+      "tools/lichess/report_test.go",
+      "tools/lichess/report.go",
+      "tools/lichess/stockfish.go",
+      "tools/lichess/record.go",
+      "tools/lichess/archive.go",
+      "tools/lichess/analyse.go",
+      "tools/lichess/record_test.go",
+      "tools/lichess/operational.go",
+      "tools/lichess/process_test.go",
+      "tools/benchmark/workflow.go",
+      "tools/benchmark/main_test.go",
+      "tools/benchmark/main.go",
+      "tools/benchmark/report.go",
+      "tools/benchmark/workflow_test.go",
+      "tools/benchmark/uci.go",
+      "tools/benchmark/checks.go",
+      "search_context.go",
+      "mate_test.go",
+      "limits.go",
+      "tools/benchmark/checks_test.go",
+      "third_party/chess/search_moves.go"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.015794582897797227
+  },
+  {
+    "name": "race",
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 27.142403041012585
+  },
+  {
+    "name": "vet",
+    "command": [
+      "go",
+      "vet",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.22879704204387963
+  },
+  {
+    "name": "candidate-build",
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/pandafish-v0.17-search-moves-dev",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.471851791953668
+  },
+  {
+    "name": "arm64",
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "/tmp/pandafish-v017-search-moves-arm64",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.26183220907114446
+  },
+  {
+    "name": "wrapper",
+    "command": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.17-search-moves/wrapper-check.py"
+    ],
+    "exit": 0,
+    "elapsed_s": 1.6819452501367778
+  },
+  {
+    "name": "upstream-library-tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-check-z6studfx/library",
+      "test",
+      "-race",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 20.03703587502241
+  },
+  {
+    "name": "baseline-fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-check-z6studfx/baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "15m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 6.899231208022684
+  },
+  {
+    "name": "baseline-deep",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-check-z6studfx/baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "15m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 19.65883908397518
+  },
+  {
+    "name": "baseline-ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-check-z6studfx/baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4256549999117851
+  },
+  {
+    "name": "candidate-fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-check-z6studfx/candidate",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "15m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.237700959201902
+  },
+  {
+    "name": "candidate-deep",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-check-z6studfx/candidate",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "15m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 12.025292875012383
+  },
+  {
+    "name": "candidate-ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v017-check-z6studfx/candidate",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.41863820888102055
+  }
+]
