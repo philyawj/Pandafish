@@ -1,0 +1,60 @@
+{
+  "scope": "Post-result stricter audit fromply4, versus predeclared union fromply8. Descriptive only; no relabel/refit/resplit after holdout.",
+  "cross_split_early_transpositions": [
+    {
+      "key": "rnbqkb1r/pppp1ppp/4pn2/8/3P4/4P3/PPP2PPP/RNBQKBNR b KQkq -",
+      "owners": [
+        [
+          "family-16",
+          "train",
+          4
+        ],
+        [
+          "family-19",
+          "train",
+          4
+        ],
+        [
+          "family-21",
+          "validation",
+          4
+        ]
+      ]
+    },
+    {
+      "key": "rnbqkb1r/pp1p1ppp/4pn2/2p5/3P4/4P3/PPP2PPP/RNBQKBNR w KQkq -",
+      "owners": [
+        [
+          "family-19",
+          "train",
+          5
+        ],
+        [
+          "family-21",
+          "validation",
+          5
+        ]
+      ]
+    }
+  ],
+  "prior_or_reserved_early_transpositions": [
+    {
+      "family": "family-03",
+      "split": "holdout",
+      "ply": 4,
+      "kind": "reserved-confirmation"
+    },
+    {
+      "family": "family-03",
+      "split": "holdout",
+      "ply": 5,
+      "kind": "reserved-confirmation"
+    },
+    {
+      "family": "family-25",
+      "split": "validation",
+      "ply": 4,
+      "kind": "reserved-confirmation"
+    }
+  ]
+}

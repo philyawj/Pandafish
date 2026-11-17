@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -17,6 +18,20 @@ import (
 
 // The child is a local stand-in for Python, never a network client.
 func TestMain(m *testing.M) {
+	if os.Getenv("PANDAFISH_TEST_RECORD_ENGINE") == "1" && len(os.Args) == 1 {
+		scanner := bufio.NewScanner(os.Stdin)
+		for scanner.Scan() {
+			switch scanner.Text() {
+			case "uci":
+				fmt.Println("id name Pandafish test\nuciok")
+			case "isready":
+				fmt.Println("readyok")
+			case "quit":
+				os.Exit(0)
+			}
+		}
+		os.Exit(0)
+	}
 	if os.Getenv("PANDAFISH_TEST_STOCKFISH") == "1" {
 		fakeStockfish()
 		os.Exit(0)
@@ -53,9 +68,18 @@ func recordingFixture(t *testing.T) recordOptions {
 		t.Fatal(err)
 	}
 	engine := filepath.Join(root, "engine-original")
-	if err := os.WriteFile(engine, []byte("#!/bin/sh\ncat >/dev/null\nprintf 'id name Pandafish test\\nuciok\\nreadyok\\n'\n"), 0755); err != nil {
+	testBinary, err := os.Executable()
+	if err != nil {
 		t.Fatal(err)
 	}
+	contents, err := os.ReadFile(testBinary)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(engine, contents, 0755); err != nil {
+		t.Fatal(err)
+	}
+	t.Setenv("PANDAFISH_TEST_RECORD_ENGINE", "1")
 	if err := os.WriteFile(filepath.Join(client, "lichess-bot.py"), []byte("offline fixture"), 0644); err != nil {
 		t.Fatal(err)
 	}

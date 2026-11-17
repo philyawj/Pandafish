@@ -1,0 +1,41 @@
+[
+  {
+    "name": "format",
+    "command": [
+      "gofmt",
+      "-w",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v019-leaves-0v55abtq/decision_trace_test.go"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "trace-controls",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v019-leaves-0v55abtq",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestDecisionTraceControls$",
+      "-v"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "leaf-export",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v019-leaves-0v55abtq",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestExportDecisionLeaves$",
+      "-timeout",
+      "20m",
+      "-v"
+    ],
+    "exit": 0
+  }
+]

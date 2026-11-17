@@ -1,0 +1,130 @@
+{
+  "runtime_files_identical_to_v018": 59,
+  "prior_archives": {
+    "tools/benchmark/research/v0.15.3-architecture": {
+      "files": 234,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.16-bishop-pair": {
+      "files": 47,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.16-next-assessment": {
+      "files": 7,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.16-piece-safety": {
+      "files": 74,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.16-search-core": {
+      "files": 87,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.17-search-moves": {
+      "files": 105,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.18-evaluation-model": {
+      "files": 145,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.18-exact-evaluation": {
+      "files": 84,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.19-decision-evaluation": {
+      "files": 40,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.19-independent-families": {
+      "files": 113,
+      "mismatches": []
+    }
+  },
+  "prior_inventory_entries": 936,
+  "independent_integer_decisions": {
+    "train": {
+      "baseline": {
+        "mean_penalty": 51.1503036437247,
+        "severe": 18,
+        "risks": 4,
+        "by_turn": {
+          "w": 46.051411290322584,
+          "b": 56.290650406504064
+        },
+        "cp_only_mean_regret": 43.85034403669725
+      },
+      "candidate": {
+        "mean_penalty": 46.28744939271255,
+        "severe": 14,
+        "risks": 5,
+        "by_turn": {
+          "w": 45.76008064516129,
+          "b": 46.81910569105691
+        },
+        "cp_only_mean_regret": 38.19954128440367
+      }
+    },
+    "validation": {
+      "baseline": {
+        "mean_penalty": 36.095238095238095,
+        "severe": 3,
+        "risks": 1,
+        "by_turn": {
+          "w": 30.10326086956522,
+          "b": 42.220370370370375
+        },
+        "cp_only_mean_regret": 32.11677282377919
+      },
+      "candidate": {
+        "mean_penalty": 33.71978021978022,
+        "severe": 3,
+        "risks": 1,
+        "by_turn": {
+          "w": 21.793478260869566,
+          "b": 45.91111111111111
+        },
+        "cp_only_mean_regret": 29.84713375796178
+      }
+    },
+    "holdout": {
+      "baseline": {
+        "mean_penalty": 44.04347826086956,
+        "severe": 3,
+        "risks": 3,
+        "by_turn": {
+          "w": 65.80978260869566,
+          "b": 22.277173913043477
+        },
+        "cp_only_mean_regret": 32.100628930817614
+      },
+      "candidate": {
+        "mean_penalty": 49.99184782608695,
+        "severe": 6,
+        "risks": 4,
+        "by_turn": {
+          "w": 71.35326086956522,
+          "b": 28.630434782608695
+        },
+        "cp_only_mean_regret": 32.569182389937104
+      }
+    }
+  },
+  "surrogate_gate_passed": false,
+  "new_holdout_unsafe_roots": [
+    "sharp-028-ply36"
+  ],
+  "journal_records": {
+    "generation-queries.jsonl": 4992,
+    "label-queries.jsonl": 6218,
+    "forest-leaves.jsonl": 29357
+  },
+  "recorded_generation_prefix_verified": true,
+  "completed_rollouts_unchanged": true,
+  "training_quiet_mate_records": 15,
+  "training_quiet_mate_distinct_leaf_fens": 14,
+  "independent_go_proof_passed": true,
+  "playing_code_unchanged": true,
+  "issues": []
+}

@@ -33,14 +33,14 @@ and benchmark evidence together. Run commands from the repository root.
    in each release milestone.
 4. Run formatting, tests, vet, a build, and `git diff --check`. If only version
    text and documentation changed since benchmarking, use a short smoke test
-   instead of another full match. For example, while preparing v0.18:
+   instead of another full match. For example, while preparing v0.19:
 
    ```sh
-   go run ./tools/benchmark --validate --race --version v0.18-release-smoke \
-     --previous tools/benchmark/bin/pandafish-v0.17 --previous-version v0.17 \
+   go run ./tools/benchmark --validate --race --version v0.19-release-smoke \
+     --previous tools/benchmark/bin/pandafish-v0.18 --previous-version v0.18 \
      --sequential --stage previous --pairs 1 --results /tmp/pandafish-release-smoke
    go run ./tools/benchmark --candidate tools/benchmark/bin/pandafish-candidate \
-     --version v0.18-release-smoke --stage external --parallel \
+     --version v0.19-release-smoke --stage external --parallel \
      --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
      --pairs 1 --results /tmp/pandafish-release-smoke
    git diff --check
@@ -64,7 +64,7 @@ and benchmark evidence together. Run commands from the repository root.
 ## Tag and publish after merge
 
 Confirm the PR is merged and the version is unused, then fast-forward local
-`main` to the merged commit. For v0.18:
+`main` to the merged commit. For v0.19:
 
 ```sh
 git switch main
@@ -77,13 +77,13 @@ Check that the working tree is clean and HEAD is the intended release commit.
 Then create and push the tag:
 
 ```sh
-git tag -a v0.18 -m "v0.18: exact evaluation over piece bitboards"
-git push origin v0.18
+git tag -a v0.19 -m "v0.19: evaluation research and Go-only tooling"
+git push origin v0.19
 ```
 
 Publish a GitHub release for that tag, through the GitHub UI or
 `gh release create`. Use the version alone as the release title, such as
-`v0.18`. Describe the engine or tooling change, remaining limits,
+`v0.19`. Describe the engine or tooling change, remaining limits,
 and validation, linking the candidate benchmark evidence. An engine release
 does not automatically advance the Stockfish skill target.
 
@@ -114,17 +114,17 @@ benchmark files do not need to be attached again as release assets.
 
 ## Build the next baseline
 
-Build from the tag rather than a development checkout. For v0.18:
+Build from the tag rather than a development checkout. For v0.19:
 
 ```sh
 mkdir -p tools/benchmark/bin
 benchmark_bin="$PWD/tools/benchmark/bin"
 build_dir=$(mktemp -d)
-git archive v0.18 | tar -x -C "$build_dir"
-(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.18" .)
+git archive v0.19 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.19" .)
 ```
 
-The tagged executable becomes the previous version for v0.19 development.
+The tagged executable becomes the previous version for v0.20 development.
 Compiled binaries remain gitignored. Building this baseline does not require
 relabeling or rerunning the development benchmarks. A separate benchmark of
 the exact released binary is optional. Keep private bot greetings in sync
@@ -176,3 +176,21 @@ v0.15.2 controls, architecture position probes and release smoke games. No
 prototype efficiency number is an Elo claim, and no optional confirmation
 runs automatically. Future work starts from the tagged research release and
 follows its measured larger-project plan rather than a fixed feature checklist.
+
+## My source and publication rules
+
+I keep all repository engine, tool, test and research source in Go, including
+archived source and subprocess fixtures. Read [AGENTS.md](AGENTS.md). I write
+PR descriptions and release notes in first person and never use the word
+"maintainer" in their titles or descriptions. Before publishing I run
+`go run ./tools/research wording --file PATH` on both prepared bodies and check
+the titles too.
+
+v0.19 publishes the [completed evaluation investigation](docs/RESEARCH_V019.md)
+and Go-only migration with unchanged v0.18 playing policy. I preserve original
+scripts and unedited evidence in the hashed release attachment, retain raw
+results in Git and use [Go research commands](tools/research/README.md) for
+supported replay/verification. Retired collectors/trainers are documented as
+retired; I do not claim that verifying their frozen output reproduces fitting.
+No new strength screen is required; release smoke games remain integration
+evidence. I keep every smoke failure and do not rerun for a favorable score.

@@ -1,3 +1,10 @@
+## v0.19 tooling migration
+
+I preserve this historical report and its original measurements. I retired the
+Python/shell runners in v0.19; commands below describe the original experiment.
+I now use the [Go research tools](/tools/research/README.md). Original scripts
+and unedited evidence remain in the [hashed release archive](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz).
+
 # Isolated exact evaluation kernel
 
 I selected this bounded revision after reviewing the two failed fitted-model
@@ -126,7 +133,7 @@ first. A new independently validated model is still needed to answer the
 second. No book, external dataset, broad board rewrite or new pruning is
 bundled into this revision.
 
-[reproduce.py](reproduce.py) restores the complete frozen source overlay over
+[reproduce.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) restores the complete frozen source overlay over
 tagged v0.17 in a **new** directory, then runs tests/build without games. The
 original failed model variants have their own separate restoration script.
 The [backend note](../../../../docs/CHESS_SEARCH_BACKEND.md) explains the local

@@ -8,6 +8,9 @@ taking. For larger changes, please open an issue first so we can discuss the ide
 
 Keep pull requests focused, describe what changed, and mention how you tested it.
 The README also covers setup and the checks to run before submitting a PR.
+I keep all repository program, test and research source in Go. Read the short
+[agent guidance](AGENTS.md). I write PR/release explanations in first person
+and exclude the prohibited role word specified there from publication text.
 
 For changes intended to improve playing strength, follow the
 [benchmark workflow](tools/benchmark/README.md#test-a-development-candidate).

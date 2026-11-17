@@ -1,3 +1,10 @@
+## v0.19 tooling migration
+
+I preserve this historical report and its original measurements. I retired the
+Python/shell runners in v0.19; commands below describe the original experiment.
+I now use the [Go research tools](/tools/research/README.md). Original scripts
+and unedited evidence remain in the [hashed release archive](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz).
+
 # v0.16 coordinated search-core experiment
 
 **Approved for v0.16.** I chose promotion from the standard screen and
@@ -27,7 +34,7 @@ tactical subset; full legal generation remains unchanged.
 [PLAN.md](PLAN.md) records the frozen scope and gates. [METHOD.md](METHOD.md)
 describes the contracts, controls, corpus, timing schedule and limitations.
 [candidate-source.json](candidate-source.json) preserves the source/tests as an
-overlay on tagged v0.15.3, and [reproduce.py](reproduce.py) restores it in a new
+overlay on tagged v0.15.3, and [reproduce.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) restores it in a new
 directory without matches or live play.
 
 ## Correctness and fixed-depth work

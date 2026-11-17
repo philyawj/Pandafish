@@ -1,0 +1,73 @@
+{
+  "stage": "Frozen before new collection, branch labels, fitting or holdout inspection",
+  "base_tag": "v0.18",
+  "base_commit": "75f12bbdbeb0e38d148690ddc0f1d6405c5af3d3",
+  "selection": "Fresh rank1 after v0.18: fix data/decision objective using the same corrected12feature geometry; no new material/placement/search/TT/clock policy.",
+  "generation": {
+    "seed": 2026111719,
+    "families": 40,
+    "attempt_cap": 200,
+    "opening_plies": 8,
+    "opening_method": "Seeded uniform choice among pinned full-strength Stockfish MultiPV4 at5000nodes. Reject used first4move prefixes from prior corpus/controls and reserved confirmation suite. Preserve rejected attempts and all exact/bound iterations.",
+    "continuation": "Through64plies or gameover: alternate taggedv0.18 at25ms and full-strength Stockfish at5000nodes, swap student color by family index. Offline training rollouts, not strength games.",
+    "sample_plies": [
+      12,
+      20,
+      28,
+      36,
+      48,
+      64
+    ]
+  },
+  "independence": "Canonical first4FEN fields with legal EP, min(original,color/rankmirror). Union whole families sharing any sampled/rollout board fromply8 onward. Deduplicate roots globally, exclude all inspected v0.18 corpus and84control board identities. Keep all raw exclusions. Group by connected family before split; no reserved confirmation openings used for training.",
+  "splits": "Seeded shuffled sorted connected-family keys; firstfloor60% train, nextfloor20% validation, rest holdout. Freeze root membership before branch labeling. Require>=32independent components, >=100roots, >=25roots each validation/holdout, else stop as data-feasibility failure without regenerating for favorable results.",
+  "alternatives": "Pinned full-strength Stockfish MultiPV3 at50000nodes plus actual taggedv0.18 100ms move; union all legal unique moves. Label each restricted move at50000nodes with freshHash64 Threads1 Skill20, all score iterations and last exact. Branch-score loss allows25cp uncertainty; any good alternative counts. Mate labels retained separately.",
+  "student_leaf": "For every alternative, full-window releasedv0.18 depth3 root equivalent (childdepth2), full supplied history. Reconstruct an exact scalar witness through main/q search, with same SEE/capture/evasion/safety/repetition eligibility, until a static leaf. Validate witness baseWhite*rootcolor equals exact branch value. Terminal/repetition/checked-cap/nonfinite rows retained but excluded from fit. This frozen-leaf approximation is a surrogate, not actual candidate-search evidence.",
+  "features": "Reuse corrected archived allocation-free12feature geometry and oracle; no old weights. Independently check all new leaf vectors and phase against pythonchess. SignedWhite-minusBlack, tapered middle/end24integer coefficients. Original v0.18 base exact.",
+  "fitting": {
+    "target": "Within-root pairwise teacher gap clipped+/-400 minus baseline branch gap; ignore pairs<=25cp apart. Weight1+min(3,(abs(gap)-25)/100), ridge scaled on training RMS only. Nonnegative bounded coordinate solve, integer round; no intercept.",
+    "regularization": [
+      0.001,
+      0.01,
+      0.1,
+      1,
+      10
+    ],
+    "middle_bounds": [
+      8,
+      8,
+      6,
+      4,
+      15,
+      20,
+      25,
+      8,
+      6,
+      25,
+      25,
+      20
+    ],
+    "end_bounds": [
+      8,
+      8,
+      6,
+      4,
+      10,
+      10,
+      5,
+      12,
+      8,
+      25,
+      25,
+      20
+    ],
+    "selection": "Includezero. On validation choose lowest mean regret among fits with severe>300 positions<=baseline+1; ties prefer stronger regularization then smallerL1. Mean regret of tied predicted best alternatives; loss=max(0,teacherbest-selected-25) capped1000. Write frozen weights before first holdout metrics."
+  },
+  "surrogate_gate": "Nonzero selected model; holdout mean decision regret improves>=5% and severe>300 positions<=baseline+1. At least25finite eligible holdout roots. No retune or gatechange after failure.",
+  "downstream": "Only after surrogate/independent-feature gates: activate distinctly named candidate; exact integer scalar/color/mate/draw/tactical tests and race/vet/build/wrapper; zero allocations and combined inference<=400ns in same cost cohort. Native serial/three-search/warm controls against taggedv0.18. New holdout actual100ms3trials/1000ms1trial decisions: finite-node reference mean loss no worse thanbaseline+max(5cp,10%) and severe<=baseline+2 at both budgets. Retain old84public controls separately. Then standard50peropponent allthreeconcurrent if promising. No automatic larger confirmation.",
+  "stop": "Preserve any failure and source. No guessed weights on inspected controls, no live Lichess, no commit/push/PR until check-in.",
+  "binaries": {
+    "baseline": "f50ec9314fe36c70bd8594456362415ee5b9b799bfb32d1a9311a3d4999beeb8",
+    "teacher": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f"
+  }
+}

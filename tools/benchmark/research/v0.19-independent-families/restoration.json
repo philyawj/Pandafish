@@ -1,0 +1,17 @@
+{
+  "base_tag": "v0.18",
+  "reason": "Actual-choice gates failed; complete candidate clean replay passed before restoration. No code lost: candidate-source.json and scalar fixture restore it.",
+  "restored": [
+    "evaluation.go",
+    "evaluation_kernel_test.go",
+    "main.go",
+    "main_test.go",
+    "quiescence_test.go"
+  ],
+  "removed_from_active_build": [
+    "evaluation_model.go",
+    "evaluation_model_test.go",
+    "third_party/chess/eval_features.go"
+  ],
+  "candidate_binary_preserved": "tools/benchmark/bin/pandafish-v0.19-independent-evaluation-dev"
+}

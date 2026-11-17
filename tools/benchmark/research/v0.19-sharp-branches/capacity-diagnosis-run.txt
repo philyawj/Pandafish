@@ -1,0 +1,59 @@
+{
+  "train": {
+    "mate_pairs": 152,
+    "robust_infeasible_pair_orderings": 15,
+    "robust_infeasible_200_margins": 28,
+    "unbounded_nonnegative_dominance_pairs": 0,
+    "identical_base_feature_pairs": [
+      {
+        "root": "sharp-001-ply37",
+        "good": "b8a7",
+        "bad": "b8a8",
+        "base_gap": 0,
+        "continuous_upper_gap": 0.0,
+        "conservative_integer_upper_gap": 2.0,
+        "robustly_cannot_rank_good_above_bad": false,
+        "robustly_cannot_meet_200_margin": true,
+        "identical_base_and_feature_vector": true,
+        "unbounded_nonnegative_dominance": false
+      }
+    ],
+    "roots_with_dominating_bad": [
+      "sharp-000-ply28",
+      "sharp-017-ply29"
+    ],
+    "target_clipping_description": {
+      "finite_pairs": 4494,
+      "old_target_opposes_residual": 892,
+      "old_nonzero_when_base_correct": 2
+    }
+  },
+  "validation": {
+    "mate_pairs": 40,
+    "robust_infeasible_pair_orderings": 0,
+    "robust_infeasible_200_margins": 1,
+    "unbounded_nonnegative_dominance_pairs": 0,
+    "identical_base_feature_pairs": [],
+    "roots_with_dominating_bad": [],
+    "target_clipping_description": {
+      "finite_pairs": 1627,
+      "old_target_opposes_residual": 343,
+      "old_nonzero_when_base_correct": 0
+    }
+  },
+  "holdout": {
+    "mate_pairs": 45,
+    "robust_infeasible_pair_orderings": 2,
+    "robust_infeasible_200_margins": 12,
+    "unbounded_nonnegative_dominance_pairs": 0,
+    "identical_base_feature_pairs": [],
+    "roots_with_dominating_bad": [
+      "sharp-050-ply48"
+    ],
+    "target_clipping_description": {
+      "finite_pairs": 1544,
+      "old_target_opposes_residual": 321,
+      "old_nonzero_when_base_correct": 0
+    }
+  }
+}

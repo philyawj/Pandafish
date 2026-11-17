@@ -1,0 +1,74 @@
+{
+  "stage": "Frozen before boundary tests, fresh collection, labels or fitting; repaired early-transposition boundary",
+  "base_tag": "v0.18",
+  "base_commit": "75f12bbdbeb0e38d148690ddc0f1d6405c5af3d3",
+  "selection": "Repair family independence and double the data while holding feature representation, fitting objective/hyperparameters and strength gates fixed. Prior split and failed weights untouched.",
+  "generation": {
+    "seed": 2026111720,
+    "families": 80,
+    "attempt_cap": 1000,
+    "opening_plies": 8,
+    "opening_method": "Seeded uniform choice among pinned full-strength Stockfish MultiPV8 at5000nodes, through8plies. Reject any candidate rollout that touches a blocked canonical position fromply4 onward. Block all previous inspected histories, query/PV paths, witness leaves, old controls and reserved confirmation paths. Preserve all rejected attempts and raw queries; no outcome-based rejection.",
+    "continuation": "Through64plies or gameover: alternate taggedv0.18 at25ms and full-strength Stockfish at5000nodes, swap student color by family index. Offline training rollouts, not strength games.",
+    "sample_plies": [
+      12,
+      20,
+      28,
+      36,
+      48,
+      64
+    ]
+  },
+  "independence": "Canonical first4FEN fields with legal EP, min(original,color/rankmirror); ignore counters only. Record every rollout board fromply4, union whole new families sharing ANY such board transitively, then split connected components. Exclude whole families touching prior/reserved canonical positions before labels. Independently reconstruct histories and audit zero prior/reserved hits and zero cross-split board overlap before branch labels. Repeat audit after leaf extraction; cross-split or prior collisions in selected leaf paths stop fitting rather than resplit consumed labels.",
+  "splits": "Seeded shuffle sorted connected-component IDs; firstfloor60% train, nextfloor20% validation, remainder holdout. Freeze membership before branch labels. Require>=64components, >=300raw roots, >=60raw roots each validation/holdout; after unchanged terminal/nonstatic/mate exclusion require>=50eligible roots in each validation/holdout. Any failure stops this batch without extending it for favorable outcomes.",
+  "alternatives": "Pinned full-strength Stockfish MultiPV3 at50000nodes plus actual taggedv0.18 100ms move; union all legal unique moves. Label each restricted move at50000nodes with freshHash64 Threads1 Skill20, all score iterations and last exact. Branch-score loss allows25cp uncertainty; any good alternative counts. Mate labels retained separately.",
+  "student_leaf": "For every alternative, full-window releasedv0.18 depth3 root equivalent (childdepth2), full supplied history. Reconstruct an exact scalar witness through main/q search, with same SEE/capture/evasion/safety/repetition eligibility, until a static leaf. Validate witness baseWhite*rootcolor equals exact branch value. Terminal/repetition/checked-cap/nonfinite rows retained but excluded from fit. This frozen-leaf approximation is a surrogate, not actual candidate-search evidence.",
+  "features": "Reuse corrected archived allocation-free12feature geometry and oracle; no old weights. Independently check all new leaf vectors and phase against pythonchess. SignedWhite-minusBlack, tapered middle/end24integer coefficients. Original v0.18 base exact.",
+  "fitting": {
+    "target": "Within-root pairwise teacher gap clipped+/-400 minus baseline branch gap; ignore pairs<=25cp apart. Weight1+min(3,(abs(gap)-25)/100), ridge scaled on training RMS only. Nonnegative bounded coordinate solve, integer round; no intercept.",
+    "regularization": [
+      0.001,
+      0.01,
+      0.1,
+      1,
+      10
+    ],
+    "middle_bounds": [
+      8,
+      8,
+      6,
+      4,
+      15,
+      20,
+      25,
+      8,
+      6,
+      25,
+      25,
+      20
+    ],
+    "end_bounds": [
+      8,
+      8,
+      6,
+      4,
+      10,
+      10,
+      5,
+      12,
+      8,
+      25,
+      25,
+      20
+    ],
+    "selection": "Includezero. On validation choose lowest mean regret among fits with severe>300 positions<=baseline+1; ties prefer stronger regularization then smallerL1. Mean regret of tied predicted best alternatives; loss=max(0,teacherbest-selected-25) capped1000. Write frozen weights before first holdout metrics."
+  },
+  "surrogate_gate": "Same nonzero model and >=5% holdout mean decision-regret improvement, severe>300 positions<=baseline+1; at least50finite eligible holdout roots. No fit/gate/weight adjustment after result.",
+  "downstream": "Only after surrogate/independent-feature gates: activate distinctly named candidate; exact integer scalar/color/mate/draw/tactical tests and race/vet/build/wrapper; zero allocations and combined inference<=400ns in same cost cohort. Native serial/three-search/warm controls against taggedv0.18. New holdout actual100ms3trials/1000ms1trial decisions: finite-node reference mean loss no worse thanbaseline+max(5cp,10%) and severe<=baseline+2 at both budgets. Retain old84public controls separately. Then standard50peropponent allthreeconcurrent if promising. No automatic larger confirmation.",
+  "stop": "Preserve any failure and source. No guessed weights on inspected controls, no live Lichess, no commit/push/PR until check-in.",
+  "binaries": {
+    "baseline": "f50ec9314fe36c70bd8594456362415ee5b9b799bfb32d1a9311a3d4999beeb8",
+    "teacher": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f"
+  },
+  "boundary_controls": "Before engines: early move-order transposition positive, distinct position negative, color/rank mirrors, counters ignored, legal versus unusable en passant, castling-right distinction, terminal-root retention, transitive family union, blocked late position, post-split collision rejection and whole-component split. Separate postcollection auditor reconstructs boards independently, never trusts saved keys."
+}

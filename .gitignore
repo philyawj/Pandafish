@@ -1,6 +1,5 @@
 /pandafish
 /pandafish.exe
-/AGENTS.md
 /commands.md
 /config-gopandafish.yml
 
@@ -48,7 +47,7 @@
 /temp/
 *.tmp
 
-# Local Python tooling
+# Ignore accidental local interpreter caches; repository source is Go only.
 .venv/
 venv/
 __pycache__/

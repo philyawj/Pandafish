@@ -1,0 +1,212 @@
+Validation grid 0.001 converged True penalty 34.032967032967036 new risks 0
+Validation grid 0.01 converged True penalty 34.37362637362637 new risks 0
+Validation grid 0.1 converged True penalty 34.629120879120876 new risks 0
+Validation grid 1 converged True penalty 33.71978021978022 new risks 0
+Validation grid 10 converged True penalty 36.11813186813187 new risks 0
+{
+  "coverage": {
+    "train": {
+      "raw_roots": 504,
+      "decision_roots": 494,
+      "turns": {
+        "w": 248,
+        "b": 246
+      },
+      "cp_evaluable_roots": 488,
+      "avoidable_mate_roots": 37
+    },
+    "validation": {
+      "raw_roots": 186,
+      "decision_roots": 182,
+      "turns": {
+        "w": 92,
+        "b": 90
+      },
+      "cp_evaluable_roots": 176,
+      "avoidable_mate_roots": 9
+    },
+    "holdout": {
+      "raw_roots": 186,
+      "decision_roots": 184,
+      "turns": {
+        "w": 92,
+        "b": 92
+      },
+      "cp_evaluable_roots": 181,
+      "avoidable_mate_roots": 11
+    }
+  },
+  "cp_pairs": 4484,
+  "ordinal_pairs": 44,
+  "selected": {
+    "base_tag": "v0.18",
+    "selected_on": "validation penalty with explicit mate safety; zero included",
+    "kind": "cp-plus-mate-order",
+    "regularization": 1,
+    "trainer_source_sha256": "3961e70cfc22a1898c85f3ef0c45bd8d64c3cc13ef711193e9a3eb4c3112e3e1",
+    "objective_source_sha256": "2e77ce9f2f354aa1902e658154193a64e206dcda59cfe3dfc949efc94df1b6c5",
+    "middle": [
+      8,
+      8,
+      2,
+      1,
+      10,
+      6,
+      12,
+      2,
+      0,
+      0,
+      0,
+      2
+    ],
+    "ending": [
+      8,
+      0,
+      0,
+      4,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1
+    ],
+    "plan_sha256": "681d1e2eb9feeb678e20be33b119955cba3a855437a2d4280fb0bf26624b4ef9",
+    "fitting_refinement_sha256": "16b7ad2652b9bbd706b0f24abfbb8d2192dac09432a2b2c766306b7fa01d67ab",
+    "membership_sha256": "cf16fa9fc9321565d9c245a0a5591f164e26b22ac90c77fbacd30484584bbe74",
+    "corpus_sha256": "29019a013287aa298c0a39a55bdfe3dac25b4f91e11637b1cc54dde2d8fc1270"
+  },
+  "holdout_relative_improvement": -0.1350567620927936,
+  "new_holdout_unsafe_roots": [
+    "sharp-028-ply36"
+  ],
+  "turn_gates": {
+    "w": true,
+    "b": false
+  },
+  "surrogate_gate_passed": false,
+  "quality": {
+    "train": {
+      "baseline": {
+        "decision_roots": 494,
+        "mean_penalty": 51.1503036437247,
+        "severe_over_300": 18,
+        "avoidable_loss_roots": 4,
+        "mate_coverage_roots": 37,
+        "cp_only_roots": 436,
+        "cp_only_mean_regret": 43.85034403669725,
+        "by_turn": {
+          "w": {
+            "roots": 248,
+            "mean_penalty": 46.051411290322584
+          },
+          "b": {
+            "roots": 246,
+            "mean_penalty": 56.290650406504064
+          }
+        }
+      },
+      "candidate": {
+        "decision_roots": 494,
+        "mean_penalty": 46.28744939271255,
+        "severe_over_300": 14,
+        "avoidable_loss_roots": 5,
+        "mate_coverage_roots": 37,
+        "cp_only_roots": 436,
+        "cp_only_mean_regret": 38.19954128440367,
+        "by_turn": {
+          "w": {
+            "roots": 248,
+            "mean_penalty": 45.76008064516129
+          },
+          "b": {
+            "roots": 246,
+            "mean_penalty": 46.81910569105691
+          }
+        }
+      }
+    },
+    "validation": {
+      "baseline": {
+        "decision_roots": 182,
+        "mean_penalty": 36.095238095238095,
+        "severe_over_300": 3,
+        "avoidable_loss_roots": 1,
+        "mate_coverage_roots": 9,
+        "cp_only_roots": 157,
+        "cp_only_mean_regret": 32.11677282377919,
+        "by_turn": {
+          "w": {
+            "roots": 92,
+            "mean_penalty": 30.10326086956522
+          },
+          "b": {
+            "roots": 90,
+            "mean_penalty": 42.220370370370375
+          }
+        }
+      },
+      "candidate": {
+        "decision_roots": 182,
+        "mean_penalty": 33.71978021978022,
+        "severe_over_300": 3,
+        "avoidable_loss_roots": 1,
+        "mate_coverage_roots": 9,
+        "cp_only_roots": 157,
+        "cp_only_mean_regret": 29.84713375796178,
+        "by_turn": {
+          "w": {
+            "roots": 92,
+            "mean_penalty": 21.793478260869566
+          },
+          "b": {
+            "roots": 90,
+            "mean_penalty": 45.91111111111111
+          }
+        }
+      }
+    },
+    "holdout": {
+      "baseline": {
+        "decision_roots": 184,
+        "mean_penalty": 44.04347826086956,
+        "severe_over_300": 3,
+        "avoidable_loss_roots": 3,
+        "mate_coverage_roots": 11,
+        "cp_only_roots": 159,
+        "cp_only_mean_regret": 32.100628930817614,
+        "by_turn": {
+          "w": {
+            "roots": 92,
+            "mean_penalty": 65.80978260869566
+          },
+          "b": {
+            "roots": 92,
+            "mean_penalty": 22.277173913043477
+          }
+        }
+      },
+      "candidate": {
+        "decision_roots": 184,
+        "mean_penalty": 49.99184782608695,
+        "severe_over_300": 6,
+        "avoidable_loss_roots": 4,
+        "mate_coverage_roots": 11,
+        "cp_only_roots": 159,
+        "cp_only_mean_regret": 32.569182389937104,
+        "by_turn": {
+          "w": {
+            "roots": 92,
+            "mean_penalty": 71.35326086956522
+          },
+          "b": {
+            "roots": 92,
+            "mean_penalty": 28.630434782608695
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,10 @@
+## v0.19 tooling migration
+
+I preserve this historical report and its original measurements. I retired the
+Python/shell runners in v0.19; commands below describe the original experiment.
+I now use the [Go research tools](/tools/research/README.md). Original scripts
+and unedited evidence remain in the [hashed release archive](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz).
+
 # Method and scope
 
 I froze the scope in [PLAN.md](PLAN.md), then implemented the archived
@@ -45,7 +52,7 @@ versus draw distinction.
 
 ## Inputs and fixed-depth comparisons
 
-[make_inputs.py](make_inputs.py) freezes [inputs.json](inputs.json) before
+[make_inputs.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) freezes [inputs.json](inputs.json) before
 candidate measurements: the original 36 cases, 36 broader cases (first 12 games
 per opponent from the released-policy control) and 12 explicit special-rule,
 endgame and threat controls. Selection cycles through prescribed plies and
@@ -69,7 +76,7 @@ per case/actor, so I use the native equal-time blocks for the timing gate.
 
 ## Native equal-time performance
 
-[uci_performance.py](uci_performance.py) records full UCI responses, independent
+[uci_performance.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) records full UCI responses, independent
 python-chess legality, completed depth, node counts and actual response time.
 Both engines receive the same requested budget and retain the same internal
 soft/hard limits. Native UCI searches advance the actual cache generation.
@@ -93,7 +100,7 @@ completion and node throughput still do not establish playing strength.
 
 ## Provenance and replay
 
-[validate.py](validate.py) records full race tests, vet, native/ARM64 builds,
+[validate.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) records full race tests, vet, native/ARM64 builds,
 offline wrapper validation and all fixed probes. The baseline is rebuilt from
 `git archive v0.15.3`, not the working tree. [source-hashes.json](source-hashes.json)
 and [candidate-source.json](candidate-source.json) freeze every root Go source/

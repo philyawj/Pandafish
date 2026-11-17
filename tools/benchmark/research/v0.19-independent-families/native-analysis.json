@@ -1,0 +1,182 @@
+{
+  "requests": 2758,
+  "blocks": {
+    "public-controls/serial/100/baseline": {
+      "requests": 252,
+      "nonterminal_completed": 252,
+      "terminal_nulls": 0,
+      "failures": [],
+      "mean_depth": 5.214285714285714,
+      "total_nodes": 11994054,
+      "mean_response_ms": 92.48466189351997,
+      "p95_response_ms": 95.87899991311133,
+      "max_response_ms": 96.33233305066824
+    },
+    "public-controls/serial/100/candidate": {
+      "requests": 252,
+      "nonterminal_completed": 252,
+      "terminal_nulls": 0,
+      "failures": [],
+      "mean_depth": 5.142857142857143,
+      "total_nodes": 11357178,
+      "mean_response_ms": 92.89120735936902,
+      "p95_response_ms": 95.81387508660555,
+      "max_response_ms": 96.26012505032122
+    },
+    "public-controls/serial/1000/candidate": {
+      "requests": 84,
+      "nonterminal_completed": 84,
+      "terminal_nulls": 0,
+      "failures": [],
+      "mean_depth": 6.75,
+      "total_nodes": 36745646,
+      "mean_response_ms": 962.5862659110377,
+      "p95_response_ms": 995.755041949451,
+      "max_response_ms": 996.1105000693351
+    },
+    "public-controls/serial/1000/baseline": {
+      "requests": 84,
+      "nonterminal_completed": 84,
+      "terminal_nulls": 0,
+      "failures": [],
+      "mean_depth": 6.845238095238095,
+      "total_nodes": 40107640,
+      "mean_response_ms": 965.6905059597366,
+      "p95_response_ms": 995.8088339772075,
+      "max_response_ms": 996.1233749054372
+    },
+    "public-controls/three-search/100/baseline": {
+      "requests": 504,
+      "nonterminal_completed": 504,
+      "terminal_nulls": 0,
+      "failures": [],
+      "mean_depth": 5.204365079365079,
+      "total_nodes": 22972596,
+      "mean_response_ms": 95.0130253756744,
+      "p95_response_ms": 107.75837488472462,
+      "max_response_ms": 117.04199993982911
+    },
+    "public-controls/three-search/100/candidate": {
+      "requests": 504,
+      "nonterminal_completed": 504,
+      "terminal_nulls": 0,
+      "failures": [],
+      "mean_depth": 5.107142857142857,
+      "total_nodes": 21406600,
+      "mean_response_ms": 95.37146728447017,
+      "p95_response_ms": 108.54525002650917,
+      "max_response_ms": 116.19949992746115
+    },
+    "public-controls/warm/100/baseline": {
+      "requests": 183,
+      "nonterminal_completed": 169,
+      "terminal_nulls": 14,
+      "failures": [],
+      "mean_depth": 4.775147928994083,
+      "total_nodes": 7455107,
+      "mean_response_ms": 85.89164459635121,
+      "p95_response_ms": 95.95220792107284,
+      "max_response_ms": 96.20341588743031
+    },
+    "public-controls/warm/100/candidate": {
+      "requests": 183,
+      "nonterminal_completed": 169,
+      "terminal_nulls": 14,
+      "failures": [],
+      "mean_depth": 4.65680473372781,
+      "total_nodes": 6995896,
+      "mean_response_ms": 86.6426801349703,
+      "p95_response_ms": 95.94362485222518,
+      "max_response_ms": 96.3930410798639
+    },
+    "fresh-holdout/serial/100/baseline": {
+      "requests": 267,
+      "nonterminal_completed": 267,
+      "terminal_nulls": 0,
+      "failures": [],
+      "mean_depth": 4.269662921348314,
+      "total_nodes": 11805748,
+      "mean_response_ms": 92.51684395156884,
+      "p95_response_ms": 95.55541607551277,
+      "max_response_ms": 95.65575001761317
+    },
+    "fresh-holdout/serial/100/candidate": {
+      "requests": 267,
+      "nonterminal_completed": 267,
+      "terminal_nulls": 0,
+      "failures": [],
+      "mean_depth": 4.146067415730337,
+      "total_nodes": 10067081,
+      "mean_response_ms": 91.70961076889034,
+      "p95_response_ms": 95.5417500808835,
+      "max_response_ms": 95.81387508660555
+    },
+    "fresh-holdout/serial/1000/candidate": {
+      "requests": 89,
+      "nonterminal_completed": 89,
+      "terminal_nulls": 0,
+      "failures": [],
+      "mean_depth": 5.595505617977528,
+      "total_nodes": 31831244,
+      "mean_response_ms": 971.3544812356906,
+      "p95_response_ms": 995.5794999841601,
+      "max_response_ms": 995.7537080626935
+    },
+    "fresh-holdout/serial/1000/baseline": {
+      "requests": 89,
+      "nonterminal_completed": 89,
+      "terminal_nulls": 0,
+      "failures": [],
+      "mean_depth": 5.662921348314606,
+      "total_nodes": 34266965,
+      "mean_response_ms": 969.4355397898537,
+      "p95_response_ms": 995.6145421601832,
+      "max_response_ms": 995.7147499080747
+    }
+  },
+  "paired_depths": {
+    "public-controls/serial/100": {
+      "pairs": 252,
+      "deeper": 14,
+      "equal": 206,
+      "shallower": 32,
+      "mean_depth_gain": -0.07142857142857142
+    },
+    "public-controls/serial/1000": {
+      "pairs": 84,
+      "deeper": 3,
+      "equal": 70,
+      "shallower": 11,
+      "mean_depth_gain": -0.09523809523809523
+    },
+    "public-controls/three-search/100": {
+      "pairs": 504,
+      "deeper": 23,
+      "equal": 409,
+      "shallower": 72,
+      "mean_depth_gain": -0.09722222222222222
+    },
+    "public-controls/warm/100": {
+      "pairs": 169,
+      "deeper": 5,
+      "equal": 139,
+      "shallower": 25,
+      "mean_depth_gain": -0.11834319526627218
+    },
+    "fresh-holdout/serial/100": {
+      "pairs": 267,
+      "deeper": 6,
+      "equal": 222,
+      "shallower": 39,
+      "mean_depth_gain": -0.12359550561797752
+    },
+    "fresh-holdout/serial/1000": {
+      "pairs": 89,
+      "deeper": 3,
+      "equal": 77,
+      "shallower": 9,
+      "mean_depth_gain": -0.06741573033707865
+    }
+  },
+  "timing_overruns": []
+}

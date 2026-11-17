@@ -1,0 +1,132 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"testing"
+	"strings"
+	"time"
+	"github.com/corentings/chess/v2"
+)
+
+type decisionWitness struct {
+	Score, BaseRoot int
+	Reason, FEN string
+	Features chess.EvalFeatures
+	Path []string
+}
+
+// This diagnostic reconstructs an exact scalar witness with full-window calls
+// to the unchanged released search. It introduces no runtime search policy.
+func decisionTrace(w *searcher, p *chess.Position, depth, quietDepth, ply int, rootColor chess.Color) decisionWitness {
+	if p.HalfMoveClock() == 0 {
+		key := w.historyKey
+		w.historyKey = 0
+		defer func() { w.historyKey = key }()
+	}
+	checked := inCheck(p)
+	var value int
+	var complete bool
+	if depth > 0 {
+		value, complete = w.searchAtPly(p, depth, -searchInfinity, searchInfinity, checked, ply)
+	} else {
+		value, complete = w.quietAtPly(p, quietDepth, -searchInfinity, searchInfinity, checked, ply)
+	}
+	if !complete { panic("incomplete witness search") }
+	result := decisionWitness{Score: value, FEN: p.String(), Reason: "terminal"}
+	if p.SearchStatus() != chess.NoMethod { return result }
+	repeated := w.pushPosition(p)
+	defer w.popPosition(p)
+	if repeated { result.Reason = "repetition"; return result }
+	if depth <= 0 {
+		static := staticScore(p, p.Turn())
+		cap := quietDepth <= -checkEvasionDepth || (quietDepth <= 0 && !checked)
+		if cap || (!checked && value == static) {
+			if value != static { panic("static witness differs from search") }
+			result.Reason = "static"
+			if checked { result.Reason = "checked-cap" }
+			result.BaseRoot = staticScore(p, rootColor)
+			result.Features = p.Board().EvaluationFeatures()
+			return result
+		}
+	}
+	moves := w.searchMoves(p, ply, depth <= 0 && !checked)
+	for _, move := range moves {
+		if depth <= 0 && !checked && !move.HasTag(chess.Check) && move.Promo() == chess.NoPieceType &&
+			captureValue(p, move) < pieceValues[p.Board().Piece(move.S1()).Type()] {
+			gain, ok := w.exchange(p, move)
+			if !ok { panic("incomplete SEE") }
+			if gain < 0 { continue }
+		}
+		child := p.Update(&move)
+		var score int
+		var ok bool
+		if depth > 0 {
+			score, ok = w.childSearch(child, depth-1, -searchInfinity, searchInfinity, move.HasTag(chess.Check), ply+1)
+		} else {
+			score, ok = w.childQuiet(child, quietDepth-1, -searchInfinity, searchInfinity, move.HasTag(chess.Check), ply+1)
+		}
+		if !ok { panic("incomplete branch") }
+		if -score != value { continue }
+		nextDepth, nextQuiet := depth-1, quietDepth
+		if depth <= 0 { nextDepth, nextQuiet = 0, quietDepth-1 }
+		leaf := decisionTrace(w, child, nextDepth, nextQuiet, ply+1, rootColor)
+		if leaf.Score != score { panic("witness recursion mismatch") }
+		leaf.Score = value
+		leaf.Path = append([]string{move.String()}, leaf.Path...)
+		return leaf
+	}
+	panic(fmt.Sprintf("no exact witness at %s depth %d quiet %d value %d", p, depth, quietDepth, value))
+}
+
+func decisionRootTrace(t *testing.T, position, choice string) decisionWitness {
+	t.Helper()
+	g, err := parsePosition(splitDecisionPosition(position))
+	if err != nil { t.Fatal(err) }
+	p := g.Position()
+	w := &searcher{table:newTable(), killers:new(killerTable), deadline:time.Now().Add(30*time.Second)}
+	for _, key := range repetitionHistory(g) { w.pushKey(key) }
+	w.pushPosition(p)
+	defer w.popPosition(p)
+	for _, move := range p.ValidMoves() {
+		if move.String() != choice { continue }
+		leaf := decisionTrace(w, p.Update(&move), 2, quiescenceDepth, 1, p.Turn())
+		leaf.Score = -leaf.Score
+		leaf.Path = append([]string{choice}, leaf.Path...)
+		if leaf.Reason == "static" && leaf.BaseRoot != leaf.Score { t.Fatalf("witness scalar: %+v", leaf) }
+		return leaf
+	}
+	t.Fatal("illegal diagnostic choice", choice)
+	return decisionWitness{}
+}
+
+func splitDecisionPosition(position string) []string {
+	// Keep the same parser and full supplied history as the released engine.
+	return strings.Fields(strings.TrimPrefix(position, "position "))
+}
+
+func TestDecisionTraceControls(t *testing.T) {
+	for _, choice := range []string{"e2e4", "d2d4", "g1f3"} {
+		leaf := decisionRootTrace(t, "position startpos", choice)
+		if leaf.Reason != "static" || leaf.BaseRoot != leaf.Score { t.Fatal(leaf) }
+	}
+	leaf := decisionRootTrace(t, "position fen 4k1n1/8/8/8/8/8/8/3QK1N1 w - - 0 1 moves g1f3 g8f6 f3g1 f6g8 g1f3 g8f6 f3g1", "f6g8")
+	if leaf.Reason != "repetition" || leaf.Score != 0 { t.Fatal("history witness", leaf) }
+}
+
+func TestExportDecisionLeaves(t *testing.T) {
+	if os.Getenv("DECISION_INPUT") == "" { t.Skip("explicit diagnostic input required") }
+	data, err := os.ReadFile(os.Getenv("DECISION_INPUT")); if err != nil { t.Fatal(err) }
+	var input struct { Cases []struct { ID, Position string; Alternatives []struct { Move string } } }
+	if err = json.Unmarshal(data, &input); err != nil { t.Fatal(err) }
+	type row struct { ID, Move string; Witness decisionWitness }
+	out := []row{}
+	for _, root := range input.Cases {
+		for _, alternative := range root.Alternatives {
+			out = append(out, row{root.ID, alternative.Move, decisionRootTrace(t, root.Position, alternative.Move)})
+			encoded, _ := json.MarshalIndent(out, "", "  ")
+			if err = os.WriteFile(os.Getenv("DECISION_OUTPUT"), append(encoded,'\n'), 0644); err != nil { t.Fatal(err) }
+		}
+	}
+}

@@ -1,3 +1,10 @@
+## v0.19 tooling migration
+
+I preserve this historical report and its original measurements. I retired the
+Python/shell runners in v0.19; commands below describe the original experiment.
+I now use the [Go research tools](/tools/research/README.md). Original scripts
+and unedited evidence remain in the [hashed release archive](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz).
+
 # v0.18 evaluation-model investigation
 
 **Recommendation: revise the evaluation hypothesis; do not promote either

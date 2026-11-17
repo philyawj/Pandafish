@@ -1,3 +1,10 @@
+## v0.19 tooling migration
+
+I preserve this historical report and its original measurements. I retired the
+Python/shell runners in v0.19; commands below describe the original experiment.
+I now use the [Go research tools](/tools/research/README.md). Original scripts
+and unedited evidence remain in the [hashed release archive](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz).
+
 # lichess-bot reconnect investigation
 
 **The installed client has a reproducible duplicate-worker bug. Current
@@ -65,7 +72,7 @@ pops the ID and can expose a free slot while a duplicate worker still runs.
 The old `final_queue_entries` can log "Game over" for a disconnected handler
 without a terminal game state. That message alone does not prove completion.
 
-The [offline reproducer](client-investigation/reproduce.py.txt) executes actual
+The [offline reproducer](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) executes actual
 installed scheduling and watcher function bodies with a fake pool and stream.
 It reproduces two queued jobs for one logical ID, including when a challenge
 reserved the ID before its first start. Completion removal is explicitly

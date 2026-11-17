@@ -1,0 +1,128 @@
+{
+  "runtime_files_identical_to_v018": 59,
+  "prior_archives": {
+    "tools/benchmark/research/v0.16-next-assessment": {
+      "files": 7,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.19-decision-evaluation": {
+      "files": 40,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.18-evaluation-model": {
+      "files": 145,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.16-bishop-pair": {
+      "files": 47,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.16-search-core": {
+      "files": 87,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.18-exact-evaluation": {
+      "files": 84,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.16-piece-safety": {
+      "files": 74,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.15.3-architecture": {
+      "files": 234,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.17-search-moves": {
+      "files": 105,
+      "mismatches": []
+    }
+  },
+  "prior_inventory_entries": 823,
+  "independent_integer_decisions": {
+    "train": {
+      "baseline": {
+        "mean_regret_cp": 30.816143497757846,
+        "severe_over_300": 3
+      },
+      "candidate": {
+        "mean_regret_cp": 27.347533632286996,
+        "severe_over_300": 2
+      }
+    },
+    "validation": {
+      "baseline": {
+        "mean_regret_cp": 30.734234234234236,
+        "severe_over_300": 1
+      },
+      "candidate": {
+        "mean_regret_cp": 28.905405405405407,
+        "severe_over_300": 1
+      }
+    },
+    "holdout": {
+      "baseline": {
+        "mean_regret_cp": 61.123456790123456,
+        "severe_over_300": 4
+      },
+      "candidate": {
+        "mean_regret_cp": 56.01851851851852,
+        "severe_over_300": 4
+      }
+    }
+  },
+  "actual_decisions_recomputed": {
+    "public-controls": {
+      "100": {
+        "mean_loss_cp": {
+          "baseline": 55.26865671641791,
+          "candidate": 68.04477611940298
+        },
+        "severe": {
+          "baseline": 1,
+          "candidate": 3
+        },
+        "passed": false
+      },
+      "1000": {
+        "mean_loss_cp": {
+          "baseline": 68.0,
+          "candidate": 66.11940298507463
+        },
+        "severe": {
+          "baseline": 3,
+          "candidate": 3
+        },
+        "passed": true
+      }
+    },
+    "fresh-holdout": {
+      "100": {
+        "mean_loss_cp": {
+          "baseline": 78.5,
+          "candidate": 63.2375
+        },
+        "severe": {
+          "baseline": 4,
+          "candidate": 3
+        },
+        "passed": true
+      },
+      "1000": {
+        "mean_loss_cp": {
+          "baseline": 68.8875,
+          "candidate": 54.6625
+        },
+        "severe": {
+          "baseline": 3,
+          "candidate": 2
+        },
+        "passed": false
+      }
+    }
+  },
+  "archived_engine_source_files_verified": 63,
+  "surrogate_gate_passed": true,
+  "actual_choice_gate_failed_preserved": true,
+  "issues": []
+}

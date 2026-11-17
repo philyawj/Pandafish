@@ -1,0 +1,3671 @@
+{
+  "scope": "Training-only post-result probe of every selected learnable witness. Actual one-ply mates are legal proofs at the saved leaf, not forced root losses. Opponent after a hypothetical pass is only a threat, never a legal continuation or proof of forced loss. No fitting, engine queries or strength games.",
+  "learnable_witnesses_checked": 2557,
+  "witnesses_with_actual_mate_one": 15,
+  "static_witnesses_with_quiet_mate_one": 15,
+  "witnesses_with_hypothetical_opponent_mate_one": 54,
+  "rows": [
+    {
+      "id": "sharp-000-ply28",
+      "root_turn": "w",
+      "choice": "g3f4",
+      "reference": {
+        "cp": null,
+        "mate": -4
+      },
+      "witness": {
+        "Score": 282,
+        "BaseRoot": 282,
+        "Reason": "static",
+        "FEN": "r2qk2r/p2b1pp1/2p5/2p5/4pKnp/1PN1P3/P1PPNPP1/R1BQ1R2 b kq - 1 16",
+        "Features": {
+          "Values": [
+            -1,
+            -1,
+            -3,
+            -7,
+            -7,
+            -16,
+            -1,
+            0,
+            0,
+            3,
+            1,
+            0
+          ],
+          "Phase": 21
+        },
+        "Path": [
+          "g3f4",
+          "c7c6",
+          "d5c3"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-000-ply28",
+      "root_turn": "w",
+      "choice": "g3h3",
+      "reference": {
+        "cp": -864,
+        "mate": null
+      },
+      "witness": {
+        "Score": -374,
+        "BaseRoot": -374,
+        "Reason": "static",
+        "FEN": "r2qk2r/p1pb1pp1/8/2pN4/4p2p/1P6/P1PPNPPK/R1BR4 b kq - 0 17",
+        "Features": {
+          "Values": [
+            8,
+            -4,
+            -2,
+            -5,
+            -1,
+            -3,
+            -1,
+            0,
+            0,
+            3,
+            1,
+            0
+          ],
+          "Phase": 16
+        },
+        "Path": [
+          "g3h3",
+          "g4e3",
+          "h3h2",
+          "e3d1",
+          "f1d1"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-001-ply29",
+      "root_turn": "b",
+      "choice": "d8e8",
+      "reference": {
+        "cp": -966,
+        "mate": null
+      },
+      "witness": {
+        "Score": -287,
+        "BaseRoot": -287,
+        "Reason": "static",
+        "FEN": "2k1rb1r/1p3ppp/p1q1N3/2N1pn2/1PPp4/3P2P1/3BPP1P/RQ2K2R w KQ - 0 17",
+        "Features": {
+          "Values": [
+            7,
+            0,
+            2,
+            -2,
+            4,
+            4,
+            2,
+            0,
+            0,
+            0,
+            0,
+            -1
+          ],
+          "Phase": 21
+        },
+        "Path": [
+          "d8e8",
+          "g2c6",
+          "d6c6"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "c6h1",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "2k1rb1r/1p3ppp/p3N3/2N1pn2/1PPp4/3P2P1/3BPP1P/RQ2K2q w Q - 0 18"
+        }
+      ]
+    },
+    {
+      "id": "sharp-002-ply36",
+      "root_turn": "w",
+      "choice": "c4d3",
+      "reference": {
+        "cp": -1005,
+        "mate": null
+      },
+      "witness": {
+        "Score": -511,
+        "BaseRoot": -511,
+        "Reason": "static",
+        "FEN": "3r1rk1/2p3pp/p7/8/8/3q4/PP3PPP/R1B1K2R w KQ - 0 21",
+        "Features": {
+          "Values": [
+            0,
+            4,
+            -11,
+            -15,
+            -5,
+            -4,
+            -1,
+            0,
+            0,
+            2,
+            0,
+            0
+          ],
+          "Phase": 13
+        },
+        "Path": [
+          "c4d3",
+          "f5d3",
+          "e5d3",
+          "d5d3"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "d3d1",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "3r1rk1/2p3pp/p7/8/8/8/PP3PPP/R1BqK2R w KQ - 2 22"
+        }
+      ]
+    },
+    {
+      "id": "sharp-009-ply13",
+      "root_turn": "b",
+      "choice": "f6d5",
+      "reference": {
+        "cp": -77,
+        "mate": null
+      },
+      "witness": {
+        "Score": 14,
+        "BaseRoot": 14,
+        "Reason": "static",
+        "FEN": "r1b1k2r/pppp1ppp/2n2q2/2bPp3/8/2P3P1/PP1PNPBP/R1BQK2R w KQkq - 1 9",
+        "Features": {
+          "Values": [
+            -3,
+            -1,
+            0,
+            -6,
+            -2,
+            -4,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            2
+          ],
+          "Phase": 22
+        },
+        "Path": [
+          "f6d5",
+          "e4d5",
+          "d8f6"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "f6f2",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r1b1k2r/pppp1ppp/2n5/2bPp3/8/2P3P1/PP1PNqBP/R1BQK2R w KQkq - 0 10"
+        }
+      ]
+    },
+    {
+      "id": "sharp-009-ply29",
+      "root_turn": "b",
+      "choice": "f8e8",
+      "reference": {
+        "cp": -395,
+        "mate": null
+      },
+      "witness": {
+        "Score": -101,
+        "BaseRoot": -101,
+        "Reason": "static",
+        "FEN": "r1bqr1k1/pp1p1ppp/8/3p1B2/1bP3Q1/6P1/PB2NP1P/R4RK1 b - - 0 17",
+        "Features": {
+          "Values": [
+            4,
+            2,
+            1,
+            2,
+            3,
+            9,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1
+          ],
+          "Phase": 21
+        },
+        "Path": [
+          "f8e8",
+          "g2e4",
+          "c6d5",
+          "e4f5"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "g4g7",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r1bqr1k1/pp1p1pQp/8/3p1B2/1bP5/6P1/PB2NP1P/R4RK1 b - - 0 18"
+        }
+      ]
+    },
+    {
+      "id": "sharp-009-ply36",
+      "root_turn": "w",
+      "choice": "d1d5",
+      "reference": {
+        "cp": 194,
+        "mate": null
+      },
+      "witness": {
+        "Score": -125,
+        "BaseRoot": -125,
+        "Reason": "static",
+        "FEN": "r1b2rk1/pp1p1p1p/1q4p1/2bRQn2/2P5/P5P1/1B2NPBP/5RK1 b - - 2 20",
+        "Features": {
+          "Values": [
+            -1,
+            3,
+            9,
+            3,
+            1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0
+          ],
+          "Phase": 22
+        },
+        "Path": [
+          "d1d5",
+          "a5b6",
+          "e4e5"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "e5h8",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r1b2rkQ/pp1p1p1p/1q4p1/2bR1n2/2P5/P5P1/1B2NPBP/5RK1 b - - 4 21"
+        }
+      ]
+    },
+    {
+      "id": "sharp-009-ply36",
+      "root_turn": "w",
+      "choice": "e4d5",
+      "reference": {
+        "cp": 210,
+        "mate": null
+      },
+      "witness": {
+        "Score": -117,
+        "BaseRoot": -117,
+        "Reason": "static",
+        "FEN": "r1b2rk1/pp1pnp1p/6p1/q1b1Q3/2P5/P5P1/1B2NPBP/3R1RK1 b - - 2 20",
+        "Features": {
+          "Values": [
+            2,
+            5,
+            8,
+            6,
+            1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            -1
+          ],
+          "Phase": 22
+        },
+        "Path": [
+          "e4d5",
+          "f5e7",
+          "d5e5"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "e5h8",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r1b2rkQ/pp1pnp1p/6p1/q1b5/2P5/P5P1/1B2NPBP/3R1RK1 b - - 4 21"
+        },
+        {
+          "move": "e5g7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r1b2rk1/pp1pnpQp/6p1/q1b5/2P5/P5P1/1B2NPBP/3R1RK1 b - - 4 21"
+        }
+      ]
+    },
+    {
+      "id": "sharp-009-ply37",
+      "root_turn": "b",
+      "choice": "a5b6",
+      "reference": {
+        "cp": -240,
+        "mate": null
+      },
+      "witness": {
+        "Score": 133,
+        "BaseRoot": 133,
+        "Reason": "static",
+        "FEN": "r1b2rk1/pp3p1p/1q1p2p1/2bRQn2/2P5/P5P1/1B2NPBP/5RK1 w - - 0 21",
+        "Features": {
+          "Values": [
+            0,
+            3,
+            7,
+            4,
+            1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            1
+          ],
+          "Phase": 22
+        },
+        "Path": [
+          "a5b6",
+          "e4e5",
+          "d7d6"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "e5h8",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r1b2rkQ/pp3p1p/1q1p2p1/2bR1n2/2P5/P5P1/1B2NPBP/5RK1 b - - 1 21"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-010-ply48",
+      "root_turn": "w",
+      "choice": "f3g4",
+      "reference": {
+        "cp": -718,
+        "mate": null
+      },
+      "witness": {
+        "Score": -214,
+        "BaseRoot": -214,
+        "Reason": "static",
+        "FEN": "r5k1/3q2pp/2p2r2/1p2p2P/p2pP3/3P4/2PQ1P2/1R4RK w - - 0 29",
+        "Features": {
+          "Values": [
+            0,
+            0,
+            0,
+            -5,
+            1,
+            1,
+            -2,
+            -16,
+            -2,
+            -1,
+            0,
+            0
+          ],
+          "Phase": 16
+        },
+        "Path": [
+          "f3g4",
+          "f7f5",
+          "g5f6",
+          "c3d2",
+          "g4d7",
+          "f8f6",
+          "d1d2",
+          "d6d7"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "d7h3",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r5k1/6pp/2p2r2/1p2p2P/p2pP3/3P3q/2PQ1P2/1R4RK w - - 2 30"
+        }
+      ]
+    },
+    {
+      "id": "sharp-013-ply48",
+      "root_turn": "w",
+      "choice": "d1d7",
+      "reference": {
+        "cp": 858,
+        "mate": null
+      },
+      "witness": {
+        "Score": 392,
+        "BaseRoot": 392,
+        "Reason": "static",
+        "FEN": "r3q1kr/p3R3/2p2Q2/5pN1/Ppb1p2P/1P4P1/2P2PB1/4R1K1 b - - 0 26",
+        "Features": {
+          "Values": [
+            4,
+            -3,
+            11,
+            5,
+            8,
+            8,
+            2,
+            9,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "Phase": 19
+        },
+        "Path": [
+          "d1d7",
+          "a6c4",
+          "d7e7"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "e7g7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r3q1kr/p5R1/2p2Q2/5pN1/Ppb1p2P/1P4P1/2P2PB1/4R1K1 b - - 2 27"
+        },
+        {
+          "move": "f6g7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r3q1kr/p3R1Q1/2p5/5pN1/Ppb1p2P/1P4P1/2P2PB1/4R1K1 b - - 2 27"
+        }
+      ]
+    },
+    {
+      "id": "sharp-014-ply36",
+      "root_turn": "w",
+      "choice": "b1a3",
+      "reference": {
+        "cp": -758,
+        "mate": null
+      },
+      "witness": {
+        "Score": -319,
+        "BaseRoot": -319,
+        "Reason": "static",
+        "FEN": "rn2kr2/1Q4pp/2pq4/p3b3/7P/N7/PP2P3/R3K2R b q - 0 21",
+        "Features": {
+          "Values": [
+            1,
+            -6,
+            -3,
+            -1,
+            -1,
+            -3,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1
+          ],
+          "Phase": 19
+        },
+        "Path": [
+          "b1a3",
+          "f4e5",
+          "d4b6",
+          "e6d6",
+          "b6b7"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "e5g3",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "rn2kr2/1Q4pp/2pq4/p7/7P/N5b1/PP2P3/R3K2R w q - 1 22"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-014-ply36",
+      "root_turn": "w",
+      "choice": "b1c3",
+      "reference": {
+        "cp": -734,
+        "mate": null
+      },
+      "witness": {
+        "Score": -303,
+        "BaseRoot": -303,
+        "Reason": "static",
+        "FEN": "rn2kr2/1Q4pp/2pq4/p3b3/7P/2N5/PP2P3/R3K2R b q - 0 21",
+        "Features": {
+          "Values": [
+            2,
+            -5,
+            -3,
+            -1,
+            -1,
+            -3,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "Phase": 19
+        },
+        "Path": [
+          "b1c3",
+          "f4e5",
+          "d4b6",
+          "e6d6",
+          "b6b7"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "e5g3",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "rn2kr2/1Q4pp/2pq4/p7/7P/2N3b1/PP2P3/R3K2R w q - 1 22"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-014-ply37",
+      "root_turn": "b",
+      "choice": "e6b3",
+      "reference": {
+        "cp": -984,
+        "mate": null
+      },
+      "witness": {
+        "Score": -717,
+        "BaseRoot": -717,
+        "Reason": "static",
+        "FEN": "rn2kr2/1Q4pp/2pP4/p3b3/7P/1P6/1P2P3/RN2K2R b q - 0 21",
+        "Features": {
+          "Values": [
+            1,
+            -7,
+            -2,
+            12,
+            2,
+            3,
+            1,
+            26,
+            -15,
+            -1,
+            -1,
+            -1
+          ],
+          "Phase": 15
+        },
+        "Path": [
+          "e6b3",
+          "a2b3",
+          "f4e5",
+          "b6b7"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "b7e7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "rn2kr2/4Q1pp/2pP4/p3b3/7P/1P6/1P2P3/RN2K2R b q - 2 22"
+        }
+      ]
+    },
+    {
+      "id": "sharp-014-ply37",
+      "root_turn": "b",
+      "choice": "f4g3",
+      "reference": {
+        "cp": 771,
+        "mate": null
+      },
+      "witness": {
+        "Score": 534,
+        "BaseRoot": 534,
+        "Reason": "static",
+        "FEN": "rn2kr2/1Q4pp/2pP4/p3P3/7P/6b1/PPK1P3/RN5q b q - 0 22",
+        "Features": {
+          "Values": [
+            1,
+            -6,
+            -9,
+            1,
+            1,
+            3,
+            0,
+            42,
+            -16,
+            1,
+            -1,
+            0
+          ],
+          "Phase": 17
+        },
+        "Path": [
+          "f4g3",
+          "e1d1",
+          "e6d5",
+          "d1c2",
+          "d5h1",
+          "b6b7"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "b7e7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "rn2kr2/4Q1pp/2pP4/p3P3/7P/6b1/PPK1P3/RN5q b q - 2 23"
+        }
+      ]
+    },
+    {
+      "id": "sharp-014-ply37",
+      "root_turn": "b",
+      "choice": "f8g8",
+      "reference": {
+        "cp": 120,
+        "mate": null
+      },
+      "witness": {
+        "Score": 59,
+        "BaseRoot": 59,
+        "Reason": "static",
+        "FEN": "rn2k1r1/1Q4pp/2pP4/p2qP3/5b1P/8/PP2P3/RN2K2R w q - 1 21",
+        "Features": {
+          "Values": [
+            1,
+            -7,
+            0,
+            0,
+            1,
+            0,
+            1,
+            42,
+            -21,
+            1,
+            -1,
+            0
+          ],
+          "Phase": 19
+        },
+        "Path": [
+          "f8g8",
+          "b6b7",
+          "e6d5"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "b7e7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "rn2k1r1/4Q1pp/2pP4/p2qP3/5b1P/8/PP2P3/RN2K2R b q - 2 21"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-014-ply49",
+      "root_turn": "b",
+      "choice": "d6e6",
+      "reference": {
+        "cp": 1004,
+        "mate": null
+      },
+      "witness": {
+        "Score": 539,
+        "BaseRoot": 539,
+        "Reason": "static",
+        "FEN": "1r2k3/3nr1pp/4q3/p7/7P/1Pb5/P2QP3/R3K2R w - - 0 27",
+        "Features": {
+          "Values": [
+            -5,
+            -7,
+            -1,
+            -4,
+            -1,
+            -3,
+            1,
+            1,
+            0,
+            -1,
+            0,
+            0
+          ],
+          "Phase": 18
+        },
+        "Path": [
+          "d6e6",
+          "b1c3",
+          "e5c3"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "e6e2",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "1r2k3/3nr1pp/8/p7/7P/1Pb5/P2Qq3/R3K2R w - - 0 28"
+        }
+      ]
+    },
+    {
+      "id": "sharp-017-ply28",
+      "root_turn": "w",
+      "choice": "h1h2",
+      "reference": {
+        "cp": -42,
+        "mate": null
+      },
+      "witness": {
+        "Score": -447,
+        "BaseRoot": -447,
+        "Reason": "static",
+        "FEN": "r1b2rk1/1p1pb2p/1qn1p3/p2p3Q/3P1p2/P4N2/1PP2PPR/2KR1B2 b - - 0 16",
+        "Features": {
+          "Values": [
+            2,
+            -2,
+            -2,
+            2,
+            1,
+            0,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "Phase": 21
+        },
+        "Path": [
+          "h1h2",
+          "g6h5",
+          "h6h5"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "h5h7",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r1b2rk1/1p1pb2Q/1qn1p3/p2p4/3P1p2/P4N2/1PP2PPR/2KR1B2 b - - 0 17"
+        }
+      ]
+    },
+    {
+      "id": "sharp-017-ply29",
+      "root_turn": "b",
+      "choice": "b6b2",
+      "reference": {
+        "cp": -1353,
+        "mate": null
+      },
+      "witness": {
+        "Score": -566,
+        "BaseRoot": -566,
+        "Reason": "static",
+        "FEN": "r1b4k/1p1pb2P/2n1p2Q/p2p1r2/3P1p2/P4N2/1KP2PP1/3R1B1R w - - 1 18",
+        "Features": {
+          "Values": [
+            3,
+            -4,
+            3,
+            10,
+            2,
+            3,
+            1,
+            36,
+            -24,
+            -1,
+            1,
+            -1
+          ],
+          "Phase": 17
+        },
+        "Path": [
+          "b6b2",
+          "c1b2",
+          "f8f5",
+          "g6h7",
+          "g8h8"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-017-ply29",
+      "root_turn": "b",
+      "choice": "f8e8",
+      "reference": {
+        "cp": null,
+        "mate": -2
+      },
+      "witness": {
+        "Score": 122,
+        "BaseRoot": 122,
+        "Reason": "static",
+        "FEN": "r1b1r2k/1p1pb2P/1qn1p3/p2p4/3P1Q2/P4N2/1PP2PP1/2KR1B1R b - - 0 17",
+        "Features": {
+          "Values": [
+            3,
+            -3,
+            4,
+            8,
+            1,
+            3,
+            2,
+            37,
+            -28,
+            0,
+            1,
+            -1
+          ],
+          "Phase": 21
+        },
+        "Path": [
+          "f8e8",
+          "g6h7",
+          "g8h8",
+          "h6f4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-017-ply29",
+      "root_turn": "b",
+      "choice": "f8f6",
+      "reference": {
+        "cp": null,
+        "mate": -2
+      },
+      "witness": {
+        "Score": 234,
+        "BaseRoot": 234,
+        "Reason": "static",
+        "FEN": "r1b4k/1p1pb2P/1qn1pr1Q/p2p4/3P1p2/P4N2/1PP2PP1/2KR1B1R w - - 1 17",
+        "Features": {
+          "Values": [
+            3,
+            0,
+            0,
+            3,
+            2,
+            3,
+            2,
+            36,
+            -28,
+            0,
+            1,
+            0
+          ],
+          "Phase": 21
+        },
+        "Path": [
+          "f8f6",
+          "g6h7",
+          "g8h8"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-017-ply29",
+      "root_turn": "b",
+      "choice": "f8f7",
+      "reference": {
+        "cp": null,
+        "mate": -8
+      },
+      "witness": {
+        "Score": -164,
+        "BaseRoot": -164,
+        "Reason": "static",
+        "FEN": "r1b3k1/1p1pb2p/1qn1p3/p2p4/3P1Q2/P4N2/1PP2PP1/2KR1B1R w - - 1 18",
+        "Features": {
+          "Values": [
+            3,
+            -3,
+            7,
+            8,
+            2,
+            3,
+            1,
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          "Phase": 19
+        },
+        "Path": [
+          "f8f7",
+          "g6f7",
+          "g8f7",
+          "h6f4",
+          "f7g8"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-019-ply12",
+      "root_turn": "w",
+      "choice": "g2g3",
+      "reference": {
+        "cp": 1,
+        "mate": null
+      },
+      "witness": {
+        "Score": -47,
+        "BaseRoot": -47,
+        "Reason": "static",
+        "FEN": "r1bq1rk1/pp1pbppp/5n2/2p1p3/2PnP3/2NP2PP/PP2NP2/R1BQKB1R b KQ - 2 8",
+        "Features": {
+          "Values": [
+            -2,
+            3,
+            1,
+            0,
+            -1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "Phase": 24
+        },
+        "Path": [
+          "g2g3",
+          "c6d4",
+          "g1e2"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "d4f3",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r1bq1rk1/pp1pbppp/5n2/2p1p3/2P1P3/2NP1nPP/PP2NP2/R1BQKB1R w KQ - 3 9"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-019-ply13",
+      "root_turn": "b",
+      "choice": "f6e8",
+      "reference": {
+        "cp": -7,
+        "mate": null
+      },
+      "witness": {
+        "Score": 39,
+        "BaseRoot": 39,
+        "Reason": "static",
+        "FEN": "r1bqnrk1/pp1pbppp/8/2p1p3/2PnP3/2NP2PP/PP2NP2/R1BQKB1R w KQ - 3 9",
+        "Features": {
+          "Values": [
+            -3,
+            1,
+            2,
+            1,
+            -1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            -1
+          ],
+          "Phase": 24
+        },
+        "Path": [
+          "f6e8",
+          "g1e2",
+          "c6d4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "d4f3",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r1bqnrk1/pp1pbppp/8/2p1p3/2P1P3/2NP1nPP/PP2NP2/R1BQKB1R w KQ - 5 10"
+        }
+      ]
+    },
+    {
+      "id": "sharp-019-ply48",
+      "root_turn": "w",
+      "choice": "d1f1",
+      "reference": {
+        "cp": 588,
+        "mate": null
+      },
+      "witness": {
+        "Score": 90,
+        "BaseRoot": 90,
+        "Reason": "static",
+        "FEN": "3qnr1k/1p4pp/r2p4/p1pNpRb1/P1P5/1P1P3P/3BQ1BK/5R2 b - - 0 26",
+        "Features": {
+          "Values": [
+            3,
+            2,
+            6,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            -1,
+            0,
+            1
+          ],
+          "Phase": 21
+        },
+        "Path": [
+          "d1f1",
+          "e7g5",
+          "f2f5"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "f5f8",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "3qnR1k/1p4pp/r2p4/p1pNp1b1/P1P5/1P1P3P/3BQ1BK/5R2 b - - 0 27"
+        }
+      ]
+    },
+    {
+      "id": "sharp-020-ply28",
+      "root_turn": "w",
+      "choice": "b3c4",
+      "reference": {
+        "cp": -1010,
+        "mate": null
+      },
+      "witness": {
+        "Score": -554,
+        "BaseRoot": -554,
+        "Reason": "static",
+        "FEN": "r3k2r/5ppp/pp1bp3/3b4/3P4/q1P1PN1P/3NP1P1/1KR2B1R w kq - 0 18",
+        "Features": {
+          "Values": [
+            9,
+            -12,
+            -1,
+            -8,
+            -5,
+            -4,
+            -1,
+            -4,
+            0,
+            0,
+            -1,
+            -2
+          ],
+          "Phase": 17
+        },
+        "Path": [
+          "b3c4",
+          "d7a4",
+          "d1c1",
+          "a4a3",
+          "c4d5",
+          "b7d5"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "a3a2",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r3k2r/5ppp/pp1bp3/3b4/3P4/2P1PN1P/q2NP1P1/1KR2B1R w kq - 2 19"
+        }
+      ]
+    },
+    {
+      "id": "sharp-020-ply29",
+      "root_turn": "b",
+      "choice": "d5c4",
+      "reference": {
+        "cp": 990,
+        "mate": null
+      },
+      "witness": {
+        "Score": 543,
+        "BaseRoot": 543,
+        "Reason": "static",
+        "FEN": "r3k2r/1b3ppp/pp2p3/1q6/3P4/b1P1PN1P/1N2P1P1/1K1R1B1R w kq - 0 18",
+        "Features": {
+          "Values": [
+            10,
+            -8,
+            0,
+            -12,
+            -2,
+            -4,
+            -1,
+            -4,
+            0,
+            0,
+            -1,
+            0
+          ],
+          "Phase": 17
+        },
+        "Path": [
+          "d5c4",
+          "d2c4",
+          "d7b5",
+          "c4b2",
+          "d6a3"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "b5b2",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r3k2r/1b3ppp/pp2p3/8/3P4/b1P1PN1P/1q2P1P1/1K1R1B1R w kq - 0 19"
+        }
+      ]
+    },
+    {
+      "id": "sharp-020-ply29",
+      "root_turn": "b",
+      "choice": "d7a4",
+      "reference": {
+        "cp": 1066,
+        "mate": null
+      },
+      "witness": {
+        "Score": 554,
+        "BaseRoot": 554,
+        "Reason": "static",
+        "FEN": "r3k2r/5ppp/pp1bp3/3b4/3P4/q1P1PN1P/3NP1P1/1KR2B1R w kq - 0 18",
+        "Features": {
+          "Values": [
+            9,
+            -12,
+            -1,
+            -8,
+            -5,
+            -4,
+            -1,
+            -4,
+            0,
+            0,
+            -1,
+            -2
+          ],
+          "Phase": 17
+        },
+        "Path": [
+          "d7a4",
+          "d1c1",
+          "a4a3",
+          "c4d5",
+          "b7d5"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "a3a2",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r3k2r/5ppp/pp1bp3/3b4/3P4/2P1PN1P/q2NP1P1/1KR2B1R w kq - 2 19"
+        }
+      ]
+    },
+    {
+      "id": "sharp-023-ply48",
+      "root_turn": "w",
+      "choice": "c3c4",
+      "reference": {
+        "cp": null,
+        "mate": 6
+      },
+      "witness": {
+        "Score": 35,
+        "BaseRoot": 35,
+        "Reason": "static",
+        "FEN": "1r3k1r/4R1pp/2p1Qn1n/1pB5/p1P5/1q1B3P/1P3PP1/3R2K1 w - - 3 27",
+        "Features": {
+          "Values": [
+            -8,
+            14,
+            6,
+            6,
+            7,
+            9,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "c3c4",
+          "a2b3",
+          "e2e6",
+          "g8f8"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "e7e8",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "1r2Rk1r/6pp/2p1Qn1n/1pB5/p1P5/1q1B3P/1P3PP1/3R2K1 b - - 4 27"
+        },
+        {
+          "move": "e7d7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "1r3k1r/3R2pp/2p1Qn1n/1pB5/p1P5/1q1B3P/1P3PP1/3R2K1 b - - 4 27"
+        },
+        {
+          "move": "e7c7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "1r3k1r/2R3pp/2p1Qn1n/1pB5/p1P5/1q1B3P/1P3PP1/3R2K1 b - - 4 27"
+        },
+        {
+          "move": "e7b7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "1r3k1r/1R4pp/2p1Qn1n/1pB5/p1P5/1q1B3P/1P3PP1/3R2K1 b - - 4 27"
+        },
+        {
+          "move": "e7a7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "1r3k1r/R5pp/2p1Qn1n/1pB5/p1P5/1q1B3P/1P3PP1/3R2K1 b - - 4 27"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-023-ply49",
+      "root_turn": "b",
+      "choice": "g8f8",
+      "reference": {
+        "cp": null,
+        "mate": -2
+      },
+      "witness": {
+        "Score": -1023,
+        "BaseRoot": -1023,
+        "Reason": "static",
+        "FEN": "7R/5kpp/2p2n1n/1pB5/p1P5/3B3P/qP2QPP1/3R2K1 b - - 0 28",
+        "Features": {
+          "Values": [
+            -7,
+            14,
+            14,
+            8,
+            9,
+            16,
+            3,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "Phase": 16
+        },
+        "Path": [
+          "g8f8",
+          "e7b7",
+          "f8g8",
+          "b7b8",
+          "g8f7",
+          "b8h8"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "h8f8",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "5R2/5kpp/2p2n1n/1pB5/p1P5/3B3P/qP2QPP1/3R2K1 b - - 2 29"
+        },
+        {
+          "move": "e2e7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "7R/4Qkpp/2p2n1n/1pB5/p1P5/3B3P/qP3PP1/3R2K1 b - - 2 29"
+        }
+      ]
+    },
+    {
+      "id": "sharp-029-ply20",
+      "root_turn": "w",
+      "choice": "f7b3",
+      "reference": {
+        "cp": 458,
+        "mate": null
+      },
+      "witness": {
+        "Score": -23,
+        "BaseRoot": -23,
+        "Reason": "static",
+        "FEN": "r1b2k1r/pppp2p1/3b3p/7Q/4qp2/1B6/PP4PP/RNB2R1K w - - 0 14",
+        "Features": {
+          "Values": [
+            3,
+            5,
+            3,
+            -5,
+            3,
+            3,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "Phase": 21
+        },
+        "Path": [
+          "f7b3",
+          "c6d4",
+          "c3d4",
+          "f6d4",
+          "g1h1",
+          "d4e4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "h5f7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r1b2k1r/pppp1Qp1/3b3p/8/4qp2/1B6/PP4PP/RNB2R1K b - - 1 14"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-029-ply37",
+      "root_turn": "b",
+      "choice": "g7g8",
+      "reference": {
+        "cp": null,
+        "mate": -5
+      },
+      "witness": {
+        "Score": -906,
+        "BaseRoot": -906,
+        "Reason": "static",
+        "FEN": "r1b3kr/ppR5/4p2p/6p1/8/2P5/PP1Q2PP/RN4K1 b - - 0 22",
+        "Features": {
+          "Values": [
+            1,
+            -1,
+            7,
+            12,
+            3,
+            1,
+            1,
+            -4,
+            0,
+            1,
+            0,
+            0
+          ],
+          "Phase": 14
+        },
+        "Path": [
+          "g7g8",
+          "f7e7",
+          "e5e6",
+          "b3e6",
+          "d7e6",
+          "e7c7"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "d2d8",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r1bQ2kr/ppR5/4p2p/6p1/8/2P5/PP4PP/RN4K1 b - - 2 23"
+        }
+      ]
+    },
+    {
+      "id": "sharp-032-ply29",
+      "root_turn": "b",
+      "choice": "d8h4",
+      "reference": {
+        "cp": 286,
+        "mate": null
+      },
+      "witness": {
+        "Score": -214,
+        "BaseRoot": -214,
+        "Reason": "static",
+        "FEN": "r4r1k/2p3pp/b7/p2QPp2/4pPnq/2P1P3/PP1N2PP/R1B2RK1 w - - 1 17",
+        "Features": {
+          "Values": [
+            -1,
+            -7,
+            -7,
+            7,
+            -4,
+            -8,
+            0,
+            16,
+            -4,
+            2,
+            -1,
+            0
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "d8h4",
+          "c6d5",
+          "g8h8"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "h4h2",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r4r1k/2p3pp/b7/p2QPp2/4pPn1/2P1P3/PP1N2Pq/R1B2RK1 w - - 0 18"
+        }
+      ]
+    },
+    {
+      "id": "sharp-032-ply36",
+      "root_turn": "w",
+      "choice": "g1h1",
+      "reference": {
+        "cp": null,
+        "mate": -2
+      },
+      "witness": {
+        "Score": -317,
+        "BaseRoot": -317,
+        "Reason": "static",
+        "FEN": "3r1r1k/2p3pp/8/Q3Pp2/4pP2/2P1n1PP/PP1N1q2/R1B2b1K w - - 0 21",
+        "Features": {
+          "Values": [
+            -1,
+            -7,
+            -10,
+            2,
+            -5,
+            -9,
+            0,
+            1,
+            0,
+            1,
+            0,
+            1
+          ],
+          "Phase": 18
+        },
+        "Path": [
+          "g1h1",
+          "h4f2",
+          "g2g3",
+          "g4e3"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "f2g2",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "3r1r1k/2p3pp/8/Q3Pp2/4pP2/2P1n1PP/PP1N2q1/R1B2b1K w - - 2 22"
+        }
+      ]
+    },
+    {
+      "id": "sharp-034-ply37",
+      "root_turn": "b",
+      "choice": "a8d8",
+      "reference": {
+        "cp": 846,
+        "mate": null
+      },
+      "witness": {
+        "Score": -3,
+        "BaseRoot": -3,
+        "Reason": "static",
+        "FEN": "3rr1k1/1pp2ppp/p5b1/8/2BPn1P1/NPQ2PqP/P7/R4K1R w - - 1 21",
+        "Features": {
+          "Values": [
+            -4,
+            4,
+            -4,
+            -1,
+            -4,
+            -3,
+            -2,
+            0,
+            0,
+            -1,
+            0,
+            0
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "a8d8",
+          "d2d4",
+          "f6e4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "g3f2",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "3rr1k1/1pp2ppp/p5b1/8/2BPn1P1/NPQ2P1P/P4q2/R4K1R w - - 3 22"
+        }
+      ]
+    },
+    {
+      "id": "sharp-034-ply37",
+      "root_turn": "b",
+      "choice": "h7h6",
+      "reference": {
+        "cp": 700,
+        "mate": null
+      },
+      "witness": {
+        "Score": -3,
+        "BaseRoot": -3,
+        "Reason": "static",
+        "FEN": "r3r1k1/1pp2pp1/p5bp/8/2BPn1P1/NPQ2PqP/P7/R4K1R w - - 1 21",
+        "Features": {
+          "Values": [
+            -4,
+            3,
+            -4,
+            -1,
+            -4,
+            -3,
+            -2,
+            0,
+            0,
+            -1,
+            0,
+            0
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "h7h6",
+          "d2d4",
+          "f6e4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "g3f2",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r3r1k1/1pp2pp1/p5bp/8/2BPn1P1/NPQ2P1P/P4q2/R4K1R w - - 3 22"
+        }
+      ]
+    },
+    {
+      "id": "sharp-034-ply48",
+      "root_turn": "w",
+      "choice": "c3e5",
+      "reference": {
+        "cp": null,
+        "mate": -3
+      },
+      "witness": {
+        "Score": -1363,
+        "BaseRoot": -1363,
+        "Reason": "static",
+        "FEN": "6k1/2p2ppp/p5b1/1pKnr3/6P1/NP3P1P/P2q4/R7 w - - 0 28",
+        "Features": {
+          "Values": [
+            -5,
+            -3,
+            0,
+            -19,
+            -10,
+            -16,
+            -3,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "Phase": 11
+        },
+        "Path": [
+          "c3e5",
+          "f6d5",
+          "e3d4",
+          "g2d2",
+          "d4c5",
+          "e8e5"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "d5e7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "6k1/2p1nppp/p5b1/1pK1r3/6P1/NP3P1P/P2q4/R7 w - - 2 29"
+        },
+        {
+          "move": "d5b4",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "6k1/2p2ppp/p5b1/1pK1r3/1n4P1/NP3P1P/P2q4/R7 w - - 2 29"
+        }
+      ]
+    },
+    {
+      "id": "sharp-034-ply48",
+      "root_turn": "w",
+      "choice": "e3f4",
+      "reference": {
+        "cp": null,
+        "mate": -3
+      },
+      "witness": {
+        "Score": -1022,
+        "BaseRoot": -1022,
+        "Reason": "static",
+        "FEN": "4r1k1/2p2ppp/p5b1/1p4K1/6P1/NPP2q1P/P7/R7 w - - 0 28",
+        "Features": {
+          "Values": [
+            2,
+            -4,
+            -5,
+            -18,
+            -9,
+            -9,
+            -3,
+            0,
+            0,
+            0,
+            0,
+            -1
+          ],
+          "Phase": 10
+        },
+        "Path": [
+          "e3f4",
+          "f6d5",
+          "f4g5",
+          "d5c3",
+          "d2c3",
+          "g2f3"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "f3f6",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "4r1k1/2p2ppp/p4qb1/1p4K1/6P1/NPP4P/P7/R7 w - - 2 29"
+        }
+      ]
+    },
+    {
+      "id": "sharp-034-ply49",
+      "root_turn": "b",
+      "choice": "g2g3",
+      "reference": {
+        "cp": 1144,
+        "mate": null
+      },
+      "witness": {
+        "Score": 557,
+        "BaseRoot": 557,
+        "Reason": "static",
+        "FEN": "4r1k1/2p2ppp/p4nb1/1q6/3K2P1/1PQ2P1P/P2P4/R7 b - - 1 28",
+        "Features": {
+          "Values": [
+            -2,
+            -3,
+            -3,
+            -3,
+            -12,
+            -16,
+            -3,
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "Phase": 14
+        },
+        "Path": [
+          "g2g3",
+          "a3b5",
+          "g3e5",
+          "d4c4",
+          "e5b5",
+          "c4d4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "b5d5",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "4r1k1/2p2ppp/p4nb1/3q4/3K2P1/1PQ2P1P/P2P4/R7 w - - 2 29"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-034-ply49",
+      "root_turn": "b",
+      "choice": "g2h2",
+      "reference": {
+        "cp": 1197,
+        "mate": null
+      },
+      "witness": {
+        "Score": 557,
+        "BaseRoot": 557,
+        "Reason": "static",
+        "FEN": "4r1k1/2p2ppp/p4nb1/1q6/3K2P1/1PQ2P1P/P2P4/R7 b - - 1 28",
+        "Features": {
+          "Values": [
+            -2,
+            -3,
+            -3,
+            -3,
+            -12,
+            -16,
+            -3,
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "Phase": 14
+        },
+        "Path": [
+          "g2h2",
+          "a3b5",
+          "h2e5",
+          "d4c4",
+          "e5b5",
+          "c4d4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "b5d5",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "4r1k1/2p2ppp/p4nb1/3q4/3K2P1/1PQ2P1P/P2P4/R7 w - - 2 29"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-035-ply63",
+      "root_turn": "b",
+      "choice": "c8a7",
+      "reference": {
+        "cp": null,
+        "mate": -4
+      },
+      "witness": {
+        "Score": -1712,
+        "BaseRoot": -1712,
+        "Reason": "static",
+        "FEN": "5Q2/R5pr/4kn1p/2Pp1p2/1P6/6P1/5B1P/3R1BK1 b - - 0 34",
+        "Features": {
+          "Values": [
+            -6,
+            9,
+            20,
+            11,
+            9,
+            16,
+            0,
+            16,
+            -9,
+            1,
+            0,
+            0
+          ],
+          "Phase": 13
+        },
+        "Path": [
+          "c8a7",
+          "a1a7",
+          "d7e6",
+          "a8f8"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "f8e7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "8/R3Q1pr/4kn1p/2Pp1p2/1P6/6P1/5B1P/3R1BK1 b - - 2 35"
+        },
+        {
+          "move": "f8d6",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "8/R5pr/3Qkn1p/2Pp1p2/1P6/6P1/5B1P/3R1BK1 b - - 2 35"
+        },
+        {
+          "move": "a7e7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "5Q2/4R1pr/4kn1p/2Pp1p2/1P6/6P1/5B1P/3R1BK1 b - - 2 35"
+        }
+      ]
+    },
+    {
+      "id": "sharp-035-ply63",
+      "root_turn": "b",
+      "choice": "d7c7",
+      "reference": {
+        "cp": -1910,
+        "mate": null
+      },
+      "witness": {
+        "Score": -1357,
+        "BaseRoot": -1357,
+        "Reason": "static",
+        "FEN": "5Q2/2k3pr/B2n1n1p/2Pp1p2/1P6/6P1/5B1P/R2R2K1 b - - 0 34",
+        "Features": {
+          "Values": [
+            -13,
+            9,
+            13,
+            11,
+            8,
+            9,
+            1,
+            16,
+            -11,
+            1,
+            0,
+            0
+          ],
+          "Phase": 14
+        },
+        "Path": [
+          "d7c7",
+          "f1a6",
+          "c8d6",
+          "a8f8"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "f8d6",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "8/2k3pr/B2Q1n1p/2Pp1p2/1P6/6P1/5B1P/R2R2K1 b - - 0 35"
+        }
+      ]
+    },
+    {
+      "id": "sharp-038-ply29",
+      "root_turn": "b",
+      "choice": "c4d5",
+      "reference": {
+        "cp": 659,
+        "mate": null
+      },
+      "witness": {
+        "Score": 16,
+        "BaseRoot": 16,
+        "Reason": "static",
+        "FEN": "r2k1b1r/pbp2p2/1p2p2p/1QpqP3/3N2p1/4P3/PP1B1PPP/R4RK1 w - - 4 17",
+        "Features": {
+          "Values": [
+            4,
+            -2,
+            4,
+            2,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "c4d5",
+          "e2b5",
+          "e8d8"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "d5g2",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r2k1b1r/pbp2p2/1p2p2p/1Qp1P3/3N2p1/4P3/PP1B1PqP/R4RK1 w - - 0 18"
+        }
+      ]
+    },
+    {
+      "id": "sharp-038-ply36",
+      "root_turn": "w",
+      "choice": "c3b4",
+      "reference": {
+        "cp": -1567,
+        "mate": null
+      },
+      "witness": {
+        "Score": -1397,
+        "BaseRoot": -1397,
+        "Reason": "static",
+        "FEN": "2r1k2r/pbp2p2/1p2p3/3qP3/1b1P2p1/6P1/PP3P1P/R4RK1 w k - 0 21",
+        "Features": {
+          "Values": [
+            0,
+            -8,
+            -2,
+            -12,
+            -3,
+            -4,
+            1,
+            0,
+            0,
+            0,
+            0,
+            -1
+          ],
+          "Phase": 14
+        },
+        "Path": [
+          "c3b4",
+          "h5g4",
+          "g2g3",
+          "f8b4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "d5g2",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "2r1k2r/pbp2p2/1p2p3/4P3/1b1P2p1/6P1/PP3PqP/R4RK1 w k - 2 22"
+        },
+        {
+          "move": "d5h1",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "2r1k2r/pbp2p2/1p2p3/4P3/1b1P2p1/6P1/PP3P1P/R4RKq w k - 2 22"
+        }
+      ]
+    },
+    {
+      "id": "sharp-039-ply36",
+      "root_turn": "w",
+      "choice": "g4h6",
+      "reference": {
+        "cp": null,
+        "mate": 5
+      },
+      "witness": {
+        "Score": 398,
+        "BaseRoot": 398,
+        "Reason": "static",
+        "FEN": "r1b2r1k/pp1p1p2/5N1N/q4p1Q/4Pb2/P6P/1PP2P2/R2K1BR1 b - - 2 20",
+        "Features": {
+          "Values": [
+            8,
+            -4,
+            5,
+            -4,
+            1,
+            5,
+            1,
+            4,
+            0,
+            2,
+            1,
+            2
+          ],
+          "Phase": 21
+        },
+        "Path": [
+          "g4h6",
+          "d8a5",
+          "e1d1"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "a5d2",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r1b2r1k/pp1p1p2/5N1N/5p1Q/4Pb2/P6P/1PPq1P2/R2K1BR1 w - - 3 21"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "h6f7",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r1b2r1k/pp1p1N2/5N2/q4p1Q/4Pb2/P6P/1PP2P2/R2K1BR1 b - - 0 21"
+        }
+      ]
+    },
+    {
+      "id": "sharp-039-ply37",
+      "root_turn": "b",
+      "choice": "d8a5",
+      "reference": {
+        "cp": null,
+        "mate": -4
+      },
+      "witness": {
+        "Score": -714,
+        "BaseRoot": -714,
+        "Reason": "static",
+        "FEN": "r1b2r1k/pp1p1p2/5N1N/q4p1Q/1P2P3/P6P/2PK1P2/R4BR1 b - - 0 21",
+        "Features": {
+          "Values": [
+            8,
+            5,
+            7,
+            -1,
+            5,
+            9,
+            1,
+            4,
+            0,
+            2,
+            1,
+            1
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "d8a5",
+          "b2b4",
+          "f4d2",
+          "e1d2"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "h6g8",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r1b2rNk/pp1p1p2/5N2/q4p1Q/1P2P3/P6P/2PK1P2/R4BR1 b - - 2 22"
+        },
+        {
+          "move": "h6f7",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r1b2r1k/pp1p1N2/5N2/q4p1Q/1P2P3/P6P/2PK1P2/R4BR1 b - - 0 22"
+        },
+        {
+          "move": "h6f5",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r1b2r1k/pp1p1p2/5N2/q4N1Q/1P2P3/P6P/2PK1P2/R4BR1 b - - 0 22"
+        }
+      ]
+    },
+    {
+      "id": "sharp-044-ply62",
+      "root_turn": "w",
+      "choice": "d4d5",
+      "reference": {
+        "cp": -962,
+        "mate": null
+      },
+      "witness": {
+        "Score": -534,
+        "BaseRoot": -534,
+        "Reason": "static",
+        "FEN": "3q1rk1/p4rbp/2R5/3p2P1/8/4Q1Pb/P2R3P/6K1 b - - 0 33",
+        "Features": {
+          "Values": [
+            0,
+            -13,
+            11,
+            5,
+            -4,
+            -4,
+            1,
+            -9,
+            1,
+            2,
+            -1,
+            -1
+          ],
+          "Phase": 18
+        },
+        "Path": [
+          "d4d5",
+          "e6d5",
+          "f4g5"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "f7f1",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "3q1rk1/p5bp/2R5/3p2P1/8/4Q1Pb/P2R3P/5rK1 w - - 1 34"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-046-ply49",
+      "root_turn": "b",
+      "choice": "d8e8",
+      "reference": {
+        "cp": 705,
+        "mate": null
+      },
+      "witness": {
+        "Score": -105,
+        "BaseRoot": -105,
+        "Reason": "static",
+        "FEN": "2k1r2r/pp1bqp2/3p4/2pP4/4PKp1/P1P1P3/1PQ4P/R1B3R1 b - - 1 27",
+        "Features": {
+          "Values": [
+            0,
+            -1,
+            -2,
+            2,
+            -7,
+            -9,
+            -2,
+            0,
+            0,
+            -1,
+            -1,
+            -1
+          ],
+          "Phase": 18
+        },
+        "Path": [
+          "d8e8",
+          "e1g1",
+          "g5g4",
+          "f3f4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "e7e5",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "2k1r2r/pp1b1p2/3p4/2pPq3/4PKp1/P1P1P3/1PQ4P/R1B3R1 w - - 2 28"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-047-ply29",
+      "root_turn": "b",
+      "choice": "g8h8",
+      "reference": {
+        "cp": -649,
+        "mate": null
+      },
+      "witness": {
+        "Score": -180,
+        "BaseRoot": -180,
+        "Reason": "static",
+        "FEN": "r4rk1/p3bpp1/B1N5/7Q/4n3/1P5P/P2q1PP1/R4RK1 b - - 0 20",
+        "Features": {
+          "Values": [
+            2,
+            -2,
+            0,
+            -5,
+            1,
+            -3,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "g8h8",
+          "e2a6",
+          "f6e4",
+          "d4e5",
+          "d6e5",
+          "f3e5",
+          "d8d2",
+          "d1h5",
+          "h8g8",
+          "e5c6"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "c6e7",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r4rk1/p3Npp1/B7/7Q/4n3/1P5P/P2q1PP1/R4RK1 b - - 0 21"
+        }
+      ]
+    },
+    {
+      "id": "sharp-055-ply37",
+      "root_turn": "b",
+      "choice": "g7g8",
+      "reference": {
+        "cp": -973,
+        "mate": null
+      },
+      "witness": {
+        "Score": -219,
+        "BaseRoot": -219,
+        "Reason": "static",
+        "FEN": "5bkr/rp1Q3p/6p1/p2nBp2/1P1P3N/P2qP1P1/5P1P/2R1K2R b K - 0 22",
+        "Features": {
+          "Values": [
+            -3,
+            3,
+            9,
+            1,
+            1,
+            3,
+            0,
+            9,
+            -1,
+            0,
+            0,
+            -1
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "g7g8",
+          "f3h4",
+          "e4d3",
+          "g2d5",
+          "f6d5",
+          "c7d7"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "d7e6",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "5bkr/rp5p/4Q1p1/p2nBp2/1P1P3N/P2qP1P1/5P1P/2R1K2R b K - 2 23"
+        },
+        {
+          "move": "d7d5",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "5bkr/rp5p/6p1/p2QBp2/1P1P3N/P2qP1P1/5P1P/2R1K2R b K - 0 23"
+        }
+      ]
+    },
+    {
+      "id": "sharp-055-ply48",
+      "root_turn": "w",
+      "choice": "e5f6",
+      "reference": {
+        "cp": null,
+        "mate": 3
+      },
+      "witness": {
+        "Score": 899,
+        "BaseRoot": 899,
+        "Reason": "static",
+        "FEN": "4k2r/rp5p/3Q1Pp1/3B1p2/1P3B2/3qP1P1/5P1P/2R2RK1 b - - 0 27",
+        "Features": {
+          "Values": [
+            0,
+            13,
+            4,
+            -4,
+            5,
+            8,
+            3,
+            25,
+            -15,
+            0,
+            -1,
+            1
+          ],
+          "Phase": 18
+        },
+        "Path": [
+          "e5f6",
+          "g7f7",
+          "g2d5",
+          "f7e8",
+          "a3b4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "d6e7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "4k2r/rp2Q2p/5Pp1/3B1p2/1P3B2/3qP1P1/5P1P/2R2RK1 b - - 2 28"
+        },
+        {
+          "move": "c1c8",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "2R1k2r/rp5p/3Q1Pp1/3B1p2/1P3B2/3qP1P1/5P1P/5RK1 b - - 2 28"
+        },
+        {
+          "move": "f6f7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "4k2r/rp3P1p/3Q2p1/3B1p2/1P3B2/3qP1P1/5P1P/2R2RK1 b - - 0 28"
+        }
+      ]
+    },
+    {
+      "id": "sharp-059-ply62",
+      "root_turn": "w",
+      "choice": "f1d1",
+      "reference": {
+        "cp": 731,
+        "mate": null
+      },
+      "witness": {
+        "Score": 308,
+        "BaseRoot": 308,
+        "Reason": "static",
+        "FEN": "1rk5/1p1R4/4p2p/5pp1/B1N1nP2/P5P1/1P5P/6K1 w - - 1 35",
+        "Features": {
+          "Values": [
+            1,
+            4,
+            11,
+            0,
+            3,
+            3,
+            1,
+            0,
+            0,
+            1,
+            0,
+            -1
+          ],
+          "Phase": 7
+        },
+        "Path": [
+          "f1d1",
+          "g6g5",
+          "b6d7",
+          "c8d7",
+          "d1d7",
+          "c7c8"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "c4b6",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "1rk5/1p1R4/1N2p2p/5pp1/B3nP2/P5P1/1P5P/6K1 b - - 2 35"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-060-ply28",
+      "root_turn": "w",
+      "choice": "a2a3",
+      "reference": {
+        "cp": -504,
+        "mate": null
+      },
+      "witness": {
+        "Score": -98,
+        "BaseRoot": -98,
+        "Reason": "static",
+        "FEN": "r3k2r/pp3ppp/2b1pq2/8/2Bb4/PP6/3N1PPP/1R1Q1K1R w kq - 0 17",
+        "Features": {
+          "Values": [
+            2,
+            -9,
+            -1,
+            -3,
+            -3,
+            -9,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "a2a3",
+          "b4c3",
+          "a1b1",
+          "c3d4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "f6f2",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r3k2r/pp3ppp/2b1p3/8/2Bb4/PP6/3N1qPP/1R1Q1K1R w kq - 0 18"
+        }
+      ]
+    },
+    {
+      "id": "sharp-060-ply29",
+      "root_turn": "b",
+      "choice": "b4c3",
+      "reference": {
+        "cp": 548,
+        "mate": null
+      },
+      "witness": {
+        "Score": 98,
+        "BaseRoot": 98,
+        "Reason": "static",
+        "FEN": "r3k2r/pp3ppp/2b1pq2/8/2Bb4/PP6/3N1PPP/1R1Q1K1R w kq - 0 17",
+        "Features": {
+          "Values": [
+            2,
+            -9,
+            -1,
+            -3,
+            -3,
+            -9,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "b4c3",
+          "a1b1",
+          "c3d4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "f6f2",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r3k2r/pp3ppp/2b1p3/8/2Bb4/PP6/3N1qPP/1R1Q1K1R w kq - 0 18"
+        }
+      ]
+    },
+    {
+      "id": "sharp-060-ply48",
+      "root_turn": "w",
+      "choice": "c4d5",
+      "reference": {
+        "cp": -1976,
+        "mate": null
+      },
+      "witness": {
+        "Score": -1749,
+        "BaseRoot": -1749,
+        "Reason": "static",
+        "FEN": "4rrk1/pp4pp/4p3/3b4/6pP/PP4K1/8/2R2N1q w - - 0 28",
+        "Features": {
+          "Values": [
+            3,
+            -5,
+            -2,
+            -8,
+            -12,
+            -16,
+            -1,
+            -20,
+            10,
+            0,
+            1,
+            1
+          ],
+          "Phase": 12
+        },
+        "Path": [
+          "c4d5",
+          "b6f2",
+          "e1f2",
+          "f5g4",
+          "f2g3",
+          "c6d5"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "h1h3",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "4rrk1/pp4pp/4p3/3b4/6pP/PP4Kq/8/2R2N2 w - - 2 29"
+        },
+        {
+          "move": "h1g2",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "4rrk1/pp4pp/4p3/3b4/6pP/PP4K1/6q1/2R2N2 w - - 2 29"
+        },
+        {
+          "move": "h1g1",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "4rrk1/pp4pp/4p3/3b4/6pP/PP4K1/8/2R2Nq1 w - - 2 29"
+        }
+      ]
+    },
+    {
+      "id": "sharp-060-ply62",
+      "root_turn": "w",
+      "choice": "f1e3",
+      "reference": {
+        "cp": -1881,
+        "mate": null
+      },
+      "witness": {
+        "Score": -2044,
+        "BaseRoot": -2044,
+        "Reason": "static",
+        "FEN": "4r2k/1p1R2pp/p3pr2/5p2/8/PP2bb2/5P2/4KBq1 w - - 0 34",
+        "Features": {
+          "Values": [
+            0,
+            -14,
+            0,
+            -8,
+            -5,
+            -8,
+            -1,
+            -1,
+            0,
+            -1,
+            0,
+            -1
+          ],
+          "Phase": 13
+        },
+        "Path": [
+          "f1e3",
+          "g3g1",
+          "c4f1",
+          "b6e3"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "g1f2",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "4r2k/1p1R2pp/p3pr2/5p2/8/PP2bb2/5q2/4KB2 w - - 0 35"
+        }
+      ]
+    },
+    {
+      "id": "sharp-062-ply48",
+      "root_turn": "w",
+      "choice": "f1a1",
+      "reference": {
+        "cp": -1601,
+        "mate": null
+      },
+      "witness": {
+        "Score": -209,
+        "BaseRoot": -209,
+        "Reason": "static",
+        "FEN": "1r6/p2n2kp/3Q2p1/2p5/P2P2q1/2P5/R1P2r1P/R6K b - - 0 26",
+        "Features": {
+          "Values": [
+            -3,
+            0,
+            -15,
+            1,
+            -1,
+            -3,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1
+          ],
+          "Phase": 17
+        },
+        "Path": [
+          "f1a1",
+          "f4f2",
+          "d3d4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "g4g2",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "1r6/p2n2kp/3Q2p1/2p5/P2P4/2P5/R1P2rqP/R6K w - - 1 27"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-069-ply63",
+      "root_turn": "b",
+      "choice": "b6b4",
+      "reference": {
+        "cp": null,
+        "mate": -3
+      },
+      "witness": {
+        "Score": -1618,
+        "BaseRoot": -1618,
+        "Reason": "static",
+        "FEN": "8/pp5p/2k3p1/4Q3/1P6/8/4BP1P/3R2K1 b - - 0 35",
+        "Features": {
+          "Values": [
+            0,
+            6,
+            12,
+            22,
+            10,
+            16,
+            2,
+            0,
+            0,
+            -3,
+            0,
+            0
+          ],
+          "Phase": 7
+        },
+        "Path": [
+          "b6b4",
+          "f7e8",
+          "c8c7",
+          "e8e5",
+          "c7c6",
+          "a3b4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "e5d6",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "8/pp5p/2kQ2p1/8/1P6/8/4BP1P/3R2K1 b - - 2 36"
+        },
+        {
+          "move": "e5c5",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "8/pp5p/2k3p1/2Q5/1P6/8/4BP1P/3R2K1 b - - 2 36"
+        }
+      ]
+    },
+    {
+      "id": "sharp-071-ply49",
+      "root_turn": "b",
+      "choice": "f8e8",
+      "reference": {
+        "cp": -1161,
+        "mate": null
+      },
+      "witness": {
+        "Score": -357,
+        "BaseRoot": -357,
+        "Reason": "static",
+        "FEN": "r3k2r/p3n2p/1p2Q1p1/3pP3/1B3P2/3B4/q3N3/2R1K2R b K - 0 28",
+        "Features": {
+          "Values": [
+            0,
+            9,
+            10,
+            -1,
+            2,
+            3,
+            0,
+            1,
+            -5,
+            1,
+            0,
+            -1
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "f8e8",
+          "f3g4",
+          "g8e7",
+          "d4e6",
+          "c8e6",
+          "g4e6"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "e6e7",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r3k2r/p3Q2p/1p4p1/3pP3/1B3P2/3B4/q3N3/2R1K2R b K - 0 29"
+        }
+      ]
+    },
+    {
+      "id": "sharp-072-ply63",
+      "root_turn": "b",
+      "choice": "f8f5",
+      "reference": {
+        "cp": 852,
+        "mate": null
+      },
+      "witness": {
+        "Score": 58,
+        "BaseRoot": 58,
+        "Reason": "static",
+        "FEN": "r6k/6p1/1pp3qp/p2p1b1n/8/2P1QPb1/PPNN3p/RKB4B w - - 0 34",
+        "Features": {
+          "Values": [
+            3,
+            -13,
+            -8,
+            4,
+            -1,
+            -1,
+            1,
+            -40,
+            4,
+            -1,
+            1,
+            3
+          ],
+          "Phase": 19
+        },
+        "Path": [
+          "f8f5",
+          "e4f5",
+          "h3f5"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "f5c2",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "r6k/6p1/1pp3qp/p2p3n/8/2P1QPb1/PPbN3p/RKB4B w - - 0 35"
+        }
+      ]
+    },
+    {
+      "id": "sharp-075-ply48",
+      "root_turn": "w",
+      "choice": "a3c5",
+      "reference": {
+        "cp": 804,
+        "mate": null
+      },
+      "witness": {
+        "Score": 331,
+        "BaseRoot": 331,
+        "Reason": "static",
+        "FEN": "2kr4/5R1p/6p1/1QB5/3pr1PN/1P5P/2Pq1P2/6K1 b - - 0 29",
+        "Features": {
+          "Values": [
+            2,
+            8,
+            -3,
+            2,
+            5,
+            3,
+            2,
+            4,
+            0,
+            1,
+            0,
+            -1
+          ],
+          "Phase": 16
+        },
+        "Path": [
+          "a3c5",
+          "h8e8",
+          "e2b5",
+          "b8c8",
+          "a1a5",
+          "e8e4",
+          "a5a7",
+          "f4d2",
+          "a7f7"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "b5b7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "2kr4/1Q3R1p/6p1/2B5/3pr1PN/1P5P/2Pq1P2/6K1 b - - 2 30"
+        }
+      ]
+    },
+    {
+      "id": "sharp-075-ply63",
+      "root_turn": "b",
+      "choice": "d7c7",
+      "reference": {
+        "cp": -986,
+        "mate": null
+      },
+      "witness": {
+        "Score": -247,
+        "BaseRoot": -247,
+        "Reason": "static",
+        "FEN": "3r3r/2k1Np1p/R5p1/1QB5/3p2P1/1P1P3q/2P2P2/6K1 w - - 0 35",
+        "Features": {
+          "Values": [
+            4,
+            6,
+            -1,
+            2,
+            8,
+            15,
+            1,
+            4,
+            0,
+            1,
+            0,
+            0
+          ],
+          "Phase": 16
+        },
+        "Path": [
+          "d7c7",
+          "a3c5",
+          "a7a6",
+          "a1a6",
+          "f3h3"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [
+        {
+          "move": "a6a7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "3r3r/R1k1Np1p/6p1/1QB5/3p2P1/1P1P3q/2P2P2/6K1 b - - 1 35"
+        }
+      ],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-076-ply21",
+      "root_turn": "b",
+      "choice": "d8c8",
+      "reference": {
+        "cp": null,
+        "mate": -2
+      },
+      "witness": {
+        "Score": -1180,
+        "BaseRoot": -1180,
+        "Reason": "static",
+        "FEN": "rnQ2b1r/p3kbpp/2p2n2/4B3/8/3PN3/PP1N1PPP/R3KB1R b KQ - 0 13",
+        "Features": {
+          "Values": [
+            2,
+            1,
+            3,
+            13,
+            7,
+            4,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "d8c8",
+          "b7c8",
+          "e8e7",
+          "f4e5"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "e3f5",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "rnQ2b1r/p3kbpp/2p2n2/4BN2/8/3P4/PP1N1PPP/R3KB1R b KQ - 2 14"
+        }
+      ]
+    },
+    {
+      "id": "sharp-076-ply29",
+      "root_turn": "b",
+      "choice": "f6d5",
+      "reference": {
+        "cp": 807,
+        "mate": null
+      },
+      "witness": {
+        "Score": -104,
+        "BaseRoot": -104,
+        "Reason": "static",
+        "FEN": "Qn2k2r/p4bpp/1qp5/3n4/1b2N3/P2PP3/1P3KPP/R4B1R w k - 1 17",
+        "Features": {
+          "Values": [
+            0,
+            -10,
+            4,
+            -4,
+            -3,
+            -9,
+            1,
+            4,
+            0,
+            2,
+            0,
+            -1
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "f6d5",
+          "a2a3",
+          "c7b6"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "b6e3",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "Qn2k2r/p4bpp/2p5/3n4/1b2N3/P2Pq3/1P3KPP/R4B1R w k - 0 18"
+        }
+      ]
+    },
+    {
+      "id": "sharp-076-ply37",
+      "root_turn": "b",
+      "choice": "f7h5",
+      "reference": {
+        "cp": null,
+        "mate": 4
+      },
+      "witness": {
+        "Score": 129,
+        "BaseRoot": 129,
+        "Reason": "static",
+        "FEN": "Qn3rk1/p5pp/2p5/8/1b2P3/4q3/bP4PP/2RK1B1R w - - 0 22",
+        "Features": {
+          "Values": [
+            -2,
+            -7,
+            0,
+            -11,
+            -6,
+            -4,
+            -2,
+            9,
+            -1,
+            0,
+            0,
+            0
+          ],
+          "Phase": 18
+        },
+        "Path": [
+          "f7h5",
+          "d1c2",
+          "h5c5",
+          "c2d1",
+          "c5e3"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "e3d2",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "Qn3rk1/p5pp/2p5/8/1b2P3/8/bP1q2PP/2RK1B1R w - - 2 23"
+        }
+      ]
+    },
+    {
+      "id": "sharp-077-ply49",
+      "root_turn": "b",
+      "choice": "f6c6",
+      "reference": {
+        "cp": -1028,
+        "mate": null
+      },
+      "witness": {
+        "Score": -61,
+        "BaseRoot": -61,
+        "Reason": "static",
+        "FEN": "r1bq1k2/pp1np2B/2r5/3p2Q1/3n2N1/6B1/5PP1/1R2RNK1 b - - 0 27",
+        "Features": {
+          "Values": [
+            -4,
+            11,
+            1,
+            10,
+            5,
+            9,
+            1,
+            -10,
+            1,
+            0,
+            0,
+            0
+          ],
+          "Phase": 23
+        },
+        "Path": [
+          "f6c6",
+          "c1g5",
+          "g8f8",
+          "c2h7"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "g5g8",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "r1bq1kQ1/pp1np2B/2r5/3p4/3n2N1/6B1/5PP1/1R2RNK1 b - - 2 28"
+        }
+      ]
+    },
+    {
+      "id": "sharp-078-ply62",
+      "root_turn": "w",
+      "choice": "f1h1",
+      "reference": {
+        "cp": null,
+        "mate": -2
+      },
+      "witness": {
+        "Score": -908,
+        "BaseRoot": -908,
+        "Reason": "static",
+        "FEN": "1k1r4/ppp5/5b2/8/2r5/8/PPB5/1RK4b w - - 0 34",
+        "Features": {
+          "Values": [
+            0,
+            -5,
+            -21,
+            0,
+            -4,
+            -9,
+            -2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "Phase": 9
+        },
+        "Path": [
+          "f1h1",
+          "d4c4",
+          "f5c2",
+          "c6h1"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "f6g5",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "1k1r4/ppp5/8/6b1/2r5/8/PPB5/1RK4b w - - 2 35"
+        }
+      ]
+    },
+    {
+      "id": "sharp-079-ply36",
+      "root_turn": "w",
+      "choice": "f4g5",
+      "reference": {
+        "cp": -57,
+        "mate": null
+      },
+      "witness": {
+        "Score": -165,
+        "BaseRoot": -165,
+        "Reason": "static",
+        "FEN": "2kr1b1r/Qpp2ppp/4p3/1N4q1/3P4/P6b/1P2N1P1/R4RK1 w - - 1 21",
+        "Features": {
+          "Values": [
+            6,
+            -5,
+            7,
+            -10,
+            1,
+            0,
+            -1,
+            0,
+            0,
+            -2,
+            0,
+            0
+          ],
+          "Phase": 20
+        },
+        "Path": [
+          "f4g5",
+          "g6g5",
+          "a4a7",
+          "b8c8"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "g5g2",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "2kr1b1r/Qpp2ppp/4p3/1N6/3P4/P6b/1P2N1q1/R4RK1 w - - 0 22"
+        }
+      ]
+    },
+    {
+      "id": "sharp-079-ply48",
+      "root_turn": "w",
+      "choice": "a8b7",
+      "reference": {
+        "cp": 1128,
+        "mate": null
+      },
+      "witness": {
+        "Score": 749,
+        "BaseRoot": 749,
+        "Reason": "static",
+        "FEN": "4k2r/1Q3ppp/2pB2q1/8/8/P6b/1P2NRP1/2R3K1 b - - 0 27",
+        "Features": {
+          "Values": [
+            4,
+            4,
+            13,
+            -1,
+            4,
+            5,
+            0,
+            4,
+            0,
+            0,
+            0,
+            1
+          ],
+          "Phase": 17
+        },
+        "Path": [
+          "a8b7",
+          "d7e8",
+          "b5d6",
+          "d8d6",
+          "e5d6"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "b7e7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "4k2r/4Qppp/2pB2q1/8/8/P6b/1P2NRP1/2R3K1 b - - 2 28"
+        }
+      ]
+    },
+    {
+      "id": "sharp-079-ply49",
+      "root_turn": "b",
+      "choice": "d7e8",
+      "reference": {
+        "cp": -1111,
+        "mate": null
+      },
+      "witness": {
+        "Score": -749,
+        "BaseRoot": -749,
+        "Reason": "static",
+        "FEN": "4k2r/1Q3ppp/2pB2q1/8/8/P6b/1P2NRP1/2R3K1 b - - 0 27",
+        "Features": {
+          "Values": [
+            4,
+            4,
+            13,
+            -1,
+            4,
+            5,
+            0,
+            4,
+            0,
+            0,
+            0,
+            1
+          ],
+          "Phase": 17
+        },
+        "Path": [
+          "d7e8",
+          "b5d6",
+          "d8d6",
+          "e5d6"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "b7e7",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "4k2r/4Qppp/2pB2q1/8/8/P6b/1P2NRP1/2R3K1 b - - 2 28"
+        }
+      ]
+    },
+    {
+      "id": "sharp-079-ply62",
+      "root_turn": "w",
+      "choice": "c1c3",
+      "reference": {
+        "cp": 1390,
+        "mate": null
+      },
+      "witness": {
+        "Score": 1047,
+        "BaseRoot": 1047,
+        "Reason": "static",
+        "FEN": "2r3kr/2N1Q2p/2p2p2/8/5B2/P1R4P/1P6/6K1 b - - 0 34",
+        "Features": {
+          "Values": [
+            4,
+            7,
+            4,
+            16,
+            4,
+            1,
+            -1,
+            0,
+            0,
+            2,
+            0,
+            0
+          ],
+          "Phase": 12
+        },
+        "Path": [
+          "c1c3",
+          "g7g5",
+          "g2h3",
+          "g5f4",
+          "e5f4"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "c3g3",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "2r3kr/2N1Q2p/2p2p2/8/5B2/P5RP/1P6/6K1 b - - 2 35"
+        }
+      ]
+    },
+    {
+      "id": "sharp-079-ply62",
+      "root_turn": "w",
+      "choice": "e5f6",
+      "reference": {
+        "cp": null,
+        "mate": 6
+      },
+      "witness": {
+        "Score": 1217,
+        "BaseRoot": 1217,
+        "Reason": "static",
+        "FEN": "2r3kr/2N1Q2p/2R2p2/8/5R2/P7/1P4K1/8 b - - 0 34",
+        "Features": {
+          "Values": [
+            6,
+            0,
+            16,
+            16,
+            4,
+            1,
+            -2,
+            0,
+            0,
+            2,
+            0,
+            0
+          ],
+          "Phase": 13
+        },
+        "Path": [
+          "e5f6",
+          "h3g2",
+          "g1g2",
+          "g7f6",
+          "c1c6"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "f4g4",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "2r3kr/2N1Q2p/2R2p2/8/6R1/P7/1P4K1/8 b - - 2 35"
+        }
+      ]
+    },
+    {
+      "id": "sharp-079-ply62",
+      "root_turn": "w",
+      "choice": "g2h3",
+      "reference": {
+        "cp": 1616,
+        "mate": null
+      },
+      "witness": {
+        "Score": 1467,
+        "BaseRoot": 1467,
+        "Reason": "static",
+        "FEN": "2r3kr/4Q1p1/2p1Np2/4B2p/5R2/P6P/1P6/2R3K1 b - - 1 33",
+        "Features": {
+          "Values": [
+            6,
+            5,
+            12,
+            12,
+            5,
+            4,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "Phase": 14
+        },
+        "Path": [
+          "g2h3",
+          "h7h5",
+          "c7e6"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "e7g7",
+          "capture": true,
+          "promotion": null,
+          "child_fen": "2r3kr/6Q1/2p1Np2/4B2p/5R2/P6P/1P6/2R3K1 b - - 0 34"
+        }
+      ]
+    },
+    {
+      "id": "sharp-079-ply63",
+      "root_turn": "b",
+      "choice": "c8d8",
+      "reference": {
+        "cp": null,
+        "mate": -3
+      },
+      "witness": {
+        "Score": -2442,
+        "BaseRoot": -2442,
+        "Reason": "static",
+        "FEN": "7Q/2N2kpp/2p2p2/4B3/5R2/P6P/1P6/2R3K1 b - - 0 34",
+        "Features": {
+          "Values": [
+            4,
+            3,
+            21,
+            9,
+            8,
+            16,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "Phase": 10
+        },
+        "Path": [
+          "c8d8",
+          "e7d8",
+          "g8f7",
+          "d8h8"
+        ]
+      },
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": [
+        {
+          "move": "h8e8",
+          "capture": false,
+          "promotion": null,
+          "child_fen": "4Q3/2N2kpp/2p2p2/4B3/5R2/P6P/1P6/2R3K1 b - - 2 35"
+        }
+      ]
+    }
+  ]
+}
