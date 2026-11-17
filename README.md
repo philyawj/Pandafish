@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.15.2 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.15.3 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
@@ -310,10 +310,14 @@ all failed and completed probes. The experiment is rejected; released playing
 behavior remains v0.15. See the
 [piece-safety research report](tools/benchmark/research/v0.16-piece-safety/README.md).
 
-**Next:** Reassess the next candidate from the new evidence before implementing
-another focused change. The concrete pawn ending after Rd5 is a leading
-investigation, not an automatic next item in a fixed checklist. Keep the
-existing search and time-management foundation and validate promising
-mechanisms with controlled local matches. The
-[testing review](tools/benchmark/live/v0.15-live-20261113-074740/TESTING.md)
-explains sample sizes and the proposed confirmation stage.
+**v0.15.3: Investigate larger strength opportunities (complete).** Preserve the
+unpromoted bishop-pair source and games, cache/repetition controls, search
+ablations, CPU/allocation profiles and a broader architecture assessment.
+Released playing behavior remains v0.15. See the
+[research and measured findings](tools/benchmark/research/v0.15.3-architecture/README.md).
+
+**Next:** Build and validate a coordinated search-core candidate, then address
+broader evaluation and threat modeling using independent data. The
+[ranked larger projects](tools/benchmark/research/v0.15.3-architecture/NEXT.md)
+give concrete stages, acceptance checks and limits. Reassess after each result;
+do not treat earlier hypothesis lists as a fixed checklist.

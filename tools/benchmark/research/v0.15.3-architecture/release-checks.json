@@ -1,0 +1,132 @@
+{
+  "release": "v0.15.3",
+  "playing_policy": "v0.15.2/v0.15, unchanged",
+  "benchmark_validation_checks": [
+    {
+      "name": "format",
+      "command": [
+        "gofmt",
+        "-l",
+        "/Users/philyawj/projects/Pandafish/evaluation.go",
+        "/Users/philyawj/projects/Pandafish/evaluation_test.go",
+        "/Users/philyawj/projects/Pandafish/exchange.go",
+        "/Users/philyawj/projects/Pandafish/exchange_test.go",
+        "/Users/philyawj/projects/Pandafish/iterative.go",
+        "/Users/philyawj/projects/Pandafish/iterative_test.go",
+        "/Users/philyawj/projects/Pandafish/killers.go",
+        "/Users/philyawj/projects/Pandafish/killers_test.go",
+        "/Users/philyawj/projects/Pandafish/limits.go",
+        "/Users/philyawj/projects/Pandafish/limits_test.go",
+        "/Users/philyawj/projects/Pandafish/main.go",
+        "/Users/philyawj/projects/Pandafish/main_test.go",
+        "/Users/philyawj/projects/Pandafish/mate.go",
+        "/Users/philyawj/projects/Pandafish/mate_test.go",
+        "/Users/philyawj/projects/Pandafish/quiescence_test.go",
+        "/Users/philyawj/projects/Pandafish/repetition.go",
+        "/Users/philyawj/projects/Pandafish/repetition_test.go",
+        "/Users/philyawj/projects/Pandafish/reporting.go",
+        "/Users/philyawj/projects/Pandafish/reporting_test.go",
+        "/Users/philyawj/projects/Pandafish/search.go",
+        "/Users/philyawj/projects/Pandafish/search_test.go",
+        "/Users/philyawj/projects/Pandafish/transposition.go",
+        "/Users/philyawj/projects/Pandafish/transposition_test.go",
+        "/Users/philyawj/projects/Pandafish/uci_test.go",
+        "/Users/philyawj/projects/Pandafish/internal/telemetry/telemetry.go",
+        "/Users/philyawj/projects/Pandafish/internal/telemetry/telemetry_test.go",
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/checks.go",
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/checks_test.go",
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/main.go",
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/main_test.go",
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/report.go",
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/uci.go",
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/workflow.go",
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/workflow_test.go",
+        "/Users/philyawj/projects/Pandafish/tools/lichess/analyse.go",
+        "/Users/philyawj/projects/Pandafish/tools/lichess/archive.go",
+        "/Users/philyawj/projects/Pandafish/tools/lichess/main.go",
+        "/Users/philyawj/projects/Pandafish/tools/lichess/operational.go",
+        "/Users/philyawj/projects/Pandafish/tools/lichess/process_test.go",
+        "/Users/philyawj/projects/Pandafish/tools/lichess/record.go",
+        "/Users/philyawj/projects/Pandafish/tools/lichess/record_test.go",
+        "/Users/philyawj/projects/Pandafish/tools/lichess/report.go",
+        "/Users/philyawj/projects/Pandafish/tools/lichess/report_test.go",
+        "/Users/philyawj/projects/Pandafish/tools/lichess/stockfish.go"
+      ],
+      "passed": true,
+      "elapsed_ms": 22
+    },
+    {
+      "name": "tests",
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "./..."
+      ],
+      "passed": true,
+      "elapsed_ms": 56786
+    },
+    {
+      "name": "vet",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "passed": true,
+      "elapsed_ms": 307
+    },
+    {
+      "name": "build",
+      "command": [
+        "go",
+        "build",
+        "-o",
+        "tools/benchmark/bin/pandafish-candidate",
+        "."
+      ],
+      "passed": true,
+      "elapsed_ms": 499
+    }
+  ],
+  "arm64_build": "/tmp/pandafish-v0153-arm64",
+  "offline_wrapper": "release-wrapper-check.txt",
+  "archive_smoke": "archive-replay-checks.json",
+  "archive_scores_membership_verified": true,
+  "six_smoke_games_complete_no_forfeits": true,
+  "smoke_results": {
+    "v0.15.2": {
+      "wins": 1,
+      "draws": 1,
+      "losses": 0,
+      "unfinished": 0,
+      "forfeits": 0,
+      "score_percent": 75,
+      "possible_score_lower_percent": 75,
+      "possible_score_upper_percent": 75
+    },
+    "Stockfish Skill 2": {
+      "wins": 1,
+      "draws": 0,
+      "losses": 1,
+      "unfinished": 0,
+      "forfeits": 0,
+      "score_percent": 50,
+      "possible_score_lower_percent": 50,
+      "possible_score_upper_percent": 50
+    },
+    "Sacrifice v0.2.0 b528f0ba": {
+      "wins": 0,
+      "draws": 1,
+      "losses": 1,
+      "unfinished": 0,
+      "forfeits": 0,
+      "score_percent": 25,
+      "possible_score_lower_percent": 25,
+      "possible_score_upper_percent": 25
+    }
+  },
+  "git_diff_check": true,
+  "live_client_started": false,
+  "quiet_mate_two_oracle_proof": "quiet-mate-proof.json"
+}

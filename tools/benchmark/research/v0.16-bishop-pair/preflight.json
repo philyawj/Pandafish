@@ -1,0 +1,20 @@
+{
+  "source_overlay_sha256": "ef4ff75fb75563cb4efeac65954af1c4af22c5c627fd250c4507210746aede54",
+  "base_tag": "v0.15.2",
+  "base_revision": "64e60edb2f7c210e942c9643453237647c4867b3",
+  "fixed_policy_files_identical": {
+    "search.go": true,
+    "iterative.go": true,
+    "exchange.go": true,
+    "transposition.go": true,
+    "limits.go": true,
+    "killers.go": true,
+    "repetition.go": true,
+    "mate.go": true
+  },
+  "weight_cp": 25,
+  "weight_tuned": false,
+  "frozen_sample": "50 games per opponent, 25 pairs, three matchups concurrent; no automatic confirmation",
+  "reason_to_screen": "Clear controlled exchange correction in both colors and reflection, all broader probes legal, fixed-depth reference effects generally neutral/positive with small regressions retained, 1.6% aggregate equal-time node reduction.",
+  "go_version": "go version go1.25.0 darwin/arm64"
+}

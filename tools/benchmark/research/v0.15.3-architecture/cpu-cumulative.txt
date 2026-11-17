@@ -1,0 +1,53 @@
+File: Pandafish.test
+Type: cpu
+Time: 2026-11-16 10:34:54 PST
+Duration: 21.29s, Total samples = 20.25s (95.13%)
+Showing nodes accounting for 6.66s, 32.89% of 20.25s total
+Dropped 203 nodes (cum <= 0.10s)
+Showing top 45 nodes out of 140
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%     16.04s 79.21%  github.com/philyawj/Pandafish.BenchmarkArchitectureProfile
+         0     0%     0%     16.04s 79.21%  testing.(*B).runN
+         0     0%     0%     16.03s 79.16%  github.com/philyawj/Pandafish.(*searcher).iterate
+         0     0%     0%     16.03s 79.16%  github.com/philyawj/Pandafish.(*searcher).root
+     0.01s 0.049% 0.049%     16.03s 79.16%  github.com/philyawj/Pandafish.(*searcher).searchAtPly
+         0     0% 0.049%     16.03s 79.16%  github.com/philyawj/Pandafish.iterativeSearchWithHistory
+         0     0% 0.049%     15.97s 78.86%  testing.(*B).launch
+     0.03s  0.15%   0.2%     12.88s 63.60%  github.com/philyawj/Pandafish.(*searcher).quietAtPly
+         0     0%   0.2%     11.16s 55.11%  github.com/philyawj/Pandafish.orderedMoves
+         0     0%   0.2%      9.06s 44.74%  github.com/corentings/chess/v2.(*Position).ValidMoves (inline)
+         0     0%   0.2%      8.70s 42.96%  github.com/corentings/chess/v2.engine.CalcMoves
+     0.74s  3.65%  3.85%      7.70s 38.02%  github.com/corentings/chess/v2.standardMoves
+     0.02s 0.099%  3.95%      6.38s 31.51%  runtime.systemstack
+     0.16s  0.79%  4.74%      4.89s 24.15%  github.com/corentings/chess/v2.moveTags
+     0.04s   0.2%  4.94%      4.26s 21.04%  runtime.mallocgc
+         0     0%  4.94%      3.57s 17.63%  runtime.profilealloc
+     0.03s  0.15%  5.09%      3.56s 17.58%  runtime.mProf_Malloc
+         0     0%  5.09%      3.24s 16.00%  runtime.callers
+         0     0%  5.09%      3.24s 16.00%  runtime.callers.func1
+     0.20s  0.99%  6.07%      3.16s 15.60%  runtime.tracebackPCs
+     0.03s  0.15%  6.22%      2.95s 14.57%  runtime.mallocgcSmallScanHeader
+     0.34s  1.68%  7.90%      2.48s 12.25%  github.com/corentings/chess/v2.isSquareAttackedBy
+     1.01s  4.99% 12.89%      2.41s 11.90%  runtime.pcvalue
+     0.52s  2.57% 15.46%      2.27s 11.21%  github.com/corentings/chess/v2.(*Board).update
+         0     0% 15.46%      2.10s 10.37%  slices.SortStableFunc[go.shape.[]github.com/corentings/chess/v2.Move,go.shape.29dc683b0550073a7c7523bb194b96692894fc1513dad32668ceac52ba23ff39] (inline)
+     0.02s 0.099% 15.56%      2.10s 10.37%  slices.stableCmpFunc[go.shape.29dc683b0550073a7c7523bb194b96692894fc1513dad32668ceac52ba23ff39]
+     0.01s 0.049% 15.60%      1.80s  8.89%  runtime.netpoll
+         0     0% 15.60%      1.80s  8.89%  runtime.startTheWorldWithSema
+         0     0% 15.60%      1.79s  8.84%  runtime.gcStart.func4
+     1.79s  8.84% 24.44%      1.79s  8.84%  runtime.kevent
+     0.07s  0.35% 24.79%      1.71s  8.44%  slices.insertionSortCmpFunc[go.shape.29dc683b0550073a7c7523bb194b96692894fc1513dad32668ceac52ba23ff39] (inline)
+         0     0% 24.79%      1.68s  8.30%  runtime.growslice
+     0.07s  0.35% 25.14%      1.60s  7.90%  github.com/philyawj/Pandafish.orderedMoves.func2
+     0.36s  1.78% 26.91%      1.54s  7.60%  runtime.mapaccess1
+         0     0% 26.91%      1.50s  7.41%  runtime.(*inlineUnwinder).resolveInternal (inline)
+     0.02s 0.099% 27.01%      1.50s  7.41%  runtime.newInlineUnwinder
+         0     0% 27.01%      1.50s  7.41%  runtime.pcdatavalue1
+     0.01s 0.049% 27.06%      1.43s  7.06%  runtime.makeslice
+        1s  4.94% 32.00%      1.42s  7.01%  github.com/corentings/chess/v2.NewPiece (inline)
+     0.03s  0.15% 32.15%      1.33s  6.57%  github.com/philyawj/Pandafish.(*searcher).stopped
+     0.11s  0.54% 32.69%      1.31s  6.47%  github.com/philyawj/Pandafish.orderedMoves.func1
+         0     0% 32.69%      1.30s  6.42%  github.com/corentings/chess/v2.(*Position).Status (inline)
+     0.02s 0.099% 32.79%      1.30s  6.42%  github.com/corentings/chess/v2.engine.Status
+     0.01s 0.049% 32.84%      1.25s  6.17%  github.com/philyawj/Pandafish.(*searcher).clock
+     0.01s 0.049% 32.89%      1.24s  6.12%  time.Now

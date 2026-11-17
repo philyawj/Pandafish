@@ -1,0 +1,24 @@
+File: Pandafish.test
+Type: alloc_space
+Time: 2026-11-16 10:35:15 PST
+Showing nodes accounting for 12124.31MB, 99.31% of 12208.80MB total
+Dropped 159 nodes (cum <= 61.04MB)
+      flat  flat%   sum%        cum   cum%
+ 5004.67MB 40.99% 40.99%  5042.38MB 41.30%  github.com/corentings/chess/v2.standardMoves
+ 4656.17MB 38.14% 79.13% 10258.97MB 84.03%  github.com/corentings/chess/v2.(*Position).ValidMoves (inline)
+ 1072.71MB  8.79% 87.92%  1105.87MB  9.06%  github.com/corentings/chess/v2.castleMoves
+  636.68MB  5.21% 93.13%  6784.93MB 55.57%  github.com/corentings/chess/v2.engine.CalcMoves
+  534.24MB  4.38% 97.51%   534.24MB  4.38%  github.com/corentings/chess/v2.(*Board).copy (inline)
+  219.71MB  1.80% 99.31%   754.55MB  6.18%  github.com/corentings/chess/v2.(*Position).Update
+    0.07MB 0.00056% 99.31% 12176.83MB 99.74%  github.com/philyawj/Pandafish.iterativeSearchWithHistory
+    0.06MB 0.00045% 99.31% 12175.60MB 99.73%  github.com/philyawj/Pandafish.(*searcher).root
+         0     0% 99.31%  1165.62MB  9.55%  github.com/corentings/chess/v2.(*Position).Status (inline)
+         0     0% 99.31%  1165.62MB  9.55%  github.com/corentings/chess/v2.engine.Status
+         0     0% 99.31% 12175.65MB 99.73%  github.com/philyawj/Pandafish.(*searcher).iterate
+         0     0% 99.31%  9102.10MB 74.55%  github.com/philyawj/Pandafish.(*searcher).quietAtPly
+         0     0% 99.31% 12169.35MB 99.68%  github.com/philyawj/Pandafish.(*searcher).searchAtPly
+         0     0% 99.31% 12204.49MB   100%  github.com/philyawj/Pandafish.BenchmarkArchitectureProfile
+         0     0% 99.31% 10258.97MB 84.03%  github.com/philyawj/Pandafish.orderedMoves
+         0     0% 99.31% 12142.57MB 99.46%  testing.(*B).launch
+         0     0% 99.31%    61.93MB  0.51%  testing.(*B).run1.func1
+         0     0% 99.31% 12204.51MB   100%  testing.(*B).runN

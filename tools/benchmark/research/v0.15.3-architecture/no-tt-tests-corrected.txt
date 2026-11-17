@@ -1,0 +1,18 @@
+--- FAIL: TestMateScoresAndTableCoordinates (0.01s)
+    mate_test.go:63: negative mate normalization/bound changed
+--- FAIL: TestHistoryContextSeparatesCachedScores (0.00s)
+    repetition_test.go:52: original context lost
+--- FAIL: TestTableIdentityAndReplacement (0.00s)
+    transposition_test.go:25: missing exact entry
+--- FAIL: TestTableEnPassantAndTransposedPositions (0.00s)
+    transposition_test.go:76: transposed move orders did not reuse the position
+--- FAIL: TestCacheReuseReducesNodesAndPreservesRootTies (0.01s)
+    transposition_test.go:115: root nodes: uncached=834 cached_pass_1=834
+    transposition_test.go:115: root nodes: uncached=834 cached_pass_2=834
+    transposition_test.go:117: warm cache nodes 834, uncached 834
+--- FAIL: TestUCICacheLifecycle (0.00s)
+    transposition_test.go:213: cache lifecycle nodes: first 669, reused 669, new game 669
+FAIL
+FAIL	github.com/philyawj/Pandafish	8.958s
+ok  	github.com/philyawj/Pandafish/internal/telemetry	0.297s
+FAIL

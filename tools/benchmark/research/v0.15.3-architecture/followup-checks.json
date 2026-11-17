@@ -1,0 +1,163 @@
+[
+  {
+    "step": "cpu-clean-profile",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/baseline",
+      "test",
+      "-run",
+      "^$",
+      "-bench",
+      "^BenchmarkArchitectureProfile$",
+      "-benchtime=10s",
+      "-cpuprofile",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/native-cpu-clean.pb.gz",
+      "-timeout",
+      "3m"
+    ],
+    "exit": 0,
+    "elapsed_s": 22.833298417041078
+  },
+  {
+    "step": "cpu-clean-flat",
+    "command": [
+      "go",
+      "tool",
+      "pprof",
+      "-top",
+      "-nodecount=50",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/native-cpu-clean.pb.gz"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.27246541692875326
+  },
+  {
+    "step": "cpu-clean-cumulative",
+    "command": [
+      "go",
+      "tool",
+      "pprof",
+      "-top",
+      "-cum",
+      "-nodecount=50",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/native-cpu-clean.pb.gz"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.13820508285425603
+  },
+  {
+    "step": "uci-historical-check",
+    "command": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/uci_probes.py",
+      "historical"
+    ],
+    "exit": 0,
+    "elapsed_s": 21.109999834094197
+  },
+  {
+    "step": "uci-historical-fixed-check",
+    "command": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/uci_probes.py",
+      "historical-fixed"
+    ],
+    "exit": 0,
+    "elapsed_s": 6.237712207948789
+  },
+  {
+    "step": "baseline-deep-check",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "8m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 16.803912666160613
+  },
+  {
+    "step": "safe-cache-deep-check",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/safe-cache",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "8m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 14.39185612485744
+  },
+  {
+    "step": "unsafe-board-scores-deep-check",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/unsafe-board-scores",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "8m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 14.32845799997449
+  },
+  {
+    "step": "root-single-best-deep-check",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/root-single-best",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "8m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 16.289143292000517
+  },
+  {
+    "step": "tactical-ordering-deep-check",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/tactical-ordering",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "8m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 14.48741599987261
+  },
+  {
+    "step": "referee-check",
+    "command": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/referee.py"
+    ],
+    "exit": 0,
+    "elapsed_s": 53.6482369590085
+  }
+]

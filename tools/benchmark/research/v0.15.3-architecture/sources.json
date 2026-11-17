@@ -1,0 +1,13 @@
+{
+  "review_date": "2026-11-16",
+  "primary_sources": [
+    {"title": "Kishimoto and Muller, A General Solution to the Graph History Interaction Problem (AAAI 2004)", "url": "https://cdn.aaai.org/AAAI/2004/AAAI04-102.pdf", "use": "Why path-dependent draws make indiscriminate board-only score reuse unsafe; not proof our prototypes implement the paper's general solution."},
+    {"title": "Stockfish search, pinned source", "url": "https://github.com/official-stockfish/Stockfish/blob/def601cc156f7d41f9ddea76d74515eddf232aaf/src/search.cpp", "use": "Primary example of coordinated TT, PVS/reductions, pruning and GHI/rule50 safeguards. Do not copy its parameters or attribute strength to one feature."},
+    {"title": "Pinned Sacrifice search", "url": "https://github.com/piratesboys/Sacrifice-Engine-/blob/b528f0ba373910b72052d991700a990ca1cb07fd/src/search.rs", "use": "Local pin inspected: PVS, LMR, history ordering, aspiration, TT and quiescence. Its history ordering is distinct from repetition history."},
+    {"title": "Pinned Sacrifice evaluation", "url": "https://github.com/piratesboys/Sacrifice-Engine-/blob/b528f0ba373910b72052d991700a990ca1cb07fd/src/evaluate.rs", "use": "Mobility, king shelter, activity, center and attack evaluation; historical Tal style affects root ordering rather than positional score."},
+    {"title": "Stockfish NNUE training project", "url": "https://github.com/official-stockfish/nnue-pytorch", "use": "Primary route for understanding trained evaluation/data tooling. NNUE is a separate architectural option, not an implemented or measured gain here."},
+    {"title": "Fishtest mathematics", "url": "https://official-stockfish.github.io/docs/fishtest-wiki/Fishtest-Mathematics.html", "use": "Distinguish small fixed-size screens from statistical strength tests and paired sequential testing."},
+    {"title": "Fishtest FAQ", "url": "https://official-stockfish.github.io/docs/fishtest-wiki/Fishtest-FAQ.html", "use": "Uncertainty and interactions prevent adding feature Elo guesses or comparing noisy historical point estimates as exact effects."}
+  ],
+  "local_library": {"module": "github.com/corentings/chess/v2", "version": "v2.6.1", "files": ["engine.go", "position.go", "board.go"], "observations": ["The library already uses bitboards and a mailbox; it is inaccurate to frame the gap as no bitboards.", "ValidMoves returns a defensive copy; ValidMovesUnsafe is read-only and must never be sorted in place.", "Status can generate a first legal move before full move generation later; legality/check tags simulate each candidate on a temporary board."]}
+}

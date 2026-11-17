@@ -56,6 +56,12 @@ Forfeits count as losses for the offending engine. Compare matching profiles bef
 | v0.15-conversion-dev | v0.14.4 | 20 / 13 / 17 | 0 | 0 | 53.0% | 53.0% to 53.0% | [R22](v0.15-conversion-dev-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15-conversion-dev-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15-conversion-dev-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/previous.pgn) |
 | v0.15-conversion-dev | Stockfish 19 / Skill 2 | 24 / 2 / 24 | 0 | 0 | 50.0% | 50.0% to 50.0% | [R22](v0.15-conversion-dev-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15-conversion-dev-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15-conversion-dev-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/stockfish.pgn) |
 | v0.15-conversion-dev | Sacrifice v0.2.0 b528f0ba | 10 / 14 / 26 | 0 | 0 | 34.0% | 34.0% to 34.0% | [R22](v0.15-conversion-dev-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15-conversion-dev-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15-conversion-dev-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/sacrifice.pgn) |
+| v0.16-bishop-pair-dev | v0.15.2 | 26 / 5 / 19 | 0 | 0 | 57.0% | 57.0% to 57.0% | [R23](v0.16-bishop-pair-dev-vs-v0.15.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.16-bishop-pair-dev-vs-v0.15.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.16-bishop-pair-dev-vs-v0.15.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/previous.pgn) |
+| v0.16-bishop-pair-dev | Stockfish 19 / Skill 2 | 21 / 2 / 27 | 0 | 0 | 44.0% | 44.0% to 44.0% | [R23](v0.16-bishop-pair-dev-vs-v0.15.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.16-bishop-pair-dev-vs-v0.15.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.16-bishop-pair-dev-vs-v0.15.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/stockfish.pgn) |
+| v0.16-bishop-pair-dev | Sacrifice v0.2.0 b528f0ba | 7 / 11 / 32 | 0 | 0 | 25.0% | 25.0% to 25.0% | [R23](v0.16-bishop-pair-dev-vs-v0.15.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.16-bishop-pair-dev-vs-v0.15.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.16-bishop-pair-dev-vs-v0.15.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/sacrifice.pgn) |
+| v0.15.2-architecture-control | v0.14.4 | 21 / 14 / 15 | 0 | 0 | 56.0% | 56.0% to 56.0% | [R24](v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/previous.pgn) |
+| v0.15.2-architecture-control | Stockfish 19 / Skill 2 | 21 / 2 / 27 | 0 | 0 | 44.0% | 44.0% to 44.0% | [R24](v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/stockfish.pgn) |
+| v0.15.2-architecture-control | Sacrifice v0.2.0 b528f0ba | 7 / 13 / 30 | 0 | 0 | 27.0% | 27.0% to 27.0% | [R24](v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | [JSON](v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json), [PGN](v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/sacrifice.pgn) |
 
 ## Run profiles
 
@@ -85,6 +91,8 @@ Times are milliseconds. Compare matching timing policies and settings. Partial r
 | [R20](v0.15-null-dev-vs-v0.14.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-13 08:22Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; three concurrent matchups; no live bot | wall-clock-v2 | 3 (all) | complete |
 | [R21](v0.15-king-danger-dev-vs-v0.14.3-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-13 08:48Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; three concurrent matchups; no live bot | wall-clock-v2 | 3 (all) | complete |
 | [R22](v0.15-conversion-dev-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-13 10:28Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; three concurrent matchups; no live bot | wall-clock-v2 | 3 (all) | complete |
+| [R23](v0.16-bishop-pair-dev-vs-v0.15.2-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-16 08:10Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; 3 concurrent matchups; no live client; ordinary background system activity, no thermal telemetry | wall-clock-v2 | 3 (all) | complete |
+| [R24](v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/summary.json) | 2026-11-16 18:50Z | 100 / 50 | 25 | openings-screening-10-v1.txt / 80ceed68 | 400 | darwin/arm64; Apple M2 MacBook Air; AC power reported; 3 concurrent retrospective control matchups; no other engine probes; no live client or thermal telemetry | wall-clock-v2 | 3 (all) | complete |
 
 ## Measured timing
 
@@ -142,3 +150,9 @@ Wall time includes sending the position, requesting the move, and receiving best
 | R22 | v0.14.4 | 98.1 | 98.6 | 0 / 0 |
 | R22 | Stockfish 19 / Skill 2 | 99.4 | 101.7 | 0 / 1523 |
 | R22 | Sacrifice v0.2.0 b528f0ba | 98.2 | 109.0 | 0 / 2509 |
+| R23 | v0.15.2 | 99.1 | 98.5 | 0 / 0 |
+| R23 | Stockfish 19 / Skill 2 | 97.8 | 102.2 | 0 / 1603 |
+| R23 | Sacrifice v0.2.0 b528f0ba | 97.9 | 100.3 | 0 / 2546 |
+| R24 | v0.14.4 | 99.3 | 116.6 | 0 / 4 |
+| R24 | Stockfish 19 / Skill 2 | 99.9 | 109.8 | 0 / 1634 |
+| R24 | Sacrifice v0.2.0 b528f0ba | 117.9 | 110.2 | 5 / 2558 |

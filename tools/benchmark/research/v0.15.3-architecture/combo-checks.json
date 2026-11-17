@@ -1,0 +1,123 @@
+[
+  {
+    "step": "coordinated-build",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-coordinated-kernel-r1q752z4",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/architecture-coordinated-kernel",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.6834791251458228
+  },
+  {
+    "step": "coordinated-tests",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-coordinated-kernel-r1q752z4",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 1,
+    "elapsed_s": 7.569306707940996
+  },
+  {
+    "step": "coordinated-ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-coordinated-kernel-r1q752z4",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4242945408914238
+  },
+  {
+    "step": "coordinated-fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-coordinated-kernel-r1q752z4",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "8m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 3.74560954188928
+  },
+  {
+    "step": "coordinated-deep",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-coordinated-kernel-r1q752z4",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "8m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 8.694557334063575
+  },
+  {
+    "step": "uci-combo-check",
+    "command": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/uci_probes.py",
+      "combo"
+    ],
+    "exit": 0,
+    "elapsed_s": 20.958215333987027
+  },
+  {
+    "step": "leaf-trace-check",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-architecture-fm_z1jxd/baseline",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestResearchTrace$",
+      "-timeout",
+      "10m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 18.240750083932653
+  },
+  {
+    "step": "referee-combo-check",
+    "command": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/referee.py"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.6480034161359072
+  },
+  {
+    "step": "analysis-check",
+    "command": [
+      "python3",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.15.3-architecture/analyse.py"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.09545629215426743
+  }
+]

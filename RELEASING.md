@@ -33,14 +33,14 @@ and benchmark evidence together. Run commands from the repository root.
    in each release milestone.
 4. Run formatting, tests, vet, a build, and `git diff --check`. If only version
    text and documentation changed since benchmarking, use a short smoke test
-   instead of another full match. For example, while preparing v0.15.2:
+   instead of another full match. For example, while preparing v0.15.3:
 
    ```sh
-   go run ./tools/benchmark --validate --race --version v0.15.2-release-smoke \
-     --previous tools/benchmark/bin/pandafish-v0.15.1 --previous-version v0.15.1 \
+   go run ./tools/benchmark --validate --race --version v0.15.3-release-smoke \
+     --previous tools/benchmark/bin/pandafish-v0.15.2 --previous-version v0.15.2 \
      --sequential --stage previous --pairs 1 --results /tmp/pandafish-release-smoke
    go run ./tools/benchmark --candidate tools/benchmark/bin/pandafish-candidate \
-     --version v0.15.2-release-smoke --stage external --parallel \
+     --version v0.15.3-release-smoke --stage external --parallel \
      --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
      --pairs 1 --results /tmp/pandafish-release-smoke
    git diff --check
@@ -64,7 +64,7 @@ and benchmark evidence together. Run commands from the repository root.
 ## Tag and publish after merge
 
 Confirm the PR is merged and the version is unused, then fast-forward local
-`main` to the merged commit. For v0.15.2:
+`main` to the merged commit. For v0.15.3:
 
 ```sh
 git switch main
@@ -77,13 +77,13 @@ Check that the working tree is clean and HEAD is the intended release commit.
 Then create and push the tag:
 
 ```sh
-git tag -a v0.15.2 -m "v0.15.2: archive rejected piece-safety research"
-git push origin v0.15.2
+git tag -a v0.15.3 -m "v0.15.3: bishop-pair and larger-gain architecture research"
+git push origin v0.15.3
 ```
 
 Publish a GitHub release for that tag, through the GitHub UI or
 `gh release create`. Use the version alone as the release title, such as
-`v0.15.2`. Describe the engine or tooling change, remaining limits,
+`v0.15.3`. Describe the engine or tooling change, remaining limits,
 and validation, linking the candidate benchmark evidence. An engine release
 does not automatically advance the Stockfish skill target.
 
@@ -114,14 +114,14 @@ benchmark files do not need to be attached again as release assets.
 
 ## Build the next baseline
 
-Build from the tag rather than a development checkout. For v0.15.2:
+Build from the tag rather than a development checkout. For v0.15.3:
 
 ```sh
 mkdir -p tools/benchmark/bin
 benchmark_bin="$PWD/tools/benchmark/bin"
 build_dir=$(mktemp -d)
-git archive v0.15.2 | tar -x -C "$build_dir"
-(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.15.2" .)
+git archive v0.15.3 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.15.3" .)
 ```
 
 The tagged executable becomes the previous version for v0.16 development.
@@ -166,3 +166,13 @@ release makes no match or Elo claim. Playing policy remains v0.15.1 (and v0.15).
 Keep the original candidate label and all diagnostic failures; distinguish the
 six-game release integration smoke from a strength screen. Reassess the next
 hypothesis from the result, rather than following the old ranking as a checklist.
+
+
+v0.15.3 archives the unpromoted bishop-pair screen and a larger architecture
+investigation. The maintainer explicitly selected archive-only treatment and
+unchanged play. Keep all diagnostic prototypes and intentional/real failures
+outside the normal build. Distinguish original bishop-pair results, retrospective
+v0.15.2 controls, architecture position probes and release smoke games. No
+prototype efficiency number is an Elo claim, and no optional confirmation
+runs automatically. Future work starts from the tagged research release and
+follows its measured larger-project plan rather than a fixed feature checklist.

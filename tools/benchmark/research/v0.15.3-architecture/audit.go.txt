@@ -1,0 +1,23 @@
+package main
+import "github.com/corentings/chess/v2"
+type researchBoardKey struct {Hash uint64; Half int}
+type researchContextKey struct {Board researchBoardKey; History uint64}
+type researchShadow struct {Depth,Score int; Bound bound; History uint64}
+type researchAudit struct {
+ MainNodes,QNodes,Evals,QGenerated,QEligible uint64
+ Probes,Hits,EqualDepthHits,DeeperHits,ShallowHits,Cutoffs uint64
+ BetaCutoffs,FirstMoveCutoffs,CutoffOrdinal uint64
+ BoardPreviouslySeen,ShadowDifferentHistory,ShadowEqualDepth,ShadowWouldCut uint64
+ boards map[researchBoardKey]bool
+ contexts map[researchContextKey]bool
+ shadow map[researchBoardKey]researchShadow
+}
+func (a *researchAudit) probe(p *chess.Position,d,alpha,beta,ply int,h uint64,e tableEntry,hit bool){
+ if a.shadow==nil{a.shadow=map[researchBoardKey]researchShadow{};a.boards=map[researchBoardKey]bool{};a.contexts=map[researchContextKey]bool{}}
+ key:=researchBoardKey{p.ZobristHash(),p.HalfMoveClock()};a.Probes++;a.boards[key]=true;a.contexts[researchContextKey{key,h}]=true
+ if hit{a.Hits++;if int(e.depth)==d{a.EqualDepthHits++}else if int(e.depth)>d{a.DeeperHits++}else{a.ShallowHits++}}
+ if s,ok:=a.shadow[key];ok{a.BoardPreviouslySeen++;if s.History!=h{a.ShadowDifferentHistory++};if s.Depth==d{a.ShadowEqualDepth++;v:=scoreFromTable(s.Score,ply);if s.Bound==exactBound||s.Bound==lowerBound&&v>=beta||s.Bound==upperBound&&v<=alpha{a.ShadowWouldCut++}}}
+}
+func(a *researchAudit) store(p *chess.Position,d,v,alpha,beta int,h uint64){
+ if a.shadow==nil{return};key:=researchBoardKey{p.ZobristHash(),p.HalfMoveClock()};old,ok:=a.shadow[key];if ok&&old.Depth>d{return};b:=exactBound;if v<=alpha{b=upperBound}else if v>=beta{b=lowerBound};a.shadow[key]=researchShadow{d,v,b,h}
+}

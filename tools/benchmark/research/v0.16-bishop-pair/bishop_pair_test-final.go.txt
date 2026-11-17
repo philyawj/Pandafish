@@ -1,0 +1,95 @@
+package main
+
+import (
+	"github.com/corentings/chess/v2"
+	"testing"
+)
+
+// Independent reconstruction of the released material/placement sum, so the
+// fixtures isolate the new interaction without changing material constants.
+func releasedStaticForPairTest(p *chess.Position, side chess.Color) int {
+	phase := 0
+	for s := chess.A1; s <= chess.H8; s++ {
+		phase += phaseWeight(p.Board().Piece(s).Type())
+	}
+	phase = min(24, phase)
+	score := 0
+	for s := chess.A1; s <= chess.H8; s++ {
+		piece := p.Board().Piece(s)
+		if piece == chess.NoPiece {
+			continue
+		}
+		rank := int(s) / 8
+		if piece.Color() == chess.Black {
+			rank = 7 - rank
+		}
+		value := pieceValues[piece.Type()] + placement(piece.Type(), int(s)%8, rank, phase)
+		if piece.Color() == side {
+			score += value
+		} else {
+			score -= value
+		}
+	}
+	return score
+}
+func TestBishopPairSquareColorControls(t *testing.T) {
+	for _, c := range []struct {
+		name, fen string
+		want      int
+	}{
+		{"single bishop", "8/8/8/7k/3B4/8/8/K7 w - - 0 1", 0},
+		{"opposite color bishops", "8/8/8/7k/3BB3/8/8/K7 w - - 0 1", 25},
+		{"promoted same color bishops", "8/8/8/7k/3B1B2/8/8/K7 w - - 0 1", 0},
+		{"three bishops one pair only", "8/8/8/7k/3BBB2/8/8/K7 w - - 0 1", 25},
+		{"both sides pair", "8/8/3bb3/7k/3BB3/8/8/K7 w - - 0 1", 0},
+		{"black pair", "8/8/3bb3/7k/8/8/8/K7 b - - 0 1", -25},
+	} {
+		t.Run(c.name, func(t *testing.T) {
+			p := evalFEN(t, c.fen)
+			if got := staticScore(p, chess.White) - releasedStaticForPairTest(p, chess.White); got != c.want {
+				t.Fatalf("bonus %d want %d", got, c.want)
+			}
+			if staticScore(p, chess.White) != -staticScore(p, chess.Black) {
+				t.Fatal("perspective mismatch")
+			}
+		})
+	}
+}
+func TestPairMaterialAndTacticalControls(t *testing.T) {
+	// Keep material fixed. B+B+N and B+N+N are both 900 cp before placement.
+	pair := evalFEN(t, "8/8/7k/8/3BBN2/8/8/K7 w - - 0 1")
+	mixed := evalFEN(t, "8/8/7k/8/3BNN2/8/8/K7 w - - 0 1")
+	if materialScore(pair, chess.White) != 900 || materialScore(mixed, chess.White) != 900 {
+		t.Fatal("material values changed")
+	}
+	// A mate with a queen on offer must survive. No root move is restricted.
+	p := evalFEN(t, "5r1k/6pp/7N/8/2Q5/8/8/K7 w - - 0 1")
+	best, score, ok := (&searcher{}).root(p, orderedMoves(p), 3)
+	if !ok || len(best) == 0 || score < mateScore-3 {
+		t.Fatalf("lost forcing mate: %v %d", best, score)
+	}
+	// Winning a queen outweighs keeping the pair, even when f6xe5 recaptures
+	// the capturing bishop and destroys that pair.
+	p = evalFEN(t, "7k/8/5p2/4q3/3B4/8/B7/K7 w - - 0 1")
+	best, _, ok = (&searcher{}).root(p, orderedMoves(p), 3)
+	if !ok || len(best) == 0 {
+		t.Fatal("search failed")
+	}
+	for _, s := range best {
+		for _, m := range p.ValidMoves() {
+			if m.String() == s && captureValue(p, m) != 900 {
+				t.Fatalf("declined queen for pair preference: %s", s)
+			}
+		}
+	}
+}
+
+func TestBishopPairColorAndFileMirrors(t *testing.T) {
+	original := evalFEN(t, "8/8/8/7k/3BB3/8/8/K7 w - - 0 1")
+	horizontal := evalFEN(t, "8/8/8/k7/3BB3/8/8/7K w - - 0 1")
+	colorMirror := evalFEN(t, "k7/8/8/3bb3/7K/8/8/8 b - - 0 1")
+	if staticScore(original, chess.White) != staticScore(horizontal, chess.White) ||
+		staticScore(original, chess.White) != staticScore(colorMirror, chess.Black) {
+		t.Fatal("bishop-pair evaluation changed under reflection")
+	}
+}

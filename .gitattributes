@@ -6,3 +6,11 @@ tools/benchmark/live/*/raw/** -whitespace
 tools/benchmark/live/*/client-investigation/*.log.txt -whitespace
 # Saved patches include a literal context prefix before original Go tabs.
 tools/benchmark/live/*/provenance/*.patch -whitespace
+
+# Hash-bearing research archives preserve original bytes across checkouts.
+tools/benchmark/research/v0.15.3-architecture/** -text
+tools/benchmark/research/v0.16-bishop-pair/** -text
+tools/benchmark/research/v0.16-next-assessment/** -text
+# Literal patch context and captured whitespace diagnostics are raw evidence.
+tools/benchmark/research/v0.15.3-architecture/v015-history-diff.patch -whitespace
+tools/benchmark/research/v0.15.3-architecture/prepublish-whitespace-check.txt -whitespace

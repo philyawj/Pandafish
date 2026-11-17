@@ -1,0 +1,4 @@
+package main
+import("testing";"github.com/corentings/chess/v2")
+var researchSink int
+func BenchmarkResearchStatic(b *testing.B){for _,c:=range []struct{name,fen string}{{"start",chess.StartingPosition().String()},{"middlegame","r2q1b1r/ppp1k1pp/4pn2/6BQ/2p5/2N5/PP3PPP/R4RK1 b - - 5 13"},{"ending","6k1/6p1/3rp1p1/ppR5/7P/P7/1P3PP1/6K1 b - - 1 32"}}{b.Run(c.name,func(b *testing.B){p:=evalFEN(&testing.T{},c.fen);b.ResetTimer();for i:=0;i<b.N;i++{researchSink=staticScore(p,chess.White)}})}}
