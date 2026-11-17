@@ -66,8 +66,8 @@ The promoted [coordinated search-core candidate](research/v0.16-search-core/READ
 implements the first architecture experiment from v0.15.3. It passes exact-score,
 best-move membership, rule/cancellation and equal-time checks. Its concurrent
 50-game screens score 65% against tagged v0.15.3, 43% against Skill 2 and 49%
-against pinned Sacrifice, with no unfinished games or forfeits. I approved
-promotion as v0.16 from this screen, with the original uncertainty retained. The proposed larger confirmation was deferred. Future candidates
+against pinned Sacrifice, with no unfinished games or forfeits. Promotion to
+v0.16 was approved from this screen, with the original uncertainty retained. The proposed larger confirmation was deferred. Future candidates
 compare against tagged v0.16; no new feature is bundled into this promotion.
 
 The promoted [legal tactical generation/storage candidate](research/v0.17-search-moves/README.md)
@@ -76,7 +76,7 @@ work. Its additive pinned-library API and per-ply buffers preserve all tested
 fixed-depth nodes, scores and moves, reduce fixed-work time by about 39–43%,
 and cut timed-kernel allocation from about 71 MB to 9.5 MB/request. Its concurrent
 50-game screens score 59% against v0.16 and 53% each against Skill 2 and pinned
-Sacrifice, with zero unfinished games/forfeits. I approved promotion as v0.17 under the practical gate, retaining the
+Sacrifice, with zero unfinished games/forfeits. Promotion to v0.17 was approved under the practical gate, retaining the
 finite-sample/color limits. The proposed larger confirmation remains deferred;
 the next candidate compared against tagged v0.17.
 
@@ -86,7 +86,7 @@ all 192 fixed-depth node/score/move pairs, reduces selected fixed-work elapsed
 time about 12–15%, and completes 2,046 native requests correctly. Its concurrent
 50-game screens score 57% against tagged v0.17, 73% against Skill 2 and 51%
 against pinned Sacrifice, with zero forfeits/unfinished games and 150 independent
-legal PGN replays. I approved promotion as v0.18 under the practical gate, while keeping
+legal PGN replays. Promotion to v0.18 was approved under the practical gate, with
 the fitted values archived. Opening concentration and wide uncertainty limit
 strength claims; a broader confirmation is justified before raising the target
 or claiming a large general gain. The larger confirmation remains deferred; future candidates compare against
@@ -97,20 +97,20 @@ repairs early transposition boundaries, audits all legal student witness paths
 before labels and freezes 76 independent groups. The first post-release fit
 remains archived separately. The repaired fit passes its surrogate gate and
 improves fresh finite-reference actual-choice loss, but fails public short-budget
-and mate-survival gates. I keep the pipeline repair, archive the model, and
-restore playing source to v0.18. No new strength games or release followed.
+and mate-survival gates. The pipeline repair is retained, the model archived,
+and playing source restored to v0.18. No new strength games or release followed.
 [Next research priorities](research/v0.19-independent-families/NEXT.md) focus on
 sharp/mate-containing branches and broader training-only action coverage.
 
-I completed that [sharp-branch retry](research/v0.19-sharp-branches/README.md)
-with balanced turns, retained mate alternatives and a pre-fit offline target
+The completed [sharp-branch retry](research/v0.19-sharp-branches/README.md)
+uses balanced turns, retained mate alternatives and a pre-fit offline target
 correction. It fails its fresh surrogate holdout before engine activation;
 v0.18 play remains unchanged and no strength games ran. The archive preserves
 all failures and the independently verified training-leaf quiet mates.
-My [reassessed next priorities](research/v0.19-sharp-branches/NEXT.md) now start
+The [reassessed next priorities](research/v0.19-sharp-branches/NEXT.md) now start
 with a bounded exact quiet-mate proof experiment, ahead of another weight fit.
 
-I publish these attempts together in **v0.19**, with unchanged v0.18 playing
+These attempts are published together in **v0.19**, with unchanged v0.18 playing
 policy and [Go-only research tooling](../research/README.md). The
 [release summary](../../docs/RESEARCH_V019.md) distinguishes each failed gate,
 retired historical workflow, preserved evidence and ranked next experiment.
@@ -118,10 +118,9 @@ Future candidates compare against tagged v0.19. No new strength screen ran.
 
 ## Why this exists
 
-This benchmark runner was created without knowing how Fishtest works. After
-building it, we realized it follows a similar methodology: compare a candidate
-engine against a baseline through controlled matches and use the results to
-evaluate changes.
+This benchmark runner independently adopted a methodology similar to Fishtest:
+compare a candidate engine against a baseline through controlled matches and
+use the results to evaluate changes.
 
 [Fishtest](https://official-stockfish.github.io/docs/fishtest-wiki/Fishtest-FAQ.html)
 distributes games across volunteer computers and uses statistical tests to
@@ -130,8 +129,8 @@ game counts and reports scores without a statistical pass/fail verdict.
 
 For now, it lives in the same repository so engine changes, benchmark tests,
 instructions, and supporting results can evolve together in one pull request.
-The separate `tools/benchmark/` folder keeps it out of the engine executable while
-we build out Pandafish. A separate project would make more sense if the runner
+The separate `tools/benchmark/` folder keeps it out of the engine executable.
+A separate project would make more sense if the runner
 eventually serves other engines or needs distributed workers.
 
 ## Build
@@ -236,7 +235,7 @@ git archive v0.19 | tar -x -C "$build_dir"
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
 deleted after building. Keep the released binaries as baselines. The Go runner
-accepts executable paths directly and contains no paths to my machine.
+accepts executable paths directly and contains no machine-specific paths.
 Official Stockfish builds include their default neural network. Custom engine
 builds requiring external data files need those files available independently;
 only the executable is copied into the benchmark's temporary snapshot.
@@ -362,8 +361,8 @@ result folders. Direct match mode also supports historical two-opponent runs.
 
 ### Why routine comparisons are concurrent
 
-I accepted a modest throughput cost to shorten the development
-loop. The [v0.13 calibration](results/v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/README.md)
+A modest throughput cost was accepted to shorten the development loop.
+The [v0.13 calibration](results/v0.13-parallel-check-vs-v0.12-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/README.md)
 compared unchanged opponents with published results and measured search work
 under one-search and three-search loads. All 150 games completed in about
 8 minutes 34 seconds with no forfeits or unfinished games. Typical probe
@@ -684,7 +683,7 @@ separately from routine results.
 ## Stockfish skill progression
 
 The ladder began at Skill Level 1. Starting with the post-v0.13 workflow,
-**Skill Level 2 is the standard reference**. I selected it after
+**Skill Level 2 is the standard reference**. It was selected after
 the Skill 1 results and a 60% first 50-game screen at Skill 2. This is a practical
 comparison point, not proof of a reliable above-50% rate at that level.
 
@@ -888,8 +887,8 @@ assess selective quiescence, selective main search, and richer classical
 scoring. The review includes a reproducible ordinary-exchange cutoff example
 and separates measured efficiency from external strength. These are research
 options. Recommendation 1 was subsequently selected for the local v0.13
-experiment; recommendations 2 and 3 remain future alternatives. I
-approved the selected candidate for v0.13.
+experiment; recommendations 2 and 3 remain future alternatives. The selected
+candidate was approved for v0.13.
 
 The local [v0.13 selective-quiescence experiment](research/v0.13-candidates/selective-quiescence-audit/README.md)
 records the SEE tests, broader-search ablation, and selected-position diagnostic.

@@ -1,8 +1,8 @@
 ## Publication note for v0.19
 
-I preserve the original local experiment report below, including its stop/check-in
-state. I subsequently received approval to publish these attempts together in
-v0.19. I keep playing policy at v0.18; the [release summary](/docs/RESEARCH_V019.md)
+The original local experiment report below retains its stop/check-in state.
+These attempts were subsequently approved for publication together in v0.19.
+Playing policy remains v0.18; the [release summary](/docs/RESEARCH_V019.md)
 and [Go tooling guide](/tools/research/README.md) describe current status and
 replace historical script commands. Original source remains in the hashed
 release attachment.

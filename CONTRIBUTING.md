@@ -1,16 +1,16 @@
 # Contributing
 
-I welcome GitHub issues and pull requests! Feel free to report bugs, suggest
-ideas, or help improve Pandafish.
+Bug reports, suggestions and focused pull requests are welcome.
 
-The [README](README.md#milestones-and-plans) outlines the direction I'm currently
-taking. For larger changes, please open an issue first so we can discuss the idea.
+The [README](README.md#milestones-and-plans) outlines the project direction.
+Discuss larger changes in an issue before implementation.
 
-Keep pull requests focused, describe what changed, and mention how you tested it.
+Keep pull requests focused, describe the change and include its validation.
 The README also covers setup and the checks to run before submitting a PR.
-I keep all repository program, test and research source in Go. Read the short
-[agent guidance](AGENTS.md). I write PR/release explanations in first person
-and exclude the prohibited role word specified there from publication text.
+All repository program, test and research source must be Go. Follow the short
+[agent guidance](AGENTS.md). Use neutral, factual engineering prose without
+first-person voice or personal framing, and exclude its prohibited role word
+from PR/release text.
 
 For changes intended to improve playing strength, follow the
 [benchmark workflow](tools/benchmark/README.md#test-a-development-candidate).
@@ -23,5 +23,4 @@ useful evidence, but does not by itself establish a small strength improvement.
 Run the Go
 tests and include focused positions that exercise the behavior changed.
 
-I follow the [release workflow](RELEASING.md) when preparing and
-publishing a version.
+Follow the [release workflow](RELEASING.md) when preparing and publishing a version.

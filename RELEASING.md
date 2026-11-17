@@ -169,28 +169,28 @@ hypothesis from the result, rather than following the old ranking as a checklist
 
 
 v0.15.3 archives the unpromoted bishop-pair screen and a larger architecture
-investigation. I explicitly selected archive-only treatment and
-unchanged play. Keep all diagnostic prototypes and intentional/real failures
+investigation. Archive-only treatment and unchanged play were explicitly
+selected. Keep all diagnostic prototypes and intentional/real failures
 outside the normal build. Distinguish original bishop-pair results, retrospective
 v0.15.2 controls, architecture position probes and release smoke games. No
 prototype efficiency number is an Elo claim, and no optional confirmation
 runs automatically. Future work starts from the tagged research release and
 follows its measured larger-project plan rather than a fixed feature checklist.
 
-## My source and publication rules
+## Source and publication rules
 
-I keep all repository engine, tool, test and research source in Go, including
-archived source and subprocess fixtures. Read [AGENTS.md](AGENTS.md). I write
-PR descriptions and release notes in first person and never use the word
-"maintainer" in their titles or descriptions. Before publishing I run
-`go run ./tools/research wording --file PATH` on both prepared bodies and check
-the titles too.
+All repository engine, tool, test and research source must be Go, including
+archived source and subprocess fixtures. Follow [AGENTS.md](AGENTS.md).
+Use neutral, factual engineering prose without first-person voice or personal
+framing. Never use the word "maintainer" in PR/release titles or descriptions.
+Before publishing, run `go run ./tools/research wording --file PATH` on both
+prepared bodies and check the titles too.
 
 v0.19 publishes the [completed evaluation investigation](docs/RESEARCH_V019.md)
-and Go-only migration with unchanged v0.18 playing policy. I preserve original
-scripts and unedited evidence in the hashed release attachment, retain raw
-results in Git and use [Go research commands](tools/research/README.md) for
+and Go-only migration with unchanged v0.18 playing policy. Original scripts and
+unedited evidence remain in the hashed release attachment. Raw results stay
+in Git, with [Go research commands](tools/research/README.md) for
 supported replay/verification. Retired collectors/trainers are documented as
-retired; I do not claim that verifying their frozen output reproduces fitting.
+retired; verifying their frozen output does not reproduce fitting.
 No new strength screen is required; release smoke games remain integration
-evidence. I keep every smoke failure and do not rerun for a favorable score.
+evidence. Preserve every smoke failure; do not rerun for a favorable score.

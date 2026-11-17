@@ -130,7 +130,7 @@ func TestQuietMatePositiveAndEscapeNegative(t *testing.T) {
 
 func TestPublicationWording(t *testing.T) {
 	path := filepath.Join(t.TempDir(), "notes.md")
-	if err := os.WriteFile(path, []byte("I kept playing policy unchanged."), 0644); err != nil {
+	if err := os.WriteFile(path, []byte("Playing policy remains unchanged."), 0644); err != nil {
 		t.Fatal(err)
 	}
 	if err := run([]string{"wording", "--file", path}); err != nil {
@@ -141,6 +141,14 @@ func TestPublicationWording(t *testing.T) {
 	}
 	if err := run([]string{"wording", "--file", path}); err == nil {
 		t.Fatal("prohibited publication wording accepted")
+	}
+	for _, text := range []string{"I kept playing policy unchanged.", "We preserved all results.", "Our next recommendation is bounded."} {
+		if err := os.WriteFile(path, []byte(text), 0644); err != nil {
+			t.Fatal(err)
+		}
+		if err := run([]string{"wording", "--file", path}); err == nil {
+			t.Fatal("first-person publication text accepted")
+		}
 	}
 }
 

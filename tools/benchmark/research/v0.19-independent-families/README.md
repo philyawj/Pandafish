@@ -1,18 +1,18 @@
 ## Publication note for v0.19
 
-I preserve the original local experiment report below, including its stop/check-in
-state. I subsequently received approval to publish these attempts together in
-v0.19. I keep playing policy at v0.18; the [release summary](/docs/RESEARCH_V019.md)
+The original local experiment report below retains its stop/check-in state.
+These attempts were subsequently approved for publication together in v0.19.
+Playing policy remains v0.18; the [release summary](/docs/RESEARCH_V019.md)
 and [Go tooling guide](/tools/research/README.md) describe current status and
 replace historical script commands. Original source remains in the hashed
 release attachment.
 
 ## v0.19 tooling migration
 
-I preserve this historical report and its original measurements. I retired the
-Python/shell runners in v0.19; commands below describe the original experiment.
-I now use the [Go research tools](/tools/research/README.md). Original scripts
-and unedited evidence remain in the [hashed release archive](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz).
+This historical report retains its original measurements. Python/shell runners
+were retired in v0.19; commands below describe the original experiment.
+Current verification uses the [Go research tools](/tools/research/README.md).
+Original scripts and unedited evidence remain in the [hashed release archive](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz).
 
 # Repaired family boundary and fresh evaluation fit
 
