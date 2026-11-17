@@ -1,0 +1,86 @@
+{
+  "eligible_root_counts": {
+    "train": 223,
+    "validation": 74,
+    "holdout": 81
+  },
+  "excluded_roots": 39,
+  "training_pairs": 567,
+  "selected": {
+    "base_tag": "v0.18",
+    "selected_on": "validation surrogate regret only, severe gate, zero included",
+    "kind": "pairwise-ridge",
+    "regularization": 1,
+    "middle": [
+      4,
+      5,
+      0,
+      0,
+      0,
+      7,
+      3,
+      0,
+      0,
+      5,
+      4,
+      7
+    ],
+    "ending": [
+      3,
+      0,
+      0,
+      0,
+      0,
+      5,
+      0,
+      3,
+      0,
+      3,
+      4,
+      1
+    ],
+    "plan_sha256": "7527909f5344c2236c244ffa75f35345c9f1d59bba8071d26670c11f75ed59e8",
+    "membership_sha256": "24a3bfb02d3e5454b2a72e5af319a78dd1b65a977af25e601897d996085af683",
+    "corpus_sha256": "97e1a99d41c24ca4e71e23045cf4264e18273e39f79502af4a26cf8f1c677de1"
+  },
+  "holdout_relative_improvement": 0.08351848111492621,
+  "surrogate_gate_passed": true,
+  "quality": {
+    "train": {
+      "baseline": {
+        "roots": 223,
+        "mean_regret_cp": 30.816143497757846,
+        "severe_over_300": 3
+      },
+      "candidate": {
+        "roots": 223,
+        "mean_regret_cp": 27.347533632286996,
+        "severe_over_300": 2
+      }
+    },
+    "validation": {
+      "baseline": {
+        "roots": 74,
+        "mean_regret_cp": 30.73423423423423,
+        "severe_over_300": 1
+      },
+      "candidate": {
+        "roots": 74,
+        "mean_regret_cp": 28.905405405405407,
+        "severe_over_300": 1
+      }
+    },
+    "holdout": {
+      "baseline": {
+        "roots": 81,
+        "mean_regret_cp": 61.123456790123456,
+        "severe_over_300": 4
+      },
+      "candidate": {
+        "roots": 81,
+        "mean_regret_cp": 56.01851851851852,
+        "severe_over_300": 4
+      }
+    }
+  }
+}

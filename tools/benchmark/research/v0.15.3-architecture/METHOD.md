@@ -1,8 +1,15 @@
+## v0.19 tooling migration
+
+I preserve this historical report and its original measurements. I retired the
+Python/shell runners in v0.19; commands below describe the original experiment.
+I now use the [Go research tools](/tools/research/README.md). Original scripts
+and unedited evidence remain in the [hashed release archive](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz).
+
 # Methods, records and reproducibility
 
 ## Frozen position suite
 
-[make_inputs.py](make_inputs.py) freezes [inputs.json](inputs.json) before probes:
+[make_inputs.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) freezes [inputs.json](inputs.json) before probes:
 24 positions from the first 24 games of the older conversion previous-version
 match, at cycling plies 16/32/48/64, clamped to two plies before game end if
 necessary. No selection by result or new-engine output. Add the starting board,
@@ -18,7 +25,7 @@ is selected after seeing savings.
 
 ## Isolated variants
 
-[setup.py](setup.py) creates small scratch copies of tagged v0.15.2 root Go,
+[setup.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) creates small scratch copies of tagged v0.15.2 root Go,
 module, internal and testdata files. Each [overlay JSON](overlay-safe-cache.json)
 records exactly what differs from that tag. No diagnostic source is compiled
 by the repository's normal build. No bishop-pair evaluation is in these trees.
@@ -31,12 +38,12 @@ preserved in the UCI result files.
 
 The coordinated-kernel prototype is an explicitly exploratory combination,
 chosen after individual ablations: one-best root, PVS, safe cache and tactical
-ordering. [setup_combo.py](setup_combo.py) records its construction. This is
+ordering. [setup_combo.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) records its construction. This is
 not an independent confirmation, tuned weight or validated strength candidate.
 
 ## Fixed-depth and correctness checks
 
-[run_variants.py](run_variants.py) builds each scratch tree, runs root/internal
+[run_variants.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) builds each scratch tree, runs root/internal
 tests and the adversarial graph-history control, then depth-three/four searches
 with full history and an independent ten-second per-search limit. Every best
 root tie is retained except in variants explicitly changing the tie contract.
@@ -46,7 +53,7 @@ Incomplete placeholders are not interpreted as evaluations.
 Warm fixed-depth probes repeat the root and search the recorded next position
 with warm and fresh tables. This toy harness keeps table generation fixed;
 native UCI probes separately test actual per-request generation semantics.
-[run_followup.py](run_followup.py) adds the prespecified depth-five/six probes.
+[run_followup.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) adds the prespecified depth-five/six probes.
 
 The first normal test invocation accidentally ran diagnostic functions without
 an output path. Those driver failures are retained in `*-tests.txt` and
@@ -96,7 +103,7 @@ selected timed workload, not every chess position or a universal GC overhead.
 
 ## Native equal-time probes
 
-[uci_probes.py](uci_probes.py) runs one searching process at a time, records raw
+[uci_probes.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) runs one searching process at a time, records raw
 UCI output and legal moves, and has independent watchdogs. Startup and readiness
 are outside the request timer; full-history `position` parsing is inside.
 Fresh `ucinewgame` resets each cold request. Three trials use reversed engine
@@ -125,14 +132,14 @@ under LMR. Reported depth/NPS therefore do not directly measure relative strengt
 
 ## Move-quality and leaf diagnostics
 
-[referee.py](referee.py) checks every distinct selected legal move and an
+[referee.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) checks every distinct selected legal move and an
 unrestricted comparator for each full-history position using Stockfish 19,
 Skill 20, limiting off, one thread, 64 MiB and 100,000 nodes per fresh-hash query.
 All score-bearing iterations are retained; the last completed exact iteration
 is used instead of a later incomplete bound update. Identical queries are
 reused when the coordinated block is added; the earlier file is retained.
 
-[analyse.py](analyse.py) retains raw and clamped cp differences, negative
+[analyse.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) retains raw and clamped cp differences, negative
 reference disagreements, mate transitions and per-case results. It averages
 repeated choices within a case before group means. Different mate/cp mixtures
 must not be pooled into one cp or Elo statistic. Equal-budget move-quality
@@ -141,7 +148,7 @@ probes are diagnostics, not games or a calibrated strength predictor.
 [leaf_trace_test.go.txt](leaf_trace_test.go.txt) reconstructs one maximizing
 line per saved diagnostic alternative from the released evaluator, including
 capture quiescence. It uses exact re-searches, deterministic first ties and a
-separate watchdog, not a warm live PV reconstruction. [leaf_referee.py](leaf_referee.py)
+separate watchdog, not a warm live PV reconstruction. [leaf_referee.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz)
 checks the resulting 16 leaf positions with full histories and the same finite
 node referee. An apparently reasonable leaf on the engine's own line does not
 validate its evaluation of a stronger opponent response. The counterfactual

@@ -1,0 +1,689 @@
+{
+  "scope": "Post-result descriptive audit only, no refit or new engine probes. Fixed-depth records reuse saved candidate and identity-equivalent v0.18 baseline sources.",
+  "public_regressions": [
+    {
+      "id": "16G1f9rx",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 d2d3 f8d6 e1g1",
+      "loss": {
+        "baseline": {
+          "mean_loss_cp": 0.0,
+          "losses": [
+            0,
+            0,
+            0
+          ],
+          "moves": [
+            "e8g8",
+            "e8g8",
+            "e8g8"
+          ]
+        },
+        "candidate": {
+          "mean_loss_cp": 423.0,
+          "losses": [
+            423,
+            423,
+            423
+          ],
+          "moves": [
+            "c6d4",
+            "c6d4",
+            "c6d4"
+          ]
+        }
+      },
+      "native": [
+        {
+          "actor": "baseline",
+          "trial": 0,
+          "depth": 5,
+          "move": "e8g8",
+          "nodes": 48701
+        },
+        {
+          "actor": "candidate",
+          "trial": 0,
+          "depth": 5,
+          "move": "c6d4",
+          "nodes": 38507
+        },
+        {
+          "actor": "candidate",
+          "trial": 1,
+          "depth": 5,
+          "move": "c6d4",
+          "nodes": 38507
+        },
+        {
+          "actor": "baseline",
+          "trial": 1,
+          "depth": 5,
+          "move": "e8g8",
+          "nodes": 50345
+        },
+        {
+          "actor": "baseline",
+          "trial": 2,
+          "depth": 5,
+          "move": "e8g8",
+          "nodes": 49127
+        },
+        {
+          "actor": "candidate",
+          "trial": 2,
+          "depth": 5,
+          "move": "c6d4",
+          "nodes": 38507
+        }
+      ],
+      "cold_fixed": [
+        {
+          "depth": 3,
+          "baseline": {
+            "Best": [
+              "c6d4"
+            ],
+            "Score": -1,
+            "Nodes": 2928
+          },
+          "candidate": {
+            "Best": [
+              "c6d4"
+            ],
+            "Score": -12,
+            "Nodes": 2796
+          }
+        },
+        {
+          "depth": 4,
+          "baseline": {
+            "Best": [
+              "e8g8"
+            ],
+            "Score": -10,
+            "Nodes": 14009
+          },
+          "candidate": {
+            "Best": [
+              "c6d4"
+            ],
+            "Score": -33,
+            "Nodes": 12279
+          }
+        }
+      ]
+    },
+    {
+      "id": "broader-previous-06-ply54",
+      "position": "position startpos moves e2e4 c7c5 g1f3 d7d6 f1d3 c8e6 e1g1 b8d7 d3b5 g8f6 b1c3 e6g4 d2d3 e7e5 b5d7 d8d7 c1g5 f8e7 g5f6 e7f6 c3d5 e8g8 d1d2 g4f3 g2f3 b7b5 c2c3 g8h8 f3f4 d7g4 g1h1 g4f3 h1g1 e5f4 d2f4 f3f4 d5f4 f6e5 f4d5 g7g5 f1d1 b5b4 d3d4 e5g7 a1b1 a8e8 f2f3 f7f5 d5c7 e8e7 c7d5 e7e8 d5c7 e8e7",
+      "loss": {
+        "baseline": {
+          "mean_loss_cp": 1.0,
+          "losses": [
+            1,
+            1,
+            1
+          ],
+          "moves": [
+            "c7d5",
+            "c7d5",
+            "c7d5"
+          ]
+        },
+        "candidate": {
+          "mean_loss_cp": 300.0,
+          "losses": [
+            300,
+            300,
+            300
+          ],
+          "moves": [
+            "d4c5",
+            "d4c5",
+            "d4c5"
+          ]
+        }
+      },
+      "native": [
+        {
+          "actor": "baseline",
+          "trial": 0,
+          "depth": 5,
+          "move": "c7d5",
+          "nodes": 49436
+        },
+        {
+          "actor": "candidate",
+          "trial": 0,
+          "depth": 5,
+          "move": "d4c5",
+          "nodes": 46709
+        },
+        {
+          "actor": "candidate",
+          "trial": 1,
+          "depth": 5,
+          "move": "d4c5",
+          "nodes": 45705
+        },
+        {
+          "actor": "baseline",
+          "trial": 1,
+          "depth": 5,
+          "move": "c7d5",
+          "nodes": 49207
+        },
+        {
+          "actor": "baseline",
+          "trial": 2,
+          "depth": 5,
+          "move": "c7d5",
+          "nodes": 48857
+        },
+        {
+          "actor": "candidate",
+          "trial": 2,
+          "depth": 5,
+          "move": "d4c5",
+          "nodes": 45658
+        }
+      ],
+      "cold_fixed": [
+        {
+          "depth": 3,
+          "baseline": {
+            "Best": [
+              "c7d5"
+            ],
+            "Score": 0,
+            "Nodes": 3159
+          },
+          "candidate": {
+            "Best": [
+              "c7d5"
+            ],
+            "Score": 0,
+            "Nodes": 3547
+          }
+        },
+        {
+          "depth": 4,
+          "baseline": {
+            "Best": [
+              "c7d5"
+            ],
+            "Score": 0,
+            "Nodes": 9464
+          },
+          "candidate": {
+            "Best": [
+              "c7d5"
+            ],
+            "Score": 0,
+            "Nodes": 9576
+          }
+        }
+      ]
+    },
+    {
+      "id": "neutral-10-ply32",
+      "position": "position startpos moves c2c4 e7e5 b1c3 g8f6 d2d4 e5d4 d1d4 b8c6 d4e3 f8e7 g1f3 e8g8 c3d5 d7d6 f3d4 c6e5 f2f4 f6g4 e3e4 f7f5 d5e7 d8e7 e4d5 e5f7 d4f5 c8f5 d5f5 f7e5 f5c2 e5c6 c2d3 c6b4",
+      "loss": {
+        "baseline": {
+          "mean_loss_cp": 0.0,
+          "losses": [
+            0,
+            0,
+            0
+          ],
+          "moves": [
+            "d3b3",
+            "d3b3",
+            "d3b3"
+          ]
+        },
+        "candidate": {
+          "mean_loss_cp": 294.0,
+          "losses": [
+            294,
+            294,
+            294
+          ],
+          "moves": [
+            "d3c3",
+            "d3c3",
+            "d3c3"
+          ]
+        }
+      },
+      "native": [
+        {
+          "actor": "baseline",
+          "trial": 0,
+          "depth": 4,
+          "move": "d3b3",
+          "nodes": 27886
+        },
+        {
+          "actor": "candidate",
+          "trial": 0,
+          "depth": 4,
+          "move": "d3c3",
+          "nodes": 27147
+        },
+        {
+          "actor": "candidate",
+          "trial": 1,
+          "depth": 4,
+          "move": "d3c3",
+          "nodes": 27096
+        },
+        {
+          "actor": "baseline",
+          "trial": 1,
+          "depth": 4,
+          "move": "d3b3",
+          "nodes": 29835
+        },
+        {
+          "actor": "baseline",
+          "trial": 2,
+          "depth": 4,
+          "move": "d3b3",
+          "nodes": 29555
+        },
+        {
+          "actor": "candidate",
+          "trial": 2,
+          "depth": 4,
+          "move": "d3c3",
+          "nodes": 27317
+        }
+      ],
+      "cold_fixed": [
+        {
+          "depth": 3,
+          "baseline": {
+            "Best": [
+              "d3c3"
+            ],
+            "Score": 34,
+            "Nodes": 3669
+          },
+          "candidate": {
+            "Best": [
+              "d3c3"
+            ],
+            "Score": -13,
+            "Nodes": 4272
+          }
+        },
+        {
+          "depth": 4,
+          "baseline": {
+            "Best": [
+              "d3b3"
+            ],
+            "Score": 41,
+            "Nodes": 31969
+          },
+          "candidate": {
+            "Best": [
+              "d3c3"
+            ],
+            "Score": -2,
+            "Nodes": 36587
+          }
+        }
+      ]
+    },
+    {
+      "id": "HhPI3vCx",
+      "position": "position fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1 moves e2e4 b8c6 d2d4 d7d5 e4e5 f7f6 f1b5 f6e5 d4e5 e7e6 g1f3 c8d7 e1g1 c6e5 f3e5 d7b5 c2c4 b5c4 e5c4 d5c4 d1h5 e8e7 c1g5 g8f6 b1c3",
+      "loss": {
+        "baseline": {
+          "mean_loss_cp": 206.0,
+          "losses": [
+            206,
+            206,
+            206
+          ],
+          "moves": [
+            "d8d3",
+            "d8d3",
+            "d8d3"
+          ]
+        },
+        "candidate": {
+          "mean_loss_cp": 448.0,
+          "losses": [
+            448,
+            448,
+            448
+          ],
+          "moves": [
+            "d8d2",
+            "d8d2",
+            "d8d2"
+          ]
+        }
+      },
+      "native": [
+        {
+          "actor": "baseline",
+          "trial": 0,
+          "depth": 4,
+          "move": "d8d3",
+          "nodes": 38209
+        },
+        {
+          "actor": "candidate",
+          "trial": 0,
+          "depth": 4,
+          "move": "d8d2",
+          "nodes": 36158
+        },
+        {
+          "actor": "candidate",
+          "trial": 1,
+          "depth": 4,
+          "move": "d8d2",
+          "nodes": 36072
+        },
+        {
+          "actor": "baseline",
+          "trial": 1,
+          "depth": 4,
+          "move": "d8d3",
+          "nodes": 39052
+        },
+        {
+          "actor": "baseline",
+          "trial": 2,
+          "depth": 4,
+          "move": "d8d3",
+          "nodes": 39239
+        },
+        {
+          "actor": "candidate",
+          "trial": 2,
+          "depth": 4,
+          "move": "d8d2",
+          "nodes": 36016
+        }
+      ],
+      "cold_fixed": [
+        {
+          "depth": 3,
+          "baseline": {
+            "Best": [
+              "d8d3"
+            ],
+            "Score": 177,
+            "Nodes": 5303
+          },
+          "candidate": {
+            "Best": [
+              "d8d3"
+            ],
+            "Score": 132,
+            "Nodes": 5959
+          }
+        },
+        {
+          "depth": 4,
+          "baseline": {
+            "Best": [
+              "d8d3"
+            ],
+            "Score": 175,
+            "Nodes": 15893
+          },
+          "candidate": {
+            "Best": [
+              "d8d2"
+            ],
+            "Score": 98,
+            "Nodes": 16782
+          }
+        }
+      ]
+    },
+    {
+      "id": "neutral-17-ply16",
+      "position": "position startpos moves d2d4 d7d5 g1f3 g8f6 b1c3 b8c6 c1f4 c8f5 e2e3 e7e6 f1d3 f8d6 d3f5 e6f5 f4g5 d6b4",
+      "loss": {
+        "baseline": {
+          "mean_loss_cp": 11.0,
+          "losses": [
+            11,
+            11,
+            11
+          ],
+          "moves": [
+            "d1d3",
+            "d1d3",
+            "d1d3"
+          ]
+        },
+        "candidate": {
+          "mean_loss_cp": 102.0,
+          "losses": [
+            102,
+            102,
+            102
+          ],
+          "moves": [
+            "e1f1",
+            "e1f1",
+            "e1f1"
+          ]
+        }
+      },
+      "native": [
+        {
+          "actor": "baseline",
+          "trial": 0,
+          "depth": 5,
+          "move": "d1d3",
+          "nodes": 31301
+        },
+        {
+          "actor": "candidate",
+          "trial": 0,
+          "depth": 5,
+          "move": "e1f1",
+          "nodes": 48127
+        },
+        {
+          "actor": "candidate",
+          "trial": 1,
+          "depth": 5,
+          "move": "e1f1",
+          "nodes": 46684
+        },
+        {
+          "actor": "baseline",
+          "trial": 1,
+          "depth": 5,
+          "move": "d1d3",
+          "nodes": 31301
+        },
+        {
+          "actor": "baseline",
+          "trial": 2,
+          "depth": 5,
+          "move": "d1d3",
+          "nodes": 31301
+        },
+        {
+          "actor": "candidate",
+          "trial": 2,
+          "depth": 5,
+          "move": "e1f1",
+          "nodes": 47551
+        }
+      ],
+      "cold_fixed": [
+        {
+          "depth": 3,
+          "baseline": {
+            "Best": [
+              "g5f6"
+            ],
+            "Score": 30,
+            "Nodes": 898
+          },
+          "candidate": {
+            "Best": [
+              "g5f6"
+            ],
+            "Score": 37,
+            "Nodes": 719
+          }
+        },
+        {
+          "depth": 4,
+          "baseline": {
+            "Best": [
+              "g5f6"
+            ],
+            "Score": 19,
+            "Nodes": 6135
+          },
+          "candidate": {
+            "Best": [
+              "g5f6"
+            ],
+            "Score": 37,
+            "Nodes": 3493
+          }
+        }
+      ]
+    }
+  ],
+  "fresh_forced_loss_coverage": [
+    {
+      "id": "fresh-024-ply48",
+      "fitting_eligible": false,
+      "labelled_alternatives": [
+        "c1a3",
+        "c3d4",
+        "c4c5",
+        "h1g1"
+      ],
+      "actual_chosen_moves": [
+        {
+          "actor": "candidate",
+          "move": "h1g1",
+          "was_labelled": true
+        },
+        {
+          "actor": "baseline",
+          "move": "c4c5",
+          "was_labelled": true
+        }
+      ],
+      "root_reference": {
+        "depth": 17,
+        "nodes": 100025,
+        "cp": -1044,
+        "mate": null,
+        "lowerbound": false,
+        "upperbound": false,
+        "pv": [
+          "c1a3",
+          "d6e5",
+          "c3d4",
+          "f3h1",
+          "d4e5",
+          "h8h2",
+          "f1g1",
+          "h2h6",
+          "c4c5",
+          "b6c5",
+          "a3c5",
+          "f7f5",
+          "c5f2",
+          "f5f4"
+        ]
+      },
+      "flag": {
+        "position": "position startpos moves b1c3 e7e6 a2a4 b8c6 e2e3 b7b6 f1c4 a7a6 e1f1 d7d5 c4d3 g8f6 g1e2 f8d6 e2d4 c6b4 e3e4 c8b7 f2f3 c7c5 d4b3 c5c4 d3c4 d5c4 b3d4 h7h5 c3e2 h5h4 c2c3 b4d3 b2b3 f6e4 f3e4 d8f6 d4f3 h4h3 b3c4 b7e4 e2d4 e6e5 d1e2 h3g2 e2g2 e5d4 g2e2 f6f3 e2f3 e4f3",
+        "root": {
+          "depth": 17,
+          "nodes": 100025,
+          "cp": -1044,
+          "mate": null,
+          "lowerbound": false,
+          "upperbound": false,
+          "pv": [
+            "c1a3",
+            "d6e5",
+            "c3d4",
+            "f3h1",
+            "d4e5",
+            "h8h2",
+            "f1g1",
+            "h2h6",
+            "c4c5",
+            "b6c5",
+            "a3c5",
+            "f7f5",
+            "c5f2",
+            "f5f4"
+          ]
+        },
+        "selected": [
+          {
+            "actor": "candidate",
+            "trial": 0,
+            "move": "h1g1",
+            "reference": {
+              "depth": 40,
+              "nodes": 100020,
+              "cp": null,
+              "mate": -4,
+              "lowerbound": false,
+              "upperbound": false,
+              "pv": [
+                "h1g1",
+                "h8h2",
+                "g1g2",
+                "h2g2",
+                "c3d4",
+                "g2f2",
+                "f1g1",
+                "d6h2"
+              ]
+            }
+          },
+          {
+            "actor": "baseline",
+            "trial": 0,
+            "move": "c4c5",
+            "reference": {
+              "depth": 15,
+              "nodes": 100024,
+              "cp": -1141,
+              "mate": null,
+              "lowerbound": false,
+              "upperbound": false,
+              "pv": [
+                "c4c5",
+                "b6c5",
+                "c1a3",
+                "f3h1",
+                "f1g1",
+                "h8h6",
+                "g1h1",
+                "d3f2",
+                "h1g1"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

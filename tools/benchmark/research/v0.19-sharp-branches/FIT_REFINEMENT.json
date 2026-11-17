@@ -1,0 +1,28 @@
+{
+  "stage": "Before any coefficient fitting or validation/holdout quality calculation in this batch. No empirical model-quality outcome has been observed.",
+  "reason": "Algebraic target direction error: clipping teacher pair gap before subtracting a correct large base gap can demand a correction in the wrong direction.",
+  "old_formula": "clip(teacher_gap,-400,400)-base_gap",
+  "effective_formula": "clip(teacher_gap-base_gap,-400,400)",
+  "controls": [
+    {
+      "teacher_gap": 2000,
+      "base_gap": 1000,
+      "old_target": -600,
+      "new_target": 400
+    },
+    {
+      "teacher_gap": -2000,
+      "base_gap": -1000,
+      "old_target": 600,
+      "new_target": -400
+    },
+    {
+      "teacher_gap": 1000,
+      "base_gap": 1000,
+      "old_target": -600,
+      "new_target": 0
+    }
+  ],
+  "scope": "Offline CP-pair correction only; ordinal mate constraints, original24bounds, regularization grid, metrics/gates, material, base evaluator, search and clocks unchanged. Previous experiment results remain exactly as measured; no empirical outcome was used to pick this refinement.",
+  "plan_sha256": "681d1e2eb9feeb678e20be33b119955cba3a855437a2d4280fb0bf26624b4ef9"
+}

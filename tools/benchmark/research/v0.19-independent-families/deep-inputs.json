@@ -1,0 +1,169 @@
+{
+  "method": "36 original diagnostics + first 12 games each from the frozen released-policy control previous/Stockfish/Sacrifice PGNs, at cycling plies 12/25/40/65/90/120 clamped to len-2 + 12 explicit rule/threat controls. No candidate-result selection. Deep subset: original six + first two new games per opponent. Public and correlated, not blind training/validation data.",
+  "sources_sha256": {
+    "tools/benchmark/results/v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/previous.pgn": "b1783eea9b7f9450d55fe95959529466478029238899f87d4960135cfeb5c6a0",
+    "tools/benchmark/results/v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/stockfish.pgn": "72e69c9dbe8af65f257a8073046b3be9efbd89e7a7780070cc51617fc08dce38",
+    "tools/benchmark/results/v0.15.2-architecture-control-vs-v0.14.4-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/sacrifice.pgn": "6e33135031e4818c5980be4ec218a9122af12c594c3aad3a147b4a6e0392afb4"
+  },
+  "cases": [
+    {
+      "id": "neutral-01-ply16",
+      "group": "neutral",
+      "fen": "r1b1k2r/p1ppqppp/2p5/4N3/4n3/2P5/P1PP1PPP/R1BQ1RK1 w kq - 1 9",
+      "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b1c3 f8b4 b5c6 b7c6 e1g1 b4c3 b2c3 f6e4 f3e5 d8e7",
+      "next_two": [
+        "f2f4",
+        "e7c5"
+      ],
+      "source_round": "1",
+      "chosen_ply": 16,
+      "target_ply": 16,
+      "deep": true
+    },
+    {
+      "id": "neutral-02-ply32",
+      "group": "neutral",
+      "fen": "1r2r1k1/p1p2p1p/2p2p2/4p3/3Pp3/2P5/P1P2PPP/3RRK2 w - - 0 17",
+      "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b1c3 f8b4 b5c6 b7c6 d2d3 b4c3 b2c3 d7d6 e1g1 e8g8 c1g5 c8g4 d3d4 g4f3 d1f3 f8e8 g5f6 d8f6 f1e1 d6d5 f3f6 g7f6 g1f1 a8b8 a1d1 d5e4",
+      "next_two": [
+        "e1e4",
+        "b8b2"
+      ],
+      "source_round": "2",
+      "chosen_ply": 32,
+      "target_ply": 32,
+      "deep": true
+    },
+    {
+      "id": "neutral-03-ply48",
+      "group": "neutral",
+      "fen": "r4rk1/1bp3p1/p1n1p3/1p5q/3PNn2/3B1NQP/PP3PK1/R5R1 w - - 5 25",
+      "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 f8b4 c1d2 b4d2 b1d2 d8d5 e2e3 g8e7 g1f3 b8c6 f1c4 d5f5 e3e4 f5g4 e1g1 e8g8 d1b3 h7h5 b3b5 a7a6 b5c5 b7b6 c5a3 c8b7 a3e3 h5h4 h2h3 g4h5 e3f4 f8c8 g2g4 h4g3 f4g3 b6b5 c4d3 f7f5 g1h1 f5e4 d2e4 c8f8 h1g2 e7g6 f1g1 g6f4",
+      "next_two": [
+        "g2h1",
+        "h5h6"
+      ],
+      "source_round": "3",
+      "chosen_ply": 48,
+      "target_ply": 48,
+      "deep": true
+    },
+    {
+      "id": "neutral-04-ply64",
+      "group": "neutral",
+      "fen": "1r5k/7p/8/2nB4/6p1/6P1/PP1R1P1r/3K1R2 w - - 11 33",
+      "position": "position startpos moves d2d4 d7d5 c2c4 e7e6 c4d5 e6d5 g1f3 g8f6 b1c3 b8c6 c1f4 f8d6 d1d2 d6f4 d2f4 c8e6 c3b5 a8c8 f3e5 a7a6 b5c3 e8g8 e1c1 c6e5 d4e5 f6h5 f4e3 g7g5 g2g3 g5g4 f1g2 c7c6 e3h6 h5g7 e2e4 f7f6 e5f6 d8f6 h6f6 f8f6 h1f1 f6h6 e4d5 e6d5 c3d5 c6d5 c1b1 h6h2 g2d5 g8h8 d5b7 c8f8 b7a6 h2g2 d1d2 g7e6 a6b7 g2h2 b1c1 e6c5 b7d5 f8c8 c1d1 c8b8",
+      "next_two": [
+        "b2b3",
+        "b8d8"
+      ],
+      "source_round": "4",
+      "chosen_ply": 64,
+      "target_ply": 64,
+      "deep": true
+    },
+    {
+      "id": "start",
+      "group": "control",
+      "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "position": "position startpos",
+      "next_two": [
+        "e2e4",
+        "e7e5"
+      ],
+      "deep": true
+    },
+    {
+      "id": "sparse-transpositions",
+      "group": "control",
+      "fen": "4k1n1/8/2n5/8/8/2N5/8/4K1N1 w - - 0 1",
+      "position": "position fen 4k1n1/8/2n5/8/8/2N5/8/4K1N1 w - - 0 1",
+      "next_two": [],
+      "deep": true
+    },
+    {
+      "id": "broader-previous-01-ply12",
+      "group": "broader-previous",
+      "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b1c3 f8b4 b5c6 b7c6 f3e5 b4c3",
+      "fen": "r1bqk2r/p1pp1ppp/2p2n2/4N3/4P3/2b5/PPPP1PPP/R1BQK2R w KQkq - 0 7",
+      "next_two": [
+        "d2c3",
+        "f6e4"
+      ],
+      "source_round": "1",
+      "chosen_ply": 12,
+      "target_ply": 12,
+      "deep": true
+    },
+    {
+      "id": "broader-previous-02-ply25",
+      "group": "broader-previous",
+      "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b5c6 b7c6 b1c3 f8b4 d2d3 b4c3 b2c3 d7d6 e1g1 c8e6 c1g5 e8g8 d3d4 e6c4 f1e1 d8e7 g5f6 g7f6 a2a3",
+      "fen": "r4rk1/p1p1qp1p/2pp1p2/4p3/2bPP3/P1P2N2/2P2PPP/R2QR1K1 b - - 0 13",
+      "next_two": [
+        "a7a5",
+        "f3d2"
+      ],
+      "source_round": "2",
+      "chosen_ply": 25,
+      "target_ply": 25,
+      "deep": true
+    },
+    {
+      "id": "broader-stockfish-01-ply12",
+      "group": "broader-stockfish",
+      "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 e1g1 f8d6 b5c6 d7c6 b1c3 f6d7",
+      "fen": "r1bqk2r/pppn1ppp/2pb4/4p3/4P3/2N2N2/PPPP1PPP/R1BQ1RK1 w kq - 2 7",
+      "next_two": [
+        "d2d4",
+        "h7h6"
+      ],
+      "source_round": "1",
+      "chosen_ply": 12,
+      "target_ply": 12,
+      "deep": true
+    },
+    {
+      "id": "broader-stockfish-02-ply25",
+      "group": "broader-stockfish",
+      "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 b1c3 f8c5 f3e5 c6e5 d2d3 d7d6 h2h3 g8f6 d3d4 c5d4 d1d4 c7c5 d4d2 e8g8 f1e2 c8e6 d2g5 h7h6 g5d2 d6d5 e4d5",
+      "fen": "r2q1rk1/pp3pp1/4bn1p/2pPn3/8/2N4P/PPPQBPP1/R1B1K2R b KQ - 0 13",
+      "next_two": [
+        "e6d5",
+        "e1g1"
+      ],
+      "source_round": "2",
+      "chosen_ply": 25,
+      "target_ply": 25,
+      "deep": true
+    },
+    {
+      "id": "broader-sacrifice-01-ply12",
+      "group": "broader-sacrifice",
+      "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 b5c6 d7c6 b1c3 c8g4 e1g1 f8b4",
+      "fen": "r2qk2r/ppp2ppp/2p2n2/4p3/1b2P1b1/2N2N2/PPPP1PPP/R1BQ1RK1 w kq - 4 7",
+      "next_two": [
+        "d2d3",
+        "h7h6"
+      ],
+      "source_round": "1",
+      "chosen_ply": 12,
+      "target_ply": 12,
+      "deep": true
+    },
+    {
+      "id": "broader-sacrifice-02-ply25",
+      "group": "broader-sacrifice",
+      "position": "position startpos moves e2e4 e7e5 g1f3 b8c6 f1b5 g8f6 f3g5 f8c5 b5c6 b7c6 d1e2 d7d5 e4d5 d8d5 b1c3 d5d6 f2f4 c5d4 e2c4 c8e6 g5e6 d6e6 c4e6 f7e6 c3e2",
+      "fen": "r3k2r/p1p3pp/2p1pn2/4p3/3b1P2/8/PPPPN1PP/R1B1K2R b KQkq - 1 13",
+      "next_two": [
+        "f6g4",
+        "h2h3"
+      ],
+      "source_round": "2",
+      "chosen_ply": 25,
+      "target_ply": 25,
+      "deep": true
+    }
+  ]
+}

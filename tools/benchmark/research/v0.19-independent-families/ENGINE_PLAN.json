@@ -1,0 +1,9 @@
+{
+  "stage": "Before active-model correctness/cost/native move-quality results",
+  "weights_sha256": "962ae26a9f556732d8c68ed3d2ba6e9cb7d8a306f6640167084c933bcc9b6f3a",
+  "native": "Taggedv0.18 versus named independent-model candidate. Existing84public controls retain full2046-request serial/three-search/warm schedule. Fresh89raw holdout roots use serial100ms3trials and1000ms1trial, with actor/case order alternation and terminal null handling. No other engine probes overlap timed blocks.",
+  "reference": "FreshHash64 Threads1 Skill20 pinnedSF100000nodes perdistinct fullhistory unrestricted/selectedmove query; reuse unchanged existingcontrol references byte-for-byte where possible. Preserve allscoreiterations and finalexact result. Do not force candidate moves.",
+  "gates": "Separately for freshholdout and oldpubliccontrol sets, at both100/1000ms, finiteCP selected-move meanloss (clamp0..1000, average trials thenpositions) <=baseline+max(5cp,10%); severe>300 positions <=baseline+2. Mate/terminal cases retained separately. Require all legal/protocol/control completions and response<=budget+50ms; exact integer scalar/color/material/base controls; combined evaluation<=400ns/op, zero allocs. No CP/mate score identity expected versus baseline when values change.",
+  "after": "If all gates hold, standard50games each vs taggedv0.18/SFSkill2/pinnedSacrifice, allthree concurrent. No largerconfirmation, live games, commit/push/PR without check-in.",
+  "mate_safety": "Pre-native clarification: keep all mate-valued cases separate and fail on a newly selected forced loss where root reference is finiteCP or nonlosing mate and baseline selects no losing mate in any trial at that budget. This prevents finiteCP case exclusion from hiding a new forced-loss diagnostic. Report existing forced losses and mate-distance differences without claiming reference proof."
+}

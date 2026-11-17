@@ -1,0 +1,30 @@
+Accepted families 1 attempts 4 sample roots 6
+Accepted families 2 attempts 6 sample roots 14
+Accepted families 3 attempts 8 sample roots 26
+Accepted families 4 attempts 9 sample roots 38
+Accepted families 5 attempts 10 sample roots 48
+Accepted families 6 attempts 11 sample roots 60
+Accepted families 7 attempts 12 sample roots 72
+Accepted families 8 attempts 13 sample roots 82
+Accepted families 9 attempts 14 sample roots 92
+Accepted families 10 attempts 15 sample roots 104
+Accepted families 11 attempts 16 sample roots 116
+Accepted families 12 attempts 22 sample roots 128
+Accepted families 13 attempts 23 sample roots 140
+Accepted families 14 attempts 24 sample roots 150
+Accepted families 15 attempts 27 sample roots 162
+Accepted families 16 attempts 28 sample roots 174
+Accepted families 17 attempts 29 sample roots 183
+Accepted families 18 attempts 32 sample roots 189
+Accepted families 19 attempts 34 sample roots 201
+Accepted families 20 attempts 36 sample roots 212
+Accepted families 21 attempts 39 sample roots 224
+Accepted families 22 attempts 40 sample roots 236
+Traceback (most recent call last):
+  File "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.19-sharp-branches/collect_generation.py", line 50, in <module>
+    result = queries.analyse(student, board, milliseconds=25, kind='student-rollout')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.19-sharp-branches/queries.py", line 41, in analyse
+    assert exact and (best in board.legal_moves or (best is None and not any(board.legal_moves))), record
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'kind': 'student-rollout', 'position': 'position startpos moves e2e3 d7d6 g1f3 c8d7 d2d4 b8c6 c2c4 g7g6 f1d3 f8g7 e1g1 g8f6 d4d5 c6b4 b1c3 b4d3 d1d3 e7e5 e3e4 e8g8 c1e3 f6h5 g1h1 f7f5 c4c5 f5f4 e3d2 d6c5 d3c4 g8h8 c4c5 b7b6 c5c4 g6g5 f3e1 g5g4 g2g3 c7c6 g3f4 e5f4 e1d3 d8h4 d5c6 g4g3', 'fen': 'r4r1k/p2b2bp/1pP5/7n/2Q1Pp1q/2NN2p1/PP1B1P1P/R4R1K w - - 0 23', 'nodes': None, 'milliseconds': 25, 'restricted_move': None, 'multipv': 1, 'iterations': [{'string': 'pandafish {"depth":0,"nodes":8077,"elapsed_ms":22.50175,"timed":true,"soft_ms":16.875,"hard_ms":22.5,"reason":"deadline","fallback":true,"score_kind":"unknown","score":0}'}], 'last_exact': {}, 'bestmove': 'c6c7'}

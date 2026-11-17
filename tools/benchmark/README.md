@@ -92,6 +92,30 @@ strength claims; a broader confirmation is justified before raising the target
 or claiming a large general gain. The larger confirmation remains deferred; future candidates compare against
 tagged v0.18.
 
+The local [post-v0.18 evaluation research](research/v0.19-independent-families/README.md)
+repairs early transposition boundaries, audits all legal student witness paths
+before labels and freezes 76 independent groups. The first post-release fit
+remains archived separately. The repaired fit passes its surrogate gate and
+improves fresh finite-reference actual-choice loss, but fails public short-budget
+and mate-survival gates. I keep the pipeline repair, archive the model, and
+restore playing source to v0.18. No new strength games or release followed.
+[Next research priorities](research/v0.19-independent-families/NEXT.md) focus on
+sharp/mate-containing branches and broader training-only action coverage.
+
+I completed that [sharp-branch retry](research/v0.19-sharp-branches/README.md)
+with balanced turns, retained mate alternatives and a pre-fit offline target
+correction. It fails its fresh surrogate holdout before engine activation;
+v0.18 play remains unchanged and no strength games ran. The archive preserves
+all failures and the independently verified training-leaf quiet mates.
+My [reassessed next priorities](research/v0.19-sharp-branches/NEXT.md) now start
+with a bounded exact quiet-mate proof experiment, ahead of another weight fit.
+
+I publish these attempts together in **v0.19**, with unchanged v0.18 playing
+policy and [Go-only research tooling](../research/README.md). The
+[release summary](../../docs/RESEARCH_V019.md) distinguishes each failed gate,
+retired historical workflow, preserved evidence and ranked next experiment.
+Future candidates compare against tagged v0.19. No new strength screen ran.
+
 ## Why this exists
 
 This benchmark runner was created without knowing how Fishtest works. After
@@ -204,6 +228,10 @@ git archive v0.17 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.18 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.18" .)
+
+build_dir=$(mktemp -d)
+git archive v0.19 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.19" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -286,12 +314,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.18 tagged baseline as above for the next engine change. Then run
+Build the v0.19 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.18 --previous-version v0.18 \
+  --previous tools/benchmark/bin/pandafish-v0.19 --previous-version v0.19 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -457,7 +485,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.18 --previous-version v0.18 \
+  --previous tools/benchmark/bin/pandafish-v0.19 --previous-version v0.19 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -680,7 +708,7 @@ reproduce earlier profiles. For example, a future Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.18 --previous-version v0.18 \
+  --previous tools/benchmark/bin/pandafish-v0.19 --previous-version v0.19 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```

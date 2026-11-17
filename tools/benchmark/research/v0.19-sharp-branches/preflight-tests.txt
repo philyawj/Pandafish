@@ -1,0 +1,29 @@
+test_blocked_late_state_and_forced_bad_split (test_boundary.BoundaryTests.test_blocked_late_state_and_forced_bad_split) ... ok
+test_early_transposition_and_distinct_negative (test_boundary.BoundaryTests.test_early_transposition_and_distinct_negative) ... ok
+test_legal_and_unusable_ep (test_boundary.BoundaryTests.test_legal_and_unusable_ep) ... ok
+test_mirror_counters_and_rights (test_boundary.BoundaryTests.test_mirror_counters_and_rights) ... ok
+test_terminal_root_is_a_state_without_alternatives (test_boundary.BoundaryTests.test_terminal_root_is_a_state_without_alternatives) ... ok
+test_transitive_whole_component_split (test_boundary.BoundaryTests.test_transitive_whole_component_split) ... ok
+test_model (unittest.loader._FailedTest.test_model) ... ERROR
+test_live_null_still_fails (test_query_controls.QueryControls.test_live_null_still_fails) ... ok
+test_terminal_null_is_recorded (test_query_controls.QueryControls.test_terminal_null_is_recorded) ... ok
+
+======================================================================
+ERROR: test_model (unittest.loader._FailedTest.test_model)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_model
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 396, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/loader.py", line 339, in _get_module_from_name
+    __import__(name)
+  File "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.19-sharp-branches/test_model.py", line 3, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.003s
+
+FAILED (errors=1)

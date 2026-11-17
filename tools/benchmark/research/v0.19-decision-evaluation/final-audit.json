@@ -1,0 +1,72 @@
+{
+  "runtime_files_identical_to_v018": 59,
+  "prior_archives": {
+    "tools/benchmark/research/v0.16-next-assessment": {
+      "files": 7,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.18-evaluation-model": {
+      "files": 145,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.16-bishop-pair": {
+      "files": 47,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.16-search-core": {
+      "files": 87,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.18-exact-evaluation": {
+      "files": 84,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.16-piece-safety": {
+      "files": 74,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.15.3-architecture": {
+      "files": 234,
+      "mismatches": []
+    },
+    "tools/benchmark/research/v0.17-search-moves": {
+      "files": 105,
+      "mismatches": []
+    }
+  },
+  "prior_inventory_entries": 783,
+  "independent_integer_decisions": {
+    "train": {
+      "baseline": {
+        "mean_regret_cp": 34.989766081871345,
+        "severe_over_300": 1
+      },
+      "candidate": {
+        "mean_regret_cp": 29.894736842105264,
+        "severe_over_300": 2
+      }
+    },
+    "validation": {
+      "baseline": {
+        "mean_regret_cp": 60.26470588235294,
+        "severe_over_300": 2
+      },
+      "candidate": {
+        "mean_regret_cp": 50.794117647058826,
+        "severe_over_300": 1
+      }
+    },
+    "holdout": {
+      "baseline": {
+        "mean_regret_cp": 54.021929824561404,
+        "severe_over_300": 1
+      },
+      "candidate": {
+        "mean_regret_cp": 54.73684210526316,
+        "severe_over_300": 1
+      }
+    }
+  },
+  "surrogate_gate_failed_preserved": true,
+  "issues": []
+}

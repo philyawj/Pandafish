@@ -1,0 +1,362 @@
+{
+  "scope": "Post-result training-only proof probe. Actual legal mate-in-one checks at saved leaf; opponent-after-null is only a hypothetical threat, never a legal continuation or proof of forced loss. No model fit, reference queries, root forcing or games.",
+  "cases": [
+    {
+      "id": "sharp-000-ply28",
+      "root_turn": "w",
+      "choice": "g3f4",
+      "reference": {
+        "depth": 35,
+        "seldepth": 9,
+        "multipv": 1,
+        "nodes": 50045,
+        "time": 0.039,
+        "cp": null,
+        "mate": -4,
+        "pv": [
+          "g3f4",
+          "f7f5",
+          "d5c7",
+          "d8c7",
+          "f4g5",
+          "c7d8",
+          "g5f4",
+          "g7g5"
+        ]
+      },
+      "witness": {
+        "Score": 282,
+        "BaseRoot": 282,
+        "Reason": "static",
+        "FEN": "r2qk2r/p2b1pp1/2p5/2p5/4pKnp/1PN1P3/P1PPNPP1/R1BQ1R2 b kq - 1 16",
+        "Features": {
+          "Values": [
+            -1,
+            -1,
+            -3,
+            -7,
+            -7,
+            -16,
+            -1,
+            0,
+            0,
+            3,
+            1,
+            0
+          ],
+          "Phase": 21
+        },
+        "Path": [
+          "g3f4",
+          "c7c6",
+          "d5c3"
+        ]
+      },
+      "leaf_turn": "b",
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-000-ply28",
+      "root_turn": "w",
+      "choice": "g3h3",
+      "reference": {
+        "depth": 18,
+        "seldepth": 21,
+        "multipv": 1,
+        "nodes": 50017,
+        "time": 0.11,
+        "cp": -864,
+        "mate": null,
+        "pv": [
+          "g3h3",
+          "g4f2",
+          "h3h2",
+          "f2d1",
+          "f1d1",
+          "d7g4",
+          "d5c3",
+          "d8g5",
+          "c1b2",
+          "g5e5",
+          "h2h1"
+        ]
+      },
+      "witness": {
+        "Score": -374,
+        "BaseRoot": -374,
+        "Reason": "static",
+        "FEN": "r2qk2r/p1pb1pp1/8/2pN4/4p2p/1P6/P1PPNPPK/R1BR4 b kq - 0 17",
+        "Features": {
+          "Values": [
+            8,
+            -4,
+            -2,
+            -5,
+            -1,
+            -3,
+            -1,
+            0,
+            0,
+            3,
+            1,
+            0
+          ],
+          "Phase": 16
+        },
+        "Path": [
+          "g3h3",
+          "g4e3",
+          "h3h2",
+          "e3d1",
+          "f1d1"
+        ]
+      },
+      "leaf_turn": "b",
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-017-ply29",
+      "root_turn": "b",
+      "choice": "f8e8",
+      "reference": {
+        "depth": 245,
+        "seldepth": 5,
+        "multipv": 1,
+        "nodes": 19093,
+        "time": 0.003,
+        "cp": null,
+        "mate": -2,
+        "pv": [
+          "f8e8",
+          "h6h7",
+          "g8f8",
+          "h7f7"
+        ]
+      },
+      "witness": {
+        "Score": 122,
+        "BaseRoot": 122,
+        "Reason": "static",
+        "FEN": "r1b1r2k/1p1pb2P/1qn1p3/p2p4/3P1Q2/P4N2/1PP2PP1/2KR1B1R b - - 0 17",
+        "Features": {
+          "Values": [
+            3,
+            -3,
+            4,
+            8,
+            1,
+            3,
+            2,
+            37,
+            -28,
+            0,
+            1,
+            -1
+          ],
+          "Phase": 21
+        },
+        "Path": [
+          "f8e8",
+          "g6h7",
+          "g8h8",
+          "h6f4"
+        ]
+      },
+      "leaf_turn": "b",
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-017-ply29",
+      "root_turn": "b",
+      "choice": "b6b2",
+      "reference": {
+        "depth": 15,
+        "seldepth": 30,
+        "multipv": 1,
+        "nodes": 50046,
+        "time": 0.1,
+        "cp": -1353,
+        "mate": null,
+        "pv": [
+          "b6b2",
+          "c1b2",
+          "e7a3",
+          "b2a3",
+          "f8f7",
+          "g6f7",
+          "g8f7",
+          "f1d3",
+          "b7b5",
+          "a3b2",
+          "f7e7",
+          "h6g5",
+          "e7d6",
+          "g5f4",
+          "e6e5",
+          "d4e5",
+          "d6c5",
+          "f4e3",
+          "d5d4"
+        ]
+      },
+      "witness": {
+        "Score": -566,
+        "BaseRoot": -566,
+        "Reason": "static",
+        "FEN": "r1b4k/1p1pb2P/2n1p2Q/p2p1r2/3P1p2/P4N2/1KP2PP1/3R1B1R w - - 1 18",
+        "Features": {
+          "Values": [
+            3,
+            -4,
+            3,
+            10,
+            2,
+            3,
+            1,
+            36,
+            -24,
+            -1,
+            1,
+            -1
+          ],
+          "Phase": 17
+        },
+        "Path": [
+          "b6b2",
+          "c1b2",
+          "f8f5",
+          "g6h7",
+          "g8h8"
+        ]
+      },
+      "leaf_turn": "w",
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-017-ply29",
+      "root_turn": "b",
+      "choice": "f8f6",
+      "reference": {
+        "depth": 245,
+        "seldepth": 5,
+        "multipv": 1,
+        "nodes": 19069,
+        "time": 0.003,
+        "cp": null,
+        "mate": -2,
+        "pv": [
+          "f8f6",
+          "h6h7",
+          "g8f8",
+          "h7h8"
+        ]
+      },
+      "witness": {
+        "Score": 234,
+        "BaseRoot": 234,
+        "Reason": "static",
+        "FEN": "r1b4k/1p1pb2P/1qn1pr1Q/p2p4/3P1p2/P4N2/1PP2PP1/2KR1B1R w - - 1 17",
+        "Features": {
+          "Values": [
+            3,
+            0,
+            0,
+            3,
+            2,
+            3,
+            2,
+            36,
+            -28,
+            0,
+            1,
+            0
+          ],
+          "Phase": 21
+        },
+        "Path": [
+          "f8f6",
+          "g6h7",
+          "g8h8"
+        ]
+      },
+      "leaf_turn": "w",
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": []
+    },
+    {
+      "id": "sharp-017-ply29",
+      "root_turn": "b",
+      "choice": "f8f7",
+      "reference": {
+        "depth": 23,
+        "seldepth": 17,
+        "multipv": 1,
+        "nodes": 50040,
+        "time": 0.075,
+        "cp": null,
+        "mate": -8,
+        "pv": [
+          "f8f7",
+          "f3g5",
+          "b6b2",
+          "c1b2",
+          "e7g5",
+          "g6f7",
+          "g8f7",
+          "h6g5",
+          "h7h6",
+          "h1h6",
+          "f7e8",
+          "h6h7",
+          "e8f8",
+          "g5g7",
+          "f8e8",
+          "g7g8"
+        ]
+      },
+      "witness": {
+        "Score": -164,
+        "BaseRoot": -164,
+        "Reason": "static",
+        "FEN": "r1b3k1/1p1pb2p/1qn1p3/p2p4/3P1Q2/P4N2/1PP2PP1/2KR1B1R w - - 1 18",
+        "Features": {
+          "Values": [
+            3,
+            -3,
+            7,
+            8,
+            2,
+            3,
+            1,
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          "Phase": 19
+        },
+        "Path": [
+          "f8f7",
+          "g6f7",
+          "g8f7",
+          "h6f4",
+          "f7g8"
+        ]
+      },
+      "leaf_turn": "w",
+      "leaf_checked": false,
+      "side_to_move_mates_in_one": [],
+      "opponent_mates_after_hypothetical_pass": []
+    }
+  ]
+}

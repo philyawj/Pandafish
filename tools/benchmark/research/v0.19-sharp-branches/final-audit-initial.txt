@@ -1,0 +1,5 @@
+First audit exit 1 at base tag identity assertion:
+assert plan['base_commit'] == git rev-parse v0.18
+AssertionError
+
+The tag is annotated: rev-parse v0.18 returns the tag object, not its commit. The source byte checks and prior inventory checks had already passed. I correct only the audit query to v0.18^{commit}; no source, input, model or result changes.

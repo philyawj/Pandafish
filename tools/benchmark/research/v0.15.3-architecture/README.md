@@ -1,3 +1,10 @@
+## v0.19 tooling migration
+
+I preserve this historical report and its original measurements. I retired the
+Python/shell runners in v0.19; commands below describe the original experiment.
+I now use the [Go research tools](/tools/research/README.md). Original scripts
+and unedited evidence remain in the [hashed release archive](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz).
+
 # v0.15.3: larger-gain architecture investigation
 
 **Recommend a coordinated search-core project first, followed by a coherent,
@@ -278,14 +285,14 @@ bishop-pair 200-game confirmation is deferred, not silently run or made mandator
   contamination.
 - [ERRATA.md](ERRATA.md): incorrect Bf3 prose (actual Qf3), main-PV reasoning,
   harness/profile mistakes and revision-label correction.
-- [analysis.json](analysis.json), [analyse.py](analyse.py): all fixed/deep,
+- [analysis.json](analysis.json), [analyse.py](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz): all fixed/deep,
   timing and per-case reference tables; raw data remain alongside them.
 - [sources.json](sources.json): primary references and the inspected pinned
   Go/Rust library/source identities.
 - [provenance.json](provenance.json), [release-checks.json](release-checks.json):
   source/binary identities, unchanged-policy checks and separate release validation.
 
-The [reproduction driver](reproduce.py) creates new scratch trees and outputs,
+The [reproduction driver](https://github.com/philyawj/Pandafish/releases/download/v0.19/v0.19-historical-research-evidence.tar.gz) creates new scratch trees and outputs,
 without overwriting this archive or running matches or live games. See its
 `--help` and the method notes. Source overlays apply to tagged v0.15.2; the
 prototype code is data, not compiled by normal repository builds.

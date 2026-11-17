@@ -8,6 +8,11 @@ only the engine, and `go test ./...` checks all implemented Go packages.
 | --- | --- | --- |
 | [benchmark](benchmark/README.md) | Controlled local UCI matches, validation, and recorded results | Implemented |
 | [lichess](lichess/README.md) | Record sessions, archive raw data, and run offline Stockfish analysis | Implemented; first live session archived |
+| [research](research/README.md) | Verify evidence, replay archived Go engines, check frozen decisions and mate proofs | Implemented in v0.19 |
+
+I keep all program/test/research source in Go. The
+[v0.19 summary](../docs/RESEARCH_V019.md) records retired historical script
+workflows, their hashed release attachment and the limits of the Go replacements.
 
 The benchmark's code, tests, opening suites, milestones, and results moved
 together from `benchmarks/` to `tools/benchmark/`. Historical result contents

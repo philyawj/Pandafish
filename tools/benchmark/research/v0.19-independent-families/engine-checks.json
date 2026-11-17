@@ -1,0 +1,199 @@
+[
+  {
+    "name": "format",
+    "command": [
+      "gofmt",
+      "-l",
+      "evaluation_test.go",
+      "search_core_test.go",
+      "main_test.go",
+      "killers.go",
+      "main.go",
+      "uci_test.go",
+      "limits_test.go",
+      "transposition_test.go",
+      "quiescence_test.go",
+      "exchange_test.go",
+      "reporting.go",
+      "transposition.go",
+      "iterative.go",
+      "evaluation_model_test.go",
+      "evaluation.go",
+      "mate.go",
+      "evaluation_kernel.go",
+      "reporting_test.go",
+      "iterative_test.go",
+      "repetition_test.go",
+      "exchange.go",
+      "search_moves.go",
+      "search_moves_test.go",
+      "evaluation_kernel_test.go",
+      "repetition.go",
+      "search.go",
+      "killers_test.go",
+      "search_test.go",
+      "search_context.go",
+      "mate_test.go",
+      "limits.go",
+      "evaluation_model.go",
+      "internal/telemetry/telemetry.go",
+      "internal/telemetry/telemetry_test.go",
+      "tools/lichess/main.go",
+      "tools/lichess/report_test.go",
+      "tools/lichess/report.go",
+      "tools/lichess/stockfish.go",
+      "tools/lichess/record.go",
+      "tools/lichess/archive.go",
+      "tools/lichess/analyse.go",
+      "tools/lichess/record_test.go",
+      "tools/lichess/operational.go",
+      "tools/lichess/process_test.go",
+      "tools/benchmark/workflow.go",
+      "tools/benchmark/main_test.go",
+      "tools/benchmark/main.go",
+      "tools/benchmark/report.go",
+      "tools/benchmark/workflow_test.go",
+      "tools/benchmark/uci.go",
+      "tools/benchmark/checks.go",
+      "tools/benchmark/checks_test.go",
+      "third_party/chess/search_moves.go",
+      "third_party/chess/eval_pieces.go",
+      "third_party/chess/eval_features.go"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.03268095897510648
+  },
+  {
+    "name": "race",
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 31.620389834046364
+  },
+  {
+    "name": "vet",
+    "command": [
+      "go",
+      "vet",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.21675316616892815
+  },
+  {
+    "name": "build",
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/pandafish-v0.19-independent-evaluation-dev",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.44716366613283753
+  },
+  {
+    "name": "arm64",
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "/tmp/pandafish-v019-independent-arm64",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.2583949170075357
+  },
+  {
+    "name": "wrapper",
+    "command": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.19-independent-families/engine-wrapper.py"
+    ],
+    "exit": 0,
+    "elapsed_s": 1.7055617079604417
+  },
+  {
+    "name": "cost",
+    "command": [
+      "go",
+      "test",
+      "-run",
+      "^$",
+      "-bench",
+      "^BenchmarkEvaluationModelCost/(baseline|features|fitted-model)$",
+      "-benchtime=1s",
+      "-count=1"
+    ],
+    "exit": 0,
+    "elapsed_s": 5.3341749999672174
+  },
+  {
+    "name": "upstream-race",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v019-engine-nqpqjazv/library",
+      "test",
+      "-race",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 19.901111542014405
+  },
+  {
+    "name": "fixed",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v019-engine-nqpqjazv/candidate",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "15m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 4.410509207984433
+  },
+  {
+    "name": "deep",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v019-engine-nqpqjazv/candidate",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureProbe$",
+      "-timeout",
+      "15m",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 11.782632458023727
+  },
+  {
+    "name": "ghi",
+    "command": [
+      "go",
+      "-C",
+      "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-v019-engine-nqpqjazv/candidate",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestArchitectureGHI$",
+      "-v"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.4032195000909269
+  }
+]

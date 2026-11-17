@@ -1,0 +1,157 @@
+package chess
+
+import "math/bits"
+
+// EvalFeatureCount is the size of the compact, symmetric positional summary.
+const EvalFeatureCount = 12
+
+// EvalFeatures contains board-only inputs, not an evaluation or legal threat
+// claim. All features are White minus Black; Phase runs from 0 to 24.
+type EvalFeatures struct {
+	Values [EvalFeatureCount]int16
+	Phase  int
+}
+
+// Masks are immutable after initialization. No legal-move list or map is built.
+var evalPawnSpans, evalShelter = func() ([2][64]bitboard, [2][64]bitboard) {
+	var spans, shelter [2][64]bitboard
+	for color := 0; color < 2; color++ {
+		step := 1
+		if color == 1 {
+			step = -1
+		}
+		for sq := 0; sq < 64; sq++ {
+			file, rank := sq%8, sq/8
+			for f := max(0, file-1); f <= min(7, file+1); f++ {
+				for r := rank + step; r >= 0 && r < 8; r += step {
+					spans[color][sq] |= bitboard(uint64(1) << uint(63-(r*8+f)))
+					if (r-rank)*step <= 2 {
+						shelter[color][sq] |= bitboard(uint64(1) << uint(63-(r*8+f)))
+					}
+				}
+			}
+		}
+	}
+	return spans, shelter
+}()
+
+// EvaluationFeatures derives mobility/king/pawn structure from existing
+// bitboards. Mobility excludes friendly occupancy and enemy pawn attacks;
+// pins, checks and sacrifices remain the search's responsibility.
+func (b *Board) EvaluationFeatures() EvalFeatures {
+	var result EvalFeatures
+	var values [2][EvalFeatureCount]int
+	pawns := [2]bitboard{b.bbWhitePawn, b.bbBlackPawn}
+	occupied := [2]bitboard{b.whiteSqs, b.blackSqs}
+	kings := [2]Square{b.whiteKingSq, b.blackKingSq}
+	pawnAttacks := [2]bitboard{
+		(pawns[0]&^bbFileH&^bbRank8)>>9 | (pawns[0]&^bbFileA&^bbRank8)>>7,
+		(pawns[1]&^bbFileH&^bbRank1)<<7 | (pawns[1]&^bbFileA&^bbRank1)<<9,
+	}
+	var zones [2]bitboard
+	var attackers [2]int
+	for c := 0; c < 2; c++ {
+		if kings[c] != NoSquare {
+			zones[c] = bbKingMoves[kings[c]] | bbForSquare(kings[c])
+			values[c][6] = bits.OnesCount64(uint64(pawns[c] & evalShelter[c][kings[c]]))
+		}
+
+	}
+	// Zones for both colors must exist before pressure is counted.
+	for c := 0; c < 2; c++ {
+		values[c][4] = bits.OnesCount64(uint64(pawnAttacks[c] & zones[1-c]))
+		attackers[c] = 0
+		if values[c][4] > 0 {
+			attackers[c] = 1
+		}
+	}
+	for _, piece := range allPieces {
+		c := 0
+		if piece.Color() == Black {
+			c = 1
+		}
+		pieceType := piece.Type()
+		if pieceType == Pawn || pieceType == King {
+			continue
+		}
+		feature, phase := -1, 0
+		switch pieceType {
+		case Knight:
+			feature, phase = 0, 1
+		case Bishop:
+			feature, phase = 1, 1
+		case Rook:
+			feature, phase = 2, 2
+		case Queen:
+			feature, phase = 3, 4
+		}
+		mask := b.bbForPiece(piece)
+		for mask != 0 {
+			square := Square(bits.LeadingZeros64(uint64(mask)))
+			mask &^= bbForSquare(square)
+			result.Phase += phase
+			attacks := bbForPieceAttacks(b, piece, square)
+			values[c][feature] += bits.OnesCount64(uint64(attacks &^ occupied[c] &^ pawnAttacks[1-c]))
+			count := bits.OnesCount64(uint64(attacks & zones[1-c]))
+			values[c][4] += count
+			if count > 0 {
+				attackers[c]++
+			}
+		}
+	}
+	result.Phase = min(24, result.Phase)
+	for c := 0; c < 2; c++ {
+		values[c][5] = attackers[c] * attackers[c]
+		var files [8]int
+		mask := pawns[c]
+		for mask != 0 {
+			sq := bits.LeadingZeros64(uint64(mask))
+			mask &^= bbForSquare(Square(sq))
+			files[sq%8]++
+		}
+		mask = pawns[c]
+		for mask != 0 {
+			sq := bits.LeadingZeros64(uint64(mask))
+			mask &^= bbForSquare(Square(sq))
+			f, r := sq%8, sq/8
+			relative := r
+			step := 8
+			if c == 1 {
+				relative = 7 - r
+				step = -8
+			}
+			if (f == 0 || files[f-1] == 0) && (f == 7 || files[f+1] == 0) {
+				values[c][9]--
+			}
+			next := sq + step
+			if next >= 0 && next < 64 && b.emptySqs&bbForSquare(Square(next)) == 0 {
+				values[c][11]--
+			}
+			if pawns[1-c]&evalPawnSpans[c][sq] == 0 {
+				values[c][7] += relative * relative
+				if next >= 0 && next < 64 && kings[c] != NoSquare && kings[1-c] != NoSquare {
+					own := evalKingDistance(kings[c], Square(next))
+					enemy := evalKingDistance(kings[1-c], Square(next))
+					values[c][8] += max(0, relative-2) * (enemy - own)
+				}
+			}
+		}
+		for _, count := range files {
+			values[c][10] -= max(0, count-1)
+		}
+	}
+	for i := range result.Values {
+		result.Values[i] = int16(values[0][i] - values[1][i])
+	}
+	return result
+}
+func evalKingDistance(a, b Square) int {
+	df, dr := int(a)%8-int(b)%8, int(a)/8-int(b)/8
+	if df < 0 {
+		df = -df
+	}
+	if dr < 0 {
+		dr = -dr
+	}
+	return max(df, dr)
+}

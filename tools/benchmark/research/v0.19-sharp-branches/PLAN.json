@@ -1,0 +1,83 @@
+{
+  "stage": "Frozen before this fresh collection, labels, fitting and holdout inspection; sharp/mate alternatives retained",
+  "base_tag": "v0.18",
+  "base_commit": "75f12bbdbeb0e38d148690ddc0f1d6405c5af3d3",
+  "selection": "One revised learning design: retain complete sharp/mate roots with separate losing-mate ordinal constraints, balance root turns, add fixed negative alternatives. Same12feature representation, material/base/search/clocks and coefficient bounds. Prior attempts remain frozen.",
+  "generation": {
+    "seed": 2026111721,
+    "families": 80,
+    "attempt_cap": 1000,
+    "opening_plies": 8,
+    "opening_method": "Same seeded uniform MultiPV8/5000node opening exploration; block every previous batch plus reserved canonical states. All old labelled/native-reference/witness paths are inspected and excluded. Sample paired even/odd plies, no mirror duplication across folds.",
+    "continuation": "Through64plies or gameover: alternate taggedv0.18 at25ms and full-strength Stockfish at5000nodes, swap student color by family index. Offline training rollouts, not strength games.",
+    "sample_plies": [
+      12,
+      13,
+      20,
+      21,
+      28,
+      29,
+      36,
+      37,
+      48,
+      49,
+      62,
+      63
+    ]
+  },
+  "independence": "Canonical first4FEN fields with legal EP, min(original,color/rankmirror), ignore counters. Build blocked set from all prior histories/query exact-PV paths/witness paths plus reserved confirmation paths. Fromply4 onward, reject rollout families touching blocked keys. After80 rollouts and BEFORE branch labels, trace EVERY legal root alternative with frozen released depth3 search; reject whole families touching blocked keys on these witness paths. Transitively union families sharing any rollout OR witness-path key, then freeze component split. Independent auditor reconstructs all paths, never trusts saved keys; any remaining overlap stops before labels. All rejected families/roots remain raw.",
+  "splits": "Same prelabel all-legal witness forest, whole-family transitive components and independent audit.80rollout families, >=64components, >=600raw roots, >=120eachvalidation/holdout, both rootturns35..65% in every split. Freeze membership before branch labels. Require>=100decision roots (>=2alts) each validation/holdout and>=40eachturn; >=60CP-evaluable roots each and>=3avoidable-losing-mate roots each; >=15avoidable-losing-mate train roots. Stop batch on infeasibility, no favorable extension.",
+  "alternatives": "TeacherMultiPV3 at50000nodes + unrestricted baseline100ms move + worst baseline depth3 LEARNABLE witness (static/checked-cap) + one seeded uniform remaining legal move. Unique union<=6. All alternatives label freshHash64 Threads1 fullstrength50000nodes, all iterations retained. The negative selection depends only on released student scores/seed, not new fitted weights or validation quality.",
+  "student_leaf": "Prelabel all-legal alternative witness forest using unchanged full-history releasedv0.18 rootdepth3/childdepth2 main/quiescence search. Validate path/FEN/geometry/scalar, group/exclude with full witness paths before split and branch labels. Later selected teacher/student alternatives reuse exactly these witnesses. This frozen-leaf approximation is a surrogate, not candidate-search strength evidence.",
+  "features": "Reuse corrected archived allocation-free12feature geometry and oracle; no old weights. Independently check all new leaf vectors and phase against pythonchess. SignedWhite-minusBlack, tapered middle/end24integer coefficients. Original v0.18 base exact.",
+  "fitting": {
+    "target": "FiniteCP/finiteCP pairs: same weighted squared residual target clip(gap,+/-400)-basegap, ignore<=25cp gap. Separately compare non-losing-reference alternative versus a labelled losing mate: squared hinge requiring score gap>=200cp, importance4. Mate values are NOT converted into CP regression targets. Winning-mate and finite alternatives are not uniquely ordered; all-losing roots retain data but no avoidable-loss penalty.",
+    "regularization": [
+      0.001,
+      0.01,
+      0.1,
+      1,
+      10
+    ],
+    "middle_bounds": [
+      8,
+      8,
+      6,
+      4,
+      15,
+      20,
+      25,
+      8,
+      6,
+      25,
+      25,
+      20
+    ],
+    "end_bounds": [
+      8,
+      8,
+      6,
+      4,
+      10,
+      10,
+      5,
+      12,
+      8,
+      25,
+      25,
+      20
+    ],
+    "solver": "Training-only weightedRMS scaling, nonnegative box constraints, projected accelerated gradient;10000iterations max, projected-gradient residual<=1e-6 for eligible solution. Ignore zero-gradient pairs and ordinal constraints satisfied for every allowed coefficient; retain their counts. Integer round before validation.",
+    "selection": "Includezero. On validation reject any newly avoidably-losing root relative to zero and severe decision-penalty roots>baseline+1. Among eligible converged fits select minimum mean capped decision penalty, then stronger regularization then smallerL1. Freeze weights before first holdout metrics."
+  },
+  "surrogate_gate": "Nonzero fit; holdout mean capped decision penalty improves>=5%, zero newly avoidably-losing roots versus baseline, severe>300 positions<=baseline+1; each rootturn mean penalty<=baseline+max(5,10%). Same initial data minimums. No retune/refold/gate change after results.",
+  "downstream": "Same correctness/race/vet/native/ARM64/offlinewrapper, <=400ns zeroalloc combined static cost. Public84control serial/three-search/warm native schedule plus all fresh rawholdout at100ms3trials/1000ms1trial. Fullhistory100000node selected-move references: both suites and EACH fresh rootturn at bothbudgets meanfiniteCP loss<=baseline+max(5,10%), severe<=baseline+2 and no newlyselected losing mate when unrestrictedreference is finite/nonlosing and baseline has none. Mate cases separate. If allgates pass, standard50games/opponent vs taggedv0.18/SFSkill2/pinnedSacrifice allthreeconcurrent; no largerconfirmation.",
+  "stop": "Preserve any failure and source. No guessed weights on inspected controls, no live Lichess, no commit/push/PR until check-in.",
+  "binaries": {
+    "baseline": "f50ec9314fe36c70bd8594456362415ee5b9b799bfb32d1a9311a3d4999beeb8",
+    "teacher": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f"
+  },
+  "boundary_controls": "Before engines: early move-order transposition positive, distinct position negative, color/rank mirrors, counters ignored, legal versus unusable en passant, castling-right distinction, terminal-root retention, transitive family union, blocked late position, post-split collision rejection and whole-component split. Separate postcollection auditor reconstructs boards independently, never trusts saved keys.",
+  "metric": "For each >=2alternative root select all maximal predicted alternatives and average ties. If at least one non-losing alternative exists, selected losing-mate alternatives receive1000 diagnostic penalty (not a numerical mate CP label); winning-mate selected alternatives receive0. Finite selected alternatives get max(0,bestfiniteCP-selectedCP-25) capped1000. All-losing roots receive0avoidable-loss penalty. Keep avoidable-loss counts, mate classes, CP-only metrics and rootturn breakdown separately. Terminal roots/single-choice roots retained as controls, outside decision-mean denominator.",
+  "witness_policy": "Retain static and checked-cap witnesses as learnable with their exact feature vector. Terminal/repetition witnesses keep exact baseline search score and zero learnable vector; no changing mate/draw/search policy. Do not remove a whole root because one branch is mate/nonstatic."
+}

@@ -1,8 +1,13 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.18 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.19 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
+
+All repository program, test and research source is Go. Start with
+[AGENTS.md](AGENTS.md) for project guidance. The
+[v0.19 research summary](docs/RESEARCH_V019.md) explains the rejected evaluation
+attempts, Go-only tooling migration and ranked next experiments.
 
 The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`,
 `transposition.go`, `search_context.go`, `search_moves.go`, `killers.go`, `exchange.go`,
@@ -347,6 +352,11 @@ Preserve exact scores and fixed-depth search behavior. Archive the unpromoted
 fitted evaluator and its failed gates separately. See the
 [implementation, tests and measured limits](tools/benchmark/research/v0.18-exact-evaluation/README.md).
 
-**Next:** Rank evaluation/data, compact learned representations and remaining
-backend/search opportunities from these results, then test one bounded choice
-with independent controls and equal-time validation.
+**v0.19: Preserve evaluation research and Go-only tooling (complete).** Archive
+three rejected post-v0.18 fits, preserve their findings and retire non-Go
+research runners with original evidence retained in the release attachment.
+Add shared Go research checks and tracked agent guidance. Playing policy remains
+v0.18. See the [research summary and next steps](docs/RESEARCH_V019.md).
+
+**Next:** Test a bounded exact quiet-mate proof, with correctness, cost and
+equal-time controls, then reassess the remaining backend/evaluation priorities.
