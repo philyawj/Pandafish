@@ -9,9 +9,8 @@ criteria, risks and stop conditions. [CACHE.md](CACHE.md) answers the cache
 question in detail; [METHOD.md](METHOD.md) documents all probes and failures.
 
 v0.15.3 is a **research release**. The bishop-pair candidate and every result
-are archived, with the maintainer's explicit instruction to keep released
-playing behavior unchanged. All architecture prototypes are data outside the
-normal build. The release retains v0.15.2/v0.15 playing policy; public identity
+are archived, and I chose to keep released playing behavior unchanged. All
+architecture prototypes are data outside the normal build. The release retains v0.15.2/v0.15 playing policy; public identity
 and documentation change only. No live Lichess client or larger bishop-pair
 confirmation starts.
 
@@ -241,7 +240,7 @@ itself explains the external shortfall compared with older historical runs.
 Neither the two-point Sacrifice difference nor subtracting other old screens
 establishes a regression. Opponents, repeated openings, random ties, workload
 and finite samples matter. The original 57% bishop direct lead remains
-inconclusive; the feature is archived at the maintainer's request.
+inconclusive; I chose to archive the feature.
 
 ## Recommendation and what ships
 

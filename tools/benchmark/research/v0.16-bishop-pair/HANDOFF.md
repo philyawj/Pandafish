@@ -1,6 +1,6 @@
 # Archived bishop-pair candidate
 
-The maintainer authorized including this candidate and its full evidence in the
+I authorized including this candidate and its full evidence in the
 v0.15.3 research release, with unchanged v0.15.2/v0.15 playing behavior. The
 bonus is not in normal builds. The earlier instruction to wait before the PR
 was superseded by explicit authorization for this research release.

@@ -1,0 +1,6 @@
+{
+  "exit": 1,
+  "error": "AssertionError: main.go in release artifact audit",
+  "cause": "The identity normalization in the artifact-audit helper used an overescaped backslash-newline pattern; validate_release.py had already independently verified the exact identity-only Go difference.",
+  "resolution": "Corrected the artifact helper normalization and reran it. No playing code, original source/hash or screen changed."
+}

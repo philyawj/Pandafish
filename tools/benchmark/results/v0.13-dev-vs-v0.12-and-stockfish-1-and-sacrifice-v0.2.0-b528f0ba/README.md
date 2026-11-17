@@ -1,6 +1,6 @@
 # v0.13 selective-quiescence candidate
 
-The maintainer reviewed and approved this candidate for v0.13. Original
+I reviewed and approved this candidate for v0.13. Original
 development labels and binary hashes are preserved; these games tested
 v0.13-dev, rather than the subsequently tagged release binary.
 The selected experiment follows the [post-v0.12 comparison and three recommendations](../../research/v0.13-candidates/README.md).
@@ -118,7 +118,7 @@ and varying operating conditions. Do not infer a precise Elo gain, guaranteed
 long-control benefit, or reliable Skill 1 win rate above 50% from this sample.
 Sacrifice still wins substantially more than it loses against the candidate.
 
-The maintainer approved proceeding to PR, merge, and v0.13 release. The intended
+I approved proceeding to PR, merge, and v0.13 release. The intended
 mechanism has regression coverage, the routine gate passed, reliability checks
 passed, and both external scores improved. This supports a stronger claim than
 efficiency alone, while retaining the limits above. Keep Stockfish Skill 1 as
@@ -136,7 +136,7 @@ next two research options, not part of this increment.
 
 ## Release preparation
 
-The maintainer approved commit, push, PR, merge, and release as v0.13. UCI
+I approved commit, push, PR, merge, and release as v0.13. UCI
 identity, its test, greetings, current README, and future-baseline instructions
 were updated. The benchmarked search policy and original run labels/hashes
 remain unchanged. Format checks, full race-enabled tests, vet, and build passed

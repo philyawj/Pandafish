@@ -1,7 +1,7 @@
 # Start here after v0.15.3
 
 v0.15.3 is a **research patch with unchanged v0.15.2/v0.15 playing behavior**.
-The maintainer authorized this PR/merge/release and explicitly chose to archive
+I authorized this PR/merge/release and explicitly chose to archive
 the bishop-pair candidate rather than activate it. No cache, PVS, move-generator
 or bishop-pair prototype is compiled into normal builds. No live bot or
 200-game confirmation was started. Private configuration/active root executable
@@ -64,4 +64,4 @@ native equal-time checks before the standard 50 games each against released
 baseline, Skill 2 and pinned Sacrifice, three concurrent matchups. All results
 stay. A larger confirmation is separately planned, never automatic. Reassess
 after each result. No new playing-feature implementation follows this research
-release automatically; check in with the maintainer on the next candidate.
+release automatically; check in with me on the next candidate.

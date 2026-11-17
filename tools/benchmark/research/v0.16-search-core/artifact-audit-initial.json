@@ -1,0 +1,6 @@
+{
+  "step": "Initial final-artifact audit, before writing the per-run README",
+  "exit": 1,
+  "error": "AssertionError: README.md linked to ../../results/v0.16-search-core-dev-vs-v0.15.3-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba/README.md, which did not yet exist.",
+  "resolution": "The runner produces summary/PGN files and a global results index; I added the per-run explanatory README, then reran the artifact audit. No game or engine result changed."
+}

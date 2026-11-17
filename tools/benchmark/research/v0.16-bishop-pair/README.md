@@ -1,6 +1,6 @@
 # Archived v0.16 bishop-pair candidate
 
-**Archived in v0.15.3, unpromoted.** The maintainer selected unchanged released
+**Archived in v0.15.3, unpromoted.** I selected unchanged released
 play and a broader architecture investigation. The original screen and its
 then-current confirmation recommendation remain below as historical evidence.
 The [new plan](../v0.15.3-architecture/NEXT.md) supersedes the immediate 200-game
@@ -189,7 +189,7 @@ experiments. The direct interval comfortably includes equality. The public
 regression/fixture selection is another limitation.
 
 **A separately planned 200-game confirmation per opponent is justified**, if
-the maintainer wants to pursue this source: the direct gate passes, the
+I want to pursue this source: the direct gate passes, the
 mechanism is concrete, and equal-time cost is small. Keep the source/weight
 frozen rather than tuning to the mixed screen. Use the public 50-position book,
 three concurrent matchups and the same binaries/settings. Even 200 may remain
@@ -201,7 +201,7 @@ further diagnosis. It is not patched by this candidate. A pair bonus does not
 understand mobility, trapped bishops, king exposure or every exchange. The
 screen does not justify adding those terms to this experiment.
 
-The next action is maintainer review before any new commit, push or PR.
+I need to review the results before any new commit, push or PR.
 Current working source remains isolated on a local development branch; the
 published v0.15.2 playing policy and active bot executable/config are untouched.
 No live client or online game was started.
@@ -235,8 +235,7 @@ drivers are data files copied into scratch root packages. The original local
 the latter requires the installed Stockfish and python-chess environment.
 Random root ties and timing need not reproduce byte-for-byte.
 
-Only if the maintainer approves the proposed confirmation, the planned command
-is below. Verify the frozen candidate SHA above first; this is **not executed**:
+Run the command below only if I approve the proposed confirmation. Verify the frozen candidate SHA above first; this is **not executed**:
 
 ```sh
 go run ./tools/benchmark \

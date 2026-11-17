@@ -1,6 +1,6 @@
 # v0.13 three-way concurrency check
 
-The maintainer requested 50 games each against v0.12, Stockfish Skill 2, and
+I requested 50 games each against v0.12, Stockfish Skill 2, and
 pinned Sacrifice, starting all three matchups together. This tests a faster
 workflow after v0.13; it is not a new engine version. The released engine and
 private bot configuration were not changed. No online games were played.
@@ -143,7 +143,7 @@ same concurrency for future comparisons. Skill 2 has a promising first screen;
 its exact strength and long-control performance remain uncertain.
 
 Recommend 50 games each in three-way concurrency for the next development
-increment, approved by the maintainer after reviewing this experiment. Serial comparisons
+increment, which I approved after reviewing this experiment. Serial comparisons
 remain useful when debugging timing problems, using a constrained host, or
 investigating a small result. The experiment itself used v0.13 and the opt-in scheduling mode. The
 subsequent v0.14 tooling release adopts the faster profile and Skill 2 as
@@ -174,7 +174,7 @@ Go without per-game LLM analysis. Hashes identify both comparison inputs.
 
 ## Decision after review
 
-The maintainer accepted the development-speed gains and made 50 games per
+I accepted the development-speed gains and made 50 games per
 opponent with all three matchups concurrent the standard after v0.13. At a
 later stage, when smaller gains matter more, revisit serial testing and sample
 size for the particular question. Keep historical records and concurrency

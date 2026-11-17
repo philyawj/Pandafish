@@ -20,5 +20,5 @@ useful evidence, but does not by itself establish a small strength improvement.
 Run the Go
 tests and include focused positions that exercise the behavior changed.
 
-Maintainers follow the [release workflow](RELEASING.md) when preparing and
+I follow the [release workflow](RELEASING.md) when preparing and
 publishing a version.

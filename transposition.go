@@ -24,16 +24,18 @@ type tableEntry struct {
 }
 
 type transpositionTable struct {
+	hints      []boardHint
 	entries    []tableEntry
 	generation uint16
 }
 
 func newTable() *transpositionTable {
-	return &transpositionTable{entries: make([]tableEntry, tableEntries)}
+	return &transpositionTable{entries: make([]tableEntry, tableEntries), hints: make([]boardHint, tableEntries)}
 }
 
 func (table *transpositionTable) clear() {
 	clear(table.entries)
+	clear(table.hints)
 	table.generation = 0
 }
 
@@ -84,4 +86,31 @@ func preferMove(moves []chess.Move, hint uint16) {
 			return
 		}
 	}
+}
+
+type boardHint struct {
+	key  uint64
+	move uint16
+}
+
+// Board hints can cross draw contexts because they only order legal moves.
+// Scores remain in the history-qualified table. The extra fixed hint storage
+// is about 1 MiB; it has no score, depth, or bound to accidentally reuse.
+func (t *transpositionTable) boardHint(p *chess.Position) uint16 {
+	if t == nil || len(t.hints) == 0 {
+		return 0
+	}
+	h := p.ZobristHash()
+	e := t.hints[h%uint64(len(t.hints))]
+	if e.key == h {
+		return e.move
+	}
+	return 0
+}
+func (t *transpositionTable) storeHint(p *chess.Position, move uint16) {
+	if t == nil || len(t.hints) == 0 {
+		return
+	}
+	h := p.ZobristHash()
+	t.hints[h%uint64(len(t.hints))] = boardHint{h, move}
 }

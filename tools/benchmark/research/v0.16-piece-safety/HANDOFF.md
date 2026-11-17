@@ -18,13 +18,13 @@ recaptures pass focused controls, but evaluation costs about three times as
 much on the microbenchmarks; equal-time node count falls 18.2%. Decision changes
 include real improvements and serious regressions. No Elo claim follows.
 
-The maintainer authorized committing, merging and publishing this work as
+I authorized committing, merging and publishing this work as
 v0.15.2, then asked for a **fresh choice of the next hypothesis**, rather than
 following the previous five recommendations as a checklist. After publication,
 start the next experiment from the tagged v0.15.2 source and executable. The
 pawn ending after Rd5 is a leading diagnostic, but reassess all alternatives
 against the new result before selecting implementation scope. Preserve rejected
-findings and stop for maintainer review before preparing that next PR.
+findings and stop for my review before preparing that next PR.
 
 Keep material values, search, quiescence, table policy and clocks fixed for a
 new evaluation experiment. Run positive/negative controls, public regressions,

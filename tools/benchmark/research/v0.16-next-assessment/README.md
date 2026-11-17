@@ -84,7 +84,7 @@ Measure unrestricted fixed-depth best sets, balanced repeated 100 ms choices
 and static cost. If the mechanism survives, run the standard 50 games each
 against tagged v0.15.2, Skill 2 and pinned Sacrifice, three matchups concurrent.
 Preserve every failed gate and game. No automatic larger confirmation or live
-games. Stop before committing, pushing or preparing the next PR for maintainer
+games. Stop before committing, pushing or preparing the next PR for my
 review. The v0.15.2 publication authorization does not publish this candidate.
 
 ## Reassess again after the bishop-pair screen
@@ -112,9 +112,9 @@ This is a decision queue, not an instruction to implement five features in
 order. No new implementation follows the bishop-pair result automatically.
 
 
-## Subsequent maintainer decision
+## My subsequent decision
 
-The maintainer chose archive-only treatment in v0.15.3 and a broader investigation
+I chose archive-only treatment in v0.15.3 and a broader investigation
 of larger opportunities before a bishop-pair confirmation. The original choices
 and results above remain historical evidence. Read the
 [new measured architecture plan](../v0.15.3-architecture/NEXT.md) for the current

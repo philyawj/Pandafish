@@ -1,11 +1,12 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.15.3 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.16 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
 The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`,
-`transposition.go`, `killers.go`, `exchange.go`, `evaluation.go`, `mate.go`, and `repetition.go`.
+`transposition.go`, `search_context.go`, `killers.go`, `exchange.go`,
+`evaluation.go`, `mate.go`, and `repetition.go`.
 [corentings/chess](https://github.com/corentings/chess) handles chess rules,
 including castling, en passant, and promotions. The engine assigns values of
 1 to pawns, 3 to knights and bishops, 5 to rooks, and 9 to queens. It picks a
@@ -13,8 +14,10 @@ legal move by completing successively deeper searches, assuming each side
 chooses its best continuation. It keeps the last fully completed result when
 time runs out, with a legal fallback if no depth completes. Alpha-beta
 pruning skips branches that cannot improve a search result, with captures
-searched first to help pruning. Equal best moves are selected randomly;
-root pruning keeps their scores exact while discarding inferior choices.
+searched first to help pruning. A completed search returns one proven best
+move with an exact score; it does not enumerate every tied move. Later moves
+use a narrow PVS probe and receive a full-window search when needed. The
+unsearched emergency fallback is selected randomly from legal root moves.
 Checkmate scores above any material advantage, being
 checkmated scores below any material disadvantage, and stalemate scores zero.
 Shorter forced mates score higher, and longer forced losses score less badly.
@@ -27,19 +30,24 @@ full development, pawn-structure, or king-safety analysis. Internal and UCI
 scores use centipawns (100 per pawn).
 
 Each engine process uses a fixed 65,536-entry transposition table (about
-2 MiB). It caches completed main-search scores at matching depths and tries
-stored moves first. Quiet moves that caused a beta cutoff can also be tried
+2 MiB), plus a separate fixed move-hint table (about 1 MiB). It caches completed
+main-search scores at matching depths and tries stored moves first. Board-only
+hints can order freshly validated legal moves across different draw contexts;
+they never supply scores. Quiet moves that caused a beta cutoff can also be tried
 early at the same search ply, after captures/promotions and any cached move.
 Two such hints per ply are shared across iterative-deepening passes and reset
-for each search. They affect ordering, not evaluation or root tie handling.
+for each search. They affect ordering rather than evaluation.
 The transposition table persists within a game, clears on `ucinewgame`,
 and is never saved to disk. Quiescence scores are not cached. Search still
 uses a repetition-count fingerprint to distinguish draw-sensitive score contexts.
+After a pawn move or capture, unreachable earlier history is omitted from that
+cache identity while draw counts remain intact.
 It still has no separate fifty-move draw evaluation.
 
 Quiescence means quietness. At the normal search boundary, it examines
 captures and promotions, and all legal escapes when the king is in check.
-Away from check it can keep the current static score instead of making a
+Away from check it sorts a copied tactical subset of the full legal list and
+can keep the current static score instead of making a
 capture. This helps avoid counting a captured piece before considering the
 recapture. A static exchange estimate skips losing ordinary captures outside
 check, while checking captures, promotions, and required evasions remain eligible.
@@ -316,8 +324,13 @@ ablations, CPU/allocation profiles and a broader architecture assessment.
 Released playing behavior remains v0.15. See the
 [research and measured findings](tools/benchmark/research/v0.15.3-architecture/README.md).
 
-**Next:** Build and validate a coordinated search-core candidate, then address
-broader evaluation and threat modeling using independent data. The
-[ranked larger projects](tools/benchmark/research/v0.15.3-architecture/NEXT.md)
-give concrete stages, acceptance checks and limits. Reassess after each result;
-do not treat earlier hypothesis lists as a fixed checklist.
+**v0.16: Coordinate the search core (complete).** Return one proven best move,
+use full-depth PVS, recover draw-safe move hints and reversible cache contexts,
+and sort only eligible tactical moves outside check. Preserve evaluation,
+quiescence eligibility, mate/repetition correctness and time allocation. See the
+[implementation, validation and measured limits](tools/benchmark/research/v0.16-search-core/README.md).
+
+**Next:** Reassess specialized tactical generation/storage and coherent
+parameter-calibrated evaluation/threat modeling against v0.16. Choose one
+experiment from the measured bottlenecks and reassess after its result;
+these projects are not a fixed checklist.

@@ -1,0 +1,36 @@
+{
+  "command": [
+    "python3",
+    "tools/benchmark/research/v0.16-search-core/reproduce.py",
+    "/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-core-replay-vxgciquz/source"
+  ],
+  "exit": 0,
+  "elapsed_s": 10.205921541899443,
+  "checks": [
+    {
+      "step": "tests",
+      "command": [
+        "go",
+        "-C",
+        "/private/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-core-replay-vxgciquz/source",
+        "test",
+        "-count=1",
+        "./..."
+      ],
+      "exit": 0
+    },
+    {
+      "step": "build",
+      "command": [
+        "go",
+        "-C",
+        "/private/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-core-replay-vxgciquz/source",
+        "build",
+        "-o",
+        "/private/var/folders/20/zl_cvhpd04lbtcrgwjk7q9fw0000gn/T/pandafish-core-replay-vxgciquz/source/pandafish-candidate",
+        "."
+      ],
+      "exit": 0
+    }
+  ]
+}

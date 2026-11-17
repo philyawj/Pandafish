@@ -1,0 +1,141 @@
+[
+  {
+    "name": "format",
+    "command": [
+      "gofmt",
+      "-l",
+      "evaluation_test.go",
+      "search_core_test.go",
+      "main_test.go",
+      "killers.go",
+      "main.go",
+      "uci_test.go",
+      "limits_test.go",
+      "transposition_test.go",
+      "quiescence_test.go",
+      "exchange_test.go",
+      "reporting.go",
+      "transposition.go",
+      "iterative.go",
+      "killers_test.go",
+      "search_test.go",
+      "repetition.go",
+      "search.go",
+      "evaluation.go",
+      "internal/telemetry/telemetry.go",
+      "internal/telemetry/telemetry_test.go",
+      "exchange.go",
+      "mate.go",
+      "reporting_test.go",
+      "iterative_test.go",
+      "repetition_test.go",
+      "tools/lichess/main.go",
+      "tools/lichess/report_test.go",
+      "tools/lichess/report.go",
+      "tools/lichess/stockfish.go",
+      "tools/lichess/record.go",
+      "tools/lichess/archive.go",
+      "tools/lichess/analyse.go",
+      "tools/lichess/record_test.go",
+      "tools/lichess/operational.go",
+      "tools/lichess/process_test.go",
+      "tools/benchmark/workflow.go",
+      "tools/benchmark/main_test.go",
+      "tools/benchmark/main.go",
+      "tools/benchmark/report.go",
+      "tools/benchmark/workflow_test.go",
+      "tools/benchmark/uci.go",
+      "tools/benchmark/checks.go",
+      "search_context.go",
+      "mate_test.go",
+      "limits.go",
+      "tools/benchmark/checks_test.go"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.02970595797523856
+  },
+  {
+    "name": "race",
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 46.458177459193394
+  },
+  {
+    "name": "vet",
+    "command": [
+      "go",
+      "vet",
+      "./..."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.22353950003162026
+  },
+  {
+    "name": "build",
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "tools/benchmark/bin/pandafish-v0.16-release",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.45411904202774167
+  },
+  {
+    "name": "arm64",
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "/tmp/pandafish-v016-release-arm64",
+      "."
+    ],
+    "exit": 0,
+    "elapsed_s": 0.2599697078112513
+  },
+  {
+    "name": "wrapper",
+    "command": [
+      "/Users/philyawj/projects/lichess-bot/venv/bin/python",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.16-search-core/release-wrapper.py"
+    ],
+    "exit": 0,
+    "elapsed_s": 1.6452661249786615
+  },
+  {
+    "name": "smoke",
+    "command": [
+      "tools/benchmark/bin/benchmark",
+      "--candidate",
+      "tools/benchmark/bin/pandafish-v0.16-release",
+      "--version",
+      "v0.16-release-smoke",
+      "--revision",
+      "720897b2f29bcc2b9a37a98fbb3eecf462015701-dirty",
+      "--previous",
+      "tools/benchmark/bin/pandafish-v0.15.3",
+      "--previous-version",
+      "v0.15.3",
+      "--previous-revision",
+      "720897b2f29bcc2b9a37a98fbb3eecf462015701",
+      "--stockfish",
+      "/opt/homebrew/bin/stockfish",
+      "--sacrifice",
+      "tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine",
+      "--pairs",
+      "1",
+      "--parallel-all",
+      "--results",
+      "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.16-search-core/release-smoke"
+    ],
+    "exit": 0,
+    "elapsed_s": 25.97138070780784
+  }
+]
