@@ -1,6 +1,6 @@
 # Go research tools
 
-I use `go run ./tools/research` from the repository root. This program needs
+Run `go run ./tools/research` from the repository root. This program needs
 Go and Git; its checks do not install interpreters, collect fresh engine labels,
 refit models or start games. The normal [benchmark](../benchmark/README.md) and
 [session tools](../lichess/README.md) remain Go programs too.
@@ -30,7 +30,7 @@ between an actual legal mate and an opponent threat after a hypothetical pass.
 only the UCI version substitution. `games --dir PATH` legally replays a benchmark
 summary's PGNs and checks their saved results/lengths and mate/repetition claims.
 
-I replay an archived Go candidate into a **new** directory with:
+Replay an archived Go candidate into a **new** directory with:
 
 ```sh
 go run ./tools/research replay \
@@ -50,30 +50,33 @@ go run ./tools/research replay --base v0.18 \
   --out /tmp/pandafish-quiet-proof --check
 ```
 
-I check PR descriptions and release notes before publishing:
+Check PR descriptions and release notes before publishing:
 
 ```sh
 go run ./tools/research wording --file /tmp/pandafish-pr.md
 go run ./tools/research wording --file /tmp/pandafish-release.md
 ```
 
-I retired 131 historical Python/shell source files, including source stored as
-`.txt`, rather than hide their language from GitHub. The hashed release
+The migration retires 131 historical Python/shell source files, including source
+stored as `.txt`. No language is hidden from GitHub. The hashed release
 attachment preserves 1,148 original files and its own manifest. The three
 post-v0.18 attempts were still local when archived; their scripts therefore
 need that attachment, while older scripts also remain in earlier tags.
 
-I replaced shared archive verification, Go-engine restoration, frozen decision
-checks, mate-proof checks and the shell test fixture with Go. One-off old corpus
+Shared archive verification, Go-engine restoration, frozen decision checks,
+mate-proof checks and the shell test fixture now use Go. One-off old corpus
 collectors, NumPy optimizers, external python-chess oracle drivers and historical
-batch orchestrators are **retired**, not claimed as equivalent Go ports. Their
+batch orchestrators are **retired**, with no claim of equivalent Go ports. Their
 original code/results remain reproducible in the historical environment from
-the attachment. I will implement future collection/fitting/oracles in Go under
-a separately reviewed experiment design. I have not reproduced a new independent
-rules oracle by merely calling the same Go library again.
+the attachment. Future collection/fitting/oracles must use Go under a separately
+reviewed experiment design. Calling the same Go rules library does not provide
+a new independent rules oracle.
 
-I retain documentary shell command examples for invoking Go and Git. The optional
+Documentary shell command examples remain for invoking Go and Git. The optional
 lichess-bot client is installed outside this repository and has its own Python
-requirements; I do not vendor or rewrite that external service client here.
+requirements; that external service client is neither vendored nor rewritten here.
 All repository program/test/research source is Go. The root source-policy test
 rejects other source extensions, including archived script-name disguises.
+Publication text must use neutral, factual engineering prose without first-person
+voice or personal framing. The `wording` command rejects first-person pronouns
+and the prohibited role word specified in [AGENTS.md](../../AGENTS.md).

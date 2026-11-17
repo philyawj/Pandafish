@@ -58,6 +58,9 @@ func run(args []string) error {
 		if regexp.MustCompile(`(?i)\bmaintainers?\b`).Match(b) {
 			return fmt.Errorf("publication text contains a prohibited role word")
 		}
+		if regexp.MustCompile(`(?i)\b(i|we|my|our|me|ours)\b`).Match(b) {
+			return fmt.Errorf("publication text must use neutral, factual prose without first-person voice")
+		}
 		return printJSON(map[string]bool{"wording_passed": true})
 	case "audit":
 		root := f.String("root", ".", "repository root")
