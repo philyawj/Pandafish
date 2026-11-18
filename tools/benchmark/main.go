@@ -339,7 +339,7 @@ func run() error {
 	parallel := flag.Bool("parallel", false, "Run Stockfish and Sacrifice concurrently after previous screen")
 	parallelAll := flag.Bool("parallel-all", false, "Require three-way concurrency (automatic for a full suite on at least four logical CPUs)")
 	sequential := flag.Bool("sequential", false, "Run matchups serially and gate external matches on the previous screen")
-	skill := flag.Int("stockfish-skill", 2, "Stockfish Skill Level (1 through 20)")
+	skill := flag.Int("stockfish-skill", 3, "Stockfish Skill Level (1 through 20)")
 	pairs := flag.Int("pairs", 25, "Color pairs per opponent")
 	moveMS := flag.Int("move-ms", 100, "Requested milliseconds per move")
 	graceMS := flag.Int("grace-ms", 50, "Additional wall-clock allowance for protocol overhead")

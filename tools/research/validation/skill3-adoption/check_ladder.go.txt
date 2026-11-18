@@ -1,0 +1,62 @@
+// Copy to a .go path and run from the repository root. No games or writes.
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"io/fs"
+	"os"
+	"path/filepath"
+)
+
+func main() {
+	root := "tools/benchmark/results/v0.20-stockfish-ladder"
+	b, e := os.ReadFile(filepath.Join(root, "inventory.json"))
+	if e != nil {
+		panic(e)
+	}
+	var inv map[string]struct {
+		SHA   string `json:"sha256"`
+		Bytes int    `json:"bytes"`
+	}
+	if e = json.Unmarshal(b, &inv); e != nil {
+		panic(e)
+	}
+	n := 0
+	e = filepath.WalkDir(root, func(p string, d fs.DirEntry, e error) error {
+		if e != nil {
+			return e
+		}
+		if d.IsDir() {
+			return nil
+		}
+		rel, e := filepath.Rel(root, p)
+		if e != nil {
+			return e
+		}
+		if rel == "inventory.json" {
+			return nil
+		}
+		want, ok := inv[filepath.ToSlash(rel)]
+		if !ok {
+			panic("unrecorded file: " + p)
+		}
+		b, e := os.ReadFile(p)
+		if e != nil {
+			return e
+		}
+		if len(b) != want.Bytes || fmt.Sprintf("%x", sha256.Sum256(b)) != want.SHA {
+			panic("altered file: " + p)
+		}
+		n++
+		return nil
+	})
+	if e != nil {
+		panic(e)
+	}
+	if n != len(inv) {
+		panic("missing files")
+	}
+	json.NewEncoder(os.Stdout).Encode(map[string]any{"ladder_inventory_files_verified": n, "unexpected_or_missing_files": 0})
+}

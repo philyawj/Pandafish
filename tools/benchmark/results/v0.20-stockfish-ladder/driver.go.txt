@@ -1,0 +1,259 @@
+// Copy to a .go path and run from the repository module. All commands and
+// observations are saved. Existing run roots/logs are refused; no retry path.
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/json"
+	"flag"
+	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"runtime"
+	"sort"
+	"strings"
+	"sync"
+	"time"
+)
+
+type record struct {
+	Skill   int      `json:"skill"`
+	Batch   int      `json:"batch"`
+	Command []string `json:"command"`
+	Started string   `json:"started_utc"`
+	Ended   string   `json:"ended_utc"`
+	Exit    int      `json:"exit"`
+	Error   string   `json:"error,omitempty"`
+	Summary string   `json:"summary"`
+}
+type stats struct {
+	Wins       int      `json:"wins"`
+	Draws      int      `json:"draws"`
+	Losses     int      `json:"losses"`
+	Unfinished int      `json:"unfinished"`
+	Forfeits   int      `json:"forfeits"`
+	Score      *float64 `json:"score_percent"`
+	Lower      float64  `json:"possible_score_lower_percent"`
+	Upper      float64  `json:"possible_score_upper_percent"`
+}
+type identity struct {
+	Label    string            `json:"label"`
+	Name     string            `json:"uci_name"`
+	SHA      string            `json:"sha256"`
+	Revision string            `json:"source_revision"`
+	Options  map[string]string `json:"options"`
+}
+type summary struct {
+	Complete  bool     `json:"complete"`
+	Candidate identity `json:"candidate"`
+	Runner    string   `json:"runner_sha256"`
+	Settings  struct {
+		Pairs    int    `json:"pairs"`
+		MS       int    `json:"move_ms"`
+		Grace    int    `json:"timeout_grace_ms"`
+		Cap      int    `json:"max_plies"`
+		Openings string `json:"openings_sha256"`
+	} `json:"settings"`
+	Matches []struct {
+		Engine identity `json:"engine"`
+		Stats  stats    `json:"stats"`
+		Games  []struct {
+			White       bool     `json:"candidate_white"`
+			Opening     []string `json:"opening"`
+			Result      string   `json:"result"`
+			Termination string   `json:"termination"`
+			Plies       int      `json:"plies"`
+			Times       []struct {
+				Candidate bool    `json:"candidate"`
+				MS        float64 `json:"elapsed_ms"`
+			} `json:"response_times"`
+		} `json:"games"`
+	} `json:"matches"`
+}
+
+func must(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+func digest(p string) string {
+	b, e := os.ReadFile(p)
+	must(e)
+	return fmt.Sprintf("%x", sha256.Sum256(b))
+}
+func put(p string, v any) {
+	b, e := json.MarshalIndent(v, "", "  ")
+	must(e)
+	must(os.WriteFile(p, append(b, '\n'), 0644))
+}
+func abs(p string) string { s, e := filepath.Abs(p); must(e); return s }
+func main() {
+	runner := flag.String("runner", "", "tagged benchmark executable")
+	research := flag.String("research", "", "Go PGN checker executable")
+	candidate := flag.String("candidate", "", "tagged v0.20 executable")
+	stockfish := flag.String("stockfish", "/opt/homebrew/bin/stockfish", "pinned Stockfish executable")
+	revision := flag.String("revision", "", "v0.20 merge SHA")
+	out := flag.String("out", "tools/benchmark/results/v0.20-stockfish-ladder", "new ladder root")
+	flag.Parse()
+	if *runner == "" || *research == "" || *candidate == "" || *revision != "c90ca44d71ce4c3897f43402976f4ca39ee1dc73" {
+		panic("tagged executables and verified revision required")
+	}
+	*runner, *research, *candidate, *stockfish = abs(*runner), abs(*research), abs(*candidate), abs(*stockfish)
+	must(os.Mkdir(filepath.Join(*out, "runs"), 0755))
+	method := map[string]any{"tag": "v0.20", "revision": *revision, "plan_sha256": digest(filepath.Join(*out, "PLAN.md")), "driver_source_sha256": digest(filepath.Join(*out, "driver.go.txt")), "candidate_sha256": digest(*candidate), "runner_sha256": digest(*runner), "reference_sha256": digest(*stockfish), "opening_sha256": digest("tools/benchmark/openings-screening-10-v1.txt"), "platform": runtime.GOOS + "/" + runtime.GOARCH, "driver_go_version": runtime.Version(), "logical_cpus": runtime.NumCPU(), "max_matchup_concurrency": 3, "batches": [][]int{{2, 5, 8}, {3, 6, 9}, {4, 7, 10}}, "games_per_skill": 50, "move_ms": 100, "grace_ms": 50, "max_plies": 400, "machine": "Same host; AC power; no overlapping engine probes; load declines at batch tails.", "started_utc": time.Now().UTC().Format(time.RFC3339Nano)}
+	path := filepath.Join(*out, "method.json")
+	f, e := os.OpenFile(path, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0644)
+	must(e)
+	enc := json.NewEncoder(f)
+	enc.SetIndent("", "  ")
+	must(enc.Encode(method))
+	must(f.Close())
+	journal, e := os.OpenFile(filepath.Join(*out, "events.jsonl"), os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0644)
+	must(e)
+	defer journal.Close()
+	var mu sync.Mutex
+	rows := []record{}
+	for batch, skills := range [][]int{{2, 5, 8}, {3, 6, 9}, {4, 7, 10}} {
+		var wg sync.WaitGroup
+		for _, skill := range skills {
+			wg.Add(1)
+			go func(skill, batch int) {
+				defer wg.Done()
+				root := filepath.Join(*out, "runs", fmt.Sprintf("skill-%d", skill))
+				args := []string{"--candidate", *candidate, "--version", "v0.20", "--revision", *revision, "--stockfish", *stockfish, "--stockfish-skill", fmt.Sprint(skill), "--stage", "external", "--sequential", "--pairs", "25", "--move-ms", "100", "--grace-ms", "50", "--max-plies", "400", "--verbose", "--machine", "Tagged v0.20 ladder; outer batch concurrency 3; AC power", "--results", root}
+				r := record{Skill: skill, Batch: batch + 1, Command: append([]string{*runner}, args...), Started: time.Now().UTC().Format(time.RFC3339Nano), Summary: filepath.Join(root, fmt.Sprintf("v0.20-vs-stockfish-%d", skill), "summary.json")}
+				mu.Lock()
+				must(json.NewEncoder(journal).Encode(map[string]any{"event": "started", "run": r}))
+				mu.Unlock()
+				log, e := os.OpenFile(filepath.Join(*out, fmt.Sprintf("skill-%d-run.txt", skill)), os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0644)
+				if e != nil {
+					r.Exit = -1
+					r.Error = e.Error()
+				} else {
+					cmd := exec.Command(*runner, args...)
+					cmd.Stdout = log
+					cmd.Stderr = log
+					e = cmd.Run()
+					if e != nil {
+						r.Error = e.Error()
+						r.Exit = -1
+						if x, ok := e.(*exec.ExitError); ok {
+							r.Exit = x.ExitCode()
+						}
+					}
+					must(log.Close())
+				}
+				r.Ended = time.Now().UTC().Format(time.RFC3339Nano)
+				mu.Lock()
+				rows = append(rows, r)
+				must(json.NewEncoder(journal).Encode(map[string]any{"event": "finished", "run": r}))
+				put(filepath.Join(*out, "runs-checkpoint.json"), rows)
+				mu.Unlock()
+				fmt.Printf("Skill %d finished, exit %d\n", skill, r.Exit)
+			}(skill, batch)
+		}
+		wg.Wait()
+		fmt.Printf("Batch %d complete\n", batch+1)
+	}
+	sort.Slice(rows, func(i, j int) bool { return rows[i].Skill < rows[j].Skill })
+	put(filepath.Join(*out, "run-results.json"), rows)
+	// No PGN replay or other heavy validation overlaps any timed game.
+	table := "# v0.20 versus Stockfish Skills 2–10\n\n50 games per skill; 450 planned. Tagged v0.20; 100ms move allowance, 50ms protocol grace, 400-ply cap, ten paired openings. Three levels per batch (2/5/8, 3/6/9, 4/7/10); individual profiles record one matchup and method.json records the outer concurrency. All scores are from Pandafish's perspective.\n\n| Skill | W / D / L | Unfinished | Forfeits | Completed score | Possible score | Records |\n| --- | --- | --- | --- | --- | --- | --- |\n"
+	review := map[string]any{}
+	failed := false
+	total := 0
+	for _, r := range rows {
+		b, e := os.ReadFile(r.Summary)
+		var s summary
+		if e == nil {
+			e = json.Unmarshal(b, &s)
+		}
+		if e != nil || len(s.Matches) != 1 || !s.Complete {
+			failed = true
+			table += fmt.Sprintf("| %d | incomplete | — | — | — | — | [log](skill-%d-run.txt) |\n", r.Skill, r.Skill)
+			review[fmt.Sprint(r.Skill)] = map[string]any{"run": r, "error": "missing/incomplete summary"}
+			continue
+		}
+		m := s.Matches[0]
+		want := stats{}
+		pairs := true
+		maxMS := map[string]float64{"candidate": 0, "opponent": 0}
+		over := 0
+		for i, g := range m.Games {
+			if (i%2 == 0) != g.White {
+				pairs = false
+			}
+			if i%2 == 1 && fmt.Sprint(g.Opening) != fmt.Sprint(m.Games[i-1].Opening) {
+				pairs = false
+			}
+			if strings.HasPrefix(g.Termination, "forfeit:") {
+				want.Forfeits++
+			}
+			switch g.Result {
+			case "*":
+				want.Unfinished++
+			case "1/2-1/2":
+				want.Draws++
+			case "1-0", "0-1":
+				if (g.Result == "1-0") == g.White {
+					want.Wins++
+				} else {
+					want.Losses++
+				}
+			default:
+				panic("invalid result")
+			}
+			if len(g.Times) != g.Plies-len(g.Opening) {
+				panic("timing count")
+			}
+			for _, t := range g.Times {
+				a := "opponent"
+				if t.Candidate {
+					a = "candidate"
+				}
+				if t.MS > maxMS[a] {
+					maxMS[a] = t.MS
+				}
+				if t.MS > 150 {
+					over++
+				}
+			}
+		}
+		complete := want.Wins + want.Draws + want.Losses
+		points := float64(want.Wins) + .5*float64(want.Draws)
+		if complete > 0 {
+			x := 100 * points / float64(complete)
+			want.Score = &x
+		}
+		want.Lower = 100 * points / float64(len(m.Games))
+		want.Upper = 100 * (points + float64(want.Unfinished)) / float64(len(m.Games))
+		wa, _ := json.Marshal(want)
+		sa, _ := json.Marshal(m.Stats)
+		if string(wa) != string(sa) || !pairs || len(m.Games) != 50 || s.Candidate.Name != "Pandafish v0.20" || s.Candidate.Revision != *revision || s.Candidate.SHA != method["candidate_sha256"] || s.Runner != method["runner_sha256"] || m.Engine.SHA != method["reference_sha256"] || m.Engine.Options["Skill Level"] != fmt.Sprint(r.Skill) || m.Engine.Options["Threads"] != "1" || m.Engine.Options["Hash"] != "16" || m.Engine.Options["UCI_LimitStrength"] != "false" || m.Engine.Options["SyzygyPath"] != "" || s.Settings.Pairs != 25 || s.Settings.MS != 100 || s.Settings.Grace != 50 || s.Settings.Cap != 400 || s.Settings.Openings != method["opening_sha256"] {
+			panic("independent profile/statistics check failed")
+		}
+		check := exec.Command(*research, "games", "--dir", filepath.Dir(r.Summary))
+		output, err := check.CombinedOutput()
+		must(os.WriteFile(filepath.Join(*out, fmt.Sprintf("skill-%d-pgn-check.json", r.Skill)), output, 0644))
+		if r.Exit != 0 || want.Forfeits > 0 || over > 0 || err != nil {
+			failed = true
+		}
+		total += len(m.Games)
+		scoreText := "—"
+		if want.Score != nil {
+			scoreText = fmt.Sprintf("%.1f%%", *want.Score)
+		}
+		rel, e := filepath.Rel(*out, filepath.Dir(r.Summary))
+		must(e)
+		table += fmt.Sprintf("| %d | %d / %d / %d | %d | %d | %s | %.1f%%–%.1f%% | [JSON](%s/summary.json), [PGN](%s/stockfish.pgn) |\n", r.Skill, want.Wins, want.Draws, want.Losses, want.Unfinished, want.Forfeits, scoreText, want.Lower, want.Upper, rel, rel)
+		review[fmt.Sprint(r.Skill)] = map[string]any{"stats": want, "max_response_ms": maxMS, "responses_over_grace": over, "color_pairs_verified": 25, "pgn_check_passed": err == nil, "engine": m.Engine, "candidate": s.Candidate}
+	}
+	table += "\nThe possible-score range treats unfinished games as all losses through all wins; it is not a confidence interval. Small repeated-opening screens and batch scheduling limit precision; adjacent skill samples need not be monotonic. No Elo equivalence, automatic target change or longer confirmation is implied. All raw runs, driver, method, failures and PGN checks are preserved. See [the frozen plan](PLAN.md).\n"
+	must(os.WriteFile(filepath.Join(*out, "README.md"), []byte(table), 0644))
+	put(filepath.Join(*out, "review.json"), map[string]any{"skills": review, "games": total, "all_checks_passed": !failed, "finished_utc": time.Now().UTC().Format(time.RFC3339Nano)})
+	fmt.Printf("Completed %d games; final checks passed=%v\n", total, !failed)
+	if failed {
+		os.Exit(1)
+	}
+}

@@ -1,0 +1,202 @@
+// Copy to a .go path and run from the module only after driver completion.
+// Validates frozen identities, cross-level openings, color scores and timing
+// overlap, then writes a new byte inventory. Never starts engines or games.
+package main
+
+import (
+	"bytes"
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"io/fs"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"reflect"
+	"sort"
+	"strings"
+	"time"
+)
+
+type entry struct {
+	SHA   string `json:"sha256"`
+	Bytes int    `json:"bytes"`
+}
+type score struct {
+	Wins       int `json:"wins"`
+	Draws      int `json:"draws"`
+	Losses     int `json:"losses"`
+	Unfinished int `json:"unfinished"`
+}
+
+func must(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+func read(p string) []byte { b, e := os.ReadFile(p); must(e); return b }
+func hash(b []byte) string { return fmt.Sprintf("%x", sha256.Sum256(b)) }
+func load(p string, v any) { must(json.Unmarshal(read(p), v)) }
+func put(p string, v any) {
+	b, e := json.MarshalIndent(v, "", "  ")
+	must(e)
+	must(os.WriteFile(p, append(b, '\n'), 0644))
+}
+func main() {
+	root := "tools/benchmark/results/v0.20-stockfish-ladder"
+	if _, e := os.Stat(filepath.Join(root, "inventory.json")); !os.IsNotExist(e) {
+		panic("refuse inventory overwrite")
+	}
+	var method struct {
+		Revision  string `json:"revision"`
+		Plan      string `json:"plan_sha256"`
+		Driver    string `json:"driver_source_sha256"`
+		Candidate string `json:"candidate_sha256"`
+		Reference string `json:"reference_sha256"`
+		Runner    string `json:"runner_sha256"`
+	}
+	load(filepath.Join(root, "method.json"), &method)
+	for p, want := range map[string]string{filepath.Join(root, "PLAN.md"): method.Plan, filepath.Join(root, "driver.go.txt"): method.Driver, "tools/benchmark/bin/pandafish-v0.20": method.Candidate, "/opt/homebrew/bin/stockfish": method.Reference, "/tmp/pandafish-v020-release/benchmark": method.Runner} {
+		if hash(read(p)) != want {
+			panic("frozen identity differs: " + p)
+		}
+	}
+	head, e := exec.Command("git", "rev-parse", "v0.20^{}").Output()
+	must(e)
+	if strings.TrimSpace(string(head)) != method.Revision {
+		panic("tag differs")
+	}
+	var review struct {
+		Passed bool                       `json:"data_validation_passed"`
+		Games  int                        `json:"games"`
+		Skills map[string]json.RawMessage `json:"skills"`
+	}
+	load(filepath.Join(root, "review.json"), &review)
+	if !review.Passed || review.Games != 450 || len(review.Skills) != 9 {
+		panic("driver review rejected/incomplete")
+	}
+	var runs []struct {
+		Skill   int    `json:"skill"`
+		Batch   int    `json:"batch"`
+		Start   string `json:"started_utc"`
+		End     string `json:"ended_utc"`
+		Exit    int    `json:"exit"`
+		Summary string `json:"summary"`
+	}
+	load(filepath.Join(root, "run-results.json"), &runs)
+	if len(runs) != 9 {
+		panic("run count")
+	}
+	type event struct {
+		T     time.Time
+		Delta int
+	}
+	events := []event{}
+	results := map[string]any{}
+	var originalOpenings map[string]int
+	for _, r := range runs {
+		if r.Exit != 0 || r.Skill < 2 || r.Skill > 10 || r.Batch != (r.Skill-2)%3+1 {
+			panic("run identity/exit")
+		}
+		start, e := time.Parse(time.RFC3339Nano, r.Start)
+		must(e)
+		end, e := time.Parse(time.RFC3339Nano, r.End)
+		must(e)
+		if !end.After(start) {
+			panic("interval")
+		}
+		events = append(events, event{start, 1}, event{end, -1})
+		var s struct {
+			Matches []struct {
+				Games []struct {
+					White   bool     `json:"candidate_white"`
+					Opening []string `json:"opening"`
+					Result  string   `json:"result"`
+				} `json:"games"`
+			} `json:"matches"`
+		}
+		load(r.Summary, &s)
+		if len(s.Matches) != 1 || len(s.Matches[0].Games) != 50 {
+			panic("match count")
+		}
+		colors := map[string]score{"white": {}, "black": {}}
+		openings := map[string]int{}
+		for _, g := range s.Matches[0].Games {
+			c := "black"
+			if g.White {
+				c = "white"
+			}
+			x := colors[c]
+			switch g.Result {
+			case "*":
+				x.Unfinished++
+			case "1/2-1/2":
+				x.Draws++
+			case "1-0", "0-1":
+				if (g.Result == "1-0") == g.White {
+					x.Wins++
+				} else {
+					x.Losses++
+				}
+			default:
+				panic("result")
+			}
+			colors[c] = x
+			openings[strings.Join(g.Opening, " ")]++
+		}
+		for _, x := range colors {
+			if x.Wins+x.Draws+x.Losses+x.Unfinished != 25 {
+				panic("color count")
+			}
+		}
+		if originalOpenings == nil {
+			originalOpenings = openings
+		} else if !reflect.DeepEqual(openings, originalOpenings) {
+			panic("opening distribution differs")
+		}
+		dir := filepath.Dir(r.Summary)
+		if !bytes.Equal(read(filepath.Join(dir, "stockfish.pgn")), read(filepath.Join(dir, "games.pgn"))) {
+			panic("combined PGN differs")
+		}
+		results[fmt.Sprint(r.Skill)] = map[string]any{"color_results": colors, "opening_counts": openings}
+	}
+	sort.Slice(events, func(i, j int) bool { return events[i].T.Before(events[j].T) })
+	active, maxActive := 0, 0
+	for _, event := range events {
+		active += event.Delta
+		if active > maxActive {
+			maxActive = active
+		}
+		if active < 0 {
+			panic("event accounting")
+		}
+	}
+	if active != 0 || maxActive != 3 {
+		panic("concurrency")
+	}
+	put(filepath.Join(root, "postcheck.json"), map[string]any{"tag_revision": method.Revision, "frozen_identities_unchanged": true, "same_opening_distribution_at_all_skills": true, "observed_max_matchup_overlap": maxActive, "combined_and_individual_pgn_bytes_agree": true, "pgn_checker_sha256": hash(read("/tmp/pandafish-v020-research-review")), "skills": results})
+	inv := map[string]entry{}
+	must(filepath.WalkDir(root, func(p string, d fs.DirEntry, e error) error {
+		if e != nil {
+			return e
+		}
+		if d.IsDir() {
+			return nil
+		}
+		rel, e := filepath.Rel(root, p)
+		if e != nil {
+			return e
+		}
+		b := read(p)
+		inv[filepath.ToSlash(rel)] = entry{hash(b), len(b)}
+		return nil
+	}))
+	put(filepath.Join(root, "inventory.json"), inv)
+	for p, want := range inv {
+		b := read(filepath.Join(root, p))
+		if len(b) != want.Bytes || hash(b) != want.SHA {
+			panic("inventory differs")
+		}
+	}
+	fmt.Printf("Verified 9 skills, 450 games, 25 games per color, identical opening distributions, maximum overlap 3, and %d evidence files.\n", len(inv))
+}

@@ -1,0 +1,51 @@
+// Generate a report-only continuation from the frozen original driver.
+// This does not run the report or any games. The original source stays intact.
+package main
+
+import (
+	"os"
+	"strings"
+)
+
+func main() {
+	root := "tools/benchmark/results/v0.20-stockfish-ladder/"
+	b, err := os.ReadFile(root + "driver.go.txt")
+	if err != nil {
+		panic(err)
+	}
+	s := string(b)
+	start := strings.Index(s, "func main() {")
+	body := strings.Index(s, "\t// No PGN replay or other heavy validation overlaps any timed game.")
+	if start < 0 || body < start {
+		panic("driver boundary differs")
+	}
+	header := strings.ReplaceAll(strings.ReplaceAll(s[:start], "\t\"runtime\"\n", ""), "\t\"sync\"\n", "")
+	header = strings.Replace(header, "// Copy to a .go path and run from the repository module. All commands and\n// observations are saved. Existing run roots/logs are refused; no retry path.", "// Report-only continuation: reads the original saved games; never starts matches.\n// Corrects failed-attempt timing counts and retains reliability failure status.", 1)
+	main := `func main() {
+ out := flag.String("out", "tools/benchmark/results/v0.20-stockfish-ladder", "saved ladder root")
+ research := flag.String("research", "/tmp/pandafish-v020-research-review", "Go PGN checker")
+ flag.Parse()
+ var method map[string]any
+ b, err := os.ReadFile(filepath.Join(*out,"method.json")); must(err); must(json.Unmarshal(b,&method))
+ revisionText := method["revision"].(string); revision := &revisionText
+ var rows []record
+ b, err = os.ReadFile(filepath.Join(*out,"run-results.json")); must(err); must(json.Unmarshal(b,&rows))
+ if len(rows)!=9 {panic("all nine original runs must finish first")}
+ sort.Slice(rows,func(i,j int)bool{return rows[i].Skill<rows[j].Skill})
+`
+	report := s[body:]
+	report = strings.Replace(report, "\tfailed := false", "\tfailed := false\n\tdataPassed := true", 1)
+	report = strings.Replace(report, "\t\t\tfailed = true", "\t\t\tfailed = true\n\t\t\tdataPassed = false", 1)
+	report = strings.Replace(report, "output, err := check.CombinedOutput()", "output, err := check.CombinedOutput()\n\t\tif err != nil {dataPassed=false}", 1)
+	old := "\t\t\tif len(g.Times) != g.Plies-len(g.Opening) {\n\t\t\t\tpanic(\"timing count\")\n\t\t\t}"
+	fix := "\t\t\textra := 0\n\t\t\tif strings.HasPrefix(g.Termination, \"forfeit:\") {extra=1}\n\t\t\tif len(g.Times) != g.Plies-len(g.Opening)+extra {panic(\"timing count including failed attempt\")}"
+	if strings.Count(report, old) != 1 {
+		panic("timing assertion differs")
+	}
+	report = strings.Replace(report, old, fix, 1)
+	report = strings.ReplaceAll(report, "skill-%d-pgn-check.json", "skill-%d-pgn-review.json")
+	report = strings.Replace(report, `"all_checks_passed": !failed`, `"all_checks_passed": !failed, "data_validation_passed": dataPassed && total==450 && len(review)==9`, 1)
+	if err = os.WriteFile(root+"report.go.txt", []byte(header+main+report), 0644); err != nil {
+		panic(err)
+	}
+}

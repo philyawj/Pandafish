@@ -14,8 +14,10 @@ in `tools/lichess/`.
 
 Starting after v0.13, use **50 games per opponent with all three matchups
 concurrent** to speed up development. That is 25 color pairs each against the
-previous release, Stockfish Skill 2, and pinned Sacrifice: 150 games total.
-The runner defaults to 25 pairs and Skill 2. A full three-opponent suite starts
+previous release, Stockfish Skill 3, and pinned Sacrifice: 150 games total.
+The runner defaults to 25 pairs and Skill 3. Skill 2 was the reference through
+v0.20; the [tagged ladder and adoption](#stockfish-skill-progression) record the
+subsequent choice. A full three-opponent suite starts
 all matchups together on hosts with at least four logical CPUs. Smaller hosts
 fall back to serial execution; `--parallel-all` requires the concurrent profile
 explicitly and rejects insufficient capacity.
@@ -126,7 +128,8 @@ screening strength and uncertainty. Rejected quiet-mate and transition-only
 attempts remain archived. The [research assessment](../../docs/RESEARCH_V020.md)
 revises the next priorities; [release validation](../research/v0.20-validation.md)
 keeps version-only smoke checks separate. Future candidates compare against
-tagged v0.20. Stockfish remains Skill 2 pending a separately reviewed ladder.
+tagged v0.20. After the separately reviewed tagged ladder, Skill 3 becomes the
+standard reference; historical Skill 2 results retain their original identities.
 
 ## Why this exists
 
@@ -352,7 +355,7 @@ check is separate.
 
 ### Routine order and practical gate
 
-1. Run **50 games each against the previous release, Stockfish Skill 2, and
+1. Run **50 games each against the previous release, Stockfish Skill 3, and
    pinned Sacrifice**, with all three matchups concurrent. Each matchup plays
    one game at a time; the two engines take turns searching.
 2. Require a previous-release score strictly above 50% when unfinished games
@@ -364,7 +367,7 @@ check is separate.
 4. Review all three scores, code checks, timings, forfeits, and unfinished games
    before proposing a release. A narrow lead remains inconclusive.
 
-The routine concurrent suite plans 150 games. Keep Skill 2 as the
+The routine concurrent suite plans 150 games. Keep Skill 3 as the
 current reference point; further ladder changes are deliberate decisions.
 Sunfish remains a possible future opponent when adding it is worthwhile.
 
@@ -699,9 +702,22 @@ separately from routine results.
 ## Stockfish skill progression
 
 The ladder began at Skill Level 1. Starting with the post-v0.13 workflow,
-**Skill Level 2 is the standard reference**. It was selected after
+Skill Level 2 was the standard reference through v0.20. It was selected after
 the Skill 1 results and a 60% first 50-game screen at Skill 2. This is a practical
 comparison point, not proof of a reliable above-50% rate at that level.
+
+**Skill Level 3 is now the standard reference.** The
+[tagged v0.20 ladder](results/v0.20-stockfish-ladder/README.md) preserves all
+50-game matchups at Skills 2–10, their identities and PGNs. The clean Skill 2
+and Skill 3 scores are 62% and 48%; Skills 4/5 score 32%/34%. Skill 3 offers a
+balanced next comparison. The [assessment](results/v0.20-stockfish-ladder/ASSESSMENT.md)
+also preserves three timeouts at Skills 6/9 and one unfinished Skill 7 game;
+the whole ladder is not a clean reliability pass. Adoption follows explicit
+review of the clean lower-level evidence. No new engine release accompanies
+this benchmark-only default change. The archived pre-adoption plan/assessment
+retain their original checkpoint wording. Skill 2 remains a historical anchor.
+The [adoption validation](../research/skill3-adoption.md) records the unchanged
+engine and the default-option integration check.
 
 For later advancement, review results and reliability at the current level,
 preserve them, and deliberately choose the next level. Score means wins plus
@@ -716,9 +732,10 @@ W/D/L, unfinished games, and JSON/PGN links when documenting an advancement.
 Keep previous levels' records. Continue comparing against the previous Pandafish
 release after moving to a new Stockfish level.
 
-Advance manually with `--stockfish-skill 3`, then 4, and so on through 20.
-The flag accepts 1 through 20 and defaults to 2. Use `--stockfish-skill 1` to
-reproduce earlier profiles. For example, a future Skill 3 comparison:
+Advance manually with `--stockfish-skill 4`, then 5, and so on through 20.
+The flag accepts 1 through 20 and defaults to 3. Use `--stockfish-skill 1` or
+`--stockfish-skill 2` to reproduce earlier profiles. For example, an explicit
+current Skill 3 comparison:
 
 ```sh
 tools/benchmark/bin/benchmark \

@@ -9,7 +9,7 @@ and benchmark evidence together. Run commands from the repository root.
    or time allocation, follow the
    [benchmark workflow](tools/benchmark/README.md#test-a-development-candidate):
    starting after v0.13, run 50 games each against the previous release,
-   Stockfish Skill 2, and pinned Sacrifice, with all three matchups concurrent.
+   Stockfish Skill 3, and pinned Sacrifice, with all three matchups concurrent.
    Review the previous-release criterion after play and keep all results even
    when it fails. Defaults match this routine on hosts with sufficient capacity.
    Use `--sequential` or larger samples later when investigating smaller gains
@@ -41,6 +41,7 @@ and benchmark evidence together. Run commands from the repository root.
      --sequential --stage previous --pairs 1 --results /tmp/pandafish-release-smoke
    go run ./tools/benchmark --candidate tools/benchmark/bin/pandafish-candidate \
      --version v0.20-release-smoke --stage external --parallel \
+     --stockfish-skill 2 \
      --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
      --pairs 1 --results /tmp/pandafish-release-smoke
    git diff --check
@@ -201,3 +202,9 @@ transition-only candidates remain archived with their failures. Preserve all
 development labels, hashes and games; version-only integration checks do not
 replace or relabel that strength screen. The later tagged Skill 2–10 benchmark
 is a separate reference-level assessment, not an automatic target advancement.
+
+After reviewing that complete ladder, Skill 3 becomes the benchmark default in
+a separate tooling/data PR without a release. The clean Skill 2/3 rows support
+the reviewed choice; affected upper-level rows and all reporting failures remain
+preserved. Future routine screens use Skill 3, while historical release evidence
+keeps its recorded skill/options. Engine playing behavior remains tagged v0.20.

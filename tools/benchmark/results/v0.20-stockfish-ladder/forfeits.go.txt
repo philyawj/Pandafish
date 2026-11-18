@@ -1,0 +1,59 @@
+// Read saved observations only; no engine queries or games.
+package main
+
+import (
+	"encoding/json"
+	"os"
+	"path/filepath"
+	"strings"
+)
+
+func main() {
+	out := []any{}
+	paths, e := filepath.Glob("tools/benchmark/results/v0.20-stockfish-ladder/runs/skill-*/*/summary.json")
+	if e != nil {
+		panic(e)
+	}
+	for _, p := range paths {
+		b, e := os.ReadFile(p)
+		if e != nil {
+			panic(e)
+		}
+		var s struct {
+			Matches []struct {
+				Engine struct {
+					Label string `json:"label"`
+				} `json:"engine"`
+				Games []struct {
+					White       bool   `json:"candidate_white"`
+					Result      string `json:"result"`
+					Termination string `json:"termination"`
+					Plies       int    `json:"plies"`
+					Times       []struct {
+						Candidate bool    `json:"candidate"`
+						MS        float64 `json:"elapsed_ms"`
+					} `json:"response_times"`
+				} `json:"games"`
+			} `json:"matches"`
+		}
+		if e = json.Unmarshal(b, &s); e != nil {
+			panic(e)
+		}
+		for _, m := range s.Matches {
+			for i, g := range m.Games {
+				if !strings.HasPrefix(g.Termination, "forfeit:") {
+					continue
+				}
+				last := g.Times[len(g.Times)-1]
+				actor := "Stockfish"
+				if last.Candidate {
+					actor = "Pandafish"
+				}
+				out = append(out, map[string]any{"opponent": m.Engine.Label, "game": i + 1, "actor": actor, "candidate_white": g.White, "result": g.Result, "termination": g.Termination, "plies": g.Plies, "response_ms": last.MS, "summary": p})
+			}
+		}
+	}
+	enc := json.NewEncoder(os.Stdout)
+	enc.SetIndent("", "  ")
+	enc.Encode(out)
+}
