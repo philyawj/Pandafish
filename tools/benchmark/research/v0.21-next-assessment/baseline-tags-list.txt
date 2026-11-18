@@ -1,0 +1,33 @@
+Total: 4.93s
+ROUTINE ======================== github.com/corentings/chess/v2.searchMoveTags in /private/tmp/pandafish-v020-release/tagged-source/third_party/chess/search_update.go
+     100ms      800ms (flat, cum) 16.23% of Total
+      10ms       10ms    106:func searchMoveTags(move Move, pos *Position, classifyOpponent bool) MoveTag {
+         .          .    107:	var tags MoveTag
+      50ms       60ms    108:	piece := pos.board.Piece(move.s1)
+      20ms       20ms    109:	if pos.board.isOccupied(move.s2) {
+         .          .    110:		tags |= Capture
+         .          .    111:	} else if move.s2 == pos.enPassantSquare && piece.Type() == Pawn {
+         .          .    112:		tags |= EnPassant
+         .          .    113:	}
+         .          .    114:	if (piece == WhiteKing && move.s1 == E1) || (piece == BlackKing && move.s1 == E8) {
+         .          .    115:		switch move.s2 {
+         .          .    116:		case C1, C8:
+         .          .    117:			tags |= QueenSideCastle
+         .          .    118:		case G1, G8:
+         .          .    119:			tags |= KingSideCastle
+         .          .    120:		}
+         .          .    121:	}
+         .       40ms    122:	local := move
+         .          .    123:	local.tags = tags
+         .       70ms    124:	board := *pos.board
+         .      280ms    125:	board.updateSearch(&local)
+      10ms      220ms    126:	if king := board.kingSquare(pos.turn); king != NoSquare && searchSquareAttackedBy(&board, king, pos.turn.Other()) {
+         .          .    127:		tags |= inCheck
+         .          .    128:	}
+         .          .    129:	if classifyOpponent {
+      10ms      100ms    130:		if king := board.kingSquare(pos.turn.Other()); king != NoSquare && searchSquareAttackedBy(&board, king, pos.turn) {
+         .          .    131:			tags |= Check
+         .          .    132:		}
+         .          .    133:	}
+         .          .    134:	return tags
+         .          .    135:}

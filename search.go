@@ -17,6 +17,7 @@ const checkEvasionDepth = 4
 // Cancellation is distinct from a score, so unfinished nodes never affect ties.
 type searcher struct {
 	moveBuffers [][]chess.Move
+	rankBuffers [][]moveRank
 	repetitions map[uint64]int
 	historyKey  uint64
 	nodes       uint64

@@ -33,15 +33,15 @@ and benchmark evidence together. Run commands from the repository root.
    in each release milestone.
 4. Run formatting, tests, vet, a build, and `git diff --check`. If only version
    text and documentation changed since benchmarking, use a short smoke test
-   instead of another full match. For example, while preparing v0.20:
+   instead of another full match. For example, while preparing v0.21:
 
    ```sh
-   go run ./tools/benchmark --validate --race --version v0.20-release-smoke \
-     --previous tools/benchmark/bin/pandafish-v0.19 --previous-version v0.19 \
+   go run ./tools/benchmark --validate --race --version v0.21-release-smoke \
+     --previous tools/benchmark/bin/pandafish-v0.20 --previous-version v0.20 \
      --sequential --stage previous --pairs 1 --results /tmp/pandafish-release-smoke
    go run ./tools/benchmark --candidate tools/benchmark/bin/pandafish-candidate \
-     --version v0.20-release-smoke --stage external --parallel \
-     --stockfish-skill 2 \
+     --version v0.21-release-smoke --stage external --parallel \
+     --stockfish-skill 3 \
      --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
      --pairs 1 --results /tmp/pandafish-release-smoke
    git diff --check
@@ -65,7 +65,7 @@ and benchmark evidence together. Run commands from the repository root.
 ## Tag and publish after merge
 
 Confirm the PR is merged and the version is unused, then fast-forward local
-`main` to the merged commit. For v0.20:
+`main` to the merged commit. For v0.21:
 
 ```sh
 git switch main
@@ -78,13 +78,13 @@ Check that the working tree is clean and HEAD is the intended release commit.
 Then create and push the tag:
 
 ```sh
-git tag -a v0.20 -m "v0.20: specialize search transitions and legality checks"
-git push origin v0.20
+git tag -a v0.21 -m "v0.21: precompute stable move ordering"
+git push origin v0.21
 ```
 
 Publish a GitHub release for that tag, through the GitHub UI or
 `gh release create`. Use the version alone as the release title, such as
-`v0.20`. Describe the engine or tooling change, remaining limits,
+`v0.21`. Describe the engine or tooling change, remaining limits,
 and validation, linking the candidate benchmark evidence. An engine release
 does not automatically advance the Stockfish skill target.
 
@@ -115,17 +115,17 @@ benchmark files do not need to be attached again as release assets.
 
 ## Build the next baseline
 
-Build from the tag rather than a development checkout. For v0.20:
+Build from the tag rather than a development checkout. For v0.21:
 
 ```sh
 mkdir -p tools/benchmark/bin
 benchmark_bin="$PWD/tools/benchmark/bin"
 build_dir=$(mktemp -d)
-git archive v0.20 | tar -x -C "$build_dir"
-(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.20" .)
+git archive v0.21 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.21" .)
 ```
 
-The tagged executable becomes the previous version for v0.21 development.
+The tagged executable becomes the previous version for v0.22 development.
 Compiled binaries remain gitignored. Building this baseline does not require
 relabeling or rerunning the development benchmarks. A separate benchmark of
 the exact released binary is optional. Keep private bot greetings in sync
@@ -207,4 +207,11 @@ After reviewing that complete ladder, Skill 3 becomes the benchmark default in
 a separate tooling/data PR without a release. The clean Skill 2/3 rows support
 the reviewed choice; affected upper-level rows and all reporting failures remain
 preserved. Future routine screens use Skill 3, while historical release evidence
-keeps its recorded skill/options. Engine playing behavior remains tagged v0.20.
+keeps its recorded skill/options. At that adoption, engine playing behavior
+remains tagged v0.20.
+
+v0.21 promotes [precomputed stable ordering](tools/benchmark/research/v0.21-rank-order/README.md)
+after its clean 55%/50%/71% standard screen. Original priorities, stable ties,
+values, search/TT policy and clocks are unchanged. Preserve the development
+binary identity and qualify the small direct lead; version-only smoke checks
+are integration evidence. The current Stockfish reference remains Skill 3.

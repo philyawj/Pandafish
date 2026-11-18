@@ -1,0 +1,44 @@
+File: Pandafish.test
+Type: cpu
+Time: 2026-11-17 19:04:51 PST
+Duration: 3.25s, Total samples = 3.01s (92.53%)
+Showing nodes accounting for 1.24s, 41.20% of 3.01s total
+Dropped 61 nodes (cum <= 0.02s)
+Showing top 36 nodes out of 149
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%      2.51s 83.39%  github.com/philyawj/Pandafish.BenchmarkCandidateProfile
+         0     0%     0%      2.51s 83.39%  testing.(*B).runN
+         0     0%     0%      2.49s 82.72%  testing.(*B).launch
+     0.01s  0.33%  0.33%      2.47s 82.06%  github.com/philyawj/Pandafish.(*searcher).childSearch
+         0     0%  0.33%      2.47s 82.06%  github.com/philyawj/Pandafish.(*searcher).root
+     0.01s  0.33%  0.66%      2.47s 82.06%  github.com/philyawj/Pandafish.(*searcher).searchAtPly
+     0.04s  1.33%  1.99%      1.42s 47.18%  github.com/philyawj/Pandafish.(*searcher).quietAtPly
+         0     0%  1.99%      1.17s 38.87%  github.com/philyawj/Pandafish.(*searcher).searchMoves
+         0     0%  1.99%      0.79s 26.25%  github.com/philyawj/Pandafish.(*searcher).childQuiet
+     0.06s  1.99%  3.99%      0.65s 21.59%  github.com/corentings/chess/v2.(*Position).searchMoves
+         0     0%  3.99%      0.64s 21.26%  slices.SortStableFunc[go.shape.[]github.com/corentings/chess/v2.Move,go.shape.29dc683b0550073a7c7523bb194b96692894fc1513dad32668ceac52ba23ff39] (inline)
+         0     0%  3.99%      0.64s 21.26%  slices.stableCmpFunc[go.shape.29dc683b0550073a7c7523bb194b96692894fc1513dad32668ceac52ba23ff39]
+         0     0%  3.99%      0.53s 17.61%  github.com/corentings/chess/v2.(*Position).AppendSearchMoves (inline)
+     0.02s  0.66%  4.65%      0.51s 16.94%  slices.insertionSortCmpFunc[go.shape.29dc683b0550073a7c7523bb194b96692894fc1513dad32668ceac52ba23ff39] (inline)
+     0.04s  1.33%  5.98%      0.46s 15.28%  github.com/corentings/chess/v2.searchMoveTags
+     0.46s 15.28% 21.26%      0.46s 15.28%  runtime.duffcopy
+     0.02s  0.66% 21.93%      0.44s 14.62%  github.com/philyawj/Pandafish.(*searcher).searchMoves.func2
+         0     0% 21.93%      0.38s 12.62%  github.com/corentings/chess/v2.(*Position).UpdateSearch
+     0.03s     1% 22.92%      0.38s 12.62%  github.com/philyawj/Pandafish.(*searcher).exchange
+     0.03s     1% 23.92%      0.37s 12.29%  github.com/philyawj/Pandafish.(*searcher).searchMoves.func1
+     0.08s  2.66% 26.58%      0.36s 11.96%  runtime.mapaccess1
+         0     0% 26.58%      0.33s 10.96%  runtime.systemstack
+     0.08s  2.66% 29.24%      0.29s  9.63%  github.com/philyawj/Pandafish.(*exchangeBoard).leastAttacker
+     0.02s  0.66% 29.90%      0.29s  9.63%  runtime.mallocgc
+         0     0% 29.90%      0.26s  8.64%  runtime.newobject
+     0.08s  2.66% 32.56%      0.20s  6.64%  github.com/corentings/chess/v2.searchSquareAttackedBy
+     0.07s  2.33% 34.88%      0.19s  6.31%  internal/runtime/maps.(*Map).getWithKeySmall
+     0.01s  0.33% 35.22%      0.17s  5.65%  github.com/corentings/chess/v2.(*Board).copy (inline)
+         0     0% 35.22%      0.17s  5.65%  runtime.(*mheap).allocSpan
+         0     0% 35.22%      0.16s  5.32%  runtime.(*mheap).alloc.func1
+     0.04s  1.33% 36.54%      0.14s  4.65%  github.com/corentings/chess/v2.(*Board).updateSearch
+     0.01s  0.33% 36.88%      0.14s  4.65%  runtime.mallocgcSmallNoscan
+     0.13s  4.32% 41.20%      0.13s  4.32%  runtime.madvise
+         0     0% 41.20%      0.13s  4.32%  runtime.sysUsed (inline)
+         0     0% 41.20%      0.13s  4.32%  runtime.sysUsedOS (inline)
+         0     0% 41.20%      0.13s  4.32%  slices.symMergeCmpFunc[go.shape.29dc683b0550073a7c7523bb194b96692894fc1513dad32668ceac52ba23ff39]

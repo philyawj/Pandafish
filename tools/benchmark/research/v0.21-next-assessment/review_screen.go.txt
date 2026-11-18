@@ -1,0 +1,154 @@
+// Independent saved-screen accounting. No engines or matches are started.
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"reflect"
+	"strings"
+)
+
+type stats struct {
+	Wins       int     `json:"wins"`
+	Draws      int     `json:"draws"`
+	Losses     int     `json:"losses"`
+	Unfinished int     `json:"unfinished"`
+	Forfeits   int     `json:"forfeits"`
+	Score      float64 `json:"score_percent"`
+	Lower      float64 `json:"possible_score_lower_percent"`
+	Upper      float64 `json:"possible_score_upper_percent"`
+}
+type identity struct {
+	Label   string            `json:"label"`
+	Name    string            `json:"uci_name"`
+	SHA     string            `json:"sha256"`
+	Options map[string]string `json:"options"`
+}
+type game struct {
+	White       bool     `json:"candidate_white"`
+	Opening     []string `json:"opening"`
+	Result      string   `json:"result"`
+	Termination string   `json:"termination"`
+	Plies       int      `json:"plies"`
+	Times       []struct {
+		Candidate bool    `json:"candidate"`
+		MS        float64 `json:"elapsed_ms"`
+	} `json:"response_times"`
+}
+type match struct {
+	PGN    string   `json:"pgn_file"`
+	Engine identity `json:"engine"`
+	Stats  stats    `json:"stats"`
+	Games  []game   `json:"games"`
+}
+type summary struct {
+	Gate      string   `json:"previous_gate"`
+	Candidate identity `json:"candidate"`
+	Settings  struct {
+		Concurrency int    `json:"matchup_concurrency"`
+		Pairs       int    `json:"pairs"`
+		MS          int    `json:"move_ms"`
+		Grace       int    `json:"timeout_grace_ms"`
+		Cap         int    `json:"max_plies"`
+		Openings    string `json:"openings_sha256"`
+	} `json:"settings"`
+	Matches []match `json:"matches"`
+}
+
+func main() {
+	out := map[string]any{}
+	for _, p := range os.Args[1:] {
+		b, e := os.ReadFile(p)
+		if e != nil {
+			panic(e)
+		}
+		var s summary
+		if e = json.Unmarshal(b, &s); e != nil {
+			panic(e)
+		}
+		if s.Settings.Concurrency != 3 || s.Settings.Pairs != 25 || s.Settings.MS != 100 || s.Settings.Grace != 50 || s.Settings.Cap != 400 || s.Settings.Openings != "80ceed68e4575b7a0d8649aa67efd35da4c8c46e480ad31b1ce12fefa94e89ca" || len(s.Matches) != 3 {
+			panic("screen settings")
+		}
+		results := []any{}
+		direct := false
+		for _, m := range s.Matches {
+			if m.PGN == "stockfish.pgn" && (m.Engine.Options["Skill Level"] != "3" || m.Engine.Options["Threads"] != "1" || m.Engine.Options["Hash"] != "16" || m.Engine.Options["UCI_LimitStrength"] != "false") {
+				panic("Stockfish reference options")
+			}
+			if len(m.Games) != 50 {
+				panic("game count")
+			}
+			want := stats{}
+			maxTime := map[string]float64{"candidate": 0, "opponent": 0}
+			over := 0
+			for i, g := range m.Games {
+				if i%2 == 0 {
+					if !g.White {
+						panic("pair color")
+					}
+				} else {
+					if g.White || !reflect.DeepEqual(g.Opening, m.Games[i-1].Opening) {
+						panic("paired opening/color")
+					}
+				}
+				extra := 0
+				if strings.HasPrefix(g.Termination, "forfeit:") {
+					extra = 1
+				}
+				if g.Plies > 400 || len(g.Times) != g.Plies-len(g.Opening)+extra {
+					panic("length/timing count")
+				}
+				if strings.HasPrefix(g.Termination, "forfeit:") {
+					want.Forfeits++
+				}
+				switch g.Result {
+				case "*":
+					want.Unfinished++
+				case "1/2-1/2":
+					want.Draws++
+				case "1-0", "0-1":
+					if (g.Result == "1-0") == g.White {
+						want.Wins++
+					} else {
+						want.Losses++
+					}
+				default:
+					panic("result")
+				}
+				for _, t := range g.Times {
+					a := "opponent"
+					if t.Candidate {
+						a = "candidate"
+					}
+					if t.MS > maxTime[a] {
+						maxTime[a] = t.MS
+					}
+					if t.MS > 150 {
+						over++
+					}
+				}
+			}
+			points := float64(want.Wins) + float64(want.Draws)/2
+			want.Score = 100 * points / float64(50-want.Unfinished)
+			want.Lower = 100 * points / 50
+			want.Upper = 100 * (points + float64(want.Unfinished)) / 50
+			if !reflect.DeepEqual(want, m.Stats) {
+				panic(fmt.Sprintf("stats differ %s %+v %+v", p, want, m.Stats))
+			}
+			if m.PGN == "previous.pgn" {
+				direct = want.Forfeits == 0 && 2*want.Wins+want.Draws > 50
+			}
+			results = append(results, map[string]any{"opponent": m.Engine, "stats": want, "max_response_ms": maxTime, "responses_over_grace": over})
+		}
+		if direct != strings.HasPrefix(s.Gate, "passed:") {
+			panic("gate differs")
+		}
+		out[p] = map[string]any{"candidate": s.Candidate, "matches": results, "direct_criterion_passed": direct, "color_pairs_verified": 75}
+	}
+	enc := json.NewEncoder(os.Stdout)
+	enc.SetIndent("", "  ")
+	if e := enc.Encode(out); e != nil {
+		panic(e)
+	}
+}
