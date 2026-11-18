@@ -1,0 +1,19 @@
+package main
+
+import (
+	"testing"
+	"github.com/corentings/chess/v2"
+)
+
+func TestLegalEnPassantQuietClassification(t *testing.T) {
+	before:=evalFEN(t,"1rrb4/1pkp4/8/2K1P3/8/7B/8/8 b - - 0 1")
+	var position *chess.Position
+	for _,move:=range before.ValidMoves(){if move.String()=="d7d5"{position=before.Update(&move);break}}
+	if position==nil{t.Fatal("predecessor double push is illegal")}
+	if position.String()!="1rrb4/1pk5/8/2KpP3/8/7B/8/8 w - d6 0 2"{t.Fatal("predecessor did not reconstruct EP root",position)}
+	oracle:=evalFEN(t,position.String())
+	found:=false
+	for _,move:=range oracle.ValidMoves(){if move.HasTag(chess.EnPassant)&&oracle.Update(&move).Status()==chess.Checkmate{found=true}}
+	if !found{t.Fatal("expected a legal EP mate")}
+	if move,quiet:=position.QuietMateMove();quiet{t.Fatal("EP mate classified as quiet",move.String())}
+}

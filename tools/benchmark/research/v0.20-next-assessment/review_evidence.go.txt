@@ -1,0 +1,149 @@
+// Saved review utility. Copy to a .go path and run from the repository module.
+// --inventories writes NEW inventories after all evidence/documents are final.
+package main
+
+import (
+	"bytes"
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"io/fs"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"strings"
+)
+
+type entry struct {
+	SHA   string `json:"sha256"`
+	Bytes int    `json:"bytes"`
+}
+
+var roots = []string{"tools/benchmark/research/v0.20-next-assessment", "tools/benchmark/research/v0.20-search-transitions", "tools/benchmark/research/v0.20-search-legality"}
+
+func must(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+func digest(b []byte) string { return fmt.Sprintf("%x", sha256.Sum256(b)) }
+func read(p string) []byte   { b, e := os.ReadFile(p); must(e); return b }
+func load(p string, v any)   { must(json.Unmarshal(read(p), v)) }
+func put(p string, v any) {
+	b, e := json.MarshalIndent(v, "", "  ")
+	must(e)
+	must(os.WriteFile(p, append(b, '\n'), 0644))
+}
+func main() {
+	if len(os.Args) == 2 && os.Args[1] == "--inventories" {
+		for _, root := range roots {
+			inv := map[string]entry{}
+			path := filepath.Join(root, "inventory.json")
+			if _, e := os.Stat(path); !os.IsNotExist(e) {
+				panic("refuse inventory overwrite")
+			}
+			must(filepath.WalkDir(root, func(p string, d fs.DirEntry, e error) error {
+				if e != nil {
+					return e
+				}
+				if d.IsDir() {
+					return nil
+				}
+				b := read(p)
+				r, e := filepath.Rel(root, p)
+				if e != nil {
+					return e
+				}
+				inv[filepath.ToSlash(r)] = entry{digest(b), len(b)}
+				return nil
+			}))
+			put(path, inv)
+		}
+		return
+	}
+	snapshots := []struct{ Source, Hashes string }{
+		{roots[0] + "/quiet-candidate-source.json", roots[0] + "/quiet-source-hashes.json"},
+		{roots[0] + "/quiet-v1-failing-control-source.json", roots[0] + "/quiet-v1-failing-source-hashes.json"},
+		{roots[0] + "/quiet-corrected-source.json", roots[0] + "/quiet-corrected-source-hashes.json"},
+		{roots[1] + "/candidate-source.json", roots[1] + "/source-hashes.json"},
+		{roots[2] + "/candidate-source.json", roots[2] + "/source-hashes.json"},
+	}
+	counts := map[string]int{}
+	for i, s := range snapshots {
+		var source struct {
+			Base  string            `json:"base_tag"`
+			Files map[string]string `json:"files"`
+		}
+		var hashes map[string]string
+		load(s.Source, &source)
+		load(s.Hashes, &hashes)
+		if source.Base != "v0.19" || len(source.Files) != len(hashes) {
+			panic("source identity")
+		}
+		for p, text := range source.Files {
+			if !strings.HasSuffix(p, ".go") || digest([]byte(text)) != hashes[p] {
+				panic("source overlay hash: " + p)
+			}
+			if i == len(snapshots)-1 && !bytes.Equal(read(p), []byte(text)) {
+				panic("active source differs: " + p)
+			}
+		}
+		counts[s.Source] = len(source.Files)
+	}
+	var upstream struct {
+		Files map[string]entry `json:"files"`
+	}
+	load("tools/benchmark/research/v0.17-search-moves/upstream-source.json", &upstream)
+	for p, e := range upstream.Files {
+		b := read(filepath.Join("third_party/chess", p))
+		if digest(b) != e.SHA || len(b) != e.Bytes {
+			panic("original upstream altered: " + p)
+		}
+	}
+	// Search policy equality allows only the three reviewed API substitutions.
+	for _, p := range []string{"search.go", "iterative.go"} {
+		old, e := exec.Command("git", "show", "v0.19:"+p).Output()
+		must(e)
+		want := bytes.ReplaceAll(old, []byte("position.Update(&move)"), []byte("position.UpdateSearch(&move)"))
+		if !bytes.Equal(want, read(p)) {
+			panic("unexpected search policy edit")
+		}
+	}
+	for _, p := range []string{"evaluation.go", "exchange.go", "transposition.go", "search_context.go", "search_moves.go", "killers.go", "repetition.go", "mate.go", "limits.go", "main.go", "go.mod", "go.sum"} {
+		old, e := exec.Command("git", "show", "v0.19:"+p).Output()
+		must(e)
+		if !bytes.Equal(old, read(p)) {
+			panic("preserved policy changed: " + p)
+		}
+	}
+	binaries := map[string]string{"tools/benchmark/bin/pandafish-v0.19": "fea4b1a87868b3c05fd5ac4f46aa52ab9afb745e259b967c7c469692cda8845c", "tools/benchmark/bin/pandafish-v0.20-search-transitions-dev": "89d254677d32f4b3ab86106eb174096c381578414615c5042a75d1ef913defb9", "tools/benchmark/bin/pandafish-v0.20-search-legality-dev": "1f40c45929750169a68af3101ff364821218a236b8e4f5229ad0789ca81861b4", "/opt/homebrew/bin/stockfish": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f", "tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine": "5c2c63f19ff6f8be65aaa127a7cbe884f6cb52d7c4daee6967b1da7a7f8fa0e5"}
+	for p, h := range binaries {
+		if digest(read(p)) != h {
+			panic("binary changed: " + p)
+		}
+	}
+	methods := 0
+	for _, root := range roots {
+		must(filepath.WalkDir(root, func(p string, d fs.DirEntry, e error) error {
+			if e != nil {
+				return e
+			}
+			if d.IsDir() || d.Name() != "reference-cache.json" {
+				return nil
+			}
+			var cache struct{ Source, SHA string }
+			var raw map[string]string
+			load(p, &raw)
+			cache.Source = raw["source"]
+			cache.SHA = raw["sha256"]
+			if digest(read(cache.Source)) != cache.SHA {
+				panic("cache source hash")
+			}
+			methods++
+			return nil
+		}))
+	}
+	enc := json.NewEncoder(os.Stdout)
+	enc.SetIndent("", "  ")
+	must(enc.Encode(map[string]any{"source_snapshots": counts, "original_upstream_files": len(upstream.Files), "active_source_matches_frozen_overlay": true, "policy_unchanged_except_reviewed_child_API": true, "binary_hashes": binaries, "reference_cache_sources_verified": methods}))
+}

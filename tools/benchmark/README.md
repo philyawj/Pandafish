@@ -114,7 +114,19 @@ These attempts are published together in **v0.19**, with unchanged v0.18 playing
 policy and [Go-only research tooling](../research/README.md). The
 [release summary](../../docs/RESEARCH_V019.md) distinguishes each failed gate,
 retired historical workflow, preserved evidence and ranked next experiment.
-Future candidates compare against tagged v0.19. No new strength screen ran.
+No new strength screen ran for v0.19.
+
+**v0.20 promotes the [search-legality kernel](research/v0.20-search-legality/README.md).**
+It preserves 325 distinct fixed-depth score/move/node comparisons and reduces
+selected fixed-work elapsed time 38.7%. Its concurrent 50-game screens score
+65% against tagged v0.19, 67% against Skill 2 and 58% against pinned Sacrifice,
+with no unfinished games or forfeits. The
+[results](research/v0.20-search-legality/RESULTS.md) distinguish efficiency,
+screening strength and uncertainty. Rejected quiet-mate and transition-only
+attempts remain archived. The [research assessment](../../docs/RESEARCH_V020.md)
+revises the next priorities; [release validation](../research/v0.20-validation.md)
+keeps version-only smoke checks separate. Future candidates compare against
+tagged v0.20. Stockfish remains Skill 2 pending a separately reviewed ladder.
 
 ## Why this exists
 
@@ -231,6 +243,10 @@ git archive v0.18 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.19 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.19" .)
+
+build_dir=$(mktemp -d)
+git archive v0.20 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.20" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -313,12 +329,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.19 tagged baseline as above for the next engine change. Then run
+Build the v0.20 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.19 --previous-version v0.19 \
+  --previous tools/benchmark/bin/pandafish-v0.20 --previous-version v0.20 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -484,7 +500,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.19 --previous-version v0.19 \
+  --previous tools/benchmark/bin/pandafish-v0.20 --previous-version v0.20 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -707,7 +723,7 @@ reproduce earlier profiles. For example, a future Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.19 --previous-version v0.19 \
+  --previous tools/benchmark/bin/pandafish-v0.20 --previous-version v0.20 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```

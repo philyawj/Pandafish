@@ -85,7 +85,7 @@ func (pos *Position) searchMoves(dst []Move, tacticalOnly, first bool) ([]Move, 
 					if promotion {
 						m.promo = promoPieceTypes[i]
 					}
-					m.tags = moveTags(m, pos)
+					m.tags = searchMoveTags(m, pos, !first)
 					if m.HasTag(inCheck) {
 						continue
 					}

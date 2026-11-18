@@ -1,0 +1,312 @@
+{
+  "tools/benchmark/research/v0.20-next-assessment/quiet-fresh-100": {
+    "finite_cases": 130,
+    "mean_loss_cp": {
+      "baseline": 40.41538461538462,
+      "candidate": 42.37692307692308
+    },
+    "severe_over_300": {
+      "baseline": 4,
+      "candidate": 5
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 38.06153846153846,
+        "candidate": 44.98461538461538
+      },
+      "w": {
+        "baseline": 42.76923076923077,
+        "candidate": 39.76923076923077
+      }
+    },
+    "turn_gates": null,
+    "turn_gates_required": false,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.20-next-assessment/quiet-public-100": {
+    "finite_cases": 67,
+    "mean_loss_cp": {
+      "baseline": 41.8955223880597,
+      "candidate": 41.82089552238806
+    },
+    "severe_over_300": {
+      "baseline": 1,
+      "candidate": 1
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 93.6842105263158,
+        "candidate": 93.42105263157895
+      },
+      "w": {
+        "baseline": 21.395833333333332,
+        "candidate": 21.395833333333332
+      }
+    },
+    "turn_gates": null,
+    "turn_gates_required": false,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.20-next-assessment/quiet-public-1000": {
+    "finite_cases": 67,
+    "mean_loss_cp": {
+      "baseline": 52.91044776119403,
+      "candidate": 52.91044776119403
+    },
+    "severe_over_300": {
+      "baseline": 3,
+      "candidate": 3
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 127.63157894736842,
+        "candidate": 127.63157894736842
+      },
+      "w": {
+        "baseline": 23.333333333333332,
+        "candidate": 23.333333333333332
+      }
+    },
+    "turn_gates": null,
+    "turn_gates_required": false,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.20-search-legality/fresh-100": {
+    "finite_cases": 130,
+    "mean_loss_cp": {
+      "baseline": 40.41538461538462,
+      "candidate": 35.09230769230769
+    },
+    "severe_over_300": {
+      "baseline": 4,
+      "candidate": 3
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 38.06153846153846,
+        "candidate": 29.93846153846154
+      },
+      "w": {
+        "baseline": 42.76923076923077,
+        "candidate": 40.246153846153845
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": true,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.20-search-legality/fresh-1000": {
+    "finite_cases": 132,
+    "mean_loss_cp": {
+      "baseline": 29.681818181818183,
+      "candidate": 30.34090909090909
+    },
+    "severe_over_300": {
+      "baseline": 2,
+      "candidate": 2
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 23.723076923076924,
+        "candidate": 23.107692307692307
+      },
+      "w": {
+        "baseline": 35.46268656716418,
+        "candidate": 37.35820895522388
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": true,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.20-search-legality/public-100": {
+    "finite_cases": 67,
+    "mean_loss_cp": {
+      "baseline": 41.8955223880597,
+      "candidate": 43.02985074626866
+    },
+    "severe_over_300": {
+      "baseline": 1,
+      "candidate": 1
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 93.6842105263158,
+        "candidate": 94
+      },
+      "w": {
+        "baseline": 21.395833333333332,
+        "candidate": 22.854166666666668
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": false,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.20-search-legality/public-1000": {
+    "finite_cases": 67,
+    "mean_loss_cp": {
+      "baseline": 52.91044776119403,
+      "candidate": 53.850746268656714
+    },
+    "severe_over_300": {
+      "baseline": 3,
+      "candidate": 3
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 127.63157894736842,
+        "candidate": 123.6842105263158
+      },
+      "w": {
+        "baseline": 23.333333333333332,
+        "candidate": 26.208333333333332
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": false,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.20-search-transitions/fresh-100": {
+    "finite_cases": 130,
+    "mean_loss_cp": {
+      "baseline": 40.41538461538462,
+      "candidate": 39.723076923076924
+    },
+    "severe_over_300": {
+      "baseline": 4,
+      "candidate": 4
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 38.06153846153846,
+        "candidate": 36.49230769230769
+      },
+      "w": {
+        "baseline": 42.76923076923077,
+        "candidate": 42.95384615384615
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": true,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.20-search-transitions/fresh-1000": {
+    "finite_cases": 132,
+    "mean_loss_cp": {
+      "baseline": 29.681818181818183,
+      "candidate": 29.439393939393938
+    },
+    "severe_over_300": {
+      "baseline": 2,
+      "candidate": 2
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 23.723076923076924,
+        "candidate": 23.107692307692307
+      },
+      "w": {
+        "baseline": 35.46268656716418,
+        "candidate": 35.582089552238806
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": true,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.20-search-transitions/public-100": {
+    "finite_cases": 67,
+    "mean_loss_cp": {
+      "baseline": 41.8955223880597,
+      "candidate": 42.701492537313435
+    },
+    "severe_over_300": {
+      "baseline": 1,
+      "candidate": 1
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 93.6842105263158,
+        "candidate": 93.6842105263158
+      },
+      "w": {
+        "baseline": 21.395833333333332,
+        "candidate": 22.520833333333332
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": false,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.20-search-transitions/public-1000": {
+    "finite_cases": 67,
+    "mean_loss_cp": {
+      "baseline": 52.91044776119403,
+      "candidate": 56.38805970149254
+    },
+    "severe_over_300": {
+      "baseline": 3,
+      "candidate": 3
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 127.63157894736842,
+        "candidate": 127.47368421052632
+      },
+      "w": {
+        "baseline": 23.333333333333332,
+        "candidate": 28.25
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": false,
+    "passed": true
+  }
+}

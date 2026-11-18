@@ -1,0 +1,5 @@
+package main
+import("encoding/json";"fmt";"os")
+type row struct{ID string;Depth int;Nodes uint64;Score int;Best []string;MS float64;Complete bool}
+func read(p string)[]row{b,e:=os.ReadFile(p);if e!=nil{panic(e)};var r []row;if e=json.Unmarshal(b,&r);e!=nil{panic(e)};return r}
+func main(){a,b:=read(os.Args[1]),read(os.Args[2]);if len(a)!=len(b){panic("length")};var am,bm float64;var an,bn uint64;changed:=[]string{};for i,x:=range a{y:=b[i];if x.ID!=y.ID||x.Depth!=y.Depth||!x.Complete||!y.Complete{panic("identity/incomplete")};am+=x.MS;bm+=y.MS;an+=x.Nodes;bn+=y.Nodes;if x.Score!=y.Score||fmt.Sprint(x.Best)!=fmt.Sprint(y.Best)||x.Nodes!=y.Nodes{changed=append(changed,x.ID)}};e:=json.NewEncoder(os.Stdout);e.SetIndent("","  ");e.Encode(map[string]any{"positions":len(a),"baseline_ms":am,"candidate_ms":bm,"elapsed_ratio":bm/am,"baseline_nodes":an,"candidate_nodes":bn,"changed_positions":changed})}

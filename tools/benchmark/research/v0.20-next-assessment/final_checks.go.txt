@@ -1,0 +1,78 @@
+// Run only after the timed match screen has finished. Adapt scratch paths for
+// reproduction. Existing result files are refused to preserve every attempt.
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+)
+
+type check struct {
+	Name     string   `json:"name"`
+	Command  []string `json:"command"`
+	Env      []string `json:"extra_environment,omitempty"`
+	Expected int      `json:"expected_exit"`
+	Exit     int      `json:"actual_exit"`
+	Log      string   `json:"log"`
+}
+
+func main() {
+	root, e := os.Getwd()
+	if e != nil {
+		panic(e)
+	}
+	dest := "tools/benchmark/research/v0.20-search-legality"
+	quiet := "tools/benchmark/research/v0.20-next-assessment"
+	screen := dest + "/screen/v0.20-search-legality-dev-vs-v0.19-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba"
+	checks := []check{
+		{Name: "legal-games", Command: []string{"go", "run", "./tools/research", "games", "--dir", screen}, Log: dest + "/screen-pgn-check.json"},
+		{Name: "reachable-ep-v1", Command: []string{"go", "-C", "/tmp/pandafish-v020-quiet-v1-legal-ep", "test", "-count=1", "-run", "^TestLegalEnPassantQuietClassification$", "-v"}, Expected: 1, Log: quiet + "/quiet-v1-reachable-ep.txt"},
+		{Name: "reachable-ep-v2", Command: []string{"go", "-C", "/tmp/pandafish-v020-quiet-v2-legal-ep", "test", "-count=1", "-run", "^TestLegalEnPassantQuietClassification$", "-v"}, Log: quiet + "/quiet-v2-reachable-ep.txt"},
+		{Name: "archived-candidate", Command: []string{"go", "run", "./tools/research", "replay", "--source", dest + "/candidate-source.json", "--out", "/tmp/pandafish-v020-legality-final-replay", "--check"}, Log: dest + "/archive-replay.json"},
+		{Name: "root-tests", Command: []string{"go", "test", "-count=1", "./..."}, Log: dest + "/final-tests.txt"},
+		{Name: "root-vet", Command: []string{"go", "vet", "./..."}, Log: dest + "/final-vet.txt"},
+		{Name: "native-build", Command: []string{"go", "build", "-o", "/tmp/pandafish-v020-final-native", "."}, Log: dest + "/final-native-build.txt"},
+		{Name: "linux-arm64-build", Command: []string{"go", "build", "-o", "/tmp/pandafish-v020-final-linux-arm64", "."}, Env: []string{"GOOS=linux", "GOARCH=arm64"}, Log: dest + "/final-arm64-build.txt"},
+		{Name: "diff-whitespace", Command: []string{"git", "diff", "--check"}, Log: dest + "/final-diff-check.txt"},
+	}
+	failed := false
+	for i := range checks {
+		c := &checks[i]
+		if _, e := os.Stat(c.Log); !os.IsNotExist(e) {
+			panic("refuse output overwrite: " + c.Log)
+		}
+		cmd := exec.Command(c.Command[0], c.Command[1:]...)
+		cmd.Dir = root
+		cmd.Env = append(os.Environ(), "GOCACHE=/tmp/pandafish-v016-go-cache")
+		cmd.Env = append(cmd.Env, c.Env...)
+		b, e := cmd.CombinedOutput()
+		if e != nil {
+			if x, ok := e.(*exec.ExitError); ok {
+				c.Exit = x.ExitCode()
+			} else {
+				c.Exit = -1
+				b = append(b, []byte(e.Error())...)
+			}
+		}
+		if e := os.WriteFile(c.Log, b, 0644); e != nil {
+			panic(e)
+		}
+		if c.Exit != c.Expected {
+			failed = true
+		}
+		data, e := json.MarshalIndent(checks[:i+1], "", "  ")
+		if e != nil {
+			panic(e)
+		}
+		if e = os.WriteFile(filepath.Join(dest, "final-checks.json"), append(data, '\n'), 0644); e != nil {
+			panic(e)
+		}
+		fmt.Printf("%s exit=%d expected=%d\n", c.Name, c.Exit, c.Expected)
+	}
+	if failed {
+		os.Exit(1)
+	}
+}

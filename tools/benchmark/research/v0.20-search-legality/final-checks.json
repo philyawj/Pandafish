@@ -1,0 +1,129 @@
+[
+  {
+    "name": "legal-games",
+    "command": [
+      "go",
+      "run",
+      "./tools/research",
+      "games",
+      "--dir",
+      "tools/benchmark/research/v0.20-search-legality/screen/v0.20-search-legality-dev-vs-v0.19-and-stockfish-2-and-sacrifice-v0.2.0-b528f0ba"
+    ],
+    "expected_exit": 0,
+    "actual_exit": 0,
+    "log": "tools/benchmark/research/v0.20-search-legality/screen-pgn-check.json"
+  },
+  {
+    "name": "reachable-ep-v1",
+    "command": [
+      "go",
+      "-C",
+      "/tmp/pandafish-v020-quiet-v1-legal-ep",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestLegalEnPassantQuietClassification$",
+      "-v"
+    ],
+    "expected_exit": 1,
+    "actual_exit": 1,
+    "log": "tools/benchmark/research/v0.20-next-assessment/quiet-v1-reachable-ep.txt"
+  },
+  {
+    "name": "reachable-ep-v2",
+    "command": [
+      "go",
+      "-C",
+      "/tmp/pandafish-v020-quiet-v2-legal-ep",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestLegalEnPassantQuietClassification$",
+      "-v"
+    ],
+    "expected_exit": 0,
+    "actual_exit": 0,
+    "log": "tools/benchmark/research/v0.20-next-assessment/quiet-v2-reachable-ep.txt"
+  },
+  {
+    "name": "archived-candidate",
+    "command": [
+      "go",
+      "run",
+      "./tools/research",
+      "replay",
+      "--source",
+      "tools/benchmark/research/v0.20-search-legality/candidate-source.json",
+      "--out",
+      "/tmp/pandafish-v020-legality-final-replay",
+      "--check"
+    ],
+    "expected_exit": 0,
+    "actual_exit": 0,
+    "log": "tools/benchmark/research/v0.20-search-legality/archive-replay.json"
+  },
+  {
+    "name": "root-tests",
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "./..."
+    ],
+    "expected_exit": 0,
+    "actual_exit": 0,
+    "log": "tools/benchmark/research/v0.20-search-legality/final-tests.txt"
+  },
+  {
+    "name": "root-vet",
+    "command": [
+      "go",
+      "vet",
+      "./..."
+    ],
+    "expected_exit": 0,
+    "actual_exit": 0,
+    "log": "tools/benchmark/research/v0.20-search-legality/final-vet.txt"
+  },
+  {
+    "name": "native-build",
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "/tmp/pandafish-v020-final-native",
+      "."
+    ],
+    "expected_exit": 0,
+    "actual_exit": 0,
+    "log": "tools/benchmark/research/v0.20-search-legality/final-native-build.txt"
+  },
+  {
+    "name": "linux-arm64-build",
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "/tmp/pandafish-v020-final-linux-arm64",
+      "."
+    ],
+    "extra_environment": [
+      "GOOS=linux",
+      "GOARCH=arm64"
+    ],
+    "expected_exit": 0,
+    "actual_exit": 0,
+    "log": "tools/benchmark/research/v0.20-search-legality/final-arm64-build.txt"
+  },
+  {
+    "name": "diff-whitespace",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "expected_exit": 0,
+    "actual_exit": 0,
+    "log": "tools/benchmark/research/v0.20-search-legality/final-diff-check.txt"
+  }
+]

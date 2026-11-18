@@ -1,0 +1,6 @@
+package main
+import("os";"strings")
+func main(){
+ b,e:=os.ReadFile("/tmp/pandafish-v020-timing.go");if e!=nil{panic(e)};s:=strings.ReplaceAll(string(b),"v0.20-search-transitions","v0.20-search-legality");s=strings.ReplaceAll(s,"ratios[1]<=.9","ratios[1]<=.7097855323649737");s=strings.ReplaceAll(s,"\"depth4_median_ratio\":ratios[1],","\"depth4_median_ratio\":ratios[1],\"relative_to_transition_revision\":ratios[1]/.7886505915166374,");if e=os.WriteFile("/tmp/pandafish-v020-timing-r2.go",[]byte(s),0644);e!=nil{panic(e)}
+ b,e=os.ReadFile("/tmp/pandafish-v020-upstream.go");if e!=nil{panic(e)};s=strings.ReplaceAll(string(b),"v0.20-search-transitions","v0.20-search-legality");s=strings.ReplaceAll(s,"\"-race\",\"./...\"","\"-race\",\".\"");if e=os.WriteFile("/tmp/pandafish-v020-upstream-r2.go",[]byte(s),0644);e!=nil{panic(e)}
+}

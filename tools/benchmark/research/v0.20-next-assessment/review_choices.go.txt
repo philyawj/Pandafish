@@ -1,0 +1,372 @@
+// Run from the repository module after copying this file to a .go path.
+// Independently checks saved observations; does not start engines or games.
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"io"
+	"math"
+	"os"
+	"path/filepath"
+	"reflect"
+	"strconv"
+	"strings"
+
+	"github.com/corentings/chess/v2"
+)
+
+type score struct {
+	CP    *int     `json:"cp"`
+	Mate  *int     `json:"mate"`
+	PV    []string `json:"pv"`
+	Lower bool     `json:"lowerbound"`
+	Upper bool     `json:"upperbound"`
+}
+type query struct {
+	Position string   `json:"position"`
+	Command  string   `json:"command"`
+	Move     string   `json:"move"`
+	MS       float64  `json:"response_ms"`
+	Lines    []string `json:"lines"`
+	Score    score    `json:"last_exact"`
+	Error    string   `json:"error"`
+}
+type ref struct {
+	Position   string          `json:"position"`
+	Move       *string         `json:"move"`
+	Score      score           `json:"last_exact"`
+	Query      *query          `json:"query"`
+	Original   json.RawMessage `json:"original_cache_record"`
+	Iterations []score         `json:"iterations"`
+}
+type native struct {
+	Case   struct{ ID, Position, FEN string } `json:"case"`
+	Trials []struct {
+		Actor string `json:"actor"`
+		Trial int    `json:"trial"`
+		Query query  `json:"query"`
+	} `json:"trials"`
+	Error string `json:"error"`
+}
+type report struct {
+	N            int                           `json:"finite_cases"`
+	Mean         map[string]float64            `json:"mean_loss_cp"`
+	Severe       map[string]int                `json:"severe_over_300"`
+	Risk         []string                      `json:"new_candidate_losing_mate_cases"`
+	Timing       []string                      `json:"timing_overruns"`
+	Turns        map[string]map[string]float64 `json:"by_turn_mean_loss_cp"`
+	TurnGates    map[string]bool               `json:"turn_gates"`
+	RequireTurns bool                          `json:"turn_gates_required"`
+	Passed       bool                          `json:"passed"`
+}
+
+func must(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+func load(path string, v any) { b, e := os.ReadFile(path); must(e); must(json.Unmarshal(b, v)) }
+func same(a, b score) bool    { return reflect.DeepEqual(a, b) }
+func rawScore(lines []string) score {
+	var last score
+	for _, line := range lines {
+		w := strings.Fields(line)
+		if len(w) < 2 || w[0] != "info" || w[1] == "string" {
+			continue
+		}
+		s := score{}
+		for i := 1; i < len(w); i++ {
+			switch w[i] {
+			case "score":
+				if i+2 < len(w) {
+					n, e := strconv.Atoi(w[i+2])
+					must(e)
+					if w[i+1] == "cp" {
+						s.CP = &n
+					}
+					if w[i+1] == "mate" {
+						s.Mate = &n
+					}
+					i += 2
+				}
+			case "lowerbound":
+				s.Lower = true
+			case "upperbound":
+				s.Upper = true
+			case "pv":
+				s.PV = w[i+1:]
+				i = len(w)
+			}
+		}
+		if (s.CP != nil || s.Mate != nil) && !s.Lower && !s.Upper {
+			last = s
+		}
+	}
+	return last
+}
+func checkRef(r ref) {
+	if r.Score.Lower || r.Score.Upper || (r.Score.CP == nil && r.Score.Mate == nil) {
+		panic("inexact reference")
+	}
+	if r.Query != nil {
+		if r.Query.Error != "" || r.Query.Position != r.Position {
+			panic("reference query error/position")
+		}
+		command := "go nodes 100000"
+		if r.Move != nil {
+			command += " searchmoves " + *r.Move
+		}
+		if r.Query.Command != command || !same(rawScore(r.Query.Lines), r.Score) || !same(r.Query.Score, r.Score) {
+			panic("reference raw query differs")
+		}
+	} else if len(r.Original) > 0 {
+		var old ref
+		must(json.Unmarshal(r.Original, &old))
+		checkRef(old)
+		if old.Position != r.Position || !reflect.DeepEqual(old.Move, r.Move) || !same(old.Score, r.Score) {
+			panic("cache record differs")
+		}
+	} else if len(r.Iterations) > 0 {
+		var last score
+		for _, s := range r.Iterations {
+			if !s.Lower && !s.Upper && (s.CP != nil || s.Mate != nil) {
+				last = s
+			}
+		}
+		if !same(last, r.Score) {
+			panic("legacy iterations differ")
+		}
+	} else {
+		panic("reference lacks observation")
+	}
+	if r.Move != nil && (len(r.Score.PV) == 0 || r.Score.PV[0] != *r.Move) {
+		panic("restricted score belongs to another move")
+	}
+}
+func game(position string) *chess.Game {
+	w := strings.Fields(position)
+	if len(w) < 2 || w[0] != "position" {
+		panic("position")
+	}
+	var g *chess.Game
+	start := 2
+	if w[1] == "startpos" {
+		g = chess.NewGame()
+	} else {
+		if w[1] != "fen" || len(w) < 8 {
+			panic("fen")
+		}
+		opt, e := chess.FEN(strings.Join(w[2:8], " "))
+		must(e)
+		g = chess.NewGame(opt)
+		start = 8
+	}
+	if len(w) > start {
+		if w[start] != "moves" {
+			panic("moves")
+		}
+		for _, m := range w[start+1:] {
+			move, e := (chess.UCINotation{}).Decode(g.Position(), m)
+			must(e)
+			must(g.Move(move, nil))
+		}
+	}
+	return g
+}
+func comparableFEN(pos *chess.Position) string {
+	w := strings.Fields(pos.String())
+	legalEP := false
+	for _, m := range pos.ValidMoves() {
+		legalEP = legalEP || m.HasTag(chess.EnPassant)
+	}
+	if !legalEP {
+		w[3] = "-"
+	}
+	return strings.Join(w, " ")
+}
+func review(dir string) report {
+	var saved report
+	load(filepath.Join(dir, "quality.json"), &saved)
+	var method struct {
+		MS     int `json:"milliseconds"`
+		Trials int `json:"trials"`
+	}
+	load(filepath.Join(dir, "method.json"), &method)
+	var rows []native
+	load(filepath.Join(dir, "native.json"), &rows)
+	refs := map[string]ref{}
+	f, e := os.Open(filepath.Join(dir, "references.jsonl"))
+	must(e)
+	defer f.Close()
+	dec := json.NewDecoder(f)
+	for {
+		var r ref
+		e = dec.Decode(&r)
+		if e == io.EOF {
+			break
+		}
+		must(e)
+		checkRef(r)
+		m := ""
+		if r.Move != nil {
+			m = *r.Move
+		}
+		key := r.Position + "\n" + m
+		if _, ok := refs[key]; ok {
+			panic("duplicate reference")
+		}
+		refs[key] = r
+	}
+	get := func(p, m string) score {
+		r, ok := refs[p+"\n"+m]
+		if !ok {
+			panic("missing reference")
+		}
+		return r.Score
+	}
+	out := report{Mean: map[string]float64{"baseline": 0, "candidate": 0}, Severe: map[string]int{"baseline": 0, "candidate": 0}, Risk: []string{}, Timing: []string{}, Turns: map[string]map[string]float64{"w": {"baseline": 0, "candidate": 0}, "b": {"baseline": 0, "candidate": 0}}, TurnGates: map[string]bool{}, RequireTurns: saved.RequireTurns}
+	counts := map[string]int{}
+	ids := map[string]bool{}
+	for _, row := range rows {
+		if row.Error != "" || ids[row.Case.ID] {
+			panic("native error/duplicate")
+		}
+		ids[row.Case.ID] = true
+		g := game(row.Case.Position)
+		if comparableFEN(g.Position()) != comparableFEN(game("position fen "+row.Case.FEN).Position()) {
+			panic(fmt.Sprintf("native FEN %s %s: replay=%s saved=%s", dir, row.Case.ID, g.Position().String(), row.Case.FEN))
+		}
+		moves := map[string]bool{}
+		for _, m := range g.Position().ValidMoves() {
+			moves[m.String()] = true
+		}
+		turn := "w"
+		if g.Position().Turn() == chess.Black {
+			turn = "b"
+		}
+		losses := map[string][]float64{"baseline": {}, "candidate": {}}
+		risks := map[string]bool{}
+		seen := map[string]bool{}
+		var root score
+		if len(moves) > 0 {
+			root = get(row.Case.Position, "")
+		}
+		finite := root.CP != nil
+		for _, t := range row.Trials {
+			key := fmt.Sprint(t.Actor, "/", t.Trial)
+			if seen[key] || (t.Actor != "baseline" && t.Actor != "candidate") || t.Trial < 0 || t.Trial >= method.Trials {
+				panic("trial identity")
+			}
+			seen[key] = true
+			q := t.Query
+			if q.Error != "" || q.Position != row.Case.Position || q.Command != fmt.Sprint("go movetime ", method.MS) || !same(q.Score, rawScore(q.Lines)) {
+				panic("native raw query differs")
+			}
+			best := ""
+			for _, line := range q.Lines {
+				w := strings.Fields(line)
+				if len(w) > 1 && w[0] == "bestmove" {
+					best = w[1]
+				}
+			}
+			if best != q.Move || (len(moves) > 0 && !moves[best]) || (len(moves) == 0 && best != "0000" && best != "(none)") {
+				panic("native illegal/mismatched move")
+			}
+			if q.MS > float64(method.MS+50) {
+				out.Timing = append(out.Timing, row.Case.ID+"/"+t.Actor)
+			}
+			if len(moves) == 0 {
+				continue
+			}
+			s := get(row.Case.Position, q.Move)
+			if s.Mate != nil && *s.Mate < 0 {
+				risks[t.Actor] = true
+			}
+			if s.CP == nil {
+				finite = false
+			}
+			if root.CP != nil && s.CP != nil {
+				d := *root.CP - *s.CP - 25
+				if d < 0 {
+					d = 0
+				}
+				if d > 1000 {
+					d = 1000
+				}
+				losses[t.Actor] = append(losses[t.Actor], float64(d))
+			}
+		}
+		if len(seen) != 2*method.Trials {
+			panic("missing trials")
+		}
+		if (root.CP != nil || (root.Mate != nil && *root.Mate >= 0)) && risks["candidate"] && !risks["baseline"] {
+			out.Risk = append(out.Risk, row.Case.ID)
+		}
+		if finite {
+			out.N++
+			counts[turn]++
+			for _, a := range []string{"baseline", "candidate"} {
+				sum := 0.
+				for _, v := range losses[a] {
+					sum += v
+				}
+				v := sum / float64(len(losses[a]))
+				out.Mean[a] += v
+				out.Turns[turn][a] += v
+				if v > 300 {
+					out.Severe[a]++
+				}
+			}
+		}
+	}
+	for a := range out.Mean {
+		out.Mean[a] /= float64(out.N)
+	}
+	for t := range out.Turns {
+		for a := range out.Turns[t] {
+			if counts[t] > 0 {
+				out.Turns[t][a] /= float64(counts[t])
+			}
+		}
+		v := out.Turns[t]
+		out.TurnGates[t] = counts[t] > 0 && v["candidate"] <= v["baseline"]+math.Max(5, v["baseline"]*.1)
+	}
+	out.Passed = out.N > 0 && out.Mean["candidate"] <= out.Mean["baseline"]+math.Max(5, .1*out.Mean["baseline"]) && out.Severe["candidate"] <= out.Severe["baseline"]+2 && len(out.Risk) == 0 && len(out.Timing) == 0
+	if out.RequireTurns {
+		out.Passed = out.Passed && out.TurnGates["w"] && out.TurnGates["b"]
+	}
+	// The first archived driver reported aggregate status only. Its frozen
+	// per-turn criterion was adjudicated separately in QUIET_RESULT.md.
+	// Preserve that older schema rather than rewriting its observations.
+	if saved.TurnGates == nil && !saved.RequireTurns {
+		out.TurnGates = nil
+	}
+	if !reflect.DeepEqual(out, saved) {
+		a, _ := json.Marshal(out)
+		b, _ := json.Marshal(saved)
+		panic(fmt.Sprintf("%s disagreement\ncomputed %s\nsaved %s", dir, a, b))
+	}
+	return out
+}
+func main() {
+	out := map[string]report{}
+	for _, root := range os.Args[1:] {
+		must(filepath.WalkDir(root, func(p string, d os.DirEntry, e error) error {
+			if e != nil {
+				return e
+			}
+			if !d.IsDir() && d.Name() == "quality.json" {
+				dir := filepath.Dir(p)
+				out[dir] = review(dir)
+			}
+			return nil
+		}))
+	}
+	if len(out) == 0 {
+		panic("no completed choice suites")
+	}
+	enc := json.NewEncoder(os.Stdout)
+	enc.SetIndent("", "  ")
+	must(enc.Encode(out))
+}
