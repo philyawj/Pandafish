@@ -1,0 +1,3 @@
+package main
+import("crypto/sha256";"encoding/json";"fmt";"os")
+func main(){files:=map[string]string{};hashes:=map[string]string{};for _,path:=range []string{"search.go","third_party/chess/search_mates.go","quiet_mate_test.go","candidate_probe_test.go","tools/research/main.go","tools/research/choices.go","tools/research/choices_test.go","tools/research/generate.go","tools/research/uci.go"}{b,e:=os.ReadFile(path);if e!=nil{panic(e)};files[path]=string(b);hashes[path]=fmt.Sprintf("%x",sha256.Sum256(b))};data,_:=json.MarshalIndent(map[string]any{"base_tag":"v0.19","files":files},"","  ");if e:=os.WriteFile(os.Args[1],append(data,'\n'),0644);e!=nil{panic(e)};data,_=json.MarshalIndent(hashes,"","  ");if e:=os.WriteFile(os.Args[2],append(data,'\n'),0644);e!=nil{panic(e)}}

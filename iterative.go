@@ -116,7 +116,7 @@ func (worker *searcher) root(position *chess.Position, moves []chess.Move, depth
 		}
 		// A fail-high in the child proves the move cannot beat the incumbent.
 		// Only a strict improvement replaces it; ties need no exact re-search.
-		score, complete := worker.childSearch(position.Update(&move), depth-1, -searchInfinity, -bestScore, move.HasTag(chess.Check), 1)
+		score, complete := worker.childSearch(position.UpdateSearch(&move), depth-1, -searchInfinity, -bestScore, move.HasTag(chess.Check), 1)
 		if !complete {
 			return nil, 0, false
 		}

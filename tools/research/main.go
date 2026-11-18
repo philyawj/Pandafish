@@ -18,10 +18,33 @@ func main() {
 
 func run(args []string) error {
 	if len(args) == 0 {
-		return fmt.Errorf("usage: research audit|replay|decisions|mates|games|policy|wording [flags]")
+		return fmt.Errorf("usage: research audit|replay|decisions|mates|games|policy|wording|choices|generate [flags]")
 	}
 	f := flag.NewFlagSet(args[0], flag.ContinueOnError)
 	switch args[0] {
+	case "generate":
+		base := f.String("baseline", "", "released student executable")
+		teacher := f.String("teacher", "/opt/homebrew/bin/stockfish", "reference executable")
+		out := f.String("out", "", "new generation directory")
+		if err := f.Parse(args[1:]); err != nil {
+			return err
+		}
+		return generateProbeCases(*base, *teacher, *out)
+	case "choices":
+		base := f.String("baseline", "", "released engine executable")
+		candidate := f.String("candidate", "", "candidate engine executable")
+		teacher := f.String("teacher", "/opt/homebrew/bin/stockfish", "reference engine")
+		input := f.String("input", "tools/benchmark/research/v0.17-search-moves/inputs.json", "position cases")
+		out := f.String("out", "", "new output directory")
+		budget := f.Int("milliseconds", 100, "equal-time allowance")
+		trials := f.Int("trials", 3, "trials per actor and position")
+		workers := f.Int("workers", 3, "concurrent native searches")
+		cache := f.String("cache", "", "optional previously saved matching 100000-node reference queries")
+		byTurn := f.Bool("by-turn", false, "also require each root turn's finite-loss tolerance")
+		if err := f.Parse(args[1:]); err != nil {
+			return err
+		}
+		return probeChoices(*base, *candidate, *teacher, *input, *out, *budget, *trials, *workers, *cache, *byTurn)
 	case "games":
 		dir := f.String("dir", "", "directory containing benchmark summary.json and PGNs")
 		if err := f.Parse(args[1:]); err != nil {

@@ -1,8 +1,10 @@
 # Go research tools
 
 Run `go run ./tools/research` from the repository root. This program needs
-Go and Git; its checks do not install interpreters, collect fresh engine labels,
-refit models or start games. The normal [benchmark](../benchmark/README.md) and
+Go and Git. Verification/replay commands do not collect labels or start games;
+the explicit `choices` and `generate` commands run offline UCI queries with
+supplied engines. No command starts live games or refits models.
+The normal [benchmark](../benchmark/README.md) and
 [session tools](../lichess/README.md) remain Go programs too.
 
 ```sh
@@ -56,6 +58,46 @@ Check PR descriptions and release notes before publishing:
 go run ./tools/research wording --file /tmp/pandafish-pr.md
 go run ./tools/research wording --file /tmp/pandafish-release.md
 ```
+
+## Offline candidate choices and development inputs
+
+The [post-v0.19 investigation](../../docs/RESEARCH_V020.md) adds two Go commands.
+They require existing native baseline/candidate binaries and pinned Stockfish.
+They refuse an existing output directory and preserve method hashes, raw UCI
+observations and failures. No production root move is forced, and close
+reference alternatives are accepted by a declared 25cp band.
+
+```sh
+go run ./tools/research choices \
+  --baseline tools/benchmark/bin/pandafish-v0.19 \
+  --candidate /absolute/path/to/candidate \
+  --teacher /opt/homebrew/bin/stockfish \
+  --out /tmp/pandafish-new-choice-run \
+  --milliseconds 100 --trials 3 --workers 3
+go run ./tools/research generate \
+  --baseline tools/benchmark/bin/pandafish-v0.19 \
+  --teacher /opt/homebrew/bin/stockfish \
+  --out /tmp/pandafish-new-development-inputs
+```
+
+`choices` defaults to the existing 84 public roots. Use `--input PATH` for
+another frozen input, `--by-turn` to require each root turn's tolerance, and
+`--cache PATH` to reuse matching completed reference observations with pinned
+teacher hash and 100,000-node budget. Timed native work finishes before teacher
+queries. A completed quality rejection is saved as `passed:false`; it is not a
+process failure. Inspect the report, not only the command's exit status.
+Mate-risk diagnostics remain separate from fully finite CP loss. These are
+development decision controls, not a strength benchmark or a proof of safety.
+
+`generate` implements the fixed 16-family, seed-2026111728 rollout plan in the
+[choice protocol](../benchmark/research/v0.20-next-assessment/CHOICE_PLAN.md).
+It excludes sampled prior/duplicate/color-mirror states and reconstructs earlier
+sharp-batch witness paths. It is a narrow offline development collector, not a
+replacement for retired training pipelines or an independent holdout after use.
+The canonical-state tests also compare 1,504 saved historical keys.
+
+Run native timing blocks and the normal game screen separately. Do not overlap
+CPU-heavy validation with either. This tooling does not change engine policy.
 
 The migration retires 131 historical Python/shell source files, including source
 stored as `.txt`. No language is hidden from GitHub. The hashed release

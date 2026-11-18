@@ -2,11 +2,62 @@ package main
 
 import (
 	"archive/tar"
+	"bufio"
 	"bytes"
+	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 )
+
+func TestMain(m *testing.M) {
+	if os.Getenv("PANDA_RESEARCH_TEST_ENGINE") == "scoreless" {
+		scanner := bufio.NewScanner(os.Stdin)
+		for scanner.Scan() {
+			line := scanner.Text()
+			switch {
+			case line == "uci":
+				fmt.Println("id name Research control")
+				for _, name := range []string{"Threads", "Hash", "Skill Level", "UCI_LimitStrength", "MultiPV"} {
+					fmt.Printf("option name %s type string\n", name)
+				}
+				fmt.Println("uciok")
+			case line == "isready":
+				fmt.Println("readyok")
+			case strings.HasPrefix(line, "go "):
+				fmt.Println("info string scoreless-reference-control\nbestmove e2e4")
+			}
+		}
+		os.Exit(0)
+	}
+	os.Exit(m.Run())
+}
+
+func TestReferenceFailureIsJournalled(t *testing.T) {
+	t.Setenv("PANDA_RESEARCH_TEST_ENGINE", "scoreless")
+	program, err := os.Executable()
+	if err != nil {
+		t.Fatal(err)
+	}
+	out := t.TempDir()
+	native := []probeNative{{Case: probeCase{ID: "start", Position: "position startpos"}}}
+	if err := probeReferences(program, out, 100, native, "", "control", false); err == nil {
+		t.Fatal("scoreless reference accepted")
+	}
+	data, err := os.ReadFile(filepath.Join(out, "references.jsonl"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var row referenceRecord
+	if err := json.Unmarshal(bytes.TrimSpace(data), &row); err != nil {
+		t.Fatal(err)
+	}
+	if row.Query == nil || !strings.Contains(strings.Join(row.Query.Lines, "\n"), "scoreless-reference-control") {
+		t.Fatal("failed reference output discarded")
+	}
+}
 
 func pointer(v int) *int { return &v }
 func TestSharpDecisionControls(t *testing.T) {

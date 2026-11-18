@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.19 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.20 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
@@ -8,6 +8,8 @@ All repository program, test and research source is Go. Start with
 [AGENTS.md](AGENTS.md) for project guidance. The
 [v0.19 research summary](docs/RESEARCH_V019.md) explains the rejected evaluation
 attempts, Go-only tooling migration and ranked next experiments.
+The [v0.20 investigation](docs/RESEARCH_V020.md) records the promoted search-
+legality kernel, rejected predecessors and reassessed next priorities.
 
 The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`,
 `transposition.go`, `search_context.go`, `search_moves.go`, `killers.go`, `exchange.go`,
@@ -357,6 +359,13 @@ three rejected post-v0.18 fits, preserve their findings and retire non-Go
 research runners with original evidence retained in the release attachment.
 Add shared Go research checks and tracked agent guidance. Playing policy remains
 v0.18. See the [research summary and next steps](docs/RESEARCH_V019.md).
+
+**v0.20: Remove repeated search-legality work (complete).** Specialize immutable
+child transitions, compute attack rays once and skip opponent-check tags when
+only legal-move existence is needed. Preserve fixed-depth scores, chosen moves,
+node counts and search policy. Keep the unsuccessful quiet-mate and transition-
+only experiments archived. See the
+[implementation, validation and measured limits](tools/benchmark/research/v0.20-search-legality/README.md).
 
 **Next:** Test a bounded exact quiet-mate proof, with correctness, cost and
 equal-time controls, then reassess the remaining backend/evaluation priorities.

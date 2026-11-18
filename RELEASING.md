@@ -33,14 +33,14 @@ and benchmark evidence together. Run commands from the repository root.
    in each release milestone.
 4. Run formatting, tests, vet, a build, and `git diff --check`. If only version
    text and documentation changed since benchmarking, use a short smoke test
-   instead of another full match. For example, while preparing v0.19:
+   instead of another full match. For example, while preparing v0.20:
 
    ```sh
-   go run ./tools/benchmark --validate --race --version v0.19-release-smoke \
-     --previous tools/benchmark/bin/pandafish-v0.18 --previous-version v0.18 \
+   go run ./tools/benchmark --validate --race --version v0.20-release-smoke \
+     --previous tools/benchmark/bin/pandafish-v0.19 --previous-version v0.19 \
      --sequential --stage previous --pairs 1 --results /tmp/pandafish-release-smoke
    go run ./tools/benchmark --candidate tools/benchmark/bin/pandafish-candidate \
-     --version v0.19-release-smoke --stage external --parallel \
+     --version v0.20-release-smoke --stage external --parallel \
      --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
      --pairs 1 --results /tmp/pandafish-release-smoke
    git diff --check
@@ -64,7 +64,7 @@ and benchmark evidence together. Run commands from the repository root.
 ## Tag and publish after merge
 
 Confirm the PR is merged and the version is unused, then fast-forward local
-`main` to the merged commit. For v0.19:
+`main` to the merged commit. For v0.20:
 
 ```sh
 git switch main
@@ -77,13 +77,13 @@ Check that the working tree is clean and HEAD is the intended release commit.
 Then create and push the tag:
 
 ```sh
-git tag -a v0.19 -m "v0.19: evaluation research and Go-only tooling"
-git push origin v0.19
+git tag -a v0.20 -m "v0.20: specialize search transitions and legality checks"
+git push origin v0.20
 ```
 
 Publish a GitHub release for that tag, through the GitHub UI or
 `gh release create`. Use the version alone as the release title, such as
-`v0.19`. Describe the engine or tooling change, remaining limits,
+`v0.20`. Describe the engine or tooling change, remaining limits,
 and validation, linking the candidate benchmark evidence. An engine release
 does not automatically advance the Stockfish skill target.
 
@@ -114,17 +114,17 @@ benchmark files do not need to be attached again as release assets.
 
 ## Build the next baseline
 
-Build from the tag rather than a development checkout. For v0.19:
+Build from the tag rather than a development checkout. For v0.20:
 
 ```sh
 mkdir -p tools/benchmark/bin
 benchmark_bin="$PWD/tools/benchmark/bin"
 build_dir=$(mktemp -d)
-git archive v0.19 | tar -x -C "$build_dir"
-(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.19" .)
+git archive v0.20 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.20" .)
 ```
 
-The tagged executable becomes the previous version for v0.20 development.
+The tagged executable becomes the previous version for v0.21 development.
 Compiled binaries remain gitignored. Building this baseline does not require
 relabeling or rerunning the development benchmarks. A separate benchmark of
 the exact released binary is optional. Keep private bot greetings in sync
@@ -194,3 +194,10 @@ supported replay/verification. Retired collectors/trainers are documented as
 retired; verifying their frozen output does not reproduce fitting.
 No new strength screen is required; release smoke games remain integration
 evidence. Preserve every smoke failure; do not rerun for a favorable score.
+
+v0.20 promotes the [search-legality kernel](tools/benchmark/research/v0.20-search-legality/README.md)
+after its standard 50-game concurrent screens. The rejected quiet-mate and
+transition-only candidates remain archived with their failures. Preserve all
+development labels, hashes and games; version-only integration checks do not
+replace or relabel that strength screen. The later tagged Skill 2–10 benchmark
+is a separate reference-level assessment, not an automatic target advancement.

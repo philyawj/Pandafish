@@ -88,7 +88,7 @@ func (worker *searcher) searchAtPly(position *chess.Position, depth, alpha, beta
 		if worker.stopped() {
 			return 0, false
 		}
-		child := position.Update(&move)
+		child := position.UpdateSearch(&move)
 		var score int
 		var complete bool
 		if moveIndex == 0 {
@@ -179,7 +179,7 @@ func (worker *searcher) quietAtPly(position *chess.Position, depth, alpha, beta 
 				continue
 			}
 		}
-		score, complete := worker.childQuiet(position.Update(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
+		score, complete := worker.childQuiet(position.UpdateSearch(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
 		if !complete {
 			return 0, false
 		}
