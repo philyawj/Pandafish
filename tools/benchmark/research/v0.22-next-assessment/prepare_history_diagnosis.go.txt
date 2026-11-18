@@ -1,0 +1,20 @@
+package main
+
+import("encoding/json";"os";"os/exec";"strings")
+func main(){
+	// Restore only the exact frozen clock overlay, checking for later edits.
+	b,e:=os.ReadFile("tools/benchmark/research/v0.22-monotonic-deadline/candidate-source.json");if e!=nil{panic(e)};var old struct{Files map[string]string};if e=json.Unmarshal(b,&old);e!=nil{panic(e)}
+	for p,s:=range old.Files{b,e:=os.ReadFile(p);if e!=nil||string(b)!=s{panic("changed source "+p)}}
+	for p:=range old.Files{b,e:=exec.Command("git","show","v0.21:"+p).Output();if e!=nil{if e=os.Remove(p);e!=nil{panic(e)}}else if e=os.WriteFile(p,b,0644);e!=nil{panic(e)}}
+	b,e=exec.Command("git","show","v0.21:search.go").Output();if e!=nil{panic(e)}
+	s:=strings.Replace(string(b),"worker.killers.remember(ply, move)","recordHistoryOpportunity(position, move, moveIndex, depth)\n\t\t\tworker.killers.remember(ply, move)",1)
+	if s==string(b){panic("instrumentation missed")}
+	helper:=`package main
+import("encoding/json";"os";"testing";"github.com/corentings/chess/v2")
+var historyOpportunities = map[string]int{}
+func recordHistoryOpportunity(p *chess.Position,m chess.Move,index,depth int){historyOpportunities["main_cutoffs"]++;if isQuietMove(m){historyOpportunities["quiet_cutoffs"]++;if index>0{historyOpportunities["nonfirst_quiet_cutoffs"]++};if index>1{historyOpportunities["after_second_quiet_cutoffs"]++}};if index==0{historyOpportunities["first_cutoffs"]++}}
+func TestHistoryOpportunity(t *testing.T){TestCandidateFixedWork(t);b,e:=json.MarshalIndent(historyOpportunities,"","  ");if e!=nil{t.Fatal(e)};if e=os.WriteFile(os.Getenv("HISTORY_OPPORTUNITY_OUTPUT"),append(b,'\n'),0644);e!=nil{t.Fatal(e)}}
+`
+	v:=map[string]any{"base_tag":"v0.21","files":map[string]string{"search.go":s,"history_opportunity_test.go":helper}}
+	b,e=json.MarshalIndent(v,"","  ");if e!=nil{panic(e)};if e=os.WriteFile("tools/benchmark/research/v0.22-next-assessment/history-opportunity-source.json",append(b,'\n'),0644);e!=nil{panic(e)}
+}

@@ -1,0 +1,21 @@
+package main
+
+import("encoding/json";"os";"strings")
+func main(){
+ read:=func(p string)[]byte{b,e:=os.ReadFile(p);if e!=nil{panic(e)};return b}
+ var s struct{Base string `json:"base_tag"`;Files map[string]string `json:"files"`};if e:=json.Unmarshal(read("tools/benchmark/research/v0.22-staged-picker/candidate-source.json"),&s);e!=nil{panic(e)}
+ replace:=func(p,old,new string){if !strings.Contains(s.Files[p],old){panic("missing marker "+p+old)};s.Files[p]=strings.Replace(s.Files[p],old,new,1)}
+ replace("search.go","worker.killers.remember(ply, move)","recordLazyMainCutoff(picker)\n\t\t\tworker.killers.remember(ply, move)")
+ replace("search.go","moves := worker.searchMoves(position, ply, !checked)","moves := worker.searchMoves(position, ply, !checked)\n\tqKind := \"q_tactical\"; if checked {qKind=\"q_checked\"}; recordLazyGeneration(qKind,len(moves))")
+ replace("search.go","for _, move := range moves {","for diagnosticIndex, move := range moves {")
+ replace("search.go","if alpha >= beta {\n\t\t\tbreak", "if alpha >= beta {\n\t\t\tqDiagnosticStats[qKind+\"_unreached\"]+=uint64(len(moves)-diagnosticIndex-1)\n\t\t\tbreak")
+ replace("main_move_picker.go","picker.moves = picker.worker.searchMoves(picker.position, picker.ply, true)","picker.moves = picker.worker.searchMoves(picker.position, picker.ply, true)\n\t\t\t\trecordLazyGeneration(\"main_tactical\",len(picker.moves))")
+ replace("main_move_picker.go","picker.moves = picker.worker.quietSearchMoves(picker.position, picker.ply)","picker.moves = picker.worker.quietSearchMoves(picker.position, picker.ply)\n\t\t\t\trecordLazyGeneration(\"main_quiet\",len(picker.moves))")
+ s.Files["lazy_diagnostic_test.go"]=`package main
+var qDiagnosticStats=map[string]uint64{}
+func recordLazyGeneration(kind string,n int){qDiagnosticStats[kind+"_generations"]++;qDiagnosticStats[kind+"_records"]+=uint64(n)}
+func recordLazyMainCutoff(p mainMovePicker){kind:="";if p.stage==1{kind="main_tactical"};if p.stage==3{kind="main_quiet"};if kind!=""&&p.moves!=nil{qDiagnosticStats[kind+"_unreached"]+=uint64(len(p.moves)-p.index)}}
+`
+ var q struct{Files map[string]string};if e:=json.Unmarshal(read("tools/benchmark/research/v0.22-next-assessment/q-opportunity-source.json"),&q);e!=nil{panic(e)};s.Files["lazy_warm_test.go"]=q.Files["q_warm_test.go"]
+ out:="tools/benchmark/research/v0.22-next-assessment/lazy-opportunity-source.json";if _,e:=os.Stat(out);!os.IsNotExist(e){panic("refuse overwrite")};b,e:=json.MarshalIndent(s,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(out,append(b,'\n'),0644);e!=nil{panic(e)}
+}

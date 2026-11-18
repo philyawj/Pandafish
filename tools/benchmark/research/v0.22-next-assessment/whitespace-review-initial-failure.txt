@@ -1,0 +1,15 @@
+The initial Go reviewer stops on Git's combined no-index difference/whitespace
+exit 3 rather than collecting its diagnostic. The original redirected JSON is
+empty; preserve it and review_untracked_whitespace.initial.go.txt.
+
+panic: tools/benchmark/research/v0.22-bitboard-exchange/native_diagnostic_driver.go.txt: tools/benchmark/research/v0.22-bitboard-exchange/native_diagnostic_driver.go.txt:16: trailing whitespace.
+	+		
+	exit status 3
+
+goroutine 1 [running]:
+main.main()
+	/tmp/pandafish-v022-review-untracked-whitespace.go:6 +0x468
+exit status 2
+
+The correction accepts Git statuses through 3 and records all findings. No
+original source, actor query, game or measurement is changed by this review.

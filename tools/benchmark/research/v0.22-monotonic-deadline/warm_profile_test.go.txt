@@ -1,0 +1,168 @@
+package main
+
+import (
+	"context"
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"os"
+	"runtime"
+	"slices"
+	"strconv"
+	"testing"
+	"time"
+
+	"github.com/corentings/chess/v2"
+)
+
+type warmRow struct {
+	Game, Ply, Depth, Score int
+	Best, FEN               string
+	Nodes                   uint64
+	ParseMS, SearchMS       float64
+	Bytes, Allocs           uint64
+}
+
+func TestWarmPipelineProfile(t *testing.T) {
+	dir, output, mode := os.Getenv("WARM_INPUT"), os.Getenv("WARM_OUTPUT"), os.Getenv("WARM_MODE")
+	if output == "" {
+		t.Skip("explicit frozen workload required")
+	}
+	if mode != "search" && mode != "pipeline" {
+		t.Fatal("unknown mode", mode)
+	}
+	depth := 0
+	if v := os.Getenv("WARM_DEPTH"); v != "" {
+		var err error
+		depth, err = strconv.Atoi(v)
+		if err != nil || depth < 1 {
+			t.Fatal("depth", v, err)
+		}
+	}
+	var summary struct {
+		Matches []struct {
+			PGN   string `json:"pgn_file"`
+			Games []struct {
+				CandidateWhite bool     `json:"candidate_white"`
+				Opening        []string `json:"opening"`
+				Plies          int      `json:"plies"`
+				Result         string   `json:"result"`
+			} `json:"games"`
+		} `json:"matches"`
+	}
+	inputs := map[string]string{}
+	for _, name := range []string{"summary.json", "previous.pgn"} {
+		b, err := os.ReadFile(dir + "/" + name)
+		if err != nil {
+			t.Fatal(err)
+		}
+		h := sha256.Sum256(b)
+		inputs[name] = hex.EncodeToString(h[:])
+		if name == "summary.json" {
+			if err = json.Unmarshal(b, &summary); err != nil {
+				t.Fatal(err)
+			}
+		}
+	}
+	if len(summary.Matches) == 0 || summary.Matches[0].PGN != "previous.pgn" || len(summary.Matches[0].Games) < 20 {
+		t.Fatal("frozen dataset shape")
+	}
+	f, err := os.Open(dir + "/previous.pgn")
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer f.Close()
+	scanner := chess.NewScanner(f)
+	rows := []warmRow{}
+	write := func() {
+		data, err := json.MarshalIndent(struct {
+			Mode   string
+			Depth  int
+			Inputs map[string]string
+			Rows   []warmRow
+		}{mode, depth, inputs, rows}, "", "  ")
+		if err != nil {
+			t.Fatal(err)
+		}
+		if err = os.WriteFile(output, append(data, '\n'), 0644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	for gi := 0; gi < 20; gi++ {
+		if !scanner.HasNext() {
+			t.Fatal("missing game", gi)
+		}
+		game, err := scanner.ParseNext()
+		if err != nil {
+			t.Fatal(err)
+		}
+		meta := summary.Matches[0].Games[gi]
+		moves, positions := game.Moves(), game.Positions()
+		if len(moves) != meta.Plies || len(positions) != len(moves)+1 || game.GetTagPair("Result") != meta.Result || positions[0].String() != chess.StartingPosition().String() {
+			t.Fatal("PGN shape", gi)
+		}
+		notations := make([]string, len(moves))
+		for i, m := range moves {
+			notations[i] = m.String()
+		}
+		if !slices.Equal(meta.Opening, notations[:len(meta.Opening)]) {
+			t.Fatal("opening mismatch", gi)
+		}
+		table := newTable()
+		beforeRoots := len(rows)
+		for ply := len(meta.Opening); ply < len(moves); ply++ {
+			p := positions[ply]
+			if (p.Turn() == chess.White) != meta.CandidateWhite {
+				continue
+			}
+			var before, after runtime.MemStats
+			runtime.ReadMemStats(&before)
+			parseStart := time.Now()
+			history := []uint64{}
+			if mode == "pipeline" {
+				args := append([]string{"startpos", "moves"}, notations[:ply]...)
+				reconstructed, err := parsePosition(args)
+				if err != nil {
+					t.Fatal(err)
+				}
+				p = reconstructed.Position()
+				history = repetitionHistory(reconstructed)
+			} else {
+				for _, q := range positions[max(0, ply-p.HalfMoveClock()):ply] {
+					history = append(history, q.ZobristHash())
+				}
+			}
+			parseMS := float64(time.Since(parseStart)) / float64(time.Millisecond)
+			if p.String() != positions[ply].String() {
+				t.Fatal("reconstruction mismatch", gi, ply)
+			}
+			for j, k := range history {
+				if k != positions[ply-len(history)+j].ZobristHash() {
+					t.Fatal("history mismatch", gi, ply)
+				}
+			}
+			limits := goLimits{moveTime: 100 * time.Millisecond, hasTime: true}
+			if depth > 0 {
+				limits = goLimits{depth: depth, moveTime: 30 * time.Second, hasTime: true}
+			}
+			budget, err := limits.budget(p.Turn())
+			if err != nil {
+				t.Fatal(err)
+			}
+			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+			start := time.Now()
+			result := iterativeSearchWithHistory(ctx, p, limits, budget, start, table, history)
+			elapsed := time.Since(start)
+			cancel()
+			runtime.ReadMemStats(&after)
+			rows = append(rows, warmRow{gi + 1, ply, result.depth, result.score, result.move, p.String(), result.metrics.Nodes, parseMS, float64(elapsed) / float64(time.Millisecond), after.TotalAlloc - before.TotalAlloc, after.Mallocs - before.Mallocs})
+			if elapsed > 10*time.Second || (depth > 0 && result.depth != depth) || result.move == "0000" {
+				write()
+				t.Fatal("incomplete", gi, ply, result)
+			}
+		}
+		write()
+		fmt.Printf("warm %s depth %d game %d roots %d total %d\n", mode, depth, gi+1, len(rows)-beforeRoots, len(rows))
+	}
+}

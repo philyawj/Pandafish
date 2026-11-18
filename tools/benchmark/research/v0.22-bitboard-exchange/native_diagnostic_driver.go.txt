@@ -1,0 +1,32 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+)
+
+func main() {
+	if len(os.Args)!=3 {panic("usage: native_driver evidenceDir candidateBinary")}
+	dir,candidate:=os.Args[1],os.Args[2]
+	checks:=[]map[string]any{}
+	for _,suite:=range []struct{name,input string;ms,trials int;turns bool}{
+		
+		{"public-1000","tools/benchmark/research/v0.17-search-moves/inputs.json",1000,1,false},
+		{"newer-100","tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json",100,1,true},
+		{"newer-1000","tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json",1000,1,true},
+	} {
+		out:=filepath.Join(dir,suite.name)
+		args:=[]string{"choices","--baseline","tools/benchmark/bin/pandafish-v0.21","--candidate",candidate,"--teacher","/opt/homebrew/bin/stockfish","--input",suite.input,"--out",out,"--milliseconds",fmt.Sprint(suite.ms),"--trials",fmt.Sprint(suite.trials),"--workers","3","--cache",filepath.Join("tools/benchmark/research/v0.21-rank-order",suite.name)};if suite.turns{args=append(args,"--by-turn")}
+		cmd:=exec.Command("tools/benchmark/bin/research",args...);cmd.Env=append(os.Environ(),"GOCACHE=/tmp/pandafish-v016-go-cache")
+		output,err:=cmd.CombinedOutput();if e:=os.WriteFile(filepath.Join(dir,suite.name+".txt"),output,0644);e!=nil{panic(e)}
+		status:=0;if err!=nil{status=1};quality:=struct{Passed bool `json:"passed"`}{}
+		b,e:=os.ReadFile(filepath.Join(out,"quality.json"));if e==nil{e=json.Unmarshal(b,&quality)}
+		checks=append(checks,map[string]any{"suite":suite.name,"command":cmd.Args,"exit":status,"quality_passed":quality.Passed,"diagnostic_only":true})
+		data,e2:=json.MarshalIndent(checks,"","  ");if e2!=nil{panic(e2)};if e2=os.WriteFile(filepath.Join(dir,"native-diagnostic-checks.json"),append(data,'\n'),0644);e2!=nil{panic(e2)}
+		fmt.Println(suite.name,status,quality.Passed)
+		if err!=nil||e!=nil {os.Exit(1)}
+	}
+}

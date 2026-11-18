@@ -1,0 +1,8 @@
+// Inspect future diff checks without staging or rewriting original observations.
+package main
+import("bytes";"encoding/json";"fmt";"os";"os/exec";"strings")
+func main(){
+ b,e:=exec.Command("git","ls-files","--others","--exclude-standard","-z").Output();if e!=nil{panic(e)};issues:=map[string]string{};count:=0
+ for _,raw:=range bytes.Split(b,[]byte{0}){if len(raw)==0{continue};p:=string(raw);out,err:=exec.Command("git","diff","--no-index","--check","--","/dev/null",p).CombinedOutput();count++;if err!=nil{if exit,ok:=err.(*exec.ExitError);!ok||exit.ExitCode()>2{panic(fmt.Sprint(p,": ",string(out),err))}};if len(bytes.TrimSpace(out))!=0{issues[p]=strings.TrimSpace(string(out))}}
+ out,e:=json.MarshalIndent(map[string]any{"files_checked_without_staging":count,"issues":issues},"","  ");if e!=nil{panic(e)};fmt.Println(string(out));if len(issues)!=0{os.Exit(1)}
+}

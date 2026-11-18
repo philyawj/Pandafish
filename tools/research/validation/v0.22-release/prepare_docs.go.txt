@@ -1,0 +1,35 @@
+package main
+import("os";"strings")
+func main(){
+ read:=func(p string)string{b,e:=os.ReadFile(p);if e!=nil{panic(e)};return string(b)};write:=func(p,s string){if e:=os.WriteFile(p,[]byte(s),0644);e!=nil{panic(e)}}
+ s:=read("RELEASING.md");parts:=strings.SplitN(s,"## Tooling releases",2);if len(parts)!=2{panic("release boundary")};prefix:=strings.ReplaceAll(parts[0],"v0.21","v0.22");prefix=strings.ReplaceAll(prefix,"v0.20","v0.21");prefix=strings.ReplaceAll(prefix,"v0.22 development","v0.23 development");prefix=strings.ReplaceAll(prefix,"precompute stable move ordering","defer legal work and accelerate exchange evaluation");s=prefix+"## Tooling releases"+parts[1]
+ s+=`
+v0.22 promotes the [revised exact kernel](tools/benchmark/research/v0.22-bitboard-exchange/RESULTS.md)
+after its clean 64%/71%/70% standard screen. Deferred generation, exact evasion
+prefiltering and bitset exchange computation preserve fixed-work search results.
+The public 100ms teacher-loss gate remains failed; its explicit pre-game review
+exception and all earlier failed variants stay archived. Preserve the original
+development label/hash. Version-only release smokes are integration evidence,
+not another strength screen. Skill 3 remains the standard. No further experiment
+starts as part of this release.
+`
+ s=strings.Replace(s,"\n \nv0.22 promotes","\n\nv0.22 promotes",1);write("RELEASING.md",s)
+ s=read("tools/benchmark/README.md");marker:="## Why this exists";if !strings.Contains(s,marker){panic("benchmark boundary")}
+ addition:=`**v0.22 promotes the [revised exact kernel](research/v0.22-bitboard-exchange/README.md).**
+Deferred main-search stages, exact evasion prefiltering and bitset legal exchange
+computation preserve all tested fixed-work moves, scores and nodes. Cold median
+search time falls 35.35%; a new warm tagged-baseline pair falls 37.84%. The
+standard concurrent 50-game rows score 64% against v0.21, 71% against Skill 3 and
+70% against pinned Sacrifice, without forfeits or unfinished games. The
+[result and limits](research/v0.22-bitboard-exchange/RESULTS.md) disclose the failed
+public 100ms surrogate and explicit pre-game exception. All earlier failed
+attempts remain preserved. [Release validation](../research/v0.22-validation.md)
+keeps version-only integration checks separate. Future candidates compare against
+tagged v0.22; Skill 3 remains the reference. No larger confirmation or further
+experiment starts automatically.
+
+`
+ s=strings.Replace(s,marker,addition+marker,1)
+ old:="(cd \"$build_dir\" && go build -o \"$benchmark_bin/pandafish-v0.21\" .)";if !strings.Contains(s,old){panic("baseline build marker")};s=strings.Replace(s,old,old+"\n\nbuild_dir=$(mktemp -d)\ngit archive v0.22 | tar -x -C \"$build_dir\"\n(cd \"$build_dir\" && go build -o \"$benchmark_bin/pandafish-v0.22\" .)",1)
+ s=strings.Replace(s,"Build the v0.21 tagged baseline as above","Build the v0.22 tagged baseline as above",1);s=strings.ReplaceAll(s,"--previous tools/benchmark/bin/pandafish-v0.21 --previous-version v0.21","--previous tools/benchmark/bin/pandafish-v0.22 --previous-version v0.22");write("tools/benchmark/README.md",s)
+}

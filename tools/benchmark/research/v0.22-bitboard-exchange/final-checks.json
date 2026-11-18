@@ -1,0 +1,58 @@
+[
+  {
+    "command": [
+      "tools/benchmark/bin/research",
+      "replay",
+      "--source",
+      "tools/benchmark/research/v0.22-bitboard-exchange/candidate-source.json",
+      "--out",
+      "/tmp/pandafish-v022-exchange-final-replay",
+      "--check"
+    ],
+    "environment": null,
+    "error": "",
+    "exit": 0,
+    "name": "final-replay"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-run",
+      "^TestRepositorySourceIsGo$",
+      "."
+    ],
+    "environment": null,
+    "error": "",
+    "exit": 0,
+    "name": "final-go-policy"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "/tmp/pandafish-v022-exchange-linux-arm64",
+      "."
+    ],
+    "environment": [
+      "GOOS=linux",
+      "GOARCH=arm64"
+    ],
+    "error": "",
+    "exit": 0,
+    "name": "linux-arm64-build"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "environment": null,
+    "error": "",
+    "exit": 0,
+    "name": "final-diff-check"
+  }
+]

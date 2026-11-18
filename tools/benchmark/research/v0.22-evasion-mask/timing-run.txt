@@ -1,0 +1,67 @@
+baseline-pair-1-depth-4 0
+candidate-pair-1-depth-4 0
+candidate-pair-2-depth-4 0
+baseline-pair-2-depth-4 0
+baseline-pair-3-depth-4 0
+candidate-pair-3-depth-4 0
+baseline-depth-3 0
+candidate-depth-3 0
+baseline-depth-6 0
+candidate-depth-6 0
+baseline-fresh-depth-4 0
+candidate-fresh-depth-4 0
+{
+  "correctness_issues": [],
+  "depth4_median_ratio": 0.756579249000036,
+  "groups": {
+    "depth-3": {
+      "baseline_ms": 252.88112099999998,
+      "candidate_ms": 217.23062700000006,
+      "changed": [],
+      "nodes": 227579,
+      "positions": 84,
+      "ratio": 0.8590227144714376
+    },
+    "depth-6": {
+      "baseline_ms": 3773.084916,
+      "candidate_ms": 2661.530793,
+      "changed": [],
+      "nodes": 3658933,
+      "positions": 12,
+      "ratio": 0.7053991235960829
+    },
+    "fresh-depth-4": {
+      "baseline_ms": 4358.342749000001,
+      "candidate_ms": 3230.1661749999994,
+      "changed": [],
+      "nodes": 3354194,
+      "positions": 145,
+      "ratio": 0.7411455135650229
+    },
+    "pair-1-depth-4": {
+      "baseline_ms": 1213.1135420000003,
+      "candidate_ms": 912.0587540000001,
+      "changed": [],
+      "nodes": 1010100,
+      "positions": 84,
+      "ratio": 0.7518329673381883
+    },
+    "pair-2-depth-4": {
+      "baseline_ms": 1187.44533,
+      "candidate_ms": 898.396496,
+      "changed": [],
+      "nodes": 1010100,
+      "positions": 84,
+      "ratio": 0.756579249000036
+    },
+    "pair-3-depth-4": {
+      "baseline_ms": 1180.5649159999996,
+      "candidate_ms": 902.017252,
+      "changed": [],
+      "nodes": 1010100,
+      "positions": 84,
+      "ratio": 0.7640556142022438
+    }
+  },
+  "timing_gate_passed": true
+}

@@ -1,0 +1,118 @@
+{
+  "tools/benchmark/research/v0.22-bitboard-exchange/newer-100": {
+    "finite_cases": 131,
+    "mean_loss_cp": {
+      "baseline": 34.93129770992366,
+      "candidate": 30.6793893129771
+    },
+    "severe_over_300": {
+      "baseline": 3,
+      "candidate": 3
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 28.892307692307693,
+        "candidate": 25.43076923076923
+      },
+      "w": {
+        "baseline": 40.878787878787875,
+        "candidate": 35.84848484848485
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": true,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.22-bitboard-exchange/newer-1000": {
+    "finite_cases": 132,
+    "mean_loss_cp": {
+      "baseline": 30.25,
+      "candidate": 24.28030303030303
+    },
+    "severe_over_300": {
+      "baseline": 2,
+      "candidate": 1
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 22.615384615384617,
+        "candidate": 21.646153846153847
+      },
+      "w": {
+        "baseline": 37.656716417910445,
+        "candidate": 26.83582089552239
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": true,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.22-bitboard-exchange/public-100": {
+    "finite_cases": 67,
+    "mean_loss_cp": {
+      "baseline": 40.07462686567164,
+      "candidate": 45.8955223880597
+    },
+    "severe_over_300": {
+      "baseline": 1,
+      "candidate": 2
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 83.57894736842105,
+        "candidate": 107.47368421052632
+      },
+      "w": {
+        "baseline": 22.854166666666668,
+        "candidate": 21.520833333333332
+      }
+    },
+    "turn_gates": {
+      "b": false,
+      "w": true
+    },
+    "turn_gates_required": false,
+    "passed": false
+  },
+  "tools/benchmark/research/v0.22-bitboard-exchange/public-1000": {
+    "finite_cases": 67,
+    "mean_loss_cp": {
+      "baseline": 52.582089552238806,
+      "candidate": 54.850746268656714
+    },
+    "severe_over_300": {
+      "baseline": 3,
+      "candidate": 3
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 120.05263157894737,
+        "candidate": 128.05263157894737
+      },
+      "w": {
+        "baseline": 25.875,
+        "candidate": 25.875
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": false,
+    "passed": true
+  }
+}

@@ -1,0 +1,45 @@
+=== RUN   TestStaticExchange
+=== RUN   TestStaticExchange/free_pawn
+=== RUN   TestStaticExchange/defended_pawn
+=== RUN   TestStaticExchange/defended_queen
+=== RUN   TestStaticExchange/revealed_rook_recapture
+=== RUN   TestStaticExchange/pinned_bishop_cannot_recapture
+=== RUN   TestStaticExchange/pinned_rook_captures_along_pin
+=== RUN   TestStaticExchange/king_cannot_recapture_protected_rook
+=== RUN   TestStaticExchange/legal_king_recapture
+=== RUN   TestStaticExchange/en_passant_rook_recapture
+=== RUN   TestStaticExchange/en_passant_diagonal_xray
+=== RUN   TestStaticExchange/capture_promotion
+=== RUN   TestStaticExchange/underpromotion
+=== RUN   TestStaticExchange/quiet_promotion
+=== RUN   TestStaticExchange/recapturing_pawn_promotes
+=== RUN   TestStaticExchange/knight_defender
+=== RUN   TestStaticExchange/black_pawn_defender
+=== RUN   TestStaticExchange/white_pawn_defender
+--- PASS: TestStaticExchange (0.00s)
+    --- PASS: TestStaticExchange/free_pawn (0.00s)
+    --- PASS: TestStaticExchange/defended_pawn (0.00s)
+    --- PASS: TestStaticExchange/defended_queen (0.00s)
+    --- PASS: TestStaticExchange/revealed_rook_recapture (0.00s)
+    --- PASS: TestStaticExchange/pinned_bishop_cannot_recapture (0.00s)
+    --- PASS: TestStaticExchange/pinned_rook_captures_along_pin (0.00s)
+    --- PASS: TestStaticExchange/king_cannot_recapture_protected_rook (0.00s)
+    --- PASS: TestStaticExchange/legal_king_recapture (0.00s)
+    --- PASS: TestStaticExchange/en_passant_rook_recapture (0.00s)
+    --- PASS: TestStaticExchange/en_passant_diagonal_xray (0.00s)
+    --- PASS: TestStaticExchange/capture_promotion (0.00s)
+    --- PASS: TestStaticExchange/underpromotion (0.00s)
+    --- PASS: TestStaticExchange/quiet_promotion (0.00s)
+    --- PASS: TestStaticExchange/recapturing_pawn_promotes (0.00s)
+    --- PASS: TestStaticExchange/knight_defender (0.00s)
+    --- PASS: TestStaticExchange/black_pawn_defender (0.00s)
+    --- PASS: TestStaticExchange/white_pawn_defender (0.00s)
+=== RUN   TestExchangeCancellation
+--- PASS: TestExchangeCancellation (0.00s)
+=== RUN   TestExchangeFilterAgainstLegalCorpus
+    exchange_test.go:150: checked 14 potential capture filters against full legal exchange oracle
+--- PASS: TestExchangeFilterAgainstLegalCorpus (0.00s)
+=== RUN   TestExchangeFilterKeepsTacticalExceptions
+--- PASS: TestExchangeFilterKeepsTacticalExceptions (0.00s)
+PASS
+ok  	github.com/philyawj/Pandafish	0.299s

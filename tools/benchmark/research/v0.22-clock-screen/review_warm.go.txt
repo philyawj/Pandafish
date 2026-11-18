@@ -1,0 +1,35 @@
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"math"
+	"os"
+	"path/filepath"
+	"reflect"
+	"sort"
+)
+
+type row struct{Game,Ply,Depth,Score int;Best,FEN string;Nodes uint64;ParseMS,SearchMS float64}
+type run struct{Mode string;Depth int;Inputs map[string]string;Rows []row}
+func read(p string)[]byte{b,e:=os.ReadFile(p);if e!=nil{panic(e)};return b}
+func load(p string,v any){if e:=json.Unmarshal(read(p),v);e!=nil{panic(e)}}
+func hash(b []byte)string{return fmt.Sprintf("%x",sha256.Sum256(b))}
+func main(){
+	dir:="tools/benchmark/research/v0.22-clock-screen";ratios:=[]float64{};first:=map[string]run{};rows:=0
+	expectedInputs:=map[string]string{"previous.pgn":"9347848b753a9ce6e3694ec55d06626af3ef6a397278231537dc383a02ba2de7","summary.json":"daaeed1f59da25e1a9ef7687bea1e11a8e0264596809cfc26cf80851932829a4"}
+	for pair:=1;pair<=3;pair++{
+		runs:=map[string]run{}
+		for _,actor:=range []string{"baseline","candidate"}{var r run;load(filepath.Join(dir,fmt.Sprintf("%s-warm-pair-%d.json",actor,pair)),&r);if len(r.Rows)!=1145||r.Mode!="pipeline"||r.Depth!=4||!reflect.DeepEqual(r.Inputs,expectedInputs){panic("warm workload identity")};runs[actor]=r;if pair==1{first[actor]=r}else{for i,x:=range first[actor].Rows{y:=r.Rows[i];if x.Game!=y.Game||x.Ply!=y.Ply||x.Depth!=y.Depth||x.Score!=y.Score||x.Best!=y.Best||x.FEN!=y.FEN||x.Nodes!=y.Nodes{panic("actor nondeterminism")}}}}
+		a,b:=runs["baseline"],runs["candidate"];am,bm:=0.,0.;var an,bn uint64
+		for i,x:=range a.Rows{y:=b.Rows[i];if x.Game!=y.Game||x.Ply!=y.Ply||x.Depth!=4||y.Depth!=4||x.Score!=y.Score||x.Best!=y.Best||x.FEN!=y.FEN||x.Nodes!=y.Nodes||x.Best=="0000"{panic("paired score/move/node membership identity")};am+=x.SearchMS;bm+=y.SearchMS;an+=x.Nodes;bn+=y.Nodes;rows++}
+		if an!=9874565||bn!=an{panic("node accounting")};ratios=append(ratios,bm/am)
+	}
+	sort.Float64s(ratios);var report struct{Median float64 `json:"median_search_ratio"`;Passed bool `json:"efficiency_gate_passed"`};load(filepath.Join(dir,"warm-analysis.json"),&report);if math.Abs(ratios[1]-report.Median)>1e-12||!report.Passed||ratios[1]>.95{panic("warm gate recomputation")}
+	helper:=read("tools/benchmark/research/v0.22-monotonic-deadline/warm_profile_test.go.txt")
+	for _,workspace:=range []string{"/tmp/pandafish-v021-clock-warm","/tmp/pandafish-v022-monotonic-profile"}{if hash(read(filepath.Join(workspace,"archived_proof_test.go")))!=hash(helper){panic("warm helper mismatch")}}
+	var repair struct{Before,After map[string]string;Unchanged bool};var raw map[string]json.RawMessage;load(filepath.Join(dir,"public-100/reference-repair.json"),&raw);if e:=json.Unmarshal(raw["before_sha256"],&repair.Before);e!=nil{panic(e)};if e:=json.Unmarshal(raw["after_sha256"],&repair.After);e!=nil{panic(e)};if e:=json.Unmarshal(raw["native_unchanged"],&repair.Unchanged);e!=nil{panic(e)}
+	if !repair.Unchanged||!reflect.DeepEqual(repair.Before,repair.After){panic("reference repair mutated data")};for name,want:=range repair.Before{if hash(read(filepath.Join(dir,"public-100",name)))!=want{panic("native data changed since repair")}}
+	b,e:=json.MarshalIndent(map[string]any{"passed":true,"paired_root_observations":rows,"score_move_node_identity":true,"baseline_best_membership_by_identical_choice":true,"same_actor_repeat_identity":true,"median_search_ratio":ratios[1],"warm_helper_sha256":hash(helper),"reference_repair_native_unchanged":true},"","  ");if e!=nil{panic(e)};if e=os.WriteFile(filepath.Join(dir,"warm-review.json"),append(b,'\n'),0644);e!=nil{panic(e)}
+}

@@ -1,0 +1,8 @@
+package main
+import("encoding/json";"fmt";"os";"reflect")
+func main(){
+ dir:="tools/benchmark/research/v0.22-next-assessment/";read:=func(p string,v any){b,e:=os.ReadFile(p);if e!=nil{panic(e)};if e=json.Unmarshal(b,v);e!=nil{panic(e)}}
+ type row struct{Game,Ply,Depth,Score int;Best,FEN string;Nodes uint64};type run struct{Mode string;Depth int;Inputs map[string]string;Rows []row};var base run;read("tools/benchmark/research/v0.22-staged-picker/baseline-warm-pair-1.json",&base)
+ for _,p:=range []string{"staged-profile-warm-depth5.json","lazy-warm-depth5.json"}{var r run;read(dir+p,&r);if len(r.Rows)!=1145||!reflect.DeepEqual(base,r){panic("warm result identity "+p)}}
+ var counts map[string]uint64;read(dir+"lazy-opportunity-counters.json",&counts);var all,unused uint64;for _,kind:=range []string{"main_quiet","main_tactical","q_checked","q_tactical"}{all+=counts[kind+"_records"];unused+=counts[kind+"_unreached"]};ratio:=float64(unused)/float64(all);b,e:=json.MarshalIndent(map[string]any{"correctness_passed":true,"roots":len(base.Rows),"generated_legal_records":all,"unreached_legal_records":unused,"unreached_ratio":ratio,"opportunity_passed":ratio>=.30,"threshold":.30},"","  ");if e!=nil{panic(e)};fmt.Println(string(b))
+}

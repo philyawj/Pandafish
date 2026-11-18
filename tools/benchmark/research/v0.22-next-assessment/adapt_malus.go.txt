@@ -1,0 +1,3 @@
+package main
+import("os";"strings")
+func main(){b,e:=os.ReadFile("tools/benchmark/research/v0.22-next-assessment/prepare_history.go.txt");if e!=nil{panic(e)};s:=strings.ReplaceAll(string(b),"v0.22-quiet-history","v0.22-history-malus");s=strings.ReplaceAll(s,"pandafish-v022-history-","pandafish-v022-malus-");if e=os.WriteFile("tools/benchmark/research/v0.22-next-assessment/prepare_malus.go.txt",[]byte(s),0644);e!=nil{panic(e)};if e=os.WriteFile("/tmp/pandafish-v022-prepare-malus.go",[]byte(s),0644);e!=nil{panic(e)}}

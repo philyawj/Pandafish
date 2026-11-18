@@ -1,0 +1,15 @@
+// Version-only release checks. No live client or larger strength screen starts.
+package main
+import("encoding/json";"fmt";"os";"os/exec";"path/filepath")
+func main(){
+ dir:="tools/research/validation/v0.22-release";checks:=[]map[string]any{}
+ run:=func(name string,env []string,args ...string){log,e:=os.OpenFile(filepath.Join(dir,name+".txt"),os.O_CREATE|os.O_EXCL|os.O_WRONLY,0644);if e!=nil{panic(e)};cmd:=exec.Command(args[0],args[1:]...);cmd.Env=append(os.Environ(),append([]string{"GOCACHE=/tmp/pandafish-v016-go-cache"},env...)...);cmd.Stdout=log;cmd.Stderr=log;err:=cmd.Run();log.Close();status:=0;message:="";if err!=nil{status=1;message=err.Error()};checks=append(checks,map[string]any{"name":name,"command":args,"environment":env,"exit":status,"error":message});b,e:=json.MarshalIndent(checks,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(filepath.Join(dir,"checks.json"),append(b,'\n'),0644);e!=nil{panic(e)};fmt.Println(name,status)}
+ ensure:=func(stage,runName string){b,e:=os.ReadFile(filepath.Join(dir,stage,runName,"summary.json"));if e!=nil{panic(e)};var s struct{Complete bool};if e=json.Unmarshal(b,&s);e!=nil||!s.Complete{panic("incomplete smoke "+stage)}}
+ run("previous-run",nil,"go","run","./tools/benchmark","--validate","--race","--version","v0.22-release-smoke","--previous","tools/benchmark/bin/pandafish-v0.21","--previous-version","v0.21","--sequential","--stage","previous","--pairs","1","--results",filepath.Join(dir,"previous"))
+ ensure("previous","v0.22-release-smoke-vs-v0.21")
+ run("linux-arm64-build",[]string{"GOOS=linux","GOARCH=arm64"},"go","build","-o","/tmp/pandafish-v022-release-linux-arm64",".")
+ run("external-run",nil,"tools/benchmark/bin/benchmark","--candidate","tools/benchmark/bin/pandafish-candidate","--version","v0.22-release-smoke","--stage","external","--parallel","--stockfish-skill","3","--sacrifice","tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine","--pairs","1","--results",filepath.Join(dir,"external"))
+ ensure("external","v0.22-release-smoke-vs-stockfish-3-and-sacrifice-v0.2.0-b528f0ba")
+ run("concurrent-run",nil,"tools/benchmark/bin/benchmark","--candidate","tools/benchmark/bin/pandafish-candidate","--version","v0.22-release-smoke","--previous","tools/benchmark/bin/pandafish-v0.21","--previous-version","v0.21","--stockfish-skill","3","--sacrifice","tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine","--pairs","1","--parallel-all","--results",filepath.Join(dir,"concurrent"))
+ ensure("concurrent","v0.22-release-smoke-vs-v0.21-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba")
+}

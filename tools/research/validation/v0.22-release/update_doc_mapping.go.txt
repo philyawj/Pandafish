@@ -1,0 +1,8 @@
+// Refresh only the three intentionally updated historical-document mappings.
+package main
+import("crypto/sha256";"encoding/json";"fmt";"os")
+func main(){
+ type entry struct{SHA string `json:"sha256"`;Bytes int `json:"bytes"`};p:="tools/research/migration.json";b,e:=os.ReadFile(p);if e!=nil{panic(e)};var m map[string]json.RawMessage;if e=json.Unmarshal(b,&m);e!=nil{panic(e)};var originals,rewritten map[string]entry;if e=json.Unmarshal(m["originals"],&originals);e!=nil{panic(e)};if e=json.Unmarshal(m["rewritten"],&rewritten);e!=nil{panic(e)};changes:=map[string]any{}
+ for _,p:=range []string{"README.md","RELEASING.md","tools/benchmark/README.md"}{if _,ok:=originals[p];!ok{panic("unmapped document "+p)};b,e:=os.ReadFile(p);if e!=nil{panic(e)};next:=entry{fmt.Sprintf("%x",sha256.Sum256(b)),len(b)};changes[p]=map[string]any{"before":rewritten[p],"after":next};rewritten[p]=next}
+ m["rewritten"],e=json.Marshal(rewritten);if e!=nil{panic(e)};b,e=json.MarshalIndent(m,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(p,append(b,'\n'),0644);e!=nil{panic(e)};b,e=json.MarshalIndent(changes,"","  ");if e!=nil{panic(e)};fmt.Println(string(b))
+}

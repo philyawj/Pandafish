@@ -1,0 +1,8 @@
+package main
+import("crypto/sha256";"encoding/json";"fmt";"os")
+func main(){
+ dir:="tools/benchmark/research/v0.22-staged-picker/";sourceName,hashName:="candidate-source.json","source-hashes.json";if len(os.Args)==2&&os.Args[1]=="initial"{sourceName,hashName="initial-source.json","initial-source-hashes.json"}
+ files,hashes:=map[string]string{},map[string]string{}
+ for _,p:=range []string{"search.go","main_move_picker.go","main_move_picker_test.go","third_party/chess/search_moves.go","third_party/chess/search_hint.go"}{b,e:=os.ReadFile(p);if e!=nil{panic(e)};files[p]=string(b);hashes[p]=fmt.Sprintf("%x",sha256.Sum256(b))}
+ for name,v:=range map[string]any{sourceName:map[string]any{"base_tag":"v0.21","files":files},hashName:hashes}{p:=dir+name;if _,e:=os.Stat(p);!os.IsNotExist(e){panic("refuse overwrite "+p)};b,e:=json.MarshalIndent(v,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(p,append(b,'\n'),0644);e!=nil{panic(e)}}
+}

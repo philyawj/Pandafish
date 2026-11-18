@@ -1,0 +1,7 @@
+package main
+import("encoding/json";"fmt";"os";"reflect")
+func main(){
+ dir:="tools/benchmark/research/v0.22-next-assessment/";read:=func(p string,v any){b,e:=os.ReadFile(p);if e!=nil{panic(e)};if e=json.Unmarshal(b,v);e!=nil{panic(e)}}
+ type row struct{Game,Ply,Depth,Score int;Best,FEN string;Nodes uint64};type run struct{Mode string;Depth int;Inputs map[string]string;Rows []row};var base,r run;read("tools/benchmark/research/v0.22-staged-picker/baseline-warm-pair-1.json",&base);read(dir+"evasion-warm-depth5.json",&r);if len(r.Rows)!=1145||!reflect.DeepEqual(base,r){panic("warm result identity")}
+ var c map[string]uint64;read(dir+"evasion-opportunity-counters.json",&c);if c["legal_rejections"]!=0{panic("legal rejection")};all:=float64(c["avoidable_tag_validations"])/float64(c["all_tag_validations"]);full:=float64(c["full_avoidable_tag_validations"])/float64(c["full_tag_validations"]);b,e:=json.MarshalIndent(map[string]any{"correctness_passed":true,"roots":len(base.Rows),"legal_rejections":c["legal_rejections"],"all_tag_avoidable_ratio":all,"full_tag_avoidable_ratio":full,"original_opportunity_passed":all>=.50,"original_threshold":.50,"counts":c},"","  ");if e!=nil{panic(e)};fmt.Println(string(b))
+}

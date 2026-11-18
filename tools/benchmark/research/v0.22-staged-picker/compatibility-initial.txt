@@ -1,0 +1,9 @@
+=== RUN   TestSearchHintAndQuietSubsetAgainstOriginal
+    main_move_picker_test.go:84: direct legal lookup differs 4k3/8/8/8/8/8/4K3/8 w KQ - 0 1 false {<nil> <nil>   map[] [] false [] 0 0 4 6 0} {<nil> <nil>   map[] [] false [] 0 0 0 0 0} false
+--- FAIL: TestSearchHintAndQuietSubsetAgainstOriginal (0.01s)
+=== RUN   TestStagedPickerMatchesEveryEagerMove
+    main_move_picker_test.go:147: staged whole-Move order differs 4k3/8/8/8/8/8/4K3/8 w KQ - 0 1 false 6
+--- FAIL: TestStagedPickerMatchesEveryEagerMove (0.01s)
+FAIL
+exit status 1
+FAIL	github.com/philyawj/Pandafish	0.333s

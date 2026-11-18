@@ -1,0 +1,7 @@
+package main
+import("os";"strings")
+func main(){
+ read:=func(p string)string{b,e:=os.ReadFile(p);if e!=nil{panic(e)};return string(b)};write:=func(p,s string){if _,e:=os.Stat(p);!os.IsNotExist(e){panic("refuse overwrite "+p)};if e:=os.WriteFile(p,[]byte(s),0644);e!=nil{panic(e)}}
+ s:=strings.ReplaceAll(read("tools/benchmark/research/v0.22-next-assessment/diagnose_picker_choices.go.txt"),"v0.22-staged-picker","v0.22-bitboard-exchange");write("tools/benchmark/research/v0.22-bitboard-exchange/diagnose_choices.go.txt",s);write("/tmp/pandafish-v022-diagnose-exchange-choices.go",s)
+ s=read("tools/benchmark/research/v0.22-staged-picker/native_diagnostic_driver.go.txt");write("tools/benchmark/research/v0.22-bitboard-exchange/native_diagnostic_driver.go.txt",s);write("/tmp/pandafish-v022-exchange-native-diagnostic.go",s)
+}

@@ -1,0 +1,19 @@
+package main
+
+import("crypto/sha256";"encoding/json";"fmt";"os";"strings")
+func main(){
+ dir:="tools/benchmark/research/v0.22-quiet-history/"
+ write:=func(p string,b []byte){if _,e:=os.Stat(p);!os.IsNotExist(e){panic("refuse overwrite "+p)};if e:=os.WriteFile(p,b,0644);e!=nil{panic(e)}}
+ b,e:=os.ReadFile("tools/benchmark/research/v0.21-rank-order/timing_driver.go.txt");if e!=nil{panic(e)}
+ s:=strings.ReplaceAll(string(b),"v0.21-rank-order","v0.22-quiet-history");s=strings.ReplaceAll(s,"/tmp/pandafish-v020-release/tagged-source","/tmp/pandafish-v021-release/tagged-source")
+ old:=" || x.Nodes != y.Nodes || fmt.Sprint(x.Best) != fmt.Sprint(y.Best)";if !strings.Contains(s,old){panic("parity adaptation missed")};s=strings.ReplaceAll(s,old,"")
+ s=strings.ReplaceAll(s,"var nodes uint64","var nodes, candidateNodes uint64\n\t\tchangedMoves := []string{}")
+ s=strings.ReplaceAll(s,"nodes += x.Nodes","nodes += x.Nodes\n\t\t\tcandidateNodes += y.Nodes\n\t\t\tif fmt.Sprint(x.Best) != fmt.Sprint(y.Best) { changedMoves = append(changedMoves,x.ID) }")
+ s=strings.ReplaceAll(s,`"nodes": nodes,`,`"nodes": nodes, "candidate_nodes": candidateNodes, "changed_moves": changedMoves,`)
+ s=strings.ReplaceAll(s,"passed = passed && deep < 1",`passed = passed && deep < 1 && results["fresh-depth-4"].(map[string]any)["ratio"].(float64) < 1`)
+ write(dir+"timing_driver.go.txt",[]byte(s));write("/tmp/pandafish-v022-history-timing.go",[]byte(s))
+ b,e=os.ReadFile("tools/benchmark/research/v0.22-child-storage/warm_driver.go.txt");if e!=nil{panic(e)};s=strings.ReplaceAll(string(b),"v0.22-child-storage","v0.22-quiet-history");s=strings.ReplaceAll(s,"pandafish-v022-child-profile","pandafish-v022-history-profile");s=strings.ReplaceAll(s,"||x.Best!=y.Best||x.Nodes!=y.Nodes","");write(dir+"warm_driver.go.txt",[]byte(s));write("/tmp/pandafish-v022-history-warm.go",[]byte(s))
+ files,hashes:=map[string]string{},map[string]string{}
+ for _,p:=range []string{"search.go","quiet_history.go","quiet_history_test.go"}{b,e:=os.ReadFile(p);if e!=nil{panic(e)};files[p]=string(b);hashes[p]=fmt.Sprintf("%x",sha256.Sum256(b))}
+ for p,v:=range map[string]any{dir+"candidate-source.json":map[string]any{"base_tag":"v0.21","files":files},dir+"source-hashes.json":hashes}{b,e:=json.MarshalIndent(v,"","  ");if e!=nil{panic(e)};write(p,append(b,'\n'))}
+}

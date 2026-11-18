@@ -1,0 +1,21 @@
+// Independent saved-observation review; no engines or games are started.
+package main
+
+import("crypto/sha256";"encoding/json";"fmt";"math";"os";"path/filepath";"reflect";"sort")
+type row struct{Game,Ply,Depth,Score int;Best,FEN string;Nodes uint64;ParseMS,SearchMS float64}
+type run struct{Mode string;Depth int;Inputs map[string]string;Rows []row}
+func read(p string)[]byte{b,e:=os.ReadFile(p);if e!=nil{panic(e)};return b}
+func load(p string,v any){if e:=json.Unmarshal(read(p),v);e!=nil{panic(e)}}
+func hash(b []byte)string{return fmt.Sprintf("%x",sha256.Sum256(b))}
+func main(){
+ dir:="tools/benchmark/research/v0.22-staged-picker";ratios:=[]float64{};first:=map[string]run{};observations:=0
+ expected:=map[string]string{"previous.pgn":"9347848b753a9ce6e3694ec55d06626af3ef6a397278231537dc383a02ba2de7","summary.json":"daaeed1f59da25e1a9ef7687bea1e11a8e0264596809cfc26cf80851932829a4"}
+ for pair:=1;pair<=3;pair++{runs:=map[string]run{};for _,actor:=range []string{"baseline","candidate"}{var r run;load(filepath.Join(dir,fmt.Sprintf("%s-warm-pair-%d.json",actor,pair)),&r);if len(r.Rows)!=1145||r.Mode!="pipeline"||r.Depth!=5||!reflect.DeepEqual(r.Inputs,expected){panic("warm workload identity")};runs[actor]=r;if pair==1{first[actor]=r}else{for i,x:=range first[actor].Rows{y:=r.Rows[i];x.ParseMS=0;x.SearchMS=0;y.ParseMS=0;y.SearchMS=0;if !reflect.DeepEqual(x,y){panic("actor nondeterminism")}}}}
+ a,b:=runs["baseline"],runs["candidate"];am,bm:=0.,0.;var an,bn uint64
+ for i,x:=range a.Rows{y:=b.Rows[i];am+=x.SearchMS;bm+=y.SearchMS;an+=x.Nodes;bn+=y.Nodes;x.ParseMS=0;x.SearchMS=0;y.ParseMS=0;y.SearchMS=0;if !reflect.DeepEqual(x,y)||x.Best=="0000"||x.Depth!=5{panic("paired score/move/node identity")};observations++};if an!=43118858||bn!=an{panic("node accounting")};ratios=append(ratios,bm/am)
+ }
+ sort.Float64s(ratios);var report struct{Median float64 `json:"median_search_ratio"`;Passed bool `json:"efficiency_gate_passed"`};load(dir+"/warm-analysis.json",&report);if math.Abs(ratios[1]-report.Median)>1e-12||!report.Passed||ratios[1]>.85{panic("efficiency gate")}
+ helper:=read("tools/benchmark/research/v0.22-next-assessment/warm_profile_test.go.txt");for _,path:=range []string{"/tmp/pandafish-v021-release/tagged-source/warm_profile_test.go","/tmp/pandafish-v022-picker-profile/archived_proof_test.go"}{if hash(read(path))!=hash(helper){panic("helper mismatch")}}
+ type choice struct{ID string;Depth,Score int;Best string;Nodes uint64;Complete bool};var ca,cb []choice;load(dir+"/changed-depth-baseline.json",&ca);load(dir+"/changed-depth-candidate.json",&cb);if len(ca)!=10||!reflect.DeepEqual(ca,cb){panic("changed-depth identity")};for _,r:=range ca{if !r.Complete{panic("incomplete comparison")}}
+ out:=map[string]any{"passed":true,"paired_root_observations":observations,"score_move_node_identity":true,"baseline_best_membership_by_identical_choice":true,"same_actor_repeat_identity":true,"median_search_ratio":ratios[1],"warm_helper_sha256":hash(helper),"matched_depth_changed_choice_comparisons":len(ca),"matched_depth_scores_moves_nodes_identical":true};b,e:=json.MarshalIndent(out,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(dir+"/warm-review.json",append(b,'\n'),0644);e!=nil{panic(e)}
+}

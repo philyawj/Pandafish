@@ -1,0 +1,13 @@
+package main
+import("bytes";"crypto/sha256";"encoding/json";"fmt";"os";"os/exec";"strings")
+func main(){
+ dir:="tools/benchmark/research/v0.22-clock-screen/";old:="tools/benchmark/research/v0.22-monotonic-deadline/"
+ hash:=func(p string)string{b,e:=os.ReadFile(p);if e!=nil{panic(e)};return fmt.Sprintf("%x",sha256.Sum256(b))}
+ if len(os.Args)==2&&os.Args[1]=="--verify-build" {a,b:=hash("tools/benchmark/bin/pandafish-v022-monotonic-deadline"),hash("tools/benchmark/bin/pandafish-v022-clock-screen");data,e:=json.MarshalIndent(map[string]any{"original_sha256":a,"rebuilt_sha256":b,"byte_identical":a==b},"","  ");if e!=nil{panic(e)};if e=os.WriteFile(dir+"build-identity.json",append(data,'\n'),0644);e!=nil{panic(e)};if a!=b{panic("build identity differs")};return}
+ write:=func(p string,b []byte){if _,e:=os.Stat(p);!os.IsNotExist(e){panic("refuse overwrite "+p)};if e:=os.WriteFile(p,b,0644);e!=nil{panic(e)}}
+ var source struct{Files map[string]string};b,e:=os.ReadFile(old+"candidate-source.json");if e!=nil{panic(e)};if e=json.Unmarshal(b,&source);e!=nil{panic(e)}
+ for p:=range source.Files{base,e:=exec.Command("git","show","v0.21:"+p).Output();current,ce:=os.ReadFile(p);if e==nil{if ce!=nil||!bytes.Equal(current,base){panic("baseline changed "+p)}}else if !os.IsNotExist(ce){panic("unexpected new source "+p)}}
+ for p,text:=range source.Files{if e=os.WriteFile(p,[]byte(text),0644);e!=nil{panic(e)}}
+ for _,name:=range []string{"candidate-source.json","source-hashes.json","timing-analysis.json"}{b,e:=os.ReadFile(old+name);if e!=nil{panic(e)};write(dir+name,b)}
+ b,e=os.ReadFile("tools/benchmark/research/v0.22-history-malus/warm_pairs_driver.go.txt");if e!=nil{panic(e)};s:=strings.ReplaceAll(string(b),"v0.22-history-malus","v0.22-clock-screen");s=strings.ReplaceAll(s,"/tmp/pandafish-v021-release/tagged-source","/tmp/pandafish-v021-clock-warm");s=strings.ReplaceAll(s,"pandafish-v022-malus-profile","pandafish-v022-monotonic-profile");s=strings.ReplaceAll(s,"ratios[1]<=.85","ratios[1]<=.95");s=strings.ReplaceAll(s,"||x.Score!=y.Score||x.FEN!=y.FEN","||x.Score!=y.Score||x.Best!=y.Best||x.Nodes!=y.Nodes||x.FEN!=y.FEN");write(dir+"warm_pairs_driver.go.txt",[]byte(s));write("/tmp/pandafish-v022-clock-warm.go",[]byte(s))
+}

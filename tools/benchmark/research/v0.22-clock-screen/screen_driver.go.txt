@@ -1,0 +1,22 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"time"
+)
+
+func main(){
+	dir:="tools/benchmark/research/v0.22-clock-screen"
+	for _,name:=range []string{"public-100","public-1000","newer-100","newer-1000"}{b,e:=os.ReadFile(filepath.Join(dir,name,"quality.json"));if e!=nil{panic(e)};var q struct{Passed bool `json:"passed"`};if e=json.Unmarshal(b,&q);e!=nil{panic(e)};if !q.Passed{panic("native gate failed "+name)}}
+	args:=[]string{"--candidate","tools/benchmark/bin/pandafish-v022-clock-screen","--version","v0.22-clock-screen-dev","--previous","tools/benchmark/bin/pandafish-v0.21","--previous-version","v0.21","--previous-revision","494604686a7afbda256da1625aa907baa6060084","--stockfish","/opt/homebrew/bin/stockfish","--stockfish-skill","3","--sacrifice","tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine","--pairs","25","--parallel-all","--move-ms","100","--grace-ms","50","--max-plies","400","--openings","tools/benchmark/openings-screening-10-v1.txt","--revision","494604686a7afbda256da1625aa907baa6060084-dirty","--machine","Apple M2; 8 logical CPUs; AC power 100%; Go 1.25; no overlapping probes or heavy validation","--results",filepath.Join(dir,"screen"),"--verbose"}
+	cmd:=exec.Command("tools/benchmark/bin/benchmark",args...)
+	put:=func(name string,v any){b,e:=json.MarshalIndent(v,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(filepath.Join(dir,name),append(b,'\n'),0644);e!=nil{panic(e)}}
+	log,e:=os.OpenFile(filepath.Join(dir,"screen-run.txt"),os.O_CREATE|os.O_EXCL|os.O_WRONLY,0644);if e!=nil{panic(e)};defer log.Close();cmd.Stdout=log;cmd.Stderr=log
+	start:=time.Now();put("screen-command.json",map[string]any{"command":cmd.Args,"started_utc":start.UTC().Format(time.RFC3339Nano)})
+	err:=cmd.Run();status:=0;message:="";if err!=nil{status=1;message=err.Error()}
+	put("screen-status.json",map[string]any{"exit":status,"error":message,"elapsed_seconds":time.Since(start).Seconds(),"finished_utc":time.Now().UTC().Format(time.RFC3339Nano)});fmt.Println("screen exit",status,message);if err!=nil{os.Exit(1)}
+}

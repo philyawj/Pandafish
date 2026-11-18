@@ -1,0 +1,46 @@
+package main
+import("os";"path/filepath";"strings")
+func main(){
+ ref:="research/v0.22-next-candidate";if len(os.Args)==2{ref=os.Args[1]};dir:="/tmp/pandafish-v022-release";if e:=os.MkdirAll(dir,0755);e!=nil{panic(e)}
+ pr:=`Main search previously built full legal lists before early cutoffs, and exchange evaluation repeatedly scanned all 64 squares. This release defers later move stages, prefilters impossible check evasions and computes the same legal exchange heuristic with local bitsets. Complete move order, material values, search horizons, TT/history policy and clocks are preserved.
+
+Selected fixed-work search time falls 35.35% in the cold median and 37.84% in a new warm tagged-baseline pair. All 325 distinct cold comparisons and the 1,145-root warm trajectory retain moves, scores and nodes. The exchange kernel matches 46,794 full scores and 33,152 attacker/least-attacker/restoration comparisons with the frozen mailbox implementation.
+
+The standard screen tests development binary **v0.22-bitboard-exchange-dev**, UCI v0.21, SHA-256 c5486656b922db819cee1fa5e2851e9ad1b744806cb9d84a301df6a64d657505. Each matchup has 50 games, all three concurrent, at 100ms plus 50ms grace with ten openings and a 400-ply cap.
+
+| Opponent | W / D / L | Unfinished | Forfeits | Completed score |
+| --- | --- | --- | --- | --- |
+| Tagged v0.21 | 26 / 12 / 12 | 0 | 0 | 64% |
+| Stockfish Skill 3 | 35 / 1 / 14 | 0 | 0 | 71% |
+| Pinned Sacrifice | 27 / 16 / 7 | 0 | 0 | 70% |
+
+The public 100ms teacher-loss gate remains failed: 45.8955cp against a 45.0746cp limit. The other three native suites pass; no new losing-mate flags or timing overruns occur. All changed choices agree at matching completed depths. The explicit pre-game research exception and every earlier failed attempt remain preserved. These small, selected screens support practical promotion without a precise Elo claim; Skill 3 remains the standard.
+
+Validation passes root/upstream race tests, vet/build, independent frozen rules, source restoration and Linux ARM64 cross-build. All 150 screen games and twelve separate release-version smoke games replay legally without forfeits or unfinished games. Release source differs from the frozen candidate only in the UCI version and handshake expectation. No live client, larger confirmation or next candidate starts.
+
+- [Complete results, limitations and source](https://github.com/philyawj/Pandafish/blob/REF/tools/benchmark/research/v0.22-bitboard-exchange/RESULTS.md)
+- [All settings, identities and PGNs](https://github.com/philyawj/Pandafish/blob/REF/tools/benchmark/research/v0.22-bitboard-exchange/screen/v0.22-bitboard-exchange-dev-vs-v0.21-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/summary.json)
+- [Investigation and preserved failures](https://github.com/philyawj/Pandafish/blob/REF/docs/RESEARCH_V022.md)
+- [Release validation](https://github.com/philyawj/Pandafish/blob/REF/tools/research/v0.22-validation.md)
+`
+ release:=`v0.22 avoids unused legal-move work and repeated exchange scans. Deferred move stages, an exact check-evasion prefilter and local exchange bitsets preserve complete ordering, values, search horizons, TT/history policy and clocks. Selected fixed-work search time falls 35.35% in the cold median and 37.84% in one new warm tagged-baseline pair, with identical tested moves, scores and nodes.
+
+The strength screen tests **v0.22-bitboard-exchange-dev** (UCI v0.21), SHA-256 c5486656b922db819cee1fa5e2851e9ad1b744806cb9d84a301df6a64d657505: 50 games per opponent, all three matchups concurrent, 100ms plus 50ms grace, ten openings and a 400-ply cap.
+
+| Opponent | W / D / L | Unfinished | Forfeits | Completed score |
+| --- | --- | --- | --- | --- |
+| Tagged v0.21 | 26 / 12 / 12 | 0 | 0 | 64% |
+| Stockfish Skill 3 | 35 / 1 / 14 | 0 | 0 | 71% |
+| Pinned Sacrifice | 27 / 16 / 7 | 0 | 0 | 70% |
+
+The public 100ms teacher-loss gate still fails narrowly, 45.8955cp versus 45.0746cp. Its matched-depth diagnosis, explicit pre-game exception and all unsuccessful experiments remain preserved. The other three native suites pass. Repeated openings and selection after failures limit strength inference; no precise Elo gain or reference-level advancement is claimed.
+
+Correctness, root/upstream races, vet/build, archived restoration, source identity and Linux ARM64 checks pass. All 150 screen games replay legally. Twelve separate version-only integration smoke games finish without forfeits or unfinished games; they supplement the original strength screen. Repository source and research programs remain Go. Skill 3 stays the standard. No live game, larger confirmation or next experiment starts as part of this release.
+
+- [Detailed results and limitations](https://github.com/philyawj/Pandafish/blob/v0.22/tools/benchmark/research/v0.22-bitboard-exchange/RESULTS.md)
+- [Full settings, engine hashes and adjacent PGNs](https://github.com/philyawj/Pandafish/blob/v0.22/tools/benchmark/research/v0.22-bitboard-exchange/screen/v0.22-bitboard-exchange-dev-vs-v0.21-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/summary.json)
+- [Research summary and archived failures](https://github.com/philyawj/Pandafish/blob/v0.22/docs/RESEARCH_V022.md)
+- [Release validation](https://github.com/philyawj/Pandafish/blob/v0.22/tools/research/v0.22-validation.md)
+`
+ for name,body:=range map[string]string{"pr.md":strings.ReplaceAll(pr,"/REF/","/"+ref+"/"),"release.md":release,"titles.md":"v0.22: defer legal generation and accelerate exchange evaluation\nv0.22\n"}{if e:=os.WriteFile(filepath.Join(dir,name),[]byte(body),0644);e!=nil{panic(e)}}
+}

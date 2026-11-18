@@ -1,0 +1,21 @@
+// Recompute actual-budget depth, throughput and response summaries from raw data.
+// No engine, teacher or game is started.
+package main
+import("encoding/json";"fmt";"os";"sort")
+type query struct{MS float64 `json:"response_ms"`;Error string `json:"error"`;Metrics struct{Depth int;Nodes uint64;Elapsed float64 `json:"elapsed_ms"`;Reason string;Fallback bool} `json:"metrics"`}
+type row struct{Case struct{ID string};Trials []struct{Actor string;Trial int;Query query};Error string}
+func median(a []float64)float64{if len(a)==0{return 0};sort.Float64s(a);if len(a)%2==1{return a[len(a)/2]};return (a[len(a)/2-1]+a[len(a)/2])/2}
+func percentile(a []float64,p float64)float64{if len(a)==0{return 0};sort.Float64s(a);index:=int(float64(len(a)-1)*p+.5);return a[index]}
+func main(){
+ dir:="tools/benchmark/research/v0.22-bitboard-exchange";out:=map[string]any{}
+ for _,suite:=range []string{"public-100","public-1000","newer-100","newer-1000"}{b,e:=os.ReadFile(dir+"/"+suite+"/native.json");if e!=nil{panic(e)};var rows []row;if e=json.Unmarshal(b,&rows);e!=nil{panic(e)}
+  paired,higher,same,lower:=0,0,0,0;ratios:=[]float64{};responses:=map[string][]float64{"baseline":{},"candidate":{}};lowerCases:=[]map[string]any{};fallback:=map[string]int{}
+  for _,r:=range rows{if r.Error!=""{panic(r.Error)};trials:=map[int]map[string]query{};for _,v:=range r.Trials{if v.Query.Error!=""{panic(v.Query.Error)};if trials[v.Trial]==nil{trials[v.Trial]=map[string]query{}};if _,ok:=trials[v.Trial][v.Actor];ok{panic("duplicate actor trial")};trials[v.Trial][v.Actor]=v.Query;responses[v.Actor]=append(responses[v.Actor],v.Query.MS);if v.Query.Metrics.Fallback{fallback[v.Actor]++}}
+   for trial,p:=range trials{a,aOK:=p["baseline"];c,cOK:=p["candidate"];if !aOK||!cOK{panic("missing pair")};paired++;switch{case c.Metrics.Depth>a.Metrics.Depth:higher++;case c.Metrics.Depth==a.Metrics.Depth:same++;default:lower++;lowerCases=append(lowerCases,map[string]any{"id":r.Case.ID,"trial":trial,"baseline_depth":a.Metrics.Depth,"candidate_depth":c.Metrics.Depth})};if a.Metrics.Reason=="deadline"&&c.Metrics.Reason=="deadline"&&a.Metrics.Nodes>0&&c.Metrics.Nodes>0&&a.Metrics.Elapsed>0&&c.Metrics.Elapsed>0{ratios=append(ratios,(float64(c.Metrics.Nodes)/c.Metrics.Elapsed)/(float64(a.Metrics.Nodes)/a.Metrics.Elapsed))}}
+  }
+  responseStats:=map[string]any{};for actor,a:=range responses{responseStats[actor]=map[string]any{"observations":len(a),"p50_ms":percentile(a,.50),"p95_ms":percentile(a,.95),"p99_ms":percentile(a,.99),"max_ms":percentile(a,1)}}
+  sort.Slice(lowerCases,func(i,j int)bool{return fmt.Sprint(lowerCases[i])<fmt.Sprint(lowerCases[j])})
+  out[suite]=map[string]any{"paired_trials":paired,"candidate_completed_depth_higher":higher,"candidate_completed_depth_same":same,"candidate_completed_depth_lower":lower,"lower_depth_cases":lowerCases,"both_deadline_pairs":len(ratios),"median_deadline_node_rate_ratio":median(ratios),"response_times":responseStats,"fallbacks":fallback}
+ }
+ b,e:=json.MarshalIndent(out,"","  ");if e!=nil{panic(e)};fmt.Println(string(b))
+}

@@ -1,0 +1,4030 @@
+{
+  "previous_gate": "passed: score above 50% treating unfinished as losses, zero forfeits",
+  "schema": 2,
+  "created_utc": "2026-11-18T15:33:59.308905Z",
+  "platform": "darwin/arm64",
+  "go_version": "go1.25.0",
+  "candidate": {
+    "label": "v0.22-release-smoke",
+    "uci_name": "Pandafish v0.22",
+    "sha256": "a3c95bfdf900476d83eb6ac14095cdc24ddcf104d9ce2076f7d42a109de6d67c",
+    "options": null
+  },
+  "settings": {
+    "matchup_concurrency": 3,
+    "external_matchup_concurrency": 2,
+    "pairs": 1,
+    "move_ms": 100,
+    "timeout_grace_ms": 50,
+    "max_plies": 400,
+    "openings_sha256": "80ceed68e4575b7a0d8649aa67efd35da4c8c46e480ad31b1ce12fefa94e89ca",
+    "openings_name": "openings-screening-10-v1.txt",
+    "timing_policy": "wall-clock-v2"
+  },
+  "matches": [
+    {
+      "pgn_file": "previous.pgn",
+      "engine": {
+        "label": "v0.21",
+        "uci_name": "Pandafish v0.21",
+        "sha256": "4e1ff2cb232e337bcd7e5d909ed4f48d0ea98a63cc10addfb4e280bf68a6b108",
+        "options": null
+      },
+      "stats": {
+        "wins": 1,
+        "draws": 1,
+        "losses": 0,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 75,
+        "possible_score_lower_percent": 75,
+        "possible_score_upper_percent": 75
+      },
+      "games": [
+        {
+          "candidate_white": true,
+          "opening": [
+            "e2e4",
+            "e7e5",
+            "g1f3",
+            "b8c6"
+          ],
+          "result": "1-0",
+          "termination": "Checkmate",
+          "plies": 175,
+          "response_times": [
+            {
+              "candidate": true,
+              "elapsed_ms": 95.414958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 79.296541
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.184917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.159667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.148625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.175833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.17025
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.166125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.1575
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.188875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 87.4955
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.399208
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.209584
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.255666
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.221458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.239458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.216458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.497792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.411709
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.271458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.25425
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 79.755334
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.2645
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.275916
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.297
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 86.648
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.31525
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.304791
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 87.410208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 86.932417
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.307292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.3545
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.314292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.329792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.355333
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 85.086875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.425583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.448375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.635583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.426167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.433125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 80.001709
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.397625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.473625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 74.364375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 72.952417
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.458333
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 83.219875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.94975
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.66625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.621459
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.463834
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.459458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.480125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.465542
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 79.070792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.499166
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.534833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.506834
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.513708
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.532375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.530542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.64625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.626458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.654208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.788291
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 93.79975
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 83.439958
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.636542
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.603667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.574166
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.737709
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.274208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.628167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.601083
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 74.435666
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.635417
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 83.235334
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 77.303917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.724708
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 77.186125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.681417
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 73.257458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 78.609583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.729458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.730375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 94.774291
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.991042
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 82.041042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.772
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.759542
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.747083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.050458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.888958
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.809417
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.800125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.115917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 75.1945
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.817584
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.818958
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.831667
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.8515
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.821041
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.039958
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 90.72425
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 77.532083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.855833
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.861125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.847
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 77.146917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.857916
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 75.053833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.914209
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.905166
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.910916
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.918291
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.924041
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.0565
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.924875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.201
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.948667
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.997625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 91.942667
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.000417
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.988708
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 76.647167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 83.76
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.049875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.277917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.034583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.386833
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.049083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.069417
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 85.713459
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.064375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 110.178791
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.528708
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.0865
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.140625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.113041
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.45875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.150875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.3815
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 85.018125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.1385
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.186833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.678584
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.233541
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 90.406791
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 80.539917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 75.609834
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 84.232416
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.450833
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 90.17925
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.244458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.279333
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.307833
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.532792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.334333
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.30225
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.299
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 79.9225
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.294625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.63325
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.362416
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.348708
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.314125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.598916
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.325583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.338625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.34675
+            }
+          ]
+        },
+        {
+          "candidate_white": false,
+          "opening": [
+            "e2e4",
+            "e7e5",
+            "g1f3",
+            "b8c6"
+          ],
+          "result": "1/2-1/2",
+          "termination": "InsufficientMaterial",
+          "plies": 209,
+          "response_times": [
+            {
+              "candidate": false,
+              "elapsed_ms": 95.192959
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.171291
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.171583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.1395
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.152125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.156
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 76.842875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.179583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.234333
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.215417
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.252458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.197
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 76.280458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.235917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.249167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.224708
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 84.809417
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.252125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.286542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.261375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.28425
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.308917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.34725
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.297666
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.346708
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.291958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.389667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.314625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.317625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.339583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 93.540042
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.551709
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 89.331667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.366625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.376042
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.336625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.402541
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.362
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.376375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.382833
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.403833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.383292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 83.147041
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.424417
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.427459
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.430041
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 76.500959
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.430916
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.515375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 85.614708
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 72.453208
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 90.357208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.480583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 86.382625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 93.271542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.511459
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.54525
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.528666
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 77.483083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.522333
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.777334
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.526
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.528792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.531333
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.7495
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.547916
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 90.779458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.577416
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 88.38875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.575375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.580667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.835667
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.617208
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.590458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.62
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.599958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.825209
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.635709
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.864083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.70025
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.69625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.658209
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 80.3865
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.737417
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.745209
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.692208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.722709
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.716125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.716833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.714458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.741334
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.952792
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.789333
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.767375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.767667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 91.686208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.801166
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.79825
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.096542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 85.300709
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.810833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 76.4865
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.843167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.897167
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.082917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 72.656417
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.037667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.08
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.867583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.879459
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.012458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 79.605208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.93625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.92775
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.932833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.945916
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 95.959708
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.198125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.150583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.024583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.200125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.020375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.192125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.20525
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.05975
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.232541
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.025667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.041208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.051458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.21675
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.077583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 84.827958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.086875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.336625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.103
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.108875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.400083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 84.977292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.338167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.321292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.349125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 82.466084
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.163
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.435709
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.183542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.441042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.211667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 85.51475
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.226791
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.267209
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.247208
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.261083
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.268125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.274875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.312917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.341458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.536333
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.295542
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.565375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 83.860917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.329333
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.380292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.320792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.998417
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.310125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.323292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.898459
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.590209
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 76.384375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.3225
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 74.034
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.583625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.577292
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 83.53875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.537458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.326209
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.351917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.404334
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.743458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.360042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.413708
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 83.01775
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 76.149584
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.398875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.612375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.6915
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.586875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.988292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.782167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 80.578875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 94.422333
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.74125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 84.145083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.813125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 73.466041
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.824917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 97.031583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.804791
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.543458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.491166
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 81.872792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.679333
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 96.524959
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.773125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 82.4675
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pgn_file": "stockfish.pgn",
+      "engine": {
+        "label": "Stockfish Skill 3",
+        "uci_name": "Stockfish 19",
+        "sha256": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f",
+        "options": {
+          "Hash": "16",
+          "Skill Level": "3",
+          "SyzygyPath": "",
+          "Threads": "1",
+          "UCI_LimitStrength": "false"
+        }
+      },
+      "stats": {
+        "wins": 1,
+        "draws": 0,
+        "losses": 1,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 50,
+        "possible_score_lower_percent": 50,
+        "possible_score_upper_percent": 50
+      },
+      "games": [
+        {
+          "candidate_white": true,
+          "opening": [
+            "e2e4",
+            "e7e5",
+            "g1f3",
+            "b8c6"
+          ],
+          "result": "1-0",
+          "termination": "Checkmate",
+          "plies": 273,
+          "response_times": [
+            {
+              "candidate": true,
+              "elapsed_ms": 95.266958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.061792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.148667
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.277917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.156041
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.652167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 80.177791
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 101.430958
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.17425
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.93875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.193583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.936459
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.220292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.360792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.230458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.373
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.431291
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.596959
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.263125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.7745
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.282708
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.5545
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.337916
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.078084
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.318167
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.424541
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.427875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 101.02
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.341792
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.731458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.355666
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.674542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.427625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.882458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.394583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 101.10275
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 92.822625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 101.136959
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.435459
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.148458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.435833
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.833833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 112.559458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 101.579167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.5025
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.093667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.489375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.116875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.791292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.216125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 78.245042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.088875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.608208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.418792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.539
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.158792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 74.047083
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.42175
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 90.3015
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.351542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.669375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.371333
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.655542
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.376375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 91.154916
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 102.402709
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.867042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.457542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.689083
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.866583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.7125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.628791
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.695917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.813917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.04525
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.553542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 75.556917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.132083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.84475
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 101.102292
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 73.151959
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.817792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.778584
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.150041
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.799875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.01875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.093042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.062167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 91.184916
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.637041
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.080583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.480792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.903917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.147
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.915875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 101.098167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.94425
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 101.081291
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.947542
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.935166
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.187458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.662167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.981625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 101.081416
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 83.14325
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.005417
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.302083
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.726
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.057583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.504291
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.048584
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.873875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.062042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.27825
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.353959
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.453167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.167
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.752458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 82.920584
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.171625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.135209
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.891667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.143625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.2345
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 74.677291
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.302209
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 75.048125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.148667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 83.517041
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.502916
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 80.840167
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.693
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.247125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.744292
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.491208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.693417
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.506792
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.561666
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.545833
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.049334
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.585583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.342542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.334458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.5315
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.676916
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.887459
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.379042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.554875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.769625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.604084
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.450708
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.343
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.424625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.161667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.732459
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.795167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.4485
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.185125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.473459
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.218875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 87.257042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.243708
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.51475
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.099875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.555667
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.612542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.834292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.566625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.658
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.065792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.624291
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.824917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.8895
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.923917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.864542
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.091875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.639375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.486958
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.784584
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.471083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.031167
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.433417
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.086917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.18675
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.720875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.770958
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.064291
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.867791
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.14525
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.80125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.797417
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.147625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 79.488333
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.399458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.825625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.452209
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.231291
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.7085
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.836625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.768333
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 80.616667
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.726958
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.865208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.112167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.879667
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.773208
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 84.4685
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.969334
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.163792
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.465667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.181916
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.302584
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.963083
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.084333
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.954042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.930334
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.408791
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.903459
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 82.480708
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.273584
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.263375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.365917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.3945
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.861333
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.387958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.184166
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.068791
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.918458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.311666
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.94525
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.324875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.296792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.12225
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.892125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.385375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.529916
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.525709
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.331084
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.461833
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.458666
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.173459
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.682625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.232458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.819875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.214417
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.701083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.258
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.4175
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.538
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.476083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.56025
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.753542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.70675
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.784208
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.517708
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.480542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.286625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.594125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.54575
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.252875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.4085
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.479292
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.34775
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 21.146583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.287583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 2.546459
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.296042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 1.598917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 97.190042
+            }
+          ]
+        },
+        {
+          "candidate_white": false,
+          "opening": [
+            "e2e4",
+            "e7e5",
+            "g1f3",
+            "b8c6"
+          ],
+          "result": "1-0",
+          "termination": "Checkmate",
+          "plies": 53,
+          "response_times": [
+            {
+              "candidate": false,
+              "elapsed_ms": 100.677208
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.196375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.851042
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.119416
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.715334
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.137292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.319208
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.199833
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.6945
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.177958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.544833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 76.855709
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.749834
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.1965
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.826708
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.903125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.217958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.946625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 73.304667
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 101.098083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.282667
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.060125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 87.030709
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.32575
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.292916
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.808917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.314792
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.608375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.327667
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.691
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 75.749166
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.644375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.376584
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.28875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.412083
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.046875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 75.643541
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.56125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 87.053292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.777167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.473417
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.393625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.48175
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.1775
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.521167
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.673125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 94.209833
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 99.668583
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pgn_file": "sacrifice.pgn",
+      "engine": {
+        "label": "Sacrifice v0.2.0 b528f0ba",
+        "uci_name": "Sacrifice-Engine",
+        "sha256": "5c2c63f19ff6f8be65aaa127a7cbe884f6cb52d7c4daee6967b1da7a7f8fa0e5",
+        "options": null,
+        "source_revision": "b528f0ba373910b72052d991700a990ca1cb07fd",
+        "assets_sha256": {
+          "Tal.pgn": "da7d473f53ac933c3a14ca4aff872bc50fe64385234f3635094cc500c0b0ad59"
+        }
+      },
+      "stats": {
+        "wins": 2,
+        "draws": 0,
+        "losses": 0,
+        "unfinished": 0,
+        "forfeits": 0,
+        "score_percent": 100,
+        "possible_score_lower_percent": 100,
+        "possible_score_upper_percent": 100
+      },
+      "games": [
+        {
+          "candidate_white": true,
+          "opening": [
+            "e2e4",
+            "e7e5",
+            "g1f3",
+            "b8c6"
+          ],
+          "result": "1-0",
+          "termination": "Checkmate",
+          "plies": 123,
+          "response_times": [
+            {
+              "candidate": true,
+              "elapsed_ms": 95.2865
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.066333
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.114542
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.054084
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.197959
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.098042
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 80.249584
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.048792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.241084
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.063042
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.235542
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.117917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.268875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.052334
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.220458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.052833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.254167
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.067833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.241958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.059833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.291792
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.05025
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.291542
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.057417
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.30225
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.055833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.32675
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.061708
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.363417
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.080084
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.337958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.079041
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.371458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.066708
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.743625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.059459
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.596459
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.073708
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.386125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.064083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.416584
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.063167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 82.350667
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 106.046916
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.313958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.071
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.544542
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.084333
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.481833
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.065208
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.47475
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.083458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 74.014375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.088375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 92.178292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.069667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.557042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.104667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.830166
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.076417
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.543083
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.069958
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.778459
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.073167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 89.28275
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.077417
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 77.50925
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.072041
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.670625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.087084
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.635167
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.085834
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 72.285666
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.13325
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.684291
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.073958
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.700833
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.081833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.759417
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.081375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.739958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.080375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.068083
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.077625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.008084
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.081416
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.969834
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.130667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.795833
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.080333
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.865
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.080667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.832208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.081583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.864042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.077083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.869
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.084083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.135209
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.081875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.969458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.095
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.955333
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.088625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.938334
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.085209
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.134167
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 38.997166
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.944583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.087666
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.990166
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 2.322917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.248458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 2.904916
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 86.632125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 0.356625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.9815
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 0.083792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.191792
+            }
+          ]
+        },
+        {
+          "candidate_white": false,
+          "opening": [
+            "e2e4",
+            "e7e5",
+            "g1f3",
+            "b8c6"
+          ],
+          "result": "0-1",
+          "termination": "Checkmate",
+          "plies": 152,
+          "response_times": [
+            {
+              "candidate": false,
+              "elapsed_ms": 100.040708
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.572834
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.056083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.16225
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.053834
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 73.475875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.061583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.226041
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.046916
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.202458
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.058
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 93.1555
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.055416
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.229542
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.053041
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.246
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.068208
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.237
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.049625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 83.076875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.072833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.273375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.068833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 76.770125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.064583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 91.799416
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.071917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.405042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.081916
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.383042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.075084
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.399167
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.067125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.378
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.065542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.442584
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.07075
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.410917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.067959
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 72.900333
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.076041
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.494042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.074625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.688
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.086458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 83.441334
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.071375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.535166
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.074583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.5335
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.075792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 86.318083
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 118.939833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.208292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.072167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.608583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.080583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.612375
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.084542
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.657583
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.077208
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.638125
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.084208
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.75875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.082083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 93.620542
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.066167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.717834
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.07625
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.770209
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.068334
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.734709
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.070666
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.804791
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.07475
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.800875
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.093458
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.832209
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.08125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.893208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.076459
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 80.013208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.085875
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.894042
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.086208
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.918208
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.095167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.97175
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.11125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.2785
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.092292
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.98525
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.113833
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 95.963917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.100708
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.025209
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.085667
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.303167
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.074125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 81.59625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.079083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.066958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.087416
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 89.710792
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.079042
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.09775
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.087375
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.40975
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.12125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.110958
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.079541
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.146459
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.084
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.178333
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.094084
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.177959
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.113083
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.1855
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.088958
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.18175
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.0925
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.22225
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.109583
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.506459
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.109125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 75.033666
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.129417
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 72.887709
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.12575
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.275625
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.092
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 83.584917
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 100.116417
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.530333
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 0.09775
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.448292
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 22.82125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.321416
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 10.881917
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.699416
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 87.732125
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.345083
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 7.760792
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.344291
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 0.101084
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.4
+            },
+            {
+              "candidate": false,
+              "elapsed_ms": 0.140167
+            },
+            {
+              "candidate": true,
+              "elapsed_ms": 96.357584
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "complete": true,
+  "planned_matches": 3,
+  "runner_sha256": "798d30119de81cfc355b56009103ca4f6feb65df8acdcacf1c760ea4b48924dc"
+}

@@ -1,0 +1,12 @@
+Command: GOCACHE=/tmp/pandafish-v016-go-cache go run /tmp/pandafish-v022-review-picker-warm.go
+panic: open /tmp/pandafish-v021-release/tagged-source/archived_proof_test.go: no such file or directory
+
+goroutine 1 [running]:
+main.read(...)
+	/tmp/pandafish-v022-review-picker-warm.go:7
+main.main()
+	/tmp/pandafish-v022-review-picker-warm.go:18 +0xa44
+exit status 2
+
+The shell command exits 1. The failed reviewer is frozen separately as
+review_warm.initial.go.txt; correction changes the baseline helper path only.

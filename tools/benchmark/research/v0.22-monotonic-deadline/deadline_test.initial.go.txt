@@ -1,0 +1,55 @@
+package main
+
+import (
+	"context"
+	"testing"
+	"time"
+)
+
+func TestDeadlineMonotonicAndWallOnly(t *testing.T) {
+	now := time.Now()
+	for _, x := range []struct {
+		name     string
+		deadline time.Time
+		want     bool
+	}{
+		{"unlimited", time.Time{}, false},
+		{"monotonic-past", now.Add(-time.Second), true},
+		{"monotonic-future", now.Add(time.Hour), false},
+		{"wall-past", now.Round(0).Add(-time.Second), true},
+		{"wall-future", now.Round(0).Add(time.Hour), false},
+		{"wall-far-past", time.Date(1, 1, 1, 0, 0, 0, 0, time.UTC), true},
+		{"wall-far-future", time.Date(9999, 1, 1, 0, 0, 0, 0, time.UTC), false},
+	} {
+		t.Run(x.name, func(t *testing.T) {
+			w := searcher{deadline: x.deadline}
+			if got := w.stopped(); got != x.want {
+				t.Fatal("deadline predicate", got, x.want)
+			}
+		})
+	}
+}
+
+func TestDeadlineInjectedClockBoundariesAndGuards(t *testing.T) {
+	deadline := time.Unix(100, 0)
+	for _, delta := range []time.Duration{-time.Nanosecond, 0, time.Nanosecond} {
+		calls := 0
+		w := searcher{deadline: deadline, now: func() time.Time { calls++; return deadline.Add(delta) }}
+		if got := w.stopped(); got != (delta >= 0) || calls != 1 {
+			t.Fatal("injected boundary/call count", delta, got, calls)
+		}
+	}
+	calls := 0
+	clock := func() time.Time { calls++; return deadline }
+	w := searcher{now: clock}
+	if w.stopped() || calls != 0 {
+		t.Fatal("unlimited read clock")
+	}
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	w.ctx = ctx
+	w.deadline = deadline
+	if !w.stopped() || calls != 0 {
+		t.Fatal("canceled context did not short circuit deadline")
+	}
+}

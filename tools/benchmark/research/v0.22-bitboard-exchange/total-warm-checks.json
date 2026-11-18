@@ -1,0 +1,44 @@
+[
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-timeout=15m",
+      "-run",
+      "^TestWarmPipelineProfile$",
+      "-v"
+    ],
+    "cwd": "/tmp/pandafish-v021-release/tagged-source",
+    "environment": [
+      "GOCACHE=/tmp/pandafish-v016-go-cache",
+      "WARM_INPUT=/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba",
+      "WARM_OUTPUT=/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.22-bitboard-exchange/baseline-total-warm-pair-1.json",
+      "WARM_MODE=pipeline",
+      "WARM_DEPTH=5"
+    ],
+    "exit": 0,
+    "name": "baseline-total-warm-pair-1"
+  },
+  {
+    "command": [
+      "go",
+      "test",
+      "-count=1",
+      "-timeout=15m",
+      "-run",
+      "^TestWarmPipelineProfile$",
+      "-v"
+    ],
+    "cwd": "/tmp/pandafish-v022-exchange-profile",
+    "environment": [
+      "GOCACHE=/tmp/pandafish-v016-go-cache",
+      "WARM_INPUT=/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba",
+      "WARM_OUTPUT=/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.22-bitboard-exchange/candidate-total-warm-pair-1.json",
+      "WARM_MODE=pipeline",
+      "WARM_DEPTH=5"
+    ],
+    "exit": 0,
+    "name": "candidate-total-warm-pair-1"
+  }
+]

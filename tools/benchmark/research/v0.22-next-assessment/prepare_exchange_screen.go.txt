@@ -1,0 +1,18 @@
+package main
+import("os";"strings")
+func main(){
+ b,e:=os.ReadFile("tools/benchmark/research/v0.22-clock-screen/screen_driver.go.txt");if e!=nil{panic(e)};s:=string(b)
+ s=strings.ReplaceAll(s,"v0.22-clock-screen","v0.22-bitboard-exchange");s=strings.ReplaceAll(s,"pandafish-v022-clock-screen","pandafish-v022-bitboard-exchange")
+ old:=`if !q.Passed{panic("native gate failed "+name)}`;if !strings.Contains(s,old){panic("missing native guard")};s=strings.Replace(s,old,`if q.Passed!=(name!="public-100"){panic("native result differs from explicit exception "+name)}`,1)
+ marker:="\n\targs:=";if !strings.Contains(s,marker){panic("missing args marker")}
+ guard:=`
+ load:=func(p string,v any){b,e:=os.ReadFile(p);if e!=nil{panic(e)};if e=json.Unmarshal(b,v);e!=nil{panic(e)}}
+ var matched struct{Passed bool;N int `+"`json:\"matched_depth_comparisons\"`"+`};load(filepath.Join(dir,"changed-depth-review.json"),&matched);if !matched.Passed||matched.N!=12{panic("matched-depth review")}
+ var source struct{Passed bool;N int `+"`json:\"native_identity_suites\"`"+`};load("tools/benchmark/research/v0.22-next-assessment/exchange-source-before-screen.json",&source);if !source.Passed||source.N!=4{panic("source/native identity review")}
+ var timing struct{Passed bool `+"`json:\"timing_gate_passed\"`"+`};load(filepath.Join(dir,"timing-analysis.json"),&timing);if !timing.Passed{panic("cold efficiency")}
+ var warm,total struct{Passed bool `+"`json:\"efficiency_gate_passed\"`"+`};load(filepath.Join(dir,"warm-analysis.json"),&warm);load(filepath.Join(dir,"total-warm-analysis.json"),&total);if !warm.Passed||!total.Passed{panic("warm efficiency")}
+ if _,e:=os.Stat(filepath.Join(dir,"SCREEN_DECISION.md"));e!=nil{panic(e)}
+ `
+ s=strings.Replace(s,marker,"\n"+guard+"\n\targs:=",1)
+ for _,p:=range []string{"tools/benchmark/research/v0.22-bitboard-exchange/screen_driver.go.txt","/tmp/pandafish-v022-exchange-screen.go"}{if _,e:=os.Stat(p);!os.IsNotExist(e){panic("refuse overwrite "+p)};if e=os.WriteFile(p,[]byte(s),0644);e!=nil{panic(e)}}
+}

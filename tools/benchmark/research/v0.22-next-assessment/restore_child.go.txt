@@ -1,0 +1,13 @@
+package main
+
+import (
+ "bytes"
+ "encoding/json"
+ "os"
+ "os/exec"
+)
+func main(){
+ b,e:=os.ReadFile("tools/benchmark/research/v0.22-child-storage/candidate-source.json");if e!=nil{panic(e)};var s struct{Base string `json:"base_tag"`;Files map[string]string `json:"files"`};if e=json.Unmarshal(b,&s);e!=nil{panic(e)}
+ for p,text:=range s.Files {got,e:=os.ReadFile(p);if e!=nil||!bytes.Equal(got,[]byte(text)){panic("source changed before archive restore: "+p)}}
+ for p:=range s.Files {b,e:=exec.Command("git","show",s.Base+":"+p).Output();if e!=nil {if e=os.Remove(p);e!=nil{panic(e)}} else if e=os.WriteFile(p,b,0644);e!=nil{panic(e)}}
+}

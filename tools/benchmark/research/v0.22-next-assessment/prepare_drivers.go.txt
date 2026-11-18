@@ -1,0 +1,17 @@
+package main
+
+import (
+ "os"
+ "strings"
+)
+
+func write(path,text string){if _,err:=os.Stat(path);!os.IsNotExist(err){panic("refuse overwrite: "+path)};if err:=os.WriteFile(path,[]byte(text),0644);err!=nil{panic(err)}}
+func main(){
+ dir:="tools/benchmark/research/v0.22-child-storage/";if err:=os.MkdirAll(dir,0755);err!=nil{panic(err)}
+ b,err:=os.ReadFile("tools/benchmark/research/v0.21-rank-order/timing_driver.go.txt");if err!=nil{panic(err)}
+ s:=strings.ReplaceAll(string(b),"v0.21-rank-order","v0.22-child-storage");s=strings.ReplaceAll(s,"/tmp/pandafish-v020-release/tagged-source","/tmp/pandafish-v021-release/tagged-source");write(dir+"timing_driver.go.txt",s);write("/tmp/pandafish-v022-timing.go",s)
+ b,err=os.ReadFile("tools/benchmark/research/v0.20-next-assessment/drivers/legality_upstream_scoped.go.txt");if err!=nil{panic(err)}
+ s=strings.ReplaceAll(string(b),"v0.20-search-legality","v0.22-child-storage");s=strings.ReplaceAll(s,"pandafish-v020-upstream-","pandafish-v022-upstream-");write(dir+"upstream_driver.go.txt",s);write("/tmp/pandafish-v022-upstream.go",s)
+ b,err=os.ReadFile("tools/benchmark/research/v0.17-search-moves/oracle_test.go.txt");if err!=nil{panic(err)}
+ s=strings.ReplaceAll(string(b),"TestSearchMoveOracle","TestSearchPositionFrozenOracle");s=strings.ReplaceAll(s,"errors:=[]string{};p:=evalFEN(t,c.FEN)","errors:=[]string{};p:=evalFEN(t,c.FEN);cell:=new(chess.SearchPosition)");s=strings.ReplaceAll(s,"child:=p.Update(&m)","child:=cell.Update(p,&m)");write(dir+"oracle_test.go.txt",s);write("scratch_oracle_probe_test.go",s)
+}

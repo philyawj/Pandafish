@@ -1,0 +1,16 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"os"
+	"testing"
+	"time"
+)
+
+func TestChangedChoiceMatchedDepth(t *testing.T){
+	if os.Getenv("CHANGED_INPUT")==""{t.Skip("explicit diagnostic inputs")}
+	b,e:=os.ReadFile(os.Getenv("CHANGED_INPUT"));if e!=nil{t.Fatal(e)};var input struct{Cases []struct{ID,Position,FEN string;Depths []int}};if e=json.Unmarshal(b,&input);e!=nil{t.Fatal(e)}
+	type row struct{ID string;Depth,Score int;Best string;Nodes uint64;Complete bool};rows:=[]row{}
+	for _,c:=range input.Cases{for _,d:=range c.Depths{g:=candidateProbeGame(t,candidateProbeCase{ID:c.ID,Position:c.Position,FEN:c.FEN});ctx,cancel:=context.WithTimeout(context.Background(),30*time.Second);r:=iterativeSearchWithHistory(ctx,g.Position(),goLimits{depth:d},timeBudget{},time.Now(),newTable(),repetitionHistory(g));cancel();rows=append(rows,row{c.ID,d,r.score,r.move,r.metrics.Nodes,r.depth==d});data,e:=json.MarshalIndent(rows,"","  ");if e!=nil{t.Fatal(e)};if e=os.WriteFile(os.Getenv("CHANGED_OUTPUT"),append(data,'\n'),0644);e!=nil{t.Fatal(e)};if r.depth!=d{t.Fatal("diagnostic incomplete",c.ID,d)}}}
+}

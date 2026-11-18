@@ -1,0 +1,41 @@
+// Verify frozen Go overlays, the active runtime boundary and native identities.
+// Inventory creation is a separate final operation and refuses old inventories.
+package main
+
+import (
+	"bytes"
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"io/fs"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"strings"
+)
+
+func must(e error){if e!=nil{panic(e)}}
+func read(p string)[]byte{b,e:=os.ReadFile(p);must(e);return b}
+func hash(b []byte)string{return fmt.Sprintf("%x",sha256.Sum256(b))}
+func put(p string,v any){b,e:=json.MarshalIndent(v,"","  ");must(e);must(os.WriteFile(p,append(b,'\n'),0644))}
+func main(){
+	root:="tools/benchmark/research/"
+	names:=[]string{"v0.22-next-assessment","v0.22-child-storage","v0.22-geometric-tags","v0.22-visible-tags","v0.22-monotonic-deadline","v0.22-quiet-history","v0.22-history-malus","v0.22-aspiration","v0.22-clock-screen"}
+	if len(os.Args)==2&&os.Args[1]=="--inventories" {
+		for _,name:=range names {dir:=root+name;p:=dir+"/inventory.json";if _,e:=os.Stat(p);!os.IsNotExist(e){panic("refuse inventory overwrite")};inv:=map[string]any{};must(filepath.WalkDir(dir,func(p string,d fs.DirEntry,e error)error{if e!=nil{return e};if d.IsDir(){return nil};b:=read(p);rel,e:=filepath.Rel(dir,p);if e!=nil{return e};inv[filepath.ToSlash(rel)]=map[string]any{"sha256":hash(b),"bytes":len(b)};return nil}));put(p,inv)};return
+	}
+	type source struct{Base string `json:"base_tag"`;Files map[string]string `json:"files"`}
+	snapshots:=map[string]source{};counts:=map[string]int{}
+	for _,name:=range names[1:] {var s source;must(json.Unmarshal(read(root+name+"/candidate-source.json"),&s));var hashes map[string]string;must(json.Unmarshal(read(root+name+"/source-hashes.json"),&hashes));if s.Base!="v0.21"||len(s.Files)!=len(hashes){panic("source shape "+name)};for p,text:=range s.Files{if !strings.HasSuffix(p,".go")||hash([]byte(text))!=hashes[p]{panic("source hash "+p)}};snapshots[name]=s;counts[name]=len(s.Files)}
+	active:=snapshots["v0.22-clock-screen"]
+	if len(active.Files)!=2||active.Files["search.go"]==""||active.Files["deadline_test.go"]==""{panic("active scope")}
+	for p,text:=range active.Files{if !bytes.Equal(read(p),[]byte(text)){panic("active source changed "+p)}}
+	list,e:=exec.Command("git","ls-tree","-r","--name-only","v0.21").Output();must(e);protected:=map[string]bool{};unchanged:=0
+	for _,p:=range strings.Fields(string(list)) {if !((!strings.Contains(p,"/")&&strings.HasSuffix(p,".go"))||strings.HasPrefix(p,"third_party/chess/")||p=="go.mod"||p=="go.sum"){continue};protected[p]=true;if _,ok:=active.Files[p];ok{continue};b,e:=exec.Command("git","show","v0.21:"+p).Output();must(e);if !bytes.Equal(read(p),b){panic("unexpected runtime change "+p)};unchanged++}
+	for _,pattern:=range []string{"*.go","third_party/chess/*.go"}{paths,e:=filepath.Glob(pattern);must(e);for _,p:=range paths{if !protected[p]&&active.Files[p]==""{panic("unexpected Go source "+p)}}}
+	binaries:=map[string]string{}
+	for _,p:=range []string{"tools/benchmark/bin/pandafish-v0.21","tools/benchmark/bin/pandafish-v022-child-storage","tools/benchmark/bin/pandafish-v022-geometric-tags","tools/benchmark/bin/pandafish-v022-visible-tags","tools/benchmark/bin/pandafish-v022-monotonic-deadline","tools/benchmark/bin/pandafish-v022-quiet-history","tools/benchmark/bin/pandafish-v022-history-malus","tools/benchmark/bin/pandafish-v022-aspiration","tools/benchmark/bin/pandafish-v022-clock-screen","/opt/homebrew/bin/stockfish","tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine"}{binaries[p]=hash(read(p))}
+	for p,want:=range map[string]string{"tools/benchmark/bin/pandafish-v0.21":"4e1ff2cb232e337bcd7e5d909ed4f48d0ea98a63cc10addfb4e280bf68a6b108","/opt/homebrew/bin/stockfish":"dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f","tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine":"5c2c63f19ff6f8be65aaa127a7cbe884f6cb52d7c4daee6967b1da7a7f8fa0e5"}{if binaries[p]!=want{panic("pinned binary changed "+p)}}
+	for _,name:=range []string{"public-100","public-1000","newer-100","newer-1000"}{p:=root+"v0.22-clock-screen/"+name+"/method.json";if _,e:=os.Stat(p);os.IsNotExist(e){continue};var m struct{IDs map[string]string `json:"identities_sha256"`};must(json.Unmarshal(read(p),&m));for actor,path:=range map[string]string{"baseline":"tools/benchmark/bin/pandafish-v0.21","candidate":"tools/benchmark/bin/pandafish-v022-clock-screen","reference":"/opt/homebrew/bin/stockfish"}{if m.IDs[actor]!=binaries[path]{panic("native binary identity "+name+"/"+actor)}}}
+	put(root+"v0.22-next-assessment/source-review.json",map[string]any{"passed":true,"base":"v0.21","active_source_files":len(active.Files),"protected_files_identical":unchanged,"overlay_counts":counts,"binary_sha256":binaries})
+}

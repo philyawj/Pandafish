@@ -1,0 +1,94 @@
+[
+  {
+    "command": [
+      "go",
+      "run",
+      "./tools/benchmark",
+      "--validate",
+      "--race",
+      "--version",
+      "v0.22-release-smoke",
+      "--previous",
+      "tools/benchmark/bin/pandafish-v0.21",
+      "--previous-version",
+      "v0.21",
+      "--sequential",
+      "--stage",
+      "previous",
+      "--pairs",
+      "1",
+      "--results",
+      "tools/research/validation/v0.22-release/previous"
+    ],
+    "environment": null,
+    "error": "",
+    "exit": 0,
+    "name": "previous-run"
+  },
+  {
+    "command": [
+      "go",
+      "build",
+      "-o",
+      "/tmp/pandafish-v022-release-linux-arm64",
+      "."
+    ],
+    "environment": [
+      "GOOS=linux",
+      "GOARCH=arm64"
+    ],
+    "error": "",
+    "exit": 0,
+    "name": "linux-arm64-build"
+  },
+  {
+    "command": [
+      "tools/benchmark/bin/benchmark",
+      "--candidate",
+      "tools/benchmark/bin/pandafish-candidate",
+      "--version",
+      "v0.22-release-smoke",
+      "--stage",
+      "external",
+      "--parallel",
+      "--stockfish-skill",
+      "3",
+      "--sacrifice",
+      "tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine",
+      "--pairs",
+      "1",
+      "--results",
+      "tools/research/validation/v0.22-release/external"
+    ],
+    "environment": null,
+    "error": "",
+    "exit": 0,
+    "name": "external-run"
+  },
+  {
+    "command": [
+      "tools/benchmark/bin/benchmark",
+      "--candidate",
+      "tools/benchmark/bin/pandafish-candidate",
+      "--version",
+      "v0.22-release-smoke",
+      "--previous",
+      "tools/benchmark/bin/pandafish-v0.21",
+      "--previous-version",
+      "v0.21",
+      "--stockfish-skill",
+      "3",
+      "--sacrifice",
+      "tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine",
+      "--pairs",
+      "1",
+      "--parallel-all",
+      "--results",
+      "tools/research/validation/v0.22-release/concurrent"
+    ],
+    "environment": null,
+    "error": "",
+    "exit": 0,
+    "name": "concurrent-run"
+  }
+]

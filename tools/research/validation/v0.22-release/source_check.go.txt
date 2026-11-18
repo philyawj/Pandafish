@@ -1,0 +1,13 @@
+package main
+import("bytes";"crypto/sha256";"encoding/json";"fmt";"os";"os/exec";"path/filepath";"strings")
+func must(e error){if e!=nil{panic(e)}}
+func read(p string)[]byte{b,e:=os.ReadFile(p);must(e);return b}
+func main(){
+ path:="tools/benchmark/research/v0.22-bitboard-exchange/candidate-source.json";var source struct{Base string `json:"base_tag"`;Files map[string]string `json:"files"`};must(json.Unmarshal(read(path),&source));if source.Base!="v0.21"||len(source.Files)!=12{panic("unexpected candidate")}
+ list,e:=exec.Command("git","ls-tree","-r","--name-only",source.Base).Output();must(e);hashes:=map[string]string{}
+ check:=func(p string,want []byte){if !bytes.Equal(read(p),want){panic("unexpected release source change "+p)};hashes[p]=fmt.Sprintf("%x",sha256.Sum256(want))}
+ for _,p:=range strings.Fields(string(list)){if !((!strings.Contains(p,"/")&&strings.HasSuffix(p,".go"))||strings.HasPrefix(p,"third_party/chess/")||p=="go.mod"||p=="go.sum"){continue};want,e:=exec.Command("git","show",source.Base+":"+p).Output();must(e);if text,ok:=source.Files[p];ok{want=[]byte(text)};if p=="main.go"||p=="main_test.go"{want=bytes.ReplaceAll(want,[]byte("v0.21"),[]byte("v0.22"))};check(p,want)}
+ for p,text:=range source.Files{if _,ok:=hashes[p];!ok{check(p,[]byte(text))}}
+ for _,pattern:=range []string{"*.go","third_party/chess/*.go"}{paths,e:=filepath.Glob(pattern);must(e);for _,p:=range paths{if _,ok:=hashes[p];!ok{panic("unrecorded source "+p)}}}
+ enc:=json.NewEncoder(os.Stdout);enc.SetIndent("","  ");must(enc.Encode(map[string]any{"base":source.Base,"release":"v0.22","candidate_source":path,"candidate_policy_preserved":true,"allowed_version_files":[]string{"main.go","main_test.go"},"files_sha256":hashes}))
+}

@@ -1,0 +1,7 @@
+package main
+import("os";"strings")
+func main(){
+ read:=func(p string)string{b,e:=os.ReadFile(p);if e!=nil{panic(e)};return string(b)};write:=func(p,s string){if _,e:=os.Stat(p);!os.IsNotExist(e){panic("refuse overwrite "+p)};if e:=os.WriteFile(p,[]byte(s),0644);e!=nil{panic(e)}};dir:="tools/benchmark/research/v0.22-bitboard-exchange/"
+ for _,name:=range []string{"final_checks.go.txt","review_strata.go.txt"}{s:=strings.ReplaceAll(read("tools/benchmark/research/v0.22-staged-picker/"+name),"v0.22-staged-picker","v0.22-bitboard-exchange");s=strings.ReplaceAll(s,"pandafish-v022-picker","pandafish-v022-exchange");s=strings.ReplaceAll(s,"pandafish-v022-staged-linux","pandafish-v022-exchange-linux");write(dir+name,s);write("/tmp/pandafish-v022-exchange-"+strings.TrimSuffix(name,".go.txt")+".go",s)}
+ write(dir+"review_screen.go.txt",read("tools/benchmark/research/v0.21-next-assessment/review_screen.go.txt"));write(dir+"review_choices.go.txt",read("tools/benchmark/research/v0.20-next-assessment/review_choices.go.txt"))
+}

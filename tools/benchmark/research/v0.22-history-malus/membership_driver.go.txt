@@ -1,0 +1,20 @@
+package main
+
+import("encoding/json";"fmt";"os";"os/exec";"path/filepath")
+func main(){
+ repo,e:=os.Getwd();if e!=nil{panic(e)};dir:=filepath.Join(repo,"tools/benchmark/research/v0.22-history-malus");checks:=[]map[string]any{};failed:=false
+ for _,suite:=range []struct{name,input,mode string}{
+  {"pair-1-depth-4","tools/benchmark/research/v0.17-search-moves/inputs.json","cases"},
+  {"depth-3","tools/benchmark/research/v0.17-search-moves/inputs.json","cases"},
+  {"depth-6","tools/benchmark/research/v0.17-search-moves/inputs.json","cases"},
+  {"fresh-depth-4","tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json","cases"},
+  {"warm-pair-1","","warm"},
+ }{
+  out:=filepath.Join(dir,"membership-"+suite.name+".json");if _,e:=os.Stat(out);!os.IsNotExist(e){panic("refuse overwrite")}
+  cmd:=exec.Command("go","test","-count=1","-timeout=15m","-run","^TestHistorySelectedMoveMembership$","-v");cmd.Dir="/tmp/pandafish-v021-release/tagged-source"
+  env:=[]string{"GOCACHE=/tmp/pandafish-v016-go-cache","HISTORY_SELECTED="+filepath.Join(dir,"candidate-"+suite.name+".json"),"HISTORY_BASELINE="+filepath.Join(dir,"baseline-"+suite.name+".json"),"HISTORY_MEMBERSHIP_OUTPUT="+out,"HISTORY_MODE="+suite.mode,"CANDIDATE_INPUT="+filepath.Join(repo,suite.input),"HISTORY_PGN="+filepath.Join(repo,"tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/previous.pgn")};cmd.Env=append(os.Environ(),env...)
+  b,err:=cmd.CombinedOutput();if e=os.WriteFile(filepath.Join(dir,"membership-"+suite.name+".txt"),b,0644);e!=nil{panic(e)};status:=0;if err!=nil{status=1;failed=true}
+  checks=append(checks,map[string]any{"suite":suite.name,"command":cmd.Args,"cwd":cmd.Dir,"environment":env,"exit":status});b,e=json.MarshalIndent(checks,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(filepath.Join(dir,"membership-checks.json"),append(b,'\n'),0644);e!=nil{panic(e)};fmt.Println(suite.name,status)
+ }
+ if failed{os.Exit(1)}
+}

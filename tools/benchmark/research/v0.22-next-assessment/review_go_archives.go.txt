@@ -1,0 +1,14 @@
+// Parse all new archived Go source, including source stored inside JSON overlays.
+package main
+
+import("encoding/json";"fmt";"go/parser";"go/token";"io/fs";"os";"path/filepath";"strings")
+func main(){
+ archives,overlays:=0,0
+ e:=filepath.WalkDir("tools/benchmark/research",func(p string,d fs.DirEntry,e error)error{
+  if e!=nil{return e};if d.IsDir(){if p!="tools/benchmark/research"&&strings.HasPrefix(d.Name(),"v0.")&&!strings.HasPrefix(d.Name(),"v0.22-"){return filepath.SkipDir};return nil}
+  parse:=func(name string,b []byte)error{_,e:=parser.ParseFile(token.NewFileSet(),name,b,parser.AllErrors);return e}
+  if strings.HasSuffix(p,".go.txt"){b,e:=os.ReadFile(p);if e!=nil{return e};if e=parse(p,b);e!=nil{return e};archives++}
+  if strings.HasSuffix(p,"source.json"){b,e:=os.ReadFile(p);if e!=nil{return e};var s struct{Files map[string]string `json:"files"`};if e=json.Unmarshal(b,&s);e!=nil{return e};for name,text:=range s.Files{if !strings.HasSuffix(name,".go"){return fmt.Errorf("non-Go overlay %s/%s",p,name)};if e=parse(p+"/"+name,[]byte(text));e!=nil{return e};overlays++}}
+  return nil
+ });if e!=nil{panic(e)};out:=map[string]any{"passed":true,"parsed_go_text_archives":archives,"parsed_go_json_overlays":overlays};b,e:=json.MarshalIndent(out,"","  ");if e!=nil{panic(e)};fmt.Println(string(b))
+}

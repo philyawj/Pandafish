@@ -1,0 +1,14 @@
+package main
+import("crypto/sha256";"encoding/json";"fmt";"os";"strings")
+func main(){
+ dir:="tools/benchmark/research/v0.22-visible-tags/"
+ write:=func(p string,b []byte){if _,e:=os.Stat(p);!os.IsNotExist(e){panic("refuse overwrite "+p)};if e:=os.WriteFile(p,b,0644);e!=nil{panic(e)}}
+ adapt:=func(in,out string,replacements ...string){b,e:=os.ReadFile(in);if e!=nil{panic(e)};s:=string(b);for i:=0;i<len(replacements);i+=2{s=strings.ReplaceAll(s,replacements[i],replacements[i+1])};write(dir+out,[]byte(s));write("/tmp/pandafish-v022-visible-"+strings.TrimSuffix(out,".txt"),[]byte(s))}
+ adapt("tools/benchmark/research/v0.21-rank-order/timing_driver.go.txt","timing_driver.go.txt","v0.21-rank-order","v0.22-visible-tags","/tmp/pandafish-v020-release/tagged-source","/tmp/pandafish-v021-release/tagged-source")
+ adapt("tools/benchmark/research/v0.20-next-assessment/drivers/legality_upstream_scoped.go.txt","upstream_driver.go.txt","v0.20-search-legality","v0.22-visible-tags","pandafish-v020-upstream-","pandafish-v022-visible-upstream-")
+ adapt("tools/benchmark/research/v0.22-child-storage/warm_driver.go.txt","warm_driver.go.txt","v0.22-child-storage","v0.22-visible-tags","pandafish-v022-child-profile","pandafish-v022-visible-profile")
+ b,e:=os.ReadFile("tools/benchmark/research/v0.17-search-moves/oracle_test.go.txt");if e!=nil{panic(e)};write(dir+"oracle_test.go.txt",b);write("scratch_oracle_probe_test.go",b)
+ files,hashes:=map[string]string{},map[string]string{}
+ for _,p:=range []string{"third_party/chess/search_moves.go","third_party/chess/search_tags.go","third_party/chess/pandafish_search_tags_test.go"}{b,e:=os.ReadFile(p);if e!=nil{panic(e)};files[p]=string(b);hashes[p]=fmt.Sprintf("%x",sha256.Sum256(b))}
+ for p,v:=range map[string]any{dir+"candidate-source.json":map[string]any{"base_tag":"v0.21","files":files},dir+"source-hashes.json":hashes}{b,e:=json.MarshalIndent(v,"","  ");if e!=nil{panic(e)};write(p,append(b,'\n'))}
+}

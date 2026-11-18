@@ -1,0 +1,118 @@
+{
+  "tools/benchmark/research/v0.22-staged-picker/newer-100": {
+    "finite_cases": 131,
+    "mean_loss_cp": {
+      "baseline": 35.083969465648856,
+      "candidate": 31.763358778625953
+    },
+    "severe_over_300": {
+      "baseline": 3,
+      "candidate": 3
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 28.892307692307693,
+        "candidate": 27.615384615384617
+      },
+      "w": {
+        "baseline": 41.18181818181818,
+        "candidate": 35.84848484848485
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": true,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.22-staged-picker/newer-1000": {
+    "finite_cases": 132,
+    "mean_loss_cp": {
+      "baseline": 30.015151515151516,
+      "candidate": 29.886363636363637
+    },
+    "severe_over_300": {
+      "baseline": 2,
+      "candidate": 2
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 22.615384615384617,
+        "candidate": 22.16923076923077
+      },
+      "w": {
+        "baseline": 37.19402985074627,
+        "candidate": 37.37313432835821
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": true,
+    "passed": true
+  },
+  "tools/benchmark/research/v0.22-staged-picker/public-100": {
+    "finite_cases": 67,
+    "mean_loss_cp": {
+      "baseline": 40.04477611940298,
+      "candidate": 45.95522388059702
+    },
+    "severe_over_300": {
+      "baseline": 1,
+      "candidate": 2
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 83.47368421052632,
+        "candidate": 107.6842105263158
+      },
+      "w": {
+        "baseline": 22.854166666666668,
+        "candidate": 21.520833333333332
+      }
+    },
+    "turn_gates": {
+      "b": false,
+      "w": true
+    },
+    "turn_gates_required": false,
+    "passed": false
+  },
+  "tools/benchmark/research/v0.22-staged-picker/public-1000": {
+    "finite_cases": 67,
+    "mean_loss_cp": {
+      "baseline": 52.582089552238806,
+      "candidate": 54.850746268656714
+    },
+    "severe_over_300": {
+      "baseline": 3,
+      "candidate": 3
+    },
+    "new_candidate_losing_mate_cases": [],
+    "timing_overruns": [],
+    "by_turn_mean_loss_cp": {
+      "b": {
+        "baseline": 120.05263157894737,
+        "candidate": 128.05263157894737
+      },
+      "w": {
+        "baseline": 25.875,
+        "candidate": 25.875
+      }
+    },
+    "turn_gates": {
+      "b": true,
+      "w": true
+    },
+    "turn_gates_required": false,
+    "passed": true
+  }
+}

@@ -143,6 +143,19 @@ checkpoint wording; [release validation](../research/v0.21-validation.md)
 records subsequent publication checks. Future candidates compare against tagged
 v0.21, with Skill 3 as the unchanged external reference.
 
+**v0.22 promotes the [revised exact kernel](research/v0.22-bitboard-exchange/README.md).**
+Deferred main-search stages, exact evasion prefiltering and bitset legal exchange
+computation preserve all tested fixed-work moves, scores and nodes. Cold median
+search time falls 35.35%; a new warm tagged-baseline pair falls 37.84%. The
+standard concurrent 50-game rows score 64% against v0.21, 71% against Skill 3 and
+70% against pinned Sacrifice, without forfeits or unfinished games. The
+[result and limits](research/v0.22-bitboard-exchange/RESULTS.md) disclose the failed
+public 100ms surrogate and explicit pre-game exception. All earlier failed
+attempts remain preserved. [Release validation](../research/v0.22-validation.md)
+keeps version-only integration checks separate. Future candidates compare against
+tagged v0.22; Skill 3 remains the reference. No larger confirmation or further
+experiment starts automatically.
+
 ## Why this exists
 
 This benchmark runner independently adopted a methodology similar to Fishtest:
@@ -266,6 +279,10 @@ git archive v0.20 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.21 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.21" .)
+
+build_dir=$(mktemp -d)
+git archive v0.22 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.22" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -348,12 +365,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.21 tagged baseline as above for the next engine change. Then run
+Build the v0.22 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.21 --previous-version v0.21 \
+  --previous tools/benchmark/bin/pandafish-v0.22 --previous-version v0.22 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -519,7 +536,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.21 --previous-version v0.21 \
+  --previous tools/benchmark/bin/pandafish-v0.22 --previous-version v0.22 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -756,7 +773,7 @@ current Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.21 --previous-version v0.21 \
+  --previous tools/benchmark/bin/pandafish-v0.22 --previous-version v0.22 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```

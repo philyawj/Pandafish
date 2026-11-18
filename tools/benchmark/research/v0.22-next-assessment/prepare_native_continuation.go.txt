@@ -1,0 +1,11 @@
+package main
+import("os";"strings")
+func main(){
+ b,e:=os.ReadFile("tools/benchmark/research/v0.22-next-assessment/native_driver.go.txt");if e!=nil{panic(e)};s:=string(b)
+ s=strings.Replace(s,`{"public-100","tools/benchmark/research/v0.17-search-moves/inputs.json",100,3,false},`,"",1)
+ s=strings.ReplaceAll(s,`suite.name,"reference-cache.json"`,`suite.name`)
+ s=strings.ReplaceAll(s,`"native-checks.json"`,`"native-continuation-checks.json"`)
+ s=strings.Replace(s,`checks:=[]map[string]any{}`,`var first struct{Passed bool `+"`json:\"passed\"`"+`}; data,err:=os.ReadFile(filepath.Join(dir,"public-100","quality.json"));if err!=nil{panic(err)};if err=json.Unmarshal(data,&first);err!=nil{panic(err)};if !first.Passed{panic("original public-100 quality gate failed")};checks:=[]map[string]any{}`,1)
+ if strings.Contains(s,`suite.name,"reference-cache.json"`)||strings.Contains(s,`{"public-100",`){panic("continuation adaptation missed")}
+ if e=os.WriteFile("tools/benchmark/research/v0.22-clock-screen/native_continue_driver.go.txt",[]byte(s),0644);e!=nil{panic(e)};if e=os.WriteFile("/tmp/pandafish-v022-native-continue.go",[]byte(s),0644);e!=nil{panic(e)}
+}

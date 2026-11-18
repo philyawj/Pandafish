@@ -1,0 +1,18 @@
+package main
+import("encoding/json";"os";"strings")
+func main(){
+ read:=func(p string)[]byte{b,e:=os.ReadFile(p);if e!=nil{panic(e)};return b};var s struct{Base string `json:"base_tag"`;Files map[string]string `json:"files"`};if e:=json.Unmarshal(read("tools/benchmark/research/v0.22-staged-picker/candidate-source.json"),&s);e!=nil{panic(e)}
+ replace:=func(p,old,new string){if !strings.Contains(s.Files[p],old){panic("missing marker "+p+old)};s.Files[p]=strings.Replace(s.Files[p],old,new,1)}
+ replace("third_party/chess/search_moves.go","allowed, targets :=", "evasionMask, evasionActive := searchEvasionMask(pos)\n\tallowed, targets :=")
+ replace("third_party/chess/search_moves.go","m.tags = searchMoveTags(m, pos, !first)","m.tags = searchMoveTags(m, pos, !first)\n\t\t\t\t\trecordEvasionCandidate(pos,m,evasionMask,evasionActive,!first)")
+ replace("third_party/chess/search_hint.go","m.tags = searchMoveTags(m, pos, true)","m.tags = searchMoveTags(m, pos, true)\n\tmask,active:=searchEvasionMask(pos);recordEvasionCandidate(pos,m,mask,active,true)")
+ s.Files["third_party/chess/search_evasion.go"]=string(read("tools/benchmark/research/v0.22-next-assessment/evasion_geometry.go.txt"))
+ s.Files["third_party/chess/search_evasion_diagnostic.go"]=`package chess
+var SearchEvasionDiagnostic=map[string]uint64{}
+func recordEvasionCandidate(pos *Position,m Move,mask bitboard,active,full bool){
+ stats:=SearchEvasionDiagnostic;stats["all_tag_validations"]++;kind:="full";if !full{kind="existence"};stats[kind+"_tag_validations"]++;if !pos.inCheck{return};stats["checked_tag_validations"]++;piece:=pos.board.Piece(m.s1);if !active||piece.Type()==King||(piece.Type()==Pawn&&m.s2==pos.enPassantSquare)||mask&bbForSquare(m.s2)!=0{return};stats["avoidable_tag_validations"]++;stats[kind+"_avoidable_tag_validations"]++;if !m.HasTag(inCheck){stats["legal_rejections"]++}
+}
+`
+ var q struct{Files map[string]string};if e:=json.Unmarshal(read("tools/benchmark/research/v0.22-next-assessment/q-opportunity-source.json"),&q);e!=nil{panic(e)};s.Files["evasion_warm_test.go"]=q.Files["q_warm_test.go"];s.Files["evasion_diagnostic_test.go"]="package main\nimport \"github.com/corentings/chess/v2\"\nvar qDiagnosticStats=chess.SearchEvasionDiagnostic\n"
+ out:="tools/benchmark/research/v0.22-next-assessment/evasion-opportunity-source.json";if _,e:=os.Stat(out);!os.IsNotExist(e){panic("refuse overwrite")};b,e:=json.MarshalIndent(s,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(out,append(b,'\n'),0644);e!=nil{panic(e)}
+}
