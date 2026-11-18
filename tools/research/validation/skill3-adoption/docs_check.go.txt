@@ -1,0 +1,11 @@
+package main
+import("bytes";"encoding/json";"fmt";"os";"os/exec";"path/filepath";"regexp";"strings";"net/url")
+func main(){
+ a,e:=exec.Command("git","diff","--name-only","--diff-filter=ACM").Output();if e!=nil{panic(e)};b,e:=exec.Command("git","ls-files","--others","--exclude-standard").Output();if e!=nil{panic(e)}
+ paths:=strings.Fields(string(append(a,b...)));paths=append(paths,"/tmp/pandafish-v020-release/skill3-pr.md")
+ links:=regexp.MustCompile(`\]\(([^)\n]+)\)`);separator:=regexp.MustCompile(`^\|[ :|\-]+\|$`);count:=0;issues:=[]string{}
+ for _,p:=range paths{if !strings.HasSuffix(p,".md"){continue};data,e:=os.ReadFile(p);if e!=nil{panic(e)};lines:=strings.Split(string(data),"\n");for i,line:=range lines{if separator.MatchString(line){if i==0||strings.Count(line,"|")!=strings.Count(lines[i-1],"|"){issues=append(issues,"table header "+p)};for _,row:=range lines[i+1:]{if !strings.HasPrefix(row,"|"){break};if strings.Count(row,"|")!=strings.Count(line,"|"){issues=append(issues,"table row "+p)}}}}
+  if !strings.HasPrefix(p,"/tmp/"){for _,match:=range links.FindAllSubmatch(data,-1){target:=string(match[1]);if strings.Contains(target,"://")||strings.HasPrefix(target,"#"){continue};target=strings.Split(target,"#")[0];target,_=url.PathUnescape(target);var file string;if strings.HasPrefix(target,"/"){file=strings.TrimPrefix(target,"/")}else{file=filepath.Join(filepath.Dir(p),target)};if _,e:=os.Stat(file);e!=nil{issues=append(issues,"missing link "+p+" -> "+target)}}};count++
+ }
+ var text bytes.Buffer;json.NewEncoder(&text).Encode(map[string]any{"markdown_files_checked":count,"issues":issues});fmt.Print(text.String());if len(issues)>0{os.Exit(1)}
+}
