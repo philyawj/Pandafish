@@ -1,0 +1,61 @@
+// Save exact candidate Go overlays and adapt the previously executed fixed-work
+// driver. Run from the module before candidate timing; original evidence stays.
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"os"
+	"os/exec"
+	"strings"
+)
+
+func main() {
+	root := "tools/benchmark/research/v0.21-rank-order/"
+	names := map[string]bool{}
+	for _, args := range [][]string{{"diff", "--name-only"}, {"ls-files", "--others", "--exclude-standard"}} {
+		b, e := exec.Command("git", args...).Output()
+		if e != nil {
+			panic(e)
+		}
+		for _, p := range strings.Fields(string(b)) {
+			if strings.HasSuffix(p, ".go") {
+				names[p] = true
+			}
+		}
+	}
+	files := map[string]string{}
+	hashes := map[string]string{}
+	for p := range names {
+		b, e := os.ReadFile(p)
+		if e != nil {
+			panic(e)
+		}
+		files[p] = string(b)
+		hashes[p] = fmt.Sprintf("%x", sha256.Sum256(b))
+	}
+	for p, v := range map[string]any{root + "candidate-source.json": map[string]any{"base_tag": "6bfb4d565c2adf2a2ad59216a462b0f4f0c01503", "files": files}, root + "source-hashes.json": hashes} {
+		if _, e := os.Stat(p); !os.IsNotExist(e) {
+			panic("refuse source overwrite")
+		}
+		b, e := json.MarshalIndent(v, "", "  ")
+		if e != nil {
+			panic(e)
+		}
+		if e = os.WriteFile(p, append(b, '\n'), 0644); e != nil {
+			panic(e)
+		}
+	}
+	b, e := os.ReadFile("tools/benchmark/research/v0.20-next-assessment/drivers/legality_timing.go.txt")
+	if e != nil {
+		panic(e)
+	}
+	s := strings.ReplaceAll(string(b), "tools/benchmark/research/v0.20-search-legality", "tools/benchmark/research/v0.21-rank-order")
+	s = strings.ReplaceAll(s, "/tmp/pandafish-v020-timing-baseline", "/tmp/pandafish-v020-release/tagged-source")
+	s = strings.ReplaceAll(s, ".7097855323649737", ".85")
+	s = strings.ReplaceAll(s, `"relative_to_transition_revision":ratios[1]/.7886505915166374,`, "")
+	if e = os.WriteFile(root+"timing_driver.go.txt", []byte(s), 0644); e != nil {
+		panic(e)
+	}
+}

@@ -1,0 +1,120 @@
+// Validate the frozen rank candidate, original runtime boundary and native
+// identities. --inventories writes new inventories only after all work is final.
+package main
+
+import (
+	"bytes"
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"io/fs"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"strings"
+)
+
+type entry struct {
+	SHA   string `json:"sha256"`
+	Bytes int    `json:"bytes"`
+}
+
+func must(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+func read(p string) []byte { b, e := os.ReadFile(p); must(e); return b }
+func hash(b []byte) string { return fmt.Sprintf("%x", sha256.Sum256(b)) }
+func load(p string, v any) { must(json.Unmarshal(read(p), v)) }
+func put(p string, v any) {
+	b, e := json.MarshalIndent(v, "", "  ")
+	must(e)
+	must(os.WriteFile(p, append(b, '\n'), 0644))
+}
+func main() {
+	roots := []string{"tools/benchmark/research/v0.21-next-assessment", "tools/benchmark/research/v0.21-rank-order"}
+	if len(os.Args) == 2 && os.Args[1] == "--inventories" {
+		for _, root := range roots {
+			p := filepath.Join(root, "inventory.json")
+			if _, e := os.Stat(p); !os.IsNotExist(e) {
+				panic("refuse inventory overwrite")
+			}
+			inv := map[string]entry{}
+			must(filepath.WalkDir(root, func(p string, d fs.DirEntry, e error) error {
+				if e != nil {
+					return e
+				}
+				if d.IsDir() {
+					return nil
+				}
+				b := read(p)
+				rel, e := filepath.Rel(root, p)
+				if e != nil {
+					return e
+				}
+				inv[filepath.ToSlash(rel)] = entry{hash(b), len(b)}
+				return nil
+			}))
+			put(p, inv)
+		}
+		return
+	}
+	var source struct {
+		Base  string            `json:"base_tag"`
+		Files map[string]string `json:"files"`
+	}
+	load(roots[1]+"/candidate-source.json", &source)
+	if source.Base != "6bfb4d565c2adf2a2ad59216a462b0f4f0c01503" || len(source.Files) != 3 {
+		panic("source identity")
+	}
+	var hashes map[string]string
+	load(roots[1]+"/source-hashes.json", &hashes)
+	for p, s := range source.Files {
+		if hash([]byte(s)) != hashes[p] || !bytes.Equal(read(p), []byte(s)) {
+			panic("source changed: " + p)
+		}
+	}
+	list, e := exec.Command("git", "ls-tree", "-r", "--name-only", source.Base).Output()
+	must(e)
+	unchanged := 0
+	for _, p := range strings.Fields(string(list)) {
+		if !((!strings.Contains(p, "/") && strings.HasSuffix(p, ".go")) || strings.HasPrefix(p, "third_party/chess/") || p == "go.mod" || p == "go.sum") {
+			continue
+		}
+		if _, ok := source.Files[p]; ok {
+			continue
+		}
+		b, e := exec.Command("git", "show", source.Base+":"+p).Output()
+		must(e)
+		if !bytes.Equal(read(p), b) {
+			panic("unexpected engine/library change: " + p)
+		}
+		unchanged++
+	}
+	binaries := map[string]string{"tools/benchmark/bin/pandafish-v0.20": "c4ac32d3360db5ff813f94ba2906e67422b0d5ad8b43380499ce6222a61e9a8d", "tools/benchmark/bin/pandafish-v0.21-rank-order-dev": "d9f2aee7c30832e00690e1c24f1490e27b7dcfe0dda6810858d71dd4bb232f1f", "/opt/homebrew/bin/stockfish": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f", "tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine": "5c2c63f19ff6f8be65aaa127a7cbe884f6cb52d7c4daee6967b1da7a7f8fa0e5"}
+	for p, want := range binaries {
+		if hash(read(p)) != want {
+			panic("binary changed: " + p)
+		}
+	}
+	suites := []string{"public-100", "public-1000", "newer-100", "newer-1000"}
+	for _, s := range suites {
+		var method struct {
+			IDs   map[string]string `json:"identities_sha256"`
+			Nodes int               `json:"reference_nodes"`
+		}
+		load(roots[1]+"/"+s+"/method.json", &method)
+		if method.IDs["baseline"] != binaries["tools/benchmark/bin/pandafish-v0.20"] || method.IDs["candidate"] != binaries["tools/benchmark/bin/pandafish-v0.21-rank-order-dev"] || method.IDs["reference"] != binaries["/opt/homebrew/bin/stockfish"] || method.Nodes != 100000 {
+			panic("native method identity")
+		}
+		var cache map[string]string
+		load(roots[1]+"/"+s+"/reference-cache.json", &cache)
+		if hash(read(cache["source"])) != cache["sha256"] {
+			panic("reference cache changed")
+		}
+	}
+	enc := json.NewEncoder(os.Stdout)
+	enc.SetIndent("", "  ")
+	must(enc.Encode(map[string]any{"base_commit": source.Base, "active_overlay_matches": true, "source_files": hashes, "original_runtime_files_unchanged": unchanged, "binary_hashes": binaries, "native_methods_and_cache_sources_verified": 4}))
+}

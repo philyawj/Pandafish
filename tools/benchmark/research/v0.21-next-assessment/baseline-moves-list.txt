@@ -1,0 +1,121 @@
+Total: 4.93s
+ROUTINE ======================== github.com/corentings/chess/v2.(*Position).searchMoves in /private/tmp/pandafish-v020-release/tagged-source/third_party/chess/search_moves.go
+     150ms      1.23s (flat, cum) 24.95% of Total
+         .          .     35:func (pos *Position) searchMoves(dst []Move, tacticalOnly, first bool) ([]Move, bool) {
+         .          .     36:	if pos.validMoves != nil {
+         .          .     37:		for _, m := range pos.validMoves {
+         .          .     38:			if !tacticalOnly || m.HasTag(Capture) || m.HasTag(EnPassant) || m.Promo() != NoPieceType {
+         .          .     39:				if first {
+         .          .     40:					return dst, true
+         .          .     41:				}
+         .          .     42:				dst = append(dst, m)
+         .          .     43:			}
+         .          .     44:		}
+         .          .     45:		return dst, false
+         .          .     46:	}
+         .          .     47:	allowed, targets := ^pos.board.whiteSqs, pos.board.blackSqs
+         .          .     48:	if pos.turn == Black {
+         .          .     49:		allowed, targets = ^pos.board.blackSqs, pos.board.whiteSqs
+         .          .     50:	}
+         .          .     51:	found := false
+      10ms       10ms     52:	for _, piece := range allPieces {
+      10ms       10ms     53:		if piece.Color() != pos.turn {
+         .          .     54:			continue
+         .          .     55:		}
+         .       40ms     56:		from := pos.board.bbForPiece(piece)
+         .          .     57:		for from != 0 {
+         .          .     58:			s1 := Square(bits.LeadingZeros64(uint64(from)))
+         .          .     59:			from &^= bbForSquare(s1)
+      30ms      150ms     60:			to := bbForPossibleMoves(pos, piece.Type(), s1) & allowed
+         .          .     61:			if tacticalOnly {
+         .          .     62:				mask := targets
+         .       20ms     63:				if piece.Type() == Pawn {
+         .          .     64:					if pos.enPassantSquare != NoSquare {
+         .          .     65:						mask |= bbForSquare(pos.enPassantSquare)
+         .          .     66:					}
+         .          .     67:					if pos.turn == White {
+      10ms       10ms     68:						mask |= bitboard(0xff)
+         .          .     69:					} else {
+         .          .     70:						mask |= bitboard(0xff00000000000000)
+         .          .     71:					}
+         .          .     72:				}
+      30ms       30ms     73:				to &= mask
+         .          .     74:			}
+      10ms       10ms     75:			for to != 0 {
+         .          .     76:				s2 := Square(bits.LeadingZeros64(uint64(to)))
+         .          .     77:				to &^= bbForSquare(s2)
+         .       10ms     78:				m := Move{s1: s1, s2: s2}
+      10ms       10ms     79:				promotion := (piece == WhitePawn && s2.Rank() == Rank8) || (piece == BlackPawn && s2.Rank() == Rank1)
+         .          .     80:				count := 1
+         .          .     81:				if promotion {
+         .          .     82:					count = len(promoPieceTypes)
+         .          .     83:				}
+      20ms       20ms     84:				for i := 0; i < count; i++ {
+         .          .     85:					if promotion {
+         .          .     86:						m.promo = promoPieceTypes[i]
+         .          .     87:					}
+         .      820ms     88:					m.tags = searchMoveTags(m, pos, !first)
+         .          .     89:					if m.HasTag(inCheck) {
+         .          .     90:						continue
+         .          .     91:					}
+         .          .     92:					if first {
+         .          .     93:						return dst, true
+         .          .     94:					}
+         .       40ms     95:					dst = append(dst, m)
+         .          .     96:					found = true
+         .          .     97:				}
+         .          .     98:			}
+         .          .     99:		}
+         .          .    100:	}
+         .       30ms    101:	if !tacticalOnly && !pos.inCheck && (pos.castleRights.CanCastle(pos.turn, KingSide) || pos.castleRights.CanCastle(pos.turn, QueenSide)) {
+         .          .    102:		castles := castleMoves(pos)
+         .          .    103:		if first && len(castles) > 0 {
+      10ms       10ms    104:			return dst, true
+         .          .    105:		}
+         .          .    106:		dst = append(dst, castles...)
+      10ms       10ms    107:		found = found || len(castles) > 0
+         .          .    108:	}
+         .          .    109:	return dst, found
+         .          .    110:}
+ROUTINE ======================== github.com/philyawj/Pandafish.(*searcher).searchMoves in /private/tmp/pandafish-v020-release/tagged-source/search_moves.go
+         0      2.10s (flat, cum) 42.60% of Total
+         .          .     11:func (w *searcher) searchMoves(p *chess.Position, ply int, tacticalOnly bool) []chess.Move {
+         .          .     12:	if len(w.moveBuffers) <= ply {
+         .          .     13:		w.moveBuffers = append(w.moveBuffers, make([][]chess.Move, ply+1-len(w.moveBuffers))...)
+         .          .     14:	}
+         .      1.06s     15:	moves := p.AppendSearchMoves(w.moveBuffers[ply][:0], tacticalOnly)
+         .          .     16:	w.moveBuffers[ply] = moves
+         .          .     17:	priority := func(m chess.Move) int {
+         .          .     18:		value := pieceValues[m.Promo()]
+         .          .     19:		if m.HasTag(chess.Capture) || m.HasTag(chess.EnPassant) {
+         .          .     20:			victim := pieceValues[p.Board().Piece(m.S2()).Type()]
+         .          .     21:			if m.HasTag(chess.EnPassant) {
+         .          .     22:				victim = pieceValues[chess.Pawn]
+         .          .     23:			}
+         .          .     24:			value += 10000 + 10*victim - pieceValues[p.Board().Piece(m.S1()).Type()]
+         .          .     25:		}
+         .          .     26:		return value
+         .          .     27:	}
+         .      1.04s     28:	slices.SortStableFunc(moves, func(a, b chess.Move) int { return priority(b) - priority(a) })
+         .          .     29:	return moves
+         .          .     30:}
+ROUTINE ======================== github.com/philyawj/Pandafish.(*searcher).searchMoves.func1 in /private/tmp/pandafish-v020-release/tagged-source/search_moves.go
+      30ms      730ms (flat, cum) 14.81% of Total
+      10ms       10ms     17:	priority := func(m chess.Move) int {
+         .      410ms     18:		value := pieceValues[m.Promo()]
+         .       10ms     19:		if m.HasTag(chess.Capture) || m.HasTag(chess.EnPassant) {
+      20ms      210ms     20:			victim := pieceValues[p.Board().Piece(m.S2()).Type()]
+         .          .     21:			if m.HasTag(chess.EnPassant) {
+         .          .     22:				victim = pieceValues[chess.Pawn]
+         .          .     23:			}
+         .       90ms     24:			value += 10000 + 10*victim - pieceValues[p.Board().Piece(m.S1()).Type()]
+         .          .     25:		}
+         .          .     26:		return value
+         .          .     27:	}
+         .          .     28:	slices.SortStableFunc(moves, func(a, b chess.Move) int { return priority(b) - priority(a) })
+         .          .     29:	return moves
+ROUTINE ======================== github.com/philyawj/Pandafish.(*searcher).searchMoves.func2 in /private/tmp/pandafish-v020-release/tagged-source/search_moves.go
+      10ms      830ms (flat, cum) 16.84% of Total
+      10ms      830ms     28:	slices.SortStableFunc(moves, func(a, b chess.Move) int { return priority(b) - priority(a) })
+         .          .     29:	return moves
+         .          .     30:}

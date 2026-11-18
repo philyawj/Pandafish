@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.20 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.21 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
@@ -10,6 +10,8 @@ All repository program, test and research source is Go. Start with
 attempts, Go-only tooling migration and ranked next experiments.
 The [v0.20 investigation](docs/RESEARCH_V020.md) records the promoted search-
 legality kernel, rejected predecessors and reassessed next priorities.
+The [v0.21 investigation](tools/benchmark/research/v0.21-rank-order/README.md)
+records precomputed stable ordering and the next profile-driven priorities.
 
 The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`,
 `transposition.go`, `search_context.go`, `search_moves.go`, `killers.go`, `exchange.go`,
@@ -367,5 +369,12 @@ node counts and search policy. Keep the unsuccessful quiet-mate and transition-
 only experiments archived. See the
 [implementation, validation and measured limits](tools/benchmark/research/v0.20-search-legality/README.md).
 
-**Next:** Test a bounded exact quiet-mate proof, with correctness, cost and
-equal-time controls, then reassess the remaining backend/evaluation priorities.
+**v0.21: Compute stable move order with less work (complete).** Calculate each
+existing priority once, sort small rank records and apply their permutation to
+the original moves. Preserve exact ordering, fixed-depth scores/moves/nodes,
+values and search policy. See the
+[implementation, validation and measured limits](tools/benchmark/research/v0.21-rank-order/README.md).
+
+**Next:** Profile allocation/copy cost with a warm game table, then select one
+measured improvement. Reassess the remaining backend/evaluation priorities after
+each result; archived quiet-mate and fitted-value attempts remain inactive.

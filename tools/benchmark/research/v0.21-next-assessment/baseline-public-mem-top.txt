@@ -1,0 +1,32 @@
+File: Pandafish.test
+Type: alloc_space
+Time: 2026-11-17 19:04:33 PST
+Showing nodes accounting for 2.03GB, 98.66% of 2.05GB total
+Dropped 60 nodes (cum <= 0.01GB)
+      flat  flat%   sum%        cum   cum%
+    0.92GB 44.58% 44.58%     0.92GB 44.58%  github.com/philyawj/Pandafish.newTable (inline)
+    0.72GB 35.13% 79.71%     0.72GB 35.13%  github.com/corentings/chess/v2.(*Board).copy (inline)
+    0.29GB 14.22% 93.93%     1.01GB 49.14%  github.com/corentings/chess/v2.(*Position).UpdateSearch
+    0.04GB  2.01% 95.94%     0.04GB  2.05%  github.com/corentings/chess/v2.standardMoves
+    0.03GB  1.36% 97.29%     0.03GB  1.40%  github.com/corentings/chess/v2.castleMoves
+    0.02GB  0.76% 98.06%     0.04GB  2.05%  github.com/corentings/chess/v2.(*Position).searchMoves
+    0.01GB   0.6% 98.66%     0.06GB  2.87%  github.com/corentings/chess/v2.engine.CalcMoves
+         0     0% 98.66%     0.07GB  3.49%  github.com/corentings/chess/v2.(*Game).Move
+         0     0% 98.66%     0.08GB  3.72%  github.com/corentings/chess/v2.(*Game).PushNotationMove
+         0     0% 98.66%     0.01GB  0.62%  github.com/corentings/chess/v2.(*Game).evaluatePositionStatus
+         0     0% 98.66%     0.02GB  0.83%  github.com/corentings/chess/v2.(*Game).moveUnchecked
+         0     0% 98.66%     0.05GB  2.65%  github.com/corentings/chess/v2.(*Game).validateMove
+         0     0% 98.66%     0.04GB  2.05%  github.com/corentings/chess/v2.(*Position).AppendSearchMoves (inline)
+         0     0% 98.66%     0.05GB  2.65%  github.com/corentings/chess/v2.(*Position).ValidMovesUnsafe (inline)
+         0     0% 98.66%     0.27GB 13.30%  github.com/philyawj/Pandafish.(*searcher).childQuiet
+         0     0% 98.66%     1.05GB 51.28%  github.com/philyawj/Pandafish.(*searcher).childSearch
+         0     0% 98.66%     0.50GB 24.55%  github.com/philyawj/Pandafish.(*searcher).quietAtPly
+         0     0% 98.66%     1.05GB 51.30%  github.com/philyawj/Pandafish.(*searcher).root
+         0     0% 98.66%     1.05GB 51.28%  github.com/philyawj/Pandafish.(*searcher).searchAtPly
+         0     0% 98.66%     0.04GB  2.05%  github.com/philyawj/Pandafish.(*searcher).searchMoves
+         0     0% 98.66%     2.05GB 99.66%  github.com/philyawj/Pandafish.BenchmarkCandidateProfile
+         0     0% 98.66%     0.08GB  3.72%  github.com/philyawj/Pandafish.candidateProbeGame
+         0     0% 98.66%     0.08GB  3.72%  github.com/philyawj/Pandafish.parsePosition
+         0     0% 98.66%     2.01GB 97.79%  testing.(*B).launch
+         0     0% 98.66%     0.04GB  1.87%  testing.(*B).run1.func1
+         0     0% 98.66%     2.05GB 99.66%  testing.(*B).runN

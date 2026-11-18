@@ -1,0 +1,72 @@
+// Copy to a .go path and run from the repository module. This checks the
+// release source against the frozen candidate plus version-only substitution.
+package main
+
+import (
+	"bytes"
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"strings"
+)
+
+func must(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+func read(p string) []byte { b, e := os.ReadFile(p); must(e); return b }
+func main() {
+	var source struct {
+		Base  string            `json:"base_tag"`
+		Files map[string]string `json:"files"`
+	}
+	must(json.Unmarshal(read("tools/benchmark/research/v0.21-rank-order/candidate-source.json"), &source))
+	if source.Base != "6bfb4d565c2adf2a2ad59216a462b0f4f0c01503" {
+		panic("unexpected base")
+	}
+	listing, e := exec.Command("git", "ls-tree", "-r", "--name-only", source.Base).Output()
+	must(e)
+	hashes := map[string]string{}
+	check := func(p string, want []byte) {
+		got := read(p)
+		if !bytes.Equal(got, want) {
+			panic("unexpected release source change: " + p)
+		}
+		hashes[p] = fmt.Sprintf("%x", sha256.Sum256(got))
+	}
+	for _, p := range strings.Fields(string(listing)) {
+		if !((!strings.Contains(p, "/") && strings.HasSuffix(p, ".go")) || strings.HasPrefix(p, "third_party/chess/") || p == "go.mod" || p == "go.sum") {
+			continue
+		}
+		want, e := exec.Command("git", "show", source.Base+":"+p).Output()
+		must(e)
+		if overlay, ok := source.Files[p]; ok {
+			want = []byte(overlay)
+		}
+		if p == "main.go" || p == "main_test.go" {
+			want = bytes.ReplaceAll(want, []byte("v0.20"), []byte("v0.21"))
+		}
+		check(p, want)
+	}
+	for p, want := range source.Files {
+		if _, ok := hashes[p]; !ok {
+			check(p, []byte(want))
+		}
+	}
+	for _, pattern := range []string{"*.go", "third_party/chess/*.go"} {
+		paths, e := filepath.Glob(pattern)
+		must(e)
+		for _, p := range paths {
+			if _, ok := hashes[p]; !ok {
+				panic("unrecorded runtime/test source: " + p)
+			}
+		}
+	}
+	enc := json.NewEncoder(os.Stdout)
+	enc.SetIndent("", "  ")
+	must(enc.Encode(map[string]any{"base": source.Base, "candidate_source": "tools/benchmark/research/v0.21-rank-order/candidate-source.json", "release": "v0.21", "candidate_policy_preserved": true, "allowed_version_files": []string{"main.go", "main_test.go"}, "files_sha256": hashes}))
+}
