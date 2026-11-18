@@ -1,0 +1,11 @@
+package main
+import("encoding/json";"fmt";"os")
+func main(){
+ prefix:="q";if len(os.Args)==2{prefix=os.Args[1]};dir:="tools/benchmark/research/v0.22-next-assessment/"
+ load:=func(path string,v any){b,e:=os.ReadFile(dir+path);if e!=nil{panic(e)};if e=json.Unmarshal(b,v);e!=nil{panic(e)}}
+ var run struct{Depth int;Inputs map[string]string;Rows []struct{Game,Ply,Depth int;Nodes uint64;FEN string}};load(prefix+"-warm-depth5.json",&run)
+ var stats map[string]uint64;load(prefix+"-opportunity-counters.json",&stats);var total uint64;for _,r:=range run.Rows{if r.Depth!=5{panic("incomplete workload")};total+=r.Nodes}
+ if len(run.Rows)!=1145||run.Depth!=5{panic("workload identity")}
+ fraction:=float64(stats["potential_avoided_descendants"])/float64(total);passed:=fraction>.2&&stats["bound_contradictions"]==0
+ out:=map[string]any{"roots":len(run.Rows),"total_nodes":total,"counters":stats,"potential_avoided_fraction":fraction,"opportunity_passed":passed,"inputs":run.Inputs,"caveat":"Diagnostic recomputes every subtree; hypothetical descendant stores and bound-return choices can differ from an actual cache. Node potential is not an elapsed or strength prediction."};b,e:=json.MarshalIndent(out,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(dir+prefix+"-opportunity-review.json",append(b,'\n'),0644);e!=nil{panic(e)};fmt.Println(string(b));if !passed{os.Exit(1)}
+}

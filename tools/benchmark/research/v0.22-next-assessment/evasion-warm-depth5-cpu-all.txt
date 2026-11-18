@@ -1,0 +1,307 @@
+File: Pandafish.test
+Type: cpu
+Time: 2026-11-18 06:11:36 PST
+Duration: 25.80s, Total samples = 22.10s (85.65%)
+Showing nodes accounting for 22.09s, 100% of 22.10s total
+Showing top 300 nodes out of 309
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%     12.97s 58.69%  github.com/philyawj/Pandafish.TestWarmPipelineProfile
+         0     0%     0%     12.97s 58.69%  testing.tRunner
+         0     0%     0%     12.90s 58.37%  github.com/philyawj/Pandafish.(*searcher).iterate
+         0     0%     0%     12.90s 58.37%  github.com/philyawj/Pandafish.iterativeSearchWithHistory
+     0.02s  0.09%  0.09%     12.89s 58.33%  github.com/philyawj/Pandafish.(*searcher).childSearch
+         0     0%  0.09%     12.89s 58.33%  github.com/philyawj/Pandafish.(*searcher).root
+     0.06s  0.27%  0.36%     12.89s 58.33%  github.com/philyawj/Pandafish.(*searcher).searchAtPly
+     0.12s  0.54%   0.9%      9.61s 43.48%  github.com/philyawj/Pandafish.(*searcher).quietAtPly
+         0     0%   0.9%      7.90s 35.75%  runtime.systemstack
+         0     0%   0.9%      6.86s 31.04%  runtime.startTheWorldWithSema
+     6.85s 31.00% 31.90%      6.85s 31.00%  runtime.kevent
+         0     0% 31.90%      6.85s 31.00%  runtime.netpoll
+     0.01s 0.045% 31.95%      5.43s 24.57%  github.com/philyawj/Pandafish.(*searcher).childQuiet
+         0     0% 31.95%      4.72s 21.36%  runtime.gcStart.func4
+     0.75s  3.39% 35.34%      3.53s 15.97%  github.com/corentings/chess/v2.(*Position).searchMoves
+     0.51s  2.31% 37.65%      3.31s 14.98%  github.com/philyawj/Pandafish.(*searcher).exchange
+     0.79s  3.57% 41.22%      2.55s 11.54%  github.com/philyawj/Pandafish.(*exchangeBoard).leastAttacker
+     0.14s  0.63% 41.86%      2.51s 11.36%  github.com/philyawj/Pandafish.(*searcher).searchMoves
+     0.06s  0.27% 42.13%      2.15s  9.73%  github.com/corentings/chess/v2.(*Position).UpdateSearch
+         0     0% 42.13%      2.13s  9.64%  runtime.startTheWorld.func1
+     0.29s  1.31% 43.44%      1.83s  8.28%  github.com/corentings/chess/v2.searchMoveTags
+         0     0% 43.44%      1.82s  8.24%  github.com/corentings/chess/v2.(*Position).AppendSearchMoves (inline)
+     0.04s  0.18% 43.62%      1.47s  6.65%  github.com/philyawj/Pandafish.(*mainMovePicker).next
+     0.03s  0.14% 43.76%      1.22s  5.52%  github.com/corentings/chess/v2.(*Position).HasLegalMove
+         0     0% 43.76%      1.22s  5.52%  github.com/corentings/chess/v2.(*Position).SearchStatus (inline)
+     1.04s  4.71% 48.46%      1.04s  4.71%  github.com/corentings/chess/v2.Piece.Color (inline)
+     0.07s  0.32% 48.78%      1.03s  4.66%  runtime.mallocgc
+     0.02s  0.09% 48.87%      1.02s  4.62%  runtime.newobject
+     0.57s  2.58% 51.45%      0.95s  4.30%  github.com/philyawj/Pandafish.staticScore
+     0.49s  2.22% 53.67%      0.83s  3.76%  github.com/corentings/chess/v2.searchSquareAttackedBy
+         0     0% 53.67%      0.78s  3.53%  runtime.schedule
+     0.76s  3.44% 57.10%      0.76s  3.44%  runtime.duffcopy
+         0     0% 57.10%      0.70s  3.17%  runtime.mcall
+         0     0% 57.10%      0.69s  3.12%  runtime.findRunnable
+     0.06s  0.27% 57.38%      0.68s  3.08%  github.com/corentings/chess/v2.(*Board).copy (inline)
+         0     0% 57.38%      0.68s  3.08%  runtime.park_m
+     0.15s  0.68% 58.05%      0.67s  3.03%  github.com/corentings/chess/v2.(*Board).updateSearch
+     0.21s  0.95% 59.00%      0.66s  2.99%  github.com/philyawj/Pandafish.(*exchangeBoard).attacked
+     0.49s  2.22% 61.22%      0.62s  2.81%  github.com/philyawj/Pandafish.(*exchangeBoard).attacks
+     0.18s  0.81% 62.04%      0.59s  2.67%  runtime.mapaccess1
+     0.15s  0.68% 62.71%      0.58s  2.62%  runtime.mallocgcSmallNoscan
+         0     0% 62.71%      0.55s  2.49%  runtime.(*mheap).alloc.func1
+         0     0% 62.71%      0.55s  2.49%  runtime.(*mheap).allocSpan
+         0     0% 62.71%      0.52s  2.35%  github.com/corentings/chess/v2.(*Position).AppendSearchQuietMoves (inline)
+     0.07s  0.32% 63.03%      0.52s  2.35%  github.com/corentings/chess/v2.(*Position).updateHash
+         0     0% 63.03%      0.52s  2.35%  github.com/philyawj/Pandafish.(*searcher).quietSearchMoves
+     0.52s  2.35% 65.38%      0.52s  2.35%  runtime.madvise
+         0     0% 65.38%      0.51s  2.31%  runtime.morestack
+         0     0% 65.38%      0.51s  2.31%  runtime.newstack
+         0     0% 65.38%      0.51s  2.31%  runtime.sysUsed (inline)
+         0     0% 65.38%      0.51s  2.31%  runtime.sysUsedOS (inline)
+     0.04s  0.18% 65.57%      0.48s  2.17%  github.com/philyawj/Pandafish.(*searcher).pushKey
+         0     0% 65.57%      0.48s  2.17%  github.com/philyawj/Pandafish.(*searcher).pushPosition (inline)
+         0     0% 65.57%      0.47s  2.13%  runtime.goschedImpl
+     0.02s  0.09% 65.66%      0.46s  2.08%  github.com/philyawj/Pandafish.(*searcher).popPosition
+         0     0% 65.66%      0.45s  2.04%  runtime.gopreempt_m (inline)
+     0.29s  1.31% 66.97%      0.43s  1.95%  runtime.mapaccess1_fast64
+         0     0% 66.97%      0.43s  1.95%  runtime.semasleep
+         0     0% 66.97%      0.43s  1.95%  runtime.stopm
+         0     0% 66.97%      0.42s  1.90%  runtime.mPark (inline)
+         0     0% 66.97%      0.42s  1.90%  runtime.notesleep
+     0.42s  1.90% 68.87%      0.42s  1.90%  runtime.pthread_cond_wait
+     0.42s  1.90% 70.77%      0.42s  1.90%  runtime.usleep
+     0.06s  0.27% 71.04%      0.41s  1.86%  runtime.mProf_Malloc
+         0     0% 71.04%      0.41s  1.86%  runtime.profilealloc
+         0     0% 71.04%      0.36s  1.63%  runtime.lock (inline)
+     0.02s  0.09% 71.13%      0.36s  1.63%  runtime.lock2
+         0     0% 71.13%      0.36s  1.63%  runtime.lockWithRank (inline)
+     0.09s  0.41% 71.54%      0.36s  1.63%  runtime.mallocgcSmallScanNoHeader
+         0     0% 71.54%      0.35s  1.58%  runtime.preemptM
+     0.35s  1.58% 73.12%      0.35s  1.58%  runtime.pthread_kill
+         0     0% 73.12%      0.35s  1.58%  runtime.signalM (inline)
+     0.19s  0.86% 73.98%      0.34s  1.54%  github.com/corentings/chess/v2.bbForPossibleMoves
+         0     0% 73.98%      0.34s  1.54%  runtime.osyield (inline)
+         0     0% 73.98%      0.34s  1.54%  runtime.preemptone
+     0.19s  0.86% 74.84%      0.32s  1.45%  github.com/philyawj/Pandafish.(*searcher).stopped
+         0     0% 74.84%      0.31s  1.40%  runtime.stkbucket
+     0.18s  0.81% 75.66%      0.29s  1.31%  github.com/corentings/chess/v2.hvAttack
+     0.16s  0.72% 76.38%      0.29s  1.31%  internal/runtime/maps.(*Map).getWithKeySmall
+     0.05s  0.23% 76.61%      0.29s  1.31%  internal/stringslite.Index
+         0     0% 76.61%      0.29s  1.31%  strings.Index (inline)
+     0.05s  0.23% 76.83%      0.26s  1.18%  internal/runtime/maps.(*Map).Delete
+         0     0% 76.83%      0.26s  1.18%  runtime.gcBgMarkWorker.func2
+     0.01s 0.045% 76.88%      0.26s  1.18%  runtime.gcDrain
+         0     0% 76.88%      0.26s  1.18%  runtime.mapdelete_fast64
+         0     0% 76.88%      0.26s  1.18%  strings.Contains (inline)
+     0.25s  1.13% 78.01%      0.25s  1.13%  internal/runtime/atomic.(*UnsafePointer).Load (inline)
+         0     0% 78.01%      0.25s  1.13%  runtime.wakep
+     0.24s  1.09% 79.10%      0.24s  1.09%  internal/bytealg.IndexByteString
+         0     0% 79.10%      0.24s  1.09%  internal/stringslite.IndexByte (inline)
+         0     0% 79.10%      0.24s  1.09%  runtime.notewakeup
+     0.23s  1.04% 80.14%      0.24s  1.09%  runtime.pthread_cond_signal
+         0     0% 80.14%      0.24s  1.09%  runtime.semawakeup
+         0     0% 80.14%      0.24s  1.09%  runtime.startm
+     0.23s  1.04% 81.18%      0.23s  1.04%  github.com/corentings/chess/v2.Piece.Type (inline)
+     0.23s  1.04% 82.22%      0.23s  1.04%  math/bits.LeadingZeros64 (inline)
+         0     0% 82.22%      0.21s  0.95%  runtime.gcDrainMarkWorkerDedicated (inline)
+     0.19s  0.86% 83.08%      0.19s  0.86%  github.com/corentings/chess/v2.(*Board).calcConvienceBBs
+     0.07s  0.32% 83.39%      0.19s  0.86%  internal/runtime/maps.(*table).Delete
+     0.18s  0.81% 84.21%      0.18s  0.81%  github.com/corentings/chess/v2.(*Board).searchPieceSet (inline)
+         0     0% 84.21%      0.18s  0.81%  runtime.(*gcControllerState).enlistWorker
+         0     0% 84.21%      0.18s  0.81%  runtime.(*gcWork).balance
+     0.17s  0.77% 84.98%      0.17s  0.77%  github.com/corentings/chess/v2.(*Board).Piece (inline)
+     0.16s  0.72% 85.70%      0.17s  0.77%  runtime.mapassign_fast64
+     0.07s  0.32% 86.02%      0.16s  0.72%  github.com/corentings/chess/v2.(*Position).updateCastleRights
+         0     0% 86.02%      0.16s  0.72%  runtime.forEachPInternal
+         0     0% 86.02%      0.16s  0.72%  runtime.preemptall
+     0.13s  0.59% 86.61%      0.15s  0.68%  github.com/corentings/chess/v2.diaAttack
+     0.09s  0.41% 87.01%      0.13s  0.59%  github.com/corentings/chess/v2.pieceZobristIndex
+     0.03s  0.14% 87.15%      0.13s  0.59%  github.com/philyawj/Pandafish.captureValue (inline)
+     0.03s  0.14% 87.29%      0.13s  0.59%  runtime.stealWork
+     0.12s  0.54% 87.83%      0.12s  0.54%  github.com/corentings/chess/v2.bbForSquare (inline)
+     0.10s  0.45% 88.28%      0.12s  0.54%  github.com/corentings/chess/v2.searchEvasionMask
+         0     0% 88.28%      0.12s  0.54%  runtime.gcMarkTermination.forEachP.func6
+     0.09s  0.41% 88.69%      0.11s   0.5%  context.(*cancelCtx).Err
+     0.03s  0.14% 88.82%      0.11s   0.5%  github.com/philyawj/Pandafish.lookupHint
+     0.11s   0.5% 89.32%      0.11s   0.5%  runtime.memclrNoHeapPointers
+     0.04s  0.18% 89.50%      0.11s   0.5%  runtime.memhash8
+     0.10s  0.45% 89.95%      0.10s  0.45%  github.com/corentings/chess/v2.(*Move).HasTag (inline)
+         0     0% 89.95%      0.10s  0.45%  github.com/corentings/chess/v2.(*Position).Status (inline)
+     0.06s  0.27% 90.23%      0.10s  0.45%  github.com/corentings/chess/v2.(*Position).updateEnPassantSquare
+         0     0% 90.23%      0.10s  0.45%  github.com/corentings/chess/v2.engine.CalcMoves
+         0     0% 90.23%      0.10s  0.45%  github.com/corentings/chess/v2.engine.Status
+     0.10s  0.45% 90.68%      0.10s  0.45%  github.com/corentings/chess/v2.pawnMoves
+     0.04s  0.18% 90.86%      0.10s  0.45%  github.com/corentings/chess/v2.standardMoves
+     0.01s 0.045% 90.90%      0.10s  0.45%  runtime.(*mcache).nextFree
+     0.09s  0.41% 91.31%      0.09s  0.41%  github.com/corentings/chess/v2.(*Board).bbForPiece (inline)
+         0     0% 91.31%      0.09s  0.41%  github.com/philyawj/Pandafish.evaluate
+         0     0% 91.31%      0.09s  0.41%  github.com/philyawj/Pandafish.searchedEvaluation
+     0.02s  0.09% 91.40%      0.09s  0.41%  runtime.gcBgMarkWorker
+     0.01s 0.045% 91.45%      0.09s  0.41%  runtime.runqsteal
+     0.02s  0.09% 91.54%      0.09s  0.41%  strings.Replace
+         0     0% 91.54%      0.09s  0.41%  strings.ReplaceAll (inline)
+         0     0% 91.54%      0.08s  0.36%  github.com/corentings/chess/v2.(*Position).LookupSearchMove
+         0     0% 91.54%      0.08s  0.36%  github.com/philyawj/Pandafish.encodeMove (inline)
+         0     0% 91.54%      0.08s  0.36%  runtime.(*mcache).refill
+     0.08s  0.36% 91.90%      0.08s  0.36%  runtime.duffzero
+         0     0% 91.90%      0.08s  0.36%  runtime.runqgrab
+     0.03s  0.14% 92.04%      0.07s  0.32%  github.com/philyawj/Pandafish.applyMoveOrder (inline)
+         0     0% 92.04%      0.07s  0.32%  internal/runtime/maps.ctrlGroup.matchH2 (inline)
+     0.07s  0.32% 92.35%      0.07s  0.32%  internal/runtime/maps.ctrlGroupMatchH2 (inline)
+         0     0% 92.35%      0.07s  0.32%  runtime.(*mcentral).cacheSpan
+     0.01s 0.045% 92.40%      0.07s  0.32%  runtime.bgsweep
+         0     0% 92.40%      0.07s  0.32%  runtime.resetspinning
+     0.06s  0.27% 92.67%      0.06s  0.27%  aeshashbody
+     0.06s  0.27% 92.94%      0.06s  0.27%  github.com/corentings/chess/v2.Square.File (inline)
+         0     0% 92.94%      0.06s  0.27%  github.com/corentings/chess/v2.moveTags
+     0.06s  0.27% 93.21%      0.06s  0.27%  github.com/philyawj/Pandafish.phaseWeight (inline)
+         0     0% 93.21%      0.06s  0.27%  runtime.(*mcentral).grow
+     0.06s  0.27% 93.48%      0.06s  0.27%  runtime.memhash64
+         0     0% 93.48%      0.06s  0.27%  runtime.preemptPark
+     0.05s  0.23% 93.71%      0.05s  0.23%  github.com/corentings/chess/v2.(*Move).S1 (inline)
+     0.05s  0.23% 93.94%      0.05s  0.23%  github.com/philyawj/Pandafish.(*transpositionTable).probe (inline)
+     0.05s  0.23% 94.16%      0.05s  0.23%  github.com/philyawj/Pandafish.abs (inline)
+     0.05s  0.23% 94.39%      0.05s  0.23%  internal/runtime/maps.(*ctrlGroup).set (inline)
+     0.05s  0.23% 94.62%      0.05s  0.23%  internal/runtime/maps.probeSeq.next (inline)
+         0     0% 94.62%      0.05s  0.23%  runtime.gcDrainMarkWorkerIdle (inline)
+     0.05s  0.23% 94.84%      0.05s  0.23%  runtime.memequal8
+     0.05s  0.23% 95.07%      0.05s  0.23%  runtime.memmove
+     0.03s  0.14% 95.20%      0.05s  0.23%  runtime.scanobject
+         0     0% 95.20%      0.05s  0.23%  slices.SortStableFunc[go.shape.[]github.com/philyawj/Pandafish.moveRank,go.shape.struct { github.com/philyawj/Pandafish.index int; github.com/philyawj/Pandafish.priority int }] (inline)
+     0.05s  0.23% 95.43%      0.05s  0.23%  slices.insertionSortCmpFunc[go.shape.struct { github.com/philyawj/Pandafish.index int; github.com/philyawj/Pandafish.priority int }] (inline)
+         0     0% 95.43%      0.05s  0.23%  slices.stableCmpFunc[go.shape.struct { github.com/philyawj/Pandafish.index int; github.com/philyawj/Pandafish.priority int }]
+     0.04s  0.18% 95.61%      0.04s  0.18%  github.com/corentings/chess/v2.Color.Other
+     0.03s  0.14% 95.75%      0.04s  0.18%  github.com/corentings/chess/v2.enPassantFileForHash
+     0.01s 0.045% 95.79%      0.04s  0.18%  github.com/corentings/chess/v2.isSquareAttackedBy
+     0.04s  0.18% 95.97%      0.04s  0.18%  github.com/philyawj/Pandafish.(*mainMovePicker).used (inline)
+         0     0% 95.97%      0.04s  0.18%  runtime.(*mheap).alloc
+         0     0% 95.97%      0.04s  0.18%  runtime.gcMarkDone.forEachP.func5
+         0     0% 95.97%      0.03s  0.14%  github.com/philyawj/Pandafish.TestWarmPipelineProfile.func1
+     0.03s  0.14% 96.11%      0.03s  0.14%  internal/abi.(*SwissMapType).IndirectKey
+     0.03s  0.14% 96.24%      0.03s  0.14%  internal/runtime/maps.(*groupsReference).group (inline)
+         0     0% 96.24%      0.03s  0.14%  os.OpenFile
+         0     0% 96.24%      0.03s  0.14%  os.WriteFile
+         0     0% 96.24%      0.03s  0.14%  os.ignoringEINTR (inline)
+         0     0% 96.24%      0.03s  0.14%  os.open (inline)
+         0     0% 96.24%      0.03s  0.14%  os.openFileNolog
+         0     0% 96.24%      0.03s  0.14%  os.openFileNolog.func1 (inline)
+         0     0% 96.24%      0.03s  0.14%  runtime.(*mheap).initSpan
+         0     0% 96.24%      0.03s  0.14%  runtime.callers
+         0     0% 96.24%      0.03s  0.14%  runtime.callers.func1
+     0.01s 0.045% 96.29%      0.03s  0.14%  runtime.heapSetTypeNoHeader (inline)
+     0.03s  0.14% 96.43%      0.03s  0.14%  runtime.nextFreeFast
+     0.03s  0.14% 96.56%      0.03s  0.14%  runtime.pcvalue
+         0     0% 96.56%      0.03s  0.14%  runtime.tracebackPCs
+         0     0% 96.56%      0.03s  0.14%  syscall.Open
+     0.03s  0.14% 96.70%      0.03s  0.14%  syscall.syscall
+         0     0% 96.70%      0.02s  0.09%  encoding/json.Unmarshal
+     0.02s  0.09% 96.79%      0.02s  0.09%  github.com/corentings/chess/v2.(*Board).kingSquare
+     0.01s 0.045% 96.83%      0.02s  0.09%  github.com/corentings/chess/v2.(*Board).update
+         0     0% 96.83%      0.02s  0.09%  github.com/corentings/chess/v2.(*Game).Move
+         0     0% 96.83%      0.02s  0.09%  github.com/corentings/chess/v2.(*Game).PushNotationMove
+         0     0% 96.83%      0.02s  0.09%  github.com/corentings/chess/v2.(*Game).evaluatePositionStatus
+         0     0% 96.83%      0.02s  0.09%  github.com/corentings/chess/v2.(*Game).moveUnchecked
+     0.02s  0.09% 96.92%      0.02s  0.09%  github.com/corentings/chess/v2.(*Move).S2
+     0.02s  0.09% 97.01%      0.02s  0.09%  github.com/corentings/chess/v2.Square.Rank
+     0.02s  0.09% 97.10%      0.02s  0.09%  github.com/corentings/chess/v2.linearAttack
+     0.02s  0.09% 97.19%      0.02s  0.09%  github.com/philyawj/Pandafish.(*transpositionTable).boardHint
+         0     0% 97.19%      0.02s  0.09%  github.com/philyawj/Pandafish.parsePosition
+     0.02s  0.09% 97.29%      0.02s  0.09%  github.com/philyawj/Pandafish.repetitionToken
+         0     0% 97.29%      0.02s  0.09%  internal/bytealg.MakeNoZero
+         0     0% 97.29%      0.02s  0.09%  internal/runtime/atomic.(*Pointer[go.shape.struct { runtime.spanSetBlockHeader2; runtime.spans [512]runtime.atomicMSpanPointer }]).StoreNoWB
+     0.02s  0.09% 97.38%      0.02s  0.09%  internal/runtime/atomic.(*UnsafePointer).StoreNoWB
+     0.02s  0.09% 97.47%      0.02s  0.09%  internal/runtime/maps.(*groupReference).key
+         0     0% 97.47%      0.02s  0.09%  internal/runtime/maps.typedmemclr
+         0     0% 97.47%      0.02s  0.09%  runtime.(*mspan).initHeapBits
+     0.02s  0.09% 97.56%      0.02s  0.09%  runtime.(*mspan).writeHeapBitsSmall
+         0     0% 97.56%      0.02s  0.09%  runtime.(*spanSet).push
+         0     0% 97.56%      0.02s  0.09%  runtime.(*unwinder).next
+         0     0% 97.56%      0.02s  0.09%  runtime.(*unwinder).resolveInternal
+     0.02s  0.09% 97.65%      0.02s  0.09%  runtime.casgstatus
+     0.01s 0.045% 97.69%      0.02s  0.09%  runtime.checkTimersNoP
+     0.02s  0.09% 97.78%      0.02s  0.09%  runtime.divRoundUp
+     0.01s 0.045% 97.83%      0.02s  0.09%  runtime.freeSomeWbufs
+         0     0% 97.83%      0.02s  0.09%  runtime.funcspdelta
+     0.02s  0.09% 97.92%      0.02s  0.09%  runtime.getMCache
+         0     0% 97.92%      0.02s  0.09%  runtime.gosched_m
+     0.01s 0.045% 97.96%      0.02s  0.09%  runtime.mallocgcTiny
+         0     0% 97.96%      0.02s  0.09%  runtime.markroot
+     0.02s  0.09% 98.05%      0.02s  0.09%  runtime.memequal64
+     0.02s  0.09% 98.14%      0.02s  0.09%  runtime.newArenaMayUnlock
+         0     0% 98.14%      0.02s  0.09%  runtime.newMarkBits
+         0     0% 98.14%      0.02s  0.09%  runtime.sweepone
+     0.01s 0.045% 98.19%      0.02s  0.09%  runtime.typePointers.next
+     0.01s 0.045% 98.24%      0.02s  0.09%  runtime.typedmemclr
+         0     0% 98.24%      0.02s  0.09%  runtime.unlock
+     0.01s 0.045% 98.28%      0.02s  0.09%  runtime.unlock2
+         0     0% 98.28%      0.02s  0.09%  runtime.unlockWithRank
+         0     0% 98.28%      0.02s  0.09%  strings.(*Builder).Grow
+         0     0% 98.28%      0.02s  0.09%  strings.(*Builder).grow
+     0.02s  0.09% 98.37%      0.02s  0.09%  sync/atomic.(*Value).Load
+     0.02s  0.09% 98.46%      0.02s  0.09%  time.Time.IsZero
+         0     0% 98.46%      0.01s 0.045%  encoding/json.(*decodeState).array
+         0     0% 98.46%      0.01s 0.045%  encoding/json.(*decodeState).object
+         0     0% 98.46%      0.01s 0.045%  encoding/json.(*decodeState).unmarshal
+         0     0% 98.46%      0.01s 0.045%  encoding/json.(*decodeState).value
+     0.01s 0.045% 98.51%      0.01s 0.045%  encoding/json.checkValid
+     0.01s 0.045% 98.55%      0.01s 0.045%  github.com/corentings/chess/v2.(*Board).String
+         0     0% 98.55%      0.01s 0.045%  github.com/corentings/chess/v2.(*Game).numOfRepetitions
+     0.01s 0.045% 98.60%      0.01s 0.045%  github.com/corentings/chess/v2.(*Move).Promo
+     0.01s 0.045% 98.64%      0.01s 0.045%  github.com/corentings/chess/v2.(*Position).Board
+         0     0% 98.64%      0.01s 0.045%  github.com/corentings/chess/v2.(*Position).samePosition
+     0.01s 0.045% 98.69%      0.01s 0.045%  github.com/philyawj/Pandafish.(*killerTable).remember
+         0     0% 98.69%      0.01s 0.045%  github.com/philyawj/Pandafish.(*searcher).iterate.func1
+     0.01s 0.045% 98.73%      0.01s 0.045%  github.com/philyawj/Pandafish.(*transpositionTable).store
+         0     0% 98.73%      0.01s 0.045%  github.com/philyawj/Pandafish.newMainMovePicker
+     0.01s 0.045% 98.78%      0.01s 0.045%  gogo
+     0.01s 0.045% 98.82%      0.01s 0.045%  internal/abi.(*SwissMapType).IndirectElem
+     0.01s 0.045% 98.87%      0.01s 0.045%  internal/bytealg.CountString
+     0.01s 0.045% 98.91%      0.01s 0.045%  internal/runtime/atomic.(*Uint32).CompareAndSwap
+     0.01s 0.045% 98.96%      0.01s 0.045%  internal/runtime/atomic.(*Uintptr).Add
+     0.01s 0.045% 99.00%      0.01s 0.045%  internal/runtime/maps.(*Map).Used
+     0.01s 0.045% 99.05%      0.01s 0.045%  internal/runtime/maps.(*Map).directoryIndex
+         0     0% 99.05%      0.01s 0.045%  reflect.Value.Grow
+         0     0% 99.05%      0.01s 0.045%  reflect.Value.grow
+         0     0% 99.05%      0.01s 0.045%  reflect.growslice
+         0     0% 99.05%      0.01s 0.045%  runtime.(*activeSweep).begin
+     0.01s 0.045% 99.10%      0.01s 0.045%  runtime.(*fixalloc).alloc
+         0     0% 99.10%      0.01s 0.045%  runtime.(*inlineUnwinder).resolveInternal
+     0.01s 0.045% 99.14%      0.01s 0.045%  runtime.(*m).clearAllpSnapshot
+     0.01s 0.045% 99.19%      0.01s 0.045%  runtime.(*mLockProfile).store
+         0     0% 99.19%      0.01s 0.045%  runtime.(*mcentral).uncacheSpan
+     0.01s 0.045% 99.23%      0.01s 0.045%  runtime.(*mspan).nextFreeIndex
+         0     0% 99.23%      0.01s 0.045%  runtime.(*pageAlloc).scavenge.func1
+         0     0% 99.23%      0.01s 0.045%  runtime.(*pageAlloc).scavengeOne
+     0.01s 0.045% 99.28%      0.01s 0.045%  runtime.(*randomEnum).done
+     0.01s 0.045% 99.32%      0.01s 0.045%  runtime.(*spanSet).pop
+         0     0% 99.32%      0.01s 0.045%  runtime.(*sweepLocked).sweep
+     0.01s 0.045% 99.37%      0.01s 0.045%  runtime.(*sysMemStat).add
+         0     0% 99.37%      0.01s 0.045%  runtime.(*timers).check
+     0.01s 0.045% 99.41%      0.01s 0.045%  runtime.(*timers).wakeTime
+     0.01s 0.045% 99.46%      0.01s 0.045%  runtime.acquirem
+     0.01s 0.045% 99.50%      0.01s 0.045%  runtime.bool2int
+         0     0% 99.50%      0.01s 0.045%  runtime.checkRunqsNoP
+         0     0% 99.50%      0.01s 0.045%  runtime.execute
+         0     0% 99.50%      0.01s 0.045%  runtime.gcMarkDone.func2
+         0     0% 99.50%      0.01s 0.045%  runtime.gcMarkTermination.func3
+         0     0% 99.50%      0.01s 0.045%  runtime.gcstopm
+     0.01s 0.045% 99.55%      0.01s 0.045%  runtime.getGCMask
+         0     0% 99.55%      0.01s 0.045%  runtime.growslice
+     0.01s 0.045% 99.59%      0.01s 0.045%  runtime.libcCall
+         0     0% 99.59%      0.01s 0.045%  runtime.mProf_Malloc.func1
+         0     0% 99.59%      0.01s 0.045%  runtime.makeSpanClass
+         0     0% 99.59%      0.01s 0.045%  runtime.markroot.func1
+         0     0% 99.59%      0.01s 0.045%  runtime.markrootBlock
+     0.01s 0.045% 99.64%      0.01s 0.045%  runtime.memhash
+     0.01s 0.045% 99.68%      0.01s 0.045%  runtime.mmap
+         0     0% 99.68%      0.01s 0.045%  runtime.nanotime
+     0.01s 0.045% 99.73%      0.01s 0.045%  runtime.nanotime1
+     0.01s 0.045% 99.77%      0.01s 0.045%  runtime.newBucket
+         0     0% 99.77%      0.01s 0.045%  runtime.newInlineUnwinder
+         0     0% 99.77%      0.01s 0.045%  runtime.notetsleep
+         0     0% 99.77%      0.01s 0.045%  runtime.notetsleep_internal
+         0     0% 99.77%      0.01s 0.045%  runtime.pcdatavalue1
+         0     0% 99.77%      0.01s 0.045%  runtime.persistentalloc.func1
+         0     0% 99.77%      0.01s 0.045%  runtime.persistentalloc1
+     0.01s 0.045% 99.82%      0.01s 0.045%  runtime.pthread_cond_timedwait_relative_np
+     0.01s 0.045% 99.86%      0.01s 0.045%  runtime.runqempty
+     0.01s 0.045% 99.91%      0.01s 0.045%  runtime.runqputbatch
+     0.01s 0.045%   100%      0.01s 0.045%  runtime.scanblock

@@ -1,0 +1,33 @@
+package main
+import("encoding/json";"os")
+func main(){
+ b,e:=os.ReadFile("tools/benchmark/research/v0.22-next-assessment/q-opportunity-source.json");if e!=nil{panic(e)};var source struct{Base string `json:"base_tag"`;Files map[string]string `json:"files"`};if e=json.Unmarshal(b,&source);e!=nil{panic(e)}
+ source.Files["q_diagnostic_test.go"]=`package main
+import "github.com/corentings/chess/v2"
+type qDiagnosticEntry struct{key uint64;halfmove,depth,score,required int;generation uint16;mode uint8;kind bound;stable bool}
+type qDiagnosticFrame struct{required int;stable bool}
+var qDiagnosticCaches=map[*transpositionTable][]qDiagnosticEntry{}
+var qDiagnosticStats=map[string]uint64{}
+var qDiagnosticActive bool
+var qDiagnosticFrames []qDiagnosticFrame
+func(w *searcher)quietAtPly(p *chess.Position,depth,alpha,beta int,checked bool,ply int)(int,bool){
+ qDiagnosticStats["quiescence_visits"]++
+ boardKey:=p.ZobristHash();n:=w.repetitions[boardKey];terminal:=p.SearchStatus()!=chess.NoMethod||n>=2
+ frame:=qDiagnosticFrame{required:-256,stable:true}
+ if !terminal{if checked{frame.required=-3}else{frame.required=1};if depth<=-checkEvasionDepth||(depth<=0&&!checked){frame.stable=false;qDiagnosticStats["horizon_caps"]++}}
+ fi:=len(qDiagnosticFrames);qDiagnosticFrames=append(qDiagnosticFrames,frame)
+ history:=w.historyKey^repetitionToken(boardKey,n)^repetitionToken(boardKey,n+1);key:=boardKey^history
+ mode:=uint8(0);if checked{mode|=1};if w.unfiltered{mode|=2}
+ var cache []qDiagnosticEntry;entry:=qDiagnosticEntry{};hit:=false
+ if w.table!=nil&&!terminal{cache=qDiagnosticCaches[w.table];if cache==nil{cache=make([]qDiagnosticEntry,tableEntries);qDiagnosticCaches[w.table]=cache};entry=cache[key%uint64(len(cache))];hit=entry.kind!=noBound&&entry.key==key&&entry.halfmove==p.HalfMoveClock()&&entry.mode==mode&&(entry.depth==depth||(entry.stable&&depth>=entry.required));if hit{value:=scoreFromTable(entry.score,ply);hit=entry.kind==exactBound||(entry.kind==lowerBound&&value>=beta)||(entry.kind==upperBound&&value<=alpha)}}
+ outer:=hit&&!qDiagnosticActive;if hit{qDiagnosticStats["applicable_bound_hits"]++;if entry.depth!=depth{qDiagnosticStats["cross_depth_hits"]++}};if outer{qDiagnosticStats["outer_hits"]++;qDiagnosticActive=true}
+ before:=w.nodes;score,complete:=w.quietAtPlyMeasured(p,depth,alpha,beta,checked,ply)
+ frame=qDiagnosticFrames[fi];qDiagnosticFrames=qDiagnosticFrames[:fi];if fi>0{parent:=&qDiagnosticFrames[fi-1];parent.required=max(parent.required,frame.required+1);parent.stable=parent.stable&&frame.stable&&complete}
+ if outer{if w.nodes>before{qDiagnosticStats["potential_avoided_descendants"]+=w.nodes-before-1};qDiagnosticActive=false}
+ if hit&&complete{old:=scoreFromTable(entry.score,ply);bad:=false;switch entry.kind{case exactBound:if score<=alpha{bad=old>score}else if score>=beta{bad=old<score}else{bad=old!=score};case lowerBound:if score<beta{bad=old>score};case upperBound:if score>alpha{bad=old<score}};if bad{qDiagnosticStats["bound_contradictions"]++}}
+ if cache!=nil&&complete{target:=&cache[key%uint64(len(cache))];if target.kind==noBound||target.generation!=w.table.generation||target.depth<=depth{kind:=exactBound;if score<=alpha{kind=upperBound}else if score>=beta{kind=lowerBound};*target=qDiagnosticEntry{key,p.HalfMoveClock(),depth,scoreToTable(score,ply),frame.required,w.table.generation,mode,kind,frame.stable};if frame.stable{qDiagnosticStats["stable_stores"]++}}}
+ return score,complete
+}
+`
+ b,e=json.MarshalIndent(map[string]any{"base_tag":source.Base,"files":source.Files},"","  ");if e!=nil{panic(e)};if e=os.WriteFile("tools/benchmark/research/v0.22-next-assessment/q-certificate-opportunity-source.json",append(b,'\n'),0644);e!=nil{panic(e)}
+}

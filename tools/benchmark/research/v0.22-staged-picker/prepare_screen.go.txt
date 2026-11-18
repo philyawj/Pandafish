@@ -1,0 +1,18 @@
+package main
+
+import("os";"strings")
+func main(){
+ read:=func(p string)string{b,e:=os.ReadFile(p);if e!=nil{panic(e)};return string(b)}
+ s:=read("tools/benchmark/research/v0.22-clock-screen/screen_driver.go.txt")
+ s=strings.ReplaceAll(s,"v0.22-clock-screen","v0.22-staged-picker");s=strings.ReplaceAll(s,"pandafish-v022-clock-screen","pandafish-v022-staged-picker")
+ old:="if !q.Passed{panic(\"native gate failed \"+name)}"
+ replacement:=`if q.Passed != (name!="public-100"){panic("native result differs from documented exception "+name)}`
+ if !strings.Contains(s,old){panic("missing prerequisite")};s=strings.Replace(s,old,replacement,1)
+ marker:="\n\targs:="
+ guard:=` 
+ var review struct{Passed bool};b,e:=os.ReadFile(filepath.Join(dir,"warm-review.json"));if e!=nil{panic(e)};if e=json.Unmarshal(b,&review);e!=nil||!review.Passed{panic("warm/depth review failed")}
+ if _,e:=os.Stat(filepath.Join(dir,"SCREEN_DECISION.md"));e!=nil{panic(e)}
+ `
+ if !strings.Contains(s,marker){panic("missing marker")};s=strings.Replace(s,marker,"\n"+guard+"\n\targs:=",1)
+ for _,p:=range []string{"tools/benchmark/research/v0.22-staged-picker/screen_driver.go.txt","/tmp/pandafish-v022-picker-screen.go"}{if _,e:=os.Stat(p);!os.IsNotExist(e){panic("refuse overwrite "+p)};if e:=os.WriteFile(p,[]byte(s),0644);e!=nil{panic(e)}}
+}

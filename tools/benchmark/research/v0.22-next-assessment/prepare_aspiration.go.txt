@@ -1,0 +1,24 @@
+package main
+
+import("crypto/sha256";"encoding/json";"fmt";"os";"strings")
+func main(){
+ dir:="tools/benchmark/research/v0.22-aspiration/"
+ write:=func(p string,b []byte){if _,e:=os.Stat(p);!os.IsNotExist(e){panic("refuse overwrite "+p)};if e:=os.WriteFile(p,b,0644);e!=nil{panic(e)}}
+ b,e:=os.ReadFile("tools/benchmark/research/v0.22-history-malus/timing_driver.go.txt");if e!=nil{panic(e)};s:=strings.ReplaceAll(string(b),"v0.22-history-malus","v0.22-aspiration");s=strings.ReplaceAll(s,"^TestCandidateFixedWork$","^TestCandidateIterationWork$");s=strings.ReplaceAll(s,"CANDIDATE_OUTPUT=","ITERATION_OUTPUT=")
+ s=strings.ReplaceAll(s,"pair-%d-depth-4","pair-%d-depth-5");s=strings.ReplaceAll(s,"pair-1-depth-4","pair-1-depth-5");s=strings.ReplaceAll(s,"pair-2-depth-4","pair-2-depth-5");s=strings.ReplaceAll(s,"pair-3-depth-4","pair-3-depth-5");s=strings.ReplaceAll(s,"pair), 4, input","pair), 5, input");s=strings.ReplaceAll(s,"[]int{3, 6}","[]int{3, 4, 6}")
+ s=strings.ReplaceAll(s,"depth4_median_ratio","depth5_median_ratio");s=strings.ReplaceAll(s,"ratios[1] <= .85","ratios[1] < 1")
+ // Add a newer depth-five pair to the frozen original depth-four cohort.
+ old:=`for _, actor := range []string{"baseline", "candidate"} {
+		run(actor, "fresh-depth-4", 4, "tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json")
+	}`
+ if !strings.Contains(s,old){panic("newer adaptation missed")}
+ s=strings.Replace(s,old,old+"\n\tfor _, actor := range []string{\"baseline\", \"candidate\"} { run(actor, \"fresh-depth-5\", 5, \"tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json\") }",1)
+ s=strings.ReplaceAll(s,`"depth-3", "depth-6", "fresh-depth-4"`,`"depth-3", "depth-4", "depth-6", "fresh-depth-4", "fresh-depth-5"`)
+ s=strings.ReplaceAll(s,`passed = passed && deep < 1 && results["fresh-depth-4"].(map[string]any)["ratio"].(float64) < 1`,`passed = passed && deep < 1 && results["fresh-depth-4"].(map[string]any)["ratio"].(float64) < 1 && results["fresh-depth-5"].(map[string]any)["ratio"].(float64) < 1`)
+ s=strings.ReplaceAll(s,"cwd := repo","cwd := \"/tmp/pandafish-v022-aspiration-profile\"")
+ write(dir+"timing_driver.go.txt",[]byte(s));write("/tmp/pandafish-v022-aspiration-timing.go",[]byte(s))
+ b,e=os.ReadFile("tools/benchmark/research/v0.22-history-malus/warm_pairs_driver.go.txt");if e!=nil{panic(e)};s=strings.ReplaceAll(string(b),"v0.22-history-malus","v0.22-aspiration");s=strings.ReplaceAll(s,"pandafish-v022-malus-profile","pandafish-v022-aspiration-profile");s=strings.ReplaceAll(s,"depth4_median_ratio","depth5_median_ratio");write(dir+"warm_pairs_driver.go.txt",[]byte(s));write("/tmp/pandafish-v022-aspiration-warm.go",[]byte(s))
+ files,hashes:=map[string]string{},map[string]string{}
+ for _,p:=range []string{"iterative.go","aspiration.go","aspiration_test.go"}{b,e:=os.ReadFile(p);if e!=nil{panic(e)};files[p]=string(b);hashes[p]=fmt.Sprintf("%x",sha256.Sum256(b))}
+ for p,v:=range map[string]any{dir+"candidate-source.json":map[string]any{"base_tag":"v0.21","files":files},dir+"source-hashes.json":hashes}{b,e:=json.MarshalIndent(v,"","  ");if e!=nil{panic(e)};write(p,append(b,'\n'))}
+}

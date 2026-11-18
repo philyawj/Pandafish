@@ -1,0 +1,89 @@
+{
+  "tools/benchmark/research/v0.22-staged-picker/screen/v0.22-staged-picker-dev-vs-v0.21-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/summary.json": {
+    "candidate": {
+      "label": "v0.22-staged-picker-dev",
+      "uci_name": "Pandafish v0.21",
+      "sha256": "e96f2c19001506d7d51d3d607f11abd62c53913f16eee688f0bae80ad306ce74",
+      "options": null
+    },
+    "color_pairs_verified": 75,
+    "direct_criterion_passed": false,
+    "matches": [
+      {
+        "max_response_ms": {
+          "candidate": 97.767625,
+          "opponent": 97.85275
+        },
+        "opponent": {
+          "label": "v0.21",
+          "uci_name": "Pandafish v0.21",
+          "sha256": "4e1ff2cb232e337bcd7e5d909ed4f48d0ea98a63cc10addfb4e280bf68a6b108",
+          "options": null
+        },
+        "responses_over_grace": 0,
+        "stats": {
+          "wins": 17,
+          "draws": 13,
+          "losses": 20,
+          "unfinished": 0,
+          "forfeits": 0,
+          "score_percent": 47,
+          "possible_score_lower_percent": 47,
+          "possible_score_upper_percent": 47
+        }
+      },
+      {
+        "max_response_ms": {
+          "candidate": 97.209166,
+          "opponent": 114.21175
+        },
+        "opponent": {
+          "label": "Stockfish Skill 3",
+          "uci_name": "Stockfish 19",
+          "sha256": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f",
+          "options": {
+            "Hash": "16",
+            "Skill Level": "3",
+            "SyzygyPath": "",
+            "Threads": "1",
+            "UCI_LimitStrength": "false"
+          }
+        },
+        "responses_over_grace": 0,
+        "stats": {
+          "wins": 34,
+          "draws": 0,
+          "losses": 16,
+          "unfinished": 0,
+          "forfeits": 0,
+          "score_percent": 68,
+          "possible_score_lower_percent": 68,
+          "possible_score_upper_percent": 68
+        }
+      },
+      {
+        "max_response_ms": {
+          "candidate": 98.117667,
+          "opponent": 100.358084
+        },
+        "opponent": {
+          "label": "Sacrifice v0.2.0 b528f0ba",
+          "uci_name": "Sacrifice-Engine",
+          "sha256": "5c2c63f19ff6f8be65aaa127a7cbe884f6cb52d7c4daee6967b1da7a7f8fa0e5",
+          "options": null
+        },
+        "responses_over_grace": 0,
+        "stats": {
+          "wins": 23,
+          "draws": 16,
+          "losses": 11,
+          "unfinished": 0,
+          "forfeits": 0,
+          "score_percent": 62,
+          "possible_score_lower_percent": 62,
+          "possible_score_upper_percent": 62
+        }
+      }
+    ]
+  }
+}

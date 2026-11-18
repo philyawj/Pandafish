@@ -1,0 +1,29 @@
+[
+  {
+    "command": [
+      "tools/benchmark/bin/research",
+      "choices",
+      "--baseline",
+      "tools/benchmark/bin/pandafish-v0.21",
+      "--candidate",
+      "tools/benchmark/bin/pandafish-v022-staged-picker",
+      "--teacher",
+      "/opt/homebrew/bin/stockfish",
+      "--input",
+      "tools/benchmark/research/v0.17-search-moves/inputs.json",
+      "--out",
+      "tools/benchmark/research/v0.22-staged-picker/public-100",
+      "--milliseconds",
+      "100",
+      "--trials",
+      "3",
+      "--workers",
+      "3",
+      "--cache",
+      "tools/benchmark/research/v0.21-rank-order/public-100"
+    ],
+    "exit": 0,
+    "quality_passed": false,
+    "suite": "public-100"
+  }
+]

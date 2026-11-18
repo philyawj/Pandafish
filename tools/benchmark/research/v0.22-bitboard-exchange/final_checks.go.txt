@@ -1,0 +1,16 @@
+// Run only after the screen completes. No benchmark or live games are started.
+package main
+
+import("encoding/json";"fmt";"os";"os/exec";"path/filepath")
+func main(){
+ dir:="tools/benchmark/research/v0.22-bitboard-exchange"
+ b,e:=os.ReadFile(filepath.Join(dir,"screen-status.json"));if e!=nil{panic(e)};var status struct{Exit int};if e=json.Unmarshal(b,&status);e!=nil{panic(e)}
+ checks:=[]map[string]any{}
+ run:=func(name string,env []string,args ...string){
+  log,e:=os.OpenFile(filepath.Join(dir,name+".txt"),os.O_CREATE|os.O_EXCL|os.O_WRONLY,0644);if e!=nil{panic(e)};cmd:=exec.Command(args[0],args[1:]...);cmd.Env=append(os.Environ(),append([]string{"GOCACHE=/tmp/pandafish-v016-go-cache"},env...)...);cmd.Stdout=log;cmd.Stderr=log;err:=cmd.Run();log.Close();code:=0;message:="";if err!=nil{code=1;message=err.Error()};checks=append(checks,map[string]any{"name":name,"command":args,"environment":env,"exit":code,"error":message});b,e:=json.MarshalIndent(checks,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(filepath.Join(dir,"final-checks.json"),append(b,'\n'),0644);e!=nil{panic(e)};fmt.Println(name,code);if err!=nil{os.Exit(1)}
+ }
+ run("final-replay",nil,"tools/benchmark/bin/research","replay","--source",dir+"/candidate-source.json","--out","/tmp/pandafish-v022-exchange-final-replay","--check")
+ run("final-go-policy",nil,"go","test","-count=1","-run","^TestRepositorySourceIsGo$",".")
+ run("linux-arm64-build",[]string{"GOOS=linux","GOARCH=arm64"},"go","build","-o","/tmp/pandafish-v022-exchange-linux-arm64",".")
+ run("final-diff-check",nil,"git","diff","--check")
+}

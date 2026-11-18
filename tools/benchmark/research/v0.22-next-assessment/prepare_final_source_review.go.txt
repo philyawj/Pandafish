@@ -1,0 +1,17 @@
+package main
+
+import("os";"strings")
+func main(){
+ b,e:=os.ReadFile("tools/benchmark/research/v0.22-next-assessment/review_sources.go.txt");if e!=nil{panic(e)};s:=string(b)
+ replace:=func(old,new string){if !strings.Contains(s,old){panic("missing source marker "+old)};s=strings.Replace(s,old,new,1)}
+ replace(`"v0.22-aspiration","v0.22-clock-screen"}`,`"v0.22-aspiration","v0.22-clock-screen","v0.22-staged-picker"}`)
+ replace(`active:=snapshots["v0.22-clock-screen"]`,`active:=snapshots["v0.22-staged-picker"]`)
+ replace(`len(active.Files)!=2||active.Files["search.go"]==""||active.Files["deadline_test.go"]==""`,`len(active.Files)!=5||active.Files["search.go"]==""||active.Files["main_move_picker.go"]==""||active.Files["main_move_picker_test.go"]==""||active.Files["third_party/chess/search_hint.go"]==""||active.Files["third_party/chess/search_moves.go"]==""`)
+ replace(`"tools/benchmark/bin/pandafish-v022-clock-screen","/opt/homebrew/bin/stockfish"`,`"tools/benchmark/bin/pandafish-v022-clock-screen","tools/benchmark/bin/pandafish-v022-staged-picker","/opt/homebrew/bin/stockfish"`)
+ replace(`root+"v0.22-clock-screen/"+name+"/method.json"`,`root+"v0.22-staged-picker/"+name+"/method.json"`)
+ replace(`"candidate":"tools/benchmark/bin/pandafish-v022-clock-screen"`,`"candidate":"tools/benchmark/bin/pandafish-v022-staged-picker"`)
+ replace(`put(root+"v0.22-next-assessment/source-review.json"`, `
+ var screen struct{Candidate struct{SHA string `+"`json:\"sha256\"`"+`} `+"`json:\"candidate\"`"+`};must(json.Unmarshal(read(root+"v0.22-staged-picker/screen/v0.22-staged-picker-dev-vs-v0.21-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/summary.json"),&screen));if screen.Candidate.SHA!=binaries["tools/benchmark/bin/pandafish-v022-staged-picker"]{panic("screen binary identity")}
+ put(root+"v0.22-next-assessment/final-source-review.json"`)
+ for _,p:=range []string{"tools/benchmark/research/v0.22-next-assessment/final_review_sources.go.txt","/tmp/pandafish-v022-final-review-sources.go"}{if _,e:=os.Stat(p);!os.IsNotExist(e){panic("refuse overwrite "+p)};if e=os.WriteFile(p,[]byte(s),0644);e!=nil{panic(e)}}
+}

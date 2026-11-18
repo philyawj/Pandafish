@@ -1,0 +1,6 @@
+package main
+import("os";"strings")
+func main(){
+ b,e:=os.ReadFile("tools/benchmark/research/v0.22-quiet-history/membership_driver.go.txt");if e!=nil{panic(e)};s:=strings.ReplaceAll(string(b),"v0.22-quiet-history","v0.22-history-malus");s=strings.ReplaceAll(s,"warm-fixed-4","warm-pair-1");if e=os.WriteFile("tools/benchmark/research/v0.22-history-malus/membership_driver.go.txt",[]byte(s),0644);e!=nil{panic(e)};if e=os.WriteFile("/tmp/pandafish-v022-malus-membership.go",[]byte(s),0644);e!=nil{panic(e)}
+ b,e=os.ReadFile("tools/benchmark/research/v0.22-quiet-history/membership_test.go.txt");if e!=nil{panic(e)};if e=os.WriteFile("tools/benchmark/research/v0.22-history-malus/membership_test.go.txt",b,0644);e!=nil{panic(e)}
+}

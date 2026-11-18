@@ -1,0 +1,12 @@
+package main
+import("encoding/json";"fmt";"os")
+func abs(v int)int{if v<0{return -v};return v}
+func main(){
+ dir:="tools/benchmark/research/v0.22-next-assessment/";out:=map[string]any{};passed:=true
+ for _,name:=range []string{"public","newer"}{b,e:=os.ReadFile(dir+"aspiration-opportunity-"+name+".json");if e!=nil{panic(e)};var rows []struct{ID,Turn string;Iterations []struct{Depth,Score int};Depth int};if e=json.Unmarshal(b,&rows);e!=nil{panic(e)}
+ finite,inside,mates:=0,0,0;turns:=map[string][2]int{"w":{},"b":{}}
+ for _,r:=range rows{if r.Depth!=5||len(r.Iterations)!=5{panic("incomplete trace")};for i:=2;i<5;i++{p,c:=r.Iterations[i-1],r.Iterations[i];if p.Depth!=i||c.Depth!=i+1{panic("trace depth")};if abs(p.Score)>=1000000-1024||abs(c.Score)>=1000000-1024{mates++;continue};finite++;counts:=turns[r.Turn];counts[0]++;if abs(c.Score-p.Score)<50{inside++;counts[1]++};turns[r.Turn]=counts}}
+ fraction:=float64(inside)/float64(finite);ok:=finite>0&&fraction>=.6;passed=passed&&ok;out[name]=map[string]any{"roots":len(rows),"finite_transitions":finite,"inside_50cp":inside,"fraction":fraction,"mate_transitions":mates,"turn_total_inside":turns,"opportunity_passed":ok}
+ }
+ out["passed"]=passed;b,e:=json.MarshalIndent(out,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(dir+"aspiration-opportunity-review.json",append(b,'\n'),0644);e!=nil{panic(e)};fmt.Println(string(b));if !passed{os.Exit(1)}
+}

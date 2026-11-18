@@ -1,0 +1,14 @@
+package main
+import("os";"os/exec";"strings")
+func main(){
+ b,e:=exec.Command("git","show","v0.21:exchange.go").Output();if e!=nil{panic(e)};original:=string(b);ref:=strings.ReplaceAll(original,"exchangeBoard","referenceExchangeBoard");ref=strings.ReplaceAll(ref,"staticExchange","referenceStaticExchange");ref=strings.ReplaceAll(ref,"captureValue","referenceCaptureValue");ref=strings.ReplaceAll(ref,").exchange(",").referenceExchange(");ref=strings.ReplaceAll(ref,"func (worker *searcher) exchange(","func (worker *searcher) referenceExchange(")
+ if _,e:=os.Stat("reference_exchange_test.go");!os.IsNotExist(e){panic("refuse oracle overwrite")};if e=os.WriteFile("reference_exchange_test.go",[]byte(ref),0644);e!=nil{panic(e)}
+ s:=original;old:="kings  [3]chess.Square // Colors are NoColor, White, Black.";if !strings.Contains(s,old){panic("struct marker")};s=strings.Replace(s,old,old+"\n\tsides [3]uint64\n\ttypes [7]uint64",1)
+ start:=strings.Index(s,"\tboard := exchangeBoard{}");end:=strings.Index(s,"\tfrom, target :=");if start<0||end<start{panic("constructor marker")};s=s[:start]+"\tboard := newExchangeBoard(position)\n"+s[end:]
+ replace:=func(old,new string){if !strings.Contains(s,old){panic("missing "+old)};s=strings.Replace(s,old,new,1)}
+ replace("board.pieces[from], board.pieces[target] = chess.NoPiece, piece","board.put(from,chess.NoPiece);board.put(target,piece)")
+ replace("board.pieces[captured] = chess.NoPiece","board.put(captured,chess.NoPiece)")
+ replace("board.pieces[attacker], board.pieces[target] = chess.NoPiece, incoming","board.put(chess.Square(attacker),chess.NoPiece);board.put(target,incoming)")
+ end=strings.Index(s,"func (board *exchangeBoard) leastAttacker");if end<0{panic("methods marker")};s=s[:end]
+ if e=os.WriteFile("exchange.go",[]byte(s),0644);e!=nil{panic(e)}
+}

@@ -1,0 +1,20 @@
+{
+  "identities_sha256": {
+    "baseline": "4e1ff2cb232e337bcd7e5d909ed4f48d0ea98a63cc10addfb4e280bf68a6b108",
+    "candidate": "c5486656b922db819cee1fa5e2851e9ad1b744806cb9d84a301df6a64d657505",
+    "input": "65463434784e20ed7cd313430297e1551cb49194735cbf7bba0238625c32decd",
+    "reference": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f"
+  },
+  "milliseconds": 1000,
+  "quality": "Per-position mean clamp(referenceCP-selectedCP-25,0,1000); retain mate cases separately; no forced candidate roots; native phase completes before reference queries.",
+  "reference_nodes": 100000,
+  "reference_options": {
+    "Hash": "64",
+    "MultiPV": "1",
+    "Skill Level": "20",
+    "Threads": "1",
+    "UCI_LimitStrength": "false"
+  },
+  "trials": 1,
+  "workers": 3
+}

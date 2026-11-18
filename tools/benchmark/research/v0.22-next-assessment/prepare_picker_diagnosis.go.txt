@@ -1,0 +1,17 @@
+package main
+import("encoding/json";"os";"os/exec";"strings")
+func main(){
+ b,e:=os.ReadFile("tools/benchmark/research/v0.22-clock-screen/candidate-source.json");if e!=nil{panic(e)};var old struct{Files map[string]string};if e=json.Unmarshal(b,&old);e!=nil{panic(e)};for p,s:=range old.Files{b,e:=os.ReadFile(p);if e!=nil||string(b)!=s{panic("changed source "+p)}};for p:=range old.Files{b,e:=exec.Command("git","show","v0.21:"+p).Output();if e!=nil{if e=os.Remove(p);e!=nil{panic(e)}}else if e=os.WriteFile(p,b,0644);e!=nil{panic(e)}}
+ b,e=exec.Command("git","show","v0.21:search.go").Output();if e!=nil{panic(e)};s:=string(b)
+ s=strings.Replace(s,"moves := worker.searchMoves(position, ply, false)","moves := worker.searchMoves(position, ply, false)\n\tprofiledPicker := recordPickerGeneration(worker,position,moves,entry,hit,ply)",1)
+ s=strings.Replace(s,"worker.killers.remember(ply, move)","recordPickerCutoff(profiledPicker,moveIndex,move)\n\t\t\tworker.killers.remember(ply, move)",1)
+ helper:=`package main
+import "github.com/corentings/chess/v2"
+var qDiagnosticStats=map[string]uint64{}
+type pickerOpportunity struct{hint uint16;killers [2]uint16;quiet,all int}
+func recordPickerGeneration(w *searcher,p *chess.Position,moves []chess.Move,e tableEntry,hit bool,ply int)pickerOpportunity{r:=pickerOpportunity{all:len(moves)};if hit{r.hint=e.move}else{r.hint=w.table.boardHint(p)};if w.killers!=nil&&ply>=0&&ply<len(w.killers){r.killers=w.killers[ply]};for i:=range moves{if isQuietMove(moves[i]){r.quiet++}};qDiagnosticStats["main_generations"]++;qDiagnosticStats["full_move_records"]+=uint64(r.all);qDiagnosticStats["quiet_move_records"]+=uint64(r.quiet);return r}
+func recordPickerCutoff(r pickerOpportunity,index int,m chess.Move){qDiagnosticStats["main_cutoffs"]++;sig:=encodeMove(m);tableFirst:=index==0&&r.hint!=0&&sig==r.hint;tactical:=!isQuietMove(m);killer:=isQuietMove(m)&&((r.killers[0]!=0&&sig==r.killers[0])||(r.killers[1]!=0&&sig==r.killers[1]));if tableFirst{qDiagnosticStats["table_first_cutoffs"]++;qDiagnosticStats["all_records_avoidable_by_table_first"]+=uint64(r.all)};if tableFirst||tactical||killer{qDiagnosticStats["early_stage_cutoffs"]++;qDiagnosticStats["potential_avoided_quiet_records"]+=uint64(r.quiet)}}
+`
+ raw,e:=os.ReadFile("tools/benchmark/research/v0.22-next-assessment/q-opportunity-source.json");if e!=nil{panic(e)};var q struct{Files map[string]string};if e=json.Unmarshal(raw,&q);e!=nil{panic(e)}
+ b,e=json.MarshalIndent(map[string]any{"base_tag":"v0.21","files":map[string]string{"search.go":s,"picker_diagnostic_test.go":helper,"picker_warm_test.go":q.Files["q_warm_test.go"]}},"","  ");if e!=nil{panic(e)};if e=os.WriteFile("tools/benchmark/research/v0.22-next-assessment/picker-opportunity-source.json",append(b,'\n'),0644);e!=nil{panic(e)}
+}

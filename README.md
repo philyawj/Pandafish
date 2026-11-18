@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.21 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.22 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
@@ -12,9 +12,12 @@ The [v0.20 investigation](docs/RESEARCH_V020.md) records the promoted search-
 legality kernel, rejected predecessors and reassessed next priorities.
 The [v0.21 investigation](tools/benchmark/research/v0.21-rank-order/README.md)
 records precomputed stable ordering and the next profile-driven priorities.
+The [v0.22 investigation](docs/RESEARCH_V022.md) records deferred legal generation,
+exact exchange computation and the preserved unsuccessful experiments.
 
 The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`,
-`transposition.go`, `search_context.go`, `search_moves.go`, `killers.go`, `exchange.go`,
+`transposition.go`, `search_context.go`, `search_moves.go`, `main_move_picker.go`,
+`killers.go`, `exchange.go`, `exchange_bits.go`,
 `evaluation.go`, `mate.go`, and `repetition.go`.
 A pinned local copy of [corentings/chess](https://github.com/corentings/chess)
 with an additive search API handles chess rules,
@@ -375,6 +378,12 @@ the original moves. Preserve exact ordering, fixed-depth scores/moves/nodes,
 values and search policy. See the
 [implementation, validation and measured limits](tools/benchmark/research/v0.21-rank-order/README.md).
 
-**Next:** Profile allocation/copy cost with a warm game table, then select one
-measured improvement. Reassess the remaining backend/evaluation priorities after
-each result; archived quiet-mate and fitted-value attempts remain inactive.
+**v0.22: Avoid unused legal work and repeated exchange scans (complete).**
+Generate later move stages only when needed, prefilter impossible check evasions
+and compute the existing legal exchange heuristic with local bitsets. Preserve
+complete move order, fixed-work scores/moves/nodes, values and search policy.
+Keep unsuccessful experiments and all original results archived. See the
+[implementation, validation and measured limits](tools/benchmark/research/v0.22-bitboard-exchange/README.md).
+
+**Next:** Reassess [the documented research priorities](tools/benchmark/research/v0.22-bitboard-exchange/NEXT.md)
+before starting another experiment. No further candidate is part of this release.

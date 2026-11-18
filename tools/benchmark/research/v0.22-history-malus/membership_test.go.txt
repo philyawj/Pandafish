@@ -1,0 +1,144 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"testing"
+	"time"
+
+	"github.com/corentings/chess/v2"
+)
+
+// Run only in the isolated tagged baseline. Restriction is a diagnostic value
+// proof for the candidate's already selected move, never a production choice.
+func TestHistorySelectedMoveMembership(t *testing.T) {
+	if os.Getenv("HISTORY_SELECTED") == "" {
+		t.Skip("explicit membership inputs required")
+	}
+	type row struct {
+		ID                      string
+		Game, Ply, Depth, Score int
+		Best                    []string
+		Complete                bool
+		FEN                     string
+	}
+	type warmRow struct {
+		Game, Ply, Depth, Score int
+		Best, FEN               string
+	}
+	load := func(path string, v any) {
+		b, e := os.ReadFile(path)
+		if e != nil {
+			t.Fatal(e)
+		}
+		if e = json.Unmarshal(b, v); e != nil {
+			t.Fatal(e)
+		}
+	}
+	selected, baseline := []row{}, []row{}
+	warm := os.Getenv("HISTORY_MODE") == "warm"
+	if warm {
+		for _, x := range []struct {
+			path string
+			dst  *[]row
+		}{{os.Getenv("HISTORY_SELECTED"), &selected}, {os.Getenv("HISTORY_BASELINE"), &baseline}} {
+			var r struct{ Rows []warmRow }
+			load(x.path, &r)
+			for _, v := range r.Rows {
+				*x.dst = append(*x.dst, row{Game: v.Game, Ply: v.Ply, Depth: v.Depth, Score: v.Score, Best: []string{v.Best}, Complete: true, FEN: v.FEN})
+			}
+		}
+	} else {
+		load(os.Getenv("HISTORY_SELECTED"), &selected)
+		load(os.Getenv("HISTORY_BASELINE"), &baseline)
+	}
+	if len(selected) == 0 || len(selected) != len(baseline) {
+		t.Fatal("membership workload shape")
+	}
+	type position struct {
+		p       *chess.Position
+		history []uint64
+	}
+	positions := map[string]position{}
+	key := func(r row) string {
+		if warm {
+			return fmt.Sprintf("%d/%d", r.Game, r.Ply)
+		}
+		return r.ID
+	}
+	if warm {
+		f, e := os.Open(os.Getenv("HISTORY_PGN"))
+		if e != nil {
+			t.Fatal(e)
+		}
+		defer f.Close()
+		scanner := chess.NewScanner(f)
+		for gi := 1; gi <= 20; gi++ {
+			if !scanner.HasNext() {
+				t.Fatal("missing recorded game")
+			}
+			g, e := scanner.ParseNext()
+			if e != nil {
+				t.Fatal(e)
+			}
+			ps := g.Positions()
+			for _, r := range selected {
+				if r.Game != gi {
+					continue
+				}
+				if r.Ply < 0 || r.Ply >= len(ps) {
+					t.Fatal("recorded ply")
+				}
+				p := ps[r.Ply]
+				h := []uint64{}
+				for _, q := range ps[max(0, r.Ply-p.HalfMoveClock()):r.Ply] {
+					h = append(h, q.ZobristHash())
+				}
+				positions[key(r)] = position{p, h}
+			}
+		}
+	} else {
+		for _, c := range candidateProbeCases(t) {
+			g := candidateProbeGame(t, c)
+			positions[c.ID] = position{g.Position(), repetitionHistory(g)}
+		}
+	}
+	proofs := []map[string]any{}
+	failures := []string{}
+	for i, r := range selected {
+		b := baseline[i]
+		p, ok := positions[key(r)]
+		if !ok || r.ID != b.ID || r.Game != b.Game || r.Ply != b.Ply || r.Depth != b.Depth || len(r.Best) != 1 {
+			t.Fatal("membership identity", key(r))
+		}
+		if warm && (r.FEN != b.FEN || r.FEN != p.p.String()) {
+			t.Fatal("membership FEN", key(r))
+		}
+		moves := rootMoves(p.p, r.Best)
+		legal := len(moves) == 1 && moves[0].String() == r.Best[0]
+		w := searcher{table: newTable(), killers: new(killerTable), deadline: time.Now().Add(30 * time.Second)}
+		for _, k := range p.history {
+			w.pushKey(k)
+		}
+		score, complete := 0, false
+		if legal {
+			_, score, complete = w.root(p.p, moves, r.Depth)
+		}
+		passed := legal && complete && r.Complete && b.Complete && score == b.Score && r.Score == b.Score
+		if !passed {
+			failures = append(failures, key(r))
+		}
+		proofs = append(proofs, map[string]any{"id": key(r), "depth": r.Depth, "selected": r.Best, "candidate_score": r.Score, "baseline_root_score": b.Score, "baseline_selected_move_score": score, "legal": legal, "complete": complete, "nodes": w.nodes, "passed": passed})
+	}
+	data, e := json.MarshalIndent(map[string]any{"positions": len(proofs), "proofs": proofs, "failures": failures, "passed": len(failures) == 0}, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile(os.Getenv("HISTORY_MEMBERSHIP_OUTPUT"), append(data, '\n'), 0644); e != nil {
+		t.Fatal(e)
+	}
+	if len(failures) != 0 {
+		t.Fatal("baseline membership failures", failures)
+	}
+}

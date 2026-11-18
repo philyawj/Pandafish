@@ -1,0 +1,106 @@
+{
+  "newer-100": {
+    "both_deadline_pairs": 90,
+    "candidate_completed_depth_higher": 40,
+    "candidate_completed_depth_lower": 0,
+    "candidate_completed_depth_same": 105,
+    "fallbacks": {},
+    "lower_depth_cases": [],
+    "median_deadline_node_rate_ratio": 1.5068801823505342,
+    "paired_trials": 145,
+    "response_times": {
+      "baseline": {
+        "max_ms": 95.987625,
+        "observations": 145,
+        "p50_ms": 95.587542,
+        "p95_ms": 95.911667,
+        "p99_ms": 95.985833
+      },
+      "candidate": {
+        "max_ms": 96.555333,
+        "observations": 145,
+        "p50_ms": 95.579292,
+        "p95_ms": 95.926458,
+        "p99_ms": 96.003709
+      }
+    }
+  },
+  "newer-1000": {
+    "both_deadline_pairs": 88,
+    "candidate_completed_depth_higher": 48,
+    "candidate_completed_depth_lower": 0,
+    "candidate_completed_depth_same": 97,
+    "fallbacks": {},
+    "lower_depth_cases": [],
+    "median_deadline_node_rate_ratio": 1.6350440970935263,
+    "paired_trials": 145,
+    "response_times": {
+      "baseline": {
+        "max_ms": 996.14725,
+        "observations": 145,
+        "p50_ms": 995.599917,
+        "p95_ms": 995.923209,
+        "p99_ms": 996.0855
+      },
+      "candidate": {
+        "max_ms": 996.025959,
+        "observations": 145,
+        "p50_ms": 995.603625,
+        "p95_ms": 995.933416,
+        "p99_ms": 995.986375
+      }
+    }
+  },
+  "public-100": {
+    "both_deadline_pairs": 143,
+    "candidate_completed_depth_higher": 74,
+    "candidate_completed_depth_lower": 0,
+    "candidate_completed_depth_same": 178,
+    "fallbacks": {},
+    "lower_depth_cases": [],
+    "median_deadline_node_rate_ratio": 1.5079053866016423,
+    "paired_trials": 252,
+    "response_times": {
+      "baseline": {
+        "max_ms": 96.907917,
+        "observations": 252,
+        "p50_ms": 95.325417,
+        "p95_ms": 96.04025,
+        "p99_ms": 96.362292
+      },
+      "candidate": {
+        "max_ms": 96.795417,
+        "observations": 252,
+        "p50_ms": 95.307667,
+        "p95_ms": 95.88875,
+        "p99_ms": 96.185416
+      }
+    }
+  },
+  "public-1000": {
+    "both_deadline_pairs": 52,
+    "candidate_completed_depth_higher": 22,
+    "candidate_completed_depth_lower": 0,
+    "candidate_completed_depth_same": 62,
+    "fallbacks": {},
+    "lower_depth_cases": [],
+    "median_deadline_node_rate_ratio": 1.5307318124709717,
+    "paired_trials": 84,
+    "response_times": {
+      "baseline": {
+        "max_ms": 996.532959,
+        "observations": 84,
+        "p50_ms": 995.608708,
+        "p95_ms": 996.102125,
+        "p99_ms": 996.442375
+      },
+      "candidate": {
+        "max_ms": 996.494625,
+        "observations": 84,
+        "p50_ms": 995.592,
+        "p95_ms": 996.173875,
+        "p99_ms": 996.447958
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+File: Pandafish.test
+Type: cpu
+Time: 2026-11-18 05:54:08 PST
+Duration: 28.65s, Total samples = 25.64s (89.48%)
+Showing nodes accounting for 9.25s, 36.08% of 25.64s total
+Dropped 209 nodes (cum <= 0.13s)
+Showing top 25 nodes out of 129
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%     18.46s 72.00%  github.com/philyawj/Pandafish.TestWarmPipelineProfile
+         0     0%     0%     18.46s 72.00%  testing.tRunner
+         0     0%     0%     18.33s 71.49%  github.com/philyawj/Pandafish.(*searcher).iterate
+         0     0%     0%     18.33s 71.49%  github.com/philyawj/Pandafish.(*searcher).root
+         0     0%     0%     18.33s 71.49%  github.com/philyawj/Pandafish.iterativeSearchWithHistory
+     0.05s   0.2%   0.2%     18.32s 71.45%  github.com/philyawj/Pandafish.(*searcher).childSearch
+     0.12s  0.47%  0.66%     18.32s 71.45%  github.com/philyawj/Pandafish.(*searcher).searchAtPly
+     0.12s  0.47%  1.13%     14.06s 54.84%  github.com/philyawj/Pandafish.(*searcher).quietAtPly
+         0     0%  1.13%      8.12s 31.67%  github.com/philyawj/Pandafish.(*searcher).childQuiet
+     0.95s  3.71%  4.84%      6.38s 24.88%  github.com/corentings/chess/v2.(*Position).searchMoves
+         0     0%  4.84%      6.06s 23.63%  runtime.systemstack
+     0.18s   0.7%  5.54%      5.37s 20.94%  github.com/philyawj/Pandafish.(*searcher).searchMoves
+     4.73s 18.45% 23.99%      4.73s 18.45%  runtime.kevent
+         0     0% 23.99%      4.73s 18.45%  runtime.netpoll
+         0     0% 23.99%      4.73s 18.45%  runtime.startTheWorldWithSema
+         0     0% 23.99%      4.27s 16.65%  github.com/corentings/chess/v2.(*Position).AppendSearchMoves (inline)
+     0.53s  2.07% 26.05%      4.17s 16.26%  github.com/corentings/chess/v2.searchMoveTags
+     0.51s  1.99% 28.04%      3.64s 14.20%  github.com/philyawj/Pandafish.(*searcher).exchange
+         0     0% 28.04%      3.20s 12.48%  runtime.gcStart.func4
+     0.10s  0.39% 28.43%      2.71s 10.57%  github.com/corentings/chess/v2.(*Position).UpdateSearch
+     0.73s  2.85% 31.28%      2.67s 10.41%  github.com/philyawj/Pandafish.(*exchangeBoard).leastAttacker
+     1.19s  4.64% 35.92%      1.95s  7.61%  github.com/corentings/chess/v2.searchSquareAttackedBy
+     0.03s  0.12% 36.04%      1.72s  6.71%  github.com/philyawj/Pandafish.(*mainMovePicker).next
+         0     0% 36.04%      1.52s  5.93%  runtime.startTheWorld.func1
+     0.01s 0.039% 36.08%      1.48s  5.77%  github.com/corentings/chess/v2.(*Position).SearchStatus (inline)

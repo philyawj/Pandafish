@@ -1,0 +1,32 @@
+=== RUN   TestDeadlineMonotonicAndWallOnly
+=== RUN   TestDeadlineMonotonicAndWallOnly/unlimited
+=== RUN   TestDeadlineMonotonicAndWallOnly/monotonic-past
+=== RUN   TestDeadlineMonotonicAndWallOnly/monotonic-future
+=== RUN   TestDeadlineMonotonicAndWallOnly/wall-past
+=== RUN   TestDeadlineMonotonicAndWallOnly/wall-future
+=== RUN   TestDeadlineMonotonicAndWallOnly/wall-far-past
+=== RUN   TestDeadlineMonotonicAndWallOnly/wall-far-future
+--- PASS: TestDeadlineMonotonicAndWallOnly (0.00s)
+    --- PASS: TestDeadlineMonotonicAndWallOnly/unlimited (0.00s)
+    --- PASS: TestDeadlineMonotonicAndWallOnly/monotonic-past (0.00s)
+    --- PASS: TestDeadlineMonotonicAndWallOnly/monotonic-future (0.00s)
+    --- PASS: TestDeadlineMonotonicAndWallOnly/wall-past (0.00s)
+    --- PASS: TestDeadlineMonotonicAndWallOnly/wall-future (0.00s)
+    --- PASS: TestDeadlineMonotonicAndWallOnly/wall-far-past (0.00s)
+    --- PASS: TestDeadlineMonotonicAndWallOnly/wall-far-future (0.00s)
+=== RUN   TestDeadlineInjectedClockBoundariesAndGuards
+--- PASS: TestDeadlineInjectedClockBoundariesAndGuards (0.00s)
+=== RUN   TestIterativeMatchesFixedDepth
+--- PASS: TestIterativeMatchesFixedDepth (0.09s)
+=== RUN   TestCancellationAndFallback
+--- PASS: TestCancellationAndFallback (0.00s)
+=== RUN   TestIncompleteIterationDoesNotReplaceCompletedResult
+--- PASS: TestIncompleteIterationDoesNotReplaceCompletedResult (0.00s)
+=== RUN   TestDeadlineInsideQuiescence
+--- PASS: TestDeadlineInsideQuiescence (0.00s)
+=== RUN   TestDeadlineDuringHorizonCheckEvasion
+--- PASS: TestDeadlineDuringHorizonCheckEvasion (0.00s)
+=== RUN   TestThirdOccurrenceScoresDrawAndUnwinds
+--- PASS: TestThirdOccurrenceScoresDrawAndUnwinds (0.00s)
+PASS
+ok  	github.com/philyawj/Pandafish	0.436s

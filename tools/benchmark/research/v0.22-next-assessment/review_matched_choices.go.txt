@@ -1,0 +1,7 @@
+package main
+import("encoding/json";"fmt";"os";"reflect")
+func main(){
+ if len(os.Args)!=2{panic("usage: reviewer evidenceDir")};dir:=os.Args[1];load:=func(p string,v any){b,e:=os.ReadFile(dir+"/"+p);if e!=nil{panic(e)};if e=json.Unmarshal(b,v);e!=nil{panic(e)}}
+ var input struct{Cases []struct{ID string;Depths []int}};load("changed-choice-inputs.json",&input);expected:=map[string]bool{};for _,c:=range input.Cases{for _,d:=range c.Depths{expected[fmt.Sprint(c.ID,"/",d)]=true}}
+ type row struct{ID string;Depth,Score int;Best string;Nodes uint64;Complete bool};var a,b []row;load("changed-depth-baseline.json",&a);load("changed-depth-candidate.json",&b);if !reflect.DeepEqual(a,b)||len(a)!=len(expected){panic("matched-depth identity")};seen:=map[string]bool{};for _,r:=range a{key:=fmt.Sprint(r.ID,"/",r.Depth);if !expected[key]||seen[key]||!r.Complete{panic("matched-depth coverage")};seen[key]=true};out:=map[string]any{"passed":true,"changed_roots":len(input.Cases),"matched_depth_comparisons":len(a),"scores_moves_nodes_identical":true,"unrestricted_fresh_iterative_search":true};data,e:=json.MarshalIndent(out,"","  ");if e!=nil{panic(e)};fmt.Println(string(data))
+}

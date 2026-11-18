@@ -1,0 +1,55 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"os"
+	"strconv"
+	"testing"
+	"time"
+)
+
+func TestCandidateIterationWork(t *testing.T) {
+	if os.Getenv("ITERATION_OUTPUT") == "" {
+		t.Skip("explicit iterative workload required")
+	}
+	depth, e := strconv.Atoi(os.Getenv("CANDIDATE_DEPTH"))
+	if e != nil || depth < 1 {
+		t.Fatal("iteration depth")
+	}
+	type row struct {
+		ID       string
+		Depth    int
+		Nodes    uint64
+		Score    int
+		Best     []string
+		MS       float64
+		Complete bool
+	}
+	rows := []row{}
+	for _, c := range candidateProbeCases(t) {
+		if depth > 5 && !c.Deep {
+			continue
+		}
+		g := candidateProbeGame(t, c)
+		history := repetitionHistory(g)
+		table := newTable()
+		ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+		start := time.Now()
+		result := iterativeSearchWithHistory(ctx, g.Position(), goLimits{depth: depth}, timeBudget{}, start, table, history)
+		elapsed := time.Since(start)
+		cancel()
+		complete := result.depth == depth || (result.move == "0000" && !g.Position().HasLegalMove())
+		rows = append(rows, row{c.ID, depth, result.metrics.Nodes, result.score, []string{result.move}, float64(elapsed) / float64(time.Millisecond), complete})
+		data, e := json.MarshalIndent(rows, "", "  ")
+		if e != nil {
+			t.Fatal(e)
+		}
+		if e = os.WriteFile(os.Getenv("ITERATION_OUTPUT"), append(data, '\n'), 0644); e != nil {
+			t.Fatal(e)
+		}
+		if !complete {
+			t.Fatal("incomplete iterative work", c.ID, result)
+		}
+	}
+}

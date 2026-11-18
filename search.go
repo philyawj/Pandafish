@@ -77,15 +77,16 @@ func (worker *searcher) searchAtPly(position *chess.Position, depth, alpha, beta
 		}
 	}
 	originalAlpha := alpha
-	moves := worker.searchMoves(position, ply, false)
-	worker.killers.order(moves, ply)
+	hint := uint16(0)
 	if hit {
-		preferMove(moves, entry.move)
+		hint = entry.move
 	} else {
-		preferMove(moves, worker.table.boardHint(position))
+		hint = worker.table.boardHint(position)
 	}
+	picker := newMainMovePicker(worker, position, ply, hint)
 	best, bestMove := -searchInfinity, uint16(0)
-	for moveIndex, move := range moves {
+	moveIndex := 0
+	for move, ok := picker.next(); ok; move, ok = picker.next() {
 		if worker.stopped() {
 			return 0, false
 		}
@@ -114,6 +115,7 @@ func (worker *searcher) searchAtPly(position *chess.Position, depth, alpha, beta
 			worker.killers.remember(ply, move)
 			break
 		}
+		moveIndex++
 	}
 	if worker.stopped() {
 		return 0, false

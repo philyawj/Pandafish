@@ -1,0 +1,32 @@
+package main
+
+import("encoding/json";"fmt";"os";"os/exec";"path/filepath";"reflect";"sort")
+type warmRow struct{Game,Ply,Depth,Score int;Best,FEN string;Nodes uint64;ParseMS,SearchMS float64;Bytes,Allocs uint64}
+type warmRun struct{Mode string;Depth int;Inputs map[string]string;Rows []warmRow}
+func main(){
+ repo,e:=os.Getwd();if e!=nil{panic(e)};dir:=filepath.Join(repo,"tools/benchmark/research/v0.22-bitboard-exchange");input:=filepath.Join(repo,"tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba")
+ read:=func(name string,v any){b,e:=os.ReadFile(filepath.Join(dir,name));if e!=nil{panic(e)};if e=json.Unmarshal(b,v);e!=nil{panic(e)}}
+ put:=func(name string,v any){b,e:=json.MarshalIndent(v,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(filepath.Join(dir,name),append(b,'\n'),0644);e!=nil{panic(e)}}
+ var cold struct{Issues []string `json:"correctness_issues"`;Median float64 `json:"depth4_median_ratio"`;Groups map[string]struct{Ratio float64 `json:"ratio"`} `json:"groups"`};read("timing-analysis.json",&cold)
+ if len(cold.Issues)>0||cold.Median>1||cold.Groups["depth-6"].Ratio>1||cold.Groups["fresh-depth-4"].Ratio>1{panic("cold correctness/no-regression gate")}
+ checks:=[]map[string]any{};results:=[]map[string]any{};ratios:=[]float64{};issues:=[]string{};first:=map[string]warmRun{}
+ for pair:=1;pair<=3;pair++ {
+  actors:=[]string{"baseline","candidate"};if pair%2==0{actors[0],actors[1]=actors[1],actors[0]}
+  runs:=map[string]warmRun{}
+  for _,actor:=range actors {
+   name:=fmt.Sprintf("%s-warm-pair-%d",actor,pair);out:=filepath.Join(dir,name+".json");if _,e:=os.Stat(out);!os.IsNotExist(e){panic("refuse overwrite")}
+   cwd:="/tmp/pandafish-v022-evasion-profile";if actor=="candidate"{cwd="/tmp/pandafish-v022-exchange-profile"}
+   cmd:=exec.Command("go","test","-count=1","-timeout=15m","-run","^TestWarmPipelineProfile$","-v");cmd.Dir=cwd;env:=[]string{"GOCACHE=/tmp/pandafish-v016-go-cache","WARM_INPUT="+input,"WARM_OUTPUT="+out,"WARM_MODE=pipeline","WARM_DEPTH=5"};cmd.Env=append(os.Environ(),env...)
+   output,err:=cmd.CombinedOutput();if e=os.WriteFile(filepath.Join(dir,name+".txt"),output,0644);e!=nil{panic(e)};status:=0;if err!=nil{status=1};checks=append(checks,map[string]any{"name":name,"cwd":cwd,"command":cmd.Args,"environment":env,"exit":status});put("warm-checks.json",checks);fmt.Println(name,status);if err!=nil{panic(err)}
+   var r warmRun;read(name+".json",&r);if len(r.Rows)!=1145||r.Depth!=5||r.Mode!="pipeline"{panic("warm workload shape")};runs[actor]=r
+   if pair==1 {first[actor]=r} else {for i,x:=range first[actor].Rows{y:=r.Rows[i];if x.Game!=y.Game||x.Ply!=y.Ply||x.Depth!=y.Depth||x.Score!=y.Score||x.Best!=y.Best||x.Nodes!=y.Nodes||x.FEN!=y.FEN{issues=append(issues,name+"/repeat-determinism")}}}
+  }
+  a,b:=runs["baseline"],runs["candidate"];if !reflect.DeepEqual(a.Inputs,b.Inputs){panic("input hashes")};var am,bm,ap,bp float64;var an,bn,ab,bb,aa,ba uint64;different:=0
+  for i,x:=range a.Rows{y:=b.Rows[i];if x.Game!=y.Game||x.Ply!=y.Ply||x.Depth!=5||y.Depth!=5||x.Score!=y.Score||x.Best!=y.Best||x.Nodes!=y.Nodes||x.FEN!=y.FEN{issues=append(issues,fmt.Sprintf("pair-%d/%d/%d",pair,x.Game,x.Ply))};if x.Best!=y.Best{different++};am+=x.SearchMS;bm+=y.SearchMS;ap+=x.ParseMS;bp+=y.ParseMS;an+=x.Nodes;bn+=y.Nodes;ab+=x.Bytes;bb+=y.Bytes;aa+=x.Allocs;ba+=y.Allocs}
+  ratio:=bm/am;ratios=append(ratios,ratio);results=append(results,map[string]any{"pair":pair,"roots":len(a.Rows),"baseline_search_ms":am,"candidate_search_ms":bm,"ratio":ratio,"baseline_parse_ms":ap,"candidate_parse_ms":bp,"baseline_nodes":an,"candidate_nodes":bn,"baseline_bytes":ab,"candidate_bytes":bb,"baseline_allocs":aa,"candidate_allocs":ba,"different_root_choices":different})
+  put("warm-analysis-checkpoint.json",map[string]any{"pairs":results,"issues":issues})
+ }
+ sort.Float64s(ratios);passed:=len(issues)==0&&ratios[1]<=.90
+ put("warm-analysis.json",map[string]any{"pairs":results,"issues":issues,"median_search_ratio":ratios[1],"efficiency_gate_passed":passed,"membership_proof_pending":true,"same_actor_results_repeat_exactly":len(issues)==0})
+ if !passed{os.Exit(1)}
+}

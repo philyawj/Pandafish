@@ -1,0 +1,13 @@
+package main
+import("crypto/sha256";"encoding/json";"fmt";"os";"strings")
+func main(){
+ dir:="tools/benchmark/research/v0.22-monotonic-deadline/"
+ write:=func(p string,b []byte){if _,e:=os.Stat(p);!os.IsNotExist(e){panic("refuse overwrite "+p)};if e:=os.WriteFile(p,b,0644);e!=nil{panic(e)}}
+ adapt:=func(in,out string,replacements ...string){b,e:=os.ReadFile(in);if e!=nil{panic(e)};s:=string(b);for i:=0;i<len(replacements);i+=2{s=strings.ReplaceAll(s,replacements[i],replacements[i+1])};write(dir+out,[]byte(s));write("/tmp/pandafish-v022-monotonic-"+strings.TrimSuffix(out,".txt"),[]byte(s))}
+ adapt("tools/benchmark/research/v0.21-rank-order/timing_driver.go.txt","timing_driver.go.txt","v0.21-rank-order","v0.22-monotonic-deadline","/tmp/pandafish-v020-release/tagged-source","/tmp/pandafish-v021-release/tagged-source")
+ adapt("tools/benchmark/research/v0.22-child-storage/warm_driver.go.txt","warm_driver.go.txt","v0.22-child-storage","v0.22-monotonic-deadline","pandafish-v022-child-profile","pandafish-v022-monotonic-profile","/tmp/pandafish-v021-release/tagged-source","/tmp/pandafish-v021-clock-warm")
+ b,e:=os.ReadFile("tools/benchmark/research/v0.22-next-assessment/warm_profile_test.go.txt");if e!=nil{panic(e)};s:=strings.ReplaceAll(string(b),"limits = goLimits{depth: depth}","limits = goLimits{depth: depth, moveTime: 30 * time.Second, hasTime: true}");if s==string(b){panic("warm helper adaptation missed")};write(dir+"warm_profile_test.go.txt",[]byte(s))
+ files,hashes:=map[string]string{},map[string]string{}
+ for _,p:=range []string{"search.go","deadline_test.go"}{b,e:=os.ReadFile(p);if e!=nil{panic(e)};files[p]=string(b);hashes[p]=fmt.Sprintf("%x",sha256.Sum256(b))}
+ for p,v:=range map[string]any{dir+"candidate-source.json":map[string]any{"base_tag":"v0.21","files":files},dir+"source-hashes.json":hashes}{b,e:=json.MarshalIndent(v,"","  ");if e!=nil{panic(e)};write(p,append(b,'\n'))}
+}

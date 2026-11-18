@@ -1,0 +1,28 @@
+// Independently recompute saved kernel pairs; no engines or games are started.
+package main
+import("crypto/sha256";"encoding/json";"fmt";"math";"os";"path/filepath";"reflect";"sort")
+func read(p string)[]byte{b,e:=os.ReadFile(p);if e!=nil{panic(e)};return b}
+func load(p string,v any){if e:=json.Unmarshal(read(p),v);e!=nil{panic(e)}}
+func close(a,b float64)bool{return math.Abs(a-b)<1e-12}
+type coldRow struct{ID string;Depth int;Nodes uint64;Score int;Best []string;MS float64;Complete bool}
+type warmRow struct{Game,Ply,Depth,Score int;Best,FEN string;Nodes uint64;ParseMS,SearchMS float64}
+type warmRun struct{Mode string;Depth int;Inputs map[string]string;Rows []warmRow}
+func main(){
+ root:="tools/benchmark/research/";var anchor warmRun;load(root+"v0.22-staged-picker/baseline-warm-pair-1.json",&anchor)
+ expected:=map[string]string{"previous.pgn":"9347848b753a9ce6e3694ec55d06626af3ef6a397278231537dc383a02ba2de7","summary.json":"daaeed1f59da25e1a9ef7687bea1e11a8e0264596809cfc26cf80851932829a4"}
+ warm:=func(dir,prefix string,n int,limit float64)map[string]any{
+  ratios:=[]float64{};observations:=0
+  for pair:=1;pair<=n;pair++{times:=map[string]float64{};for _,actor:=range []string{"baseline","candidate"}{var r warmRun;load(filepath.Join(dir,fmt.Sprintf("%s-%swarm-pair-%d.json",actor,prefix,pair)),&r);if r.Mode!="pipeline"||r.Depth!=5||len(r.Rows)!=1145||!reflect.DeepEqual(r.Inputs,expected){panic("warm input identity")};var nodes uint64;for i,x:=range r.Rows{y:=anchor.Rows[i];times[actor]+=x.SearchMS;nodes+=x.Nodes;x.ParseMS=0;x.SearchMS=0;y.ParseMS=0;y.SearchMS=0;if !reflect.DeepEqual(x,y)||x.Best=="0000"{panic("warm root/score/move/node identity")}};if nodes!=43118858{panic("warm node accounting")}};if times["baseline"]<=0||times["candidate"]<=0{panic("time total")};ratios=append(ratios,times["candidate"]/times["baseline"]);observations+=1145}
+  sort.Float64s(ratios);median:=ratios[len(ratios)/2];var report struct{Ratio float64 `json:"median_search_ratio"`;Passed bool `json:"efficiency_gate_passed"`;Issues []string `json:"issues"`};load(dir+"/"+prefix+"warm-analysis.json",&report);passed:=median<=limit;if !close(median,report.Ratio)||report.Passed!=passed||len(report.Issues)!=0{panic("warm report differs")};return map[string]any{"paired_root_observations":observations,"median_ratio":median,"efficiency_gate_passed":passed,"limit":limit,"scores_moves_nodes_identical_to_v021":true,"baseline_best_membership_by_identical_choice":true,"same_actor_repeat_identity":true}
+ }
+ out:=map[string]any{}
+ for _,phase:=range []struct{Name string;Limit float64}{{"v0.22-staged-picker",.85},{"v0.22-evasion-mask",.90},{"v0.22-bitboard-exchange",.90}}{
+  dir:=root+phase.Name;ratios:=[]float64{};distinct:=map[string]bool{};groups:=map[string]float64{}
+  for _,suffix:=range []string{"pair-1-depth-4","pair-2-depth-4","pair-3-depth-4","depth-3","depth-6","fresh-depth-4"}{var a,b []coldRow;load(dir+"/baseline-"+suffix+".json",&a);load(dir+"/candidate-"+suffix+".json",&b);if len(a)!=len(b){panic("cold shape")};am,bm:=0.,0.;for i,x:=range a{y:=b[i];am+=x.MS;bm+=y.MS;x.MS=0;y.MS=0;if !x.Complete||!reflect.DeepEqual(x,y){panic("cold identity")};distinct[fmt.Sprint(x.ID,"/",x.Depth)]=true};groups[suffix]=bm/am;if len(ratios)<3{ratios=append(ratios,bm/am)}}
+  sort.Float64s(ratios);if len(distinct)!=325{panic("distinct cold roots")};var report struct{Ratio float64 `json:"depth4_median_ratio"`;Passed bool `json:"timing_gate_passed"`;Issues []string `json:"correctness_issues"`};load(dir+"/timing-analysis.json",&report);if !close(ratios[1],report.Ratio)||report.Passed!=(ratios[1]<=.85&&groups["depth-6"]<1)||len(report.Issues)!=0{panic("cold report differs")}
+  out[phase.Name]=map[string]any{"cold_distinct_comparisons":len(distinct),"cold_median_ratio":ratios[1],"cold_gate_passed":report.Passed,"warm":warm(dir,"",3,phase.Limit)}
+ }
+ out["exchange_total_warm_vs_v021"]=warm(root+"v0.22-bitboard-exchange","total-",1,.85)
+ helper:=read(root+"v0.22-next-assessment/warm_profile_test.go.txt");want:=sha256.Sum256(helper);for _,p:=range []string{"/tmp/pandafish-v021-release/tagged-source/warm_profile_test.go","/tmp/pandafish-v022-picker-profile/archived_proof_test.go","/tmp/pandafish-v022-evasion-profile/archived_proof_test.go","/tmp/pandafish-v022-exchange-profile/archived_proof_test.go"}{if sha256.Sum256(read(p))!=want{panic("warm helper changed")}}
+ out["review_passed"]=true;out["warm_helper_sha256"]=fmt.Sprintf("%x",want);b,e:=json.MarshalIndent(out,"","  ");if e!=nil{panic(e)};fmt.Println(string(b))
+}

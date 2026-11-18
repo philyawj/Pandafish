@@ -33,14 +33,14 @@ and benchmark evidence together. Run commands from the repository root.
    in each release milestone.
 4. Run formatting, tests, vet, a build, and `git diff --check`. If only version
    text and documentation changed since benchmarking, use a short smoke test
-   instead of another full match. For example, while preparing v0.21:
+   instead of another full match. For example, while preparing v0.22:
 
    ```sh
-   go run ./tools/benchmark --validate --race --version v0.21-release-smoke \
-     --previous tools/benchmark/bin/pandafish-v0.20 --previous-version v0.20 \
+   go run ./tools/benchmark --validate --race --version v0.22-release-smoke \
+     --previous tools/benchmark/bin/pandafish-v0.21 --previous-version v0.21 \
      --sequential --stage previous --pairs 1 --results /tmp/pandafish-release-smoke
    go run ./tools/benchmark --candidate tools/benchmark/bin/pandafish-candidate \
-     --version v0.21-release-smoke --stage external --parallel \
+     --version v0.22-release-smoke --stage external --parallel \
      --stockfish-skill 3 \
      --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
      --pairs 1 --results /tmp/pandafish-release-smoke
@@ -65,7 +65,7 @@ and benchmark evidence together. Run commands from the repository root.
 ## Tag and publish after merge
 
 Confirm the PR is merged and the version is unused, then fast-forward local
-`main` to the merged commit. For v0.21:
+`main` to the merged commit. For v0.22:
 
 ```sh
 git switch main
@@ -78,13 +78,13 @@ Check that the working tree is clean and HEAD is the intended release commit.
 Then create and push the tag:
 
 ```sh
-git tag -a v0.21 -m "v0.21: precompute stable move ordering"
-git push origin v0.21
+git tag -a v0.22 -m "v0.22: defer legal work and accelerate exchange evaluation"
+git push origin v0.22
 ```
 
 Publish a GitHub release for that tag, through the GitHub UI or
 `gh release create`. Use the version alone as the release title, such as
-`v0.21`. Describe the engine or tooling change, remaining limits,
+`v0.22`. Describe the engine or tooling change, remaining limits,
 and validation, linking the candidate benchmark evidence. An engine release
 does not automatically advance the Stockfish skill target.
 
@@ -115,17 +115,17 @@ benchmark files do not need to be attached again as release assets.
 
 ## Build the next baseline
 
-Build from the tag rather than a development checkout. For v0.21:
+Build from the tag rather than a development checkout. For v0.22:
 
 ```sh
 mkdir -p tools/benchmark/bin
 benchmark_bin="$PWD/tools/benchmark/bin"
 build_dir=$(mktemp -d)
-git archive v0.21 | tar -x -C "$build_dir"
-(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.21" .)
+git archive v0.22 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.22" .)
 ```
 
-The tagged executable becomes the previous version for v0.22 development.
+The tagged executable becomes the previous version for v0.23 development.
 Compiled binaries remain gitignored. Building this baseline does not require
 relabeling or rerunning the development benchmarks. A separate benchmark of
 the exact released binary is optional. Keep private bot greetings in sync
@@ -215,3 +215,12 @@ after its clean 55%/50%/71% standard screen. Original priorities, stable ties,
 values, search/TT policy and clocks are unchanged. Preserve the development
 binary identity and qualify the small direct lead; version-only smoke checks
 are integration evidence. The current Stockfish reference remains Skill 3.
+
+v0.22 promotes the [revised exact kernel](tools/benchmark/research/v0.22-bitboard-exchange/RESULTS.md)
+after its clean 64%/71%/70% standard screen. Deferred generation, exact evasion
+prefiltering and bitset exchange computation preserve fixed-work search results.
+The public 100ms teacher-loss gate remains failed; its explicit pre-game review
+exception and all earlier failed variants stay archived. Preserve the original
+development label/hash. Version-only release smokes are integration evidence,
+not another strength screen. Skill 3 remains the standard. No further experiment
+starts as part of this release.

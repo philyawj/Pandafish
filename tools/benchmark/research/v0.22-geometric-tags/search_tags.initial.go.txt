@@ -1,0 +1,108 @@
+package chess
+
+// Geometry has no dependency on the original package's runtime lookup-table
+// initialization. Each ray includes all aligned squares except its origin.
+var searchTagGeometry = func() [64]struct {
+	orthogonal, diagonal bitboard
+	pawnOrigins          [3]bitboard
+} {
+	var result [64]struct {
+		orthogonal, diagonal bitboard
+		pawnOrigins          [3]bitboard
+	}
+	for target := 0; target < 64; target++ {
+		for origin := 0; origin < 64; origin++ {
+			dx, dy := origin%8-target%8, origin/8-target/8
+			ax, ay := dx, dy
+			if ax < 0 {
+				ax = -ax
+			}
+			if ay < 0 {
+				ay = -ay
+			}
+			if origin != target && (dx == 0 || dy == 0) {
+				result[target].orthogonal |= bbForSquare(Square(origin))
+			}
+			if ax != 0 && ax == ay {
+				result[target].diagonal |= bbForSquare(Square(origin))
+			}
+			if ax == 1 && dy == -1 {
+				result[target].pawnOrigins[White] |= bbForSquare(Square(origin))
+			}
+			if ax == 1 && dy == 1 {
+				result[target].pawnOrigins[Black] |= bbForSquare(Square(origin))
+			}
+		}
+	}
+	return result
+}()
+
+type searchTagContext struct {
+	pos                  *Position
+	ownKing, otherKing   Square
+	ownRays, otherRays   bitboard
+	checkingTargets      [7]bitboard
+	classify, otherCheck bool
+}
+
+func newSearchTagContext(pos *Position, classify bool) searchTagContext {
+	c := searchTagContext{pos: pos, ownKing: pos.board.kingSquare(pos.turn), otherKing: pos.board.kingSquare(pos.turn.Other()), classify: classify}
+	if c.ownKing != NoSquare {
+		g := searchTagGeometry[c.ownKing]
+		c.ownRays = g.orthogonal | g.diagonal
+	}
+	if classify && c.otherKing != NoSquare {
+		g := searchTagGeometry[c.otherKing]
+		c.otherRays = g.orthogonal | g.diagonal
+		c.checkingTargets[King], c.checkingTargets[Knight] = bbKingMoves[c.otherKing], bbKnightMoves[c.otherKing]
+		c.checkingTargets[Queen], c.checkingTargets[Rook], c.checkingTargets[Bishop] = c.otherRays, g.orthogonal, g.diagonal
+		c.checkingTargets[Pawn] = g.pawnOrigins[pos.turn]
+		c.otherCheck = searchSquareAttackedBy(pos.board, c.otherKing, pos.turn)
+	}
+	return c
+}
+
+func (c *searchTagContext) tags(move Move) MoveTag {
+	pos := c.pos
+	piece := pos.board.Piece(move.s1)
+	var tags MoveTag
+	if pos.board.isOccupied(move.s2) {
+		tags |= Capture
+	} else if move.s2 == pos.enPassantSquare && piece.Type() == Pawn {
+		tags |= EnPassant
+	}
+	if (piece == WhiteKing && move.s1 == E1) || (piece == BlackKing && move.s1 == E8) {
+		switch move.s2 {
+		case C1, C8:
+			tags |= QueenSideCastle
+		case G1, G8:
+			tags |= KingSideCastle
+		}
+	}
+	special := tags&(EnPassant|KingSideCastle|QueenSideCastle) != 0
+	from, to := bbForSquare(move.s1), bbForSquare(move.s2)
+	ownNeeded := c.ownKing != NoSquare && (pos.inCheck || piece.Type() == King || special || c.ownRays&from != 0)
+	kind := piece.Type()
+	if move.promo != NoPieceType {
+		kind = move.promo
+	}
+	otherNeeded := c.classify && c.otherKing != NoSquare && (c.otherCheck || special || c.otherRays&from != 0 || c.checkingTargets[kind]&to != 0)
+	if !ownNeeded && !otherNeeded {
+		return tags
+	}
+	local := move
+	local.tags = tags
+	board := *pos.board
+	board.updateSearch(&local)
+	if ownNeeded {
+		if king := board.kingSquare(pos.turn); king != NoSquare && searchSquareAttackedBy(&board, king, pos.turn.Other()) {
+			tags |= inCheck
+		}
+	}
+	if otherNeeded {
+		if king := board.kingSquare(pos.turn.Other()); king != NoSquare && searchSquareAttackedBy(&board, king, pos.turn) {
+			tags |= Check
+		}
+	}
+	return tags
+}

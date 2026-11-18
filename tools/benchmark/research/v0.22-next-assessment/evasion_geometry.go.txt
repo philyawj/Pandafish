@@ -1,0 +1,20 @@
+package chess
+
+import "math/bits"
+
+// searchEvasionMask only prefilters ordinary nonking destinations. Every retained
+// move still needs full legality. En passant must bypass this mask.
+func searchEvasionMask(pos *Position) (bitboard, bool) {
+ if !pos.inCheck{return 0,false}
+ kings:=pos.board.bbWhiteKing;if pos.turn==Black{kings=pos.board.bbBlackKing};if bits.OnesCount64(uint64(kings))!=1{return 0,false}
+ king:=pos.board.kingSquare(pos.turn);file,rank:=int(king.File()),int(king.Rank());enemy:=pos.turn.Other();mask:=^bitboard(0);checkers:=0
+ add:=func(line bitboard){mask&=line;checkers++}
+ knights,enemyKings:=pos.board.bbBlackKnight,pos.board.bbBlackKing;if enemy==White{knights,enemyKings=pos.board.bbWhiteKnight,pos.board.bbWhiteKing}
+ direct:=(bbKnightMoves[king]&knights)|(bbKingMoves[king]&enemyKings)
+ for direct!=0{s:=Square(bits.LeadingZeros64(uint64(direct)));direct&^=bbForSquare(s);add(bbForSquare(s))}
+ pawnRank:=rank+1;if enemy==White{pawnRank=rank-1};if pawnRank>=0&&pawnRank<8{for _,df:=range [2]int{-1,1}{f:=file+df;if f>=0&&f<8{s:=Square(pawnRank*8+f);if pos.board.Piece(s)==NewPiece(Pawn,enemy){add(bbForSquare(s))}}}}
+ for _,direction:=range [8][2]int{{1,0},{-1,0},{0,1},{0,-1},{1,1},{1,-1},{-1,1},{-1,-1}}{
+  line:=bitboard(0);for f,r:=file+direction[0],rank+direction[1];f>=0&&f<8&&r>=0&&r<8;f,r=f+direction[0],r+direction[1]{s:=Square(r*8+f);line|=bbForSquare(s);piece:=pos.board.Piece(s);if piece==NoPiece{continue};if piece.Color()==enemy{kind:=piece.Type();straight:=direction[0]==0||direction[1]==0;if kind==Queen||(straight&&kind==Rook)||(!straight&&kind==Bishop){add(line)}};break}
+ }
+ if checkers==0{return 0,false};return mask,true
+}

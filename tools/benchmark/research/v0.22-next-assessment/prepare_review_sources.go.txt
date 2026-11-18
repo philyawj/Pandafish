@@ -1,0 +1,11 @@
+package main
+import("os";"strings")
+func main(){
+ b,e:=os.ReadFile("tools/benchmark/research/v0.22-next-assessment/review_evidence.go.txt");if e!=nil{panic(e)};s:=string(b)
+ s=strings.ReplaceAll(s,`"v0.22-monotonic-deadline"}`,`"v0.22-monotonic-deadline","v0.22-quiet-history","v0.22-history-malus","v0.22-aspiration","v0.22-clock-screen"}`)
+ s=strings.ReplaceAll(s,`active:=snapshots["v0.22-monotonic-deadline"]`,`active:=snapshots["v0.22-clock-screen"]`)
+ s=strings.ReplaceAll(s,`"tools/benchmark/bin/pandafish-v022-monotonic-deadline","/opt`, `"tools/benchmark/bin/pandafish-v022-monotonic-deadline","tools/benchmark/bin/pandafish-v022-quiet-history","tools/benchmark/bin/pandafish-v022-history-malus","tools/benchmark/bin/pandafish-v022-aspiration","tools/benchmark/bin/pandafish-v022-clock-screen","/opt`)
+ s=strings.ReplaceAll(s,`root+"v0.22-monotonic-deadline/"+name+"/method.json"`,`root+"v0.22-clock-screen/"+name+"/method.json"`)
+ s=strings.ReplaceAll(s,`"candidate":"tools/benchmark/bin/pandafish-v022-monotonic-deadline"`,`"candidate":"tools/benchmark/bin/pandafish-v022-clock-screen"`)
+ if e=os.WriteFile("tools/benchmark/research/v0.22-next-assessment/review_sources.go.txt",[]byte(s),0644);e!=nil{panic(e)};if e=os.WriteFile("/tmp/pandafish-v022-review-sources.go",[]byte(s),0644);e!=nil{panic(e)}
+}

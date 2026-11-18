@@ -1,0 +1,93 @@
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+)
+
+type row struct {
+	Game, Ply, Depth, Score int
+	Best, FEN               string
+	Nodes                   uint64
+	ParseMS, SearchMS       float64
+	Bytes, Allocs           uint64
+}
+type run struct {
+	Mode   string
+	Depth  int
+	Inputs map[string]string
+	Rows   []row
+}
+
+func read(path string) run {
+	b, e := os.ReadFile(path)
+	if e != nil {
+		panic(e)
+	}
+	var v run
+	if e = json.Unmarshal(b, &v); e != nil {
+		panic(e)
+	}
+	return v
+}
+func hash(path string) string {
+	b, e := os.ReadFile(path)
+	if e != nil {
+		panic(e)
+	}
+	v := sha256.Sum256(b)
+	return hex.EncodeToString(v[:])
+}
+func main() {
+	if len(os.Args) != 4 {
+		panic("usage: review_warm dir baselineBinary out")
+	}
+	dir := os.Args[1]
+	results := map[string]any{}
+	for _, mode := range []string{"search", "pipeline"} {
+		r := read(filepath.Join(dir, "baseline-warm-"+mode+".json"))
+		var nodes, bytes, allocs uint64
+		var parseMS, searchMS, depth float64
+		games := map[int]int{}
+		overruns := []string{}
+		for _, x := range r.Rows {
+			nodes += x.Nodes
+			bytes += x.Bytes
+			allocs += x.Allocs
+			parseMS += x.ParseMS
+			searchMS += x.SearchMS
+			depth += float64(x.Depth)
+			games[x.Game]++
+			if x.SearchMS > 150 {
+				overruns = append(overruns, fmt.Sprintf("%d/%d", x.Game, x.Ply))
+			}
+		}
+		results[mode] = map[string]any{"roots": len(r.Rows), "games": games, "nodes": nodes, "parse_ms": parseMS, "search_ms": searchMS, "parse_percent": 100 * parseMS / (parseMS + searchMS), "bytes": bytes, "allocs": allocs, "mean_depth": depth / float64(len(r.Rows)), "search_over_150ms": overruns, "inputs": r.Inputs}
+	}
+	a, b := read(filepath.Join(dir, "baseline-warm-search.json")), read(filepath.Join(dir, "baseline-warm-pipeline.json"))
+	if len(a.Rows) != len(b.Rows) {
+		panic("root count")
+	}
+	for i, x := range a.Rows {
+		y := b.Rows[i]
+		if x.Game != y.Game || x.Ply != y.Ply || x.FEN != y.FEN {
+			panic("workload mismatch")
+		}
+	}
+	results["baseline_sha256"] = hash(os.Args[2])
+	results["baseline_tag"] = "v0.21"
+	results["baseline_revision"] = "494604686a7afbda256da1625aa907baa6060084"
+	results["workload_identity_passed"] = true
+	data, e := json.MarshalIndent(results, "", "  ")
+	if e != nil {
+		panic(e)
+	}
+	if e = os.WriteFile(os.Args[3], append(data, '\n'), 0644); e != nil {
+		panic(e)
+	}
+	fmt.Println(string(data))
+}

@@ -1,0 +1,16 @@
+package main
+import("encoding/json";"os";"os/exec";"strings")
+func main(){
+ b,e:=os.ReadFile("tools/benchmark/research/v0.22-history-malus/candidate-source.json");if e!=nil{panic(e)};var old struct{Files map[string]string};if e=json.Unmarshal(b,&old);e!=nil{panic(e)}
+ for p,s:=range old.Files{b,e:=os.ReadFile(p);if e!=nil||string(b)!=s{panic("changed source "+p)}}
+ for p:=range old.Files{b,e:=exec.Command("git","show","v0.21:"+p).Output();if e!=nil{if e=os.Remove(p);e!=nil{panic(e)}}else if e=os.WriteFile(p,b,0644);e!=nil{panic(e)}}
+ b,e=exec.Command("git","show","v0.21:iterative.go").Output();if e!=nil{panic(e)};oldText:="result = searchResult{move: best[0], depth: depth, score: score}";s:=strings.Replace(string(b),oldText,oldText+"\n\t\trecordAspirationIteration(depth,score)",1);if s==string(b){panic("instrumentation missed")}
+ helper:=`package main
+import("context";"encoding/json";"os";"testing";"time")
+type aspirationIteration struct{Depth,Score int}
+var aspirationTrace []aspirationIteration
+func recordAspirationIteration(depth,score int){aspirationTrace=append(aspirationTrace,aspirationIteration{depth,score})}
+func TestAspirationOpportunity(t *testing.T){type row struct{ID,Turn string;Iterations []aspirationIteration;Move string;Depth int};rows:=[]row{};for _,c:=range candidateProbeCases(t){g:=candidateProbeGame(t,c);aspirationTrace=nil;ctx,cancel:=context.WithTimeout(context.Background(),30*time.Second);result:=iterativeSearchWithHistory(ctx,g.Position(),goLimits{depth:5},timeBudget{},time.Now(),newTable(),repetitionHistory(g));cancel();rows=append(rows,row{c.ID,g.Position().Turn().String(),aspirationTrace,result.move,result.depth});if result.depth!=5{t.Fatal("incomplete diagnostic",c.ID)};b,e:=json.MarshalIndent(rows,"","  ");if e!=nil{t.Fatal(e)};if e=os.WriteFile(os.Getenv("ASPIRATION_OUTPUT"),append(b,'\n'),0644);e!=nil{t.Fatal(e)}}}
+`
+ b,e=json.MarshalIndent(map[string]any{"base_tag":"v0.21","files":map[string]string{"iterative.go":s,"aspiration_opportunity_test.go":helper}},"","  ");if e!=nil{panic(e)};if e=os.WriteFile("tools/benchmark/research/v0.22-next-assessment/aspiration-opportunity-source.json",append(b,'\n'),0644);e!=nil{panic(e)}
+}

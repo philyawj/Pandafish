@@ -1,0 +1,30 @@
+package main
+import("encoding/json";"os";"os/exec";"strings")
+func main(){
+ b,e:=exec.Command("git","show","v0.21:search.go").Output();if e!=nil{panic(e)};old:="func (worker *searcher) quietAtPly(";s:=strings.Replace(string(b),old,"func (worker *searcher) quietAtPlyMeasured(",1);if s==string(b){panic("quiescence instrumentation missed")}
+ helper:=`package main
+import "github.com/corentings/chess/v2"
+type qDiagnosticEntry struct{key uint64;halfmove,depth,score int;generation uint16;mode uint8;kind bound}
+var qDiagnosticCaches=map[*transpositionTable][]qDiagnosticEntry{}
+var qDiagnosticStats=map[string]uint64{}
+var qDiagnosticActive bool
+func(w *searcher)quietAtPly(p *chess.Position,depth,alpha,beta int,checked bool,ply int)(int,bool){
+ qDiagnosticStats["quiescence_visits"]++
+ boardKey:=p.ZobristHash();n:=w.repetitions[boardKey]
+ if w.table==nil||p.SearchStatus()!=chess.NoMethod||n>=2{return w.quietAtPlyMeasured(p,depth,alpha,beta,checked,ply)}
+ history:=w.historyKey^repetitionToken(boardKey,n)^repetitionToken(boardKey,n+1);key:=boardKey^history
+ mode:=uint8(0);if checked{mode|=1};if w.unfiltered{mode|=2}
+ cache:=qDiagnosticCaches[w.table];if cache==nil{cache=make([]qDiagnosticEntry,tableEntries);qDiagnosticCaches[w.table]=cache}
+ entry:=cache[key%uint64(len(cache))];hit:=entry.kind!=noBound&&entry.key==key&&entry.halfmove==p.HalfMoveClock()&&entry.depth==depth&&entry.mode==mode
+ if hit{value:=scoreFromTable(entry.score,ply);hit=entry.kind==exactBound||(entry.kind==lowerBound&&value>=beta)||(entry.kind==upperBound&&value<=alpha)}
+ outer:=hit&&!qDiagnosticActive;if hit{qDiagnosticStats["applicable_bound_hits"]++};if outer{qDiagnosticStats["outer_hits"]++;qDiagnosticActive=true}
+ before:=w.nodes;score,complete:=w.quietAtPlyMeasured(p,depth,alpha,beta,checked,ply)
+ if outer{if w.nodes>before{qDiagnosticStats["potential_avoided_descendants"]+=w.nodes-before-1};qDiagnosticActive=false}
+ if complete{target:=&cache[key%uint64(len(cache))];if target.kind==noBound||target.generation!=w.table.generation||target.depth<=depth{kind:=exactBound;if score<=alpha{kind=upperBound}else if score>=beta{kind=lowerBound};*target=qDiagnosticEntry{key,p.HalfMoveClock(),depth,scoreToTable(score,ply),w.table.generation,mode,kind}}}
+ return score,complete
+}
+`
+ // Persist counters after every game checkpoint through the existing warm test.
+ warm,e:=os.ReadFile("tools/benchmark/research/v0.22-next-assessment/warm_profile_test.go.txt");if e!=nil{panic(e)};ws:=string(warm);needle:="write()\n\t\tfmt.Printf";replacement:="write()\n\t\tstatsData, statsErr := json.MarshalIndent(qDiagnosticStats, \"\", \"  \"); if statsErr != nil { t.Fatal(statsErr) }; if statsErr = os.WriteFile(os.Getenv(\"Q_DIAGNOSTIC_OUTPUT\"), append(statsData, '\\n'), 0644); statsErr != nil { t.Fatal(statsErr) }\n\t\tfmt.Printf";if !strings.Contains(ws,needle){panic("warm checkpoint missed")};ws=strings.Replace(ws,needle,replacement,1)
+ b,e=json.MarshalIndent(map[string]any{"base_tag":"v0.21","files":map[string]string{"search.go":s,"q_diagnostic_test.go":helper,"q_warm_test.go":ws}},"","  ");if e!=nil{panic(e)};if e=os.WriteFile("tools/benchmark/research/v0.22-next-assessment/q-opportunity-source.json",append(b,'\n'),0644);e!=nil{panic(e)}
+}

@@ -1,0 +1,15 @@
+package main
+import("encoding/json";"fmt";"os";"sort")
+func main(){dir:="tools/benchmark/research/v0.22-staged-picker/";load:=func(name string,v any){b,e:=os.ReadFile(dir+name);if e!=nil{panic(e)};if e=json.Unmarshal(b,v);e!=nil{panic(e)}}
+ type nativeRow struct{Case struct{ID,Position,FEN string};Trials []struct{Actor string;Trial int;Query struct{Move string;Score struct{Depth int} `json:"last_exact"`} `json:"query"`} `json:"trials"`}
+ var native []nativeRow;load("public-100/native.json",&native)
+ var quality struct{Cases []struct{ID string;Turn string;Loss map[string]float64 `json:"mean_loss_cp"`}};load("public-100/quality.json",&quality);losses:=map[string]map[string]float64{};for _,c:=range quality.Cases{losses[c.ID]=c.Loss}
+ type selected struct{ID,Position,FEN string;Depths []int;Moves map[string][]string;Loss map[string]float64}
+ rows:=[]selected{};diagnosis:=[]map[string]any{}
+ for _,r:=range native {moves:=map[string][]string{};all:=map[string]bool{};depthSet:=map[int]bool{};for _,v:=range r.Trials{moves[v.Actor]=append(moves[v.Actor],v.Query.Move);all[v.Query.Move]=true;if v.Query.Score.Depth>0{depthSet[v.Query.Score.Depth]=true}}
+  if len(all)<2{continue};depths:=[]int{};for d:=range depthSet{depths=append(depths,d)};sort.Ints(depths);rows=append(rows,selected{r.Case.ID,r.Case.Position,r.Case.FEN,depths,moves,losses[r.Case.ID]});diagnosis=append(diagnosis,map[string]any{"id":r.Case.ID,"loss":losses[r.Case.ID],"difference":losses[r.Case.ID]["candidate"]-losses[r.Case.ID]["baseline"],"moves":moves,"completed_depths":depths})
+ }
+ sort.Slice(diagnosis,func(i,j int)bool{return diagnosis[i]["difference"].(float64)>diagnosis[j]["difference"].(float64)})
+ put:=func(name string,v any){b,e:=json.MarshalIndent(v,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(dir+name,append(b,'\n'),0644);e!=nil{panic(e)}}
+ put("changed-choice-inputs.json",map[string]any{"cases":rows});put("changed-choice-diagnosis.json",diagnosis);fmt.Println("All differing-choice cases retained:",len(rows))
+}

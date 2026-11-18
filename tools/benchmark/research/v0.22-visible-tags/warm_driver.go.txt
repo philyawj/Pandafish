@@ -1,0 +1,33 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"reflect"
+)
+
+type warmRow struct {Game,Ply,Depth,Score int;Best,FEN string;Nodes uint64;ParseMS,SearchMS float64;Bytes,Allocs uint64}
+type warmRun struct {Mode string;Depth int;Inputs map[string]string;Rows []warmRow}
+func main(){
+	repo,err:=os.Getwd();if err!=nil{panic(err)};dir:=filepath.Join(repo,"tools/benchmark/research/v0.22-visible-tags");input:=filepath.Join(repo,"tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba")
+	put:=func(name string,v any){b,e:=json.MarshalIndent(v,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(filepath.Join(dir,name),append(b,'\n'),0644);e!=nil{panic(e)}}
+	checks:=[]map[string]any{}
+	run:=func(actor string,depth int,profile bool){
+		name:=actor+"-warm-fixed-4";if profile{name=actor+"-warm-pipeline"}
+		out:=filepath.Join(dir,name+".json");if _,e:=os.Stat(out);!os.IsNotExist(e){panic("refuse overwrite")}
+		cwd:="/tmp/pandafish-v021-release/tagged-source";if actor=="candidate"{cwd="/tmp/pandafish-v022-visible-profile"}
+		args:=[]string{"test","-count=1","-timeout=15m","-run","^TestWarmPipelineProfile$","-v"};if profile{args=append(args,"-cpuprofile",filepath.Join(dir,name+".cpu"),"-memprofile",filepath.Join(dir,name+".mem"),"-o","/tmp/pandafish-v022-visible-profile.test")}
+		cmd:=exec.Command("go",args...);cmd.Dir=cwd;env:=[]string{"GOCACHE=/tmp/pandafish-v016-go-cache","WARM_INPUT="+input,"WARM_OUTPUT="+out,"WARM_MODE=pipeline"};if depth>0{env=append(env,fmt.Sprintf("WARM_DEPTH=%d",depth))};cmd.Env=append(os.Environ(),env...)
+		output,e:=cmd.CombinedOutput();if err=os.WriteFile(filepath.Join(dir,name+".txt"),output,0644);err!=nil{panic(err)};status:=0;if e!=nil{status=1};checks=append(checks,map[string]any{"name":name,"cwd":cwd,"command":cmd.Args,"environment":env,"exit":status});put("warm-checks.json",checks);fmt.Println(name,status);if e!=nil{panic(e)}
+	}
+	run("baseline",4,false);run("candidate",4,false)
+	read:=func(actor string)warmRun{b,e:=os.ReadFile(filepath.Join(dir,actor+"-warm-fixed-4.json"));if e!=nil{panic(e)};var r warmRun;if e=json.Unmarshal(b,&r);e!=nil{panic(e)};return r}
+	a,b:=read("baseline"),read("candidate");issues:=[]string{};if len(a.Rows)!=1145||len(b.Rows)!=len(a.Rows)||!reflect.DeepEqual(a.Inputs,b.Inputs){panic("workload mismatch")}
+	var an,bn,ab,bb,aa,ba uint64;var am,bm,ap,bp float64
+	for i,x:=range a.Rows {y:=b.Rows[i];if x.Game!=y.Game||x.Ply!=y.Ply||x.Depth!=4||y.Depth!=4||x.Score!=y.Score||x.Best!=y.Best||x.Nodes!=y.Nodes||x.FEN!=y.FEN{issues=append(issues,fmt.Sprintf("%d/%d",x.Game,x.Ply))};an+=x.Nodes;bn+=y.Nodes;am+=x.SearchMS;bm+=y.SearchMS;ap+=x.ParseMS;bp+=y.ParseMS;ab+=x.Bytes;bb+=y.Bytes;aa+=x.Allocs;ba+=y.Allocs}
+	passed:=len(issues)==0&&bm<am;put("warm-fixed-analysis.json",map[string]any{"roots":len(a.Rows),"changed":issues,"baseline_nodes":an,"candidate_nodes":bn,"baseline_search_ms":am,"candidate_search_ms":bm,"search_ratio":bm/am,"baseline_parse_ms":ap,"candidate_parse_ms":bp,"baseline_bytes":ab,"candidate_bytes":bb,"byte_ratio":float64(bb)/float64(ab),"baseline_allocs":aa,"candidate_allocs":ba,"passed":passed});if !passed{os.Exit(1)}
+	if len(os.Args) == 1 { run("candidate",0,true) }
+}

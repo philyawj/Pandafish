@@ -1,0 +1,14 @@
+// Describe the saved screen by color, paired games and opening family.
+package main
+
+import("encoding/json";"fmt";"os";"strings")
+type count struct{Wins,Draws,Losses,Unfinished int;Points float64}
+func (c *count)add(result string,white bool){switch result{case "1/2-1/2":c.Draws++;c.Points+=.5;case "1-0","0-1":if (result=="1-0")==white{c.Wins++;c.Points++}else{c.Losses++};case "*":c.Unfinished++;default:panic("bad result")}}
+func main(){
+ dir:="tools/benchmark/research/v0.22-staged-picker";b,e:=os.ReadFile(dir+"/screen/v0.22-staged-picker-dev-vs-v0.21-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/summary.json");if e!=nil{panic(e)}
+ var s struct{Complete bool;Matches []struct{PGN string `json:"pgn_file"`;Games []struct{White bool `json:"candidate_white"`;Opening []string `json:"opening"`;Result string `json:"result"`}}};if e=json.Unmarshal(b,&s);e!=nil{panic(e)};if !s.Complete||len(s.Matches)!=3{panic("incomplete screen")}
+ rows:=map[string]any{};for _,m:=range s.Matches{if len(m.Games)!=50{panic("game count")};colors:=map[string]*count{"white":{},"black":{}};openings:=map[string]*count{};pairs:=map[string]int{"won":0,"drawn":0,"lost":0};points:=0.
+  for i,g:=range m.Games{color:="black";if g.White{color="white"};colors[color].add(g.Result,g.White);key:=strings.Join(g.Opening," ");if openings[key]==nil{openings[key]=new(count)};openings[key].add(g.Result,g.White);pair:=new(count);pair.add(g.Result,g.White);points+=pair.Points;if i%2==1{key:="drawn";if points>1{key="won"}else if points<1{key="lost"};pairs[key]++;points=0}}
+  if len(openings)!=10{panic("opening families")};rows[m.PGN]=map[string]any{"by_color":colors,"by_opening":openings,"color_pair_outcomes":pairs}
+ };b,e=json.MarshalIndent(rows,"","  ");if e!=nil{panic(e)};fmt.Println(string(b))
+}

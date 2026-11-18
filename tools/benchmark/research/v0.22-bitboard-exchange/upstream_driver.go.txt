@@ -1,0 +1,9 @@
+package main
+import("crypto/sha256";"encoding/json";"fmt";"io/fs";"os";"os/exec";"path/filepath";"strings")
+func main(){
+ root:="/Users/philyawj/go/pkg/mod/github.com/corentings/chess/v2@v2.6.1";out,e:=os.MkdirTemp("/tmp","pandafish-v022-exchange-upstream-");if e!=nil{panic(e)}
+ e=filepath.WalkDir(root,func(path string,d fs.DirEntry,err error)error{if err!=nil{return err};name,err:=filepath.Rel(root,path);if err!=nil{return err};target:=filepath.Join(out,name);if d.IsDir(){return os.MkdirAll(target,0755)};b,err:=os.ReadFile(path);if err!=nil{return err};return os.WriteFile(target,b,0644)});if e!=nil{panic(e)}
+ files,e:=filepath.Glob("third_party/chess/*.go");if e!=nil{panic(e)};hashes:=map[string]string{};original:=0
+ for _,p:=range files{b,e:=os.ReadFile(p);if e!=nil{panic(e)};name:=filepath.Base(p);old,e:=os.ReadFile(filepath.Join(root,name));if e==nil{if string(old)!=string(b){panic("original upstream source changed: "+name)};original++};if e=os.WriteFile(filepath.Join(out,name),b,0644);e!=nil{panic(e)};hashes[name]=fmt.Sprintf("%x",sha256.Sum256(b))}
+ command:=exec.Command("go","test","-race",".");command.Dir=out;command.Env=append(os.Environ(),"GOCACHE=/tmp/pandafish-v016-go-cache");output,err:=command.CombinedOutput();dest:="tools/benchmark/research/v0.22-bitboard-exchange/";os.WriteFile(dest+"upstream-race.txt",output,0644);status:=0;if err!=nil{status=1};data,_:=json.MarshalIndent(map[string]any{"upstream":"v2.6.1","workspace":out,"original_runtime_files_identical":original,"overlay_sha256":hashes,"command":strings.Join(command.Args," "),"exit":status},"","  ");os.WriteFile(dest+"upstream-check.json",append(data,'\n'),0644);fmt.Print(string(data));if err!=nil{os.Exit(1)}
+}

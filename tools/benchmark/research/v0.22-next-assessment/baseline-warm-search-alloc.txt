@@ -1,0 +1,23 @@
+File: pandafish-v021-warm.test
+Type: alloc_space
+Time: 2026-11-17 23:39:32 PST
+Showing nodes accounting for 32899.48MB, 99.47% of 33075.06MB total
+Dropped 87 nodes (cum <= 165.38MB)
+      flat  flat%   sum%        cum   cum%
+22666.65MB 68.53% 68.53% 22666.65MB 68.53%  github.com/corentings/chess/v2.(*Board).copy (inline)
+ 9582.23MB 28.97% 97.50% 32265.38MB 97.55%  github.com/corentings/chess/v2.(*Position).UpdateSearch
+  360.59MB  1.09% 98.59%   377.59MB  1.14%  github.com/corentings/chess/v2.castleMoves
+     172MB  0.52% 99.11%      172MB  0.52%  strings.(*Builder).grow
+  100.42MB   0.3% 99.42%      558MB  1.69%  github.com/corentings/chess/v2.(*Position).searchMoves
+   16.51MB  0.05% 99.47%      574MB  1.74%  github.com/philyawj/Pandafish.(*searcher).searchMoves
+    0.58MB 0.0017% 99.47% 33065.33MB   100%  github.com/philyawj/Pandafish.TestWarmPipelineProfile
+    0.50MB 0.0015% 99.47% 32966.13MB 99.67%  github.com/philyawj/Pandafish.(*searcher).root
+         0     0% 99.47%   557.50MB  1.69%  github.com/corentings/chess/v2.(*Position).AppendSearchMoves (inline)
+         0     0% 99.47%  3616.87MB 10.94%  github.com/philyawj/Pandafish.(*searcher).childQuiet
+         0     0% 99.47% 32921.12MB 99.53%  github.com/philyawj/Pandafish.(*searcher).childSearch
+         0     0% 99.47% 32966.13MB 99.67%  github.com/philyawj/Pandafish.(*searcher).iterate
+         0     0% 99.47%  8233.30MB 24.89%  github.com/philyawj/Pandafish.(*searcher).quietAtPly
+         0     0% 99.47% 32921.12MB 99.53%  github.com/philyawj/Pandafish.(*searcher).searchAtPly
+         0     0% 99.47% 32971.15MB 99.69%  github.com/philyawj/Pandafish.iterativeSearchWithHistory
+         0     0% 99.47%      172MB  0.52%  strings.(*Builder).Grow
+         0     0% 99.47% 33065.33MB   100%  testing.tRunner

@@ -7,7 +7,15 @@ import "math/bits"
 // tacticalOnly retains captures, en passant and every promotion, including quiet
 // underpromotions. A checked search must request all moves for legal evasions.
 func (pos *Position) AppendSearchMoves(dst []Move, tacticalOnly bool) []Move {
-	moves, _ := pos.searchMoves(dst, tacticalOnly, false)
+	moves, _ := pos.searchMoves(dst, tacticalOnly, false, false)
+	return moves
+}
+
+// AppendSearchQuietMoves appends legal noncapture, nonpromotion moves in their
+// original order, including quiet checks/evasions and castling. Storage is owned
+// by the caller; captures, en passant and all promotions are excluded.
+func (pos *Position) AppendSearchQuietMoves(dst []Move) []Move {
+	moves, _ := pos.searchMoves(dst, false, false, true)
 	return moves
 }
 
@@ -16,7 +24,7 @@ func (pos *Position) HasLegalMove() bool {
 	if pos.validMoves != nil {
 		return len(pos.validMoves) != 0
 	}
-	_, found := pos.searchMoves(nil, false, true)
+	_, found := pos.searchMoves(nil, false, true, false)
 	return found
 }
 
@@ -32,9 +40,12 @@ func (pos *Position) SearchStatus() Method {
 	return Stalemate
 }
 
-func (pos *Position) searchMoves(dst []Move, tacticalOnly, first bool) ([]Move, bool) {
+func (pos *Position) searchMoves(dst []Move, tacticalOnly, first, quietOnly bool) ([]Move, bool) {
 	if pos.validMoves != nil {
 		for _, m := range pos.validMoves {
+			if quietOnly && (m.HasTag(Capture) || m.HasTag(EnPassant) || m.Promo() != NoPieceType) {
+				continue
+			}
 			if !tacticalOnly || m.HasTag(Capture) || m.HasTag(EnPassant) || m.Promo() != NoPieceType {
 				if first {
 					return dst, true
@@ -44,6 +55,7 @@ func (pos *Position) searchMoves(dst []Move, tacticalOnly, first bool) ([]Move, 
 		}
 		return dst, false
 	}
+	evasionMask, evasionActive := searchEvasionMask(pos)
 	allowed, targets := ^pos.board.whiteSqs, pos.board.blackSqs
 	if pos.turn == Black {
 		allowed, targets = ^pos.board.blackSqs, pos.board.whiteSqs
@@ -58,7 +70,14 @@ func (pos *Position) searchMoves(dst []Move, tacticalOnly, first bool) ([]Move, 
 			s1 := Square(bits.LeadingZeros64(uint64(from)))
 			from &^= bbForSquare(s1)
 			to := bbForPossibleMoves(pos, piece.Type(), s1) & allowed
-			if tacticalOnly {
+			if evasionActive && piece.Type() != King {
+				mask := evasionMask
+				if piece.Type() == Pawn && pos.enPassantSquare != NoSquare {
+					mask |= bbForSquare(pos.enPassantSquare)
+				}
+				to &= mask
+			}
+			if tacticalOnly || quietOnly {
 				mask := targets
 				if piece.Type() == Pawn {
 					if pos.enPassantSquare != NoSquare {
@@ -70,7 +89,11 @@ func (pos *Position) searchMoves(dst []Move, tacticalOnly, first bool) ([]Move, 
 						mask |= bitboard(0xff00000000000000)
 					}
 				}
-				to &= mask
+				if tacticalOnly {
+					to &= mask
+				} else {
+					to &^= mask
+				}
 			}
 			for to != 0 {
 				s2 := Square(bits.LeadingZeros64(uint64(to)))

@@ -1,0 +1,136 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"sort"
+)
+
+type row struct {
+	ID       string
+	Depth    int
+	Nodes    uint64
+	Score    int
+	Best     []string
+	MS       float64
+	Complete bool
+}
+type check struct {
+	Name    string   `json:"name"`
+	Command []string `json:"command"`
+	Exit    int      `json:"exit"`
+}
+
+func main() {
+	repo, e := os.Getwd()
+	if e != nil {
+		panic(e)
+	}
+	dest := filepath.Join(repo, "tools/benchmark/research/v0.22-staged-picker")
+	checks := []check{}
+	put := func(name string, v any) {
+		b, e := json.MarshalIndent(v, "", "  ")
+		if e != nil {
+			panic(e)
+		}
+		if e = os.WriteFile(filepath.Join(dest, name), append(b, '\n'), 0644); e != nil {
+			panic(e)
+		}
+	}
+	run := func(actor, suffix string, depth int, input string) {
+		name := actor + "-" + suffix
+		path := filepath.Join(dest, name+".json")
+		if _, e := os.Stat(path); !os.IsNotExist(e) {
+			panic("refuse timing overwrite")
+		}
+		cwd := repo
+		if actor == "baseline" {
+			cwd = "/tmp/pandafish-v021-release/tagged-source"
+		}
+		cmd := exec.Command("go", "test", "-count=1", "-run", "^TestCandidateFixedWork$")
+		cmd.Dir = cwd
+		cmd.Env = append(os.Environ(), "GOCACHE=/tmp/pandafish-v016-go-cache", "CANDIDATE_INPUT="+filepath.Join(repo, input), "CANDIDATE_OUTPUT="+path, fmt.Sprintf("CANDIDATE_DEPTH=%d", depth))
+		output, err := cmd.CombinedOutput()
+		os.WriteFile(filepath.Join(dest, name+".txt"), output, 0644)
+		status := 0
+		if err != nil {
+			status = 1
+		}
+		checks = append(checks, check{name, cmd.Args, status})
+		put("timing-checks.json", checks)
+		fmt.Println(name, status)
+		if err != nil {
+			panic(err)
+		}
+	}
+	input := "tools/benchmark/research/v0.17-search-moves/inputs.json"
+	for pair := 1; pair <= 3; pair++ {
+		order := []string{"baseline", "candidate"}
+		if pair%2 == 0 {
+			order[0], order[1] = order[1], order[0]
+		}
+		for _, actor := range order {
+			run(actor, fmt.Sprintf("pair-%d-depth-4", pair), 4, input)
+		}
+	}
+	for _, d := range []int{3, 6} {
+		for _, actor := range []string{"baseline", "candidate"} {
+			run(actor, fmt.Sprintf("depth-%d", d), d, input)
+		}
+	}
+	for _, actor := range []string{"baseline", "candidate"} {
+		run(actor, "fresh-depth-4", 4, "tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json")
+	}
+	read := func(name string) []row {
+		b, e := os.ReadFile(filepath.Join(dest, name+".json"))
+		if e != nil {
+			panic(e)
+		}
+		var rows []row
+		if e = json.Unmarshal(b, &rows); e != nil {
+			panic(e)
+		}
+		return rows
+	}
+	ratios := []float64{}
+	results := map[string]any{}
+	issues := []string{}
+	for _, suffix := range []string{"pair-1-depth-4", "pair-2-depth-4", "pair-3-depth-4", "depth-3", "depth-6", "fresh-depth-4"} {
+		a, b := read("baseline-"+suffix), read("candidate-"+suffix)
+		if len(a) != len(b) {
+			panic("length mismatch")
+		}
+		am, bm := 0., 0.
+		var nodes uint64
+		changed := []string{}
+		for i, x := range a {
+			y := b[i]
+			am += x.MS
+			bm += y.MS
+			nodes += x.Nodes
+			if x.ID != y.ID || !x.Complete || !y.Complete || x.Score != y.Score || x.Nodes != y.Nodes || fmt.Sprint(x.Best) != fmt.Sprint(y.Best) {
+				changed = append(changed, x.ID)
+				issues = append(issues, suffix+"/"+x.ID)
+			}
+		}
+		ratio := bm / am
+		results[suffix] = map[string]any{"positions": len(a), "nodes": nodes, "baseline_ms": am, "candidate_ms": bm, "ratio": ratio, "changed": changed}
+		if suffix == "pair-1-depth-4" || suffix == "pair-2-depth-4" || suffix == "pair-3-depth-4" {
+			ratios = append(ratios, ratio)
+		}
+	}
+	sort.Float64s(ratios)
+	passed := len(issues) == 0 && ratios[1] <= .85
+	deep := results["depth-6"].(map[string]any)["ratio"].(float64)
+	passed = passed && deep < 1
+	report := map[string]any{"groups": results, "depth4_median_ratio": ratios[1], "correctness_issues": issues, "timing_gate_passed": passed}
+	put("timing-analysis.json", report)
+	b, _ := json.MarshalIndent(report, "", "  ")
+	fmt.Println(string(b))
+	if !passed {
+		os.Exit(1)
+	}
+}

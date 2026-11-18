@@ -1,0 +1,20 @@
+package main
+import("encoding/json";"os";"os/exec";"strings")
+func main(){
+ b,e:=exec.Command("git","show","v0.21:search.go").Output();if e!=nil{panic(e)};s:=string(b)
+ s=strings.Replace(s,"for _, move := range moves {","for _, move := range moves {\n\t\tstandpatOpportunity := recordStandpatOpportunity(position,move,checked,alpha,worker.unfiltered)",1)
+ old:="worker.childQuiet(position.UpdateSearch(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)";s=strings.Replace(s,old,"diagnosticStandpatChild(worker, position.UpdateSearch(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1, standpatOpportunity, alpha)",1);if !strings.Contains(s,"diagnosticStandpatChild"){panic("instrumentation missed")}
+ helper:=`package main
+import "github.com/corentings/chess/v2"
+var qDiagnosticStats=map[string]uint64{}
+func recordStandpatOpportunity(p *chess.Position,m chess.Move,checked bool,alpha int,unfiltered bool)bool{
+ see:=!unfiltered&&!checked&&!m.HasTag(chess.Check)&&m.Promo()==chess.NoPieceType&&captureValue(p,m)<pieceValues[p.Board().Piece(m.S1()).Type()];if see{qDiagnosticStats["actual_see_calls"]++}
+ if checked||alpha<0||m.HasTag(chess.Check)||m.Promo()!=chess.NoPieceType||(!m.HasTag(chess.Capture)&&!m.HasTag(chess.EnPassant)){return false}
+ qDiagnosticStats["ordinary_nonchecking_capture_candidates"]++
+ child:=p.UpdateSearch(&m);predicted:=staticScore(child,p.Turn());if predicted>alpha{return false};qDiagnosticStats["potential_pre_see_prunes"]++;if see{qDiagnosticStats["potential_avoided_see_calls"]++};return true
+}
+func diagnosticStandpatChild(w *searcher,p *chess.Position,d,a,b int,c bool,ply int,potential bool,parentAlpha int)(int,bool){before:=w.nodes;score,complete:=w.childQuiet(p,d,a,b,c,ply);if potential{qDiagnosticStats["potential_avoided_child_calls"]++;qDiagnosticStats["potential_avoided_nodes"]+=w.nodes-before;if complete&&-score>parentAlpha{qDiagnosticStats["bound_contradictions"]++}};return score,complete}
+`
+ raw,e:=os.ReadFile("tools/benchmark/research/v0.22-next-assessment/q-opportunity-source.json");if e!=nil{panic(e)};var q struct{Files map[string]string};if e=json.Unmarshal(raw,&q);e!=nil{panic(e)}
+ b,e=json.MarshalIndent(map[string]any{"base_tag":"v0.21","files":map[string]string{"search.go":s,"standpat_diagnostic_test.go":helper,"standpat_warm_test.go":q.Files["q_warm_test.go"]}},"","  ");if e!=nil{panic(e)};if e=os.WriteFile("tools/benchmark/research/v0.22-next-assessment/standpat-opportunity-source.json",append(b,'\n'),0644);e!=nil{panic(e)}
+}
