@@ -1,0 +1,58 @@
+[
+  {
+    "command": [
+      "tools/benchmark/bin/research",
+      "choices",
+      "--baseline",
+      "tools/benchmark/bin/pandafish-v0.22",
+      "--candidate",
+      "tools/benchmark/bin/pandafish-v023-quiet-checks",
+      "--teacher",
+      "/opt/homebrew/bin/stockfish",
+      "--input",
+      "tools/benchmark/research/v0.23-quiet-checks/fresh-generation/inputs.json",
+      "--out",
+      "tools/benchmark/research/v0.23-quiet-checks/fresh-100",
+      "--milliseconds",
+      "100",
+      "--trials",
+      "3",
+      "--workers",
+      "3",
+      "--by-turn"
+    ],
+    "exit": 0,
+    "quality_passed": true,
+    "seconds": 90.024805625,
+    "suite": "fresh-100"
+  },
+  {
+    "command": [
+      "tools/benchmark/bin/research",
+      "choices",
+      "--baseline",
+      "tools/benchmark/bin/pandafish-v0.22",
+      "--candidate",
+      "tools/benchmark/bin/pandafish-v023-quiet-checks",
+      "--teacher",
+      "/opt/homebrew/bin/stockfish",
+      "--input",
+      "tools/benchmark/research/v0.23-quiet-checks/fresh-generation/inputs.json",
+      "--out",
+      "tools/benchmark/research/v0.23-quiet-checks/fresh-1000",
+      "--milliseconds",
+      "1000",
+      "--trials",
+      "1",
+      "--workers",
+      "3",
+      "--by-turn",
+      "--cache",
+      "tools/benchmark/research/v0.23-quiet-checks/fresh-100"
+    ],
+    "exit": 0,
+    "quality_passed": true,
+    "seconds": 105.647322041,
+    "suite": "fresh-1000"
+  }
+]

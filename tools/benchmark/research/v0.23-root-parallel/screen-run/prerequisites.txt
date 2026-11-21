@@ -1,0 +1,156 @@
+{
+  "plan_sha256": "9fc2fa2fe5b211a8c3b2b15907844af0afb260aa9e9c67110496e52b243fd4bc",
+  "status": "passed",
+  "steps": [
+    {
+      "brief": {
+        "tools/benchmark/research/v0.23-root-parallel/public-100/brief.json/by_turn_mean_loss_cp": {
+          "b": {
+            "baseline": 107.47368421052632,
+            "candidate": 107.63157894736842
+          },
+          "w": {
+            "baseline": 21.520833333333332,
+            "candidate": 21.041666666666668
+          }
+        },
+        "tools/benchmark/research/v0.23-root-parallel/public-100/brief.json/finite_cases": 67,
+        "tools/benchmark/research/v0.23-root-parallel/public-100/brief.json/mean_loss_cp": {
+          "baseline": 45.8955223880597,
+          "candidate": 45.59701492537314
+        },
+        "tools/benchmark/research/v0.23-root-parallel/public-100/brief.json/new_candidate_losing_mate_cases": [],
+        "tools/benchmark/research/v0.23-root-parallel/public-100/brief.json/severe_over_300": {
+          "baseline": 2,
+          "candidate": 2
+        },
+        "tools/benchmark/research/v0.23-root-parallel/public-100/brief.json/timing_overruns": 0,
+        "tools/benchmark/research/v0.23-root-parallel/public-100/brief.json/worst_regressions": [
+          {
+            "id": "broader-previous-08-ply25",
+            "mean_loss_cp": {
+              "baseline": 0,
+              "candidate": 3
+            },
+            "regression_cp": 3,
+            "turn": "b"
+          }
+        ]
+      },
+      "error": "",
+      "name": "public-100",
+      "seconds": 17.2953235,
+      "status": "passed"
+    },
+    {
+      "brief": {
+        "tools/benchmark/research/v0.23-root-parallel/public-1000/brief.json/by_turn_mean_loss_cp": {
+          "b": {
+            "baseline": 128.05263157894737,
+            "candidate": 128.05263157894737
+          },
+          "w": {
+            "baseline": 25.875,
+            "candidate": 25.875
+          }
+        },
+        "tools/benchmark/research/v0.23-root-parallel/public-1000/brief.json/finite_cases": 67,
+        "tools/benchmark/research/v0.23-root-parallel/public-1000/brief.json/mean_loss_cp": {
+          "baseline": 54.850746268656714,
+          "candidate": 54.850746268656714
+        },
+        "tools/benchmark/research/v0.23-root-parallel/public-1000/brief.json/new_candidate_losing_mate_cases": [],
+        "tools/benchmark/research/v0.23-root-parallel/public-1000/brief.json/severe_over_300": {
+          "baseline": 3,
+          "candidate": 3
+        },
+        "tools/benchmark/research/v0.23-root-parallel/public-1000/brief.json/timing_overruns": 0,
+        "tools/benchmark/research/v0.23-root-parallel/public-1000/brief.json/worst_regressions": []
+      },
+      "error": "",
+      "name": "public-1000",
+      "seconds": 56.464429042,
+      "status": "passed"
+    },
+    {
+      "brief": {
+        "tools/benchmark/research/v0.23-root-parallel/newer-100/brief.json/by_turn_mean_loss_cp": {
+          "b": {
+            "baseline": 25.43076923076923,
+            "candidate": 24.26153846153846
+          },
+          "w": {
+            "baseline": 35.84848484848485,
+            "candidate": 36.303030303030305
+          }
+        },
+        "tools/benchmark/research/v0.23-root-parallel/newer-100/brief.json/finite_cases": 131,
+        "tools/benchmark/research/v0.23-root-parallel/newer-100/brief.json/mean_loss_cp": {
+          "baseline": 30.6793893129771,
+          "candidate": 30.328244274809162
+        },
+        "tools/benchmark/research/v0.23-root-parallel/newer-100/brief.json/new_candidate_losing_mate_cases": [],
+        "tools/benchmark/research/v0.23-root-parallel/newer-100/brief.json/severe_over_300": {
+          "baseline": 3,
+          "candidate": 3
+        },
+        "tools/benchmark/research/v0.23-root-parallel/newer-100/brief.json/timing_overruns": 0,
+        "tools/benchmark/research/v0.23-root-parallel/newer-100/brief.json/worst_regressions": [
+          {
+            "id": "proof-fresh-03-ply24",
+            "mean_loss_cp": {
+              "baseline": 60,
+              "candidate": 95
+            },
+            "regression_cp": 35,
+            "turn": "w"
+          }
+        ]
+      },
+      "error": "",
+      "name": "newer-100",
+      "seconds": 11.236984292,
+      "status": "passed"
+    },
+    {
+      "brief": {
+        "tools/benchmark/research/v0.23-root-parallel/newer-1000/brief.json/by_turn_mean_loss_cp": {
+          "b": {
+            "baseline": 21.646153846153847,
+            "candidate": 21.50769230769231
+          },
+          "w": {
+            "baseline": 26.761194029850746,
+            "candidate": 22.611940298507463
+          }
+        },
+        "tools/benchmark/research/v0.23-root-parallel/newer-1000/brief.json/finite_cases": 132,
+        "tools/benchmark/research/v0.23-root-parallel/newer-1000/brief.json/mean_loss_cp": {
+          "baseline": 24.242424242424242,
+          "candidate": 22.068181818181817
+        },
+        "tools/benchmark/research/v0.23-root-parallel/newer-1000/brief.json/new_candidate_losing_mate_cases": [],
+        "tools/benchmark/research/v0.23-root-parallel/newer-1000/brief.json/severe_over_300": {
+          "baseline": 1,
+          "candidate": 1
+        },
+        "tools/benchmark/research/v0.23-root-parallel/newer-1000/brief.json/timing_overruns": 0,
+        "tools/benchmark/research/v0.23-root-parallel/newer-1000/brief.json/worst_regressions": [
+          {
+            "id": "proof-fresh-13-ply12",
+            "mean_loss_cp": {
+              "baseline": 0,
+              "candidate": 5
+            },
+            "regression_cp": 5,
+            "turn": "w"
+          }
+        ]
+      },
+      "error": "",
+      "name": "newer-1000",
+      "seconds": 97.090673833,
+      "status": "passed"
+    }
+  ]
+}

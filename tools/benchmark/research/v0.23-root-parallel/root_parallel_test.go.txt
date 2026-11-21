@@ -1,0 +1,93 @@
+package main
+
+import (
+	"context"
+	"maps"
+	"testing"
+	"time"
+
+	"github.com/corentings/chess/v2"
+)
+
+func TestParallelRootValuesAndContext(t *testing.T) {
+	for _, fen := range []string{chess.StartingPosition().String(), timeoutPosition, queenRaidPosition, crowdedPosition,
+		"7k/8/5KQ1/8/8/8/8/8 w - - 0 1", "8/8/8/8/8/5kq1/8/7K b - - 0 1", "7k/8/8/8/8/8/P7/K7 w - - 0 1"} {
+		p := evalFEN(t, fen)
+		before, hash := p.String(), p.ZobristHash()
+		moves := rootMoves(p, nil)
+		for trial := 0; trial < 3; trial++ {
+			serial := searcher{table: newTable(), killers: new(killerTable)}
+			parallel := searcher{table: newTable(), killers: new(killerTable), rootTeam: new(rootTeam)}
+			for _, key := range []uint64{123, 456, 123} {
+				serial.pushKey(key)
+				parallel.pushKey(key)
+			}
+			counts, key := maps.Clone(parallel.repetitions), parallel.historyKey
+			_, want, done := serial.root(p, moves, 3)
+			if !done {
+				t.Fatal("reference incomplete")
+			}
+			best, score, done := parallel.root(p, moves, 3)
+			if !done || score != want || len(best) != 1 {
+				t.Fatal("parallel value", fen, best, score, want, done)
+			}
+			verify := searcher{}
+			for _, k := range []uint64{123, 456, 123} {
+				verify.pushKey(k)
+			}
+			_, actual, done := verify.root(p, rootMoves(p, best), 3)
+			if !done || actual != score {
+				t.Fatal("bound selected as exact best", best, score, actual)
+			}
+			if !maps.Equal(counts, parallel.repetitions) || key != parallel.historyKey || before != p.String() || hash != p.ZobristHash() {
+				t.Fatal("parent/context changed")
+			}
+			if parallel.rootTeam.running.Load() != 0 || parallel.rootTeam.peak.Load() > 2 {
+				t.Fatal("worker bound/shutdown")
+			}
+		}
+	}
+}
+
+func TestParallelRootCancellationAndReuse(t *testing.T) {
+	p := evalFEN(t, crowdedPosition)
+	ctx, cancel := context.WithCancel(context.Background())
+	w := searcher{ctx: ctx, table: newTable(), killers: new(killerTable), rootTeam: new(rootTeam)}
+	w.pushKey(123)
+	before, key := maps.Clone(w.repetitions), w.historyKey
+	done := make(chan bool, 1)
+	go func() { _, _, complete := w.root(p, rootMoves(p, nil), 6); done <- complete }()
+	until := time.NewTimer(5 * time.Second)
+	defer until.Stop()
+	for w.rootTeam.running.Load() == 0 {
+		select {
+		case <-done:
+			cancel()
+			t.Fatal("search ended before cancellation control")
+		case <-until.C:
+			cancel()
+			<-done
+			t.Fatal("parallel workers never started")
+		case <-time.After(time.Millisecond):
+		}
+	}
+	cancel()
+	select {
+	case complete := <-done:
+		if complete {
+			t.Fatal("interrupted root completed")
+		}
+	case <-time.After(time.Second):
+		t.Fatal("workers not joined")
+	}
+	if w.rootTeam.running.Load() != 0 || !maps.Equal(before, w.repetitions) || key != w.historyKey {
+		t.Fatal("cancellation leaked worker/state")
+	}
+	w.ctx = context.Background()
+	_, score, complete := w.root(p, rootMoves(p, nil), 3)
+	ref := searcher{}
+	_, want, ok := ref.root(p, rootMoves(p, nil), 3)
+	if !complete || !ok || score != want || w.rootTeam.running.Load() != 0 {
+		t.Fatal("team reuse", score, want, complete, ok)
+	}
+}

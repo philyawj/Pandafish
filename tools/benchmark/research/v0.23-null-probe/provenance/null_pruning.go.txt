@@ -1,0 +1,64 @@
+package main
+
+import (
+	"maps"
+	"math/bits"
+
+	"github.com/corentings/chess/v2"
+)
+
+// nullCut is selective: neither a pass nor reduced verification proves
+// a full-depth minimax bound. Both workers are isolated from real score/hint
+// tables and killers. The caller has already entered the real repetition node.
+func (w *searcher) nullCut(p *chess.Position, depth, beta int, checked bool, ply int) (bool, bool) {
+	if depth < 3 || checked || abs(beta) >= mateBound || p.HalfMoveClock() >= 80 || w.repetitions[p.ZobristHash()] > 1 {
+		return false, !w.stopped()
+	}
+	sets := p.Board().EvaluationPieces()
+	if bits.OnesCount64(sets[0]) != 1 || bits.OnesCount64(sets[6]) != 1 ||
+		sets[5]&0xffffff != 0 || sets[11]&0xffffff0000000000 != 0 {
+		return false, !w.stopped()
+	}
+	offset := 0
+	if p.Turn() == chess.Black {
+		offset = 6
+	}
+	phase, ownMaterial := 0, 0
+	for i, set := range sets {
+		n := bits.OnesCount64(set)
+		phase += n * phaseWeight(evaluationPieceTypes[i])
+		if i >= offset && i < offset+6 && i%6 != 5 {
+			ownMaterial += n * pieceValues[evaluationPieceTypes[i]]
+		}
+	}
+	if phase < 8 || ownMaterial < 900 || sets[offset+1]|sets[offset+2] == 0 || staticScore(p, p.Turn()) < beta+50 {
+		return false, !w.stopped()
+	}
+	board := newExchangeBoard(p)
+	if board.attacked(board.kings[p.Turn().Other()], p.Turn()) {
+		return false, !w.stopped()
+	}
+	passed := p.Update(nil)
+	if passed.SearchStatus() != chess.NoMethod {
+		return false, !w.stopped()
+	}
+	probe := searcher{ctx: w.ctx, deadline: w.deadline, now: w.now, disableNull: true, unfiltered: w.unfiltered}
+	score, complete := probe.searchAtPly(passed, max(1, depth-3), -beta, -beta+1, false, ply+1)
+	w.nodes += probe.nodes
+	score = -score
+	if !complete {
+		return false, false
+	}
+	if score < beta || abs(score) >= mateBound {
+		return false, !w.stopped()
+	}
+	if depth < 6 {
+		return true, !w.stopped()
+	}
+	verify := searcher{ctx: w.ctx, deadline: w.deadline, now: w.now, disableNull: true, unfiltered: w.unfiltered,
+		repetitions: maps.Clone(w.repetitions), historyKey: w.historyKey}
+	verify.popPosition(p)
+	score, complete = verify.searchAtPly(p, depth-2, beta-1, beta, false, ply)
+	w.nodes += verify.nodes
+	return complete && score >= beta && abs(score) < mateBound && !w.stopped(), complete && !w.stopped()
+}

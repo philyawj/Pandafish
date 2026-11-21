@@ -1,0 +1,53 @@
+{
+  "created_utc": "2026-11-21T15:18:48.40973Z",
+  "input_identities": {
+    "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-1.json": {
+      "sha256": "9be3dce00250843fb594ccda6429fca34a7c81f3f4dede6dbb1883bd5ddb98c4",
+      "bytes": 288970
+    },
+    "tools/benchmark/research/v0.23-scout-reduction-study/warm-study.json": {
+      "sha256": "16bad9a0e9dc3c87566f2a0254c271dbc825a91880e43394e7d4c5cbe5f25054",
+      "bytes": 353610
+    }
+  },
+  "issues": [],
+  "median_time_ratio": 0.9981882199893815,
+  "node_ratios": [
+    1
+  ],
+  "options": {
+    "Values": false,
+    "Parallel": false,
+    "Baseline": "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-1.json",
+    "Candidate": "tools/benchmark/research/v0.23-scout-reduction-study/warm-study.json",
+    "Out": "tools/benchmark/research/v0.23-scout-reduction-study/opportunity.json",
+    "Reference": "",
+    "Pairs": 1,
+    "Roots": 1145,
+    "Depth": 5,
+    "MaxTimeRatio": 0,
+    "MaxNodeRatio": 0,
+    "MinOpportunity": 0.3,
+    "Exact": true
+  },
+  "pairs": [
+    {
+      "baseline_ms": 21601.534275999973,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 21562.397048000024,
+      "candidate_nodes": 43118858,
+      "changed_roots": 0,
+      "contradictions": 0,
+      "node_ratio": 1,
+      "opportunity_captures": 792211,
+      "opportunity_fraction": 0.6643567183527913,
+      "opportunity_nodes": 28646303,
+      "pair": 1,
+      "time_ratio": 0.9981882199893815
+    }
+  ],
+  "passed": true,
+  "time_ratios": [
+    0.9981882199893815
+  ]
+}

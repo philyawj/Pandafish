@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "inputs": [
+    "tools/benchmark/bin/research",
+    "tools/benchmark/bin/pandafish-v0.22",
+    "/opt/homebrew/bin/stockfish",
+    "tools/research/*.go",
+    "tools/benchmark/research/v0.19-sharp-branches/blocked.json",
+    "tools/benchmark/research/v0.19-sharp-branches/unlabelled-roots.json",
+    "tools/benchmark/research/v0.19-sharp-branches/forest-leaves.json",
+    "tools/benchmark/research/v0.17-search-moves/inputs.json",
+    "tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json",
+    "tools/benchmark/research/v0.23-quiet-checks/fresh-generation/inputs.json",
+    "tools/benchmark/research/v0.23-phase-activity/fresh-generation/inputs.json",
+    "tools/benchmark/research/v0.23-root-parallel/fresh-generation-complete/inputs.json",
+    "tools/benchmark/live/v0.22-live-*/analysis/stockfish-n100000/*.json"
+  ],
+  "steps": [
+    {
+      "name": "collect-fresh",
+      "command": [
+        "tools/benchmark/bin/research",
+        "generate",
+        "--baseline",
+        "tools/benchmark/bin/pandafish-v0.22",
+        "--teacher",
+        "/opt/homebrew/bin/stockfish",
+        "--out",
+        "tools/benchmark/research/v0.23-scout-material/fresh-generation",
+        "--seed",
+        "2026112119",
+        "--stream",
+        "119",
+        "--exclude-input",
+        "tools/benchmark/research/v0.17-search-moves/inputs.json",
+        "--exclude-input",
+        "tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json",
+        "--exclude-input",
+        "tools/benchmark/research/v0.23-quiet-checks/fresh-generation/inputs.json",
+        "--exclude-input",
+        "tools/benchmark/research/v0.23-phase-activity/fresh-generation/inputs.json",
+        "--exclude-input",
+        "tools/benchmark/research/v0.23-root-parallel/fresh-generation-complete/inputs.json",
+        "--exclude-analysis",
+        "tools/benchmark/live/v0.22-live-*/analysis/stockfish-n100000/*.json"
+      ],
+      "timeout_seconds": 1800,
+      "outputs": [
+        "tools/benchmark/research/v0.23-scout-material/fresh-generation/*.json",
+        "tools/benchmark/research/v0.23-scout-material/fresh-generation/*.jsonl"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-scout-material/fresh-generation/generation.json",
+          "pointer": "/completed_families",
+          "equals": 16,
+          "brief": [
+            "/retained",
+            "/turns"
+          ]
+        }
+      ]
+    }
+  ]
+}

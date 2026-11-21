@@ -1,0 +1,6 @@
+Initial shared replay invocation, exit 1:
+overlay must contain only Go source/module files or JSON fixtures: third_party/chess/go.sum
+exit status 1
+
+The original snapshot remains unchanged. The compatible manifest omits nested
+go.mod/go.sum only after matching each file byte-for-byte against base tag v0.22.

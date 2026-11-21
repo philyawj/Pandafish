@@ -14,3 +14,12 @@ framing. Never use the word "maintainer" in PR titles/descriptions or release
 titles/notes. Preserve failed results and
 distinguish functional changes from measured playing strength. Do not start
 live games without explicit authorization.
+
+For requests to find the next engine improvement, follow
+[the research workflow](docs/RESEARCH_WORKFLOW.md): reassess priorities, test one
+hypothesis at a time, preserve unsuccessful attempts on the branch and continue
+autonomously until a candidate merits promotion. Present its evidence and stop
+before committing, pushing, opening a PR or releasing unless separately authorized.
+Use [the tooling map](docs/RESEARCH_TOOLING.md) to delegate deterministic runs,
+comparisons and evidence handling to Go. Start ongoing work from the compact
+[research checkpoint](docs/RESEARCH_CHECKPOINT.md).

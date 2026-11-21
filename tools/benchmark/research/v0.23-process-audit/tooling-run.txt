@@ -1,0 +1,75 @@
+start child-cost (1/5)
+finish child-cost passed 0.1s
+start verified-null-cost (2/5)
+finish verified-null-cost passed 0.1s
+start compact-pawn-cost (3/5)
+finish compact-pawn-cost passed 0.1s
+start source-snapshot (4/5)
+finish source-snapshot passed 0.0s
+start source-replay (5/5)
+finish source-replay passed 9.2s
+{
+  "plan_sha256": "53fb56c25687af3d69c58270ceb8e1309289c0d2efec1d66f894a9a5cca51a4f",
+  "status": "passed",
+  "steps": [
+    {
+      "brief": {
+        "tools/benchmark/research/v0.23-process-audit/recomputed-child-cost.json/issues": [],
+        "tools/benchmark/research/v0.23-process-audit/recomputed-child-cost.json/median_time_ratio": 0.9086268765172082,
+        "tools/benchmark/research/v0.23-process-audit/recomputed-child-cost.json/node_ratios": [
+          1,
+          1,
+          1
+        ]
+      },
+      "error": "",
+      "name": "child-cost",
+      "seconds": 0.086809084,
+      "status": "passed"
+    },
+    {
+      "brief": {
+        "tools/benchmark/research/v0.23-process-audit/recomputed-verified-null-cost.json/issues": [],
+        "tools/benchmark/research/v0.23-process-audit/recomputed-verified-null-cost.json/median_time_ratio": 1.0011031845669802,
+        "tools/benchmark/research/v0.23-process-audit/recomputed-verified-null-cost.json/node_ratios": [
+          0.901112594401271,
+          0.901112594401271,
+          0.901112594401271
+        ]
+      },
+      "error": "",
+      "name": "verified-null-cost",
+      "seconds": 0.078751542,
+      "status": "passed"
+    },
+    {
+      "brief": {
+        "tools/benchmark/research/v0.23-process-audit/recomputed-compact-pawn-cost.json/issues": [],
+        "tools/benchmark/research/v0.23-process-audit/recomputed-compact-pawn-cost.json/median_time_ratio": 1.0395005989350448,
+        "tools/benchmark/research/v0.23-process-audit/recomputed-compact-pawn-cost.json/node_ratios": [
+          1.002396932683143,
+          1.002396932683143,
+          1.002396932683143
+        ]
+      },
+      "error": "",
+      "name": "compact-pawn-cost",
+      "seconds": 0.080334,
+      "status": "passed"
+    },
+    {
+      "brief": null,
+      "error": "",
+      "name": "source-snapshot",
+      "seconds": 0.033269167,
+      "status": "passed"
+    },
+    {
+      "brief": null,
+      "error": "",
+      "name": "source-replay",
+      "seconds": 9.240758083,
+      "status": "passed"
+    }
+  ]
+}

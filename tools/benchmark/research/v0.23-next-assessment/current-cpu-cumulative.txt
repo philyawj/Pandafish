@@ -1,0 +1,40 @@
+File: pandafish-v023-profile.test
+Type: cpu
+Time: 2026-11-20 13:44:10 PST
+Duration: 22.39s, Total samples = 19.68s (87.91%)
+Showing nodes accounting for 10.24s, 52.03% of 19.68s total
+Dropped 195 nodes (cum <= 0.10s)
+Showing top 32 nodes out of 122
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%     11.15s 56.66%  github.com/philyawj/Pandafish.TestWarmPipelineProfile
+         0     0%     0%     11.15s 56.66%  testing.tRunner
+     0.02s   0.1%   0.1%     11.10s 56.40%  github.com/philyawj/Pandafish.(*searcher).childSearch
+         0     0%   0.1%     11.10s 56.40%  github.com/philyawj/Pandafish.(*searcher).iterate
+         0     0%   0.1%     11.10s 56.40%  github.com/philyawj/Pandafish.(*searcher).root
+         0     0%   0.1%     11.10s 56.40%  github.com/philyawj/Pandafish.iterativeSearchWithHistory
+     0.13s  0.66%  0.76%     11.09s 56.35%  github.com/philyawj/Pandafish.(*searcher).searchAtPly
+     0.22s  1.12%  1.88%      7.69s 39.08%  github.com/philyawj/Pandafish.(*searcher).quietAtPly
+         0     0%  1.88%      7.45s 37.86%  runtime.systemstack
+         0     0%  1.88%      6.49s 32.98%  runtime.startTheWorldWithSema
+     6.48s 32.93% 34.81%      6.48s 32.93%  runtime.kevent
+         0     0% 34.81%      6.48s 32.93%  runtime.netpoll
+         0     0% 34.81%      4.70s 23.88%  runtime.gcStart.func4
+     0.02s   0.1% 34.91%      4.33s 22.00%  github.com/philyawj/Pandafish.(*searcher).childQuiet
+     0.75s  3.81% 38.72%      3.38s 17.17%  github.com/corentings/chess/v2.(*Position).searchMoves
+     0.17s  0.86% 39.58%      2.83s 14.38%  github.com/philyawj/Pandafish.(*searcher).searchMoves
+     0.05s  0.25% 39.84%      2.28s 11.59%  github.com/corentings/chess/v2.(*Position).UpdateSearch
+         0     0% 39.84%      1.95s  9.91%  github.com/corentings/chess/v2.(*Position).AppendSearchMoves (inline)
+     0.28s  1.42% 41.26%      1.85s  9.40%  github.com/corentings/chess/v2.searchMoveTags
+         0     0% 41.26%      1.78s  9.04%  runtime.startTheWorld.func1
+     0.05s  0.25% 41.51%      1.28s  6.50%  github.com/philyawj/Pandafish.(*mainMovePicker).next
+     0.05s  0.25% 41.77%      1.01s  5.13%  runtime.mallocgc
+     0.02s   0.1% 41.87%         1s  5.08%  github.com/corentings/chess/v2.(*Position).HasLegalMove
+         0     0% 41.87%         1s  5.08%  github.com/corentings/chess/v2.(*Position).SearchStatus (inline)
+     0.01s 0.051% 41.92%         1s  5.08%  runtime.newobject
+     0.05s  0.25% 42.17%      0.96s  4.88%  github.com/philyawj/Pandafish.(*searcher).exchange
+     0.66s  3.35% 45.53%      0.96s  4.88%  github.com/philyawj/Pandafish.staticScore
+     0.01s 0.051% 45.58%      0.81s  4.12%  runtime.schedule
+     0.24s  1.22% 46.80%      0.79s  4.01%  github.com/corentings/chess/v2.(*Board).updateSearch
+     0.77s  3.91% 50.71%      0.77s  3.91%  runtime.duffcopy
+     0.14s  0.71% 51.42%      0.76s  3.86%  github.com/corentings/chess/v2.(*Position).updateHash
+     0.12s  0.61% 52.03%      0.76s  3.86%  runtime.mapaccess1

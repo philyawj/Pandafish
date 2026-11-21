@@ -1,0 +1,38 @@
+[
+  {
+    "command": [
+      "tools/benchmark/bin/research",
+      "choices",
+      "--baseline",
+      "tools/benchmark/bin/pandafish-v0.22",
+      "--candidate",
+      "tools/benchmark/bin/pandafish-v023-phase-activity",
+      "--teacher",
+      "/opt/homebrew/bin/stockfish",
+      "--input",
+      "tools/benchmark/research/v0.23-phase-activity/fresh-generation/inputs.json",
+      "--out",
+      "tools/benchmark/research/v0.23-phase-activity/fresh-100",
+      "--milliseconds",
+      "100",
+      "--trials",
+      "3",
+      "--workers",
+      "3",
+      "--by-turn"
+    ],
+    "exit": 0,
+    "mean_loss_cp": {
+      "baseline": 37.3006993006993,
+      "candidate": 40.97902097902098
+    },
+    "original_quality_passed": true,
+    "seconds": 94.585385292,
+    "severe_over_300": {
+      "baseline": 6,
+      "candidate": 6
+    },
+    "stricter_independent_gate_passed": false,
+    "suite": "fresh-100"
+  }
+]

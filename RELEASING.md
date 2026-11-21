@@ -33,14 +33,21 @@ and benchmark evidence together. Run commands from the repository root.
    in each release milestone.
 4. Run formatting, tests, vet, a build, and `git diff --check`. If only version
    text and documentation changed since benchmarking, use a short smoke test
-   instead of another full match. For example, while preparing v0.22:
+   instead of another full match.
+
+   Before the evidence audit, record authorized edits to historically mapped
+   Markdown guides with `go run ./tools/research map-docs --file PATH.md --record NEW_TRANSITION.json`.
+   Repeat `--file` for each changed mapped guide. Original hashes and raw evidence
+   stay intact; do not regenerate old inventories to hide changed observations.
+
+   For example, while preparing v0.23:
 
    ```sh
-   go run ./tools/benchmark --validate --race --version v0.22-release-smoke \
-     --previous tools/benchmark/bin/pandafish-v0.21 --previous-version v0.21 \
+   go run ./tools/benchmark --validate --race --version v0.23-release-smoke \
+     --previous tools/benchmark/bin/pandafish-v0.22 --previous-version v0.22 \
      --sequential --stage previous --pairs 1 --results /tmp/pandafish-release-smoke
    go run ./tools/benchmark --candidate tools/benchmark/bin/pandafish-candidate \
-     --version v0.22-release-smoke --stage external --parallel \
+     --version v0.23-release-smoke --stage external --parallel \
      --stockfish-skill 3 \
      --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
      --pairs 1 --results /tmp/pandafish-release-smoke
@@ -65,7 +72,7 @@ and benchmark evidence together. Run commands from the repository root.
 ## Tag and publish after merge
 
 Confirm the PR is merged and the version is unused, then fast-forward local
-`main` to the merged commit. For v0.22:
+`main` to the merged commit. For v0.23:
 
 ```sh
 git switch main
@@ -78,13 +85,13 @@ Check that the working tree is clean and HEAD is the intended release commit.
 Then create and push the tag:
 
 ```sh
-git tag -a v0.22 -m "v0.22: defer legal work and accelerate exchange evaluation"
-git push origin v0.22
+git tag -a v0.23 -m "v0.23: reuse search state and avoid temporary tag copies"
+git push origin v0.23
 ```
 
 Publish a GitHub release for that tag, through the GitHub UI or
 `gh release create`. Use the version alone as the release title, such as
-`v0.22`. Describe the engine or tooling change, remaining limits,
+`v0.23`. Describe the engine or tooling change, remaining limits,
 and validation, linking the candidate benchmark evidence. An engine release
 does not automatically advance the Stockfish skill target.
 
@@ -115,17 +122,17 @@ benchmark files do not need to be attached again as release assets.
 
 ## Build the next baseline
 
-Build from the tag rather than a development checkout. For v0.22:
+Build from the tag rather than a development checkout. For v0.23:
 
 ```sh
 mkdir -p tools/benchmark/bin
 benchmark_bin="$PWD/tools/benchmark/bin"
 build_dir=$(mktemp -d)
-git archive v0.22 | tar -x -C "$build_dir"
-(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.22" .)
+git archive v0.23 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.23" .)
 ```
 
-The tagged executable becomes the previous version for v0.23 development.
+The tagged executable becomes the previous version for v0.24 development.
 Compiled binaries remain gitignored. Building this baseline does not require
 relabeling or rerunning the development benchmarks. A separate benchmark of
 the exact released binary is optional. Keep private bot greetings in sync
@@ -224,3 +231,14 @@ exception and all earlier failed variants stay archived. Preserve the original
 development label/hash. Version-only release smokes are integration evidence,
 not another strength screen. Skill 3 remains the standard. No further experiment
 starts as part of this release.
+
+
+v0.23 promotes the [exact state kernel](tools/benchmark/research/v0.23-state-kernel/README.md)
+for a 14.142% measured same-work saving. The original screen scores 51% direct,
+69.4% over 49 completed Skill 3 games (one 400-ply cap; 68–70% possible overall),
+and 76% against Sacrifice, with zero forfeits and 150 legal records. Playing-
+strength improvement remains inconclusive. Preserve all 23 unsuccessful attempts,
+the original development label/hash and every failed control. The
+[Go workflow and flowchart](docs/RESEARCH_TOOLING.md) and efficiency observations
+are part of the release. Version-only smokes are integration evidence. Skill 3
+stays the standard; no next candidate or live session starts automatically.

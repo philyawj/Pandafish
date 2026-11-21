@@ -1,0 +1,21 @@
+package main
+
+import (
+	"github.com/corentings/chess/v2"
+	"math/bits"
+)
+
+func deltaCaptureEligible(p *chess.Position, m chess.Move, static, alpha int, checked bool) bool {
+	if checked || abs(alpha) >= mateBound || m.HasTag(chess.Check) || m.HasTag(chess.EnPassant) || !m.HasTag(chess.Capture) || m.Promo() != chess.NoPieceType || p.HalfMoveClock() >= 80 || static+captureValue(p, m)+200 > alpha {
+		return false
+	}
+	sets := p.Board().EvaluationPieces()
+	if bits.OnesCount64(sets[0]) != 1 || bits.OnesCount64(sets[6]) != 1 || sets[5]&0xffffff != 0 || sets[11]&0xffffff0000000000 != 0 {
+		return false
+	}
+	phase := 0
+	for i, set := range sets {
+		phase += bits.OnesCount64(set) * phaseWeight(evaluationPieceTypes[i])
+	}
+	return phase >= 8
+}

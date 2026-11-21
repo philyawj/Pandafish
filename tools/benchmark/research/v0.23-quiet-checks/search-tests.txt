@@ -1,0 +1,12 @@
+--- FAIL: TestSearchMatchesExhaustiveMinimax (0.50s)
+    --- FAIL: TestSearchMatchesExhaustiveMinimax/fen_4k3/1q6/8/5N2/8/8/8/K7_w_-_-_0_1/depth0 (0.00s)
+        search_test.go:113: search score = 280, exhaustive score = -582
+    --- FAIL: TestSearchMatchesExhaustiveMinimax/fen_k7/8/8/8/5n2/8/1Q6/4K3_b_-_-_0_1/depth0 (0.00s)
+        search_test.go:113: search score = 280, exhaustive score = -582
+FAIL
+FAIL	github.com/philyawj/Pandafish	5.502s
+ok  	github.com/philyawj/Pandafish/internal/telemetry	(cached)
+ok  	github.com/philyawj/Pandafish/tools/benchmark	(cached)
+ok  	github.com/philyawj/Pandafish/tools/lichess	(cached)
+ok  	github.com/philyawj/Pandafish/tools/research	0.871s
+FAIL

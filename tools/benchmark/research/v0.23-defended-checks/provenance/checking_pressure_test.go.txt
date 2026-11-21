@@ -1,0 +1,134 @@
+package main
+
+import (
+	"github.com/corentings/chess/v2"
+	"math/bits"
+	"math/rand/v2"
+	"testing"
+)
+
+func referenceEvaluationSlider(square int, occupied uint64, diagonal, straight bool) uint64 {
+	var result uint64
+	for _, d := range [][2]int{{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {1, -1}, {-1, -1}} {
+		if (d[0] == 0 || d[1] == 0) && !straight {
+			continue
+		}
+		if d[0] != 0 && d[1] != 0 && !diagonal {
+			continue
+		}
+		for f, r := square%8+d[0], square/8+d[1]; f >= 0 && f < 8 && r >= 0 && r < 8; f, r = f+d[0], r+d[1] {
+			bit := uint64(1) << uint(63-r*8-f)
+			result |= bit
+			if occupied&bit != 0 {
+				break
+			}
+		}
+	}
+	return result
+}
+
+func TestCheckingPressureGeometryAndSymmetry(t *testing.T) {
+	rng := rand.New(rand.NewPCG(23, 91))
+	p := chess.StartingPosition()
+	for n := 0; n < 300; n++ {
+		pieces := p.Board().EvaluationPieces()
+		occupied := uint64(0)
+		phase := 0
+		var mirror [12]uint64
+		for i, set := range pieces {
+			occupied |= set
+			phase += phaseWeight(evaluationPieceTypes[i]) * bits.OnesCount64(set)
+			for set != 0 {
+				sq := bits.LeadingZeros64(set)
+				set &^= uint64(1) << uint(63-sq)
+				mirror[(i+6)%12] |= uint64(1) << uint(63-(sq^56))
+			}
+		}
+		for sq := 0; sq < 64; sq++ {
+			for _, mode := range [][2]bool{{true, false}, {false, true}, {true, true}} {
+				if got, want := evaluationSliders(sq, occupied, mode[0], mode[1]), referenceEvaluationSlider(sq, occupied, mode[0], mode[1]); got != want {
+					t.Fatalf("slider blocker mismatch sq%d", sq)
+				}
+			}
+			for side := 0; side < 2; side++ {
+				want := uint64(0)
+				step := 1
+				if side == 1 {
+					step = -1
+				}
+				for _, df := range []int{-1, 1} {
+					f, r := sq%8+df, sq/8+step
+					if f >= 0 && f < 8 && r >= 0 && r < 8 {
+						want |= uint64(1) << uint(63-r*8-f)
+					}
+				}
+				if got := evaluationPawnAttacks(uint64(1)<<uint(63-sq), side); got != want {
+					t.Fatal("pawn edge mismatch", sq, side)
+				}
+			}
+		}
+		phase = min(24, phase)
+		got := checkingPressure(pieces, phase)
+		if got != -checkingPressure(mirror, phase) || abs(got) > 600 {
+			t.Fatal("pressure mirror/bound", p.String(), got, checkingPressure(mirror, phase))
+		}
+		before, hash := p.String(), p.ZobristHash()
+		if staticScore(p, chess.White) != -staticScore(p, chess.Black) || p.String() != before || p.ZobristHash() != hash {
+			t.Fatal("perspective/mutation")
+		}
+		moves := p.ValidMoves()
+		if len(moves) == 0 || n%70 == 69 {
+			p = chess.StartingPosition()
+		} else {
+			p = p.Update(&moves[rng.IntN(len(moves))])
+		}
+	}
+}
+
+func TestCheckingPressureContextControls(t *testing.T) {
+	pressure := func(fen string) int {
+		p := evalFEN(t, fen)
+		sets := p.Board().EvaluationPieces()
+		phase := 0
+		for i, s := range sets {
+			phase += bits.OnesCount64(s) * phaseWeight(evaluationPieceTypes[i])
+		}
+		return checkingPressure(sets, min(24, phase))
+	}
+	// Equal material and king squares; only the shelter's location changes.
+	sheltered := pressure("6k1/5ppp/8/8/8/6q1/5PPP/5RK1 w - - 0 1")
+	exposed := pressure("6k1/5ppp/8/8/5PPP/6q1/8/5RK1 w - - 0 1")
+	if exposed >= sheltered {
+		t.Fatal("lost shelter not recognized", sheltered, exposed)
+	}
+	if pressure("7k/8/8/8/8/8/8/K7 w - - 0 1") != 0 {
+		t.Fatal("bare-king pressure")
+	}
+	if pressure(chess.StartingPosition().String()) != 0 {
+		t.Fatal("start symmetry")
+	}
+	p := chess.StartingPosition()
+	before := p.String()
+	if n := testing.AllocsPerRun(1000, func() { staticScore(p, chess.White) }); n != 0 || p.String() != before {
+		t.Fatal("allocation/mutation", n)
+	}
+}
+
+var v023EvaluationSink int
+
+func BenchmarkV023Evaluation(b *testing.B) {
+	for _, mode := range []string{"base", "pressure"} {
+		b.Run(mode, func(b *testing.B) {
+			p := evalFEN(&testing.T{}, "r1bqk2r/p1p2ppp/2pb1n2/3p4/3Pp3/2N1PN2/PPP2PPP/R1BQ1RK1 w kq - 0 9")
+			b.ReportAllocs()
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				if mode == "base" {
+					v023EvaluationSink = baseStaticScore(p, chess.White)
+				} else {
+					v023EvaluationSink = staticScore(p, chess.White)
+				}
+			}
+		})
+	}
+}

@@ -1,0 +1,18 @@
+package main
+
+import "github.com/corentings/chess/v2"
+
+type scoutReductionStats struct{ Probes, Verified, MateVerified uint64 }
+
+func (w *searcher) canReduceScout(move chess.Move, depth, index, ply, alpha int, checked bool) bool {
+	if w.fullDepthScouts || depth < 3 || index < 3 || ply < 1 || checked || move.HasTag(chess.Check) || !isQuietMove(move) || abs(alpha) >= mateBound-1 {
+		return false
+	}
+	if w.killers != nil && ply < len(w.killers) {
+		signature := encodeMove(move)
+		if w.killers[ply][0] == signature || w.killers[ply][1] == signature {
+			return false
+		}
+	}
+	return true
+}

@@ -1,0 +1,12 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/philyawj/Pandafish
+cpu: Apple M2
+BenchmarkQuietCheckingGenerator/all-quiets-8         	  396898	      1472 ns/op	      92 B/op	       1 allocs/op
+BenchmarkQuietCheckingGenerator/all-quiets-8         	  413511	      1465 ns/op	      92 B/op	       1 allocs/op
+BenchmarkQuietCheckingGenerator/all-quiets-8         	  408187	      1504 ns/op	      92 B/op	       1 allocs/op
+BenchmarkQuietCheckingGenerator/checks-only-8        	 1840753	       325.4 ns/op	      10 B/op	       1 allocs/op
+BenchmarkQuietCheckingGenerator/checks-only-8        	 1872030	       318.8 ns/op	      10 B/op	       1 allocs/op
+BenchmarkQuietCheckingGenerator/checks-only-8        	 1883319	       330.2 ns/op	      10 B/op	       1 allocs/op
+PASS
+ok  	github.com/philyawj/Pandafish	5.197s

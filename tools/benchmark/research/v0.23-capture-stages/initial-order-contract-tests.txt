@@ -1,0 +1,14 @@
+--- FAIL: TestStagedPickerMatchesEveryEagerMove (0.00s)
+    main_move_picker_test.go:147: staged whole-Move order differs r1b1kbnr/ppQnpppp/2p5/3q4/4p3/2B4P/PPP2PP1/RN2KBNR b KQkq - 0 9 false 0
+--- FAIL: TestStagedPickerDefersBuffersAndIsolatesActivePly (0.00s)
+    main_move_picker_test.go:179: preferred-only picker allocated 1
+FAIL
+FAIL	github.com/philyawj/Pandafish	4.854s
+ok  	github.com/philyawj/Pandafish/internal/telemetry	(cached)
+?   	github.com/philyawj/Pandafish/tmp/v023-generator	[no test files]
+?   	github.com/philyawj/Pandafish/tmp/v023-pawns-generator	[no test files]
+?   	github.com/philyawj/Pandafish/tmp/v023-phase-generator	[no test files]
+ok  	github.com/philyawj/Pandafish/tools/benchmark	(cached)
+ok  	github.com/philyawj/Pandafish/tools/lichess	(cached)
+ok  	github.com/philyawj/Pandafish/tools/research	(cached)
+FAIL

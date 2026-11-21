@@ -1,0 +1,79 @@
+package main
+
+import (
+	"bytes"
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+	"strings"
+)
+
+func main() {
+	if len(os.Args) != 5 {
+		panic("usage: source-check SNAPSHOT OLD_VERSION NEW_VERSION OUTPUT")
+	}
+	data, err := os.ReadFile(os.Args[1])
+	if err != nil {
+		panic(err)
+	}
+	var source struct {
+		Base  string            `json:"base_tag"`
+		Files map[string]string `json:"files"`
+	}
+	if err = json.Unmarshal(data, &source); err != nil {
+		panic(err)
+	}
+	if source.Base != "v0.22" || len(source.Files) != 118 {
+		panic("unexpected frozen candidate source")
+	}
+	hashes := map[string]string{}
+	for path, text := range source.Files {
+		if !filepath.IsLocal(path) {
+			panic("unsafe source path")
+		}
+		want := []byte(text)
+		if path == "main.go" || path == "main_test.go" {
+			want = bytes.ReplaceAll(want, []byte(os.Args[2]), []byte(os.Args[3]))
+		}
+		got, e := os.ReadFile(path)
+		if e != nil {
+			panic(e)
+		}
+		if !bytes.Equal(got, want) {
+			panic("unexpected release source change: " + path)
+		}
+		hashes[path] = fmt.Sprintf("%x", sha256.Sum256(got))
+	}
+	for _, pattern := range []string{"*.go", "third_party/chess/*.go", "tools/research/*.go", "internal/telemetry/*.go"} {
+		paths, e := filepath.Glob(pattern)
+		if e != nil {
+			panic(e)
+		}
+		for _, path := range paths {
+			if _, ok := hashes[path]; !ok {
+				panic("uncaptured source: " + path)
+			}
+		}
+	}
+	if !strings.HasPrefix(os.Args[3], "v0.") {
+		panic("unexpected release identity")
+	}
+	report := map[string]any{"passed": true, "candidate_snapshot": os.Args[1], "snapshot_sha256": fmt.Sprintf("%x", sha256.Sum256(data)), "old_version": os.Args[2], "release": os.Args[3], "allowed_version_files": []string{"main.go", "main_test.go"}, "files_checked": len(hashes), "files_sha256": hashes}
+	b, e := json.MarshalIndent(report, "", "  ")
+	if e != nil {
+		panic(e)
+	}
+	f, e := os.OpenFile(os.Args[4], os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0644)
+	if e != nil {
+		panic(e)
+	}
+	if _, e = f.Write(append(b, '\n')); e != nil {
+		panic(e)
+	}
+	if e = f.Close(); e != nil {
+		panic(e)
+	}
+	fmt.Println("PASS candidate source preserved; version-only release changes")
+}

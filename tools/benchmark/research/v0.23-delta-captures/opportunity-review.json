@@ -1,0 +1,51 @@
+{
+  "created_utc": "2026-11-21T02:58:04.275149Z",
+  "input_identities": {
+    "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-1.json": {
+      "sha256": "9be3dce00250843fb594ccda6429fca34a7c81f3f4dede6dbb1883bd5ddb98c4",
+      "bytes": 288970
+    },
+    "tools/benchmark/research/v0.23-delta-captures/diagnostic-warm.json": {
+      "sha256": "7e22028c769120e6f5d39b0135e2ac2caf96ec2ab63230d6393cee36a2c3fbbb",
+      "bytes": 387377
+    }
+  },
+  "issues": [],
+  "median_time_ratio": 1.014331788568556,
+  "node_ratios": [
+    1
+  ],
+  "options": {
+    "Baseline": "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-1.json",
+    "Candidate": "tools/benchmark/research/v0.23-delta-captures/diagnostic-warm.json",
+    "Out": "tools/benchmark/research/v0.23-delta-captures/opportunity-review.json",
+    "Reference": "",
+    "Pairs": 1,
+    "Roots": 1145,
+    "Depth": 5,
+    "MaxTimeRatio": 0,
+    "MaxNodeRatio": 0,
+    "MinOpportunity": 0.2,
+    "Exact": true
+  },
+  "pairs": [
+    {
+      "baseline_ms": 21601.534275999973,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 21911.122898000023,
+      "candidate_nodes": 43118858,
+      "changed_roots": 0,
+      "contradictions": 0,
+      "node_ratio": 1,
+      "opportunity_captures": 2021662,
+      "opportunity_fraction": 0.04688579646520323,
+      "opportunity_nodes": 2021662,
+      "pair": 1,
+      "time_ratio": 1.014331788568556
+    }
+  ],
+  "passed": false,
+  "time_ratios": [
+    1.014331788568556
+  ]
+}

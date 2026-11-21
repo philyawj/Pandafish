@@ -1,0 +1,66 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"net/url"
+	"os"
+	"path/filepath"
+	"regexp"
+	"strings"
+)
+
+func main() {
+	paths := []string{"README.md", "AGENTS.md", "CONTRIBUTING.md", "RELEASING.md", "tools/README.md", "tools/benchmark/README.md", "tools/research/README.md", "docs/RESEARCH_CHECKPOINT.md", "docs/RESEARCH_WORKFLOW.md", "docs/RESEARCH_TOOLING.md", "docs/RESEARCH_V023.md", "tools/research/v0.23-validation.md", "tools/benchmark/research/v0.23-state-kernel/README.md", "tools/benchmark/research/v0.23-state-kernel/screen/README.md", "tools/benchmark/research/v0.23-next-assessment/README.md", "/tmp/pandafish-v023-publication/pr.md", "/tmp/pandafish-v023-publication/release.md"}
+	links := regexp.MustCompile(`\]\(([^)\n]+)\)`)
+	separator := regexp.MustCompile(`^\|[ :|\-]+\|$`)
+	issues := []string{}
+	for _, path := range paths {
+		data, e := os.ReadFile(path)
+		if e != nil {
+			panic(e)
+		}
+		lines := strings.Split(string(data), "\n")
+		for i, line := range lines {
+			if separator.MatchString(line) {
+				if i == 0 || strings.Count(line, "|") != strings.Count(lines[i-1], "|") {
+					issues = append(issues, "table header: "+path)
+				}
+				for _, row := range lines[i+1:] {
+					if !strings.HasPrefix(row, "|") {
+						break
+					}
+					if strings.Count(row, "|") != strings.Count(line, "|") {
+						issues = append(issues, "table row: "+path)
+					}
+				}
+			}
+		}
+		if strings.HasPrefix(path, "/tmp/") {
+			continue
+		}
+		for _, match := range links.FindAllSubmatch(data, -1) {
+			target := string(match[1])
+			if strings.Contains(target, "://") || strings.HasPrefix(target, "#") {
+				continue
+			}
+			target = strings.Split(target, "#")[0]
+			target, _ = url.PathUnescape(target)
+			file := filepath.Join(filepath.Dir(path), target)
+			if strings.HasPrefix(target, "/") {
+				file = strings.TrimPrefix(target, "/")
+			}
+			if _, e = os.Stat(file); e != nil {
+				issues = append(issues, "missing link: "+path+" -> "+target)
+			}
+		}
+	}
+	b, e := json.MarshalIndent(map[string]any{"paths": paths, "issues": issues, "passed": len(issues) == 0}, "", "  ")
+	if e != nil {
+		panic(e)
+	}
+	fmt.Println(string(b))
+	if len(issues) > 0 {
+		os.Exit(1)
+	}
+}

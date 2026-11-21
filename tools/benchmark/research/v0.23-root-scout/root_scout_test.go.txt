@@ -1,0 +1,51 @@
+package main
+
+import (
+	"maps"
+	"testing"
+
+	"github.com/corentings/chess/v2"
+)
+
+// Original one-sided root windows are a separate reference. Descendant search,
+// legal roots and history are identical; no reference-engine move is forced.
+func rootWideReference(w *searcher, p *chess.Position, moves []chess.Move, depth int) (string, int, bool) {
+	w.pushPosition(p)
+	defer w.popPosition(p)
+	best, value := "", -searchInfinity
+	for _, move := range moves {
+		score, done := w.childSearch(p.UpdateSearch(&move), depth-1, -searchInfinity, -value, move.HasTag(chess.Check), 1)
+		if !done {
+			return "", 0, false
+		}
+		if -score > value {
+			best, value = move.String(), -score
+		}
+	}
+	return best, value, !w.stopped()
+}
+
+func TestRootScoutMatchesWideReference(t *testing.T) {
+	for _, fen := range []string{chess.StartingPosition().String(), timeoutPosition, queenRaidPosition, crowdedPosition,
+		"7k/8/5KQ1/8/8/8/8/8 w - - 0 1", "8/8/8/8/8/5kq1/8/7K b - - 0 1", "7k/8/8/8/8/8/P7/K7 w - - 0 1"} {
+		p := evalFEN(t, fen)
+		before := p.String()
+		for _, depth := range []int{1, 2, 3} {
+			a, b := &searcher{table: newTable(), killers: new(killerTable)}, &searcher{table: newTable(), killers: new(killerTable)}
+			for _, key := range []uint64{123, 456, 123} {
+				a.pushKey(key)
+				b.pushKey(key)
+			}
+			counts, key := maps.Clone(b.repetitions), b.historyKey
+			moves := rootMoves(p, nil)
+			wantMove, wantScore, ok := rootWideReference(a, p, moves, depth)
+			best, score, done := b.root(p, moves, depth)
+			if !ok || !done || len(best) != 1 || best[0] != wantMove || score != wantScore {
+				t.Fatal(fen, depth, best, score, wantMove, wantScore)
+			}
+			if before != p.String() || !maps.Equal(counts, b.repetitions) || key != b.historyKey {
+				t.Fatal("parent/history changed")
+			}
+		}
+	}
+}

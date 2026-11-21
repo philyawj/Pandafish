@@ -1,0 +1,266 @@
+{
+  "version": 1,
+  "inputs": [
+    "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/research",
+    "/tmp/pandafish-warm-v022-shared.test",
+    "/tmp/pandafish-quiet-scouts.test",
+    "tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/summary.json",
+    "tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/previous.pgn",
+    "tools/research/*.go",
+    "*.go",
+    "go.mod",
+    "go.sum",
+    "internal/telemetry/*.go",
+    "third_party/chess/*.go",
+    "third_party/chess/go.mod",
+    "third_party/chess/go.sum",
+    "tools/benchmark/research/v0.23-quiet-scouts/validation-run/state.json"
+  ],
+  "steps": [
+    {
+      "name": "validated-source",
+      "command": [
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/research",
+        "workflow",
+        "--out",
+        "tools/benchmark/research/v0.23-quiet-scouts/validation-run",
+        "--status"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-quiet-scouts/validation-run/state.json",
+          "pointer": "/status",
+          "equals": "passed"
+        }
+      ]
+    },
+    {
+      "name": "warm-baseline-pair-1",
+      "command": [
+        "/tmp/pandafish-warm-v022-shared.test",
+        "-test.run=^TestResearchWarmWorkload$",
+        "-test.count=1",
+        "-test.v"
+      ],
+      "env": {
+        "WARM_DEPTH": "5",
+        "WARM_INPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba",
+        "WARM_MODE": "search",
+        "WARM_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-quiet-scouts/warm/warm-baseline-pair-1.json"
+      },
+      "timeout_seconds": 600,
+      "outputs": [
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-quiet-scouts/warm/warm-baseline-pair-1.json"
+      ]
+    },
+    {
+      "name": "warm-candidate-pair-1",
+      "command": [
+        "/tmp/pandafish-quiet-scouts.test",
+        "-test.run=^TestResearchWarmWorkload$",
+        "-test.count=1",
+        "-test.v"
+      ],
+      "env": {
+        "WARM_DEPTH": "5",
+        "WARM_INPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba",
+        "WARM_MODE": "search",
+        "WARM_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-quiet-scouts/warm/warm-candidate-pair-1.json"
+      },
+      "timeout_seconds": 600,
+      "outputs": [
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-quiet-scouts/warm/warm-candidate-pair-1.json"
+      ]
+    },
+    {
+      "name": "node-gate-1",
+      "command": [
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/research",
+        "warm-report",
+        "--baseline",
+        "tools/benchmark/research/v0.23-quiet-scouts/warm/warm-baseline-pair-[1-1].json",
+        "--candidate",
+        "tools/benchmark/research/v0.23-quiet-scouts/warm/warm-candidate-pair-[1-1].json",
+        "--pairs",
+        "1",
+        "--roots",
+        "1145",
+        "--depth",
+        "5",
+        "--max-time-ratio",
+        "0",
+        "--max-node-ratio",
+        "0.8",
+        "--out",
+        "tools/benchmark/research/v0.23-quiet-scouts/warm/node-gate-1.json"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-quiet-scouts/warm/node-gate-1.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-quiet-scouts/warm/node-gate-1.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/median_time_ratio",
+            "/node_ratios",
+            "/issues"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "warm-candidate-pair-2",
+      "command": [
+        "/tmp/pandafish-quiet-scouts.test",
+        "-test.run=^TestResearchWarmWorkload$",
+        "-test.count=1",
+        "-test.v"
+      ],
+      "env": {
+        "WARM_DEPTH": "5",
+        "WARM_INPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba",
+        "WARM_MODE": "search",
+        "WARM_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-quiet-scouts/warm/warm-candidate-pair-2.json"
+      },
+      "timeout_seconds": 600,
+      "outputs": [
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-quiet-scouts/warm/warm-candidate-pair-2.json"
+      ]
+    },
+    {
+      "name": "warm-baseline-pair-2",
+      "command": [
+        "/tmp/pandafish-warm-v022-shared.test",
+        "-test.run=^TestResearchWarmWorkload$",
+        "-test.count=1",
+        "-test.v"
+      ],
+      "env": {
+        "WARM_DEPTH": "5",
+        "WARM_INPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba",
+        "WARM_MODE": "search",
+        "WARM_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-quiet-scouts/warm/warm-baseline-pair-2.json"
+      },
+      "timeout_seconds": 600,
+      "outputs": [
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-quiet-scouts/warm/warm-baseline-pair-2.json"
+      ]
+    },
+    {
+      "name": "node-gate-2",
+      "command": [
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/research",
+        "warm-report",
+        "--baseline",
+        "tools/benchmark/research/v0.23-quiet-scouts/warm/warm-baseline-pair-[1-2].json",
+        "--candidate",
+        "tools/benchmark/research/v0.23-quiet-scouts/warm/warm-candidate-pair-[1-2].json",
+        "--pairs",
+        "2",
+        "--roots",
+        "1145",
+        "--depth",
+        "5",
+        "--max-time-ratio",
+        "0",
+        "--max-node-ratio",
+        "0.8",
+        "--out",
+        "tools/benchmark/research/v0.23-quiet-scouts/warm/node-gate-2.json"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-quiet-scouts/warm/node-gate-2.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-quiet-scouts/warm/node-gate-2.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/median_time_ratio",
+            "/node_ratios",
+            "/issues"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "warm-baseline-pair-3",
+      "command": [
+        "/tmp/pandafish-warm-v022-shared.test",
+        "-test.run=^TestResearchWarmWorkload$",
+        "-test.count=1",
+        "-test.v"
+      ],
+      "env": {
+        "WARM_DEPTH": "5",
+        "WARM_INPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba",
+        "WARM_MODE": "search",
+        "WARM_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-quiet-scouts/warm/warm-baseline-pair-3.json"
+      },
+      "timeout_seconds": 600,
+      "outputs": [
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-quiet-scouts/warm/warm-baseline-pair-3.json"
+      ]
+    },
+    {
+      "name": "warm-candidate-pair-3",
+      "command": [
+        "/tmp/pandafish-quiet-scouts.test",
+        "-test.run=^TestResearchWarmWorkload$",
+        "-test.count=1",
+        "-test.v"
+      ],
+      "env": {
+        "WARM_DEPTH": "5",
+        "WARM_INPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba",
+        "WARM_MODE": "search",
+        "WARM_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-quiet-scouts/warm/warm-candidate-pair-3.json"
+      },
+      "timeout_seconds": 600,
+      "outputs": [
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-quiet-scouts/warm/warm-candidate-pair-3.json"
+      ]
+    },
+    {
+      "name": "warm-gate",
+      "command": [
+        "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/research",
+        "warm-report",
+        "--baseline",
+        "tools/benchmark/research/v0.23-quiet-scouts/warm/warm-baseline-pair-[1-3].json",
+        "--candidate",
+        "tools/benchmark/research/v0.23-quiet-scouts/warm/warm-candidate-pair-[1-3].json",
+        "--pairs",
+        "3",
+        "--roots",
+        "1145",
+        "--depth",
+        "5",
+        "--max-time-ratio",
+        "0.85",
+        "--max-node-ratio",
+        "0.8",
+        "--out",
+        "tools/benchmark/research/v0.23-quiet-scouts/warm/warm-gate.json"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-quiet-scouts/warm/warm-gate.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-quiet-scouts/warm/warm-gate.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/median_time_ratio",
+            "/node_ratios",
+            "/issues"
+          ]
+        }
+      ]
+    }
+  ]
+}

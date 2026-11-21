@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "inputs": [
+    "tools/benchmark/bin/research",
+    "tools/benchmark/bin/benchmark",
+    "tools/benchmark/bin/pandafish-v0.22",
+    "tools/benchmark/bin/pandafish-v023-root-parallel",
+    "/opt/homebrew/bin/stockfish",
+    "tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine",
+    "tools/benchmark/bin/sacrifice-source/data/Tal.pgn",
+    "tools/benchmark/openings-screening-10-v1.txt",
+    "*.go",
+    "go.mod",
+    "go.sum",
+    "internal/telemetry/*.go",
+    "third_party/chess/*.go",
+    "third_party/chess/go.mod",
+    "third_party/chess/go.sum",
+    "tools/benchmark/*.go",
+    "tools/research/*.go",
+    "tools/benchmark/research/v0.23-root-parallel/public-100/quality.json",
+    "tools/benchmark/research/v0.23-root-parallel/public-1000/quality.json",
+    "tools/benchmark/research/v0.23-root-parallel/newer-100/quality.json",
+    "tools/benchmark/research/v0.23-root-parallel/newer-1000/quality.json",
+    "tools/benchmark/research/v0.23-root-parallel/fresh-100/quality.json",
+    "tools/benchmark/research/v0.23-root-parallel/fresh-1000/quality.json",
+    "tools/benchmark/research/v0.23-root-parallel/warm/warm-gate.json",
+    "tools/benchmark/research/v0.23-root-parallel/warm/choice-validation.json"
+  ],
+  "steps": [
+    {
+      "name": "prerequisites",
+      "command": [
+        "tools/benchmark/bin/research",
+        "workflow",
+        "--out",
+        "tools/benchmark/research/v0.23-root-parallel/native-run",
+        "--status"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-root-parallel/public-100/quality.json",
+          "pointer": "/passed",
+          "equals": true
+        },
+        {
+          "file": "tools/benchmark/research/v0.23-root-parallel/public-1000/quality.json",
+          "pointer": "/passed",
+          "equals": true
+        },
+        {
+          "file": "tools/benchmark/research/v0.23-root-parallel/newer-100/quality.json",
+          "pointer": "/passed",
+          "equals": true
+        },
+        {
+          "file": "tools/benchmark/research/v0.23-root-parallel/newer-1000/quality.json",
+          "pointer": "/passed",
+          "equals": true
+        },
+        {
+          "file": "tools/benchmark/research/v0.23-root-parallel/fresh-100/quality.json",
+          "pointer": "/passed",
+          "equals": true
+        },
+        {
+          "file": "tools/benchmark/research/v0.23-root-parallel/fresh-1000/quality.json",
+          "pointer": "/passed",
+          "equals": true
+        },
+        {
+          "file": "tools/benchmark/research/v0.23-root-parallel/warm/warm-gate.json",
+          "pointer": "/passed",
+          "equals": true
+        },
+        {
+          "file": "tools/benchmark/research/v0.23-root-parallel/warm/choice-validation.json",
+          "pointer": "/passed",
+          "equals": true
+        }
+      ]
+    },
+    {
+      "name": "standard-screen",
+      "command": [
+        "tools/benchmark/bin/benchmark",
+        "--candidate",
+        "tools/benchmark/bin/pandafish-v023-root-parallel",
+        "--version",
+        "v0.23-root-parallel-dev",
+        "--previous",
+        "tools/benchmark/bin/pandafish-v0.22",
+        "--previous-version",
+        "v0.22",
+        "--previous-revision",
+        "1953f2af97f956c4499cbc5b61c3c1c698856740",
+        "--stockfish",
+        "/opt/homebrew/bin/stockfish",
+        "--stockfish-skill",
+        "3",
+        "--sacrifice",
+        "tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine",
+        "--pairs",
+        "25",
+        "--parallel-all",
+        "--move-ms",
+        "100",
+        "--grace-ms",
+        "50",
+        "--max-plies",
+        "400",
+        "--openings",
+        "tools/benchmark/openings-screening-10-v1.txt",
+        "--revision",
+        "8b0109d5fd578a397e2f7ae9857190bd94df8095-dirty",
+        "--machine",
+        "Apple M2; 8 logical CPUs; candidate max 2 search workers; opponents 1 active search thread; AC; Go 1.25; no overlapping agent validation; external workload unmeasured",
+        "--results",
+        "tools/benchmark/research/v0.23-root-parallel/screen",
+        "--verbose"
+      ],
+      "timeout_seconds": 3600,
+      "outputs": [
+        "tools/benchmark/research/v0.23-root-parallel/screen/v0.23-root-parallel-dev-vs-v0.22-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/*.json",
+        "tools/benchmark/research/v0.23-root-parallel/screen/v0.23-root-parallel-dev-vs-v0.22-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/*.pgn",
+        "tools/benchmark/research/v0.23-root-parallel/screen/v0.23-root-parallel-dev-vs-v0.22-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/*.md"
+      ]
+    },
+    {
+      "name": "legal-game-audit",
+      "command": [
+        "tools/benchmark/bin/research",
+        "games",
+        "--dir",
+        "tools/benchmark/research/v0.23-root-parallel/screen/v0.23-root-parallel-dev-vs-v0.22-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba"
+      ],
+      "timeout_seconds": 120
+    }
+  ]
+}

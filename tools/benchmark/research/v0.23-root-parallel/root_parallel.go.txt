@@ -1,0 +1,106 @@
+package main
+
+import (
+	"maps"
+	"sync"
+	"sync/atomic"
+
+	"github.com/corentings/chess/v2"
+)
+
+type rootTeam struct {
+	lanes   [2]*searcher
+	running atomic.Int32
+	peak    atomic.Int32
+}
+
+// The serial first move establishes an exact incumbent. Every later job uses
+// its snapshot window; a failed improvement is a bound, not a proven tie.
+func (w *searcher) parallelRoot(p *chess.Position, moves []chess.Move, depth int) ([]string, int, bool) {
+	w.pushPosition(p)
+	defer w.popPosition(p)
+	if w.stopped() {
+		return nil, 0, false
+	}
+	first := moves[0]
+	value, complete := w.childSearch(p.UpdateSearch(&first), depth-1, -searchInfinity, searchInfinity, first.HasTag(chess.Check), 1)
+	if !complete {
+		return nil, 0, false
+	}
+	state := struct {
+		sync.Mutex
+		score, index int
+		complete     bool
+	}{score: -value, index: 0, complete: true}
+	jobs := make(chan int, len(moves)-1)
+	for i := 1; i < len(moves); i++ {
+		jobs <- i
+	}
+	close(jobs)
+	team := w.rootTeam
+	for i := range team.lanes {
+		lane := team.lanes[i]
+		if lane == nil {
+			lane = &searcher{}
+			team.lanes[i] = lane
+		}
+		lane.ctx, lane.deadline, lane.now = w.ctx, w.deadline, w.now
+		lane.table, lane.unfiltered = w.table, w.unfiltered
+		lane.nodes, lane.historyKey = 0, w.historyKey
+		lane.repetitions = maps.Clone(w.repetitions)
+		if w.killers == nil {
+			lane.killers = nil
+		} else {
+			if lane.killers == nil {
+				lane.killers = new(killerTable)
+			}
+			*lane.killers = *w.killers
+		}
+	}
+	var wg sync.WaitGroup
+	for _, lane := range team.lanes {
+		wg.Add(1)
+		go func(lane *searcher) {
+			defer wg.Done()
+			n := team.running.Add(1)
+			for old := team.peak.Load(); n > old; old = team.peak.Load() {
+				if team.peak.CompareAndSwap(old, n) {
+					break
+				}
+			}
+			defer team.running.Add(-1)
+			for index := range jobs {
+				if lane.stopped() {
+					state.Lock()
+					state.complete = false
+					state.Unlock()
+					return
+				}
+				state.Lock()
+				threshold := state.score
+				state.Unlock()
+				move := moves[index]
+				score, done := lane.childSearch(p.UpdateSearch(&move), depth-1, -searchInfinity, -threshold, move.HasTag(chess.Check), 1)
+				score = -score
+				state.Lock()
+				if !done {
+					state.complete = false
+				} else if score > threshold && (score > state.score || score == state.score && index < state.index) {
+					state.score, state.index = score, index
+				}
+				state.Unlock()
+				if !done {
+					return
+				}
+			}
+		}(lane)
+	}
+	wg.Wait()
+	for _, lane := range team.lanes {
+		w.nodes += lane.nodes
+	}
+	if !state.complete || w.stopped() {
+		return nil, 0, false
+	}
+	return []string{moves[state.index].String()}, state.score, true
+}

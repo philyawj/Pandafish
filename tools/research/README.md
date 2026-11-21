@@ -1,11 +1,30 @@
 # Go research tools
 
-Run `go run ./tools/research` from the repository root. This program needs
+Run individual commands with `go run ./tools/research` from the repository root.
+Reusable workflow plans use the persistent built executable described in the
+[tooling guide](../../docs/RESEARCH_TOOLING.md). This program needs
 Go and Git. Verification/replay commands do not collect labels or start games;
 the explicit `choices` and `generate` commands run offline UCI queries with
-supplied engines. No command starts live games or refits models.
+supplied engines. Explicit experimental `context-fit` and `context-targets`
+commands execute their frozen offline fitting/label protocols, outside the
+routine workflow. No command starts live games or publishes code.
 The normal [benchmark](../benchmark/README.md) and
 [session tools](../lichess/README.md) remain Go programs too.
+
+For new engine investigations, start with the
+[tooling map and flowchart](../../docs/RESEARCH_TOOLING.md). Shared `workflow`,
+`validation-plan`, `warm-plan`, `warm-report`, `native-plan`, `snapshot` and `inventory` commands
+replace duplicated per-attempt orchestration. `generate` accepts fixed seed/
+stream and repeatable exclusion flags. `choices` also writes a compact
+`brief.json`; raw records and scientific gates remain unchanged.
+
+`validation-plan` orders normal/race/vet checks before test/engine builds.
+`warm-plan` requires its passed source-matching state through `--preflight-state`.
+`depth-review` reconstructs changed native choices at observed depths; its
+`--flags-only` option selects saved new mate flags. `confirm-mates` checks every
+such flag at a fixed larger reference budget using both actors' complete move
+union and an unrestricted root. These diagnostics preserve the original failed
+gates and do not repeat timed actor queries. Finite reference reports are estimates.
 
 ```sh
 go run ./tools/research audit

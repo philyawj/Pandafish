@@ -1,0 +1,80 @@
+package main
+
+import (
+	"context"
+	"maps"
+	"testing"
+
+	"github.com/corentings/chess/v2"
+)
+
+func TestScoutReductionGuards(t *testing.T) {
+	p := chess.StartingPosition()
+	m := rootMoves(p, []string{"g1f3"})[0]
+	w := searcher{}
+	if !w.canReduceScout(m, 3, 3, 1, 0, false) {
+		t.Fatal("late ordinary scout excluded")
+	}
+	for _, c := range []struct {
+		depth, index, ply, alpha int
+		checked                  bool
+	}{{2, 3, 1, 0, false}, {3, 2, 1, 0, false}, {3, 3, 0, 0, false}, {3, 3, 1, mateBound, false}, {3, 3, 1, -mateBound, false}, {3, 3, 1, 0, true}} {
+		if w.canReduceScout(m, c.depth, c.index, c.ply, c.alpha, c.checked) {
+			t.Fatal("guard failed", c)
+		}
+	}
+	w.killers = new(killerTable)
+	w.killers[1][0] = encodeMove(m)
+	if w.canReduceScout(m, 3, 3, 1, 0, false) {
+		t.Fatal("killer reduced")
+	}
+	w = searcher{fullDepthScouts: true}
+	if w.canReduceScout(m, 3, 3, 1, 0, false) {
+		t.Fatal("reference mode reduced")
+	}
+	for _, fen := range []string{"3r3k/8/8/3p4/8/8/8/3Q2K1 w - - 0 1", "r6k/1P6/8/8/8/8/8/7K w - - 0 1"} {
+		p := evalFEN(t, fen)
+		for _, move := range p.ValidMoves() {
+			if (!isQuietMove(move) || move.HasTag(chess.Check)) && (&searcher{}).canReduceScout(move, 4, 9, 1, 0, false) {
+				t.Fatal("tactical move reduced", fen, move)
+			}
+		}
+	}
+}
+
+func TestScoutReductionVerificationAndRestoration(t *testing.T) {
+	var probes, verified uint64
+	for _, fen := range []string{chess.StartingPosition().String(), queenRaidPosition, crowdedPosition, timeoutPosition} {
+		p := evalFEN(t, fen)
+		stats := scoutReductionStats{}
+		w := searcher{table: newTable(), killers: new(killerTable), reductions: &stats}
+		for _, key := range []uint64{123, 456, 123} {
+			w.pushKey(key)
+		}
+		counts, key, before := maps.Clone(w.repetitions), w.historyKey, p.String()
+		best, _, done := w.root(p, rootMoves(p, nil), 4)
+		if !done || len(best) != 1 || len(rootMoves(p, best)) != 1 {
+			t.Fatal("incomplete/illegal root")
+		}
+		if !maps.Equal(counts, w.repetitions) || key != w.historyKey || before != p.String() {
+			t.Fatal("parent/history not restored")
+		}
+		if stats.Verified > stats.Probes || stats.MateVerified > stats.Verified {
+			t.Fatal("invalid verification accounting")
+		}
+		probes += stats.Probes
+		verified += stats.Verified
+	}
+	if probes == 0 || verified == 0 {
+		t.Fatal("positive reduction/verification controls not exercised", probes, verified)
+	}
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	w := searcher{ctx: ctx, reductions: new(scoutReductionStats)}
+	if _, _, done := w.root(chess.StartingPosition(), rootMoves(chess.StartingPosition(), nil), 4); done {
+		t.Fatal("cancelled search completed")
+	}
+	if len(w.repetitions) != 0 {
+		t.Fatal("cancelled history leaked")
+	}
+}

@@ -1,0 +1,99 @@
+package chess
+
+import "math/bits"
+
+// AppendSearchQuietChecks appends legal noncapture, nonpromotion checks in the
+// original legal-list order. Checking castles are retained. Capture checks,
+// EP and promotions belong to AppendSearchMoves(dst, true), avoiding duplicates.
+func (pos *Position) AppendSearchQuietChecks(dst []Move) []Move {
+	moves, _ := pos.searchMovesWithChecks(dst, false, false, true, true)
+	return moves
+}
+
+// Conservative discovery origins: the sole friendly blocker between a friendly
+// slider and the opposing king. Final move tagging decides whether it moved off
+// the line and whether the mover's own king is safe.
+func searchCheckContext(pos *Position) (king Square, discovered bitboard, active bool) {
+	enemy := pos.turn.Other()
+	kings := pos.board.bbForPiece(NewPiece(King, enemy))
+	if bits.OnesCount64(uint64(kings)) != 1 {
+		return NoSquare, 0, false
+	}
+	king = Square(bits.LeadingZeros64(uint64(kings)))
+	if searchSquareAttackedBy(pos.board, king, pos.turn) {
+		return king, 0, false // Arbitrary FEN: an unrelated move can preserve check.
+	}
+	owned := pos.board.whiteSqs
+	if pos.turn == Black {
+		owned = pos.board.blackSqs
+	}
+	occupied := ^pos.board.emptySqs
+	for _, kind := range []PieceType{Queen, Rook, Bishop} {
+		set := pos.board.bbForPiece(NewPiece(kind, pos.turn))
+		for set != 0 {
+			from := Square(bits.LeadingZeros64(uint64(set)))
+			set &^= bbForSquare(from)
+			line := searchEvasionLines[king][from]
+			if line == 0 {
+				continue
+			}
+			straight := king.File() == from.File() || king.Rank() == from.Rank()
+			if (straight && kind == Bishop) || (!straight && kind == Rook) {
+				continue
+			}
+			blockers := (line &^ bbForSquare(from)) & occupied
+			if bits.OnesCount64(uint64(blockers)) == 1 && blockers&owned != 0 {
+				discovered |= blockers
+			}
+		}
+	}
+	return king, discovered, true
+}
+
+func searchCheckingTargets(pos *Position, piece Piece, from, king Square, discovered bitboard) bitboard {
+	if discovered&bbForSquare(from) != 0 {
+		return ^bitboard(0)
+	}
+	occupied := (^pos.board.emptySqs) &^ bbForSquare(from)
+	switch piece.Type() {
+	case Pawn:
+		return searchEvasionPawnOrigins[pos.turn][king]
+	case Knight:
+		return bbKnightMoves[king]
+	case King:
+		return bbKingMoves[king]
+	case Bishop:
+		return diaAttack(occupied, king)
+	case Rook:
+		return hvAttack(occupied, king)
+	case Queen:
+		return diaAttack(occupied, king) | hvAttack(occupied, king)
+	}
+	return 0
+}
+
+// Avoid allocating/testing ordinary castles when the resulting rook cannot
+// check. A possible discovery or nonstandard input keeps the broad fallback.
+func searchCheckingCastlePossible(pos *Position, king Square, discovered bitboard) bool {
+	from, rookK, rookQ, toK, toQ, kingK, kingQ := E1, H1, A1, F1, D1, G1, C1
+	if pos.turn == Black {
+		from, rookK, rookQ, toK, toQ, kingK, kingQ = E8, H8, A8, F8, D8, G8, C8
+	}
+	if discovered&(bbForSquare(from)|bbForSquare(rookK)|bbForSquare(rookQ)) != 0 {
+		return true
+	}
+	for _, c := range []struct {
+		side             Side
+		rook, to, kingTo Square
+	}{{KingSide, rookK, toK, kingK}, {QueenSide, rookQ, toQ, kingQ}} {
+		if !pos.castleRights.CanCastle(pos.turn, c.side) {
+			continue
+		}
+		occupied := (^pos.board.emptySqs) &^ (bbForSquare(from) | bbForSquare(c.rook))
+		occupied |= bbForSquare(c.to) | bbForSquare(c.kingTo)
+		if hvAttack(occupied, king)&bbForSquare(c.to) != 0 {
+			return true
+		}
+	}
+	return false
+}

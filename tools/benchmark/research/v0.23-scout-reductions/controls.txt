@@ -1,0 +1,16 @@
+--- FAIL: TestKillerNodeAudit (0.24s)
+    killers_test.go:176: startpos: nodes 2415 -> 1471; score 0
+    killers_test.go:176: fen r2k2r1/5p2/Ppp1q3/3Np1Pp/2P1P1n1/Q5PB/P2BKP1N/1R5R w - - 0 28: nodes 85905 -> 85217; score 1387
+    killers_test.go:171: ordering changed exact root result
+--- FAIL: TestDelayForcedMateMatchesIndependentProof (0.11s)
+    mate_test.go:135: delay best[h8g8] want[h8g8 h8h7] score-931 proof{outcome:-1 distance:6}
+FAIL
+FAIL	github.com/philyawj/Pandafish	5.086s
+ok  	github.com/philyawj/Pandafish/internal/telemetry	(cached)
+?   	github.com/philyawj/Pandafish/tmp/v023-generator	[no test files]
+?   	github.com/philyawj/Pandafish/tmp/v023-pawns-generator	[no test files]
+?   	github.com/philyawj/Pandafish/tmp/v023-phase-generator	[no test files]
+ok  	github.com/philyawj/Pandafish/tools/benchmark	(cached)
+ok  	github.com/philyawj/Pandafish/tools/lichess	(cached)
+ok  	github.com/philyawj/Pandafish/tools/research	(cached)
+FAIL

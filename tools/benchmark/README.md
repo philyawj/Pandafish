@@ -156,6 +156,28 @@ keeps version-only integration checks separate. Future candidates compare agains
 tagged v0.22; Skill 3 remains the reference. No larger confirmation or further
 experiment starts automatically.
 
+
+**v0.23 promotes the [exact state kernel](research/v0.23-state-kernel/README.md).**
+Per-ply child storage and virtual ordinary-move tags preserve all 1,145 warm
+moves, scores and 43,118,858 nodes; median elapsed time falls 14.142%. All six
+actual-budget decision gates pass. The original 50-game-per-opponent screen is:
+
+| Opponent | W / D / L | Unfinished | Forfeits | Completed score |
+| --- | --- | --- | --- | --- |
+| Tagged v0.22 | 20 / 11 / 19 | 0 | 0 | 51% |
+| Stockfish Skill 3 | 34 / 0 / 15 | 1 | 0 | 69.4% |
+| Pinned Sacrifice | 34 / 8 / 8 | 0 | 0 | 76% |
+
+The Stockfish game reaches the 400-ply cap; possible score across all 50 is
+68–70%. All 150 records replay legally. The one-game direct lead does not
+establish a meaningful strength or Elo gain. Promotion recognizes a moderate
+exact efficiency improvement. The [research summary](../../docs/RESEARCH_V023.md)
+preserves 23 unsuccessful attempts, all adverse evidence and the Go tooling
+flowchart. [Release validation](../research/v0.23-validation.md) records separate
+version-only integration checks. Future candidates compare against tagged
+v0.23; Skill 3 remains the standard. No larger confirmation or new experiment
+starts automatically.
+
 ## Why this exists
 
 This benchmark runner independently adopted a methodology similar to Fishtest:
@@ -283,6 +305,10 @@ git archive v0.21 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.22 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.22" .)
+
+build_dir=$(mktemp -d)
+git archive v0.23 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.23" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -365,12 +391,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.22 tagged baseline as above for the next engine change. Then run
+Build the v0.23 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.22 --previous-version v0.22 \
+  --previous tools/benchmark/bin/pandafish-v0.23 --previous-version v0.23 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -536,7 +562,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.22 --previous-version v0.22 \
+  --previous tools/benchmark/bin/pandafish-v0.23 --previous-version v0.23 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -773,7 +799,7 @@ current Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.22 --previous-version v0.22 \
+  --previous tools/benchmark/bin/pandafish-v0.23 --previous-version v0.23 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```
