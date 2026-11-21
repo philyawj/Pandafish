@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "inputs": [
+    "tools/benchmark/bin/research",
+    "tools/research/*.go",
+    "*.go",
+    "go.mod",
+    "go.sum",
+    "internal/telemetry/*.go",
+    "third_party/chess/*.go",
+    "third_party/chess/go.mod",
+    "third_party/chess/go.sum",
+    "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-*.json",
+    "tools/benchmark/research/v0.23-child-reuse/warm-candidate-pair-*.json",
+    "tools/benchmark/research/v0.23-verified-null/warm-baseline-pair-*.json",
+    "tools/benchmark/research/v0.23-verified-null/warm-candidate-pair-*.json",
+    "tools/benchmark/research/v0.23-pawn-structure/compact-cost/warm-baseline-pair-*.json",
+    "tools/benchmark/research/v0.23-pawn-structure/compact-cost/warm-candidate-pair-*.json",
+    "tools/benchmark/research/v0.23-pawn-structure/warm-candidate-pair-1.json"
+  ],
+  "steps": [
+    {
+      "name": "child-cost",
+      "command": [
+        "tools/benchmark/bin/research",
+        "warm-report",
+        "--baseline",
+        "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-*.json",
+        "--candidate",
+        "tools/benchmark/research/v0.23-child-reuse/warm-candidate-pair-*.json",
+        "--out",
+        "tools/benchmark/research/v0.23-process-audit/recomputed-child-cost.json",
+        "--exact",
+        "--max-time-ratio",
+        "0.85"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-process-audit/recomputed-child-cost.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-process-audit/recomputed-child-cost.json",
+          "pointer": "/passed",
+          "equals": false,
+          "brief": [
+            "/median_time_ratio",
+            "/node_ratios",
+            "/issues"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "verified-null-cost",
+      "command": [
+        "tools/benchmark/bin/research",
+        "warm-report",
+        "--baseline",
+        "tools/benchmark/research/v0.23-verified-null/warm-baseline-pair-*.json",
+        "--candidate",
+        "tools/benchmark/research/v0.23-verified-null/warm-candidate-pair-*.json",
+        "--out",
+        "tools/benchmark/research/v0.23-process-audit/recomputed-verified-null-cost.json",
+        "--max-time-ratio",
+        "0.85",
+        "--max-node-ratio",
+        "0.8"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-process-audit/recomputed-verified-null-cost.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-process-audit/recomputed-verified-null-cost.json",
+          "pointer": "/passed",
+          "equals": false,
+          "brief": [
+            "/median_time_ratio",
+            "/node_ratios",
+            "/issues"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "compact-pawn-cost",
+      "command": [
+        "tools/benchmark/bin/research",
+        "warm-report",
+        "--baseline",
+        "tools/benchmark/research/v0.23-pawn-structure/compact-cost/warm-baseline-pair-*.json",
+        "--candidate",
+        "tools/benchmark/research/v0.23-pawn-structure/compact-cost/warm-candidate-pair-*.json",
+        "--out",
+        "tools/benchmark/research/v0.23-process-audit/recomputed-compact-pawn-cost.json",
+        "--max-time-ratio",
+        "1.15",
+        "--reference",
+        "tools/benchmark/research/v0.23-pawn-structure/warm-candidate-pair-1.json"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-process-audit/recomputed-compact-pawn-cost.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-process-audit/recomputed-compact-pawn-cost.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/median_time_ratio",
+            "/node_ratios",
+            "/issues"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "source-snapshot",
+      "command": [
+        "tools/benchmark/bin/research",
+        "snapshot",
+        "--base",
+        "v0.22",
+        "--out",
+        "tools/benchmark/research/v0.23-process-audit/diagnostic-overlay.json"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-process-audit/diagnostic-overlay.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-process-audit/diagnostic-overlay.json",
+          "pointer": "/base_tag",
+          "equals": "v0.22"
+        }
+      ]
+    },
+    {
+      "name": "source-replay",
+      "command": [
+        "tools/benchmark/bin/research",
+        "replay",
+        "--source",
+        "tools/benchmark/research/v0.23-process-audit/diagnostic-overlay.json",
+        "--out",
+        "/tmp/pandafish-v023-shared-replay",
+        "--check"
+      ],
+      "env": {
+        "GOFLAGS": "-buildvcs=false"
+      },
+      "outputs": [
+        "/tmp/pandafish-v023-shared-replay/tests.txt",
+        "/tmp/pandafish-v023-shared-replay/build.txt"
+      ],
+      "timeout_seconds": 300
+    }
+  ]
+}

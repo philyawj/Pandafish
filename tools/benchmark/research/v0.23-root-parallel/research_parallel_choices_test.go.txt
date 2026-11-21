@@ -1,0 +1,95 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"os"
+	"path/filepath"
+	"testing"
+	"time"
+
+	"github.com/corentings/chess/v2"
+)
+
+// Heavy full-window verification runs after timing pairs, never between timed
+// roots. Only the diagnostic reference restricts a selected move; production
+// candidate roots remain unrestricted and any exact co-best move is accepted.
+func TestResearchParallelChoices(t *testing.T) {
+	pattern, output := os.Getenv("PARALLEL_VALIDATION_ROWS"), os.Getenv("PARALLEL_VALIDATION_OUTPUT")
+	if pattern == "" || output == "" {
+		t.Skip("explicit completed parallel rows required")
+	}
+	paths, err := filepath.Glob(pattern)
+	if err != nil || len(paths) != 3 {
+		t.Fatal("three completed candidate pairs required", err)
+	}
+	data := [][]researchWarmRow{}
+	for _, path := range paths {
+		b, err := os.ReadFile(path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		var rows struct{ Rows []researchWarmRow }
+		if err = json.Unmarshal(b, &rows); err != nil {
+			t.Fatal(err)
+		}
+		if len(rows.Rows) != 1145 {
+			t.Fatal("coverage")
+		}
+		data = append(data, rows.Rows)
+	}
+	visit, choices := 0, 0
+	defer func() { researchSearchOverride = nil }()
+	researchSearchOverride = func(ctx context.Context, p *chess.Position, limits goLimits, budget timeBudget, start time.Time, table *transpositionTable, history []uint64) searchResult {
+		if visit >= 1145 {
+			t.Fatal("too many workload roots")
+		}
+		expected := data[0][visit]
+		if p.String() != expected.FEN || limits.depth != expected.Depth {
+			t.Fatal("trajectory differs")
+		}
+		seen := map[string]bool{}
+		var result searchResult
+		var nodes uint64
+		for _, pair := range data {
+			row := pair[visit]
+			if row.FEN != expected.FEN || row.Game != expected.Game || row.Ply != expected.Ply || row.Score != expected.Score || row.Depth != expected.Depth {
+				t.Fatal("pair mismatch")
+			}
+			if seen[row.Best] {
+				continue
+			}
+			seen[row.Best] = true
+			w := searcher{ctx: ctx, table: newTable(), killers: new(killerTable)}
+			for _, key := range history {
+				w.pushKey(key)
+			}
+			moves := rootMoves(p, []string{row.Best})
+			if len(moves) != 1 {
+				t.Fatal("illegal recorded choice")
+			}
+			_, score, done := w.serialRoot(p, moves, row.Depth)
+			if !done || score != row.Score {
+				t.Fatal("co-best full-window value differs", visit, row.Best, score, row.Score, done)
+			}
+			choices++
+			nodes += w.nodes
+			result = searchResult{move: row.Best, depth: row.Depth, score: score}
+		}
+		result.metrics.Nodes = nodes
+		visit++
+		return result
+	}
+	TestResearchWarmWorkload(t)
+	if visit != 1145 {
+		t.Fatal("incomplete validation", visit)
+	}
+	report := map[string]any{"passed": true, "roots": visit, "distinct_choices": choices, "full_window_verified": true, "timing_use": "Independent serial verification only; these durations are not performance observations."}
+	b, err := json.MarshalIndent(report, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(output, append(b, '\n'), 0644); err != nil {
+		t.Fatal(err)
+	}
+}

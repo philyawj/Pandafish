@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "inputs": [
+    "tools/benchmark/bin/research",
+    "tools/research/*.go",
+    "/opt/homebrew/bin/stockfish",
+    "tools/benchmark/research/v0.23-scout-material/fresh-100/method.json",
+    "tools/benchmark/research/v0.23-scout-material/fresh-100/quality.json",
+    "tools/benchmark/research/v0.23-scout-material/fresh-100/native.json"
+  ],
+  "steps": [
+    {
+      "name": "confirm-all-mate-flags",
+      "command": [
+        "tools/benchmark/bin/research",
+        "confirm-mates",
+        "--dir",
+        "tools/benchmark/research/v0.23-scout-material/fresh-100",
+        "--teacher",
+        "/opt/homebrew/bin/stockfish",
+        "--nodes",
+        "1000000",
+        "--out",
+        "tools/benchmark/research/v0.23-scout-material/mate-confirmation"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-scout-material/mate-confirmation/*.json",
+        "tools/benchmark/research/v0.23-scout-material/mate-confirmation/*.jsonl"
+      ],
+      "timeout_seconds": 600
+    }
+  ]
+}

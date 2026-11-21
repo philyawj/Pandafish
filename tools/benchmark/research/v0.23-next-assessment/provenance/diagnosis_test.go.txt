@@ -1,0 +1,239 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"github.com/corentings/chess/v2"
+	"os"
+	"strings"
+	"testing"
+	"time"
+)
+
+// Research-only driver; archived outside the active package after diagnosis.
+func TestV023Diagnosis(t *testing.T) {
+	if os.Getenv("V023_DIAGNOSE") == "" {
+		t.Skip("offline research driver")
+	}
+	const dir = "tools/benchmark/research/v0.23-next-assessment/"
+	var rows []struct {
+		Selected struct {
+			Move struct {
+				Game, Position, Played string
+				Capture                struct{ Metrics struct{ Depth int } }
+			}
+		}
+		Best struct{ Bestmove string }
+	}
+	b, e := os.ReadFile("tools/benchmark/live/v0.22-campaign-review-20261120/confirmation-n500000.json")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = json.Unmarshal(b, &rows); e != nil {
+		t.Fatal(e)
+	}
+	wanted := map[string]bool{"gNQRBta1": true, "Mido8Dw4": true, "6Nup5qBd": true, "IK3YVmhF": true, "PV4oUeoe": true, "u4xtX1iv": true}
+	type result struct {
+		Game, Position, LivePlayed, Reference            string
+		LiveDepth, RequestedDepth, CompletedDepth, Score int
+		Move                                             string
+		Nodes                                            uint64
+		Milliseconds                                     float64
+		Cancelled                                        bool
+	}
+	results := []result{}
+	for _, row := range rows {
+		m := row.Selected.Move
+		id := m.Game[strings.LastIndex(m.Game, "/")+1:]
+		if !wanted[id] {
+			continue
+		}
+		game, e := parsePosition(strings.Fields(m.Position)[1:])
+		if e != nil {
+			t.Fatal(e)
+		}
+		for _, depth := range []int{m.Capture.Metrics.Depth, m.Capture.Metrics.Depth + 1} {
+			ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+			start := time.Now()
+			r := iterativeSearchWithHistory(ctx, game.Position(), goLimits{depth: depth}, timeBudget{}, start, newTable(), repetitionHistory(game))
+			cancelled := ctx.Err() != nil
+			cancel()
+			results = append(results, result{m.Game, m.Position, m.Played, row.Best.Bestmove, m.Capture.Metrics.Depth, depth, r.depth, r.score, r.move, r.metrics.Nodes, r.metrics.ElapsedMS, cancelled})
+			b, e := json.MarshalIndent(results, "", "  ")
+			if e != nil {
+				t.Fatal(e)
+			}
+			if e = os.WriteFile(dir+"depth-diagnosis.json", append(b, '\n'), 0644); e != nil {
+				t.Fatal(e)
+			}
+			fmt.Printf("%s d%d completed%d %s score%d %.0fms live=%s reference=%s\n", id, depth, r.depth, r.move, r.score, r.metrics.ElapsedMS, m.Played, row.Best.Bestmove)
+		}
+	}
+}
+
+type v023Leaf struct {
+	FEN, Kind        string
+	Static, Material int
+	Path             []string
+	Score            int
+	Complete         bool
+}
+
+// Recover one exact value witness, not a unique principal variation. Every
+// selected edge is checked against a fresh full-window production search.
+func v023Witness(w *searcher, p *chess.Position, d, q, ply int, checked bool) v023Leaf {
+	var score int
+	var complete bool
+	if d > 0 {
+		score, complete = w.searchAtPly(p, d, -searchInfinity, searchInfinity, checked, ply)
+	} else {
+		score, complete = w.quietAtPly(p, q, -searchInfinity, searchInfinity, checked, ply)
+	}
+	leaf := v023Leaf{FEN: p.String(), Score: score, Complete: complete, Static: staticScore(p, p.Turn()), Material: materialScore(p, p.Turn())}
+	if !complete {
+		leaf.Kind = "cancelled"
+		return leaf
+	}
+	if p.SearchStatus() != chess.NoMethod {
+		leaf.Kind = "terminal"
+		return leaf
+	}
+	repeated := w.pushPosition(p)
+	defer w.popPosition(p)
+	if repeated {
+		leaf.Kind = "repetition"
+		return leaf
+	}
+	if d <= 0 && (q <= -checkEvasionDepth || (q <= 0 && !checked)) {
+		leaf.Kind = "safety-cap"
+		return leaf
+	}
+	if d <= 0 && !checked && score == leaf.Static {
+		leaf.Kind = "stand-pat"
+		return leaf
+	}
+	moves := orderedMoves(p)
+	for _, m := range moves {
+		if d <= 0 && !checked {
+			if !m.HasTag(chess.Capture) && !m.HasTag(chess.EnPassant) && m.Promo() == chess.NoPieceType {
+				continue
+			}
+			if !m.HasTag(chess.Check) && m.Promo() == chess.NoPieceType && captureValue(p, m) < pieceValues[p.Board().Piece(m.S1()).Type()] {
+				gain, ok := w.exchange(p, m)
+				if !ok {
+					leaf.Kind = "cancelled"
+					leaf.Complete = false
+					return leaf
+				}
+				if gain < 0 {
+					continue
+				}
+			}
+		}
+		child := p.UpdateSearch(&m)
+		var value int
+		var ok bool
+		if d > 0 {
+			value, ok = w.childSearch(child, d-1, -searchInfinity, searchInfinity, m.HasTag(chess.Check), ply+1)
+		} else {
+			value, ok = w.childQuiet(child, q-1, -searchInfinity, searchInfinity, m.HasTag(chess.Check), ply+1)
+		}
+		if !ok {
+			leaf.Kind = "cancelled"
+			leaf.Complete = false
+			return leaf
+		}
+		if -value != score {
+			continue
+		}
+		key := w.historyKey
+		if child.HalfMoveClock() == 0 {
+			w.historyKey = 0
+		}
+		nextD, nextQ := d-1, q
+		if d <= 0 {
+			nextQ = q - 1
+		}
+		r := v023Witness(w, child, nextD, nextQ, ply+1, m.HasTag(chess.Check))
+		w.historyKey = key
+		if r.Complete && -r.Score != score {
+			panic("witness edge score differs")
+		}
+		r.Path = append([]string{m.String()}, r.Path...)
+		r.Score = score
+		return r
+	}
+	panic("no exact witness child")
+}
+
+func TestV023LeafDiagnosis(t *testing.T) {
+	if os.Getenv("V023_LEAVES") == "" {
+		t.Skip("offline research driver")
+	}
+	var rows []struct {
+		Selected struct {
+			Move struct {
+				Game, Position, Played string
+				Capture                struct{ Metrics struct{ Depth int } }
+			}
+		}
+		Best struct{ Bestmove string }
+	}
+	b, e := os.ReadFile("tools/benchmark/live/v0.22-campaign-review-20261120/confirmation-n500000.json")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = json.Unmarshal(b, &rows); e != nil {
+		t.Fatal(e)
+	}
+	results := []map[string]any{}
+	for _, row := range rows {
+		m := row.Selected.Move
+		if !strings.HasSuffix(m.Game, "IK3YVmhF") && !strings.HasSuffix(m.Game, "gNQRBta1") {
+			continue
+		}
+		g, e := parsePosition(strings.Fields(m.Position)[1:])
+		if e != nil {
+			t.Fatal(e)
+		}
+		for _, move := range []string{m.Played, row.Best.Bestmove} {
+			ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+			w := searcher{ctx: ctx, table: newTable(), killers: new(killerTable)}
+			for _, key := range repetitionHistory(g) {
+				w.pushKey(key)
+			}
+			w.pushPosition(g.Position())
+			moves := rootMoves(g.Position(), []string{move})
+			if len(moves) != 1 {
+				t.Fatal("diagnostic move illegal")
+			}
+			child := g.Position().UpdateSearch(&moves[0])
+			if child.HalfMoveClock() == 0 {
+				w.historyKey = 0
+			}
+			r := v023Witness(&w, child, m.Capture.Metrics.Depth-1, quiescenceDepth, 1, moves[0].HasTag(chess.Check))
+			r.Score = -r.Score
+			r.Path = append([]string{move}, r.Path...)
+			cancel()
+			if r.Complete && r.Kind == "stand-pat" {
+				expected := r.Static
+				if len(r.Path)%2 == 1 {
+					expected = -expected
+				}
+				if expected != r.Score {
+					t.Fatal("leaf scalar differs from root")
+				}
+			}
+			results = append(results, map[string]any{"game": m.Game, "root_move": move, "depth": m.Capture.Metrics.Depth, "witness": r, "nodes": w.nodes})
+			b, e := json.MarshalIndent(results, "", "  ")
+			if e != nil {
+				t.Fatal(e)
+			}
+			if e = os.WriteFile("tools/benchmark/research/v0.23-next-assessment/leaf-diagnosis.json", append(b, '\n'), 0644); e != nil {
+				t.Fatal(e)
+			}
+			fmt.Printf("%s %s score%d kind%s complete%t %s\n", m.Game, move, r.Score, r.Kind, r.Complete, r.FEN)
+		}
+	}
+}

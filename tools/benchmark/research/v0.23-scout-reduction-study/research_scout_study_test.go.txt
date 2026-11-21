@@ -1,0 +1,91 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"os"
+	"strings"
+	"testing"
+	"time"
+
+	"github.com/corentings/chess/v2"
+)
+
+func TestResearchScoutOpportunity(t *testing.T) {
+	if os.Getenv("SCOUT_STUDY_OUTPUT") == "" {
+		t.Skip("explicit study output required")
+	}
+	studies := []scoutStudy{}
+	defer func() { researchSearchOverride = nil }()
+	researchSearchOverride = func(ctx context.Context, p *chess.Position, limits goLimits, budget timeBudget, start time.Time, table *transpositionTable, history []uint64) searchResult {
+		table.generation++
+		study := scoutStudy{}
+		w := searcher{ctx: ctx, table: table, killers: new(killerTable), scoutStudy: &study}
+		for _, key := range history {
+			w.pushKey(key)
+		}
+		if budget.timed {
+			w.deadline = start.Add(budget.hard)
+		}
+		result := w.iterate(p, rootMoves(p, limits.searchMoves), limits.depth, budget, start)
+		if study.active != 0 {
+			t.Fatal("unclosed scout span")
+		}
+		studies = append(studies, study)
+		return result
+	}
+	TestResearchWarmWorkload(t)
+	path := os.Getenv("WARM_OUTPUT")
+	b, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var data struct {
+		Mode   string
+		Depth  int
+		Inputs map[string]string
+		Rows   []struct {
+			researchWarmRow
+			DeltaNodes, DeltaCandidates uint64
+		}
+	}
+	if err = json.Unmarshal(b, &data); err != nil {
+		t.Fatal(err)
+	}
+	if len(data.Rows) != 1145 || len(studies) != len(data.Rows) {
+		t.Fatal("coverage")
+	}
+	nodes, covered := map[string]uint64{}, map[string]uint64{}
+	var wide uint64
+	for i := range data.Rows {
+		row := &data.Rows[i]
+		row.DeltaNodes, row.DeltaCandidates = studies[i].nodes, studies[i].candidates
+		wide += studies[i].wideNodes
+		turn := strings.Fields(row.FEN)[1]
+		nodes[turn] += row.Nodes
+		covered[turn] += row.DeltaNodes
+	}
+	b, err = json.MarshalIndent(data, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(path, append(b, '\n'), 0644); err != nil {
+		t.Fatal(err)
+	}
+	ratios := map[string]float64{}
+	passed := true
+	for _, turn := range []string{"w", "b"} {
+		ratios[turn] = float64(covered[turn]) / float64(nodes[turn])
+		passed = passed && nodes[turn] > 0 && ratios[turn] >= .20
+	}
+	total := float64(covered["w"]+covered["b"]) / float64(nodes["w"]+nodes["b"])
+	passed = passed && total >= .30
+	report := map[string]any{"passed": passed, "roots": len(data.Rows), "node_fraction": total, "by_turn": ratios, "wide_parent_outer_nodes": wide, "wide_parent_fraction_of_all_nodes": float64(wide) / float64(nodes["w"]+nodes["b"]), "timing_use": "instrumented diagnosis only"}
+	b, err = json.MarshalIndent(report, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(os.Getenv("SCOUT_STUDY_OUTPUT"), append(b, '\n'), 0644); err != nil {
+		t.Fatal(err)
+	}
+}

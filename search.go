@@ -16,17 +16,18 @@ const checkEvasionDepth = 4
 // A zero-value searcher is unlimited, useful for fixed-depth comparisons.
 // Cancellation is distinct from a score, so unfinished nodes never affect ties.
 type searcher struct {
-	moveBuffers [][]chess.Move
-	rankBuffers [][]moveRank
-	repetitions map[uint64]int
-	historyKey  uint64
-	nodes       uint64
-	table       *transpositionTable
-	killers     *killerTable
-	ctx         context.Context
-	deadline    time.Time
-	now         func() time.Time
-	unfiltered  bool // Internal reference mode for broader-quiescence ablations.
+	positionBuffers []*chess.SearchPosition
+	moveBuffers     [][]chess.Move
+	rankBuffers     [][]moveRank
+	repetitions     map[uint64]int
+	historyKey      uint64
+	nodes           uint64
+	table           *transpositionTable
+	killers         *killerTable
+	ctx             context.Context
+	deadline        time.Time
+	now             func() time.Time
+	unfiltered      bool // Internal reference mode for broader-quiescence ablations.
 }
 
 func (worker *searcher) clock() time.Time {
@@ -90,7 +91,7 @@ func (worker *searcher) searchAtPly(position *chess.Position, depth, alpha, beta
 		if worker.stopped() {
 			return 0, false
 		}
-		child := position.UpdateSearch(&move)
+		child := worker.childPosition(position, &move, ply+1)
 		var score int
 		var complete bool
 		if moveIndex == 0 {
@@ -182,7 +183,7 @@ func (worker *searcher) quietAtPly(position *chess.Position, depth, alpha, beta 
 				continue
 			}
 		}
-		score, complete := worker.childQuiet(position.UpdateSearch(&move), depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
+		score, complete := worker.childQuiet(worker.childPosition(position, &move, ply+1), depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
 		if !complete {
 			return 0, false
 		}

@@ -1,0 +1,108 @@
+package main
+
+import (
+	"encoding/json"
+	"github.com/corentings/chess/v2"
+	"os"
+	"testing"
+)
+
+func referenceBaseStaticScore(position *chess.Position, perspective chess.Color) int {
+	board := position.Board()
+	phase := 0
+	for square := chess.A1; square <= chess.H8; square++ {
+		phase += phaseWeight(board.Piece(square).Type())
+	}
+	phase = min(24, phase)
+	score := 0
+	for square := chess.A1; square <= chess.H8; square++ {
+		piece := board.Piece(square)
+		if piece == chess.NoPiece {
+			continue
+		}
+		file, rank := int(square)%8, int(square)/8
+		if piece.Color() == chess.Black {
+			rank = 7 - rank
+		}
+		value := pieceValues[piece.Type()] + placement(piece.Type(), file, rank, phase)
+		if piece.Color() == perspective {
+			score += value
+		} else {
+			score -= value
+		}
+	}
+	return score
+}
+
+func TestPrecomputedBaseEvaluationIsExact(t *testing.T) {
+	for phase := 0; phase <= 24; phase++ {
+		for index, kind := range evaluationPieceTypes {
+			for sq := 0; sq < 64; sq++ {
+				rank := sq / 8
+				sign := 1
+				if index >= 6 {
+					rank = 7 - rank
+					sign = -1
+				}
+				want := sign * (pieceValues[kind] + placement(kind, sq%8, rank, phase))
+				if int(basePieceScores[phase][index][sq]) != want {
+					t.Fatal("piece-square table mismatch")
+				}
+			}
+		}
+	}
+	data, err := os.ReadFile("tools/benchmark/research/v0.17-search-moves/oracle-inputs.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var input struct{ Cases []struct{ FEN string } }
+	if err = json.Unmarshal(data, &input); err != nil {
+		t.Fatal(err)
+	}
+	for _, c := range input.Cases {
+		p := evalFEN(t, c.FEN)
+		for _, color := range []chess.Color{chess.White, chess.Black} {
+			if staticScore(p, color)-referencePawnCorrection(p, color) != referenceBaseStaticScore(p, color) {
+				t.Fatal("base evaluation drift", c.FEN)
+			}
+		}
+	}
+}
+
+func TestEvaluationPiecesValueCopyAndPromotedPhase(t *testing.T) {
+	for _, fen := range []string{
+		chess.StartingPosition().String(),
+		"kqqqqqqq/qqqqqqqq/8/8/8/8/QQQQQQQQ/KQQQQQQQ w - - 0 1",
+		"7k/8/8/8/8/8/8/K7 b - - 0 1",
+	} {
+		p := evalFEN(t, fen)
+		before := p.String()
+		pieces := p.Board().EvaluationPieces()
+		for index, mask := range pieces {
+			color := chess.White
+			if index >= 6 {
+				color = chess.Black
+			}
+			for square := chess.A1; square <= chess.H8; square++ {
+				piece := p.Board().Piece(square)
+				want := piece.Type() == evaluationPieceTypes[index] && piece.Color() == color
+				got := mask&(uint64(1)<<uint(63-int(square))) != 0
+				if got != want {
+					t.Fatalf("piece mask %d square %s: got %v want %v", index, square, got, want)
+				}
+			}
+		}
+		pieces[0] = 0
+		if p.String() != before || p.Board().EvaluationPieces()[0] == 0 {
+			t.Fatal("changing returned value mutated the board")
+		}
+		for _, color := range []chess.Color{chess.White, chess.Black} {
+			if staticScore(p, color)-referencePawnCorrection(p, color) != referenceBaseStaticScore(p, color) {
+				t.Fatal("phase cap or perspective differs from original", fen, color)
+			}
+		}
+		if allocations := testing.AllocsPerRun(1000, func() { _ = staticScore(p, chess.White) }); allocations != 0 {
+			t.Fatal("evaluation allocates", allocations)
+		}
+	}
+}

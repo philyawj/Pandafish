@@ -1,0 +1,10 @@
+// Sequential actual-choice suites; stop on an adverse quality or execution gate.
+package main
+
+import("encoding/json";"fmt";"os";"os/exec";"path/filepath";"time")
+func main(){if len(os.Args)!=3{panic("evidence directory and candidate binary required")};dir,candidate:=os.Args[1],os.Args[2];checks:=[]map[string]any{}
+ for _,s:=range []struct{name,input string;ms,trials int;turns bool}{{"public-100","tools/benchmark/research/v0.17-search-moves/inputs.json",100,3,false},{"public-1000","tools/benchmark/research/v0.17-search-moves/inputs.json",1000,1,false},{"newer-100","tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json",100,1,true},{"newer-1000","tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json",1000,1,true}}{
+  args:=[]string{"choices","--baseline","tools/benchmark/bin/pandafish-v0.22","--candidate",candidate,"--teacher","/opt/homebrew/bin/stockfish","--input",s.input,"--out",filepath.Join(dir,s.name),"--milliseconds",fmt.Sprint(s.ms),"--trials",fmt.Sprint(s.trials),"--workers","3","--cache",filepath.Join("tools/benchmark/research/v0.22-bitboard-exchange",s.name)};if s.turns{args=append(args,"--by-turn")}
+  cmd:=exec.Command("tools/benchmark/bin/research",args...);log,e:=os.OpenFile(filepath.Join(dir,s.name+"-run.txt"),os.O_CREATE|os.O_EXCL|os.O_WRONLY,0644);if e!=nil{panic(e)};cmd.Stdout=log;cmd.Stderr=log;start:=time.Now();err:=cmd.Run();log.Close();quality:=struct{Passed bool `json:"passed"`}{ };b,e:=os.ReadFile(filepath.Join(dir,s.name,"quality.json"));if e==nil{e=json.Unmarshal(b,&quality)};exit:=0;if err!=nil||e!=nil{exit=1};checks=append(checks,map[string]any{"suite":s.name,"command":cmd.Args,"exit":exit,"quality_passed":quality.Passed,"seconds":time.Since(start).Seconds()});b,e=json.MarshalIndent(checks,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(filepath.Join(dir,"native-checks.json"),append(b,'\n'),0644);e!=nil{panic(e)};fmt.Println(s.name,"execution",exit,"quality",quality.Passed);if exit!=0||!quality.Passed{os.Exit(1)}
+ }
+}

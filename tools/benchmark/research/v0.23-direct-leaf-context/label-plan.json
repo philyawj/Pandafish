@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "inputs": [
+    "tools/benchmark/bin/research",
+    "/opt/homebrew/bin/stockfish",
+    "*.go",
+    "go.mod",
+    "go.sum",
+    "internal/telemetry/*.go",
+    "third_party/chess/*.go",
+    "third_party/chess/go.mod",
+    "third_party/chess/go.sum",
+    "tools/research/*.go",
+    "tools/benchmark/research/v0.23-direct-leaf-context/PLAN.md",
+    "tools/benchmark/research/v0.19-sharp-branches/fit-data.json",
+    "tools/benchmark/research/v0.19-sharp-branches/leaves.json",
+    "tools/benchmark/research/v0.19-sharp-branches/unlabelled-roots.json",
+    "tools/benchmark/research/v0.19-sharp-branches/boundary-audit-after-leaves.json"
+  ],
+  "steps": [
+    {
+      "name": "source",
+      "command": [
+        "tools/benchmark/bin/research",
+        "snapshot",
+        "--base",
+        "v0.22",
+        "--include",
+        "tools/research/*.go",
+        "--out",
+        "tools/benchmark/research/v0.23-direct-leaf-context/candidate-source-labeling.json"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-direct-leaf-context/candidate-source-labeling.json"
+      ]
+    },
+    {
+      "name": "source-replay",
+      "command": [
+        "tools/benchmark/bin/research",
+        "replay",
+        "--source",
+        "tools/benchmark/research/v0.23-direct-leaf-context/candidate-source-labeling.json",
+        "--out",
+        "/tmp/pandafish-direct-target-replay",
+        "--check"
+      ],
+      "env": {
+        "GOFLAGS": "-buildvcs=false"
+      },
+      "outputs": [
+        "/tmp/pandafish-direct-target-replay/tests.txt",
+        "/tmp/pandafish-direct-target-replay/build.txt"
+      ],
+      "timeout_seconds": 300
+    },
+    {
+      "name": "diagnose",
+      "command": [
+        "tools/benchmark/bin/research",
+        "context-targets",
+        "--teacher",
+        "/opt/homebrew/bin/stockfish",
+        "--out",
+        "tools/benchmark/research/v0.23-direct-leaf-context/labels",
+        "--stage",
+        "diagnose"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-direct-leaf-context/labels/method.json",
+        "tools/benchmark/research/v0.23-direct-leaf-context/labels/diagnostic-labels.jsonl",
+        "tools/benchmark/research/v0.23-direct-leaf-context/labels/alignment.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-direct-leaf-context/labels/alignment.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/finite_comparisons",
+            "/median_absolute_target_difference_cp",
+            "/clear_pairs",
+            "/opposite_fraction",
+            "/changed_losing_mate_classifications",
+            "/queries"
+          ]
+        }
+      ],
+      "timeout_seconds": 300
+    },
+    {
+      "name": "complete",
+      "command": [
+        "tools/benchmark/bin/research",
+        "context-targets",
+        "--teacher",
+        "/opt/homebrew/bin/stockfish",
+        "--out",
+        "tools/benchmark/research/v0.23-direct-leaf-context/labels",
+        "--stage",
+        "complete"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-direct-leaf-context/labels/remaining-labels.jsonl",
+        "tools/benchmark/research/v0.23-direct-leaf-context/labels/targets.json",
+        "tools/benchmark/research/v0.23-direct-leaf-context/labels/complete.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-direct-leaf-context/labels/complete.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/targets",
+            "/queries",
+            "/new_queries"
+          ]
+        }
+      ],
+      "timeout_seconds": 900
+    }
+  ]
+}

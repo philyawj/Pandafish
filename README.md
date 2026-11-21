@@ -1,6 +1,6 @@
 # Pandafish
 
-A bare-bones chess engine written in Go. Pandafish v0.22 speaks UCI over
+A bare-bones chess engine written in Go. Pandafish v0.23 speaks UCI over
 stdin/stdout and uses time-aware iterative deepening with alpha-beta pruning
 and bounded quiescence. Standard chess only.
 
@@ -14,10 +14,12 @@ The [v0.21 investigation](tools/benchmark/research/v0.21-rank-order/README.md)
 records precomputed stable ordering and the next profile-driven priorities.
 The [v0.22 investigation](docs/RESEARCH_V022.md) records deferred legal generation,
 exact exchange computation and the preserved unsuccessful experiments.
+The [v0.23 investigation](docs/RESEARCH_V023.md) records reusable search state,
+virtual move tags, preserved unsuccessful attempts and research-tooling guidance.
 
 The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`,
 `transposition.go`, `search_context.go`, `search_moves.go`, `main_move_picker.go`,
-`killers.go`, `exchange.go`, `exchange_bits.go`,
+`killers.go`, `exchange.go`, `exchange_bits.go`, `search_position.go`,
 `evaluation.go`, `mate.go`, and `repetition.go`.
 A pinned local copy of [corentings/chess](https://github.com/corentings/chess)
 with an additive search API handles chess rules,
@@ -385,5 +387,12 @@ complete move order, fixed-work scores/moves/nodes, values and search policy.
 Keep unsuccessful experiments and all original results archived. See the
 [implementation, validation and measured limits](tools/benchmark/research/v0.22-bitboard-exchange/README.md).
 
-**Next:** Reassess [the documented research priorities](tools/benchmark/research/v0.22-bitboard-exchange/NEXT.md)
+**v0.23: Reuse search state and avoid temporary tag copies (complete).** Reuse
+worker-owned child positions and boards by search ply, and classify ordinary
+moves from virtual occupancy and attacker sets. Preserve fixed-work moves,
+scores, nodes and playing policy. Archive unsuccessful research and add a
+repeatable Go research workflow. See the
+[implementation and measured limits](tools/benchmark/research/v0.23-state-kernel/README.md).
+
+**Next:** Reassess [the documented research priorities](docs/RESEARCH_V023.md)
 before starting another experiment. No further candidate is part of this release.

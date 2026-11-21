@@ -1,0 +1,86 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"os"
+	"testing"
+	"time"
+
+	"github.com/corentings/chess/v2"
+)
+
+func TestResearchParallelOpportunity(t *testing.T) {
+	output := os.Getenv("PARALLEL_OPPORTUNITY_OUTPUT")
+	if output == "" {
+		t.Skip("explicit frozen workload/output required")
+	}
+	if researchSearchOverride != nil {
+		t.Fatal("existing research override")
+	}
+	defer func() { researchSearchOverride = nil }()
+	rows := []map[string]any{}
+	var all, rootSpan, late uint64
+	researchSearchOverride = func(ctx context.Context, p *chess.Position, limits goLimits, budget timeBudget, start time.Time, table *transpositionTable, history []uint64) searchResult {
+		table.generation++
+		costs := map[int][]uint64{}
+		w := searcher{ctx: ctx, table: table, killers: new(killerTable), measureParallel: true, observeRoot: func(depth, index int, nodes uint64) {
+			if index != len(costs[depth]) {
+				t.Fatal("root observer order")
+			}
+			costs[depth] = append(costs[depth], nodes)
+		}}
+		for _, key := range history {
+			w.pushKey(key)
+		}
+		if budget.timed {
+			w.deadline = start.Add(budget.hard)
+		}
+		result := w.iterate(p, rootMoves(p, limits.searchMoves), limits.depth, budget, start)
+		sum, span := uint64(result.depth), uint64(result.depth)
+		for depth := 1; depth <= result.depth; depth++ {
+			moves := costs[depth]
+			if len(moves) == 0 {
+				t.Fatal("missing complete depth")
+			}
+			sum += moves[0]
+			span += moves[0]
+			var lanes [2]uint64
+			for _, nodes := range moves[1:] {
+				sum += nodes
+				if lanes[0] <= lanes[1] {
+					lanes[0] += nodes
+				} else {
+					lanes[1] += nodes
+				}
+			}
+			span += max(lanes[0], lanes[1])
+		}
+		if sum != result.metrics.Nodes || w.parallelNodes > sum {
+			t.Fatal("opportunity accounting", sum, result.metrics.Nodes, w.parallelNodes)
+		}
+		all += sum
+		rootSpan += span
+		late += w.parallelNodes
+		rows = append(rows, map[string]any{"fen": p.String(), "depth": result.depth, "score": result.score, "move": result.move, "nodes": sum, "root_two_lane_node_span": span, "outer_late_child_nodes": w.parallelNodes})
+		return result
+	}
+	TestResearchWarmWorkload(t)
+	rootSaving := 1 - float64(rootSpan)/float64(all)
+	lateFraction := float64(late) / float64(all)
+	direction := "reject"
+	if rootSaving >= .2 {
+		direction = "root-only"
+	} else if lateFraction >= .5 {
+		direction = "nested split"
+	}
+	report := map[string]any{"passed": direction != "reject", "direction": direction, "roots": len(rows), "nodes": all, "root_two_lane_node_span": rootSpan, "root_proxy_saving_fraction": rootSaving, "outer_late_child_nodes": late, "outer_late_fraction": lateFraction, "rows": rows, "timing_is_instrumented": true}
+	b, err := json.MarshalIndent(report, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(output, append(b, '\n'), 0644); err != nil {
+		t.Fatal(err)
+	}
+	t.Log("roots", len(rows), "root proxy saving", rootSaving, "outer late fraction", lateFraction, "direction", direction)
+}

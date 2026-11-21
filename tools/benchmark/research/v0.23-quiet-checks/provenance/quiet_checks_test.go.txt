@@ -1,0 +1,216 @@
+package main
+
+import (
+	"encoding/json"
+	"github.com/corentings/chess/v2"
+	"math/rand/v2"
+	"os"
+	"reflect"
+	"testing"
+)
+
+func originalQuietChecks(p *chess.Position) []chess.Move {
+	var result []chess.Move
+	for _, m := range p.ValidMoves() {
+		if m.HasTag(chess.Check) && !m.HasTag(chess.Capture) && !m.HasTag(chess.EnPassant) && m.Promo() == chess.NoPieceType {
+			result = append(result, m)
+		}
+	}
+	return result
+}
+
+func TestQuietCheckingGenerator(t *testing.T) {
+	var independent struct {
+		Cases []struct {
+			ID    int
+			FEN   string
+			Moves []struct {
+				UCI             string
+				Tactical, Check bool
+			}
+		}
+	}
+	data, e := os.ReadFile("tools/benchmark/research/v0.17-search-moves/oracle-inputs.json")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = json.Unmarshal(data, &independent); e != nil {
+		t.Fatal(e)
+	}
+	checked, expectedChecks := 0, 0
+	check := func(p *chess.Position) {
+		t.Helper()
+		fen, hash := p.String(), p.ZobristHash()
+		want := originalQuietChecks(p)
+		cold := evalFEN(t, fen)
+		var storage [256]chess.Move
+		got := cold.AppendSearchQuietChecks(storage[:0])
+		if !sameMoves(got, want) {
+			t.Fatal("cold quiet-check list/tags differ", fen, got, want)
+		}
+		cached := p.AppendSearchQuietChecks(nil)
+		if !sameMoves(cached, want) {
+			t.Fatal("cached quiet-check list differs", fen)
+		}
+		prefix := append([]chess.Move{{}}, got...)
+		again := cold.AppendSearchQuietChecks(prefix[:1])
+		if len(again) != len(got)+1 || !reflect.DeepEqual(again[0], chess.Move{}) || !sameMoves(again[1:], want) {
+			t.Fatal("caller prefix/reuse")
+		}
+		if p.String() != fen || p.ZobristHash() != hash || cold.String() != fen || cold.ZobristHash() != hash {
+			t.Fatal("parent mutated")
+		}
+		checked++
+		expectedChecks += len(want)
+	}
+	for _, c := range independent.Cases {
+		p := evalFEN(t, c.FEN)
+		got := p.AppendSearchQuietChecks(nil)
+		wanted := map[string]bool{}
+		for _, m := range c.Moves {
+			if m.Check && !m.Tactical {
+				wanted[m.UCI] = true
+			}
+		}
+		if len(got) != len(wanted) {
+			t.Fatal("independent quiet-check size", c.ID, c.FEN, len(got), len(wanted))
+		}
+		for _, m := range got {
+			if !wanted[m.String()] {
+				t.Fatal("independent unexpected quiet check", c.ID, m)
+			}
+		}
+		check(p)
+	}
+	for _, fen := range []string{
+		"5k2/8/8/8/8/8/8/4K2R w K - 0 1",
+		"3k4/8/8/8/8/8/8/R3K3 w Q - 0 1",
+		"4k2r/8/8/8/8/8/8/5K2 b k - 0 1",
+		"4k3/8/8/8/4N3/8/8/4R1K1 w - - 0 1",
+		"4r3/8/8/7k/8/8/4N3/4K3 w - - 0 1",
+		"k7/8/8/8/8/8/8/RN5K w - - 0 1",
+		"7k/P7/8/3pP3/8/8/8/6K1 w - d6 0 1",
+	} {
+		check(evalFEN(t, fen))
+	}
+	rng := rand.New(rand.NewPCG(23, 2307))
+	p := chess.StartingPosition()
+	for n := 0; n < 2500; n++ {
+		check(p)
+		moves := p.ValidMoves()
+		if len(moves) == 0 || n%150 == 149 {
+			p = chess.StartingPosition()
+		} else {
+			p = p.Update(&moves[rng.IntN(len(moves))])
+		}
+	}
+	if path := os.Getenv("CHECK_OUTPUT"); path != "" {
+		b, e := json.MarshalIndent(map[string]any{"positions": checked, "quiet_checks": expectedChecks, "independent_positions": len(independent.Cases), "passed": true}, "", "  ")
+		if e != nil {
+			t.Fatal(e)
+		}
+		if e = os.WriteFile(path, append(b, '\n'), 0644); e != nil {
+			t.Fatal(e)
+		}
+	}
+	t.Log("positions", checked, "quiet checking occurrences", expectedChecks)
+}
+
+var quietCheckSink int
+
+func TestQuietCheckingHorizonAndDefensiveControls(t *testing.T) {
+	for _, fen := range []string{"7k/8/5KQ1/8/8/8/8/8 w - - 0 1", "8/8/8/8/8/5kq1/8/7K b - - 0 1"} {
+		p := evalFEN(t, fen)
+		before, hash := p.String(), p.ZobristHash()
+		if inCheck(p) {
+			t.Fatal("control starts checked")
+		}
+		got := quiescence(p, quiescenceDepth, -searchInfinity, searchInfinity)
+		if got != mateScore-1 {
+			t.Fatal("quiet mate-in-one not found", fen, got)
+		}
+		if oldLayer := quiescence(p, quiescenceDepth-1, -searchInfinity, searchInfinity); oldLayer != staticScore(p, p.Turn()) {
+			t.Fatal("quiet checks expanded beyond the first layer", oldLayer)
+		}
+		if p.String() != before || p.ZobristHash() != hash {
+			t.Fatal("checking search mutated root")
+		}
+	}
+	for _, fen := range []string{"7k/8/6Q1/5K2/8/8/8/8 w - - 0 1", "8/8/8/8/5k2/6q1/8/7K b - - 0 1"} {
+		p := evalFEN(t, fen)
+		if got := quiescence(p, quiescenceDepth, -searchInfinity, searchInfinity); abs(got) >= mateBound {
+			t.Fatal("escape position incorrectly scored mate", fen, got)
+		}
+	}
+	for _, c := range []struct{ fen, check, reply string }{
+		{"5b1k/8/5KQ1/8/8/8/8/8 w - - 0 1", "g6g7", "f8g7"},
+		{"7k/8/5K2/6n1/6Q1/1B6/8/8 w - - 0 1", "g4h5", "g5h7"},
+	} {
+		p := evalFEN(t, c.fen)
+		var found *chess.Move
+		for _, m := range p.AppendSearchQuietChecks(nil) {
+			if m.String() == c.check {
+				x := m
+				found = &x
+			}
+		}
+		if found == nil {
+			t.Fatal("defensive test check absent", c.check)
+		}
+		child := p.UpdateSearch(found)
+		reply := false
+		for _, m := range child.ValidMoves() {
+			if m.String() == c.reply {
+				reply = true
+			}
+		}
+		if !reply || child.SearchStatus() == chess.Checkmate {
+			t.Fatal("legal defence lost", c.reply)
+		}
+		if abs(quiescence(child, quiescenceDepth-1, -searchInfinity, searchInfinity)) >= mateBound {
+			t.Fatal("defence classified as forced mate")
+		}
+	}
+}
+
+func BenchmarkQuietCheckingGenerator(b *testing.B) {
+	positions := []*chess.Position{}
+	for _, path := range []string{"tools/benchmark/research/v0.17-search-moves/inputs.json", "tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json"} {
+		data, e := os.ReadFile(path)
+		if e != nil {
+			b.Fatal(e)
+		}
+		var input struct{ Cases []struct{ FEN string } }
+		if e = json.Unmarshal(data, &input); e != nil {
+			b.Fatal(e)
+		}
+		for _, c := range input.Cases {
+			f, e := chess.FEN(c.FEN)
+			if e != nil {
+				b.Fatal(e)
+			}
+			positions = append(positions, chess.NewGame(f).Position())
+		}
+	}
+	for _, mode := range []string{"all-quiets", "checks-only"} {
+		b.Run(mode, func(b *testing.B) {
+			var storage [256]chess.Move
+			sum := 0
+			b.ReportAllocs()
+			b.ResetTimer()
+			for n := 0; n < b.N; n++ {
+				p := positions[n%len(positions)]
+				if mode == "checks-only" {
+					sum += len(p.AppendSearchQuietChecks(storage[:0]))
+				} else {
+					for _, m := range p.AppendSearchQuietMoves(storage[:0]) {
+						if m.HasTag(chess.Check) {
+							sum++
+						}
+					}
+				}
+			}
+			quietCheckSink = sum
+		})
+	}
+}

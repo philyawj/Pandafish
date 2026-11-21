@@ -103,7 +103,7 @@ func (pos *Position) UpdateSearch(move *Move) *Position {
 
 // Full tagging matches moveTags. An existence-only caller discards the move and
 // needs only own-king legality, so opponent-check classification is optional.
-func searchMoveTags(move Move, pos *Position, classifyOpponent bool) MoveTag {
+func searchMoveTagsSimulated(move Move, pos *Position, classifyOpponent bool) MoveTag {
 	var tags MoveTag
 	piece := pos.board.Piece(move.s1)
 	if pos.board.isOccupied(move.s2) {

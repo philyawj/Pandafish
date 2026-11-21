@@ -1,0 +1,95 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"github.com/corentings/chess/v2"
+	"os"
+	"testing"
+	"time"
+)
+
+// This optional reference is compiled in a replay of the frozen candidate.
+// Each actor owns its table; no reduced score enters an unreduced reference.
+func TestResearchSameHorizonRegret(t *testing.T) {
+	output := os.Getenv("REGRET_OUTPUT")
+	if output == "" {
+		t.Skip("explicit same-horizon reference required")
+	}
+	data, e := os.ReadFile(os.Getenv("REGRET_CANDIDATE"))
+	if e != nil {
+		t.Fatal(e)
+	}
+	var candidate struct{ Rows []researchWarmRow }
+	if e = json.Unmarshal(data, &candidate); e != nil {
+		t.Fatal(e)
+	}
+	if len(candidate.Rows) != 1145 {
+		t.Fatal("candidate coverage")
+	}
+	rows := []map[string]any{}
+	visit, finite, total, maximum, risks, contradictions := 0, 0, 0, 0, 0, 0
+	defer func() { researchSearchOverride = nil }()
+	researchSearchOverride = func(ctx context.Context, p *chess.Position, limits goLimits, budget timeBudget, start time.Time, table *transpositionTable, history []uint64) searchResult {
+		if visit >= len(candidate.Rows) {
+			t.Fatal("extra reference root")
+		}
+		c := candidate.Rows[visit]
+		if c.FEN != p.String() || c.Depth != 5 || limits.depth != 5 {
+			t.Fatal("trajectory/depth mismatch", visit)
+		}
+		table.generation++
+		w := searcher{ctx: ctx, table: table, killers: new(killerTable), fullDepthScouts: true}
+		selected := searcher{ctx: ctx, table: newTable(), killers: new(killerTable), fullDepthScouts: true}
+		for _, key := range history {
+			w.pushKey(key)
+			selected.pushKey(key)
+		}
+		result := w.iterate(p, rootMoves(p, nil), 5, budget, start)
+		if result.depth != 5 {
+			t.Fatal("incomplete unrestricted reference", visit)
+		}
+		moves := rootMoves(p, []string{c.Best})
+		if len(moves) != 1 {
+			t.Fatal("illegal candidate choice")
+		}
+		_, value, complete := selected.root(p, moves, 5)
+		if !complete {
+			t.Fatal("incomplete selected reference", visit)
+		}
+		above := value > result.score
+		missed := result.score >= mateBound && value < mateBound
+		loss := result.score > -mateBound && value <= -mateBound
+		unsupported := (c.Score >= mateBound && value < mateBound) || (c.Score <= -mateBound && value > -mateBound)
+		if above {
+			contradictions++
+		}
+		if missed || loss || unsupported {
+			risks++
+		}
+		row := map[string]any{"game": c.Game, "ply": c.Ply, "fen": c.FEN, "choice": c.Best, "reference_best": result.move, "reference_optimum": result.score, "selective_score": c.Score, "full_depth_choice_value": value, "above_optimum": above, "missed_winning_mate": missed, "new_losing_mate": loss, "unsupported_mate_claim": unsupported}
+		if abs(result.score) < mateBound && abs(value) < mateBound {
+			regret := max(0, result.score-value)
+			total += regret
+			maximum = max(maximum, regret)
+			finite++
+			row["finite_regret_cp"] = regret
+		}
+		rows = append(rows, row)
+		visit++
+		return result
+	}
+	TestResearchWarmWorkload(t)
+	if visit != 1145 || finite == 0 {
+		t.Fatal("reference coverage")
+	}
+	mean := float64(total) / float64(finite)
+	report := map[string]any{"passed": mean <= 25 && risks == 0 && contradictions == 0, "roots": visit, "finite_roots": finite, "mean_regret_cp": mean, "max_finite_regret_cp": maximum, "mate_risk_roots": risks, "value_contradictions": contradictions, "rows": rows, "reference": "same candidate horizon, fullDepthScouts=true, no shared selective tables"}
+	b, e := json.MarshalIndent(report, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile(output, append(b, '\n'), 0644); e != nil {
+		t.Fatal(e)
+	}
+}

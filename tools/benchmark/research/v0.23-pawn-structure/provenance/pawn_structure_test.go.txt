@@ -1,0 +1,147 @@
+package main
+
+import (
+	"math/bits"
+	"math/rand/v2"
+	"testing"
+
+	"github.com/corentings/chess/v2"
+)
+
+// Scalar mailbox oracle intentionally avoids fill/rank-population operations.
+func referencePawnStructure(p *chess.Position, phase int) int {
+	var mg, eg [2]int
+	for sq := chess.A1; sq <= chess.H8; sq++ {
+		piece := p.Board().Piece(sq)
+		if piece.Type() != chess.Pawn {
+			continue
+		}
+		side := int(piece.Color()) - 1
+		file, rank := int(sq)%8, int(sq)/8
+		adjacent, sameBehind, passed := false, false, true
+		for q := chess.A1; q <= chess.H8; q++ {
+			other := p.Board().Piece(q)
+			if other.Type() != chess.Pawn || q == sq {
+				continue
+			}
+			f, r := int(q)%8, int(q)/8
+			if other.Color() == piece.Color() {
+				if abs(f-file) == 1 {
+					adjacent = true
+				}
+				if f == file && r < rank {
+					sameBehind = true
+				}
+			} else if abs(f-file) <= 1 && ((side == 0 && r > rank) || (side == 1 && r < rank)) {
+				passed = false
+			}
+		}
+		if sameBehind {
+			mg[side] -= 12
+			eg[side] -= 20
+		}
+		if !adjacent {
+			mg[side] -= 10
+			eg[side] -= 16
+		}
+		if passed {
+			rel, step := rank, 8
+			if side == 1 {
+				rel = 7 - rank
+				step = -8
+			}
+			m, e := [8]int{0, 0, 5, 12, 25, 45, 75, 0}[rel], [8]int{0, 0, 10, 25, 50, 90, 150, 0}[rel]
+			next := int(sq) + step
+			if next >= 0 && next < 64 && p.Board().Piece(chess.Square(next)) != chess.NoPiece {
+				m /= 2
+				e /= 2
+			}
+			mg[side] += m
+			eg[side] += e
+		}
+	}
+	return ((mg[0]-mg[1])*phase + (eg[0]-eg[1])*(24-phase)) / 24
+}
+
+func referencePawnCorrection(p *chess.Position, perspective chess.Color) int {
+	phase := 0
+	for sq := chess.A1; sq <= chess.H8; sq++ {
+		phase += phaseWeight(p.Board().Piece(sq).Type())
+	}
+	x := referencePawnStructure(p, min(24, phase))
+	if perspective == chess.Black {
+		return -x
+	}
+	return x
+}
+
+func TestPawnStructureScalarAndRestoration(t *testing.T) {
+	rng := rand.New(rand.NewPCG(2306, 6001))
+	p := chess.StartingPosition()
+	for n := 0; n < 1000; n++ {
+		before, hash := p.String(), p.ZobristHash()
+		sets := p.Board().EvaluationPieces()
+		for phase := 0; phase <= 24; phase++ {
+			if got, want := pawnStructure(sets, phase), referencePawnStructure(p, phase); got != want {
+				t.Fatal("oracle", before, phase, got, want)
+			}
+		}
+		for _, color := range []chess.Color{chess.White, chess.Black} {
+			if staticScore(p, color) != referenceBaseStaticScore(p, color)+referencePawnCorrection(p, color) {
+				t.Fatal("complete evaluation", before, color)
+			}
+		}
+		var mirrored [12]uint64
+		for i, set := range sets {
+			for set != 0 {
+				sq := bits.LeadingZeros64(set)
+				set &^= uint64(1) << uint(63-sq)
+				mirrored[(i+6)%12] |= uint64(1) << uint(63-(sq^56))
+			}
+		}
+		if pawnStructure(sets, 13) != -pawnStructure(mirrored, 13) {
+			t.Fatal("color mirror")
+		}
+		if before != p.String() || hash != p.ZobristHash() {
+			t.Fatal("mutated root")
+		}
+		moves := p.ValidMoves()
+		if len(moves) == 0 || n%100 == 99 {
+			p = chess.StartingPosition()
+		} else {
+			p = p.Update(&moves[rng.IntN(len(moves))])
+		}
+	}
+}
+
+func TestPawnStructureRelations(t *testing.T) {
+	for _, c := range []struct {
+		fen    string
+		mg, eg int
+	}{
+		{"7k/8/8/4P3/8/8/8/K7 w - - 0 1", 15, 34},
+		{"7k/8/4n3/4P3/8/8/8/K7 w - - 0 1", 2, 9},
+		{"7k/8/3p4/4P3/8/8/8/K7 w - - 0 1", 0, 0},
+		{"7k/8/8/3pP3/8/8/8/K7 w - - 0 1", 13, 25},
+		// The rear doubled pawn is immediately blocked by the front pawn.
+		{"7k/8/8/4P3/4P3/8/8/K7 w - - 0 1", -1, 10},
+		{"7k/8/8/8/8/PP6/8/K7 w - - 0 1", 10, 20},
+	} {
+		p := evalFEN(t, c.fen)
+		sets := p.Board().EvaluationPieces()
+		if pawnStructure(sets, 24) != c.mg || pawnStructure(sets, 0) != c.eg {
+			t.Fatal(c.fen, pawnStructure(sets, 24), pawnStructure(sets, 0), c.mg, c.eg)
+		}
+	}
+}
+
+var pawnEvalSink int
+
+func BenchmarkPawnStructure(b *testing.B) {
+	p := evalFEN(&testing.T{}, "r2q1rk1/pp2bppp/2npbn2/2p1p3/4P3/2NP1NP1/PPP2PBP/R1BQ1RK1 w - - 0 1")
+	sets := p.Board().EvaluationPieces()
+	b.ReportAllocs()
+	for n := 0; n < b.N; n++ {
+		pawnEvalSink = pawnStructure(sets, 22)
+	}
+}

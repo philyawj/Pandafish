@@ -1,0 +1,114 @@
+package main
+
+import (
+	"github.com/corentings/chess/v2"
+	"math/bits"
+)
+
+// All evaluation/search scores are centipawns. Mate exceeds any legal material
+// balance plus positional terms, including positions with promoted pieces.
+const mateScore = 1000000
+
+var pieceValues = map[chess.PieceType]int{
+	chess.Pawn: 100, chess.Knight: 300, chess.Bishop: 300, chess.Rook: 500, chess.Queen: 900,
+}
+
+func evaluate(position *chess.Position, perspective chess.Color) int {
+	switch position.Status() {
+	case chess.Checkmate:
+		if position.Turn() == perspective {
+			return -mateScore
+		}
+		return mateScore
+	case chess.Stalemate:
+		return 0
+	}
+	return staticScore(position, perspective)
+}
+
+// Original middle/end activity formulas, precomputed for each material phase.
+// Relative rank is zero on each side's home rank; material values are separate.
+func placement(piece chess.PieceType, file, rank, phase int) int {
+	center := 6 - (abs(2*file-7)+abs(2*rank-7))/2 // -1 on corners; 5 on central squares.
+	central := max(0, 3-abs(2*file-7))
+	middle, ending := 0, 0
+	switch piece {
+	case chess.Pawn:
+		middle = central*min(rank, 3)*4 + max(0, rank-3)*4
+		ending = 3*rank*rank + 2*central
+	case chess.Knight:
+		middle, ending = center*8, center*6
+	case chess.Bishop:
+		middle, ending = center*4+min(rank, 3)*3, center*6+min(rank, 4)*2
+	case chess.Rook:
+		middle, ending = central*4, center*3+rank*2
+		if rank == 6 {
+			middle += 20
+			ending += 24
+		}
+	case chess.Queen:
+		middle, ending = center*2-max(0, rank-1)*2, center*4
+	case chess.King:
+		// Prefer the home rank and shelter-side files while material remains.
+		shelter := 0
+		if file <= 2 || file >= 5 {
+			shelter = 20
+		}
+		middle := shelter - 12*rank - center*4
+		ending := center * 8
+		return (middle*phase + ending*(24-phase)) / 24
+	}
+	return (middle*phase + ending*(24-phase)) / 24
+}
+func abs(n int) int {
+	if n < 0 {
+		return -n
+	}
+	return n
+}
+func phaseWeight(piece chess.PieceType) int {
+	switch piece {
+	case chess.Knight, chess.Bishop:
+		return 1
+	case chess.Rook:
+		return 2
+	case chess.Queen:
+		return 4
+	}
+	return 0
+}
+func staticScore(position *chess.Position, perspective chess.Color) int {
+	pieces := position.Board().EvaluationPieces()
+	phase := 0
+	for index, mask := range pieces {
+		phase += bits.OnesCount64(mask) * phaseWeight(evaluationPieceTypes[index])
+	}
+	phase = min(24, phase)
+	score := 0
+	for index, mask := range pieces {
+		for mask != 0 {
+			sq := bits.LeadingZeros64(mask)
+			mask &^= uint64(1) << uint(63-sq)
+			score += int(basePieceScores[phase][index][sq])
+		}
+	}
+	if perspective == chess.Black {
+		return -score
+	}
+	return score
+}
+
+// Retained separately for material invariants and diagnostics.
+func materialScore(position *chess.Position, perspective chess.Color) int {
+	score := 0
+	for square := chess.A1; square <= chess.H8; square++ {
+		piece := position.Board().Piece(square)
+		value := pieceValues[piece.Type()]
+		if piece.Color() == perspective {
+			score += value
+		} else {
+			score -= value
+		}
+	}
+	return score
+}

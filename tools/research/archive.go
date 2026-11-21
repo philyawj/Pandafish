@@ -5,6 +5,7 @@ import (
 	"compress/gzip"
 	"crypto/sha256"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/fs"
@@ -60,10 +61,14 @@ func audit(root, legacy string) (map[string]any, error) {
 	if err := load(filepath.Join(root, "tools/research/migration.json"), &m); err != nil {
 		return nil, err
 	}
+	var originalErrors []error
 	for name, want := range m.Originals {
 		if _, err := migratedEntry(root, name, want, m); err != nil {
-			return nil, err
+			originalErrors = append(originalErrors, err)
 		}
+	}
+	if len(originalErrors) > 0 {
+		return nil, errors.Join(originalErrors...)
 	}
 	counts := map[string]int{}
 	inventories, entries := 0, 0
@@ -244,6 +249,10 @@ func extract(tr *tar.Reader, out string) error {
 		}
 	}
 }
+func allowedOverlay(p string) bool {
+	return safePath(p) && (strings.HasSuffix(p, ".go") || strings.HasSuffix(p, ".json") || p == "go.mod" || p == "go.sum" || p == "third_party/chess/go.mod" || p == "third_party/chess/go.sum")
+}
+
 func replay(source, base, out, test string, check bool) error {
 	var snapshot struct {
 		Base  string            `json:"base_tag"`
@@ -262,7 +271,7 @@ func replay(source, base, out, test string, check bool) error {
 		return fmt.Errorf("invalid base ref")
 	}
 	for p := range snapshot.Files {
-		if !safePath(p) || !(strings.HasSuffix(p, ".go") || strings.HasSuffix(p, ".json") || p == "go.mod" || p == "go.sum") {
+		if !allowedOverlay(p) {
 			return fmt.Errorf("overlay must contain only Go source/module files or JSON fixtures: %s", p)
 		}
 	}

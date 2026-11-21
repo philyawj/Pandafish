@@ -13,6 +13,8 @@ only the engine, and `go test ./...` checks all implemented Go packages.
 All program/test/research source must be Go. The
 [v0.19 summary](../docs/RESEARCH_V019.md) records retired historical script
 workflows, their hashed release attachment and the limits of the Go replacements.
+The [research tooling flowchart](../docs/RESEARCH_TOOLING.md) maps the shared
+Go execution, reporting and evidence commands used by new investigations.
 
 The benchmark's code, tests, opening suites, milestones, and results moved
 together from `benchmarks/` to `tools/benchmark/`. Historical result contents

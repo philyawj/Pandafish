@@ -1,0 +1,14 @@
+--- FAIL: TestPawnStructureRelations (0.00s)
+    pawn_structure_test.go:132: 7k/8/8/4P3/4P3/8/8/K7 w - - 0 1 -1 10 5 23
+--- FAIL: TestQuiescence (0.00s)
+    --- FAIL: TestQuiescence/en_passant (0.00s)
+        quiescence_test.go:43: quiescence score = 210, want 1
+FAIL
+FAIL	github.com/philyawj/Pandafish	5.073s
+ok  	github.com/philyawj/Pandafish/internal/telemetry	(cached)
+?   	github.com/philyawj/Pandafish/tmp/v023-generator	[no test files]
+?   	github.com/philyawj/Pandafish/tmp/v023-phase-generator	[no test files]
+ok  	github.com/philyawj/Pandafish/tools/benchmark	(cached)
+ok  	github.com/philyawj/Pandafish/tools/lichess	(cached)
+ok  	github.com/philyawj/Pandafish/tools/research	(cached)
+FAIL

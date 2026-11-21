@@ -1,0 +1,71 @@
+{
+  "by_turn_mean_loss_cp": {
+    "b": {
+      "baseline": 107.47368421052632,
+      "candidate": 104.10526315789474
+    },
+    "w": {
+      "baseline": 21.520833333333332,
+      "candidate": 21.3125
+    }
+  },
+  "finite_cases": 67,
+  "mean_loss_cp": {
+    "baseline": 45.8955223880597,
+    "candidate": 44.791044776119406
+  },
+  "new_candidate_losing_mate_cases": [],
+  "passed": true,
+  "severe_over_300": {
+    "baseline": 2,
+    "candidate": 2
+  },
+  "timing_overruns": 0,
+  "worst_regressions": [
+    {
+      "id": "PNfQoYP0",
+      "mean_loss_cp": {
+        "baseline": 112,
+        "candidate": 207
+      },
+      "regression_cp": 95,
+      "turn": "w"
+    },
+    {
+      "id": "broader-sacrifice-01-ply12",
+      "mean_loss_cp": {
+        "baseline": 0,
+        "candidate": 46
+      },
+      "regression_cp": 46,
+      "turn": "w"
+    },
+    {
+      "id": "neutral-04-ply64",
+      "mean_loss_cp": {
+        "baseline": 0,
+        "candidate": 29
+      },
+      "regression_cp": 29,
+      "turn": "w"
+    },
+    {
+      "id": "broader-sacrifice-09-ply40",
+      "mean_loss_cp": {
+        "baseline": 129,
+        "candidate": 135
+      },
+      "regression_cp": 6,
+      "turn": "w"
+    },
+    {
+      "id": "start",
+      "mean_loss_cp": {
+        "baseline": 12,
+        "candidate": 16
+      },
+      "regression_cp": 4,
+      "turn": "w"
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "plan_sha256": "936f383004b7d5bfdb82bbc4246de09f82b309bc7203cd05a4463b8954880cd1",
+  "inputs": {
+    "/opt/homebrew/bin/stockfish": {
+      "sha256": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f",
+      "bytes": 99868024
+    },
+    "symlink:/opt/homebrew/bin/stockfish": {
+      "sha256": "61884c50e6bb0fcf58d2dc6eaf4a125e82524cbb59864987206170949f1b99e6",
+      "bytes": 84
+    },
+    "tools/benchmark/bin/research": {
+      "sha256": "40c0e7a0a59407f312e02da7fe21efe34e65e6feff3a4efdc6287ac9cc92e722",
+      "bytes": 5981890
+    },
+    "tools/benchmark/research/v0.23-scout-material/fresh-100/method.json": {
+      "sha256": "ae14cab7be84ff43a47039499074acd6d33646bd6e98bea5a61ba13d601a36b6",
+      "bytes": 777
+    },
+    "tools/benchmark/research/v0.23-scout-material/fresh-100/native.json": {
+      "sha256": "55628ef3ec382f3034fd5f7827c2d4c89d5d01996c2059382e0536ff3da9d189",
+      "bytes": 1287738
+    },
+    "tools/benchmark/research/v0.23-scout-material/fresh-100/quality.json": {
+      "sha256": "851d159bcdac79a50f426f48e79986a74e807afb3e22fd0af11614c948b0c342",
+      "bytes": 95390
+    },
+    "tools/research/archive.go": {
+      "sha256": "578a9d4ea777510750c048e02d19024f69178b7fe70268d389aca6c7efad334c",
+      "bytes": 8906
+    },
+    "tools/research/choices.go": {
+      "sha256": "b0aea9ecd0460d4eeb416009d9fe2a6ee9beac95e4519d2503dd0bf568ecec12",
+      "bytes": 18569
+    },
+    "tools/research/choices_test.go": {
+      "sha256": "94f87af18075483009630f53ab07889a3f5afc04b511bac7c818191e0286907b",
+      "bytes": 2698
+    },
+    "tools/research/confirm.go": {
+      "sha256": "b9fe2338e989efd6b3eb0fa178beea1760e876e0bab5fe775beafc4aeee296d9",
+      "bytes": 4168
+    },
+    "tools/research/confirm_test.go": {
+      "sha256": "365b7a17dde828c553af8911874cf7efa31848e5a5f817c581fdee5e3f4627d4",
+      "bytes": 658
+    },
+    "tools/research/context_fit.go": {
+      "sha256": "720deb653506a72d1f140e3a900efd964977f2ae8e8a3a821cd291c6b999def7",
+      "bytes": 15025
+    },
+    "tools/research/context_fit_test.go": {
+      "sha256": "d9b27d47ae8f82c73c713ab789fab25f0aa9a5fcb5f30bd4605a51e20a38b975",
+      "bytes": 4524
+    },
+    "tools/research/context_targets.go": {
+      "sha256": "b2a052282a6715d17cc42e9b608c41060dab5ec6a27c1451fd7d561983421890",
+      "bytes": 12237
+    },
+    "tools/research/context_targets_test.go": {
+      "sha256": "dc1415eef62db0cf5ab09215541fe6c1a9730d844ee52b85107a827213bad38a",
+      "bytes": 2851
+    },
+    "tools/research/decisions.go": {
+      "sha256": "566d2a10a2f615fb356ee6168925c38954a8c1448861378b9c63ddccbd7e9364",
+      "bytes": 7056
+    },
+    "tools/research/depth_review.go": {
+      "sha256": "aefd6506f00ac30ea06c47a89f0fdf0d4bcbbd347c3ebf35827cd2505464fcf8",
+      "bytes": 4871
+    },
+    "tools/research/depth_review_test.go": {
+      "sha256": "5b144d26427579df6aee4747740fa20a6f8d305a5929fe96f1d5b0e056b7ee93",
+      "bytes": 1158
+    },
+    "tools/research/document_map.go": {
+      "sha256": "1a9b79600f5a2a2470579243b8f6b12fb61051261029cb484483de6a58a66f75",
+      "bytes": 2521
+    },
+    "tools/research/document_map_test.go": {
+      "sha256": "04255c449276803d6f86efd402ff8ed7d41f5ac521ac32b06839fe93e1155ce2",
+      "bytes": 2229
+    },
+    "tools/research/evidence.go": {
+      "sha256": "d5d0c48f9e1532e48e6d7387f0b53c2e203f4c65d14770e4f27ff7ab9cf41ba9",
+      "bytes": 2494
+    },
+    "tools/research/generate.go": {
+      "sha256": "2ff9a7deae8265425980c9da501fb40cc0169859d8b4b38ecca9b735e4d6a520",
+      "bytes": 8521
+    },
+    "tools/research/generate_exclusions.go": {
+      "sha256": "b18762ebd03b633e4cb806e7171f5a4ac067c68057f2d90566cb7c56b2d96590",
+      "bytes": 2700
+    },
+    "tools/research/generate_exclusions_test.go": {
+      "sha256": "3221c332fec5c4f77c2196033634103f2870692f90b07c612c47dce784627820",
+      "bytes": 2004
+    },
+    "tools/research/main.go": {
+      "sha256": "d85eea6a3f928446f4c4ef9e6065b59a9a826599df2c26ecf39de73769aa1589",
+      "bytes": 11735
+    },
+    "tools/research/main_test.go": {
+      "sha256": "58ebab96c86c9dba018b870de2a3152c16f018cd93f03a5f4d59710712c89ad2",
+      "bytes": 7156
+    },
+    "tools/research/native_plan.go": {
+      "sha256": "3c6e6cb8c86bcf17e98326ed61c350d311b48e7fc534b03581739f87fd535a38",
+      "bytes": 3066
+    },
+    "tools/research/parallel_report_test.go": {
+      "sha256": "5bb6e5320c5cec91a571b9dbc6b8ec0df06ce321e7928ba7c81f0bd7e6be9469",
+      "bytes": 2550
+    },
+    "tools/research/plan_test.go": {
+      "sha256": "081018b056f2f73045ce6fc8915a9fb70b29a3ec079019f17a12c93a8d111753",
+      "bytes": 3217
+    },
+    "tools/research/release.go": {
+      "sha256": "40101c1f5c8218d43fe7cdbffcf6382421591be7dd0b5a2a6b6426ce3e5dbf10",
+      "bytes": 4180
+    },
+    "tools/research/uci.go": {
+      "sha256": "f97272410b68162668d8bd7a621cde108a05d23edcd353eae259a12697b5439e",
+      "bytes": 4501
+    },
+    "tools/research/warm_plan.go": {
+      "sha256": "7b0b29c4ca52916d2a33f0194c0ddc0e289f623e508474e97f2f0b998cf93949",
+      "bytes": 5932
+    },
+    "tools/research/warm_preflight_test.go": {
+      "sha256": "93ba87692e0190c517264a8cd48b08c545c62721085df98cd206493995f6ca45",
+      "bytes": 748
+    },
+    "tools/research/warm_report.go": {
+      "sha256": "581ea5793c6f5092b91dc6dfd8d3f84fb194695ba19db22d382668a89e8e6e28",
+      "bytes": 6263
+    },
+    "tools/research/warm_report_test.go": {
+      "sha256": "a33f80d3bb7dc1e16cd56477629274e223f2d63b604a54ec49c274f612d993eb",
+      "bytes": 4162
+    },
+    "tools/research/workflow.go": {
+      "sha256": "c02106b1067155f84109d74583a13b3cf77d637cd7a6f6f1b4349fbd4a37f3d4",
+      "bytes": 11238
+    },
+    "tools/research/workflow_process_other.go": {
+      "sha256": "bf69c777fb7555548839944abd53a24ee2b43b593304fc77f92a13ddb7e261c9",
+      "bytes": 539
+    },
+    "tools/research/workflow_process_unix.go": {
+      "sha256": "8290651ab51e647e1ce1f6cbaab5301ab52bfbc49dfd0b89062c1f32da8fb917",
+      "bytes": 760
+    },
+    "tools/research/workflow_test.go": {
+      "sha256": "5ca881f29cfe03c8fd5d28c6e406494cbf2f83e8bbdfcc2802a690203e1ba5f6",
+      "bytes": 5120
+    }
+  },
+  "environment": {
+    "GOARCH": "",
+    "GODEBUG": "",
+    "GOFLAGS": "",
+    "GOGC": "",
+    "GOMAXPROCS": "",
+    "GOMEMLIMIT": "",
+    "GOOS": "",
+    "GOTOOLCHAIN": "",
+    "PATH": "/Users/philyawj/.codex/packages/app-server-daemon/releases/0.171.0-aarch64-apple-darwin/codex-path:/opt/homebrew/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0SKqY0w:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.171.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg04otxpZ:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.170.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0OWiWqj:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.169.1-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0rul5Dw:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.169.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0Y50qQb:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.168.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0ZAEBrb:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.167.2-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0TcmUM6:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.167.1-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0QWC5ul:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.167.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0lMLO5g:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.166.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0K6h5zL:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.165.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0aXn9td:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.164.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0pKWM9w:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.163.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0/codex-arg0ROBR1s:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.162.1-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0/codex-arg0YFFiHv:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.162.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0/codex-arg07ZzbjG:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.159.3-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0/codex-arg0EJoDiU:/opt/homebrew/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex-path:/opt/homebrew/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin"
+  },
+  "status": "passed",
+  "results": [
+    {
+      "name": "confirm-all-mate-flags",
+      "status": "passed",
+      "started_utc": "2026-11-21T15:41:59.5356Z",
+      "seconds": 4.989961584,
+      "exit": 0,
+      "files": {
+        "tools/benchmark/research/v0.23-scout-material/confirmation-run/confirm-all-mate-flags.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "tools/benchmark/research/v0.23-scout-material/mate-confirmation/method.json": {
+          "sha256": "e20b99885b4be9fed7ef968403d6006ad0928b21b20a610263d02da70419b6bd",
+          "bytes": 488
+        },
+        "tools/benchmark/research/v0.23-scout-material/mate-confirmation/queries.jsonl": {
+          "sha256": "2f5232db9716bdf7cce9f3c7c11c40e270f76b56a6dc70cf8e851d527cfd3808",
+          "bytes": 18862
+        },
+        "tools/benchmark/research/v0.23-scout-material/mate-confirmation/summary.json": {
+          "sha256": "867d1ca1b425d5656c17913536e600fd629ac619d0e432ee3aa956518411d8ff",
+          "bytes": 2370
+        }
+      }
+    }
+  ]
+}

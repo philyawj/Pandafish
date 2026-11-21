@@ -1,0 +1,13 @@
+package main
+
+import("encoding/json";"fmt";"os";"os/exec";"path/filepath";"sort")
+type row struct{Game,Ply,Depth,Score int;Best,FEN string;Nodes uint64;ParseMS,SearchMS float64}
+func main(){repo,e:=os.Getwd();if e!=nil{panic(e)};dir:=filepath.Join(repo,"tools/benchmark/research/v0.23-child-reuse");input:=filepath.Join(repo,"tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba");checks:=[]map[string]any{}
+ put:=func(name string,v any){b,e:=json.MarshalIndent(v,"","  ");if e!=nil{panic(e)};if e=os.WriteFile(filepath.Join(dir,name),append(b,'\n'),0644);e!=nil{panic(e)}}
+ ratios:=[]float64{};issues:=[]string{}
+ for pair:=1;pair<=3;pair++{order:=[]string{"baseline","candidate"};if pair%2==0{order[0],order[1]=order[1],order[0]};data:=map[string][]row{}
+  for _,actor:=range order {name:=fmt.Sprintf("warm-%s-pair-%d",actor,pair);path:=filepath.Join(dir,name+".json");if _,e:=os.Stat(path);!os.IsNotExist(e){panic("refuse overwrite")};cmd:=exec.Command("/tmp/pandafish-v023-"+actor+".test","-test.run=^TestWarmPipelineProfile$","-test.count=1","-test.v");cmd.Dir=repo;cmd.Env=append(os.Environ(),"WARM_INPUT="+input,"WARM_OUTPUT="+path,"WARM_MODE=search","WARM_DEPTH=5");b,err:=cmd.CombinedOutput();if e=os.WriteFile(filepath.Join(dir,name+".txt"),b,0644);e!=nil{panic(e)};status:=0;if err!=nil{status=1};checks=append(checks,map[string]any{"actor":actor,"pair":pair,"command":cmd.Args,"exit":status});put("warm-checks.json",checks);if err!=nil{panic(err)};b,e=os.ReadFile(path);if e!=nil{panic(e)};var x struct{Rows []row};if e=json.Unmarshal(b,&x);e!=nil{panic(e)};data[actor]=x.Rows;fmt.Println(name,len(x.Rows))}
+  a,b:=data["baseline"],data["candidate"];if len(a)!=1145||len(a)!=len(b){panic("warm coverage")};am,bm:=0.,0.;for i,x:=range a{y:=b[i];am+=x.SearchMS;bm+=y.SearchMS;if x.Game!=y.Game||x.Ply!=y.Ply||x.FEN!=y.FEN||x.Depth!=y.Depth||x.Score!=y.Score||x.Best!=y.Best||x.Nodes!=y.Nodes{issues=append(issues,fmt.Sprintf("pair%d/%d/%d",pair,x.Game,x.Ply))}};ratio:=bm/am;ratios=append(ratios,ratio);put(fmt.Sprintf("warm-pair-%d-summary.json",pair),map[string]any{"baseline_ms":am,"candidate_ms":bm,"ratio":ratio,"roots":len(a),"issues":issues});fmt.Printf("pair%d baseline%.1f candidate%.1f ratio%.5f\n",pair,am,bm,ratio)
+ }
+ sort.Float64s(ratios);passed:=len(issues)==0&&ratios[1]<=.85;put("warm-analysis.json",map[string]any{"ratios":ratios,"median_ratio":ratios[1],"saving_percent":(1-ratios[1])*100,"correctness_issues":issues,"timing_gate_passed":passed});if !passed{os.Exit(1)}
+}

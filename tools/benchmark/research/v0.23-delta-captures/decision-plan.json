@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "inputs": [
+    "tools/benchmark/bin/research",
+    "*.go",
+    "go.mod",
+    "go.sum",
+    "internal/telemetry/*.go",
+    "third_party/chess/*.go",
+    "third_party/chess/go.mod",
+    "third_party/chess/go.sum",
+    "tools/research/*.go",
+    "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-1.json",
+    "tools/benchmark/research/v0.23-delta-captures/diagnostic-warm.json"
+  ],
+  "steps": [
+    {
+      "name": "snapshot",
+      "command": [
+        "tools/benchmark/bin/research",
+        "snapshot",
+        "--base",
+        "v0.22",
+        "--out",
+        "tools/benchmark/research/v0.23-delta-captures/candidate-source.json"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-delta-captures/candidate-source.json"
+      ]
+    },
+    {
+      "name": "opportunity",
+      "command": [
+        "tools/benchmark/bin/research",
+        "warm-report",
+        "--baseline",
+        "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-1.json",
+        "--candidate",
+        "tools/benchmark/research/v0.23-delta-captures/diagnostic-warm.json",
+        "--pairs",
+        "1",
+        "--exact",
+        "--min-opportunity",
+        "0.2",
+        "--out",
+        "tools/benchmark/research/v0.23-delta-captures/opportunity-review.json"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-delta-captures/opportunity-review.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-delta-captures/opportunity-review.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/pairs",
+            "/issues"
+          ]
+        }
+      ]
+    }
+  ]
+}

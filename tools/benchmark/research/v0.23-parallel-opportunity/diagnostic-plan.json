@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "inputs": [
+    "tools/benchmark/bin/research",
+    "/tmp/pandafish-parallel-opportunity.test",
+    "*.go",
+    "go.mod",
+    "go.sum",
+    "internal/telemetry/*.go",
+    "third_party/chess/*.go",
+    "third_party/chess/go.mod",
+    "third_party/chess/go.sum",
+    "tools/research/*.go",
+    "tools/benchmark/research/v0.23-parallel-opportunity/PLAN.md",
+    "tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/summary.json",
+    "tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/previous.pgn",
+    "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-1.json"
+  ],
+  "steps": [
+    {
+      "name": "source",
+      "command": [
+        "tools/benchmark/bin/research",
+        "snapshot",
+        "--base",
+        "v0.22",
+        "--include",
+        "tools/research/*.go",
+        "--out",
+        "tools/benchmark/research/v0.23-parallel-opportunity/candidate-source.json"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-parallel-opportunity/candidate-source.json"
+      ]
+    },
+    {
+      "name": "source-replay",
+      "command": [
+        "tools/benchmark/bin/research",
+        "replay",
+        "--source",
+        "tools/benchmark/research/v0.23-parallel-opportunity/candidate-source.json",
+        "--out",
+        "/tmp/pandafish-parallel-diagnostic-replay",
+        "--check"
+      ],
+      "env": {
+        "GOFLAGS": "-buildvcs=false"
+      },
+      "outputs": [
+        "/tmp/pandafish-parallel-diagnostic-replay/tests.txt",
+        "/tmp/pandafish-parallel-diagnostic-replay/build.txt"
+      ],
+      "timeout_seconds": 300
+    },
+    {
+      "name": "diagnose",
+      "command": [
+        "/tmp/pandafish-parallel-opportunity.test",
+        "-test.run=^TestResearchParallelOpportunity$",
+        "-test.count=1",
+        "-test.v"
+      ],
+      "env": {
+        "WARM_INPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba",
+        "WARM_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-parallel-opportunity/warm.json",
+        "WARM_MODE": "search",
+        "WARM_DEPTH": "5",
+        "PARALLEL_OPPORTUNITY_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-parallel-opportunity/opportunity.json"
+      },
+      "outputs": [
+        "tools/benchmark/research/v0.23-parallel-opportunity/warm.json",
+        "tools/benchmark/research/v0.23-parallel-opportunity/opportunity.json"
+      ],
+      "timeout_seconds": 600
+    },
+    {
+      "name": "exactness",
+      "command": [
+        "tools/benchmark/bin/research",
+        "warm-report",
+        "--baseline",
+        "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-1.json",
+        "--candidate",
+        "tools/benchmark/research/v0.23-parallel-opportunity/warm.json",
+        "--pairs",
+        "1",
+        "--exact",
+        "--out",
+        "tools/benchmark/research/v0.23-parallel-opportunity/exactness.json"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-parallel-opportunity/exactness.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-parallel-opportunity/exactness.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/issues"
+          ]
+        },
+        {
+          "file": "tools/benchmark/research/v0.23-parallel-opportunity/opportunity.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/roots",
+            "/nodes",
+            "/root_proxy_saving_fraction",
+            "/outer_late_fraction",
+            "/direction"
+          ]
+        }
+      ]
+    }
+  ]
+}

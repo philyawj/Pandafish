@@ -1,0 +1,8 @@
+// Capture Go source overlays without changing the Git index.
+package main
+
+import("crypto/sha256";"encoding/hex";"encoding/json";"fmt";"os";"path/filepath";"strings")
+func main(){if len(os.Args)!=2{panic("output directory required")};out:=os.Args[1];files:=map[string]string{}
+ for _,dir:=range []string{".","internal/telemetry","third_party/chess"}{entries,e:=os.ReadDir(dir);if e!=nil{panic(e)};for _,f:=range entries{if !f.IsDir()&&(strings.HasSuffix(f.Name(),".go")||f.Name()=="go.mod"||f.Name()=="go.sum"){path:=filepath.ToSlash(filepath.Join(dir,f.Name()));b,e:=os.ReadFile(path);if e!=nil{panic(e)};files[path]=string(b)}}}
+ b,e:=json.MarshalIndent(map[string]any{"base_tag":"v0.22","files":files},"","  ");if e!=nil{panic(e)};b=append(b,'\n');if e=os.WriteFile(filepath.Join(out,"candidate-source.json"),b,0644);e!=nil{panic(e)};h:=sha256.Sum256(b);fmt.Println("source files",len(files),"SHA256",hex.EncodeToString(h[:]))
+}

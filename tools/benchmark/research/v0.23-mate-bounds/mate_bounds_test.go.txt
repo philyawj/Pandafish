@@ -1,0 +1,30 @@
+package main
+
+import "testing"
+
+func TestMateWindowKeepsOrdinaryScoresAndBoundsImpossibleMates(t *testing.T) {
+	for ply := 0; ply < 85; ply++ {
+		a, b := mateWindow(-2000, 2000, ply)
+		if a != -2000 || b != 2000 {
+			t.Fatal("ordinary window changed")
+		}
+		a, b = mateWindow(-searchInfinity, searchInfinity, ply)
+		if a != -mateScore+ply || b != mateScore-ply-1 {
+			t.Fatal("mate window", ply, a, b)
+		}
+	}
+	p := evalFEN(t, "7k/8/8/8/8/8/P7/K7 w - - 0 1")
+	for _, quiet := range []bool{false, true} {
+		w := searcher{}
+		var score int
+		var done bool
+		if quiet {
+			score, done = w.quietAtPly(p, quiescenceDepth, mateScore-4, mateScore-3, false, 7)
+		} else {
+			score, done = w.searchAtPly(p, 3, mateScore-4, mateScore-3, false, 7)
+		}
+		if !done || score != mateScore-4 || w.nodes != 1 || len(w.repetitions) != 0 {
+			t.Fatal("impossible winning window not bounded/restored", quiet, score, done, w.nodes, w.repetitions)
+		}
+	}
+}

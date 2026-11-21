@@ -1,0 +1,285 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"math/rand/v2"
+	"os"
+	"path/filepath"
+	"strings"
+	"time"
+
+	"github.com/corentings/chess/v2"
+)
+
+func canonicalProbe(p *chess.Position) string {
+	w := strings.Fields(p.String())[:4]
+	if w[3] != "-" {
+		legal := false
+		for _, m := range p.ValidMoves() {
+			if m.HasTag(chess.EnPassant) {
+				legal = true
+				break
+			}
+		}
+		if !legal {
+			w[3] = "-"
+		}
+	}
+	original := strings.Join(w, " ")
+	var board strings.Builder
+	for rank := 7; rank >= 0; rank-- {
+		if rank < 7 {
+			board.WriteByte('/')
+		}
+		empty := 0
+		for file := 0; file < 8; file++ {
+			piece := p.Board().Piece(chess.Square((rank*8 + file) ^ 56))
+			if piece == chess.NoPiece {
+				empty++
+				continue
+			}
+			if empty > 0 {
+				board.WriteByte(byte('0' + empty))
+				empty = 0
+			}
+			name := piece.Type().String()
+			if piece.Color() == chess.Black {
+				name = strings.ToUpper(name)
+			}
+			board.WriteString(name)
+		}
+		if empty > 0 {
+			board.WriteByte(byte('0' + empty))
+		}
+	}
+	turn := "b"
+	if w[1] == "b" {
+		turn = "w"
+	}
+	rights := ""
+	for _, pair := range [][2]string{{"K", "k"}, {"Q", "q"}, {"k", "K"}, {"q", "Q"}} {
+		if strings.Contains(w[2], pair[1]) {
+			rights += pair[0]
+		}
+	}
+	if rights == "" {
+		rights = "-"
+	}
+	ep := w[3]
+	if ep != "-" {
+		ep = string([]byte{ep[0], byte('9' - ep[1] + '0')})
+	}
+	mirrored := board.String() + " " + turn + " " + rights + " " + ep
+	if mirrored < original {
+		return mirrored
+	}
+	return original
+}
+
+func generateProbeCases(base, teacher, out string) error {
+	if base == "" || out == "" {
+		return fmt.Errorf("baseline and new output directory required")
+	}
+	if err := os.Mkdir(out, 0755); err != nil {
+		return err
+	}
+	baseHash, err := probeDigest(base)
+	if err != nil {
+		return err
+	}
+	teacherHash, err := probeDigest(teacher)
+	if err != nil {
+		return err
+	}
+	if err := writeProbeJSON(filepath.Join(out, "method.json"), map[string]any{"seed": 2026112023, "families": 16, "opening_plies": 8, "opening_multipv": 8, "reference_nodes": 5000, "student_ms": 25, "sample_plies": []int{12, 13, 24, 25, 36, 37, 48, 49, 60, 61}, "max_plies": 64, "student_sha256": baseHash, "teacher_sha256": teacherHash, "selection": "All fixed rollout families retained. Exclude old blocked/forest states, public and v0.20 decision roots, every v0.22 live survey board, and duplicate/color-mirrored samples. No candidate queried or favorable batch extension. This is a fresh final decision control, not a fitting dataset."}); err != nil {
+		return err
+	}
+	blocked := map[string]bool{}
+	var previous struct {
+		Positions map[string]string `json:"canonical_positions"`
+	}
+	if err := load("tools/benchmark/research/v0.19-sharp-branches/blocked.json", &previous); err != nil {
+		return err
+	}
+	for key := range previous.Positions {
+		blocked[key] = true
+	}
+	var roots struct{ Cases []probeCase }
+	if err := load("tools/benchmark/research/v0.19-sharp-branches/unlabelled-roots.json", &roots); err != nil {
+		return err
+	}
+	rootPositions := map[string]*chess.Position{}
+	for _, c := range roots.Cases {
+		g, err := probeGame(c)
+		if err != nil {
+			return err
+		}
+		rootPositions[c.ID] = g.Position()
+	}
+	var forest []struct {
+		ID      string
+		Witness struct {
+			FEN  string
+			Path []string
+		}
+	}
+	if err := load("tools/benchmark/research/v0.19-sharp-branches/forest-leaves.json", &forest); err != nil {
+		return err
+	}
+	for _, row := range forest {
+		p := rootPositions[row.ID]
+		if p == nil {
+			return fmt.Errorf("missing forest root")
+		}
+		blocked[canonicalProbe(p)] = true
+		for _, move := range row.Witness.Path {
+			found := false
+			for _, m := range p.ValidMoves() {
+				if m.String() == move {
+					p = p.Update(&m)
+					found = true
+					break
+				}
+			}
+			if !found {
+				return fmt.Errorf("illegal old witness path")
+			}
+			blocked[canonicalProbe(p)] = true
+		}
+		if p.String() != row.Witness.FEN {
+			return fmt.Errorf("old witness leaf mismatch")
+		}
+	}
+	blockedSources:=[]map[string]string{}
+	for _,path:=range []string{"tools/benchmark/research/v0.17-search-moves/inputs.json","tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json"}{
+	 var input struct{Cases []probeCase};if err:=load(path,&input);err!=nil{return err};h,err:=probeDigest(path);if err!=nil{return err};blockedSources=append(blockedSources,map[string]string{"path":path,"sha256":h});for _,c:=range input.Cases{g,err:=probeGame(c);if err!=nil{return err};blocked[canonicalProbe(g.Position())]=true}
+	}
+	for _,session:=range []string{"v0.22-live-20261118-080529","v0.22-live-20261118-120005","v0.22-live-20261119-151427"}{
+	 paths,err:=filepath.Glob(filepath.Join("tools/benchmark/live",session,"analysis/stockfish-n100000/*.json"));if err!=nil{return err}
+	 for _,path:=range paths {data,err:=os.ReadFile(path);if err!=nil{return err};if len(data)==0||data[0]!='{'{continue};var a struct{Game string `json:"game"`;Moves []struct{FEN string `json:"fen"`} `json:"moves"`};if err=json.Unmarshal(data,&a);err!=nil{return err};if a.Game==""{continue};h,err:=probeDigest(path);if err!=nil{return err};blockedSources=append(blockedSources,map[string]string{"path":path,"sha256":h});for _,m:=range a.Moves {f,err:=chess.FEN(m.FEN);if err!=nil{return err};blocked[canonicalProbe(chess.NewGame(f).Position())]=true}}
+	}
+	if err:=writeProbeJSON(filepath.Join(out,"additional-blocking.json"),map[string]any{"blocked_states":len(blocked),"sources":blockedSources});err!=nil{return err}
+	journal, err := os.OpenFile(filepath.Join(out, "queries.jsonl"), os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0644)
+	if err != nil {
+		return err
+	}
+	defer journal.Close()
+	encoder := json.NewEncoder(journal)
+	rng := rand.New(rand.NewPCG(2026112023, 23))
+	cases := []probeCase{}
+	raw := []map[string]any{}
+	sample := map[int]bool{12: true, 13: true, 24: true, 25: true, 36: true, 37: true, 48: true, 49: true, 60: true, 61: true}
+	turns := map[string]int{"w": 0, "b": 0}
+	seen := map[string]bool{}
+	for family := 0; family < 16; family++ {
+		student, err := startEngine(base, nil)
+		if err != nil {
+			return err
+		}
+		ref, err := startEngine(teacher, map[string]string{"Threads": "1", "Hash": "64", "Skill Level": "20", "UCI_LimitStrength": "false", "MultiPV": "8"})
+		if err != nil {
+			student.close()
+			return err
+		}
+		g := chess.NewGame()
+		moves := []string{}
+		studentWhite := family%2 == 0
+		for ply := 0; ply <= 64; ply++ {
+			position := "position startpos moves " + strings.Join(moves, " ")
+			if sample[ply] {
+				c := probeCase{ID: fmt.Sprintf("context-fresh-%02d-ply%02d", family, ply), Position: position, FEN: g.FEN()}
+				key := canonicalProbe(g.Position())
+				reason := "retained"
+				if len(g.Position().ValidMoves()) == 0 {
+					reason = "terminal"
+				} else if blocked[key] {
+					reason = "previous-state"
+				} else if seen[key] {
+					reason = "duplicate-mirror"
+				} else {
+					cases = append(cases, c)
+					seen[key] = true
+					turns[strings.Fields(c.FEN)[1]]++
+				}
+				raw = append(raw, map[string]any{"case": c, "reason": reason})
+			}
+			if ply == 64 || g.Outcome() != chess.NoOutcome || len(g.Position().ValidMoves()) == 0 {
+				break
+			}
+			if ply == 8 {
+				if err := ref.send("setoption name MultiPV value 1"); err != nil {
+					return err
+				}
+				if err := ref.send("isready"); err != nil {
+					return err
+				}
+				if _, err := ref.wait("readyok", 5*time.Second); err != nil {
+					return err
+				}
+			}
+			actor := "reference"
+			e := ref
+			command := "go nodes 5000"
+			if ply >= 8 && ((g.Position().Turn() == chess.White) == studentWhite) {
+				actor = "student"
+				e = student
+				command = "go movetime 25"
+			}
+			q := e.probe(position, command, 10*time.Second)
+			if err := encoder.Encode(map[string]any{"family": family, "ply": ply, "actor": actor, "query": q}); err != nil {
+				return err
+			}
+			if q.Error != "" {
+				student.close()
+				ref.close()
+				return fmt.Errorf("rollout query %s", q.Error)
+			}
+			move := q.Move
+			if ply < 8 {
+				options := map[int]string{}
+				for _, line := range q.Lines {
+					score, exact := parseProbeScore(line)
+					if exact && len(score.PV) > 0 {
+						options[score.MultiPV] = score.PV[0]
+					}
+				}
+				choices := []string{}
+				unique := map[string]bool{}
+				for index := 1; index <= 8; index++ {
+					choice := options[index]
+					if choice != "" && !unique[choice] && validProbeMove(g, choice) {
+						choices = append(choices, choice)
+						unique[choice] = true
+					}
+				}
+				if len(choices) == 0 {
+					return fmt.Errorf("opening has no exact legal alternatives")
+				}
+				move = choices[rng.IntN(len(choices))]
+			}
+			if !validProbeMove(g, move) {
+				student.close()
+				ref.close()
+				return fmt.Errorf("illegal rollout move")
+			}
+			if err := g.PushNotationMove(move, chess.UCINotation{}, nil); err != nil {
+				return err
+			}
+			moves = append(moves, move)
+		}
+		student.close()
+		ref.close()
+		if err := writeProbeJSON(filepath.Join(out, "generation.json"), map[string]any{"completed_families": family + 1, "raw_samples": raw, "turns": turns, "retained": len(cases)}); err != nil {
+			return err
+		}
+		if err := writeProbeJSON(filepath.Join(out, "inputs.json"), map[string]any{"cases": cases}); err != nil {
+			return err
+		}
+		fmt.Printf("Family %d/16; retained %d\n", family+1, len(cases))
+	}
+	if len(cases) < 80 || turns["w"] < 30 || turns["b"] < 30 {
+		return fmt.Errorf("fresh data coverage infeasible: %d %v", len(cases), turns)
+	}
+	return printJSON(map[string]any{"roots": len(cases), "turns": turns, "families": 16})
+}

@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "inputs": [
+    "tools/benchmark/bin/research",
+    "*.go",
+    "go.mod",
+    "go.sum",
+    "internal/telemetry/*.go",
+    "third_party/chess/*.go",
+    "third_party/chess/go.mod",
+    "third_party/chess/go.sum",
+    "tools/research/*.go",
+    "tools/benchmark/research/v0.19-sharp-branches/fit-data.json",
+    "tools/benchmark/research/v0.19-sharp-branches/leaves.json",
+    "tools/benchmark/research/v0.19-sharp-branches/model-weights.json",
+    "tools/benchmark/research/v0.19-sharp-branches/fit-results.json",
+    "tools/benchmark/research/v0.19-sharp-branches/boundary-audit-after-leaves.json"
+  ],
+  "steps": [
+    {
+      "name": "evidence-audit",
+      "command": [
+        "tools/benchmark/bin/research",
+        "audit"
+      ]
+    },
+    {
+      "name": "source",
+      "command": [
+        "tools/benchmark/bin/research",
+        "snapshot",
+        "--base",
+        "v0.22",
+        "--include",
+        "tools/research/*.go",
+        "--out",
+        "tools/benchmark/research/v0.23-king-context/candidate-source-before-fit.json"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-king-context/candidate-source-before-fit.json"
+      ]
+    },
+    {
+      "name": "source-replay",
+      "command": [
+        "tools/benchmark/bin/research",
+        "replay",
+        "--source",
+        "tools/benchmark/research/v0.23-king-context/candidate-source-before-fit.json",
+        "--out",
+        "/tmp/pandafish-context-training-replay",
+        "--check"
+      ],
+      "env": {
+        "GOFLAGS": "-buildvcs=false"
+      },
+      "outputs": [
+        "/tmp/pandafish-context-training-replay/tests.txt",
+        "/tmp/pandafish-context-training-replay/build.txt"
+      ],
+      "timeout_seconds": 300
+    },
+    {
+      "name": "fit",
+      "command": [
+        "tools/benchmark/bin/research",
+        "context-fit",
+        "--out",
+        "tools/benchmark/research/v0.23-king-context/fit"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-king-context/fit/*.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-king-context/fit/summary.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/constraints",
+            "/splits",
+            "/solver/converged",
+            "/solver/iterations"
+          ]
+        }
+      ],
+      "timeout_seconds": 300
+    }
+  ]
+}

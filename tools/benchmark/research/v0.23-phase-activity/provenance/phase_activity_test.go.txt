@@ -1,0 +1,59 @@
+package main
+
+import (
+	"github.com/corentings/chess/v2"
+	"testing"
+)
+
+func TestPhaseActivityEndpointsAndBlending(t *testing.T) {
+	for _, c := range []struct {
+		piece                             chess.PieceType
+		file, rank, middle, ending, mixed int
+	}{
+		{chess.Pawn, 4, 5, 32, 79, 55},
+		{chess.Knight, 3, 3, 40, 30, 35},
+		{chess.Bishop, 3, 3, 29, 36, 32},
+		{chess.Rook, 4, 0, 8, 6, 7},
+		{chess.Rook, 4, 6, 28, 45, 36},
+		{chess.Queen, 3, 0, 4, 8, 6},
+		{chess.Queen, 3, 3, 6, 20, 13},
+	} {
+		if got := placement(c.piece, c.file, c.rank, 24); got != c.middle {
+			t.Fatal("middle activity", c, got)
+		}
+		if got := placement(c.piece, c.file, c.rank, 0); got != c.ending {
+			t.Fatal("ending activity", c, got)
+		}
+		if got := placement(c.piece, c.file, c.rank, 12); got != c.mixed {
+			t.Fatal("mixed activity", c, got)
+		}
+	}
+	if placement(chess.Rook, 4, 0, 24) <= placement(chess.Rook, 7, 0, 24) {
+		t.Fatal("central rook file activity absent")
+	}
+	if placement(chess.Pawn, 0, 5, 0) <= placement(chess.Pawn, 0, 5, 24) {
+		t.Fatal("advanced ending pawn activity absent")
+	}
+	if placement(chess.Queen, 3, 3, 24) >= placement(chess.Queen, 3, 3, 0) {
+		t.Fatal("queen development phase absent")
+	}
+}
+
+func TestPhaseActivityMaterialAndAllocation(t *testing.T) {
+	p := chess.StartingPosition()
+	before, hash := p.String(), p.ZobristHash()
+	if materialScore(p, chess.White) != 0 || staticScore(p, chess.White) != 0 {
+		t.Fatal("initial symmetry/material")
+	}
+	for piece, want := range map[chess.PieceType]int{chess.Pawn: 100, chess.Knight: 300, chess.Bishop: 300, chess.Rook: 500, chess.Queen: 900} {
+		if pieceValues[piece] != want {
+			t.Fatal("material changed")
+		}
+	}
+	if n := testing.AllocsPerRun(1000, func() { staticScore(p, chess.White) }); n != 0 {
+		t.Fatal("static allocation", n)
+	}
+	if p.String() != before || p.ZobristHash() != hash {
+		t.Fatal("evaluation mutated parent")
+	}
+}

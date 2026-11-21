@@ -1,0 +1,71 @@
+{
+  "by_turn_mean_loss_cp": {
+    "b": {
+      "baseline": 44.7020202020202,
+      "candidate": 32.03030303030303
+    },
+    "w": {
+      "baseline": 41.13636363636363,
+      "candidate": 33.72727272727273
+    }
+  },
+  "finite_cases": 132,
+  "mean_loss_cp": {
+    "baseline": 42.91919191919192,
+    "candidate": 32.878787878787875
+  },
+  "new_candidate_losing_mate_cases": [],
+  "passed": true,
+  "severe_over_300": {
+    "baseline": 3,
+    "candidate": 1
+  },
+  "timing_overruns": 0,
+  "worst_regressions": [
+    {
+      "id": "proof-fresh-14-ply12",
+      "mean_loss_cp": {
+        "baseline": 1,
+        "candidate": 121
+      },
+      "regression_cp": 120,
+      "turn": "w"
+    },
+    {
+      "id": "proof-fresh-12-ply36",
+      "mean_loss_cp": {
+        "baseline": 35,
+        "candidate": 107
+      },
+      "regression_cp": 72,
+      "turn": "w"
+    },
+    {
+      "id": "proof-fresh-06-ply13",
+      "mean_loss_cp": {
+        "baseline": 0,
+        "candidate": 49
+      },
+      "regression_cp": 49,
+      "turn": "b"
+    },
+    {
+      "id": "proof-fresh-00-ply13",
+      "mean_loss_cp": {
+        "baseline": 100,
+        "candidate": 138
+      },
+      "regression_cp": 38,
+      "turn": "b"
+    },
+    {
+      "id": "proof-fresh-13-ply61",
+      "mean_loss_cp": {
+        "baseline": 2,
+        "candidate": 29
+      },
+      "regression_cp": 27,
+      "turn": "b"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "created_utc": "2026-11-21T02:54:26.471822Z",
+  "input_identities": {
+    "tools/benchmark/research/v0.23-pawn-structure/compact-cost/warm-baseline-pair-1.json": {
+      "sha256": "e610a859ce790b1bf7011707f7fbb821b912980c2132fcb4e8443580e7e44ec1",
+      "bytes": 288471
+    },
+    "tools/benchmark/research/v0.23-pawn-structure/compact-cost/warm-baseline-pair-2.json": {
+      "sha256": "d550618ed7c260784a0bdb3f5286331715cf048ad4966ae151ecddde033d536e",
+      "bytes": 288598
+    },
+    "tools/benchmark/research/v0.23-pawn-structure/compact-cost/warm-baseline-pair-3.json": {
+      "sha256": "f420547d7f0ba0dc2fdae8ffc84e272b26f8373f7d31d87808b0f79926ad4c4f",
+      "bytes": 288298
+    },
+    "tools/benchmark/research/v0.23-pawn-structure/compact-cost/warm-candidate-pair-1.json": {
+      "sha256": "11202790a4d4bc961a968317502e0086ea86927952d7a39dc3e44699b146d32b",
+      "bytes": 288682
+    },
+    "tools/benchmark/research/v0.23-pawn-structure/compact-cost/warm-candidate-pair-2.json": {
+      "sha256": "d8c1f063ab2f8f7de9e8670aede9f72e4a7dc7886bb364f75d9bb39f07e77e8b",
+      "bytes": 288426
+    },
+    "tools/benchmark/research/v0.23-pawn-structure/compact-cost/warm-candidate-pair-3.json": {
+      "sha256": "f54b90d093a2d54451aa12d9867a8d076428a867ad384ecaf56d612ca85b14ae",
+      "bytes": 288658
+    },
+    "tools/benchmark/research/v0.23-pawn-structure/warm-candidate-pair-1.json": {
+      "sha256": "3f7bd61edea94e96f1393e9d11113d1924a998720828388b4f157ccb6be33c80",
+      "bytes": 288709
+    }
+  },
+  "issues": [],
+  "median_time_ratio": 1.0395005989350448,
+  "node_ratios": [
+    1.002396932683143,
+    1.002396932683143,
+    1.002396932683143
+  ],
+  "options": {
+    "Baseline": "tools/benchmark/research/v0.23-pawn-structure/compact-cost/warm-baseline-pair-*.json",
+    "Candidate": "tools/benchmark/research/v0.23-pawn-structure/compact-cost/warm-candidate-pair-*.json",
+    "Out": "tools/benchmark/research/v0.23-process-audit/recomputed-compact-pawn-cost.json",
+    "Reference": "tools/benchmark/research/v0.23-pawn-structure/warm-candidate-pair-1.json",
+    "Pairs": 3,
+    "Roots": 1145,
+    "Depth": 5,
+    "MaxTimeRatio": 1.15,
+    "MaxNodeRatio": 0,
+    "MinOpportunity": 0,
+    "Exact": false
+  },
+  "pairs": [
+    {
+      "baseline_ms": 21666.62916700001,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 22522.473996000022,
+      "candidate_nodes": 43222211,
+      "changed_roots": 1116,
+      "contradictions": 0,
+      "node_ratio": 1.002396932683143,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 1,
+      "time_ratio": 1.0395005989350448
+    },
+    {
+      "baseline_ms": 21701.31083899999,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 22485.750067000034,
+      "candidate_nodes": 43222211,
+      "changed_roots": 1116,
+      "contradictions": 0,
+      "node_ratio": 1.002396932683143,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 2,
+      "time_ratio": 1.0361470896306553
+    },
+    {
+      "baseline_ms": 21875.723784999955,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 22876.71731800001,
+      "candidate_nodes": 43222211,
+      "changed_roots": 1116,
+      "contradictions": 0,
+      "node_ratio": 1.002396932683143,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 3,
+      "time_ratio": 1.0457581903500917
+    }
+  ],
+  "passed": true,
+  "time_ratios": [
+    1.0361470896306553,
+    1.0395005989350448,
+    1.0457581903500917
+  ]
+}

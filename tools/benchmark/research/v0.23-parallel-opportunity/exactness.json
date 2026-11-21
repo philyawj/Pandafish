@@ -1,0 +1,51 @@
+{
+  "created_utc": "2026-11-21T04:24:57.896913Z",
+  "input_identities": {
+    "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-1.json": {
+      "sha256": "9be3dce00250843fb594ccda6429fca34a7c81f3f4dede6dbb1883bd5ddb98c4",
+      "bytes": 288970
+    },
+    "tools/benchmark/research/v0.23-parallel-opportunity/warm.json": {
+      "sha256": "09c75f697efcc5d62f4475770296b17991b4003c1335efa32f6f1b783a4f2bfa",
+      "bytes": 288799
+    }
+  },
+  "issues": [],
+  "median_time_ratio": 0.9978562369501961,
+  "node_ratios": [
+    1
+  ],
+  "options": {
+    "Baseline": "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-1.json",
+    "Candidate": "tools/benchmark/research/v0.23-parallel-opportunity/warm.json",
+    "Out": "tools/benchmark/research/v0.23-parallel-opportunity/exactness.json",
+    "Reference": "",
+    "Pairs": 1,
+    "Roots": 1145,
+    "Depth": 5,
+    "MaxTimeRatio": 0,
+    "MaxNodeRatio": 0,
+    "MinOpportunity": 0,
+    "Exact": true
+  },
+  "pairs": [
+    {
+      "baseline_ms": 21601.534275999973,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 21555.22570500001,
+      "candidate_nodes": 43118858,
+      "changed_roots": 0,
+      "contradictions": 0,
+      "node_ratio": 1,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 1,
+      "time_ratio": 0.9978562369501961
+    }
+  ],
+  "passed": true,
+  "time_ratios": [
+    0.9978562369501961
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "inputs": [
+    "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/research",
+    "tools/research/*.go",
+    "testdata/*.json",
+    "*.go",
+    "go.mod",
+    "go.sum",
+    "internal/telemetry/*.go",
+    "third_party/chess/*.go",
+    "third_party/chess/go.mod",
+    "third_party/chess/go.sum"
+  ],
+  "steps": [
+    {
+      "name": "normal-tests",
+      "command": [
+        "go",
+        "test",
+        "./..."
+      ],
+      "timeout_seconds": 180
+    },
+    {
+      "name": "race-tests",
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "./..."
+      ],
+      "timeout_seconds": 300
+    },
+    {
+      "name": "vet",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "timeout_seconds": 180
+    },
+    {
+      "name": "build-warm-test",
+      "command": [
+        "go",
+        "test",
+        "-c",
+        "-o",
+        "/tmp/pandafish-check-budget.test",
+        "."
+      ],
+      "timeout_seconds": 180,
+      "outputs": [
+        "/tmp/pandafish-check-budget.test"
+      ]
+    },
+    {
+      "name": "build-engine",
+      "command": [
+        "go",
+        "build",
+        "-buildvcs=false",
+        "-o",
+        "tools/benchmark/bin/pandafish-v023-check-budget",
+        "."
+      ],
+      "timeout_seconds": 180,
+      "outputs": [
+        "tools/benchmark/bin/pandafish-v023-check-budget"
+      ]
+    }
+  ]
+}

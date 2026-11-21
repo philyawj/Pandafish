@@ -590,5 +590,24 @@ func probeReferences(teacher, out string, budget int, native []probeNative, cach
 	if err := writeProbeJSON(filepath.Join(out, "quality.json"), report); err != nil {
 		return err
 	}
-	return printJSON(map[string]any{"finite_cases": finiteCases, "mean_loss_cp": finiteMeans, "severe_over_300": severe, "new_candidate_losing_mate_cases": newRisk, "timing_overruns": len(timing), "passed": passed})
+	// Keep the complete report unchanged; routine agent review needs only the
+	// summary and a few adverse case IDs, not every principal variation.
+	sorted := append([]qualityCase(nil), quality...)
+	sort.SliceStable(sorted, func(i, j int) bool {
+		return sorted[i].Loss["candidate"]-sorted[i].Loss["baseline"] > sorted[j].Loss["candidate"]-sorted[j].Loss["baseline"]
+	})
+	worst := []map[string]any{}
+	for _, q := range sorted {
+		if len(worst) == 5 {
+			break
+		}
+		if len(q.Loss) == 2 && q.Loss["candidate"] > q.Loss["baseline"] {
+			worst = append(worst, map[string]any{"id": q.ID, "turn": q.Turn, "mean_loss_cp": q.Loss, "regression_cp": q.Loss["candidate"] - q.Loss["baseline"]})
+		}
+	}
+	brief := map[string]any{"finite_cases": finiteCases, "mean_loss_cp": finiteMeans, "by_turn_mean_loss_cp": turnMeans, "severe_over_300": severe, "new_candidate_losing_mate_cases": newRisk, "timing_overruns": len(timing), "worst_regressions": worst, "passed": passed}
+	if err := writeProbeJSON(filepath.Join(out, "brief.json"), brief); err != nil {
+		return err
+	}
+	return printJSON(brief)
 }

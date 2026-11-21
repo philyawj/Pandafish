@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "inputs": [
+    "tools/benchmark/bin/research",
+    "tools/research/*.go",
+    "tools/benchmark/bin/pandafish-v0.22",
+    "tools/benchmark/bin/pandafish-v023-scout-material",
+    "tools/benchmark/research/v0.23-scout-material/fresh-100/native.json",
+    "tools/benchmark/research/v0.23-scout-material/fresh-100/quality.json"
+  ],
+  "steps": [
+    {
+      "name": "flagged-matched-depth",
+      "command": [
+        "tools/benchmark/bin/research",
+        "depth-review",
+        "--baseline",
+        "tools/benchmark/bin/pandafish-v0.22",
+        "--candidate",
+        "tools/benchmark/bin/pandafish-v023-scout-material",
+        "--input",
+        "tools/benchmark/research/v0.23-scout-material/fresh-100/native.json",
+        "--flags-only",
+        "--out",
+        "tools/benchmark/research/v0.23-scout-material/flagged-depth-review"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-scout-material/flagged-depth-review/*.json",
+        "tools/benchmark/research/v0.23-scout-material/flagged-depth-review/*.jsonl"
+      ],
+      "timeout_seconds": 600
+    }
+  ]
+}

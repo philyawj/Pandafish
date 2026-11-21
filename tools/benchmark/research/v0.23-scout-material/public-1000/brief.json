@@ -1,0 +1,62 @@
+{
+  "by_turn_mean_loss_cp": {
+    "b": {
+      "baseline": 128.05263157894737,
+      "candidate": 120.36842105263158
+    },
+    "w": {
+      "baseline": 25.875,
+      "candidate": 25.166666666666668
+    }
+  },
+  "finite_cases": 67,
+  "mean_loss_cp": {
+    "baseline": 54.850746268656714,
+    "candidate": 52.16417910447761
+  },
+  "new_candidate_losing_mate_cases": [],
+  "passed": true,
+  "severe_over_300": {
+    "baseline": 3,
+    "candidate": 3
+  },
+  "timing_overruns": 0,
+  "worst_regressions": [
+    {
+      "id": "broader-stockfish-08-ply25",
+      "mean_loss_cp": {
+        "baseline": 0,
+        "candidate": 65
+      },
+      "regression_cp": 65,
+      "turn": "b"
+    },
+    {
+      "id": "neutral-24-ply64",
+      "mean_loss_cp": {
+        "baseline": 3,
+        "candidate": 26
+      },
+      "regression_cp": 23,
+      "turn": "w"
+    },
+    {
+      "id": "broader-stockfish-02-ply25",
+      "mean_loss_cp": {
+        "baseline": 0,
+        "candidate": 3
+      },
+      "regression_cp": 3,
+      "turn": "b"
+    },
+    {
+      "id": "PNfQoYP0",
+      "mean_loss_cp": {
+        "baseline": 112,
+        "candidate": 113
+      },
+      "regression_cp": 1,
+      "turn": "w"
+    }
+  ]
+}

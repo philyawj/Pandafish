@@ -1,0 +1,53 @@
+{
+  "created_utc": "2026-11-21T15:14:23.581083Z",
+  "input_identities": {
+    "tools/benchmark/research/v0.23-mate-bounds/warm/warm-baseline-pair-1.json": {
+      "sha256": "99c294f1cf23664178f4af81a124ebeae92630f41ef9dcf5e37f3002cf3fa131",
+      "bytes": 288793
+    },
+    "tools/benchmark/research/v0.23-mate-bounds/warm/warm-candidate-pair-1.json": {
+      "sha256": "f9531ed82fdb315c28a3feebe78f9f5b79f4b81b61ca71dedcab7e263f713f29",
+      "bytes": 288665
+    }
+  },
+  "issues": [],
+  "median_time_ratio": 0.9784816416644807,
+  "node_ratios": [
+    0.9661388759414732
+  ],
+  "options": {
+    "Values": true,
+    "Parallel": false,
+    "Baseline": "tools/benchmark/research/v0.23-mate-bounds/warm/warm-baseline-pair-[1-1].json",
+    "Candidate": "tools/benchmark/research/v0.23-mate-bounds/warm/warm-candidate-pair-[1-1].json",
+    "Out": "tools/benchmark/research/v0.23-mate-bounds/warm/node-gate-1.json",
+    "Reference": "",
+    "Pairs": 1,
+    "Roots": 1145,
+    "Depth": 5,
+    "MaxTimeRatio": 0,
+    "MaxNodeRatio": 0.85,
+    "MinOpportunity": 0,
+    "Exact": false
+  },
+  "pairs": [
+    {
+      "baseline_ms": 21420.323977000007,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 20959.393770000006,
+      "candidate_nodes": 41658805,
+      "changed_roots": 196,
+      "contradictions": 0,
+      "node_ratio": 0.9661388759414732,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 1,
+      "time_ratio": 0.9784816416644807
+    }
+  ],
+  "passed": false,
+  "time_ratios": [
+    0.9784816416644807
+  ]
+}

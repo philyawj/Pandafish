@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "inputs": [
+    "tools/benchmark/bin/research",
+    "*.go",
+    "go.mod",
+    "go.sum",
+    "internal/telemetry/*.go",
+    "third_party/chess/*.go",
+    "third_party/chess/go.mod",
+    "third_party/chess/go.sum",
+    "tools/research/*.go",
+    "tools/benchmark/research/v0.19-sharp-branches/fit-data.json",
+    "tools/benchmark/research/v0.19-sharp-branches/leaves.json",
+    "tools/benchmark/research/v0.19-sharp-branches/model-weights.json",
+    "tools/benchmark/research/v0.19-sharp-branches/fit-results.json",
+    "tools/benchmark/research/v0.19-sharp-branches/boundary-audit-after-leaves.json",
+    "tools/research/migration.json",
+    "AGENTS.md",
+    "RELEASING.md",
+    "tools/README.md",
+    "tools/benchmark/live/README.md",
+    "tools/benchmark/research/v0.23-king-context/PLAN.md",
+    "tools/benchmark/research/v0.23-king-context/NUMERICAL_REFINEMENT.md",
+    "tools/benchmark/research/v0.23-king-context/fit/model.json"
+  ],
+  "steps": [
+    {
+      "name": "source",
+      "command": [
+        "tools/benchmark/bin/research",
+        "snapshot",
+        "--base",
+        "v0.22",
+        "--include",
+        "tools/research/*.go",
+        "--out",
+        "tools/benchmark/research/v0.23-king-context/candidate-source-numerical.json"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-king-context/candidate-source-numerical.json"
+      ]
+    },
+    {
+      "name": "source-replay",
+      "command": [
+        "tools/benchmark/bin/research",
+        "replay",
+        "--source",
+        "tools/benchmark/research/v0.23-king-context/candidate-source-numerical.json",
+        "--out",
+        "/tmp/pandafish-context-numerical-replay",
+        "--check"
+      ],
+      "env": {
+        "GOFLAGS": "-buildvcs=false"
+      },
+      "outputs": [
+        "/tmp/pandafish-context-numerical-replay/tests.txt",
+        "/tmp/pandafish-context-numerical-replay/build.txt"
+      ],
+      "timeout_seconds": 300
+    },
+    {
+      "name": "fit",
+      "command": [
+        "tools/benchmark/bin/research",
+        "context-fit",
+        "--out",
+        "tools/benchmark/research/v0.23-king-context/fit-numerical"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-king-context/fit-numerical/*.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-king-context/fit-numerical/summary.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/constraints",
+            "/splits",
+            "/solver/converged",
+            "/solver/iterations"
+          ]
+        }
+      ],
+      "timeout_seconds": 300
+    }
+  ]
+}

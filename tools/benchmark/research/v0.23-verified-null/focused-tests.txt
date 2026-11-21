@@ -1,0 +1,33 @@
+=== RUN   TestVerifiedNullControls
+=== RUN   TestVerifiedNullControls/material_advantage
+=== RUN   TestVerifiedNullControls/white_quiet_mate_threat
+=== RUN   TestVerifiedNullControls/black_quiet_mate_threat
+=== RUN   TestVerifiedNullControls/shallow
+=== RUN   TestVerifiedNullControls/checked
+=== RUN   TestVerifiedNullControls/mate_window
+=== RUN   TestVerifiedNullControls/pawn_ending
+=== RUN   TestVerifiedNullControls/low_phase
+=== RUN   TestVerifiedNullControls/near_promotion
+=== RUN   TestVerifiedNullControls/draw_clock
+=== RUN   TestVerifiedNullControls/static_below_beta
+--- PASS: TestVerifiedNullControls (0.01s)
+    --- PASS: TestVerifiedNullControls/material_advantage (0.00s)
+    --- PASS: TestVerifiedNullControls/white_quiet_mate_threat (0.00s)
+    --- PASS: TestVerifiedNullControls/black_quiet_mate_threat (0.00s)
+    --- PASS: TestVerifiedNullControls/shallow (0.00s)
+    --- PASS: TestVerifiedNullControls/checked (0.00s)
+    --- PASS: TestVerifiedNullControls/mate_window (0.00s)
+    --- PASS: TestVerifiedNullControls/pawn_ending (0.00s)
+    --- PASS: TestVerifiedNullControls/low_phase (0.00s)
+    --- PASS: TestVerifiedNullControls/near_promotion (0.00s)
+    --- PASS: TestVerifiedNullControls/draw_clock (0.00s)
+    --- PASS: TestVerifiedNullControls/static_below_beta (0.00s)
+=== RUN   TestVerifiedNullCancellationAndDrawPriority
+--- PASS: TestVerifiedNullCancellationAndDrawPriority (0.00s)
+=== RUN   TestQuietCheckingGenerator
+    quiet_checks_test.go:116: positions 3103 quiet checking occurrences 3479
+--- PASS: TestQuietCheckingGenerator (0.21s)
+=== RUN   TestQuietCheckingHorizonAndDefensiveControls
+--- PASS: TestQuietCheckingHorizonAndDefensiveControls (0.00s)
+PASS
+ok  	github.com/philyawj/Pandafish	0.504s

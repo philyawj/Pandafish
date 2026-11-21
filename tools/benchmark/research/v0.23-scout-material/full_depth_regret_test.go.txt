@@ -1,0 +1,94 @@
+package main
+
+// Compile only against tagged v0.22 plus the shared warm harness. The diagnostic
+// reference never uses the active selective candidate's search implementation.
+import (
+	"context"
+	"encoding/json"
+	"os"
+	"testing"
+	"time"
+
+	"github.com/corentings/chess/v2"
+	"github.com/philyawj/Pandafish/internal/telemetry"
+)
+
+func TestResearchFullDepthRegret(t *testing.T) {
+	output := os.Getenv("REGRET_OUTPUT")
+	if output == "" {
+		t.Skip("explicit original-tag review required")
+	}
+	loadRows := func(path string) []researchWarmRow {
+		b, err := os.ReadFile(path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		var data struct{ Rows []researchWarmRow }
+		if err = json.Unmarshal(b, &data); err != nil {
+			t.Fatal(err)
+		}
+		if len(data.Rows) != 1145 {
+			t.Fatal("warm coverage")
+		}
+		return data.Rows
+	}
+	base, candidate := loadRows(os.Getenv("REGRET_BASELINE")), loadRows(os.Getenv("REGRET_CANDIDATE"))
+	rows := []map[string]any{}
+	finite, contradictions, risks := 0, 0, 0
+	total, excess, maxRegret := 0, 0, 0
+	visit := 0
+	defer func() { researchSearchOverride = nil }()
+	researchSearchOverride = func(ctx context.Context, p *chess.Position, limits goLimits, budget timeBudget, start time.Time, table *transpositionTable, history []uint64) searchResult {
+		b, c := base[visit], candidate[visit]
+		if b.FEN != p.String() || b.FEN != c.FEN || b.Game != c.Game || b.Ply != c.Ply || b.Depth != 5 || c.Depth != 5 {
+			t.Fatal("trajectory/depth mismatch", visit)
+		}
+		moves := rootMoves(p, []string{c.Best})
+		if len(moves) != 1 {
+			t.Fatal("illegal candidate choice")
+		}
+		w := searcher{ctx: ctx, table: newTable(), killers: new(killerTable)}
+		for _, key := range history {
+			w.pushKey(key)
+		}
+		_, value, done := w.root(p, moves, 5)
+		if !done {
+			t.Fatal("reference incomplete", visit)
+		}
+		badBound := value > b.Score
+		missedMate := b.Score >= mateBound && value < mateBound
+		newLoss := b.Score > -mateBound && value <= -mateBound
+		unsupportedMate := (c.Score >= mateBound && value < mateBound) || (c.Score <= -mateBound && value > -mateBound)
+		if badBound {
+			contradictions++
+		}
+		if missedMate || newLoss || unsupportedMate {
+			risks++
+		}
+		row := map[string]any{"game": b.Game, "ply": b.Ply, "fen": b.FEN, "choice": c.Best, "baseline_optimum": b.Score, "selective_score": c.Score, "full_depth_choice_value": value, "above_optimum": badBound, "missed_winning_mate": missedMate, "new_losing_mate": newLoss, "unsupported_mate_claim": unsupportedMate}
+		if abs(b.Score) < mateBound && abs(value) < mateBound {
+			regret := max(0, b.Score-value)
+			total += regret
+			excess += max(0, regret-25)
+			finite++
+			maxRegret = max(maxRegret, regret)
+			row["finite_regret_cp"] = regret
+		}
+		rows = append(rows, row)
+		visit++
+		return searchResult{move: c.Best, depth: 5, score: value, metrics: telemetry.Metrics{Nodes: w.nodes}}
+	}
+	TestResearchWarmWorkload(t)
+	if visit != 1145 || finite == 0 {
+		t.Fatal("incomplete regret coverage")
+	}
+	mean := float64(total) / float64(finite)
+	report := map[string]any{"passed": mean <= 25 && contradictions == 0 && risks == 0, "roots": visit, "finite_roots": finite, "mean_regret_cp": mean, "mean_excess_over_25_cp": float64(excess) / float64(finite), "max_finite_regret_cp": maxRegret, "value_contradictions": contradictions, "mate_risk_roots": risks, "rows": rows, "timing_use": "original-tag full-depth diagnostic only"}
+	b, err := json.MarshalIndent(report, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(output, append(b, '\n'), 0644); err != nil {
+		t.Fatal(err)
+	}
+}

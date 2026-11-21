@@ -1,0 +1,99 @@
+{
+  "cases": [
+    {
+      "case": {
+        "ID": "proof-fresh-12-ply36",
+        "Position": "position startpos moves e2e3 e7e6 c2c3 f8e7 d1g4 g7g5 g4a4 c7c6 g1f3 h7h5 f1d3 g5g4 f3d4 d7d5 e1g1 h5h4 b1a3 b8d7 g1h1 e6e5 d4c6 b7c6 a4c6 a8b8 c6d5 c8b7 d5c4 e7a3 b2a3 h4h3 e3e4 h3g2 h1g2 b8c8 c4b3 d8h4",
+        "FEN": "2r1k1nr/pb1n1p2/8/4p3/4P1pq/PQPB4/P2P1PKP/R1B2R2 w k - 3 19"
+      },
+      "id": "proof-fresh-12-ply36",
+      "losing_mate_reported": {
+        "baseline": false,
+        "candidate": true
+      },
+      "new_risk_still_reported": true,
+      "reference_scores_by_move": {
+        "": {
+          "cp": -873,
+          "mate": null,
+          "depth": 24,
+          "nodes": 1000257,
+          "pv": [
+            "f1h1",
+            "d7c5",
+            "b3b5",
+            "e8f8",
+            "a1b1",
+            "h8h6",
+            "b5c5",
+            "c8c5",
+            "b1b7",
+            "f8g7",
+            "d3e2",
+            "c5c6",
+            "d2d4",
+            "c6c3",
+            "c1d2",
+            "h6f6",
+            "d2e1"
+          ],
+          "lowerbound": false,
+          "upperbound": false,
+          "multipv": 1
+        },
+        "f1d1": {
+          "cp": null,
+          "mate": -5,
+          "depth": 56,
+          "nodes": 1000140,
+          "pv": [
+            "f1d1",
+            "h4h2",
+            "g2f1",
+            "h2h1",
+            "f1e2",
+            "h1f3",
+            "e2e1",
+            "h8h1",
+            "d3f1",
+            "f3e4"
+          ],
+          "lowerbound": false,
+          "upperbound": false,
+          "multipv": 1
+        },
+        "f1h1": {
+          "cp": -854,
+          "mate": null,
+          "depth": 25,
+          "nodes": 1000637,
+          "pv": [
+            "f1h1",
+            "d7c5",
+            "b3b5",
+            "e8f8",
+            "a1b1",
+            "h8h6",
+            "d3c2",
+            "b7a6",
+            "d2d3",
+            "h6f6",
+            "c1e3",
+            "a6b5",
+            "b1b5",
+            "c5e6",
+            "c2b3",
+            "e6f4",
+            "e3f4"
+          ],
+          "lowerbound": false,
+          "upperbound": false,
+          "multipv": 1
+        }
+      }
+    }
+  ],
+  "completed": 1,
+  "interpretation": "Finite-node reference estimates, not a proof that a finite alternative avoids loss.",
+  "original_gate_rewritten": false
+}

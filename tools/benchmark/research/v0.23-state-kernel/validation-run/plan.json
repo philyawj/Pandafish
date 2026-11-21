@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "inputs": [
+    "/Users/philyawj/projects/Pandafish/tools/benchmark/bin/research",
+    "tools/research/*.go",
+    "testdata/*.json",
+    "*.go",
+    "go.mod",
+    "go.sum",
+    "internal/telemetry/*.go",
+    "third_party/chess/*.go",
+    "third_party/chess/go.mod",
+    "third_party/chess/go.sum",
+    "tools/benchmark/research/v0.17-search-moves/oracle-inputs.json"
+  ],
+  "steps": [
+    {
+      "name": "normal-tests",
+      "command": [
+        "go",
+        "test",
+        "./..."
+      ],
+      "timeout_seconds": 180
+    },
+    {
+      "name": "race-tests",
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "./..."
+      ],
+      "timeout_seconds": 300
+    },
+    {
+      "name": "vet",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "timeout_seconds": 180
+    },
+    {
+      "name": "chess-normal",
+      "command": [
+        "go",
+        "-C",
+        "third_party/chess",
+        "test",
+        "./..."
+      ],
+      "timeout_seconds": 180
+    },
+    {
+      "name": "chess-race",
+      "command": [
+        "go",
+        "-C",
+        "third_party/chess",
+        "test",
+        "-race",
+        "./..."
+      ],
+      "timeout_seconds": 300
+    },
+    {
+      "name": "chess-vet",
+      "command": [
+        "go",
+        "-C",
+        "third_party/chess",
+        "vet",
+        "./..."
+      ],
+      "timeout_seconds": 180
+    },
+    {
+      "name": "build-warm-test",
+      "command": [
+        "go",
+        "test",
+        "-c",
+        "-o",
+        "/tmp/pandafish-state-kernel.test",
+        "."
+      ],
+      "timeout_seconds": 180,
+      "outputs": [
+        "/tmp/pandafish-state-kernel.test"
+      ]
+    },
+    {
+      "name": "build-engine",
+      "command": [
+        "go",
+        "build",
+        "-buildvcs=false",
+        "-o",
+        "tools/benchmark/bin/pandafish-v023-state-kernel",
+        "."
+      ],
+      "timeout_seconds": 180,
+      "outputs": [
+        "tools/benchmark/bin/pandafish-v023-state-kernel"
+      ]
+    },
+    {
+      "name": "independent-vectors",
+      "command": [
+        "/tmp/pandafish-state-kernel.test",
+        "-test.run=^TestSearchMoveOracle$",
+        "-test.count=1",
+        "-test.v"
+      ],
+      "env": {
+        "ORACLE_INPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.17-search-moves/oracle-inputs.json",
+        "ORACLE_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-state-kernel/independent-oracle.json"
+      },
+      "outputs": [
+        "tools/benchmark/research/v0.23-state-kernel/independent-oracle.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-state-kernel/independent-oracle.json",
+          "pointer": "/positions",
+          "equals": 596
+        },
+        {
+          "file": "tools/benchmark/research/v0.23-state-kernel/independent-oracle.json",
+          "pointer": "/passed",
+          "equals": 596
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "actor": "baseline",
+    "command": [
+      "/tmp/pandafish-v023-baseline.test",
+      "-test.run=^TestWarmPipelineProfile$",
+      "-test.count=1",
+      "-test.v"
+    ],
+    "exit": 0,
+    "pair": 1
+  },
+  {
+    "actor": "candidate",
+    "command": [
+      "/tmp/pandafish-v023-pawns.test",
+      "-test.run=^TestWarmPipelineProfile$",
+      "-test.count=1",
+      "-test.v"
+    ],
+    "exit": 0,
+    "pair": 1
+  },
+  {
+    "actor": "candidate",
+    "command": [
+      "/tmp/pandafish-v023-pawns.test",
+      "-test.run=^TestWarmPipelineProfile$",
+      "-test.count=1",
+      "-test.v"
+    ],
+    "exit": 0,
+    "pair": 2
+  },
+  {
+    "actor": "baseline",
+    "command": [
+      "/tmp/pandafish-v023-baseline.test",
+      "-test.run=^TestWarmPipelineProfile$",
+      "-test.count=1",
+      "-test.v"
+    ],
+    "exit": 0,
+    "pair": 2
+  },
+  {
+    "actor": "baseline",
+    "command": [
+      "/tmp/pandafish-v023-baseline.test",
+      "-test.run=^TestWarmPipelineProfile$",
+      "-test.count=1",
+      "-test.v"
+    ],
+    "exit": 0,
+    "pair": 3
+  },
+  {
+    "actor": "candidate",
+    "command": [
+      "/tmp/pandafish-v023-pawns.test",
+      "-test.run=^TestWarmPipelineProfile$",
+      "-test.count=1",
+      "-test.v"
+    ],
+    "exit": 0,
+    "pair": 3
+  }
+]

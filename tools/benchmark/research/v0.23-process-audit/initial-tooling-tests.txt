@@ -1,0 +1,31 @@
+{
+  "wording_passed": true
+}
+start first (1/2)
+finish first passed 0.0s
+start second (2/2)
+finish second passed 0.0s
+start first (1/2)
+finish first gate-failed 0.0s
+start first (1/2)
+finish first execution-failed 0.0s
+start first (1/2)
+finish first execution-failed 1.0s
+start first (1/2)
+finish first passed 0.0s
+start second (2/2)
+finish second passed 0.0s
+start first (1/2)
+finish first passed 0.0s
+start second (2/2)
+finish second passed 0.0s
+start first (1/2)
+finish first passed 0.0s
+start second (2/2)
+finish second passed 0.0s
+--- FAIL: TestWorkflowRejectsIdentityChanges (0.11s)
+    --- FAIL: TestWorkflowRejectsIdentityChanges/input (0.05s)
+        workflow_test.go:104: accepted changed input
+FAIL
+FAIL	github.com/philyawj/Pandafish/tools/research	2.028s
+FAIL

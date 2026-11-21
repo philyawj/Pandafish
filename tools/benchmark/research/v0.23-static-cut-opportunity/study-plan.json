@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "inputs": [
+    "tools/benchmark/bin/research",
+    "/tmp/pandafish-static-cut-study.test",
+    "*.go",
+    "go.mod",
+    "go.sum",
+    "internal/telemetry/*.go",
+    "third_party/chess/*.go",
+    "third_party/chess/go.mod",
+    "third_party/chess/go.sum",
+    "tools/research/*.go",
+    "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/summary.json",
+    "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/previous.pgn",
+    "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-1.json"
+  ],
+  "steps": [
+    {
+      "name": "unchanged-tree-study",
+      "command": [
+        "/tmp/pandafish-static-cut-study.test",
+        "-test.run=^TestResearchStaticCutOpportunity$",
+        "-test.count=1",
+        "-test.v"
+      ],
+      "env": {
+        "WARM_INPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba",
+        "WARM_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-static-cut-opportunity/warm-study.json",
+        "WARM_MODE": "search",
+        "WARM_DEPTH": "5",
+        "STATIC_STUDY_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.23-static-cut-opportunity/study-summary.json"
+      },
+      "outputs": [
+        "tools/benchmark/research/v0.23-static-cut-opportunity/warm-study.json",
+        "tools/benchmark/research/v0.23-static-cut-opportunity/study-summary.json"
+      ],
+      "timeout_seconds": 600
+    },
+    {
+      "name": "opportunity-gate",
+      "command": [
+        "tools/benchmark/bin/research",
+        "warm-report",
+        "--baseline",
+        "tools/benchmark/research/v0.23-child-reuse/warm-baseline-pair-1.json",
+        "--candidate",
+        "tools/benchmark/research/v0.23-static-cut-opportunity/warm-study.json",
+        "--pairs",
+        "1",
+        "--roots",
+        "1145",
+        "--depth",
+        "5",
+        "--exact",
+        "--min-opportunity",
+        ".20",
+        "--out",
+        "tools/benchmark/research/v0.23-static-cut-opportunity/opportunity.json"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-static-cut-opportunity/opportunity.json"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-static-cut-opportunity/opportunity.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/issues",
+            "/pairs"
+          ]
+        },
+        {
+          "file": "tools/benchmark/research/v0.23-static-cut-opportunity/study-summary.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/node_fraction",
+            "/by_turn",
+            "/qualifications",
+            "/false_predictions",
+            "/hidden_losing_mates",
+            "/worst_false_prediction_cp"
+          ]
+        }
+      ]
+    }
+  ]
+}

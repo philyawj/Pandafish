@@ -1,0 +1,51 @@
+package main
+
+import (
+	"context"
+	"slices"
+	"testing"
+)
+
+func TestLosingCaptureDeferralControls(t *testing.T) {
+	for _, c := range []struct {
+		fen      string
+		deferred bool
+	}{
+		{"3r3k/8/8/3p4/8/8/8/3Q2K1 w - - 0 1", true},
+		{"7k/8/8/3p4/8/8/8/3Q2K1 w - - 0 1", false},
+		{"3r2k1/8/8/3p4/8/8/8/3Q2K1 w - - 0 1", false},
+	} {
+		p := evalFEN(t, c.fen)
+		w := searcher{}
+		picker := newMainMovePicker(&w, p, 0, 0)
+		moves := []string{}
+		for m, ok := picker.next(); ok; m, ok = picker.next() {
+			moves = append(moves, m.String())
+		}
+		if len(moves) != len(p.ValidMoves()) || slices.Index(moves, "d1d5") < 0 {
+			t.Fatal("capture omitted/duplicate", moves)
+		}
+		if c.deferred && moves[len(moves)-1] != "d1d5" {
+			t.Fatal("poisoned capture not deferred", moves)
+		}
+		if !c.deferred && moves[0] != "d1d5" {
+			t.Fatal("hanging/checking capture lost priority", moves)
+		}
+		m := rootMoves(p, []string{"d1d5"})[0]
+		preferred := newMainMovePicker(&w, p, 0, encodeMove(m))
+		if got, ok := preferred.next(); !ok || got.String() != "d1d5" {
+			t.Fatal("preferred move not first")
+		}
+	}
+}
+
+func TestCaptureClassificationCancellationIsIncomplete(t *testing.T) {
+	p := evalFEN(t, "3r3k/8/8/3p4/8/8/8/3Q2K1 w - - 0 1")
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	w := searcher{ctx: ctx}
+	picker := newMainMovePicker(&w, p, 0, 0)
+	if _, ok := picker.next(); ok || !picker.incomplete {
+		t.Fatal("aborted exchange treated as complete move list")
+	}
+}

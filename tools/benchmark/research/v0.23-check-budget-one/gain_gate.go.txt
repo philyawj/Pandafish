@@ -1,0 +1,53 @@
+// A data-only check for this hypothesis's additional frozen fresh100 target.
+// Ordinary choices quality gates remain authoritative and unchanged.
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
+func main() {
+	if len(os.Args) != 3 {
+		panic("usage: gain-gate quality.json NEW_REPORT.json")
+	}
+	b, err := os.ReadFile(os.Args[1])
+	if err != nil {
+		panic(err)
+	}
+	var q struct {
+		Passed bool               `json:"passed"`
+		Finite int                `json:"finite_cases"`
+		Mean   map[string]float64 `json:"mean_loss_cp"`
+	}
+	if err = json.Unmarshal(b, &q); err != nil {
+		panic(err)
+	}
+	base, hasBase := q.Mean["baseline"]
+	candidate, hasCandidate := q.Mean["candidate"]
+	if !hasBase || !hasCandidate || base <= 0 || candidate < 0 || q.Finite <= 0 {
+		panic("invalid finite quality data")
+	}
+	gain := (base - candidate) / base
+	passed := q.Passed && candidate <= .95*base
+	report := map[string]any{"passed": passed, "original_quality_passed": q.Passed, "finite_cases": q.Finite, "mean_loss_cp": q.Mean, "relative_improvement": gain, "required_improvement": .05, "input": os.Args[1]}
+	b, err = json.MarshalIndent(report, "", "  ")
+	if err != nil {
+		panic(err)
+	}
+	f, err := os.OpenFile(os.Args[2], os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0644)
+	if err != nil {
+		panic(err)
+	}
+	if _, err = f.Write(append(b, '\n')); err != nil {
+		panic(err)
+	}
+	if err = f.Close(); err != nil {
+		panic(err)
+	}
+	fmt.Printf("fresh100 relative improvement %.6f, required .05, passed %v\n", gain, passed)
+	if !passed {
+		os.Exit(1)
+	}
+}

@@ -78,6 +78,10 @@ func canonicalProbe(p *chess.Position) string {
 }
 
 func generateProbeCases(base, teacher, out string) error {
+	return generateProbeCasesWithOptions(base, teacher, out, 2026111728, 20, nil, nil)
+}
+
+func generateProbeCasesWithOptions(base, teacher, out string, seed, stream uint64, excludeInputs, excludeAnalysis []string) error {
 	if base == "" || out == "" {
 		return fmt.Errorf("baseline and new output directory required")
 	}
@@ -92,7 +96,7 @@ func generateProbeCases(base, teacher, out string) error {
 	if err != nil {
 		return err
 	}
-	if err := writeProbeJSON(filepath.Join(out, "method.json"), map[string]any{"seed": 2026111728, "families": 16, "opening_plies": 8, "opening_multipv": 8, "reference_nodes": 5000, "student_ms": 25, "sample_plies": []int{12, 13, 24, 25, 36, 37, 48, 49, 60, 61}, "max_plies": 64, "student_sha256": baseHash, "teacher_sha256": teacherHash, "selection": "All fixed rollout families retained. Sample roots exclude prior blocked states, previous sharp-batch forest paths and duplicate/color-mirrored samples. No candidate queried, no favorable batch extension."}); err != nil {
+	if err := writeProbeJSON(filepath.Join(out, "method.json"), map[string]any{"seed": seed, "stream": stream, "families": 16, "opening_plies": 8, "opening_multipv": 8, "reference_nodes": 5000, "student_ms": 25, "sample_plies": []int{12, 13, 24, 25, 36, 37, 48, 49, 60, 61}, "max_plies": 64, "student_sha256": baseHash, "teacher_sha256": teacherHash, "exclude_inputs": excludeInputs, "exclude_analysis": excludeAnalysis, "selection": "All fixed rollout families retained. Sample roots exclude prior blocked states, previous sharp-batch forest paths, declared additional sources and duplicate/color-mirrored samples. No candidate queried, no favorable batch extension."}); err != nil {
 		return err
 	}
 	blocked := map[string]bool{}
@@ -151,13 +155,22 @@ func generateProbeCases(base, teacher, out string) error {
 			return fmt.Errorf("old witness leaf mismatch")
 		}
 	}
+	sources, err := blockAdditionalProbeSources(blocked, excludeInputs, excludeAnalysis)
+	if err != nil {
+		return err
+	}
+	if len(sources) > 0 {
+		if err = writeProbeJSON(filepath.Join(out, "additional-blocking.json"), map[string]any{"blocked_states": len(blocked), "sources": sources}); err != nil {
+			return err
+		}
+	}
 	journal, err := os.OpenFile(filepath.Join(out, "queries.jsonl"), os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0644)
 	if err != nil {
 		return err
 	}
 	defer journal.Close()
 	encoder := json.NewEncoder(journal)
-	rng := rand.New(rand.NewPCG(2026111728, 20))
+	rng := rand.New(rand.NewPCG(seed, stream))
 	cases := []probeCase{}
 	raw := []map[string]any{}
 	sample := map[int]bool{12: true, 13: true, 24: true, 25: true, 36: true, 37: true, 48: true, 49: true, 60: true, 61: true}

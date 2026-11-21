@@ -1,0 +1,34 @@
+package main
+
+import "testing"
+
+// Two checking choices separated by a forced king evasion distinguish this
+// experiment from the archived one-choice horizon. No root move is prescribed.
+func TestQuietCheckingSecondChoice(t *testing.T) {
+	for _, fen := range []string{
+		"7k/8/5K2/8/8/8/8/Q7 w - - 0 1",
+		"q7/8/8/8/8/5k2/8/7K b - - 0 1",
+	} {
+		p := evalFEN(t, fen)
+		before, hash := p.String(), p.ZobristHash()
+		got := quiescence(p, quiescenceDepth, -searchInfinity, searchInfinity)
+		if got != mateScore-3 {
+			t.Fatalf("two-choice mate: %s got %d", fen, got)
+		}
+		if shallow := quiescence(p, quiescenceDepth-2, -searchInfinity, searchInfinity); abs(shallow) >= mateBound {
+			t.Fatalf("one-choice horizon unexpectedly proves mate: %s got %d", fen, shallow)
+		}
+		want := exhaustiveQuietScore(p, quiescenceDepth)
+		if p.Turn().String() == "b" {
+			want = -want
+		}
+		// The fixed-color oracle has no distance adjustment. Compare the mate
+		// band independently; the engine's distance is checked above.
+		if want < mateBound {
+			t.Fatalf("complete-list oracle misses mate: %s got %d", fen, want)
+		}
+		if p.String() != before || p.ZobristHash() != hash {
+			t.Fatal("root mutated")
+		}
+	}
+}

@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "inputs": [
+    "tools/benchmark/bin/research",
+    "tools/benchmark/bin/pandafish-v0.22",
+    "tools/benchmark/bin/pandafish-v023-root-parallel",
+    "tools/research/*.go",
+    "tools/benchmark/research/v0.23-root-parallel/*/native.json"
+  ],
+  "steps": [
+    {
+      "name": "matched-depth-review",
+      "command": [
+        "tools/benchmark/bin/research",
+        "depth-review",
+        "--baseline",
+        "tools/benchmark/bin/pandafish-v0.22",
+        "--candidate",
+        "tools/benchmark/bin/pandafish-v023-root-parallel",
+        "--input",
+        "tools/benchmark/research/v0.23-root-parallel/*/native.json",
+        "--out",
+        "tools/benchmark/research/v0.23-root-parallel/depth-review"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.23-root-parallel/depth-review/*.json",
+        "tools/benchmark/research/v0.23-root-parallel/depth-review/*.jsonl"
+      ],
+      "timeout_seconds": 1800,
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.23-root-parallel/depth-review/summary.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/changed_cases",
+            "/matched_depth_comparisons"
+          ]
+        }
+      ]
+    }
+  ]
+}

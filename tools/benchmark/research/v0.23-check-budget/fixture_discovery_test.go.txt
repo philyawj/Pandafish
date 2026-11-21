@@ -1,0 +1,61 @@
+package main
+
+import (
+	"fmt"
+	"github.com/corentings/chess/v2"
+	"slices"
+	"strings"
+	"testing"
+)
+
+func TestBudgetFixtureDiscovery(t *testing.T) {
+	for _, king := range []chess.Square{chess.F5, chess.F6, chess.F7, chess.G5, chess.G6} {
+		for q := chess.A1; q <= chess.H8; q++ {
+			if q == king || q == chess.H8 {
+				continue
+			}
+			var ranks []string
+			for rank := 7; rank >= 0; rank-- {
+				line := ""
+				empty := 0
+				for file := 0; file < 8; file++ {
+					s := chess.Square(rank*8 + file)
+					v := ""
+					if s == king {
+						v = "K"
+					}
+					if s == q {
+						v = "Q"
+					}
+					if s == chess.H8 {
+						v = "k"
+					}
+					if v == "" {
+						empty++
+					} else {
+						if empty > 0 {
+							line += fmt.Sprint(empty)
+							empty = 0
+						}
+						line += v
+					}
+				}
+				if empty > 0 {
+					line += fmt.Sprint(empty)
+				}
+				ranks = append(ranks, line)
+			}
+			fen := strings.Join(ranks, "/") + " w - - 0 1"
+			p := evalFEN(t, fen)
+			if slices.Contains(p.Board().AttacksFrom(q), chess.H8) {
+				continue
+			}
+			got := quiescence(p, 16, -searchInfinity, searchInfinity)
+			if got == mateScore-3 && abs(quiescence(p, 14, -searchInfinity, searchInfinity)) < mateBound {
+				t.Log("FOUND", fen)
+				return
+			}
+		}
+	}
+	t.Fatal("no fixture")
+}

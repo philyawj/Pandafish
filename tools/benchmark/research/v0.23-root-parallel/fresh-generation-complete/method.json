@@ -1,0 +1,34 @@
+{
+  "exclude_analysis": [
+    "tools/benchmark/live/v0.22-live-*/analysis/stockfish-n100000/*.json"
+  ],
+  "exclude_inputs": [
+    "tools/benchmark/research/v0.17-search-moves/inputs.json",
+    "tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json",
+    "tools/benchmark/research/v0.23-quiet-checks/fresh-generation/inputs.json",
+    "tools/benchmark/research/v0.23-phase-activity/fresh-generation/inputs.json"
+  ],
+  "families": 16,
+  "max_plies": 64,
+  "opening_multipv": 8,
+  "opening_plies": 8,
+  "reference_nodes": 5000,
+  "sample_plies": [
+    12,
+    13,
+    24,
+    25,
+    36,
+    37,
+    48,
+    49,
+    60,
+    61
+  ],
+  "seed": 2026112113,
+  "selection": "All fixed rollout families retained. Sample roots exclude prior blocked states, previous sharp-batch forest paths, declared additional sources and duplicate/color-mirrored samples. No candidate queried, no favorable batch extension.",
+  "stream": 113,
+  "student_ms": 25,
+  "student_sha256": "e8d2f6d8e19207921419ebac1a44528aa6d7e92b993aa8ef18988bcbe6e4b003",
+  "teacher_sha256": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f"
+}

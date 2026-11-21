@@ -1,0 +1,61 @@
+package main
+
+import "math/bits"
+
+const pawnFileA uint64 = 0x8080808080808080
+const pawnFileH uint64 = 0x0101010101010101
+
+// Pawn relations are positional hints, not proofs of mobility or promotion.
+// Masks use the library's A1-high-bit convention. Only the immediate square
+// ahead discounts a blocked passer; pins and king blockade are not evaluated.
+func pawnStructure(pieces [12]uint64, phase int) int {
+	pawns := [2]uint64{pieces[5], pieces[11]}
+	occupied := uint64(0)
+	for _, set := range pieces {
+		occupied |= set
+	}
+	var mg, eg [2]int
+	for side, own := range pawns {
+		enemy := pawns[1-side]
+		var files [8]int
+		for file := 0; file < 8; file++ {
+			files[file] = bits.OnesCount64(own & (pawnFileA >> uint(file)))
+		}
+		for file, n := range files {
+			mg[side] -= 12 * max(0, n-1)
+			eg[side] -= 20 * max(0, n-1)
+			if (file == 0 || files[file-1] == 0) && (file == 7 || files[file+1] == 0) {
+				mg[side] -= 10 * n
+				eg[side] -= 16 * n
+			}
+		}
+		front := enemy | ((enemy &^ pawnFileA) << 1) | ((enemy &^ pawnFileH) >> 1)
+		blocked := occupied << 8
+		if side == 0 {
+			front <<= 8
+			front |= front << 8
+			front |= front << 16
+			front |= front << 32
+		} else {
+			front >>= 8
+			front |= front >> 8
+			front |= front >> 16
+			front |= front >> 32
+			blocked = occupied >> 8
+		}
+		passers := own &^ front
+		middle := [8]int{0, 0, 5, 12, 25, 45, 75, 0}
+		ending := [8]int{0, 0, 10, 25, 50, 90, 150, 0}
+		for rank := 2; rank <= 6; rank++ {
+			boardRank := rank
+			if side == 1 {
+				boardRank = 7 - rank
+			}
+			group := passers & (uint64(0xff) << uint((7-boardRank)*8))
+			free, held := bits.OnesCount64(group&^blocked), bits.OnesCount64(group&blocked)
+			mg[side] += free*middle[rank] + held*(middle[rank]/2)
+			eg[side] += free*ending[rank] + held*(ending[rank]/2)
+		}
+	}
+	return ((mg[0]-mg[1])*phase + (eg[0]-eg[1])*(24-phase)) / 24
+}
