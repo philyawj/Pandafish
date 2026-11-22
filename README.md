@@ -16,6 +16,11 @@ The [v0.22 investigation](docs/RESEARCH_V022.md) records deferred legal generati
 exact exchange computation and the preserved unsuccessful experiments.
 The [v0.23 investigation](docs/RESEARCH_V023.md) records reusable search state,
 virtual move tags, preserved unsuccessful attempts and research-tooling guidance.
+The [current checkpoint](docs/RESEARCH_CHECKPOINT.md),
+[repository audit](docs/REPOSITORY_AUDIT_V023.md),
+[ranked next projects](docs/NEXT_ENGINE_ASSESSMENT_V023.md) and
+[evidence-storage policy](docs/EVIDENCE_STORAGE.md) describe the post-release
+work. Existing data stays in place; new diagnostics use leaner records.
 
 The engine code is in `main.go`, `limits.go`, `iterative.go`, `search.go`,
 `transposition.go`, `search_context.go`, `search_moves.go`, `main_move_picker.go`,

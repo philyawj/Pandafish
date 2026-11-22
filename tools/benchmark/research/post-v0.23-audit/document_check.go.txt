@@ -1,0 +1,85 @@
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+	"regexp"
+	"strings"
+)
+
+func main() {
+	paths := []string{"docs/REPOSITORY_AUDIT_V023.md", "docs/NEXT_ENGINE_ASSESSMENT_V023.md", "tools/benchmark/research/post-v0.23-audit/README.md"}
+	issues := []string{}
+	identities := map[string]string{}
+	links, tables, candidates := 0, 0, 0
+	re := regexp.MustCompile(`\]\(([^\s)]+)(?:\s+"[^"]*")?\)`)
+	for _, p := range paths {
+		b, e := os.ReadFile(p)
+		if e != nil {
+			panic(e)
+		}
+		text := string(b)
+		identities[p] = fmt.Sprintf("%x", sha256.Sum256(b))
+		for _, m := range re.FindAllStringSubmatch(text, -1) {
+			target := m[1]
+			if strings.Contains(target, "://") || strings.HasPrefix(target, "#") {
+				continue
+			}
+			target = strings.Split(target, "#")[0]
+			if _, e := os.Stat(filepath.Join(filepath.Dir(p), target)); e != nil {
+				issues = append(issues, p+": missing "+target)
+			}
+			links++
+		}
+		lines := strings.Split(text, "\n")
+		for i, l := range lines {
+			if strings.TrimRight(l, " \t") != l {
+				issues = append(issues, fmt.Sprintf("%s:%d trailing whitespace", p, i+1))
+			}
+		}
+		fenced := false
+		cols := 0
+		for i, l := range lines {
+			if strings.HasPrefix(l, "```") {
+				fenced = !fenced
+				continue
+			}
+			if fenced {
+				continue
+			}
+			if strings.HasPrefix(l, "| ") {
+				n := strings.Count(l, "|")
+				if cols == 0 {
+					cols = n
+					tables++
+				} else if n != cols {
+					issues = append(issues, fmt.Sprintf("%s:%d table columns", p, i+1))
+				}
+			} else {
+				cols = 0
+			}
+			if strings.HasPrefix(l, "#") && i > 0 && strings.TrimSpace(lines[i-1]) != "" {
+				issues = append(issues, fmt.Sprintf("%s:%d missing heading separation", p, i+1))
+			}
+			if strings.Contains(p, "NEXT_ENGINE") && regexp.MustCompile(`^### [1-8]\. `).MatchString(l) {
+				candidates++
+			}
+		}
+	}
+	if candidates != 8 {
+		issues = append(issues, "expected eight ranked engine candidates")
+	}
+	report := map[string]any{"passed": len(issues) == 0, "documents": paths, "local_inline_links_checked": links, "tables_checked": tables, "ranked_engine_candidates": candidates, "issues": issues, "limits": "Local inline path existence and table-column/heading checks only; no external URL or heading-anchor verification. Scientific judgments reviewed separately."}
+	report["document_sha256"] = identities
+	b, e := json.MarshalIndent(report, "", "  ")
+	if e != nil {
+		panic(e)
+	}
+	fmt.Println(string(b))
+	if len(issues) > 0 {
+		os.Exit(1)
+	}
+}

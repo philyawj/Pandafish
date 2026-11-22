@@ -59,7 +59,7 @@ confirmation. Local research authorization does not authorize live play or publi
 | --- | --- |
 | `snapshot` | Capture the core Go overlay, module metadata, base commit and source hash once; refuse overwriting it. |
 | `replay` | Reconstruct a tagged base plus declared Go overlay/test; optionally test/build. |
-| `validation-plan` | Produce normal/race/vet checks followed by test/engine builds; a failed check stops before later stages. |
+| `validation-plan` | Produce root and nested-chess normal/race/vet checks followed by test/engine builds; a failed check stops before later stages. |
 | `warm-plan` | Produce three alternating baseline/candidate pairs and their declared cost/exactness gate. |
 | `warm-report` | Check coverage, complete depth, legal moves, determinism, optional exactness and frozen numeric gates; retain per-pair details. |
 | `native-plan` | Produce the existing four-suite or fresh two-suite schedule using unchanged `choices` quality rules. |
@@ -81,6 +81,10 @@ also preserves that executable's Go sources in the replayable overlay. The
 experimental `context-fit` command follows its own frozen model plan; it is not
 an automatic stage of routine engine research.
 
+The [storage policy](EVIDENCE_STORAGE.md) keeps existing evidence intact. New
+diagnostics retain canonical observations, compact aggregates and sparse adverse
+witnesses. Existing tool schemas and replay dependencies remain supported.
+
 ## Preparation and warm work
 
 Build the research executable once per tooling revision, before any measurement:
@@ -101,9 +105,9 @@ uses the frozen first 20 games from the v0.21 rank-order screen: all ten opening
 1,145 candidate turns, persistent per-game tables and complete depth five.
 
 ```sh
-tools/benchmark/bin/research replay --base v0.22 --test research_warm_test.go \
-  --out /tmp/pandafish-warm-v022
-go -C /tmp/pandafish-warm-v022 test -c -o /tmp/pandafish-warm-v022.test .
+tools/benchmark/bin/research replay --base v0.23 --test research_warm_test.go \
+  --out /tmp/pandafish-warm-v023
+go -C /tmp/pandafish-warm-v023 test -c -o /tmp/pandafish-warm-v023.test .
 ```
 
 Build/check the candidate through the shared fail-closed schedule:
@@ -137,7 +141,7 @@ candidate with a prospectively chosen 15% elapsed-saving target:
 
 ```sh
 tools/benchmark/bin/research warm-plan \
-  --baseline-test /tmp/pandafish-warm-v022.test \
+  --baseline-test /tmp/pandafish-warm-v023.test \
   --candidate-test /tmp/pandafish-candidate.test \
   --input tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba \
   --evidence tools/benchmark/research/ATTEMPT/warm \
@@ -165,7 +169,7 @@ plan during a run:
 
 ```sh
 tools/benchmark/bin/research native-plan \
-  --baseline tools/benchmark/bin/pandafish-v0.22 \
+  --baseline tools/benchmark/bin/pandafish-v0.23 \
   --candidate tools/benchmark/bin/CANDIDATE \
   --cache tools/benchmark/research/v0.22-bitboard-exchange \
   --evidence tools/benchmark/research/ATTEMPT \

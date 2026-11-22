@@ -64,6 +64,8 @@ func validateCandidate(candidate string, race bool, run commandRunner, out io.Wr
 		{"format", "gofmt", append([]string{"-l"}, files...)},
 		{"tests", "go", testArgs},
 		{"vet", "go", []string{"vet", "./..."}},
+		{"chess-tests", "go", append([]string{"-C", "third_party/chess"}, testArgs...)},
+		{"chess-vet", "go", []string{"-C", "third_party/chess", "vet", "./..."}},
 		{"build", "go", []string{"build", "-o", candidate, "."}},
 	}
 	var checks []checkRecord

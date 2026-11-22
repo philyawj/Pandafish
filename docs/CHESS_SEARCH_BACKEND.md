@@ -1,5 +1,25 @@
 # The local chess-library search backend introduced in v0.17
 
+## Current state after v0.23
+
+The local pinned module remains the rules backend. Additive APIs now include
+staged tactical/quiet generation, evasion prefiltering, virtual ordinary-move
+tags and worker-owned per-ply child storage. Child updates copy board state into
+reusable cells; they no longer require a new Position/Board allocation per edge.
+This is still a copy-on-ply design, not make/unmake. General immutable APIs and
+the original upstream runtime identities remain available.
+
+Root `go test ./...` excludes this nested module; run its tests/races/vet
+explicitly or use the current shared validation plan. Frozen independent vectors
+need the optional oracle helper's explicit input/output. The
+[current assessment](NEXT_ENGINE_ASSESSMENT_V023.md) ranks shared legality/attack
+context first; no claim of another measured gain follows from that ranking.
+
+The remainder records the v0.17 design and subsequent v0.18 follow-up. Its
+allocation descriptions and future-work decisions describe those versions.
+
+## Historical v0.17 introduction
+
 I introduced this change in [PR #32](https://github.com/philyawj/Pandafish/pull/32)
 and released it as [v0.17](https://github.com/philyawj/Pandafish/releases/tag/v0.17).
 The PR's reference to **v0.16** describes the behavior before the change.
