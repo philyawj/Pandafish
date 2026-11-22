@@ -1,0 +1,4 @@
+package main
+import("encoding/json";"os")
+func must(e error){if e!=nil{panic(e)}}
+func main(){p:="tools/research/validation/v1.0-release/validation-plan.json";b,e:=os.ReadFile(p);must(e);var plan map[string]any;must(json.Unmarshal(b,&plan));found:=false;for _,raw:=range plan["steps"].([]any){s:=raw.(map[string]any);if s["name"]=="build-engine"{cmd:=s["command"].([]any);cmd=append(cmd[:2],append([]any{"-trimpath"},cmd[2:]...)...);s["command"]=cmd;s["env"]=map[string]string{"CGO_ENABLED":"0"};found=true}};if !found{panic("build step missing")};b,e=json.MarshalIndent(plan,"","  ");must(e);must(os.WriteFile(p,append(b,'\n'),0644));if b,e=os.ReadFile("tools/research/validation/v1.0-release/format.txt");e!=nil||len(b)!=0{panic("format check failed")}}

@@ -1,0 +1,36 @@
+package main
+
+import (
+ "crypto/sha256"
+ "encoding/json"
+ "fmt"
+ "os"
+ "path/filepath"
+ "sort"
+ "strings"
+ "github.com/corentings/chess/v2"
+)
+func must(err error){if err!=nil {panic(err)}}
+func main(){
+ if len(os.Args)<3 {panic("destination and source globs required")}
+ type source struct{Path,SHA256 string;Positions int}
+ sources:=[]source{};fens:=map[string]bool{}
+ for _,pattern:=range os.Args[2:] {
+  paths,e:=filepath.Glob(pattern);must(e);if len(paths)==0 {panic("no sources: "+pattern)}
+  for _,path:=range paths {b,e:=os.ReadFile(path);must(e);count:=0
+   add:=func(fen string){fens[fen]=true;count++}
+   if strings.HasSuffix(path,".pgn") {
+    f,e:=os.Open(path);must(e);sc:=chess.NewScanner(f)
+    for sc.HasNext(){g,e:=sc.ParseNext();must(e);for _,p:=range g.Positions(){add(p.String())}}
+    must(f.Close())
+   }else{var rows []struct{FEN string};must(json.Unmarshal(b,&rows));for _,r:=range rows {if r.FEN==""{panic("empty FEN")};add(r.FEN)}}
+   sources=append(sources,source{path,fmt.Sprintf("%x",sha256.Sum256(b)),count})
+  }
+ }
+ keys:=[]string{};for fen:=range fens {keys=append(keys,fen)};sort.Strings(keys)
+ type c struct{ID,FEN string};out:=struct{Cases []c}{}
+ for i,fen:=range keys {out.Cases=append(out.Cases,c{fmt.Sprintf("consumed-%d",i),fen})}
+ b,e:=json.MarshalIndent(out,"","  ");must(e);b=append(b,'\n')
+ f,e:=os.OpenFile(os.Args[1],os.O_CREATE|os.O_EXCL|os.O_WRONLY,0644);must(e);_,e=f.Write(b);must(e);must(f.Close())
+ must(json.NewEncoder(os.Stdout).Encode(map[string]any{"sources":sources,"unique_full_fens":len(keys),"temporary_cases":os.Args[1],"temporary_sha256":fmt.Sprintf("%x",sha256.Sum256(b)),"purpose":"Exclude consumed post-v0.23 games and draw diagnostic controls without tracking duplicate trajectories."}))
+}

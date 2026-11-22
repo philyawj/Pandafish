@@ -1,0 +1,99 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+	"regexp"
+	"strconv"
+	"strings"
+)
+
+func load(p string, v any) {
+	b, e := os.ReadFile(p)
+	if e != nil {
+		panic(e)
+	}
+	if e = json.Unmarshal(b, v); e != nil {
+		panic(e)
+	}
+}
+func main() {
+	if len(os.Args) != 2 {
+		panic("evidence directory required")
+	}
+	dir := os.Args[1]
+	var n struct{ Contexts, TagCalls, OrdinaryOwnQueries, OpponentQueries, EligibleOwnQueries, StatusCalls, StatusFollowedByGeneration, Contradictions uint64 }
+	load(filepath.Join(dir, "warm-counters.json"), &n)
+	var cost struct {
+		Context  float64 `json:"context_ns_per_root"`
+		All      float64 `json:"all_query_mean_ns"`
+		Eligible float64 `json:"eligible_query_mean_ns"`
+	}
+	load(filepath.Join(dir, "root-cost.json"), &cost)
+	b, e := os.ReadFile("tools/benchmark/research/post-v0.23-audit/cpu-cumulative.txt")
+	if e != nil {
+		panic(e)
+	}
+	shares := map[string]float64{}
+	for _, line := range strings.Split(string(b), "\n") {
+		f := strings.Fields(line)
+		if len(f) < 6 {
+			continue
+		}
+		for _, name := range []string{"searchAttackedAfterOrdinary", "SearchStatus"} {
+			if strings.HasSuffix(f[5], name) {
+				v, e := strconv.ParseFloat(strings.TrimSuffix(f[4], "%"), 64)
+				if e != nil {
+					panic(e)
+				}
+				shares[name] = v / 100
+			}
+		}
+	}
+	m := regexp.MustCompile(`Total samples = ([0-9.]+)s`).FindSubmatch(b)
+	if len(m) != 2 {
+		panic("profile samples")
+	}
+	cpu, e := strconv.ParseFloat(string(m[1]), 64)
+	if e != nil {
+		panic(e)
+	}
+	if len(shares) != 2 || n.OrdinaryOwnQueries+n.OpponentQueries == 0 || n.StatusCalls == 0 || cost.All <= 0 {
+		panic("incomplete observations")
+	}
+	attackFraction := float64(n.EligibleOwnQueries) / float64(n.OrdinaryOwnQueries+n.OpponentQueries)
+	duplicateFraction := float64(n.StatusFollowedByGeneration) / float64(n.StatusCalls)
+	attackSaving := shares["searchAttackedAfterOrdinary"] * attackFraction * (cost.Eligible / cost.All)
+	statusSaving := shares["SearchStatus"] * duplicateFraction
+	contextCost := float64(n.Contexts) * cost.Context / 1e9 / cpu
+	net := attackSaving + statusSaving - contextCost
+	report := map[string]any{
+		"correctness_passed":                               n.Contradictions == 0,
+		"eligible_fraction_of_ordinary_own_queries":        float64(n.EligibleOwnQueries) / float64(n.OrdinaryOwnQueries),
+		"eligible_fraction_of_all_ordinary_attack_queries": attackFraction,
+		"status_followed_by_generation_fraction":           duplicateFraction,
+		"profile_shares":                                   shares, "profile_sampled_cpu_seconds": cpu,
+		"optimistic_attack_saving_fraction": attackSaving, "optimistic_duplicate_status_saving_fraction": statusSaving,
+		"optimistic_gross_saving_fraction":     attackSaving + statusSaving,
+		"estimated_full_context_cost_fraction": contextCost, "estimated_net_saving_fraction": net,
+		"prospective_minimum_net_saving_fraction":   0.08,
+		"supports_implementation_under_frozen_gate": n.Contradictions == 0 && net >= 0.08,
+		"decision": "Do not activate this full per-position pin-context/own-check shortcut under the frozen 8% objective. Preserve the safe opportunity result; reassess a materially cheaper or broader mechanism before another implementation.",
+		"limits":   []string{"Call-count weighting and root legal-move microcosts approximate descendant CPU costs; this is not a rigorous ceiling or a measured whole-engine speed difference.", "Gross proxy credits complete removal of later-reused status calls, although no such implementation exists; status/tag costs overlap and may be double credited.", "Context estimate omits lookup/eligibility overhead but includes the tested full ray context; cheaper lazy contexts could differ.", "Instrumented warm elapsed ratio is not cost evidence. All sampled data are inspected development controls; no game strength claim."},
+	}
+	out, e := json.MarshalIndent(report, "", "  ")
+	if e != nil {
+		panic(e)
+	}
+	f, e := os.OpenFile(filepath.Join(dir, "assessment.json"), os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0644)
+	if e != nil {
+		panic(e)
+	}
+	defer f.Close()
+	if _, e = f.Write(append(out, '\n')); e != nil {
+		panic(e)
+	}
+	fmt.Println(string(out))
+}

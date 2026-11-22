@@ -1,0 +1,12 @@
+package main
+import("context";"encoding/json";"os";"testing";"time";"github.com/corentings/chess/v2")
+func TestContactShadowLedger(t *testing.T){
+ out:=os.Getenv("CONTACT_LEDGER_OUTPUT");if out==""{t.Skip("explicit unchanged-tree ledger")}
+ type witness struct{Move string;Hits uint64;Roots []int}
+ positions:=map[string]*witness{};var eligible,guards,proofs uint64;root:=0
+ contactObserver=func(p *chess.Position,g,proof bool,m chess.Move){eligible++;if g{guards++};if proof{proofs++;fen:=p.String();w:=positions[fen];if w==nil{w=&witness{Move:m.String()};positions[fen]=w};w.Hits++;if len(w.Roots)==0||w.Roots[len(w.Roots)-1]!=root{w.Roots=append(w.Roots,root)}}}
+ defer func(){contactObserver=nil;researchSearchOverride=nil}()
+ researchSearchOverride=func(ctx context.Context,p *chess.Position,l goLimits,b timeBudget,start time.Time,tt *transpositionTable,h []uint64)searchResult{root++;return iterativeSearchWithHistory(ctx,p,l,b,start,tt,h)}
+ TestResearchWarmWorkload(t)
+ b,e:=json.MarshalIndent(map[string]any{"roots":root,"eligible_standpat_cutoffs":eligible,"geometric_guards":guards,"certified_contact_threats":proofs,"witnesses":positions,"timing_instrumented":true},"","  ");if e!=nil{t.Fatal(e)};if e=os.WriteFile(out,append(b,'\n'),0644);e!=nil{t.Fatal(e)}
+}

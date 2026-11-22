@@ -1,0 +1,172 @@
+package chess
+
+import (
+	"encoding/json"
+	"fmt"
+	"math/bits"
+	"os"
+)
+
+// Scratch-only shadow state. Released predicates always decide the actual tree.
+type diagnosticContext struct {
+	hash           uint64
+	valid, checked bool
+	pinned         bitboard
+	pendingStatus  uint64
+}
+type diagnosticWitness struct {
+	FEN, Move        string
+	OriginalOwnCheck bool
+}
+type diagnosticCounts struct {
+	Contexts, TagCalls, OrdinaryOwnQueries, OpponentQueries, EligibleOwnQueries                                           uint64
+	CheckedTags, KingTags, SpecialTags, InvalidContexts                                                                   uint64
+	StatusCalls, StatusFollowedByGeneration, ExistenceGenerations, FullGenerations, TacticalGenerations, QuietGenerations uint64
+	Contradictions                                                                                                        uint64
+	Witnesses                                                                                                             []diagnosticWitness
+}
+type diagnosticState struct {
+	counts   diagnosticCounts
+	contexts map[*Position]*diagnosticContext
+}
+
+var legalityDiagnostic *diagnosticState
+
+func diagnosticBuild(p *Position) diagnosticContext {
+	c := diagnosticContext{hash: p.ZobristHash()}
+	b := p.board
+	if bits.OnesCount64(uint64(b.bbWhiteKing)) != 1 || bits.OnesCount64(uint64(b.bbBlackKing)) != 1 {
+		return c
+	}
+	c.valid = true
+	king := b.kingSquare(p.turn)
+	c.checked = searchSquareAttackedBy(b, king, p.turn.Other())
+	for _, d := range [8][2]int{{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}} {
+		blocker := NoSquare
+		for f, r := int(king.File())+d[0], int(king.Rank())+d[1]; f >= 0 && f < 8 && r >= 0 && r < 8; f, r = f+d[0], r+d[1] {
+			square := Square(r*8 + f)
+			piece := b.Piece(square)
+			if piece == NoPiece {
+				continue
+			}
+			if blocker == NoSquare {
+				if piece.Color() != p.turn {
+					break
+				}
+				blocker = square
+				continue
+			}
+			if piece.Color() != p.turn && (piece.Type() == Queen || (d[0] == 0 || d[1] == 0) && piece.Type() == Rook || d[0] != 0 && d[1] != 0 && piece.Type() == Bishop) {
+				c.pinned |= bbForSquare(blocker)
+			}
+			break
+		}
+	}
+	return c
+}
+func diagnosticOrdinary(m Move, p *Position) bool {
+	piece, captured := p.board.Piece(m.s1), p.board.Piece(m.s2)
+	return piece != NoPiece && piece.Color() == p.turn && captured.Type() != King &&
+		(captured == NoPiece || captured.Color() != p.turn) && m.promo == NoPieceType &&
+		!(piece.Type() == Pawn && captured == NoPiece && m.s2 == p.enPassantSquare) &&
+		!((piece == WhiteKing && m.s1 == E1 || piece == BlackKing && m.s1 == E8) && (m.s2 == C1 || m.s2 == G1 || m.s2 == C8 || m.s2 == G8))
+}
+func diagnosticEligible(c *diagnosticContext, m Move, p *Position) bool {
+	return c.valid && !c.checked && p.board.Piece(m.s1).Type() != King && c.pinned&bbForSquare(m.s1) == 0 && diagnosticOrdinary(m, p)
+}
+func diagnosticGet(p *Position) *diagnosticContext {
+	d := legalityDiagnostic
+	c := d.contexts[p]
+	if c == nil {
+		c = new(diagnosticContext)
+		d.contexts[p] = c
+	}
+	if !c.valid || c.hash != p.ZobristHash() {
+		*c = diagnosticBuild(p)
+		d.counts.Contexts++
+		if !c.valid {
+			d.counts.InvalidContexts++
+		}
+	}
+	return c
+}
+func searchMoveTags(m Move, p *Position, classify bool) MoveTag {
+	tags := releasedDiagnosticMoveTags(m, p, classify)
+	if legalityDiagnostic == nil {
+		return tags
+	}
+	c := diagnosticGet(p)
+	n := &legalityDiagnostic.counts
+	n.TagCalls++
+	if !diagnosticOrdinary(m, p) {
+		n.SpecialTags++
+		return tags
+	}
+	n.OrdinaryOwnQueries++
+	if classify {
+		n.OpponentQueries++
+	}
+	if c.checked {
+		n.CheckedTags++
+	}
+	if p.board.Piece(m.s1).Type() == King {
+		n.KingTags++
+	}
+	if diagnosticEligible(c, m, p) {
+		n.EligibleOwnQueries++
+		if tags&inCheck != 0 {
+			n.Contradictions++
+			if len(n.Witnesses) < 64 {
+				n.Witnesses = append(n.Witnesses, diagnosticWitness{p.String(), m.String(), true})
+			}
+		}
+	}
+	return tags
+}
+func (p *Position) searchMoves(dst []Move, tacticalOnly, first, quietOnly bool) ([]Move, bool) {
+	if legalityDiagnostic != nil {
+		c := diagnosticGet(p)
+		n := &legalityDiagnostic.counts
+		if first {
+			n.ExistenceGenerations++
+		} else {
+			n.StatusFollowedByGeneration += c.pendingStatus
+			c.pendingStatus = 0
+			if tacticalOnly {
+				n.TacticalGenerations++
+			} else if quietOnly {
+				n.QuietGenerations++
+			} else {
+				n.FullGenerations++
+			}
+		}
+	}
+	return p.releasedDiagnosticSearchMoves(dst, tacticalOnly, first, quietOnly)
+}
+func diagnosticStatus(p *Position) {
+	if legalityDiagnostic != nil {
+		legalityDiagnostic.counts.StatusCalls++
+		diagnosticGet(p).pendingStatus++
+	}
+}
+func BeginLegalityDiagnostic() {
+	legalityDiagnostic = &diagnosticState{contexts: map[*Position]*diagnosticContext{}}
+}
+func EndLegalityDiagnostic(path string) error {
+	d := legalityDiagnostic
+	legalityDiagnostic = nil
+	if d == nil {
+		return fmt.Errorf("diagnostic not started")
+	}
+	b, e := json.MarshalIndent(d.counts, "", "  ")
+	if e != nil {
+		return e
+	}
+	if e = os.WriteFile(path, append(b, '\n'), 0644); e != nil {
+		return e
+	}
+	if d.counts.Contradictions != 0 {
+		return fmt.Errorf("own-check shadow contradictions: %d", d.counts.Contradictions)
+	}
+	return nil
+}

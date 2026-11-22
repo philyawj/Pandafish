@@ -1,0 +1,44 @@
+{
+  "by_turn_mean_loss_cp": {
+    "b": {
+      "baseline": 107.47368421052632,
+      "candidate": 107.63157894736842
+    },
+    "w": {
+      "baseline": 21.520833333333332,
+      "candidate": 21.923611111111114
+    }
+  },
+  "finite_cases": 67,
+  "mean_loss_cp": {
+    "baseline": 45.8955223880597,
+    "candidate": 46.22885572139303
+  },
+  "new_candidate_losing_mate_cases": [],
+  "passed": true,
+  "severe_over_300": {
+    "baseline": 2,
+    "candidate": 2
+  },
+  "timing_overruns": 0,
+  "worst_regressions": [
+    {
+      "id": "neutral-04-ply64",
+      "mean_loss_cp": {
+        "baseline": 0,
+        "candidate": 19.333333333333332
+      },
+      "regression_cp": 19.333333333333332,
+      "turn": "w"
+    },
+    {
+      "id": "broader-previous-08-ply25",
+      "mean_loss_cp": {
+        "baseline": 0,
+        "candidate": 3
+      },
+      "regression_cp": 3,
+      "turn": "b"
+    }
+  ]
+}

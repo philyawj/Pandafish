@@ -1,0 +1,3 @@
+package main
+import("encoding/json";"os";"unsafe";"github.com/corentings/chess/v2")
+func main(){type compact struct{From,To chess.Square;Promo chess.PieceType;Tags chess.MoveTag};json.NewEncoder(os.Stdout).Encode(map[string]any{"move_bytes":unsafe.Sizeof(chess.Move{}),"minimal_search_move_bytes":unsafe.Sizeof(compact{}),"board_bytes":unsafe.Sizeof(chess.Board{}),"position_bytes":unsafe.Sizeof(chess.Position{})})}

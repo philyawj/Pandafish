@@ -1,0 +1,14 @@
+package main
+import("bytes";"fmt";"os";"path/filepath")
+func must(err error){if err!=nil {panic(err)}}
+func main(){
+ root:=os.Args[1];archive:="tools/benchmark/research/v0.24-draw-semantics"
+ b,e:=os.ReadFile(filepath.Join(root,"search.go"));must(e)
+ needle:=[]byte("if position.SearchStatus() != chess.NoMethod {")
+ if bytes.Count(b,needle)!=2 {panic("expected exactly two main/q terminal sites")}
+ b=bytes.ReplaceAll(b,needle,append([]byte("researchDrawObserve(position)\n\t"),needle...));must(os.WriteFile(filepath.Join(root,"search.go"),b,0644))
+ for _,c:=range [][2]string{{"third_party/chess/search_draw.go","third_party/chess/search_draw.go"},{filepath.Join(archive,"witness_test.go.txt"),"research_draw_witness_test.go"}} {
+  b,e=os.ReadFile(c[0]);must(e);must(os.WriteFile(filepath.Join(root,c[1]),b,0644))
+ }
+ fmt.Println("Shadow only: invoke observer before both original terminal sites; baseline predicate is observational, candidate predicate remains functional. No original decisions replaced.")
+}

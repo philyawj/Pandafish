@@ -1,0 +1,9 @@
+=== RUN   TestNNIncrementalParity
+    nn_probe_test.go:139: map[accumulator_bytes:160 full_incremental_comparisons:54191 model_bytes:655488 passed:true positions:602 seed:2026112203 special_transitions:map[capture:2334 castle:33 ep:5 promotion:32]]
+--- PASS: TestNNIncrementalParity (0.21s)
+=== RUN   TestNNCapacityCertificate
+    nn_probe_test.go:247: capacity collision
+--- FAIL: TestNNCapacityCertificate (0.03s)
+FAIL
+FAIL	github.com/philyawj/Pandafish	0.535s
+FAIL

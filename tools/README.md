@@ -1,5 +1,9 @@
 # Developer tools
 
+Pandafish v1.0 is the stable milestone. Active engine development is paused;
+the tools and preserved evidence remain available for reproducibility and
+deliberately scoped future work. See the [project state](../README.md#milestones-and-plans).
+
 These Go tools live in the engine's module but build as separate programs.
 Run their commands from the repository root. `go build -o pandafish .` builds
 only the engine, and `go test ./...` checks the root module's Go packages.

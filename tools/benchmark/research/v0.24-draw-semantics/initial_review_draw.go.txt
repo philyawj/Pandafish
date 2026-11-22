@@ -1,0 +1,50 @@
+package main
+
+import (
+ "crypto/sha256"
+ "encoding/hex"
+ "encoding/json"
+ "fmt"
+ "os"
+ "path/filepath"
+)
+func fail(err error){if err!=nil {panic(err)}}
+func load(path string,v any)string {b,e:=os.ReadFile(path);fail(e);fail(json.Unmarshal(b,v));h:=sha256.Sum256(b);return hex.EncodeToString(h[:])}
+func main(){
+ d:=os.Args[1]
+ type policy struct {Name,FEN,Outcome,Method,Status string;Eligible []string;Static,Main,Quiet int}
+ var base,cand []policy
+ identities:=map[string]string{}
+ identities["baseline-policy.json"]=load(filepath.Join(d,"baseline-policy.json"),&base)
+ identities["candidate-policy.json"]=load(filepath.Join(d,"candidate-policy.json"),&cand)
+ if len(base)!=25||len(cand)!=len(base){panic("policy coverage")}
+ type delta struct {FEN,Kind string;Before,After int}
+ changes:=[]delta{}
+ corrected:=0
+ dead:=map[string]bool{"kings":true,"bishop":true,"knight":true,"same-bishops":true}
+ for i,a:=range base {b:=cand[i];if a.FEN!=b.FEN||a.Static!=b.Static||a.Method!=b.Method||a.Status!=b.Status {panic("unrelated policy change")}
+  if dead[a.Name] {if b.Main!=0||b.Quiet!=0||b.Outcome!="1/2-1/2"{panic("dead not zero")};corrected++}
+  if a.Main!=b.Main {changes=append(changes,delta{a.FEN,"main",a.Main,b.Main})}
+  if a.Quiet!=b.Quiet {changes=append(changes,delta{a.FEN,"q",a.Quiet,b.Quiet})}
+  if !dead[a.Name] && (a.Main!=b.Main||a.Quiet!=b.Quiet) {panic("declared live controls changed")}
+ }
+ type warmRow struct {Game,Ply,Depth,Score int;Best,FEN string;Nodes uint64;SearchMS float64}
+ type warmFile struct {Rows []warmRow}
+ type warmChange struct {Game,Ply int;FEN,BeforeMove,AfterMove string;BeforeScore,AfterScore int;BeforeNodes,AfterNodes uint64}
+ warmChanges:=[]warmChange{}
+ var reference []warmRow
+ for pair:=1;pair<=3;pair++ {
+  var a,b warmFile
+  an:=fmt.Sprintf("warm/warm-baseline-pair-%d.json",pair);bn:=fmt.Sprintf("warm/warm-candidate-pair-%d.json",pair)
+  identities[an]=load(filepath.Join(d,an),&a);identities[bn]=load(filepath.Join(d,bn),&b)
+  if len(a.Rows)!=1145||len(b.Rows)!=1145 {panic("warm coverage")}
+  for i,x:=range a.Rows {y:=b.Rows[i];if x.FEN!=y.FEN||x.Game!=y.Game||x.Ply!=y.Ply||x.Depth!=5||y.Depth!=5 {panic("warm identity/depth")}
+   if pair==1&&(x.Best!=y.Best||x.Score!=y.Score||x.Nodes!=y.Nodes) {warmChanges=append(warmChanges,warmChange{x.Game,x.Ply,x.FEN,x.Best,y.Best,x.Score,y.Score,x.Nodes,y.Nodes})}
+   if pair>1 {z:=reference[i];if y.Best!=z.Best||y.Score!=z.Score||y.Nodes!=z.Nodes {panic("candidate nondeterminism")}}
+  }
+  if pair==1 {reference=b.Rows}
+ }
+ result:=map[string]any{"policy_rows":len(base),"proved_dead_rows":corrected,"policy_changes":changes,"static_and_live_controls_unchanged":true,"warm_roots":len(reference),"warm_changed_rows":warmChanges,"candidate_deterministic":true,"source_sha256":identities}
+ b,e:=json.MarshalIndent(result,"","  ");fail(e);fail(os.WriteFile(filepath.Join(d,"semantic-review.json"),append(b,'\n'),0644))
+ fmt.Println(string(b))
+}

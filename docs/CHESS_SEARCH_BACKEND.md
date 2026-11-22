@@ -1,6 +1,15 @@
 # The local chess-library search backend introduced in v0.17
 
-## Current state after v0.23
+## Current state at v1.0
+
+v1.0 adds a bounded protected queen-contact query and actual-defense verification
+using the existing legal-move and child-state APIs. Original general rules APIs
+remain intact. See the [engine guide](ENGINE.md) and
+[implementation/evidence](../tools/benchmark/research/v0.24-contact-threat/README.md).
+Active development is paused at the [v1.0 milestone](../README.md#milestones-and-plans).
+
+The preceding v0.23 state is summarized below; the original v0.17 account remains
+historical context rather than a current implementation specification.
 
 The local pinned module remains the rules backend. Additive APIs now include
 staged tactical/quiet generation, evasion prefiltering, virtual ordinary-move
@@ -12,8 +21,9 @@ the original upstream runtime identities remain available.
 Root `go test ./...` excludes this nested module; run its tests/races/vet
 explicitly or use the current shared validation plan. Frozen independent vectors
 need the optional oracle helper's explicit input/output. The
-[current assessment](NEXT_ENGINE_ASSESSMENT_V023.md) ranks shared legality/attack
-context first; no claim of another measured gain follows from that ranking.
+[post-v0.23 assessment](NEXT_ENGINE_ASSESSMENT_V023.md) originally ranked shared
+legality/attack context first. The [completed investigation](RESEARCH_V024.md)
+records its outcome and later candidates; it is not an active development queue.
 
 The remainder records the v0.17 design and subsequent v0.18 follow-up. Its
 allocation descriptions and future-work decisions describe those versions.

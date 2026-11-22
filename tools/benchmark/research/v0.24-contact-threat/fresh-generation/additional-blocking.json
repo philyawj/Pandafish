@@ -1,0 +1,4667 @@
+{
+  "blocked_states": 337660,
+  "sources": [
+    {
+      "identity": {
+        "sha256": "65463434784e20ed7cd313430297e1551cb49194735cbf7bba0238625c32decd",
+        "bytes": 44718
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/research/v0.17-search-moves/inputs.json",
+      "positions": 84
+    },
+    {
+      "identity": {
+        "sha256": "101175eb6b5a28e2f700f5198d4e184618660a03f74d986bfccb7f480b09c525",
+        "bytes": 50122
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json",
+      "positions": 145
+    },
+    {
+      "identity": {
+        "sha256": "181782ec1298eb7d3dfa229116ed855312787ac1eb9c38fe33763fe1bf99b144",
+        "bytes": 49030
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/research/v0.23-check-budget-one/fresh-generation/inputs.json",
+      "positions": 142
+    },
+    {
+      "identity": {
+        "sha256": "9af407ad7e554cca57a5b43d0332e5fe5ca445be83dbebaa9fc0dc4d8151de35",
+        "bytes": 52394
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/research/v0.23-phase-activity/fresh-generation/inputs.json",
+      "positions": 151
+    },
+    {
+      "identity": {
+        "sha256": "2fd0c949d6696ee24952a5264945d4ed1b30c6b561cc261db5392854c4c9c11d",
+        "bytes": 50924
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/research/v0.23-quiet-checks/fresh-generation/inputs.json",
+      "positions": 147
+    },
+    {
+      "identity": {
+        "sha256": "642ebb5d95526f754940bc3f83cf37a4b938d5c312ee619ebd17c35374eb6e9d",
+        "bytes": 43510
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/research/v0.23-quiet-scouts/fresh-generation/inputs.json",
+      "positions": 130
+    },
+    {
+      "identity": {
+        "sha256": "e717c8b58ecee6a5faf89d8597e8dcc9447a21528f7568d9b6eacc9e2bcfd57b",
+        "bytes": 51944
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/research/v0.23-root-parallel/fresh-generation-complete/inputs.json",
+      "positions": 150
+    },
+    {
+      "identity": {
+        "sha256": "f64933c72657dba5c8cc150d6face58729ee75d5a4f1897d72be7e65b19bc936",
+        "bytes": 48059
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/research/v0.23-scout-material/fresh-generation/inputs.json",
+      "positions": 141
+    },
+    {
+      "identity": {
+        "sha256": "4e3768ef3a632a323c73fff0e6f03a778f0f7ffebcea4c33af4863fdb928cae2",
+        "bytes": 51261
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/research/v0.23-state-kernel/fresh-generation/inputs.json",
+      "positions": 148
+    },
+    {
+      "identity": {
+        "sha256": "8339073e9b87c63385ca262a5d12d33f9cfb14c41a5808233a7fc0d7ac35dc11",
+        "bytes": 49319
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/research/v0.24-compact-search/fresh-generation/inputs.json",
+      "positions": 144
+    },
+    {
+      "identity": {
+        "sha256": "629c1315a23f59b9d4832c1c48eaf93b098ba5011d4bdc1d35e835f9714330e4",
+        "bytes": 49443
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/research/v0.24-draw-semantics/fresh-generation/inputs.json",
+      "positions": 144
+    },
+    {
+      "identity": {
+        "sha256": "87981bb36990c1adb67277ccc6ea5a1f23835447f5ef9562609339ded34fb818",
+        "bytes": 42554
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/research/v0.24-move-count-claims/fresh-generation/inputs.json",
+      "positions": 129
+    },
+    {
+      "identity": {
+        "sha256": "0c4ada067cb1fa6cdd8e66e8d2787ac7c9060e5601b6c9f66cacfa8f32f76ac9",
+        "bytes": 130464
+      },
+      "ignored_non_game_metadata": false,
+      "path": "/tmp/pandafish-v024-warm-exclusions.json",
+      "positions": 1145
+    },
+    {
+      "identity": {
+        "sha256": "b49756151cb84ae56a3943a728eb5f95c2d24164ba49704476278c14449b69ce",
+        "bytes": 69658
+      },
+      "ignored_non_game_metadata": false,
+      "path": "/tmp/pandafish-v024-oracle-exclusions.json",
+      "positions": 596
+    },
+    {
+      "identity": {
+        "sha256": "8cc63b751ac1b4cb9292f913a7db9a2a5b40669e3c8bb12c6f7bf53c705bab57",
+        "bytes": 3380900
+      },
+      "ignored_non_game_metadata": false,
+      "path": "/tmp/pandafish-v024-contact-screen-exclusions.json",
+      "positions": 31233
+    },
+    {
+      "identity": {
+        "sha256": "804f9ff095a614fc02cacbfb520b7ca7f460d942db756c1e0212a5f96d19a6c5",
+        "bytes": 2461273
+      },
+      "ignored_non_game_metadata": false,
+      "path": "/tmp/pandafish-v024-contact-witness-exclusions.json",
+      "positions": 22583
+    },
+    {
+      "identity": {
+        "sha256": "6f535af8d4d16342a3272615909fb85c78e69f37e9aed672037098fa6b1b8387",
+        "bytes": 513043
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/AetherBot vs GoPandaFish - y1xXiZbd.json",
+      "positions": 39
+    },
+    {
+      "empty_completed_game": true,
+      "identity": {
+        "sha256": "0782bf2eb4692b217a58087740a025d2c3a490f273d166c418a7762b3805763c",
+        "bytes": 171
+      },
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/Blunder-Engine vs GoPandaFish - qAjzFwzX.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "a7f87a66ebda175f02d2e4e1930cc0134ee04aba0f4d9176d2d1992ab1aceeb8",
+        "bytes": 1167539
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/GoPandaFish vs AetherBot - dbkD6ZNt.json",
+      "positions": 100
+    },
+    {
+      "identity": {
+        "sha256": "c01cc02fd642e1306b277e4dedc758d843e3a94f3b3e357771f450a2b9b2403f",
+        "bytes": 420072
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/GoPandaFish vs BlueMoonBot - djj7sLqm.json",
+      "positions": 40
+    },
+    {
+      "identity": {
+        "sha256": "7b1b742a9901b0d61f20d332eae98dd52b151d449f21d50ea2a7d4e87b0d42a3",
+        "bytes": 2396494
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/GoPandaFish vs LentusChess - AMmBtiCB.json",
+      "positions": 75
+    },
+    {
+      "identity": {
+        "sha256": "0dcbaced403e98f0acf50a14bdc9fd42850f51a031af745221afe7844247a07d",
+        "bytes": 820904
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/GoPandaFish vs O-Rei-CX - JwrF9K8d.json",
+      "positions": 55
+    },
+    {
+      "identity": {
+        "sha256": "d79eb3fca0b01001d000864b6e6fde54796005508dcf68369250d49d6be6ea29",
+        "bytes": 1276671
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/GoPandaFish vs PARTNER3615DIAGO - yZ6wObvi.json",
+      "positions": 57
+    },
+    {
+      "identity": {
+        "sha256": "2b893c40be13063d161fb8ee6de3d38edfa326ea5805b88ed8fa1e79a16499f2",
+        "bytes": 1079331
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/GoPandaFish vs Sacrifice-Engine - 6j1YSLRZ.json",
+      "positions": 108
+    },
+    {
+      "identity": {
+        "sha256": "4bd908b21eb71bcf3385ddbfb7900731390739170ea93e1d8c6d2dc098a5da80",
+        "bytes": 953628
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/GoPandaFish vs Vic98lg - eNxSUcbC.json",
+      "positions": 78
+    },
+    {
+      "identity": {
+        "sha256": "66ed80fc02594a76ac6edbd499899e96480277e8e77cefae5496f5d59d10740a",
+        "bytes": 986928
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/GoPandaFish vs michaAmateurBot - glYlALQg.json",
+      "positions": 69
+    },
+    {
+      "identity": {
+        "sha256": "460b62e4f43cda228d0bf6036277dafb38aa80b99ae0913b1ffd5efc3913733f",
+        "bytes": 507382
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/GoPandaFish vs princhess_policy_bot - 3y5c9jT5.json",
+      "positions": 55
+    },
+    {
+      "identity": {
+        "sha256": "5820e20b220ef5327d1f42445313f574afaf45b27b6081750514233fc4c2d88a",
+        "bytes": 16615
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/KirinChessBot vs GoPandaFish - dvyPuK12.json",
+      "positions": 2
+    },
+    {
+      "identity": {
+        "sha256": "cfc70f3d17bf25735c2eb53ee93f4a8a73f6268874d125e0ead47f9651227546",
+        "bytes": 10223562
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/ShallowRedBot vs GoPandaFish - v0aclfVS.json",
+      "positions": 268
+    },
+    {
+      "identity": {
+        "sha256": "efa4f923e8af8918cb64d90d99b39fdc9895678d97191638567b9f1feddb8031",
+        "bytes": 24710
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/candidates.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "c09c3496196a7e95ce84feafb390868c9c520c40497243de9e657e226b319283",
+        "bytes": 6137
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/confirmation.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "39ceda9972a449547484d884fdc0bb4d922f902bcaaad514cd2e49ce2a3d36b8",
+        "bytes": 577
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/method.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "884186db6575757ac83d884382de0e12a865eda44dbf6295c584dc640cba0c09",
+        "bytes": 987
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/summary.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "002283d6f87d7ee9d7946b2ab4ed4f9d0504618facccd91364e69e79c14595e8",
+        "bytes": 1574870
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.10-twitch-m2-20261112/analysis/stockfish-n100000/uxugin-bot vs GoPandaFish - yQH0wqtl.json",
+      "positions": 146
+    },
+    {
+      "identity": {
+        "sha256": "71e678b45625b10fab02b6c5148105111463cd59b348c4fb78621c1cb9ed3865",
+        "bytes": 1236939
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/AetherBot vs GoPandaFish - SHb60gFb.json",
+      "positions": 115
+    },
+    {
+      "identity": {
+        "sha256": "5bb99f8dac517efefd0f9393130960ac1f08b72dca2f2f49a35f3f1c2b3fe562",
+        "bytes": 636767
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/AnechkaChess vs GoPandaFish - B1WTqhJy.json",
+      "positions": 82
+    },
+    {
+      "identity": {
+        "sha256": "21f27f9bc9606c104449f9a9cb3b471c20aa79fe48ddf39b66607471e30533b2",
+        "bytes": 851005
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Angela_eng vs GoPandaFish - Pds3R7kn.json",
+      "positions": 67
+    },
+    {
+      "identity": {
+        "sha256": "41d08022af8f28efed179ca54599b359269b2a104659d66e3abbc5e6f4981298",
+        "bytes": 1057883
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Ballin-bot vs GoPandaFish - rpk4dbYK.json",
+      "positions": 100
+    },
+    {
+      "identity": {
+        "sha256": "9cbe7e55f70adc6d31469ebccd73e3c73c8ff98138e97500cda27802d365c489",
+        "bytes": 907856
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Ballin-bot vs GoPandaFish - v3AGvAE8.json",
+      "positions": 80
+    },
+    {
+      "identity": {
+        "sha256": "aa60c991292866c84609b63e4383ace71c5e3999381b7dd3beaefe8679afa572",
+        "bytes": 1256973
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Blujay-bot vs GoPandaFish - zbCrEJbl.json",
+      "positions": 89
+    },
+    {
+      "empty_completed_game": true,
+      "identity": {
+        "sha256": "03d603627e6d09274aa33dc793e5c30bbb1123e78637eede82bdbbefe031c7a1",
+        "bytes": 171
+      },
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Blunder-Engine vs GoPandaFish - P1vTXlIe.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "6336b5b5733cffe68e45d2493de63ba729157a56665e687ce3a34639f60d4efe",
+        "bytes": 1948797
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Bongaclang vs GoPandaFish - ooyg8SSZ.json",
+      "positions": 139
+    },
+    {
+      "identity": {
+        "sha256": "474ea20dcf84ba28fd4cd971cfd9b0fb86074137f2f4091414bdbc9905bc5ade",
+        "bytes": 896213
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/CCE_V2 vs GoPandaFish - eiKMw75Q.json",
+      "positions": 75
+    },
+    {
+      "identity": {
+        "sha256": "3d54e38b0d5ec99b7dd51562619603553382742dfb2ade5b288b41d6b62fcbd0",
+        "bytes": 1279542
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/CarlsenStyleBot vs GoPandaFish - 40CCYWYU.json",
+      "positions": 97
+    },
+    {
+      "identity": {
+        "sha256": "de82f5c9fc907b10ee6f9f521132564368798d8783106ad1e3839107ec50463c",
+        "bytes": 1269194
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/CassidyChess-Bot vs GoPandaFish - OKOeNL7e.json",
+      "positions": 119
+    },
+    {
+      "identity": {
+        "sha256": "a96d387ff7a7e6c9d34d96664a39d6d1d59805c49a15e4ba9bdc4b5cd820c622",
+        "bytes": 891431
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Chessiverse_Ethan vs GoPandaFish - mPUuYpZn.json",
+      "positions": 88
+    },
+    {
+      "identity": {
+        "sha256": "737466b7d5c64e34f4d44fab0f66e41bf954d8f0fd9605f816e87be75ca66f6f",
+        "bytes": 767071
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Chessiverse_Pawnza vs GoPandaFish - GbDJ06Gh.json",
+      "positions": 66
+    },
+    {
+      "identity": {
+        "sha256": "21727d96f5cd95e93d28315cc7954bc1c05198e1a0ed44f8c9ce66270e1be2ba",
+        "bytes": 618296
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Chessiverse_Pawnza vs GoPandaFish - LUQ8RErT.json",
+      "positions": 56
+    },
+    {
+      "identity": {
+        "sha256": "f582d086ec20e5a808631a87df304390d63a0bb320cdafbb75d61709167bf650",
+        "bytes": 817701
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Chessiverse_Pawnza vs GoPandaFish - Lmo91cuN.json",
+      "positions": 82
+    },
+    {
+      "identity": {
+        "sha256": "48f2b140ac7fda8b42e21ded089fb0922d232f337712c222b2b31ecb7093b8fa",
+        "bytes": 1006580
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Chessiverse_Raak vs GoPandaFish - li4LOWY3.json",
+      "positions": 86
+    },
+    {
+      "identity": {
+        "sha256": "8df75674d5760bea0d72db9d3e87c635a042d184db83f31c5cacce956585af73",
+        "bytes": 911468
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Cheszter vs GoPandaFish - k9tE98QI.json",
+      "positions": 75
+    },
+    {
+      "identity": {
+        "sha256": "8870e07198df3c11759b7c3f83911f73f1ea807c2809ad15a666fccfdf2f1c8d",
+        "bytes": 584241
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Cloudia-Chess vs GoPandaFish - CBtJ5xEy.json",
+      "positions": 66
+    },
+    {
+      "identity": {
+        "sha256": "5d3992d7dd271809700d3438f27f0b1267887ee2db802dfb8dd6b5b2dd807fb1",
+        "bytes": 831606
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Cloudia-Chess vs GoPandaFish - e6mgJNx7.json",
+      "positions": 78
+    },
+    {
+      "identity": {
+        "sha256": "ca771fdab7e10d5b3c2157cbbcf46ecb7f340045a7870e6e8dec5bf39b189cbc",
+        "bytes": 706333
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/ConfidenceBuilder vs GoPandaFish - 6LAr0xIy.json",
+      "positions": 56
+    },
+    {
+      "identity": {
+        "sha256": "08bce3b1650f7dd7744da5a51a33a3fdcd91b3c6d7bb17697fb0e300948d3b18",
+        "bytes": 776229
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/ConfidenceBuilder vs GoPandaFish - IPKBGhp3.json",
+      "positions": 66
+    },
+    {
+      "identity": {
+        "sha256": "f37fa46cf807c22d160a829f9396a5f65feb0c3849e3c946547e0747967a91b0",
+        "bytes": 712728
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/ConsoleChessFastBot vs GoPandaFish - ul58ftvF.json",
+      "positions": 66
+    },
+    {
+      "identity": {
+        "sha256": "e84ac65a7a7a0a28896f33b4748f4e40bd42dc7cb912928e6246fefa685d431c",
+        "bytes": 815444
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/CookieBot711 vs GoPandaFish - U8obBbtt.json",
+      "positions": 61
+    },
+    {
+      "identity": {
+        "sha256": "4bd491449aa763115f638fdeccbd62d14c93bcc65254c58b4b1f1de5960d6ae7",
+        "bytes": 877490
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/CookieBot711 vs GoPandaFish - zMAhZYmv.json",
+      "positions": 71
+    },
+    {
+      "identity": {
+        "sha256": "17d3318e298635bb507b66ff81a0cb2e73fa9c9a54b8d6d281552e0f31d14042",
+        "bytes": 1398133
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Cosmic_Engine vs GoPandaFish - yuWlaBRS.json",
+      "positions": 133
+    },
+    {
+      "identity": {
+        "sha256": "0bff9cd60ef15a9482d91e2a30015585179c9de694fceaa194d78b0c6f6081a3",
+        "bytes": 788270
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/DarkOnBot vs GoPandaFish - 16G1f9rx.json",
+      "positions": 63
+    },
+    {
+      "identity": {
+        "sha256": "b6f3e9286faa31d5a6d0c457e77a18626fb6b76b5c0e78c1be6828f67927c60b",
+        "bytes": 796941
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/DeMen100ns-bot vs GoPandaFish - EP9iU6Hd.json",
+      "positions": 57
+    },
+    {
+      "identity": {
+        "sha256": "5ce1bc2aebbf598055eea0c91fd1e39c19d0ac9711164fb9168b6fd385b21675",
+        "bytes": 784002
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/DevilfishZero vs GoPandaFish - MnaqVQc3.json",
+      "positions": 63
+    },
+    {
+      "identity": {
+        "sha256": "875920197a94c0e3e667765566e47d080562e1fe8392794dcbb97aab66818604",
+        "bytes": 1009251
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Disrespect_Fish vs GoPandaFish - jnsu7vCq.json",
+      "positions": 65
+    },
+    {
+      "identity": {
+        "sha256": "95406625918f4923866ed78dbc475022224d9ba40f8c6311ace6b5889ecf6e08",
+        "bytes": 561057
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Fobero vs GoPandaFish - R63ZRca9.json",
+      "positions": 35
+    },
+    {
+      "identity": {
+        "sha256": "dee3629f360cc2334946fac30f820284aeb516637c72628ff6f004d96cc608cf",
+        "bytes": 629740
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GambitOnlyBot vs GoPandaFish - nBl4tfTd.json",
+      "positions": 47
+    },
+    {
+      "identity": {
+        "sha256": "872727118c9b486620aaec5bc30a2f34291ccb896829af3a91d3a87abab9eba6",
+        "bytes": 833973
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs AggressiveStockfish - 3ZyPpSGl.json",
+      "positions": 58
+    },
+    {
+      "identity": {
+        "sha256": "98fa5b99b5a17ec0321c6950a7e55a208fc4154970840c30b28194555f8dfe24",
+        "bytes": 2558850
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Angela_eng - K9VpY9Gn.json",
+      "positions": 223
+    },
+    {
+      "identity": {
+        "sha256": "5add3f8b86c1817c6a36098e028ab3c144988e6c27c4f8059a4c56ab4cceefbf",
+        "bytes": 1484748
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Angela_eng - Qg6L6Wm8.json",
+      "positions": 183
+    },
+    {
+      "identity": {
+        "sha256": "f22873fee1a6f1fc3502afb0858b516e0f05e8ecbb9c5c1359c2695886318e27",
+        "bytes": 773233
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs ApexChess-Bot - pPG9ldxa.json",
+      "positions": 97
+    },
+    {
+      "identity": {
+        "sha256": "d7c07e1faa00e65823c588d2a6da61a59c0e1cb98ea1ee8283c4ff8e7b2b3582",
+        "bytes": 613634
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs AshNostromo - 0coUnZSY.json",
+      "positions": 48
+    },
+    {
+      "identity": {
+        "sha256": "f436c54d19a36f707199273045c39fd4c7ed490f219f0ae3d2413d2487ec33b9",
+        "bytes": 1310727
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs AshNostromo - 7YECFY7h.json",
+      "positions": 122
+    },
+    {
+      "identity": {
+        "sha256": "04a7e9ca198270bbc48d23aa76815bbd5825db6006b0d6591cb1fcf276db28e3",
+        "bytes": 1904101
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs AshNostromo - 7vm186dX.json",
+      "positions": 180
+    },
+    {
+      "identity": {
+        "sha256": "1da7bceca8a012f29bff6ddb2b18f02539e89c59dcf9c89772cb49dc2a3e6904",
+        "bytes": 1186395
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs AshNostromo - Yrz1bWLG.json",
+      "positions": 114
+    },
+    {
+      "identity": {
+        "sha256": "0e854b52207bd3578727c5f7a15f1109c2f2618b7191b0a953ea597f8b1cb21c",
+        "bytes": 845093
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Ballin-bot - QaHolDKW.json",
+      "positions": 69
+    },
+    {
+      "identity": {
+        "sha256": "c9ca7cb4acc36de727315a18a516e935ea2f19fe832d64b605719ac6cac03ab8",
+        "bytes": 431032
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Ballin-bot - RbSX4WaF.json",
+      "positions": 59
+    },
+    {
+      "identity": {
+        "sha256": "b1996f87c5a31e289bdb058ce5c6ca8877cd2f37a3edad8af810ead36b92c9bc",
+        "bytes": 431036
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Ballin-bot - hNr2PJbY.json",
+      "positions": 59
+    },
+    {
+      "identity": {
+        "sha256": "e3835b802eac3f7b1470e69d08de91761139439cbca0830ef74f8a03ce8e50df",
+        "bytes": 1231157
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Bit-Fish8 - FUyRo61O.json",
+      "positions": 118
+    },
+    {
+      "identity": {
+        "sha256": "a7e29ab4814531384bfbe95a0d70103a96eeab0214720b7b89a637f7f25e1462",
+        "bytes": 1204346
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Blujay-bot - ICEHQnX7.json",
+      "positions": 115
+    },
+    {
+      "identity": {
+        "sha256": "9bc1536bdc7bd7697a8094dc40f0b7f2c9fcb1288832a54b26f54dc732cbb3c4",
+        "bytes": 7989
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Blunder-Engine - WfKXj0lh.json",
+      "positions": 1
+    },
+    {
+      "identity": {
+        "sha256": "569ec51d2100910f96aa78dc84a72843d43703cc6a0945cdb102d78ca5645b59",
+        "bytes": 1003659
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs BockFish - oEhEi7KY.json",
+      "positions": 86
+    },
+    {
+      "identity": {
+        "sha256": "57687694d53f31e2a92f1691914c4e1018d83566df673007bce6d07f5db21b6c",
+        "bytes": 3763943
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Bongaclang - yY7KYF4r.json",
+      "positions": 144
+    },
+    {
+      "identity": {
+        "sha256": "09903fe07031278e7c0b8d9a6d270d1a8dc7313e2ea5da0cbaeb1fc82cad9b51",
+        "bytes": 1003873
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Botkingteam33 - 9oRhkgb2.json",
+      "positions": 78
+    },
+    {
+      "identity": {
+        "sha256": "f29dfbe5d6e095215d0702a15184646c1c96fc1abf113cedebf9deabc133a897",
+        "bytes": 658883
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Botkingteam33 - cnK9lkT9.json",
+      "positions": 85
+    },
+    {
+      "identity": {
+        "sha256": "450902972566823015897fb8e3e23122400a6506cf04598f6632935aaff1bcbf",
+        "bytes": 588329
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs BretemaBot - BYybyvba.json",
+      "positions": 42
+    },
+    {
+      "identity": {
+        "sha256": "19865314a82344b0e10a939e86294259a5ef304a368f3866ae870314a5d31454",
+        "bytes": 538761
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Casanchess-NNUE - QkGDF0kv.json",
+      "positions": 40
+    },
+    {
+      "identity": {
+        "sha256": "61dd71acb9a57ddd1fba276b9ce67bd878c0b250be9461cc348f24bace6bbefe",
+        "bytes": 1251410
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs CassidyChess-Bot - rI0oJG0N.json",
+      "positions": 114
+    },
+    {
+      "identity": {
+        "sha256": "b79f3b78e0e84f9d16ad0f5a4181d535840b16376af7f1416be8990b34ff28f0",
+        "bytes": 1227151
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Chessiverse_Ethan - jtlVBF5N.json",
+      "positions": 107
+    },
+    {
+      "identity": {
+        "sha256": "d60a5d96247a12288af6fb3d89bd2edb7e4ef33d364585e078a3ecb5185d8457",
+        "bytes": 1003351
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs DarkElectronBot - 1T8KKC69.json",
+      "positions": 86
+    },
+    {
+      "identity": {
+        "sha256": "e88a338bdca4ded557dab891ef17afb39d1f98138805bb6132b1c6a1b0aed20c",
+        "bytes": 990067
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs DarkElectronBot - Qs1Xqlm2.json",
+      "positions": 88
+    },
+    {
+      "identity": {
+        "sha256": "ae0806a3b59fdb0bb29edcc197fbff73b0ddb867e379f37bd69c510ac1f80ae0",
+        "bytes": 896046
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs DevilfishZero - 9sfF61Hc.json",
+      "positions": 72
+    },
+    {
+      "identity": {
+        "sha256": "2d6ec343e76ddabcbe5fbf8907108b85def9490b88fcd8922cac08a4789a72dc",
+        "bytes": 4752667
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Disrespect_Fish - 4kMsR96I.json",
+      "positions": 204
+    },
+    {
+      "identity": {
+        "sha256": "4b8a9d61c423a0ca249ee45daca12ae4028cfc29a5defbc4b6e5ea54927317bc",
+        "bytes": 10845153
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Disrespect_Fish - Vpqb3wpv.json",
+      "positions": 244
+    },
+    {
+      "identity": {
+        "sha256": "90f7a5a9d4d0b38b594ac10faa87a61001b2645a76b187392cb028ab48e15641",
+        "bytes": 786143
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs DrewsChessMachine - HLk8Ajmi.json",
+      "positions": 87
+    },
+    {
+      "identity": {
+        "sha256": "ab5b31e3af5968b9362e8d816498c3fc2bc25cd86c9fc0b3769800eb906b0732",
+        "bytes": 387047
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs DrewsChessMachine - g5RSmCvy.json",
+      "positions": 33
+    },
+    {
+      "identity": {
+        "sha256": "f360e8e913ba7c6b25c0e04a0eab58aab48c27fd50621318aac651295cd853b5",
+        "bytes": 403974
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs DrewsChessMachine - mkEryUPf.json",
+      "positions": 43
+    },
+    {
+      "identity": {
+        "sha256": "3217082afcde43fe90fede466b0b61399246636f7bc98cff617c401eccdc0c73",
+        "bytes": 661068
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs FenrirBot - IW8Rlhum.json",
+      "positions": 52
+    },
+    {
+      "identity": {
+        "sha256": "5d8a377988df04a320ede8950fbeef5ba0ee0e586fcd31c55e1bdf5b92701bdb",
+        "bytes": 701082
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs FenrirBot - emMx3CVk.json",
+      "positions": 56
+    },
+    {
+      "identity": {
+        "sha256": "1434f98365a95e3fc01c268b611570c1eb8b24efb6d8e8a9b3c1d6add0bfa636",
+        "bytes": 1669341
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Ferrite - RZgMZce5.json",
+      "positions": 162
+    },
+    {
+      "identity": {
+        "sha256": "609a294ebd5b15e679bc6e921e69eac5f684cc29ae1b00ede552ef69ccc147a9",
+        "bytes": 379063
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Flower-Queen - XHXhCNDe.json",
+      "positions": 40
+    },
+    {
+      "identity": {
+        "sha256": "5eb783cb339ef98f377b5832a06c042b988ac7b78cb5a3cef8274785095de3a6",
+        "bytes": 524622
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs FlowerLilac - fGPMHX2e.json",
+      "positions": 42
+    },
+    {
+      "identity": {
+        "sha256": "26f18330c04687ba829221a4e4ba25c6ff2533dcb9b610953e3ca2737de3ce9e",
+        "bytes": 1200650
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs GeoTsiBot - ketFIvs9.json",
+      "positions": 96
+    },
+    {
+      "identity": {
+        "sha256": "d9e86b230dcdfc4e9c731d28497efaed90292ed7159f06ef6875e48ad59d76ab",
+        "bytes": 483617
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs GeoTsiBot - vciXyGUA.json",
+      "positions": 63
+    },
+    {
+      "identity": {
+        "sha256": "627c91479106f0d262b7721ffbf10cf9b20c61072f7e9d4e94b58302ec6de45f",
+        "bytes": 1324462
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Glimbus - XGkRZN2j.json",
+      "positions": 112
+    },
+    {
+      "identity": {
+        "sha256": "01c9164006de4d4d89afbc030525e745d10b828ccaeb34417818572a1590b8c8",
+        "bytes": 377914
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Goopis - T9eASxFQ.json",
+      "positions": 46
+    },
+    {
+      "identity": {
+        "sha256": "f72679d90b08c24f8086c614f57591b55d69eec745dbb770a4e9dc7115987a8e",
+        "bytes": 1762595
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Goopis - buYVo59V.json",
+      "positions": 201
+    },
+    {
+      "identity": {
+        "sha256": "f4818e9b303e4b8fbec04b503bd047c27e5c3a3fa44e7860db3dddd804d7fd8e",
+        "bytes": 921310
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Grindfish - FvU0kOVi.json",
+      "positions": 82
+    },
+    {
+      "identity": {
+        "sha256": "5db30441ece09f7dc58cefcca058961bbea3168b6f356054eeffe2e2a8cfe30d",
+        "bytes": 1401564
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Gvait - FurvigAM.json",
+      "positions": 118
+    },
+    {
+      "identity": {
+        "sha256": "06316a1992bdf10ffd8d9d89f3496d5e42271c9f2750e22b820e8c26dcd302cb",
+        "bytes": 675342
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs HackerChessBot - WBYzfQmn.json",
+      "positions": 52
+    },
+    {
+      "identity": {
+        "sha256": "cfbf0422e21fb2ea3b952ef7608a7cfa006cd3d8956436aa22723a6167a5f1f2",
+        "bytes": 727584
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs HomoLudensBot - x89jO4W3.json",
+      "positions": 61
+    },
+    {
+      "identity": {
+        "sha256": "8098dd4d97cca3e6df896b1ef46711430b08f7d0a3c83dc6bbe0c16a354279d8",
+        "bytes": 902769
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Hyperopic - 7x1tlyzh.json",
+      "positions": 76
+    },
+    {
+      "identity": {
+        "sha256": "1ea10696a1be60df07859bd4c880e4cf3772ee6c2104db9e278cb20955aadf62",
+        "bytes": 1414723
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs JemBok - aTSlVmnQ.json",
+      "positions": 104
+    },
+    {
+      "identity": {
+        "sha256": "68fdf462303fb1aa5cac5b2aa5857ddca11730510bd73a912bd3393e41bb2a56",
+        "bytes": 797104
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Jimmy_inc3710 - jCPLCkuL.json",
+      "positions": 54
+    },
+    {
+      "identity": {
+        "sha256": "905cce764a1d26f590f3ede54e64de0d9e3e3a9b00451bd34f0d067d8ba4f2d1",
+        "bytes": 1160406
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs JurdBird - aubUxIkO.json",
+      "positions": 111
+    },
+    {
+      "identity": {
+        "sha256": "ab570f2c190b31d000c733bc35f46349151e13f316d22504f303c6dc44f8423a",
+        "bytes": 1170075
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs KFCBot - uKoQGHOl.json",
+      "positions": 139
+    },
+    {
+      "identity": {
+        "sha256": "dc8304849f607466437a1e39e0b461671a30dda51f67e955fe41a0c2dd8b7502",
+        "bytes": 649954
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs MDBOT - YKZH2bKm.json",
+      "positions": 40
+    },
+    {
+      "identity": {
+        "sha256": "cab18179be4399017706a3d917e11558c5a00fef3b7b35148ef85d9ec2b34179",
+        "bytes": 1085072
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Martuni - 3fFS9j9T.json",
+      "positions": 94
+    },
+    {
+      "identity": {
+        "sha256": "c97a19c8bab1eef22c495f98362004694241761230d321a7e8bb84bb9ae1c3b8",
+        "bytes": 846062
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Martuni - FG05Et8M.json",
+      "positions": 74
+    },
+    {
+      "identity": {
+        "sha256": "5708540392a0a87f4a09f1a145fe05f4148972c6b581760abd62190b821c3c34",
+        "bytes": 1716864
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs MetisBot - kkjlnQkD.json",
+      "positions": 174
+    },
+    {
+      "identity": {
+        "sha256": "dce013cd520c263557898b734dd0b5acc720d37f9092a8540e580952472ad66c",
+        "bytes": 727225
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs MostlyHuman1900 - XkM9SOjv.json",
+      "positions": 83
+    },
+    {
+      "identity": {
+        "sha256": "a50bcd5e7d056f28f5a05a521d612e4ef1f9a1ac34aad6e4a6f655f480d587b3",
+        "bytes": 751668
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs NEWTSbot - wIpdjT47.json",
+      "positions": 54
+    },
+    {
+      "identity": {
+        "sha256": "d6c067760ccbdbc2f0ee669e77f828cd4893cc474881d6fe837140485d5d2277",
+        "bytes": 1259086
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs NICE_BOT - cu5ff2fG.json",
+      "positions": 127
+    },
+    {
+      "identity": {
+        "sha256": "39e411f3f1c15f2995a1678a4eeb4ab0598bf909c723f34fa386425c0e3b895c",
+        "bytes": 839391
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Ndr1sn - pgi5eGLQ.json",
+      "positions": 66
+    },
+    {
+      "identity": {
+        "sha256": "fb6a18c49bacf07c2759d6e655c993d5c347e43ec29f4645522ac10d54ee672c",
+        "bytes": 962384
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs O-Rei-CX - ypnxqSZG.json",
+      "positions": 122
+    },
+    {
+      "identity": {
+        "sha256": "201557f1e5ce28a7d5f375e593956330594f5d912a8f0ce20801445a03c17dfb",
+        "bytes": 1329359
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Oxide-Eg - AA4qRpWT.json",
+      "positions": 104
+    },
+    {
+      "identity": {
+        "sha256": "25437ee53936ba5c62a1b513559d9be35be66e2ca67af52c0b1f3d592cace482",
+        "bytes": 866212
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Oxide-Eg - BhrzqEje.json",
+      "positions": 72
+    },
+    {
+      "identity": {
+        "sha256": "c6f1ad4f90495781f7bd740aa237ed6e4a84ff7404403725eb8e818695e44934",
+        "bytes": 1678401
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Oxide-Eg - L0mwQLiR.json",
+      "positions": 205
+    },
+    {
+      "identity": {
+        "sha256": "f638b624654dc8f070d6d9f484753a2cfba4daf3029a3a7012d71bb4b69e08a0",
+        "bytes": 806818
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs PeachFruit - BefOoIGC.json",
+      "positions": 66
+    },
+    {
+      "identity": {
+        "sha256": "401b82357f14d637164fe3ed01669dd98c339514bef23dfb713a6099dc4ed5b1",
+        "bytes": 714604
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Ponytail_engine - nw14BP8l.json",
+      "positions": 42
+    },
+    {
+      "identity": {
+        "sha256": "9087f3572fe650424475e5edb10bfd657e8f9460ef9b12caeff9c5b6c8399581",
+        "bytes": 1187387
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Raven030 - WfDjpws7.json",
+      "positions": 111
+    },
+    {
+      "identity": {
+        "sha256": "a9f6923a2d53de874bb4b796defb084c7529660a8ffe64f8ff09c44d4a360cbc",
+        "bytes": 530573
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Rodent-IV - HBykKGiX.json",
+      "positions": 51
+    },
+    {
+      "identity": {
+        "sha256": "e7291250ec1f02c47b5614deeb0429b7a0781d86fa9ae1937b020b3964dc8f45",
+        "bytes": 459258
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs ScalaQueen - 74OmsK55.json",
+      "positions": 59
+    },
+    {
+      "identity": {
+        "sha256": "fb3c18a318d0e6de82a3646784f47f9ce7f7e3a220bbf04d8bd58696fb24c86b",
+        "bytes": 1373359
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs SeedChess - 0RV7CCdA.json",
+      "positions": 104
+    },
+    {
+      "identity": {
+        "sha256": "68d826c0f89a2282ef5d906e441c291b7f6d65ac38a9be1d8b3e9f7f2d3d4f47",
+        "bytes": 937936
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs ShallowRedBot - 5FjSVrf9.json",
+      "positions": 107
+    },
+    {
+      "identity": {
+        "sha256": "4b8c4fdd304a20f27748986608bf760b45956ccc9c86858da21f7b86ca653ea1",
+        "bytes": 660260
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs ShallowRedBot - ZoOwfuZk.json",
+      "positions": 81
+    },
+    {
+      "identity": {
+        "sha256": "759759f636131b4f2f4fdf17ad7a34a8e1a258e1a3526e3c300beec8a3877177",
+        "bytes": 1422625
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs SpringerBot - tOZZkKHM.json",
+      "positions": 129
+    },
+    {
+      "identity": {
+        "sha256": "e9ce5aaaf313912daf7df2f448f4f096a8c0e6c31e2b989bd5363103358a64fb",
+        "bytes": 528755
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs SquareFish-900 - ZVo6SSJu.json",
+      "positions": 51
+    },
+    {
+      "identity": {
+        "sha256": "5db7d436ca491e9b2da7a12e37133f8da12d7f22adaa6df41e9be579f1b00319",
+        "bytes": 997127
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs StargazerEngine - uYLasbHI.json",
+      "positions": 84
+    },
+    {
+      "identity": {
+        "sha256": "f2301075b32b63d483886cc1f08390a5ba4517a012810e5af63020aa80482a4e",
+        "bytes": 1127773
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Stepbot_Chess - EXBvLZKP.json",
+      "positions": 108
+    },
+    {
+      "identity": {
+        "sha256": "c5e0b9c048ca8167e317c07d679d5ff1fd91676e56b5dcace0774aadb8d3d244",
+        "bytes": 2186298
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Styx-Chess - QlV5OJJg.json",
+      "positions": 218
+    },
+    {
+      "identity": {
+        "sha256": "e8905a1459649cc332d1963783485dc5330b806a6de3e9705c92b9aecb0c14b5",
+        "bytes": 518298
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Tente8x - YmgkAlpK.json",
+      "positions": 30
+    },
+    {
+      "identity": {
+        "sha256": "03523d55e056f7f1e9132ba1e58f4eba93a83f5daa923531f37929c964a7c548",
+        "bytes": 889178
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs TerritoryBot - FUnqAQXc.json",
+      "positions": 75
+    },
+    {
+      "identity": {
+        "sha256": "e8d927967279b4bd5a5c9f01a4f38842f106e4c9641c226984d16fa7deb6bba8",
+        "bytes": 1600942
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs TerritoryBot - PNfQoYP0.json",
+      "positions": 157
+    },
+    {
+      "identity": {
+        "sha256": "36dac45c22a77814d138f2a5c42eef33cf3e5bd67c8eb80873e622f9118611a0",
+        "bytes": 1056185
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs TheFinalChessCard - YfP3JSfu.json",
+      "positions": 103
+    },
+    {
+      "identity": {
+        "sha256": "048fe78e36607875db51a1c12260e7735022dbaf86de5eb42ae838679e641c8d",
+        "bytes": 1100211
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Tigrament - 9omGrw4L.json",
+      "positions": 100
+    },
+    {
+      "identity": {
+        "sha256": "38d3fe93667de113683e9352c4e0c8bb059028437704d725f7da4b439587d6bf",
+        "bytes": 606320
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs TroutBot - PkwQ1Fkk.json",
+      "positions": 44
+    },
+    {
+      "identity": {
+        "sha256": "5f929d1cdf28e481d31c27adab6ff324c7ea8a28853b014934d9b843c98ab4c2",
+        "bytes": 932979
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs UnifiedChess-Bot - t9moKsKY.json",
+      "positions": 80
+    },
+    {
+      "identity": {
+        "sha256": "1790474444b6a9176de75573826ecc36590b67bf258b2af0600684579ce8126e",
+        "bytes": 888794
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Ursus_bot - zcdj0W2k.json",
+      "positions": 74
+    },
+    {
+      "identity": {
+        "sha256": "493b4282a811c00293ff9a1be6104e380046fceb7c95890f61e5a8470b971add",
+        "bytes": 680035
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Vic98lg - YDlfsTjm.json",
+      "positions": 50
+    },
+    {
+      "identity": {
+        "sha256": "0769ce657caa886ca7ac0ae20640e4d5c40ebde12c84d0c26d43abada747c6f5",
+        "bytes": 965723
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Vortex_Bot - f3Z8Vm0P.json",
+      "positions": 88
+    },
+    {
+      "identity": {
+        "sha256": "f227db60a739e7954e5c702df202c895dc17e302e1e2accbf575dc9b3b1629c1",
+        "bytes": 739539
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs Was_Bot - 2F2UIN0j.json",
+      "positions": 54
+    },
+    {
+      "identity": {
+        "sha256": "dfb325b7e42a80b2dfd8d17eff133419af7dd93070df716403f1d596c05c9530",
+        "bytes": 1396618
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs ai-con - lmH485Oo.json",
+      "positions": 137
+    },
+    {
+      "identity": {
+        "sha256": "cb5662d2b2f7d0ecf858ae75ac3d1c64ae4bf954aaae97c6a7dfaf7521d36e65",
+        "bytes": 1241694
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs bfiedler-bot - qP6h6HDa.json",
+      "positions": 115
+    },
+    {
+      "identity": {
+        "sha256": "fddeb0a274f7171ae7769755ffe40c85f7423c633d2a92c8be5f2a8ca00cce74",
+        "bytes": 1563381
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs chiral_ebt - JarAPKZX.json",
+      "positions": 134
+    },
+    {
+      "identity": {
+        "sha256": "5c61211acec0c59ef397a1ebedaed707b19927ad8d4433e62500d586cb2ed75b",
+        "bytes": 902077
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs clessy-bot - 9AprsVIr.json",
+      "positions": 76
+    },
+    {
+      "identity": {
+        "sha256": "033a5948dcc882938801a78cdb99aa11da69de776370523c5a6ad60c51cfe86f",
+        "bytes": 799074
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs colinbot - DeozJiuS.json",
+      "positions": 66
+    },
+    {
+      "identity": {
+        "sha256": "dde55dbba94bd457ec48719337645077511632c2b4670516c30c12ad2c31457e",
+        "bytes": 863489
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs colinbot - qfbjN5Ng.json",
+      "positions": 72
+    },
+    {
+      "identity": {
+        "sha256": "ecead2027783ad629d8642d70981c105adfba0ec6206d544d3c3382ff9a73c2e",
+        "bytes": 852927
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs croco_bot - p15kqznG.json",
+      "positions": 71
+    },
+    {
+      "identity": {
+        "sha256": "90e8a92ad606da9e07310336f886a4442fee183332e8602b44265db8eb66460e",
+        "bytes": 821816
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs crocodile_bot - Mt31Jibf.json",
+      "positions": 106
+    },
+    {
+      "identity": {
+        "sha256": "d43ec446fb1c14fe2ba26ca0cb898d079590803e5d1aecf3ced64e7616de201c",
+        "bytes": 1351673
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs crocodile_bot - yPBz4ev0.json",
+      "positions": 162
+    },
+    {
+      "identity": {
+        "sha256": "f45d8a3b18294538c820f3bd8f48f51a3b293233feb9ce8bf6c63f532d8c5571",
+        "bytes": 683509
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs crushinator_bot - mjlIrzUJ.json",
+      "positions": 53
+    },
+    {
+      "identity": {
+        "sha256": "b65bff64777b986b7d0f191a7236641505f49a0eef0d3397b2d97017ca08dce1",
+        "bytes": 697277
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs crushinator_bot - utSAjyhY.json",
+      "positions": 61
+    },
+    {
+      "identity": {
+        "sha256": "7e642aa806669af6b6197ca7fbc0045307903c772934f9b22298db80d8f7cdb7",
+        "bytes": 509665
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs dala-1100 - WelgYsq1.json",
+      "positions": 55
+    },
+    {
+      "identity": {
+        "sha256": "c0f007d91621b2bfb047ad80f70041608cfe4ddb7b9e1d37d2fcca52a0584c74",
+        "bytes": 1365883
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs felix_pufferlib - kt2f2Ez6.json",
+      "positions": 129
+    },
+    {
+      "identity": {
+        "sha256": "78d931a94918eb987c220d05289bea8d55f39c4ed742feed008972f7569ef3b7",
+        "bytes": 1063538
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs felix_pufferlib - mKw8R7C8.json",
+      "positions": 95
+    },
+    {
+      "identity": {
+        "sha256": "1f9029b06583b15c5c4195e4b10c15829f12e42f93e955ae8260a67137fe94dc",
+        "bytes": 1289570
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs grail-bot - WKWFHDIF.json",
+      "positions": 122
+    },
+    {
+      "identity": {
+        "sha256": "0ae596e983d69b41cfdaff85a1b8abb4fc625359075eb7def3fb55be4bdd7db4",
+        "bytes": 509381
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs ix-bot - XCwl7FvN.json",
+      "positions": 64
+    },
+    {
+      "identity": {
+        "sha256": "7ad636900b6179a8b643530aa91a764efbb557791f805f60020c4b7487f67a3f",
+        "bytes": 1112109
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs kleiniBOT - 3s6oiPMI.json",
+      "positions": 102
+    },
+    {
+      "identity": {
+        "sha256": "17329f9045dd7ad51b89835a82c3c555a2fb111e500eaab7c20d942160ee4c84",
+        "bytes": 570174
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs little-0 - zHzzp6IR.json",
+      "positions": 40
+    },
+    {
+      "identity": {
+        "sha256": "426a977cfde24e2aa42338b99c3101f18d6cbe8d131518c8712ecc5312d170b5",
+        "bytes": 375183
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs littleply - GkJnHETo.json",
+      "positions": 50
+    },
+    {
+      "identity": {
+        "sha256": "fffff62606d968f3433fbb04917200ec7bfb494beae1dd00b44efd176373d4a4",
+        "bytes": 1470597
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs littleply - NHnjB3DH.json",
+      "positions": 102
+    },
+    {
+      "identity": {
+        "sha256": "42b3781419b6250d29224074d3c1ab737d6bc65c3e839000cb51c27d9b90415a",
+        "bytes": 790849
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs littleply - RSMJOMZk.json",
+      "positions": 102
+    },
+    {
+      "identity": {
+        "sha256": "5e2fc1bdf26b2413540b90c5d76584b90fee8c5ff276ae6f982ee802dc03146c",
+        "bytes": 1247797
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs littleply - TLkNQ4qP.json",
+      "positions": 106
+    },
+    {
+      "identity": {
+        "sha256": "b63c3c5d521769fdefd9e9c5d14e95a2d0de8d24dd881848dbdadffc24700ef9",
+        "bytes": 747045
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs macbotitsmagic - 7UnWrqw3.json",
+      "positions": 58
+    },
+    {
+      "identity": {
+        "sha256": "24c5c5259d0989779ec54b50e58d495e5447023e62a320506bde6e4e5aabd8a8",
+        "bytes": 1129944
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs neryba - xa2sCgDA.json",
+      "positions": 108
+    },
+    {
+      "identity": {
+        "sha256": "1f51352f76b99c8e267a7d5e03b7a012497e55a1706b1ded47ed835bf11e5296",
+        "bytes": 1313419
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs notropis - CbHeGyMS.json",
+      "positions": 112
+    },
+    {
+      "identity": {
+        "sha256": "3fce4d5763ab985bdc1ae28e52172c6572e0bdd2f26ea8fc7799679d70e662b0",
+        "bytes": 658150
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs patgro986_bot - ILAhQR7F.json",
+      "positions": 50
+    },
+    {
+      "identity": {
+        "sha256": "7d2ce08e16048a4cdac9b7e03e0bb3883b81bc0e7243d285e8978d138f170d73",
+        "bytes": 953385
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs pi0w - MEwNOoFD.json",
+      "positions": 82
+    },
+    {
+      "identity": {
+        "sha256": "28af398f6e052c0f54b287fecfb1992030b0c9164c9873562e41acf83ed1e34f",
+        "bytes": 1497159
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs psion-chess - PGSZLKXg.json",
+      "positions": 130
+    },
+    {
+      "identity": {
+        "sha256": "b2c3b77670c9e42224c6262949aeea0468950164c816d415fd581d11e3a7b533",
+        "bytes": 1354316
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs psion-chess - cid6fU2j.json",
+      "positions": 132
+    },
+    {
+      "identity": {
+        "sha256": "f883b167aa8e82074b7e3bd861ccc1fdb2760d50b95c90479c06b2f72714d3c6",
+        "bytes": 394299
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs sargon-1ply - RML70jnQ.json",
+      "positions": 39
+    },
+    {
+      "identity": {
+        "sha256": "a0f79a1fa55cdb7490164cd8eea7387bc2ffbef8b0ce27254c4c2dd2bc85bd41",
+        "bytes": 923999
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs shrevenBOT - Ev21Chsu.json",
+      "positions": 95
+    },
+    {
+      "identity": {
+        "sha256": "6fd92daca19803082923039f1a81cd88a2ff9b0d0639bfa5d7f3faa9aef8fccc",
+        "bytes": 2659921
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs shrevenBOT - d2PjsdwJ.json",
+      "positions": 239
+    },
+    {
+      "identity": {
+        "sha256": "3dfa7c3156263b43f4e6aa78bc1948aa1dd26897307de2fec5fe633720cf5b0a",
+        "bytes": 711308
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs smartysprout - VCbs3ECV.json",
+      "positions": 51
+    },
+    {
+      "identity": {
+        "sha256": "acb572a10b0047d5b80472e23d0c813079b07e056be8f1fe6edba4bf09e13ed2",
+        "bytes": 1043336
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs stickshark99 - pZbbqbWo.json",
+      "positions": 92
+    },
+    {
+      "identity": {
+        "sha256": "5b4196051e652904d2eff96d7c8a90ba8767b2fb348982f15b7d89962c3e3dff",
+        "bytes": 1242898
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs sunfish-engine - IVZNvGck.json",
+      "positions": 114
+    },
+    {
+      "identity": {
+        "sha256": "33cfb07ef555b3a42d7bb93a888cf13405fc99a1a388cb2f46ee6a25a3ea610d",
+        "bytes": 591847
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs thunfisch-bot - mWe70ObE.json",
+      "positions": 44
+    },
+    {
+      "identity": {
+        "sha256": "c55ba7d5eeaa58a4487e038681b79f90a1db6a2c71deb4fa0fe62d5704667f36",
+        "bytes": 966156
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs thunfisch-bot - v2I3Zvhk.json",
+      "positions": 82
+    },
+    {
+      "identity": {
+        "sha256": "65bcdcea3da2961004e515e16a421b02687d40618d488194d6da295bde2ce28d",
+        "bytes": 1028283
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs uSunfish - 9h2V1VXX.json",
+      "positions": 90
+    },
+    {
+      "identity": {
+        "sha256": "d2232a97ca4ffefb831fff771cc3e1bdb73253230260fba4cd212364b9112f18",
+        "bytes": 1150392
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs uxugin-bot - WFQzZjAI.json",
+      "positions": 103
+    },
+    {
+      "identity": {
+        "sha256": "64bab21e09167c714f24f55809d8bb6f0bb949baafa348cdfe16d531558c4ec9",
+        "bytes": 1138003
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs uxugin-bot - foyR30Fv.json",
+      "positions": 103
+    },
+    {
+      "identity": {
+        "sha256": "dafc2d85c83ccff1090ddd71ef899dafe0d28da4d6cb136c2341d54de21969f7",
+        "bytes": 638602
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/GoPandaFish vs zyrox-bot - 99udi4R8.json",
+      "positions": 71
+    },
+    {
+      "identity": {
+        "sha256": "af4d7651147a308b7e158bb5b98989223089860cc627c2bfbaa82844eca23402",
+        "bytes": 913348
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/HardRok vs GoPandaFish - AZsG8MxC.json",
+      "positions": 80
+    },
+    {
+      "identity": {
+        "sha256": "857396314406eb65935ea4b19acb21ab04507932a8f433da277bd8a457299f53",
+        "bytes": 906641
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/HiusBot vs GoPandaFish - cBqH484w.json",
+      "positions": 78
+    },
+    {
+      "identity": {
+        "sha256": "c5a6c7a1b1a2084b113bbeacc2cf0be0bd9087d842b9711c782a755ee13d851f",
+        "bytes": 533241
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/HomoLudensBot vs GoPandaFish - r0Ov9X8D.json",
+      "positions": 44
+    },
+    {
+      "identity": {
+        "sha256": "017512f2e98ebc32dc124137faa30c7c105a3e023ece6a14651f4bc0cb194e74",
+        "bytes": 829614
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/HydraBot3141 vs GoPandaFish - nhcjG05R.json",
+      "positions": 101
+    },
+    {
+      "identity": {
+        "sha256": "471d1479b51e8de14c25baef56684cb8eed8a54d5306a4a900970bf7445851e2",
+        "bytes": 1062389
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Hyperopic vs GoPandaFish - K76aglQu.json",
+      "positions": 89
+    },
+    {
+      "identity": {
+        "sha256": "8f2dd1abbf207bd8ee9233eb583a08f6206c93abcb5afff16a5d1676a7996e5f",
+        "bytes": 1269208
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Jibbby vs GoPandaFish - TfxxR4P8.json",
+      "positions": 120
+    },
+    {
+      "identity": {
+        "sha256": "d892c3eca5686c27efd595aaec597a4c47e929d8dd671bb4609b2916e170e593",
+        "bytes": 1203487
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/KFCBot vs GoPandaFish - I5e00b8C.json",
+      "positions": 109
+    },
+    {
+      "identity": {
+        "sha256": "2c738090c9535f1b07bcff42a74669dde2821ec5f15aff93c9947c36e0d5707e",
+        "bytes": 1231071
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/KirinChessBot1500 vs GoPandaFish - AQPxTfST.json",
+      "positions": 112
+    },
+    {
+      "identity": {
+        "sha256": "65c73601f88d726772a98c354edbe19964d6888a2b2ae158b5311a0a9a2d5d92",
+        "bytes": 618677
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/KirinChessBot1500 vs GoPandaFish - Ebx1nIud.json",
+      "positions": 48
+    },
+    {
+      "identity": {
+        "sha256": "34d82d94738a02c157b2304e3da785050336dc1826e4333a6f57135fa5f47cb2",
+        "bytes": 690899
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/KirinChessBot2000 vs GoPandaFish - 4asRCida.json",
+      "positions": 53
+    },
+    {
+      "identity": {
+        "sha256": "9b5de31adcbf2b9d6d869877e120f5572fec567613488dc99a87130c6003437a",
+        "bytes": 1482662
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/LeechGODestroy vs GoPandaFish - n4OYimuW.json",
+      "positions": 147
+    },
+    {
+      "identity": {
+        "sha256": "9867cafa131906d874010c8c294b679bd72c9fbed1ed1596eaa34a106bdfd66b",
+        "bytes": 873627
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Lightning-762 vs GoPandaFish - nzT8wmvw.json",
+      "positions": 57
+    },
+    {
+      "identity": {
+        "sha256": "c6021e4b4e258a751679ec1bbe6f53676268d8456a99cb9369139d9aeec9d88f",
+        "bytes": 617386
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Lightning-762 vs GoPandaFish - ofogXLgg.json",
+      "positions": 43
+    },
+    {
+      "identity": {
+        "sha256": "5a84880c1e5b413c92d183ae4ddcafeb97ba22115479ec2adb8bb35792f3cb82",
+        "bytes": 1126123
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/MiccoEngine vs GoPandaFish - uITt5KAi.json",
+      "positions": 97
+    },
+    {
+      "identity": {
+        "sha256": "f87286eea1060dbaa7cd25c35d83b66efc08bcc8a0785fb5add9c18fa9ef7446",
+        "bytes": 1667468
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/MimirBot vs GoPandaFish - 63KWrCYk.json",
+      "positions": 145
+    },
+    {
+      "identity": {
+        "sha256": "5e1a7908a6165ac1a703ee7cd6c8292f0004f8d7697e43f43dcbe53269a83e42",
+        "bytes": 1282079
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/MimirBot vs GoPandaFish - qaE8fqwI.json",
+      "positions": 123
+    },
+    {
+      "identity": {
+        "sha256": "6dc5052edcb43687f04975b40c16b81855b1267750dc0eab064a0817822c5309",
+        "bytes": 1449489
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/MostlyHuman1900 vs GoPandaFish - Lj7IuLO1.json",
+      "positions": 127
+    },
+    {
+      "identity": {
+        "sha256": "9c3e55c3ed64c7bb8245b746b1ebca8bb785dd0ef5224173fa06f98adbda9344",
+        "bytes": 819544
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/NICE_BOT vs GoPandaFish - ZTKmWVYZ.json",
+      "positions": 63
+    },
+    {
+      "identity": {
+        "sha256": "7dc79eb477230e0b0a446368c0c55495d14ba9b3ff36a3d15f4484a6a633bd1a",
+        "bytes": 986140
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/NICE_BOT vs GoPandaFish - mLPtUMHP.json",
+      "positions": 83
+    },
+    {
+      "identity": {
+        "sha256": "3fe1fdeba1304010314d085d458a882e234ffe0dc74f01d1e76e6a0f3728cf83",
+        "bytes": 1563068
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/O-Rei-CX vs GoPandaFish - 9khJdBnw.json",
+      "positions": 125
+    },
+    {
+      "identity": {
+        "sha256": "918ed50388865771f7b33ef415ceabfeee87c95c3cf0ba7e888b45110e89531d",
+        "bytes": 1226968
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Oxide-Eg vs GoPandaFish - 7k20Z33B.json",
+      "positions": 111
+    },
+    {
+      "identity": {
+        "sha256": "193e20c98887cb76ab72f66ca042c518fb4b2e71b89c17b54709fee053324fff",
+        "bytes": 1819903
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Oxide-Eg vs GoPandaFish - e8j054gd.json",
+      "positions": 167
+    },
+    {
+      "identity": {
+        "sha256": "96eefe30a6d4bf01da44e9347e9a258087703d49025adcedeec4f3bc520696db",
+        "bytes": 750544
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/PeachFruit vs GoPandaFish - EmWSRK1u.json",
+      "positions": 61
+    },
+    {
+      "identity": {
+        "sha256": "37bb29ae71691d4ebf75c9b8c72c9b04abbbcf9c9ba66d2fe8c414aa5d05348b",
+        "bytes": 725269
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/PeachFruit vs GoPandaFish - cD7EwYD7.json",
+      "positions": 57
+    },
+    {
+      "identity": {
+        "sha256": "a372cb091b76f26233ab0fdf6aeb1d4d212550af24033df51ac1d0e052e15e62",
+        "bytes": 700255
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/PeachFruit vs GoPandaFish - qhUVejTs.json",
+      "positions": 57
+    },
+    {
+      "identity": {
+        "sha256": "2c39dc6bc5a28af39323a0cba73a9c19f455e22896b5c284f7120c23cf99fe7c",
+        "bytes": 1059177
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Perl-GigaChess vs GoPandaFish - H48lBmnp.json",
+      "positions": 96
+    },
+    {
+      "identity": {
+        "sha256": "5b29e0c6fcd3bd9a3e9d913b9cccd3b36a19b52c4c5c6fe875dc0044f08dc0aa",
+        "bytes": 852522
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Quirkafleeg-ZXNext vs GoPandaFish - 19ZuG5on.json",
+      "positions": 69
+    },
+    {
+      "identity": {
+        "sha256": "89a54b442cec07a25bfd14b811526e169854917746ea4325451a9f1973b22e97",
+        "bytes": 1079338
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Quirkafleeg-ZXNext vs GoPandaFish - BLb1GuB7.json",
+      "positions": 95
+    },
+    {
+      "identity": {
+        "sha256": "0d8915b150d3e7f7dc43d454ac630f3c178d7be206e8ecb593a85fb492faa14b",
+        "bytes": 1322924
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Quirkafleeg-ZXNext vs GoPandaFish - QcAZ6Mxb.json",
+      "positions": 122
+    },
+    {
+      "identity": {
+        "sha256": "5a789a5699a660fc7e721d39cab032ba134621228269ac8c69774dff2ed8fbb9",
+        "bytes": 1409533
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/R0bspierre vs GoPandaFish - WPUQlQyc.json",
+      "positions": 130
+    },
+    {
+      "identity": {
+        "sha256": "ddf4a795732868f8b73178686b3d1e27e097471ea8e43ce054c97800e759e1be",
+        "bytes": 802253
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/RubyAI vs GoPandaFish - CeUJN37G.json",
+      "positions": 49
+    },
+    {
+      "identity": {
+        "sha256": "3d130db1cafbcfc84a20e4c83a7456ce8ac28c99895cd07305455d13b3be6274",
+        "bytes": 1514272
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Sacrifice-Engine vs GoPandaFish - aYIPyAYl.json",
+      "positions": 138
+    },
+    {
+      "identity": {
+        "sha256": "18a71938a150dd05987bf0f331f93adaecf6b1fc42d87b0b2251da459aa06f04",
+        "bytes": 676861
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/SeedChess vs GoPandaFish - XzRGgjkv.json",
+      "positions": 47
+    },
+    {
+      "identity": {
+        "sha256": "f8bc9de23fd8c9ac4a73234fcb613ae500dc5d9815d2a83aaa455c3530cf686e",
+        "bytes": 651722
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/SeedChess vs GoPandaFish - qSud3dNr.json",
+      "positions": 43
+    },
+    {
+      "identity": {
+        "sha256": "90bc4f7b06c42dd12dfdf34742252d983021a5617a4122a62092e11a89be8522",
+        "bytes": 688906
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/ShallowRedBot vs GoPandaFish - 2koPBAP5.json",
+      "positions": 84
+    },
+    {
+      "identity": {
+        "sha256": "c80f4d61e835f4a8836897a489f20c9aa0602f74795afad68cac0bbe81979040",
+        "bytes": 690342
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/ShallowRedBot vs GoPandaFish - BGjcMkWb.json",
+      "positions": 49
+    },
+    {
+      "identity": {
+        "sha256": "c2bc4a24eaac72274f0cd98b69d961654f72cdfa9f53f41cb380dc3f36e6a914",
+        "bytes": 641205
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/ShallowRedBot vs GoPandaFish - U2LaF6mc.json",
+      "positions": 80
+    },
+    {
+      "identity": {
+        "sha256": "d8cd30d7df95213e522a84601aa11c37c8e6ed8c16527af409b15c8425b286a9",
+        "bytes": 1311732
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/ShallowRedBot vs GoPandaFish - jXYhnq8u.json",
+      "positions": 121
+    },
+    {
+      "identity": {
+        "sha256": "445f7847597cbeb9e002243ff7cddd9e7582e856835ba127a4854a8c1a49dc75",
+        "bytes": 1060730
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/SpringerBot vs GoPandaFish - F3sIUo7d.json",
+      "positions": 93
+    },
+    {
+      "identity": {
+        "sha256": "c5e3c296cd007c7fe6afc81675885f99aedfd235b2935c8e7ae50cba284611c3",
+        "bytes": 471409
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/SquareFish-900 vs GoPandaFish - 19t5KUV4.json",
+      "positions": 42
+    },
+    {
+      "identity": {
+        "sha256": "333806b5b651fc7214a9dee80ecc0cd59a1c300ac639e6df2a135e4dff0839a1",
+        "bytes": 1549177
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/StockConda vs GoPandaFish - GT8u2Nkb.json",
+      "positions": 121
+    },
+    {
+      "identity": {
+        "sha256": "a306dda20640e9440baed69ecc524d55eb3f8e4fff395f81495fc4fc1e066c97",
+        "bytes": 1142323
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Tente-V2 vs GoPandaFish - YzfaekGC.json",
+      "positions": 132
+    },
+    {
+      "identity": {
+        "sha256": "eb63d6cfafc801454d9dd791d76a0bc55c7518e899a47f0a6cccb3fd1f724568",
+        "bytes": 705427
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Tente8x vs GoPandaFish - J0Nay5Rd.json",
+      "positions": 57
+    },
+    {
+      "identity": {
+        "sha256": "25b6c39ff32793b2028466871d276872b8aa21a32cc8807ca4e60ee4d820fbbb",
+        "bytes": 2323047
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/TerritoryBot vs GoPandaFish - FtRp2MlL.json",
+      "positions": 258
+    },
+    {
+      "identity": {
+        "sha256": "265b378381c06b2c49cc4c275f3389a121a6a989a7b03447b1a087bded068a8d",
+        "bytes": 844752
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Tigrament vs GoPandaFish - JzWAukWt.json",
+      "positions": 67
+    },
+    {
+      "identity": {
+        "sha256": "cc199a4886f687dabffd4bdb0cafcc32e0ad26e86545a2fcd895440ce4af7eb5",
+        "bytes": 799291
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/TikiFish vs GoPandaFish - Cxu6BwTG.json",
+      "positions": 61
+    },
+    {
+      "identity": {
+        "sha256": "b0b2c0a573b689cb21026171d8974f12cef75bbb887ae2b4123e56ea879d1fd8",
+        "bytes": 892973
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/TilapiaBot vs GoPandaFish - u0H60HmC.json",
+      "positions": 81
+    },
+    {
+      "identity": {
+        "sha256": "fc086c845d4ce04dd88cf1c19e6f52525224adfcddeeb6bcedc4f967e378ccaa",
+        "bytes": 946098
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/To299d vs GoPandaFish - O4wRsvjl.json",
+      "positions": 81
+    },
+    {
+      "identity": {
+        "sha256": "ac71e8364b7cb0fe6370aa886c6d6d8773f9199f9f61435d5cf32b29707b2a56",
+        "bytes": 772703
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/To299d vs GoPandaFish - vBSvdO2f.json",
+      "positions": 53
+    },
+    {
+      "identity": {
+        "sha256": "f401cf0d6d4649a3e76b535237c8c43b52f233e24ee4979bd896e268b41944ba",
+        "bytes": 907785
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/TopasBot vs GoPandaFish - r3PL3Tky.json",
+      "positions": 75
+    },
+    {
+      "identity": {
+        "sha256": "43854fa245f188f6ea278568092333ee2b7b0497c543545b1b253af45c24682a",
+        "bytes": 1382056
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/TrinculoBot vs GoPandaFish - aaEEX0mp.json",
+      "positions": 136
+    },
+    {
+      "identity": {
+        "sha256": "ac98074a323d4090b93901382853261cc3a4e2df775d17023756b983cd025aa1",
+        "bytes": 1655997
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/TrinculoBot vs GoPandaFish - yIRBiE2X.json",
+      "positions": 156
+    },
+    {
+      "identity": {
+        "sha256": "a0ae0b96c9c589106a7c1a472fc00a62352537a965d171b0bd7d1dbdde5f6de8",
+        "bytes": 829847
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/UnifiedChess-Bot vs GoPandaFish - UtQr1tHN.json",
+      "positions": 67
+    },
+    {
+      "identity": {
+        "sha256": "d4c81111e5c676b7fd00ea71ba883031c11b0d0ebf28af82c443c1f28afb1b7f",
+        "bytes": 1044010
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/UnifiedChess-Bot vs GoPandaFish - ynCKmF0L.json",
+      "positions": 89
+    },
+    {
+      "identity": {
+        "sha256": "cb5240a784fd46d832cf35e9099adbad43213eeffadd1dfb9bcb0fe7da391b40",
+        "bytes": 1009246
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/VietnameseCoffee vs GoPandaFish - wuolaQaa.json",
+      "positions": 98
+    },
+    {
+      "identity": {
+        "sha256": "6ff8a6ccbef78e10b0638a394f8f212a37798a61515326d5e715cb6a3942012e",
+        "bytes": 2139727
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Waldemar-the-elf vs GoPandaFish - rGmjbC5l.json",
+      "positions": 240
+    },
+    {
+      "identity": {
+        "sha256": "a0f1f06fae942416e8943036008900aaff580519c29ffb77cbd91c9001d50937",
+        "bytes": 685348
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Z-O_AspenLabs vs GoPandaFish - W0ErjnQY.json",
+      "positions": 53
+    },
+    {
+      "identity": {
+        "sha256": "3632064c768d33baee32357fecfca8c323f6ac11d525564d1dc1f31a650d8b2b",
+        "bytes": 545236
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/Zyqorath vs GoPandaFish - tWJ6StAN.json",
+      "positions": 46
+    },
+    {
+      "identity": {
+        "sha256": "2090a6fb9cb42292936f2049d888f6fdd347a34b7b36cef432ea8c510a21ac53",
+        "bytes": 805295
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/abcd_engine vs GoPandaFish - WcdggQyT.json",
+      "positions": 47
+    },
+    {
+      "identity": {
+        "sha256": "95414e1eb24966d32d0c06a3ee8764a577e09da0210fb62b9efabf013b66cf43",
+        "bytes": 415319
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/ailedbot vs GoPandaFish - z7FhDSVk.json",
+      "positions": 42
+    },
+    {
+      "identity": {
+        "sha256": "5b706cd796b1532fb20815c44e209b4ff2be10200790acf63313d3887431329b",
+        "bytes": 932924
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/artidigm_research vs GoPandaFish - HhPI3vCx.json",
+      "positions": 71
+    },
+    {
+      "identity": {
+        "sha256": "8cb669c0b1b499c20f9a8f4f90a258c500ddb5944dea734d3116efe259f10cf9",
+        "bytes": 617314
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/artidigm_research vs GoPandaFish - exSaaUfH.json",
+      "positions": 72
+    },
+    {
+      "identity": {
+        "sha256": "1bd1e7b18269985ae818ae056066404d43cf0a527a7b704c444159f66486a9a4",
+        "bytes": 1428147
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/bot_adario vs GoPandaFish - cHx1ti7d.json",
+      "positions": 133
+    },
+    {
+      "identity": {
+        "sha256": "0b21eb9d225b48c8d996402f3128aafb0b88894954515fba0e654a9b0243baaf",
+        "bytes": 887141
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/candidates.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "e65846ddbbb0ca218f32f3187b213cd79f29a15ff7d7b1d972afde16703c3aca",
+        "bytes": 794715
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/chess_set_manager vs GoPandaFish - P47w1ojK.json",
+      "positions": 61
+    },
+    {
+      "identity": {
+        "sha256": "32f2216e666277dd1ff291752920ea791d85a4cdb1d98e9830e5707e98db16fc",
+        "bytes": 1231555
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/chiral_ebt vs GoPandaFish - MeUyNCid.json",
+      "positions": 111
+    },
+    {
+      "identity": {
+        "sha256": "0246792d048f867cbd1e7f241a0737e802d66e04d5f62ac4a9dba46fed9a7462",
+        "bytes": 809397
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/chmod-bot vs GoPandaFish - h16hpLR8.json",
+      "positions": 67
+    },
+    {
+      "identity": {
+        "sha256": "4ddd0ea8218cd409f1bdf8d0eb260f81518dcd77915b41be5cd286ad98a1387f",
+        "bytes": 766644
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/colinbot vs GoPandaFish - UeNjeyLW.json",
+      "positions": 57
+    },
+    {
+      "identity": {
+        "sha256": "3a9f170a2d168071dc865b24c5ffb074c6ac6bf9741ab12a54bc2bbada632701",
+        "bytes": 11517
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/confirmation.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "dda7820539174c2cb7f0761f1f714506ab4803bc6e2f5b82d88ece0eb83c5417",
+        "bytes": 1089626
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/croco_bot vs GoPandaFish - 4R57Qmf5.json",
+      "positions": 98
+    },
+    {
+      "identity": {
+        "sha256": "28e74263a23046e9fd8fb6f58da623624ec401652d5da8922eb3be0d04ef061d",
+        "bytes": 1128668
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/croco_bot vs GoPandaFish - XNGMBc0p.json",
+      "positions": 100
+    },
+    {
+      "identity": {
+        "sha256": "4ca111096482782396e98774e36b54db25fa7b78ec68d1d41303d7fd3425c56a",
+        "bytes": 532324
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/dala-1300 vs GoPandaFish - 4yxgnkGg.json",
+      "positions": 42
+    },
+    {
+      "identity": {
+        "sha256": "8884625200453e3064211c87ceda953c0ab23facf9ed26e67567281792eb16d5",
+        "bytes": 909489
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/entebot vs GoPandaFish - Avap2OJY.json",
+      "positions": 63
+    },
+    {
+      "identity": {
+        "sha256": "36f644d297c7acc432dceb4145f18896b97da6b0e95da89fa5fdd9fd8765387e",
+        "bytes": 1003607
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/eubos vs GoPandaFish - LJLDrQbM.json",
+      "positions": 83
+    },
+    {
+      "identity": {
+        "sha256": "e4c04a4179e48bd8eaf542a93c6f4085cadb75d6b13fe1f03acf85034b68469a",
+        "bytes": 1238326
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/felix_pufferlib vs GoPandaFish - DsqFd5Kj.json",
+      "positions": 120
+    },
+    {
+      "identity": {
+        "sha256": "9ff3a75f52860056e106b427a2a45e390a14df7794ec24744c5478dc4ee78027",
+        "bytes": 1123569
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/fractionBOT vs GoPandaFish - JsvmD06t.json",
+      "positions": 99
+    },
+    {
+      "identity": {
+        "sha256": "a88f40e4ca776a7a0be934d62708f8cab68a2ab15f2d03cb4616631efba24044",
+        "bytes": 695681
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/glorbo_evermorrow vs GoPandaFish - kqW5oiXD.json",
+      "positions": 51
+    },
+    {
+      "identity": {
+        "sha256": "eb7f74ca969f56d92be232efd3c41b692cca71fb81b00e3e75c51a52b1c55b7b",
+        "bytes": 1006458
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/grail-bot vs GoPandaFish - BqbTfnng.json",
+      "positions": 73
+    },
+    {
+      "empty_completed_game": true,
+      "identity": {
+        "sha256": "7f734783490f7521fb21a35d379765e9e74cb95127e3319eba5c8a316eb3c563",
+        "bytes": 171
+      },
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/incipit_bot vs GoPandaFish - doe0PNEA.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "1b076625e5fc7add4a383077284463aab0cd82f171ee80847d3429529565049f",
+        "bytes": 796806
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/io-bot vs GoPandaFish - 8mQaEKbe.json",
+      "positions": 63
+    },
+    {
+      "identity": {
+        "sha256": "1fc78ef3e374f082eb54c86b2ab03347423921626f0f92f16767c1949b357bff",
+        "bytes": 779758
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/jpg-bot vs GoPandaFish - bmjPgzjz.json",
+      "positions": 63
+    },
+    {
+      "identity": {
+        "sha256": "12b431de173bd878e66f842f5a6553c10d6df1afcc24907e0da675c7108efe7d",
+        "bytes": 814069
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/kolmato vs GoPandaFish - WbBEK119.json",
+      "positions": 67
+    },
+    {
+      "identity": {
+        "sha256": "ce5f11dfe6a1cc65e5548ddbf97c86520e194bd7fea505c9cbab2dad1c7016fc",
+        "bytes": 914718
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/laura-bot vs GoPandaFish - Z7cAAmyS.json",
+      "positions": 85
+    },
+    {
+      "identity": {
+        "sha256": "53daaf6e11d72b1fd05f8146df45a71f642d54f191d5dd3ea9b1b3b3e6f19eca",
+        "bytes": 721227
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/little-0 vs GoPandaFish - 5WC5FRtB.json",
+      "positions": 51
+    },
+    {
+      "identity": {
+        "sha256": "461638ae8db0ca7c8adc0e2a148230b977aaf7c1210b83fea344667ed81c6990",
+        "bytes": 676446
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/littleply vs GoPandaFish - Wlj5PDq4.json",
+      "positions": 55
+    },
+    {
+      "identity": {
+        "sha256": "9ccc5c685ecb09dc5ebc1e75a72e389a22c7eb3f22dbad493ddb992fca01b50d",
+        "bytes": 1354790
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/manu-bot vs GoPandaFish - kQ4iEA2q.json",
+      "positions": 114
+    },
+    {
+      "identity": {
+        "sha256": "250caa1d57f6e42817a89d878f15f6abb4534f8c1a9d6fc96b706720c312d0e9",
+        "bytes": 843483
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/mate1-bot vs GoPandaFish - d9tFa7Y9.json",
+      "positions": 67
+    },
+    {
+      "identity": {
+        "sha256": "43f759a82408e654087b135398a72392bbc7fd1646633e66cc46bfaac95bd55a",
+        "bytes": 3634109
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/matmoi vs GoPandaFish - ATzIvZ7w.json",
+      "positions": 384
+    },
+    {
+      "identity": {
+        "sha256": "a8ce90b2158e16c20725c9ccef7cfc13078c18adb8cb7e5e3911b87d82b58712",
+        "bytes": 798442
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/mermaid_engine vs GoPandaFish - 4RtvQXj3.json",
+      "positions": 76
+    },
+    {
+      "identity": {
+        "sha256": "9482b21b393da4a78768cb5b9fc9b158d60b1e923d49213032a6f2dda40820be",
+        "bytes": 577
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/method.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "78c506d75f2523eedcad7aa3240a574ffe62ea0186b4cc5a841ad9845bd55bea",
+        "bytes": 583632
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/michaAmateurBot vs GoPandaFish - KgdBoDhU.json",
+      "positions": 50
+    },
+    {
+      "identity": {
+        "sha256": "868d44a9788d9a1c56f97fdfbca797883d7221de8f126146180d061616c0b56a",
+        "bytes": 702583
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/myChessJava vs GoPandaFish - jOhf490d.json",
+      "positions": 51
+    },
+    {
+      "identity": {
+        "sha256": "b6ac554d7be03df40ff21c7d1b51a914154b1dfb03c2f2d21e221aba94855c8f",
+        "bytes": 1508608
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/princhess_policy_bot vs GoPandaFish - HYhlfE4F.json",
+      "positions": 150
+    },
+    {
+      "identity": {
+        "sha256": "9c236667edd6c314f1d17227b3628cfda91f35ba417b02af750afe863fcb6e06",
+        "bytes": 698641
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/prokopakop vs GoPandaFish - QghUQNGi.json",
+      "positions": 49
+    },
+    {
+      "identity": {
+        "sha256": "cd0459cfd03707b46b55ed631d157ac107b27c2f8855ea2c6bbb6d1d72209788",
+        "bytes": 1415285
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/psion-chess vs GoPandaFish - qX6GPM1t.json",
+      "positions": 143
+    },
+    {
+      "identity": {
+        "sha256": "907703f7c370bf58fe31191c1a52af39ef9155f47d267b278eebc3b7df863973",
+        "bytes": 1556836
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/ratsu-bot vs GoPandaFish - dXniMk2j.json",
+      "positions": 131
+    },
+    {
+      "identity": {
+        "sha256": "a598ddae348525358655c2956c707b6e2c37bda050ef211ae009c7047dee85b5",
+        "bytes": 664779
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/remychessengine vs GoPandaFish - r60KNAff.json",
+      "positions": 45
+    },
+    {
+      "identity": {
+        "sha256": "addd7eec670550e8749e9e88a47f2ddbd5989b3af9e956700498ad70402e6f81",
+        "bytes": 619926
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/rust-in-pieces vs GoPandaFish - ITpXfIYb.json",
+      "positions": 47
+    },
+    {
+      "identity": {
+        "sha256": "6a66a1f9006bf14ca7ac5a6171b22013ca20e83318aefd47d43bfaf7310c1e40",
+        "bytes": 915719
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/scipio-bot vs GoPandaFish - TWyu8niJ.json",
+      "positions": 78
+    },
+    {
+      "identity": {
+        "sha256": "8fc44be34da3da95135badd800169eb8c94716fe3f2b8e5e6525a0095b723f2d",
+        "bytes": 649014
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/shrevenBOT vs GoPandaFish - V962S41M.json",
+      "positions": 68
+    },
+    {
+      "identity": {
+        "sha256": "83558acd7f595fcc77b37198194464252adedc37e72f22723048edbd08fcebbb",
+        "bytes": 1312458
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/shrevenBOT vs GoPandaFish - qhb4iAQB.json",
+      "positions": 134
+    },
+    {
+      "identity": {
+        "sha256": "34451e9024305837a2a8d85f9e86b3781a41334b183178d2ddb5995af7819732",
+        "bytes": 867087
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/simple-bot vs GoPandaFish - zJegkegP.json",
+      "positions": 71
+    },
+    {
+      "identity": {
+        "sha256": "071995f947dcdc02b986805e5fcd751ee49bac473d3e6fbbc190a82c40da0718",
+        "bytes": 1167614
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/sseh-c vs GoPandaFish - ZATxhHXk.json",
+      "positions": 109
+    },
+    {
+      "identity": {
+        "sha256": "fe6d88dcc6b91ae51309f11d69f27acd36e822b511869274aebb2020eba7e5e4",
+        "bytes": 1113973
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/stickshark99 vs GoPandaFish - Lz2z3V5K.json",
+      "positions": 103
+    },
+    {
+      "identity": {
+        "sha256": "01cd2b2a08813e925e577b6f8d99ee15f25b96934212767546a9565e3f1c4d5a",
+        "bytes": 1034
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/summary.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "46cc2212d0b4e30195a434d9fed0104e5daebee237c7149006c9bb6b5bbcf774",
+        "bytes": 1225075
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/sunfish-engine vs GoPandaFish - CAsMVtgL.json",
+      "positions": 152
+    },
+    {
+      "identity": {
+        "sha256": "5887055435f409759ae87a4e725819eacfb616ffa94dc36d462a5d2269d9446a",
+        "bytes": 1510638
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/sunfish-nnue-engine vs GoPandaFish - J0oJTUv4.json",
+      "positions": 147
+    },
+    {
+      "identity": {
+        "sha256": "ca050b0fe802a11be104c0448e0d31438f84bcab2905cfbffad2fed6efee3b88",
+        "bytes": 902758
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/sunfish-nnue-engine vs GoPandaFish - PxR2B1nJ.json",
+      "positions": 123
+    },
+    {
+      "empty_completed_game": true,
+      "identity": {
+        "sha256": "8c227e4b322a67e68718e0adf6b03afc75741285dd5be5a21cfba2b7277348a4",
+        "bytes": 171
+      },
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/sunfish-nnue-engine vs GoPandaFish - aOIecGbM.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "af5da9bfafc8a9eb779e67f314f06f050397d00a55f0af98d4a514a40773720e",
+        "bytes": 956669
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/sunfish-nnue-engine vs GoPandaFish - kiOWTCJC.json",
+      "positions": 69
+    },
+    {
+      "identity": {
+        "sha256": "c5828cb2f55188e80b0239f9f0a2065b967ec9bb16f66a9540d15d6339e440ea",
+        "bytes": 1109436
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/uSunfish vs GoPandaFish - AfSNlfZC.json",
+      "positions": 93
+    },
+    {
+      "identity": {
+        "sha256": "adb28012a4638f49fd144c4eb0f8ea983c5b6f235a8d2df84afd30fc97603da8",
+        "bytes": 1023546
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/uSunfish vs GoPandaFish - B77ylgJp.json",
+      "positions": 114
+    },
+    {
+      "identity": {
+        "sha256": "bee1b3f1c2a2abfebdb6ec98a125a9aca1e6a5315f97ff9edcae210559567506",
+        "bytes": 787093
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/uundrstnd vs GoPandaFish - IaUg953e.json",
+      "positions": 59
+    },
+    {
+      "identity": {
+        "sha256": "a2c1358dd7105f94c6e99da2d17fafd0cdf2c7309925ddac11bf7839ea2f64cd",
+        "bytes": 1178933
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/uundrstnd vs GoPandaFish - PyGK4Lnn.json",
+      "positions": 107
+    },
+    {
+      "identity": {
+        "sha256": "6695e7922e99adf113b319d8ef2f45c6128f7f784ed2b6c40573efb69493bb65",
+        "bytes": 862493
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/uundrstnd vs GoPandaFish - UMtDZiNy.json",
+      "positions": 71
+    },
+    {
+      "identity": {
+        "sha256": "b54d0faf15110cc3853fe649f2ad1f0703d114b90a249c74d5191d61cf3e0a15",
+        "bytes": 1119876
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.15-live-20261113-074740/analysis/stockfish-n100000/uxugin-bot vs GoPandaFish - uOq0lhNd.json",
+      "positions": 98
+    },
+    {
+      "identity": {
+        "sha256": "4d3f294d948e4f23afe464ee9e3587a391b9ca3f246fcf6b1efe624304695a66",
+        "bytes": 896589
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/Blujay-bot vs GoPandaFish - mmMvJUHm.json",
+      "positions": 82
+    },
+    {
+      "identity": {
+        "sha256": "63f9f518c1e422a3c04d28e948c406d1129f58a92b99f832ae2378ba8cb1ba37",
+        "bytes": 891818
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/GambitOnlyBot vs GoPandaFish - PzEtqL6B.json",
+      "positions": 75
+    },
+    {
+      "identity": {
+        "sha256": "2736bcec4d6c00fa896d2527fc89f2eb9753648f838a11dda83dcb828e1fa58f",
+        "bytes": 793271
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/GoPandaFish vs NichtEliasBot - PV4oUeoe.json",
+      "positions": 64
+    },
+    {
+      "identity": {
+        "sha256": "1d68fa77eead28aa42b7917d5e5bb3f02a8fb27b13fd933705d90b7028facd95",
+        "bytes": 1061710
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/GoPandaFish vs NoHopeForMan - XgOBT8eH.json",
+      "positions": 88
+    },
+    {
+      "identity": {
+        "sha256": "596766e139ca2ed14b54aa634787aef845bda7e926bdf36f336a81559bcfe72e",
+        "bytes": 751181
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/GoPandaFish vs Oxide-Eg - nVVSe2oF.json",
+      "positions": 93
+    },
+    {
+      "identity": {
+        "sha256": "a91fe21151bab4a3953244dea006a3f3811ac86ea3059caa8717a784b7630648",
+        "bytes": 1337721
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/GoPandaFish vs Tente-V2 - E3RvY9Nk.json",
+      "positions": 123
+    },
+    {
+      "identity": {
+        "sha256": "197313e081553c35dee672dbfba788667a5fd7dd4224a76559102b54fcc16aaa",
+        "bytes": 400916
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/GoPandaFish vs dala-1100 - mQQjCDiw.json",
+      "positions": 29
+    },
+    {
+      "identity": {
+        "sha256": "24dcf72fec5997fe41f1f2cd3c81c9cb350a9360122af3d3e874411d418b5ef3",
+        "bytes": 1723208
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/GoPandaFish vs dala-1300 - SRn3UtST.json",
+      "positions": 203
+    },
+    {
+      "identity": {
+        "sha256": "6d17fb9a234b107122fc86c8cf6c29b77bc291b0cc1ed1fb82110b4ce6eb1809",
+        "bytes": 862894
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/GoPandaFish vs justbot-v1 - Mido8Dw4.json",
+      "positions": 62
+    },
+    {
+      "identity": {
+        "sha256": "9acdf4e08a89dc8c862ed495346bbf58b7c9c3e4392d182f2e60a8a3a899d946",
+        "bytes": 967125
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/GoPandaFish vs nebubot - mMZ5Ne11.json",
+      "positions": 82
+    },
+    {
+      "identity": {
+        "sha256": "9eca28dacabf1781752e78b71afa012d103662e1eec4043cffee158f6ed28f59",
+        "bytes": 1471721
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/GoPandaFish vs notropis - 9CDIInpP.json",
+      "positions": 137
+    },
+    {
+      "identity": {
+        "sha256": "b0890a8d847f58b5a1d4ad5e5a28adbb130d1308d7ac76c1bd5fae40a59cddb2",
+        "bytes": 1183362
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/GoPandaFish vs zyrox-bot - Gl7kmsLj.json",
+      "positions": 109
+    },
+    {
+      "identity": {
+        "sha256": "30a19b93e30af0f7f1e62e1e855236662778c234fe5dd5bbcf822d2a54911875",
+        "bytes": 25256
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/PZChessBot vs GoPandaFish - 2byZKYLT.json",
+      "positions": 3
+    },
+    {
+      "identity": {
+        "sha256": "443f64a8553177ad97e17fe61fe9c3f0140785d3ae1a6a1368830cd61025c2e0",
+        "bytes": 54661
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/candidates.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "9b5dec2cd21a4c14a2d7c76a5576bedc4c8bd5011665646f6e397702c0abc1c2",
+        "bytes": 936665
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/coda_bot vs GoPandaFish - SODGjjrZ.json",
+      "positions": 77
+    },
+    {
+      "identity": {
+        "sha256": "fe1a4ceda0cf7374732e3fdea21e60dce027fa8c2a9d7198f21bf9972b00d408",
+        "bytes": 765744
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/colinbot vs GoPandaFish - 8a73DmQx.json",
+      "positions": 63
+    },
+    {
+      "identity": {
+        "sha256": "2aa3cc43c15dc8b92d522df60a7015f13fcb1d41b4a8617ff78a3dc23d406e97",
+        "bytes": 10861
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/confirmation.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "01d9b69fc6d80936a4cae530b7f0787f58fbb4bf9418d132cde3853158c07711",
+        "bytes": 940903
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/icarus-bot vs GoPandaFish - y2IkeSMw.json",
+      "positions": 73
+    },
+    {
+      "identity": {
+        "sha256": "72688a906110cce87db3493411da0e978437526708c17aaf2b970d077510a75b",
+        "bytes": 1081669
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/kolmato vs GoPandaFish - EpCUge8J.json",
+      "positions": 97
+    },
+    {
+      "identity": {
+        "sha256": "14c6a016c7593ec3feff9582e55e20329063ae36fd91e3bb7d6e9092e64f6aca",
+        "bytes": 931774
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/mate1-bot vs GoPandaFish - LP57FP1I.json",
+      "positions": 81
+    },
+    {
+      "identity": {
+        "sha256": "18250dfb442b8799081cb95bb940fc9604bc390f06bedbfb996750cd4e846699",
+        "bytes": 577
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/method.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "52f4e18225cecdef9ba48d5824a4c45e6206b7b9e20c6aad4da92a09e9119809",
+        "bytes": 1527539
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/stickshark99 vs GoPandaFish - EQggxkZN.json",
+      "positions": 127
+    },
+    {
+      "identity": {
+        "sha256": "41d71b44dfbb32999dc4e5a018b4e9efd28c4dcc1b1f0993256f1c347753cfe1",
+        "bytes": 1015
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.22-live-20261118-080529/analysis/stockfish-n100000/summary.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "f6a4e8694d1fec7f86d3e7d31fb2f345eda32f239c510e49c70fae18ee038582",
+        "bytes": 741651
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Alarm2001 vs GoPandaFish - 4vMIlqpg.json",
+      "positions": 45
+    },
+    {
+      "identity": {
+        "sha256": "3c7414b7d2402c278f44a4ab7335bca665283089485139d0e96aeeb3abd6e781",
+        "bytes": 1856852
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Angela_eng vs GoPandaFish - abAXTpmd.json",
+      "positions": 180
+    },
+    {
+      "identity": {
+        "sha256": "bf25f5bc025bb0840f1ad5fc0b513379eca6be430e5375df4a2f91e2f22bd3c6",
+        "bytes": 1424119
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Athena-ChessBot vs GoPandaFish - Fd9TKkJ2.json",
+      "positions": 117
+    },
+    {
+      "empty_completed_game": true,
+      "identity": {
+        "sha256": "58f3c3c6de41a5b5d871127b548939c7b0af271ef3e30bba8970bf4fcfbe6354",
+        "bytes": 171
+      },
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Ballin-bot vs GoPandaFish - ZsXkGPEs.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "e1739ba75b239d1acd9534e6a4d1c5e0ff087bc9e05910585e8428acf62203fa",
+        "bytes": 668121
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/BlueMoonBot vs GoPandaFish - QpPao7Sr.json",
+      "positions": 51
+    },
+    {
+      "identity": {
+        "sha256": "8c442ec3f7da2a3bab7ccddc65d7d12b694482ef75441bee488f3b80c4e23e51",
+        "bytes": 896586
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Blujay-bot vs GoPandaFish - VMrpzeys.json",
+      "positions": 82
+    },
+    {
+      "identity": {
+        "sha256": "3bdfefda52d6a42e35e9c91aa9dfaa1bfa08fb88c5c84a8f146a7c4b2f44df9c",
+        "bytes": 896461
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/BockFish vs GoPandaFish - PVGNjS34.json",
+      "positions": 61
+    },
+    {
+      "identity": {
+        "sha256": "ae8382043d1a0ef9b4b5f86471f3d2c3d9a6da5084bd46e474cea5565ae599ab",
+        "bytes": 4659332
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Botkingteam33 vs GoPandaFish - rPaHjnoM.json",
+      "positions": 464
+    },
+    {
+      "identity": {
+        "sha256": "4c4c7e0627f2974ae501e2a601527e188957eb8f377137c2a9e2d3de40813388",
+        "bytes": 1227753
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Bytefish vs GoPandaFish - t0mFV93D.json",
+      "positions": 118
+    },
+    {
+      "identity": {
+        "sha256": "2e744f9831bc2e97b4c80faf8a294e3b39aa41e722929453c3eb9736e801f2fa",
+        "bytes": 1785091
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Cactus_Bot vs GoPandaFish - 53HukkXX.json",
+      "positions": 159
+    },
+    {
+      "identity": {
+        "sha256": "9302ff81a65b2503512f6d5861d94d7436e4bbbfc9028448363696befd2c1c97",
+        "bytes": 837407
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/CarlsenStyleBot vs GoPandaFish - Y3KAsmwx.json",
+      "positions": 80
+    },
+    {
+      "identity": {
+        "sha256": "2160360262160edcb4a7f7da65680fc585101b25229c0d68f8002c7ca61ba546",
+        "bytes": 828218
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/CassidyChess-Bot vs GoPandaFish - E6gj3NUf.json",
+      "positions": 65
+    },
+    {
+      "identity": {
+        "sha256": "61eb54b6b7ac2b873ed276570443f3367806a6f46fc1605aff7df16bd9f07781",
+        "bytes": 909120
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Chessiverse_Raak vs GoPandaFish - ybP5TfSN.json",
+      "positions": 84
+    },
+    {
+      "identity": {
+        "sha256": "ed375a6ff2839ccccdc77cee552edb4a44d96aef62be233e19b64d447ad5e0b1",
+        "bytes": 293391
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Cloudia-Chess vs GoPandaFish - 2WGLvZUk.json",
+      "positions": 28
+    },
+    {
+      "identity": {
+        "sha256": "6a06a16fce903d928ec910cd99dfdb7c32fd54ef5c039724a730340482f80c28",
+        "bytes": 952946
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Cloudia-Chess vs GoPandaFish - vMJ64VjF.json",
+      "positions": 86
+    },
+    {
+      "identity": {
+        "sha256": "96367b77f4cfabb29ea877e01e8e38fe6a3e3dc3155cd651d808e812a42b1cb4",
+        "bytes": 889366
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Cosmic_Engine vs GoPandaFish - gX4ghUo0.json",
+      "positions": 65
+    },
+    {
+      "identity": {
+        "sha256": "5cb92f69965b5b28e7e120a2bed664963ae2bf95a8eff06bf8797a4101c16b4b",
+        "bytes": 703297
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/FSChess-Engine vs GoPandaFish - Mfi4JiuZ.json",
+      "positions": 55
+    },
+    {
+      "identity": {
+        "sha256": "dd18ce8bbf2f18e802e4d81d76958e8155d0c20f2171bf88a3ff1841cc1d3bbc",
+        "bytes": 1114195
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/FenrirBot vs GoPandaFish - v7c5pVV1.json",
+      "positions": 99
+    },
+    {
+      "identity": {
+        "sha256": "aaf99f392b4c8f64b8a681fc7028c75367de1d32de84a396e8fc0eb71e9558cc",
+        "bytes": 966278
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/FenrirBot vs GoPandaFish - yXWZOlKn.json",
+      "positions": 73
+    },
+    {
+      "identity": {
+        "sha256": "338cf1c78797a5f4924dab6997113c23d5d5c7f078678a558e7b8abf7f6d67a7",
+        "bytes": 7704
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Ballin-bot - 7zlgD0un.json",
+      "positions": 1
+    },
+    {
+      "identity": {
+        "sha256": "5209ca4682198c922d062da62bcd8bbc274d4dd9f2260c3d182376a15f84a66c",
+        "bytes": 7703
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Ballin-bot - bbUUoSNG.json",
+      "positions": 1
+    },
+    {
+      "identity": {
+        "sha256": "0c27f373425dd449e72bceb833e8777793a9e61214b2943fd1ea36926a924578",
+        "bytes": 7703
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Benzene-Phenol-02 - DijN8b0i.json",
+      "positions": 1
+    },
+    {
+      "identity": {
+        "sha256": "706fe0902a758c7c2e5a1cc243c25f9c7085bd82c80c2046e7f2746fd26aeacc",
+        "bytes": 1137933
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Blujay-bot - 35s0eXdt.json",
+      "positions": 107
+    },
+    {
+      "identity": {
+        "sha256": "e2f6739d8170c87f73bbec14aec6f4c05d29e10e238020937281578dededeb1d",
+        "bytes": 944871
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs BockFish - 66HTxTj6.json",
+      "positions": 78
+    },
+    {
+      "identity": {
+        "sha256": "121d538dc6f0f7fda1aa0abe04e9b93582dfafc5c0e1c453d92ed8f562e63295",
+        "bytes": 885429
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Bongaclang - tppTJbt0.json",
+      "positions": 74
+    },
+    {
+      "identity": {
+        "sha256": "729260077f2e9930f60d33569268c4fc37f8de566088f2f6d2eeb3784a1fe035",
+        "bytes": 814681
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Casanchess-NNUE - 7hFQYQ1d.json",
+      "positions": 64
+    },
+    {
+      "identity": {
+        "sha256": "f48318f77c01833c17d596839690d04273a1db4fc892fc9ac1524b453c8390d3",
+        "bytes": 513901
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Cloudia-Chess - MfmxQtF7.json",
+      "positions": 55
+    },
+    {
+      "identity": {
+        "sha256": "7c26010ce63ab7e1d9f3dc87b8214d0e0b43fca6c304f260e1fe0060141c8bd7",
+        "bytes": 789145
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs CookieBot711 - qtjfcmCI.json",
+      "positions": 64
+    },
+    {
+      "identity": {
+        "sha256": "62994a1cb9145c5b39577e4fdb9db596e2e48c0c90a44ae18dc5628038b4d1e4",
+        "bytes": 815433
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Cosmic_Engine - SgEMWySj.json",
+      "positions": 72
+    },
+    {
+      "identity": {
+        "sha256": "78f848085d0eed3f2b25b63eade513c6612b63835720ce5d47b02bb4794944cc",
+        "bytes": 815440
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Cosmic_Engine - SwnETCnu.json",
+      "positions": 72
+    },
+    {
+      "identity": {
+        "sha256": "d15d2cf445223c51c82f7ff64e9c55e03d3bc80a31533605ee783236a617e9ee",
+        "bytes": 805682
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs DingusBot - u4oAJWu0.json",
+      "positions": 75
+    },
+    {
+      "identity": {
+        "sha256": "ef89f6940df2483312ffe4a81fbb7db0fe7a622794ae8286dad539ab1704de35",
+        "bytes": 647482
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Joey_ChessEngine - IK3YVmhF.json",
+      "positions": 67
+    },
+    {
+      "identity": {
+        "sha256": "9d6f2e90128603b4cb2060f23c2b4ea6e7ac8d20fdae36b615809bd5d233564b",
+        "bytes": 1089585
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Joey_ChessEngine - gDJalA0A.json",
+      "positions": 99
+    },
+    {
+      "identity": {
+        "sha256": "1be38092b16605be182b8a4dad34afab08356d5de296cc8b9db6c5264f8ddce1",
+        "bytes": 954069
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs LegoTechnicControlPl - 93JFs3RB.json",
+      "positions": 86
+    },
+    {
+      "identity": {
+        "sha256": "1934518d7da3bcec8c40c4d64b73efd00ccb63408b0e456687cdf5b293012e63",
+        "bytes": 2014384
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Lightning-762 - jmVmUcjT.json",
+      "positions": 194
+    },
+    {
+      "identity": {
+        "sha256": "f47940c2402846bb9819382f4437444127205b20e27cd7ca6b2c83ceeccabe9b",
+        "bytes": 484078
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs LouisChess48-6K - 2PKiqrUW.json",
+      "positions": 29
+    },
+    {
+      "identity": {
+        "sha256": "6e3ee4aa2c3ab55717e9f8adeaa46ce80c4454f649bc3718b7bb0ccd1d117c65",
+        "bytes": 656170
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs MDBOT - Am5FLZVf.json",
+      "positions": 50
+    },
+    {
+      "identity": {
+        "sha256": "48f4a9900b7f5a63b49af0e608d8c71780da11e42c1bfbc24ea9ccc2fd680b6c",
+        "bytes": 618506
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs MutusBot - 8ojddlqN.json",
+      "positions": 45
+    },
+    {
+      "identity": {
+        "sha256": "250032919c8a28d914a0158216a7c43f79389587599e0e534f3966937d8cb38c",
+        "bytes": 697929
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs MutusBot - nViUqeab.json",
+      "positions": 53
+    },
+    {
+      "identity": {
+        "sha256": "0cf51927a48cff846df1c27f6c153d5d1db93a6b58df5d0cfc3b81596daf6c42",
+        "bytes": 656171
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Ndr1sn - 3yHc95pS.json",
+      "positions": 50
+    },
+    {
+      "identity": {
+        "sha256": "4b809a9cc888ecdf768b20ee1b653c38effc1630cea2c4cc301f719a88d0dabc",
+        "bytes": 923900
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Perl-GigaChess - WwybQSjn.json",
+      "positions": 81
+    },
+    {
+      "identity": {
+        "sha256": "5a0d9c95728fb0e44ce258f5e75cb6987f086d9604b3c221ee5e6ea13aa62e31",
+        "bytes": 596832
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Quirkafleeg-ZX48K - 59zOq6FN.json",
+      "positions": 51
+    },
+    {
+      "identity": {
+        "sha256": "8a345c03c4df0550c869d40303bc141a4ecdac4cfd358c895756937180cf3562",
+        "bytes": 899441
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs R0bspierre - 5RbuISTD.json",
+      "positions": 77
+    },
+    {
+      "identity": {
+        "sha256": "abb2290a6207e4fb24c363b51454454c70db69b670a836b1bdb64499c26583df",
+        "bytes": 1044034
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs SardineBot - SLxbGbFt.json",
+      "positions": 94
+    },
+    {
+      "identity": {
+        "sha256": "1eb0cd8a3c1c544c1bb82d8c7d41250dc84af3d05254805cdfb17e194a763185",
+        "bytes": 1481085
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs SleepMindEngine - KtVulsnk.json",
+      "positions": 146
+    },
+    {
+      "identity": {
+        "sha256": "4b3195d6605d5805bc2c47331aa196d8760e12c0f43077dd99a866f2059160c9",
+        "bytes": 1597438
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs SleepMindEngine - skkDmXAu.json",
+      "positions": 132
+    },
+    {
+      "identity": {
+        "sha256": "b82e8180b025b92a319c7d71825f7f02a523387aa0b391e3329be0c549fcb565",
+        "bytes": 1647621
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Sloth_Engine - Ustisvmm.json",
+      "positions": 157
+    },
+    {
+      "identity": {
+        "sha256": "a3806d7f21b525cfa7205c9bf48bdca10154f2f73d3e7b56cf2cac1b87e2fe79",
+        "bytes": 1445667
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Stronggoliath - p74AX63h.json",
+      "positions": 122
+    },
+    {
+      "identity": {
+        "sha256": "3ddc4faa3a8fa996165dcc7b30d93de3080f5091d52b109679a208e8de38d913",
+        "bytes": 2327545
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Supra_engine - Z4Zg7bYn.json",
+      "positions": 239
+    },
+    {
+      "identity": {
+        "sha256": "2242eed7652201fd790209185b7f1448748504f74fe38b4d398274c965192b18",
+        "bytes": 1136276
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs TerritoryBot - DrjE4O2r.json",
+      "positions": 97
+    },
+    {
+      "identity": {
+        "sha256": "797504fba3fd2015810b5668422cdf250dfe5deaf9bc6f5e18c9083724866b62",
+        "bytes": 919469
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs TheChessblazer - Z7uKj4jC.json",
+      "positions": 65
+    },
+    {
+      "identity": {
+        "sha256": "40733768ef2902ca33017d73ce57844bd6c2b1f211802327edda5ddd96868276",
+        "bytes": 1108833
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs TroutBot - JHf8LHRa.json",
+      "positions": 100
+    },
+    {
+      "identity": {
+        "sha256": "df831db25b2a11521f2ebc948540cfbc883a3fda8cf26e8a5f046ec61deb8e67",
+        "bytes": 1333121
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs TroutBot - gSsa1QLN.json",
+      "positions": 128
+    },
+    {
+      "identity": {
+        "sha256": "2e4e12fcc12737e95fd93e9c679b8a0f26afd2d54c27d1a252e0a6dce964d434",
+        "bytes": 1385693
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Z-O_AspenLabs - 7RPYss9J.json",
+      "positions": 122
+    },
+    {
+      "identity": {
+        "sha256": "d4708652d71d320716678a5340c426f833dd5ff245bde9496cbcc0ef866608ef",
+        "bytes": 2663010
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs Z-O_AspenLabs - eWmuPNmR.json",
+      "positions": 306
+    },
+    {
+      "identity": {
+        "sha256": "91992833825b9443447bf2eaff0173d4e28ae9ed1ed1d9b2d781ff708b8fd5f4",
+        "bytes": 1046623
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs byte-knight - LW7mc1tY.json",
+      "positions": 96
+    },
+    {
+      "identity": {
+        "sha256": "b2690176d566cfd10c8b66dfeff9b206071718524ce2ca89469bd44eac3e2bf6",
+        "bytes": 1113659
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs incipit_bot - 5R1Xa9ay.json",
+      "positions": 102
+    },
+    {
+      "identity": {
+        "sha256": "18adaba69d7c1b0fb393842ffc6ab76a501f7783f8a042f7b65e418d0336491e",
+        "bytes": 2171904
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs lamprook - rofyW9Uw.json",
+      "positions": 228
+    },
+    {
+      "identity": {
+        "sha256": "001088f35fd7c7429cb4a31a1ca04ae9ece27b9166129660c01aec43ad2c66e1",
+        "bytes": 1084479
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs littleply - 9CA9Sz2w.json",
+      "positions": 99
+    },
+    {
+      "identity": {
+        "sha256": "14c0d7461cd3e5d3a17a09bb91cbc0aff35a5b933770b6009c7827196aa44062",
+        "bytes": 1250471
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs manu-bot - unOdJ6Ba.json",
+      "positions": 113
+    },
+    {
+      "identity": {
+        "sha256": "f0f39c31e0fc3f4e813d40348bd04beebcfa5ac06cdafcfcb11f6ccb65d44274",
+        "bytes": 1348103
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs myChessJava - AVlXnr6L.json",
+      "positions": 114
+    },
+    {
+      "identity": {
+        "sha256": "79a57a111fcf5a3aa14c5b2c1713b93606fac47c1aa96b0c5f2565de0a7df35d",
+        "bytes": 1113892
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs ratsu-bot - Bwo78ywt.json",
+      "positions": 90
+    },
+    {
+      "identity": {
+        "sha256": "4266c3c70f7f794f218a39475dd08d6086b34cb390180fa133fb625d84c6670c",
+        "bytes": 834524
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs rudim-bot - n5N2xU29.json",
+      "positions": 70
+    },
+    {
+      "identity": {
+        "sha256": "f7eb79d190c41850ae22deea1f03cc1ca16a891364324837305564979d53e295",
+        "bytes": 560559
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs smartysprout - ZJE1kANQ.json",
+      "positions": 39
+    },
+    {
+      "identity": {
+        "sha256": "2866954bb7541c07ded8b143f8817b76480ecac9c2850be9ae3fb46875dadb98",
+        "bytes": 1042342
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs thunfisch-bot - KceAXtSE.json",
+      "positions": 94
+    },
+    {
+      "identity": {
+        "sha256": "e0b94dc6ed6ce3f3e29a89519ffd14b01ad72e7b59c516b88decbfa20aa0474a",
+        "bytes": 1282704
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs walpurti - rlaSxu4x.json",
+      "positions": 112
+    },
+    {
+      "identity": {
+        "sha256": "2275cf6b13ba661fdfaeabe8d761b0fe5a750e8086a1ed045b9de9f466f840d0",
+        "bytes": 1105623
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/GoPandaFish vs zion-bot - dS5HniCN.json",
+      "positions": 102
+    },
+    {
+      "identity": {
+        "sha256": "3848c513483a8cfaa99d29437584186edf67cc5a6af91129c6127d2a36be63a5",
+        "bytes": 776551
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Grindfish vs GoPandaFish - JJCmtTvg.json",
+      "positions": 59
+    },
+    {
+      "identity": {
+        "sha256": "750c5581b142c1a26b18ee74b22057f86de0fac95ed3d0fef0a92bc1eff7452b",
+        "bytes": 868884
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Jibbby vs GoPandaFish - mIlDvGLy.json",
+      "positions": 85
+    },
+    {
+      "identity": {
+        "sha256": "52bfba436733c52aa1ea78d16f027b90d6bab8b81bb44d4818353f3cd39e993b",
+        "bytes": 1102414
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/Joey_ChessEngine vs GoPandaFish - YGbXhDju.json",
+      "positions": 96
+    },
+    {
+      "identity": {
+        "sha256": "d928e6dc0139a36121aa5b753eb46a0f177d6e1d784bdd4b04ca4d6d3c810e28",
+        "bytes": 829983
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/JongsungKim vs GoPandaFish - 3Vs4DQ30.json",
+      "positions": 73
+    },
+    {
+      "identity": {
+        "sha256": "937c9a4cb2364aa2f3f5cd7770e22a347a4a11d09b0db40bfab75bba1681ab64",
+        "bytes": 671728
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/KirinChessBot1500 vs GoPandaFish - GmVBYy2I.json",
+      "positions": 54
+    },
+    {
+      "identity": {
+        "sha256": "88b0576f3399ea3c5740c8f24c100f0d02dedb23beb41ec53a26a862786bee81",
+        "bytes": 842509
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/LegoTechnicControlPl vs GoPandaFish - 9FT7vIEz.json",
+      "positions": 59
+    },
+    {
+      "identity": {
+        "sha256": "cb22d985ce7876978fce5200c9e8bf3d06fdd684ea0305f5a4b1c88f31541392",
+        "bytes": 683623
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/MilanBot vs GoPandaFish - 6Nup5qBd.json",
+      "positions": 49
+    },
+    {
+      "identity": {
+        "sha256": "dd3b37d13f7ac69719b88d758c8c84ff6dc221f8445ec87ec5cf3db7db5faf6e",
+        "bytes": 720058
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/MutusBot vs GoPandaFish - 3GmZfeIU.json",
+      "positions": 58
+    },
+    {
+      "identity": {
+        "sha256": "8754dec058c4b3d1c88e4557aacd2d1fea975864d988c60defe8b071cc561989",
+        "bytes": 1586251
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/NibbleKnight vs GoPandaFish - YMHob41k.json",
+      "positions": 151
+    },
+    {
+      "identity": {
+        "sha256": "8ef597c345c0880d5d1e2aed246e9c74c7c68fcdd3f7aedb5995b96af51c044f",
+        "bytes": 684702
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/O-Rei-CX vs GoPandaFish - 48CHb0oJ.json",
+      "positions": 54
+    },
+    {
+      "identity": {
+        "sha256": "c1557310535f007316b70f9b823d30b97a18c5181c101ca221fdbe50d2b7cf92",
+        "bytes": 669916
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/SeedChess vs GoPandaFish - ruzTzMtj.json",
+      "positions": 45
+    },
+    {
+      "identity": {
+        "sha256": "5de253b77410b9fb9a02b3eb9072e3229340047113da1d59117d9f11e9ae5eca",
+        "bytes": 652657
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/SleepMindEngine vs GoPandaFish - 23V05AWI.json",
+      "positions": 49
+    },
+    {
+      "identity": {
+        "sha256": "403c63995453f3f0def4a515a5ed0760d14bf43dd302efd1e726dda412546824",
+        "bytes": 414548
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/SquareFish-900 vs GoPandaFish - EnxvOcoj.json",
+      "positions": 40
+    },
+    {
+      "identity": {
+        "sha256": "2838a663e0bed5682b94b9ff9e5b8e8f50a5777b4a4115cb18ebbfa05d9aba6d",
+        "bytes": 927644
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/StockConda vs GoPandaFish - HVV4rIGQ.json",
+      "positions": 86
+    },
+    {
+      "identity": {
+        "sha256": "5f7c8e920d445371186a64c59b770260a018cf12c45e8c3218d77ebbda202681",
+        "bytes": 2347763
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/TopasBot vs GoPandaFish - 95LVf0TO.json",
+      "positions": 233
+    },
+    {
+      "identity": {
+        "sha256": "0c01187e6f271deab173044759e298f13ce2bb8bcd0ade06770bbc5957636bab",
+        "bytes": 983181
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/TrinculoBot vs GoPandaFish - m6B9i3bN.json",
+      "positions": 88
+    },
+    {
+      "identity": {
+        "sha256": "56ea3d056a91f5c5a7df82909ceb698d7fbdf954c0692a5ac7c04aab88eb6c85",
+        "bytes": 1020114
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/ZaatarTheCat vs GoPandaFish - rLbugNb3.json",
+      "positions": 94
+    },
+    {
+      "identity": {
+        "sha256": "cc55c957bfcf4a4d1e6f99153f409f6db9165f00799514c1634835c8ce57a4ba",
+        "bytes": 566289
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/ailedbot vs GoPandaFish - yhO4ggxY.json",
+      "positions": 40
+    },
+    {
+      "identity": {
+        "sha256": "5a5fb6ce82ecd8976c4f82fce5c85752231659af9f33bcc22c355c60a212600e",
+        "bytes": 1026298
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/baby_eubos vs GoPandaFish - 50kq2J5b.json",
+      "positions": 122
+    },
+    {
+      "identity": {
+        "sha256": "3e822dcb1a891e47e58a65859bb716e0689219d636a626739ea4a46e34bd7677",
+        "bytes": 472409
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/bernstein-4ply vs GoPandaFish - 2QjRexZ8.json",
+      "positions": 52
+    },
+    {
+      "identity": {
+        "sha256": "4c84900b0a012a2d53fdb06c7a20d93f7e75562c3173eb1cb2d190389cdfac8f",
+        "bytes": 312392
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/candidates.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "aa5f547866484bb59e15e526e9ade32b8790c7d5b3fa45f761178658803069b0",
+        "bytes": 806118
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/chatgpt5_5 vs GoPandaFish - YmoztEDQ.json",
+      "positions": 67
+    },
+    {
+      "identity": {
+        "sha256": "3d627a414f64f67a4254c522bd71a9f58a8680bb2bdf6ff89b526245166c25f0",
+        "bytes": 12379
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/confirmation.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "2a3eb0f94938b612a9ee527f02299921cb2c24d71ff3593b901272cb62b611ba",
+        "bytes": 862751
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/crocodile_bot vs GoPandaFish - PBPEKKp3.json",
+      "positions": 70
+    },
+    {
+      "identity": {
+        "sha256": "b4885b9de85544d0813d09f484f6eb6e5421c1d53a63e5b903563893d167b1c4",
+        "bytes": 766120
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/glorbo_evermorrow vs GoPandaFish - FlBFkERu.json",
+      "positions": 59
+    },
+    {
+      "empty_completed_game": true,
+      "identity": {
+        "sha256": "92a6e340553a872024d3555f1402fb8d82bfbc6fe11471d7c02a28e69c5fcaf4",
+        "bytes": 171
+      },
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/jester7777 vs GoPandaFish - bB4Gj7g3.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "90b03ff653123a3fc9a8b81c4cfe5a14e6603fee4ede407196bf54cd0e1cb883",
+        "bytes": 1021710
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/karl-engine-v1 vs GoPandaFish - wwxRtPYp.json",
+      "positions": 84
+    },
+    {
+      "identity": {
+        "sha256": "a0a3ba10c404281d0b49a16575bdbd9ffdcaed6e7e11e25d092a153247540d1c",
+        "bytes": 402489
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/kbelludoo vs GoPandaFish - iJ00aKHL.json",
+      "positions": 52
+    },
+    {
+      "identity": {
+        "sha256": "e50b01430f3641faf59bda459c92077f9c35294de786808b1bf43c49acffe2d8",
+        "bytes": 4572415
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/lamprook vs GoPandaFish - KgctDwEO.json",
+      "positions": 496
+    },
+    {
+      "identity": {
+        "sha256": "7b39abe3cc0040d3508256ff41a4917be3929a223bbfc5aac97556acb29c8139",
+        "bytes": 2533112
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/manu-bot vs GoPandaFish - VJoWDHPC.json",
+      "positions": 262
+    },
+    {
+      "identity": {
+        "sha256": "69ac6f504b7297f92654180606c509f1651900ef6c61a86ad7f79c6e03b29783",
+        "bytes": 1557671
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/manu-bot vs GoPandaFish - mBm0HUvS.json",
+      "positions": 140
+    },
+    {
+      "identity": {
+        "sha256": "ea67ef51e08eac82c7921638a188b761fcf34f5c21ff6cb874ed14adeaf5064e",
+        "bytes": 943044
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/mate1-bot vs GoPandaFish - RN2Chbl1.json",
+      "positions": 75
+    },
+    {
+      "identity": {
+        "sha256": "9da4a767d8d07560679eb8557e41d2b8e2bf4116f60370f6af0a2da0be520861",
+        "bytes": 577
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/method.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "d74beba74df13c37120fd09e3673ee1ab2029af1a01a4539ff49081ec826f40e",
+        "bytes": 1436845
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/nebubot vs GoPandaFish - DRSiOoTf.json",
+      "positions": 135
+    },
+    {
+      "identity": {
+        "sha256": "a37c1aebd333846c142c92892a7df8c96c83eaf21e9197bf9716cf8d7b023b73",
+        "bytes": 1270776
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/patgro986_bot vs GoPandaFish - yRhGYK9D.json",
+      "positions": 119
+    },
+    {
+      "identity": {
+        "sha256": "acd6a073c2db73aeb8d6c8cd2f05d192eba1052b5b29480d17e0430116079a6b",
+        "bytes": 1068865
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/princhess_policy_bot vs GoPandaFish - rMr32JUb.json",
+      "positions": 96
+    },
+    {
+      "identity": {
+        "sha256": "e3ac80e786788c7993ef5fc022e114936ee761f42694377bf88a49a6eb4cb4dc",
+        "bytes": 811661
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/rust-in-pieces vs GoPandaFish - FU3KLGg1.json",
+      "positions": 67
+    },
+    {
+      "identity": {
+        "sha256": "58fe9409cda39e7b1ce1dbe73947e81e4ef919e2d6d656f45811720fa2534005",
+        "bytes": 838959
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/rust-in-pieces vs GoPandaFish - HVVQVqOZ.json",
+      "positions": 67
+    },
+    {
+      "identity": {
+        "sha256": "03ae6535b1985f60a99361636fe2f9a8ea134465ede4a6fc24b39f46dbbb2c0c",
+        "bytes": 1866305
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/spyros1bot vs GoPandaFish - q2mkXBUe.json",
+      "positions": 222
+    },
+    {
+      "identity": {
+        "sha256": "01a886e61f5922419fb3386b40d0e3b107bea1ff429528d6728b305e77616f97",
+        "bytes": 1171051
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/sseh-c vs GoPandaFish - gNQRBta1.json",
+      "positions": 103
+    },
+    {
+      "identity": {
+        "sha256": "16f2b95d91538743c4642739cc0bbb6f56e508379c28686756878b3bc433b1d0",
+        "bytes": 1028
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/summary.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "91d0ebc53638aac7091b2833841e5327b31a7e579f3107658995fec2d847df88",
+        "bytes": 2113877
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261118-120005/analysis/stockfish-n100000/sunfish-nnue-engine vs GoPandaFish - TiOrLhnj.json",
+      "positions": 198
+    },
+    {
+      "identity": {
+        "sha256": "9f4901b67d65c8b5893d7b61563e5dc5a90643e5a431b129afdb4a115091b120",
+        "bytes": 920355
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/Angela_eng vs GoPandaFish - sIxuenPs.json",
+      "positions": 80
+    },
+    {
+      "identity": {
+        "sha256": "19872d136d0ebe84c66daf92530a8dbef16094e18f6cc2aa7a41cce89330055a",
+        "bytes": 382981
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/Chessiverse_Ethan vs GoPandaFish - A4Hg9awN.json",
+      "positions": 38
+    },
+    {
+      "identity": {
+        "sha256": "12d730ba7a54c8521794aa8c6a8fa6b08676af61853bde18f8e68e2b91d67ae9",
+        "bytes": 760075
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs AetherBot - otr1y1Bs.json",
+      "positions": 96
+    },
+    {
+      "identity": {
+        "sha256": "784a99fefdc237b1aefe9785215b43caa426b2c867e5da9f9e3d16c3a85ee7f8",
+        "bytes": 838842
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs Chessiverse_Luc - o8HptRoh.json",
+      "positions": 83
+    },
+    {
+      "identity": {
+        "sha256": "4a1db745d1b99917cf02c94b069cb3b314e810afafed91ccee0b2729aa455e54",
+        "bytes": 1574607
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs Chessiverse_Pawnza - u4xtX1iv.json",
+      "positions": 156
+    },
+    {
+      "identity": {
+        "sha256": "e83f7e5aa13f4794e4c202c42c901c0671b08c61f709f632102776f9bd8d246c",
+        "bytes": 605276
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs FenrirBot - 1TrbIGaE.json",
+      "positions": 44
+    },
+    {
+      "identity": {
+        "sha256": "c3d04cdb9926cc66ad401e76eef20cedecef5dceeb8a2f89ccf8f66f748d6bd4",
+        "bytes": 825601
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs GambitOnlyBot - 9m86yw5x.json",
+      "positions": 56
+    },
+    {
+      "identity": {
+        "sha256": "beeb558388cf9485f86f97b1d6022fa451e320bcc7ecec608c681643624fb36e",
+        "bytes": 998382
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs HardRok - faVjqhvv.json",
+      "positions": 88
+    },
+    {
+      "identity": {
+        "sha256": "cc7905c8fad5c4bbee3af4f09ceeff872b168684d085e129f0dcc754b0d4c674",
+        "bytes": 2376010
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs Iskelt-Corax - bw0hYYqY.json",
+      "positions": 232
+    },
+    {
+      "identity": {
+        "sha256": "7210883705d004b310b7b6dccef8a089bd8c6ef51767eff720b566557c43c461",
+        "bytes": 729848
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs MarlinChessBot - c4POr7th.json",
+      "positions": 65
+    },
+    {
+      "identity": {
+        "sha256": "1aa02715409e8e964824e5bd8bab1219a28b326904ff294f0d3be89f3e6adcf4",
+        "bytes": 1121299
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs MilanBot - D6rn4haK.json",
+      "positions": 99
+    },
+    {
+      "identity": {
+        "sha256": "cc8dfecf6e44e7cbeb25708b544e1ab68b9bf8009f8b18b4ef23a56c5c669836",
+        "bytes": 508716
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs MostlyHuman1900 - VWr9LKNk.json",
+      "positions": 57
+    },
+    {
+      "identity": {
+        "sha256": "b36e75d7077ff6200aac92af309e9a6044e385cbc72c9e4681e4da9638f463a0",
+        "bytes": 1497937
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs NICE_BOT - 5khQm35W.json",
+      "positions": 151
+    },
+    {
+      "identity": {
+        "sha256": "38945b6da3753dd56f63bce470782174df81343e4c702e76df5fe2c85ea17a77",
+        "bytes": 1053541
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs Ponytail_engine - X4j9rEtC.json",
+      "positions": 92
+    },
+    {
+      "identity": {
+        "sha256": "8c38eef3fcd09894792dacc4599be26600769d15174315ee5e16d8b01ad6b01e",
+        "bytes": 624067
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs SJ_NorBot - ZiWwAAsF.json",
+      "positions": 49
+    },
+    {
+      "identity": {
+        "sha256": "3ad087e46b411463457aa9a326d2b39aa6c0a6fd61862d49e14f2699799f6ae6",
+        "bytes": 867838
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs icarus-bot - R5SDcDSV.json",
+      "positions": 72
+    },
+    {
+      "identity": {
+        "sha256": "d0643ed422137ba87babbb31d2471fa0f1344bc735c3d35cb95bbba4914e0659",
+        "bytes": 762073
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs incipit_bot - U1Z9lTsh.json",
+      "positions": 60
+    },
+    {
+      "identity": {
+        "sha256": "e202d37033e0837e4e5ad22fe5e0cc8090989d6c40024cb014d419860e5cc7f2",
+        "bytes": 1152579
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs kopyto_dev - jMayAOLf.json",
+      "positions": 115
+    },
+    {
+      "identity": {
+        "sha256": "8fc88f13d4d8120d4373450c8d1f073c479cc979326dc570a69186bf3275cd45",
+        "bytes": 1164695
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs manu-bot - fAa1ypzA.json",
+      "positions": 107
+    },
+    {
+      "identity": {
+        "sha256": "9b22f70f67f5780f964abddb7a730f84e0d81ea754eabfa079f1fe8bd8e63ce5",
+        "bytes": 864134
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs princhess_policy_bot - sG9ZxJFN.json",
+      "positions": 69
+    },
+    {
+      "identity": {
+        "sha256": "17f021c04be97b0445413b7395c969c4243eaebaeeccd55c54b846cccbc74d73",
+        "bytes": 825589
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs prokopakop - XDKx7goI.json",
+      "positions": 66
+    },
+    {
+      "identity": {
+        "sha256": "6438f57431b3d0c1b8405f703188c5d71b20d8307079a1458046406802852f22",
+        "bytes": 1084370
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs rudim-bot - vrPZQy5O.json",
+      "positions": 96
+    },
+    {
+      "identity": {
+        "sha256": "afd1c740b672635a87ee8ac86d4c82ba6bbfb36945bd5f8e8afda265198127ca",
+        "bytes": 1183660
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs sseh-c - Ah9LcQlH.json",
+      "positions": 109
+    },
+    {
+      "identity": {
+        "sha256": "b744476b64bda73f15038b25fa95efc4bca59e807b05ec16a800cf2f1a90848a",
+        "bytes": 931065
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/GoPandaFish vs uSunfish-l7 - bcmp5xRI.json",
+      "positions": 85
+    },
+    {
+      "identity": {
+        "sha256": "ae82ec267c23dd843c13c9c0c51e59b00a08264dcda63a6712d3110dbb6906b7",
+        "bytes": 694054
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/Jaxakos13_bot vs GoPandaFish - qRnP8DNI.json",
+      "positions": 51
+    },
+    {
+      "identity": {
+        "sha256": "c470f0b765e5e7d276a449c0c333878ade5c56e2994e841c9c56279f5649006c",
+        "bytes": 1253178
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/LentusChess vs GoPandaFish - oRSwsRb3.json",
+      "positions": 108
+    },
+    {
+      "identity": {
+        "sha256": "249a479134160766e9e173d213523b2cc26357631bbaabaaec609340fd5e8fd7",
+        "bytes": 1164677
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/MudskipperBot vs GoPandaFish - 2V40jKiJ.json",
+      "positions": 85
+    },
+    {
+      "identity": {
+        "sha256": "914410519b0681b51d0508602f779ff5fe79e72f687c834ff81ac1ee4f1763ee",
+        "bytes": 904690
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/NICE_BOT vs GoPandaFish - gwliYouc.json",
+      "positions": 107
+    },
+    {
+      "identity": {
+        "sha256": "4befe2358da3c544847595135eeab8eb546f68242e1633d609e9816ebd464e1e",
+        "bytes": 1318883
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/Noksiy vs GoPandaFish - JwEJzRsX.json",
+      "positions": 121
+    },
+    {
+      "identity": {
+        "sha256": "2db6e19b1cce59befea8793de8e5868af8a38be3c5f917575ef8c9a58118d38b",
+        "bytes": 703570
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/SimonEricAfonso vs GoPandaFish - g29qunfO.json",
+      "positions": 64
+    },
+    {
+      "identity": {
+        "sha256": "521f210500e2f37e4ea0761e96cee777395f977e6b94a1dbd1f096984ad97f20",
+        "bytes": 775969
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/TroutBot vs GoPandaFish - EDoYRsVz.json",
+      "positions": 63
+    },
+    {
+      "identity": {
+        "sha256": "403dea0035023aceac562215dc83e5fd940550d7823e912711e2b3bd7daac29e",
+        "bytes": 1310235
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/bot64jaques vs GoPandaFish - RuCn73pd.json",
+      "positions": 127
+    },
+    {
+      "identity": {
+        "sha256": "a5ef247285db42e9dd9996424109b043af6985575676cad3a2a896f1543c7d50",
+        "bytes": 112402
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/candidates.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "b90bf00aa36a398c8b996eed40f8b0761092170d774d4824af479c6e967d183d",
+        "bytes": 13371
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/confirmation.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "2a05f861e4b6134d8056ca752854c5d3e3099ac8f25375478efdcd065d0e9e41",
+        "bytes": 1447145
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/lamprook vs GoPandaFish - MhLL6txE.json",
+      "positions": 129
+    },
+    {
+      "identity": {
+        "sha256": "78de8432308ad2bed7c02edad6c01b9be3a8daf79c25005dfc8a0e4b15a0f2e3",
+        "bytes": 577
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/method.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "c4b7dce615520e31ec02bdabdc1ea5a0b1920f0ffd70eb136a1a33e0b2deaec5",
+        "bytes": 995
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.22-live-20261119-151427/analysis/stockfish-n100000/summary.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "2d2ccd5d0508dcc2461c3f4abe96e904dfdcee3fddb7f3bca7538daf26162f64",
+        "bytes": 453576
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/CruelKen vs GoPandaFish - aLyp5bQ9.json",
+      "positions": 27
+    },
+    {
+      "identity": {
+        "sha256": "ea5f13089bae7e45d7777a57f1a8008945de7b289e5d9460af54143509c801fd",
+        "bytes": 1059268
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs Bongaclang - gqoXnl0F.json",
+      "positions": 90
+    },
+    {
+      "identity": {
+        "sha256": "7f63c2e289f662225aa4cff66f7bad266a65733fa5cd7cc7ee170cabc3c19ca5",
+        "bytes": 624302
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs BorkaTower - orRYNDY7.json",
+      "positions": 64
+    },
+    {
+      "identity": {
+        "sha256": "abf49370dd86c1965d01e0774662b0936527db5f5e360a36071e14184884efd2",
+        "bytes": 596309
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs ChessGeniusBot - 3RfwEqFZ.json",
+      "positions": 42
+    },
+    {
+      "identity": {
+        "sha256": "dd46aaf7d8c30d0272c33b4045e1ed7a8530776cb6603f7953ffaa1568f94be7",
+        "bytes": 486476
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs CruelKen - qurbp5Yx.json",
+      "positions": 44
+    },
+    {
+      "identity": {
+        "sha256": "44c70809a497aed1cdf018451c13487962adaf15a7e6e5998eab7b6925ee7583",
+        "bytes": 751398
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs DarkElectronBot - FIEmNFLQ.json",
+      "positions": 78
+    },
+    {
+      "identity": {
+        "sha256": "7f13aa8bb38b02b89c01edf7b44e1e639b5eea5d7c32f36831c7f633891ddd0c",
+        "bytes": 1515549
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs HardRok - Fr0PwIwd.json",
+      "positions": 144
+    },
+    {
+      "identity": {
+        "sha256": "a93890d572327336d2c3b95dca23e7a2a1b8c7bf4dd4c5c6823e471055c8f312",
+        "bytes": 1147855
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs Lightning-762 - U2vCK8ax.json",
+      "positions": 98
+    },
+    {
+      "identity": {
+        "sha256": "d0b7f10401ff6df5b01fda0ad3470b153d171b19c7f84ab900f090cd8af11d33",
+        "bytes": 593160
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs ManyMachinesOnIX - kaPNNDev.json",
+      "positions": 48
+    },
+    {
+      "identity": {
+        "sha256": "d285e9082aeb181ef49b3ac3dd31fb44b891a7bd4fe42613d4a6a30911e5a5a3",
+        "bytes": 480854
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs Moteur441 - mEY6KGOi.json",
+      "positions": 34
+    },
+    {
+      "identity": {
+        "sha256": "1753f1ea74a44c182671be9e0f32bfabf9e2cf37bad8144e1e85f78b53828d7b",
+        "bytes": 402276
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs PeachFruit - aiWAHFRM.json",
+      "positions": 36
+    },
+    {
+      "identity": {
+        "sha256": "98bf84ef935d6997316d3f472d301bf9d2a5463149bda8ddfbf548c9ff192259",
+        "bytes": 1535642
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs R0bspierre - Lkfnlfui.json",
+      "positions": 142
+    },
+    {
+      "identity": {
+        "sha256": "7ced4c3af6d6f0b56ad9c62fddb408a87e1dbc5cabad462c1f61f66523c468fa",
+        "bytes": 547840
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs SleepMindEngine - uKThpMAl.json",
+      "positions": 42
+    },
+    {
+      "identity": {
+        "sha256": "72bfbcb17ed7239f42f1790f0f6f93e920256e2a04a05a4b0021e01733bef666",
+        "bytes": 1456428
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs SquareFish-900 - NpakTGGj.json",
+      "positions": 85
+    },
+    {
+      "identity": {
+        "sha256": "4148ccc4d13f9531b412bf2d6306aa6e62c51e16e131a4311f3db03ea645baaf",
+        "bytes": 4510957
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs SquareFish-900 - pYNsRFix.json",
+      "positions": 137
+    },
+    {
+      "identity": {
+        "sha256": "bc8879d913a0ef7454380e7f48a183ed92d557748cc57bb3d160224860f6e1a1",
+        "bytes": 653895
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs aposeij - eQWlFWWF.json",
+      "positions": 50
+    },
+    {
+      "identity": {
+        "sha256": "3706c7269ebf1e6ac96031e5c3a91c4ee934fc53de74a5ab1460ed844ddba393",
+        "bytes": 753787
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs aposeij - sBnSP8kD.json",
+      "positions": 76
+    },
+    {
+      "identity": {
+        "sha256": "905e66c8278357ae6942544ff789b11a7ed03aaebfe8470e6c7c52f1d704ce58",
+        "bytes": 1765310
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs debzero - UYEjyC5W.json",
+      "positions": 164
+    },
+    {
+      "identity": {
+        "sha256": "ae5060565163802607734bc8ae6eb48b8855b58aaf29f99445dcc12b3cde0d1b",
+        "bytes": 751152
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs jpg-bot - XkuKZPlt.json",
+      "positions": 60
+    },
+    {
+      "identity": {
+        "sha256": "2dbffcc9cb74bdb562393e7f7a263f0399a9b069ab0df7c8e56711ebacf213c0",
+        "bytes": 876960
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs kopyto_dev - t9sARTEN.json",
+      "positions": 58
+    },
+    {
+      "identity": {
+        "sha256": "b3536994f29dea67a8be0e237c9a1f3f3438fefad3acb96d433021cc0a46376d",
+        "bytes": 671842
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs littleply - hYr1FYNL.json",
+      "positions": 77
+    },
+    {
+      "identity": {
+        "sha256": "69841a3a900b194963430be8e2410068fa81d3ddc0cc186bd375bd5e3d66da55",
+        "bytes": 568611
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs lukebot - ksQeVnG2.json",
+      "positions": 42
+    },
+    {
+      "identity": {
+        "sha256": "bc754e96d8fb69798a7c1fc136620533c84b68cbf253c35f71bf87aa3554b2c6",
+        "bytes": 2620314
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs scipio-bot - 5ApneMbA.json",
+      "positions": 301
+    },
+    {
+      "identity": {
+        "sha256": "cf35db24feec4285b98a5da2769b1d017187d10b2b99d69fde4226fe6652d167",
+        "bytes": 8889930
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs scipio-bot - DnpnFIKb.json",
+      "positions": 241
+    },
+    {
+      "identity": {
+        "sha256": "c78dc5ced89257ecd6682b4421f2f787478ae796ce4b959e9bb1f216bfff3e39",
+        "bytes": 860033
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/GoPandaFish vs sleepish - PQppCXQX.json",
+      "positions": 78
+    },
+    {
+      "identity": {
+        "sha256": "048981077d1f4bd3916b767f8691e3901d0990c82dc788b9e25a1afd5af538a2",
+        "bytes": 696214
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/Jaxakos13_bot vs GoPandaFish - Oq5c8fD1.json",
+      "positions": 53
+    },
+    {
+      "identity": {
+        "sha256": "46ced62ed216f9f2a6e178bff2c208c34537f12f1712cc784e7b00446574f6cb",
+        "bytes": 1058100
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/JurdBird vs GoPandaFish - ThL1IKzb.json",
+      "positions": 134
+    },
+    {
+      "identity": {
+        "sha256": "23ed6ff23aef8f080178427a35d33a2ecfbf07971ef51dc4406f6ff2ea5b9a43",
+        "bytes": 639237
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/Kapablanca_balls vs GoPandaFish - sOYgQQ8g.json",
+      "positions": 49
+    },
+    {
+      "identity": {
+        "sha256": "60949029f2a7ff8c1bf452a95d81ac3044a015ebcfe190a21ee438aa3d193831",
+        "bytes": 658513
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/KirinChessBot2000 vs GoPandaFish - 0d3mGqB4.json",
+      "positions": 37
+    },
+    {
+      "identity": {
+        "sha256": "209ed942d3adaffbe5998f3e9aa65a41be20b59c16f8d62debdcf5c313929e33",
+        "bytes": 690856
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/LevyMaia vs GoPandaFish - un7IhthI.json",
+      "positions": 67
+    },
+    {
+      "identity": {
+        "sha256": "d4771aed64e634a323613371f81fac90922e171f48454b62d099f5823200473c",
+        "bytes": 957034
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/MilanBot vs GoPandaFish - j9jUu1vU.json",
+      "positions": 91
+    },
+    {
+      "identity": {
+        "sha256": "4895ca0dc7d6d9a1ef1a99e247f2400be9b13d110a92ce5680b6ac840d523d8e",
+        "bytes": 1122680
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/O-Rei-CX vs GoPandaFish - jsl3DIqX.json",
+      "positions": 105
+    },
+    {
+      "identity": {
+        "sha256": "9ff214998ab428a79dad03be13b494f35a8618066d584c19e76b4180bc5d0a3e",
+        "bytes": 739256
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/SeedChess vs GoPandaFish - SFgUSPLz.json",
+      "positions": 59
+    },
+    {
+      "identity": {
+        "sha256": "28e75d1569236b6c3d4806c3d35f96c72d3f2c4b039557e20cf372788b6c36f5",
+        "bytes": 581574
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/Tente8x vs GoPandaFish - OTPuHqNv.json",
+      "positions": 45
+    },
+    {
+      "identity": {
+        "sha256": "f82a577f576a415c83a264c01b4518223772329988b8862a4d9d3f60dd6df4e9",
+        "bytes": 775768
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/TheChessblazer vs GoPandaFish - RTekQhPS.json",
+      "positions": 59
+    },
+    {
+      "identity": {
+        "sha256": "34e055e4230fa34bf1aa6314eab6cdf1a14a09ced1f33f0e7170c022f848babb",
+        "bytes": 604646
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/ThomEngine vs GoPandaFish - SPVS0wx3.json",
+      "positions": 41
+    },
+    {
+      "identity": {
+        "sha256": "32bd848310b7a9b27a1e1567bcf023d4638d4bff33ef4d23d2bb148fa18cf2bd",
+        "bytes": 170926
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/candidates.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "bd31922e486c46ed520176728a6d25a67909cd55f17ea32e0684751ca877903a",
+        "bytes": 10378
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/confirmation.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "956bc10595732f1c89d2f3f8d72a797ec1ae1a214f981e11dfc84d21a8584878",
+        "bytes": 218257
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/dala-2000 vs GoPandaFish - JLOkDEs6.json",
+      "positions": 28
+    },
+    {
+      "identity": {
+        "sha256": "9e9d9d85fa3089886694abaaa790e6bad847e7b3e22d99a2d08aad5e94ee092b",
+        "bytes": 524260
+      },
+      "ignored_non_game_metadata": false,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/laura-bot vs GoPandaFish - kwA07saM.json",
+      "positions": 43
+    },
+    {
+      "identity": {
+        "sha256": "84c47a5958a2716f411ca88ea460c978a86c601d58d714bd6e05e84229ec9e1d",
+        "bytes": 577
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/method.json",
+      "positions": 0
+    },
+    {
+      "identity": {
+        "sha256": "e96dc294e6c6402022a4f2c5c0cb342f449f555f0c5af2e32e6fd1dd026d4c88",
+        "bytes": 1023
+      },
+      "ignored_non_game_metadata": true,
+      "path": "tools/benchmark/live/v0.8-twitch-m2-20261111/analysis/stockfish-n100000/summary.json",
+      "positions": 0
+    }
+  ]
+}

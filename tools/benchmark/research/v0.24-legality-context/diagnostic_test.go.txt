@@ -1,0 +1,110 @@
+package chess
+
+import (
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+func TestLegalityDiagnosticTransitionControls(t *testing.T) {
+	out := os.Getenv("LEGALITY_CONTROL_OUTPUT")
+	if out == "" {
+		t.Skip("explicit shadow control requested")
+	}
+	BeginLegalityDiagnostic()
+	defer func() {
+		if e := EndLegalityDiagnostic(out); e != nil {
+			t.Fatal(e)
+		}
+	}()
+	TestVirtualTagsMatchBothTransitionOracles(t)
+}
+
+func TestLegalityDiagnosticCost(t *testing.T) {
+	input, out := os.Getenv("LEGALITY_COST_INPUT"), os.Getenv("LEGALITY_COST_OUTPUT")
+	if out == "" {
+		t.Skip("explicit cost sample required")
+	}
+	var roots struct{ Rows []struct{ FEN string } }
+	b, e := os.ReadFile(input)
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = json.Unmarshal(b, &roots); e != nil {
+		t.Fatal(e)
+	}
+	type sample struct {
+		p        *Position
+		c        diagnosticContext
+		moves    []Move
+		eligible []Move
+	}
+	samples := []sample{}
+	total, eligible := 0, 0
+	for _, r := range roots.Rows {
+		option, e := FEN(r.FEN)
+		if e != nil {
+			t.Fatal(e)
+		}
+		p := NewGame(option).Position()
+		s := sample{p: p, c: diagnosticBuild(p)}
+		// Legal ordinary moves give a bounded root-distribution cost control. The
+		// full warm shadow separately counts all actual pseudo-legal tag calls.
+		for _, m := range p.AppendSearchMoves(nil, false) {
+			if diagnosticOrdinary(m, p) {
+				s.moves = append(s.moves, m)
+				if diagnosticEligible(&s.c, m, p) {
+					s.eligible = append(s.eligible, m)
+				}
+			}
+		}
+		total += len(s.moves) * 2
+		eligible += len(s.eligible)
+		samples = append(samples, s)
+	}
+	if len(samples) != 1145 {
+		t.Fatal("coverage", len(samples))
+	}
+	var sink diagnosticContext
+	var attacked bool
+	contextCost := testing.Benchmark(func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sink = diagnosticBuild(samples[i%len(samples)].p)
+		}
+	})
+	query := func(p *Position, m Move, side Color) bool {
+		piece, captured := p.board.Piece(m.s1), p.board.Piece(m.s2)
+		from, to := bbForSquare(m.s1), bbForSquare(m.s2)
+		occupied := (^p.board.emptySqs &^ from) | to
+		king := p.board.kingSquare(side.Other())
+		if piece.Type() == King && piece.Color() == side.Other() {
+			king = m.s2
+		}
+		return searchAttackedAfterOrdinary(p.board, king, side, piece, captured, from, to, occupied)
+	}
+	allCost := testing.Benchmark(func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			s := samples[i%len(samples)]
+			for _, m := range s.moves {
+				attacked = query(s.p, m, s.p.turn.Other())
+				attacked = query(s.p, m, s.p.turn)
+			}
+		}
+	})
+	eligibleCost := testing.Benchmark(func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			s := samples[i%len(samples)]
+			for _, m := range s.eligible {
+				attacked = query(s.p, m, s.p.turn.Other())
+			}
+		}
+	})
+	result := map[string]any{"roots": len(samples), "ordinary_root_queries": total, "eligible_root_queries": eligible, "context_ns_per_root": contextCost.NsPerOp(), "all_queries_ns_per_root": allCost.NsPerOp(), "eligible_queries_ns_per_root": eligibleCost.NsPerOp(), "all_query_mean_ns": float64(allCost.NsPerOp()) * float64(len(samples)) / float64(total), "eligible_query_mean_ns": float64(eligibleCost.NsPerOp()) * float64(len(samples)) / float64(eligible), "limits": "Root legal-move cost sample, not descendant tag weighting. Go benchmark calibration is not an alternating whole-engine speed test. Context cache/eligibility lookup overhead is excluded, so the net proxy is optimistic.", "sink_checked": sink.checked, "sink_attacked": attacked}
+	b, e = json.MarshalIndent(result, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile(out, append(b, '\n'), 0644); e != nil {
+		t.Fatal(e)
+	}
+}

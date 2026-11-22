@@ -1,0 +1,8 @@
+{
+ "version":1,
+ "inputs":["/tmp/pandafish-v024-draw-baseline-shadow.test","/tmp/pandafish-v024-draw-candidate-shadow.test","tools/benchmark/research/v0.24-draw-semantics/witness_test.go.txt","tools/benchmark/research/v0.24-draw-semantics/instrument_witness.go.txt","tools/benchmark/research/v0.24-draw-semantics/candidate-source.json"],
+ "steps":[
+ {"name":"baseline-shadow","command":["/tmp/pandafish-v024-draw-baseline-shadow.test","-test.run=^TestResearchDrawWitness$","-test.count=1","-test.v"],"env":{"DRAW_WITNESS_OUTPUT":"tools/benchmark/research/v0.24-draw-semantics/baseline-witness.json","WARM_OUTPUT":"/tmp/pandafish-draw-baseline-shadow-rows.json","WARM_INPUT":"tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba","WARM_MODE":"search","WARM_DEPTH":"5"},"outputs":["tools/benchmark/research/v0.24-draw-semantics/baseline-witness.json","/tmp/pandafish-draw-baseline-shadow-rows.json"],"timeout_seconds":600},
+ {"name":"candidate-shadow","command":["/tmp/pandafish-v024-draw-candidate-shadow.test","-test.run=^TestResearchDrawWitness$","-test.count=1","-test.v"],"env":{"DRAW_WITNESS_OUTPUT":"tools/benchmark/research/v0.24-draw-semantics/candidate-witness.json","WARM_OUTPUT":"/tmp/pandafish-draw-candidate-shadow-rows.json","WARM_INPUT":"tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba","WARM_MODE":"search","WARM_DEPTH":"5"},"outputs":["tools/benchmark/research/v0.24-draw-semantics/candidate-witness.json","/tmp/pandafish-draw-candidate-shadow-rows.json"],"timeout_seconds":600}
+ ]
+}

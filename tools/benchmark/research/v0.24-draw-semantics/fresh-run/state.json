@@ -1,0 +1,666 @@
+{
+  "version": 1,
+  "plan_sha256": "cc0189b2b8b91311955c21103ce80288ae04a50eb703cb69098292d3c9c9420a",
+  "inputs": {
+    "/opt/homebrew/bin/stockfish": {
+      "sha256": "dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f",
+      "bytes": 99868024
+    },
+    "/tmp/pandafish-cleanup-research": {
+      "sha256": "ab85d17c47b31c1436e5df776e122732f38ce7d07390a9c7f2dcd0029f8ad3ec",
+      "bytes": 6015330
+    },
+    "candidate_probe_test.go": {
+      "sha256": "52f8b5c6583f8cb1474471cb8536d36d128d43f9942715128121ea1fb2550ec5",
+      "bytes": 2656
+    },
+    "context_corpus_test.go": {
+      "sha256": "ed1baf2f9496e9977ab7343bed10c1ee5b3a3692b907447d275ec3330cc1a887",
+      "bytes": 1703
+    },
+    "evaluation.go": {
+      "sha256": "683545c42a15f64aae62eb339218755efac3d0c63c4b2aeeb342cf5abfc0e513",
+      "bytes": 2970
+    },
+    "evaluation_kernel.go": {
+      "sha256": "a8334e3bbfd3bd6a95c998343f67704cf03f498835e656d080a264215d4e813b",
+      "bytes": 830
+    },
+    "evaluation_kernel_test.go": {
+      "sha256": "06d2b1b13cdce58059de4771c4101c263e229e4cd9d4fc4fca1fb4fe453e4d6d",
+      "bytes": 3067
+    },
+    "evaluation_test.go": {
+      "sha256": "4a52c7c1092c5da0fd998bd6fde742d6dc87a1e5a9ad66f1454a6d2bbbbe5199",
+      "bytes": 3343
+    },
+    "evasion_moves_test.go": {
+      "sha256": "b96f79bfd2b28ee81c15ad75984261448e90941bf2fb0aeae7a058eb0bc8b9a5",
+      "bytes": 2768
+    },
+    "exchange.go": {
+      "sha256": "07f0056c344c23c8480a24448b7150df457d05367cc6fa3b07309ed4455c6188",
+      "bytes": 2382
+    },
+    "exchange_bits.go": {
+      "sha256": "3f40487e07d3088a2ebead731a78727d66a2105bef68b5599328268d53a458d2",
+      "bytes": 4030
+    },
+    "exchange_bits_test.go": {
+      "sha256": "c7f60887750cea1820fe606e7756778eb12b54a4b725df47a361d0129484b595",
+      "bytes": 2779
+    },
+    "exchange_test.go": {
+      "sha256": "e71f82cce4de851991786093aa1f5931f84bd987df6f8648802eabe3f043c6fd",
+      "bytes": 5186
+    },
+    "go.mod": {
+      "sha256": "1ca5478f8043912d81fa323a50c1cb70de42e8536761096eac4daec7549657c8",
+      "bytes": 190
+    },
+    "go.sum": {
+      "sha256": "5907156a87fd9910caa211d47655f6787448ccd6b79ab70f12a23f6842a540f8",
+      "bytes": 543
+    },
+    "internal/telemetry/telemetry.go": {
+      "sha256": "80abb632fa2a587c63210b6f1cf7ea59dd1405f6a8cd845360accf7d77faa0a7",
+      "bytes": 2526
+    },
+    "internal/telemetry/telemetry_test.go": {
+      "sha256": "ad079e53fee752163d62116f0c488d7d6678d6d1e7dc75bf491e5f92b18a629d",
+      "bytes": 1177
+    },
+    "iterative.go": {
+      "sha256": "409f92c5553fb7479985f770a4f75b741b8c4bb1a82ef2361b5a11fc019e023a",
+      "bytes": 4542
+    },
+    "iterative_test.go": {
+      "sha256": "7093504b59fd5c21e51f3c1c6dd377e5f1b7760bde6f6b9fc56b212b7d48a593",
+      "bytes": 4330
+    },
+    "killers.go": {
+      "sha256": "f9e1458a5b974b8f32e498304b88db3d7dcbea1a0298a4a0be35a5c9fb72e90c",
+      "bytes": 1319
+    },
+    "killers_test.go": {
+      "sha256": "7674a3e5bea294f23b6ce9e757d4a92bbd6add98ddd83a40a96274bc8489f06c",
+      "bytes": 6767
+    },
+    "limits.go": {
+      "sha256": "7605e6b48b329dadb222890d1ae8588f50e92f091a8cd509c69f356f7bc354ba",
+      "bytes": 3406
+    },
+    "limits_test.go": {
+      "sha256": "1615ddd4ccf88bfddeb98d560658a234e651f2b0811822ba999106e70ae70406",
+      "bytes": 2698
+    },
+    "main.go": {
+      "sha256": "2258ceb265b1e3740d3f4c664054b6a447f112509fa552cb491b933513e86144",
+      "bytes": 4876
+    },
+    "main_move_picker.go": {
+      "sha256": "059a8f09e6fa97b3327abd914981279b642ca84a8e70aa2db2b02799d6258108",
+      "bytes": 3982
+    },
+    "main_move_picker_test.go": {
+      "sha256": "513c7aa7af6a272b343c3833ed2e641029cde73a60bb91c92208a470e698a28a",
+      "bytes": 6218
+    },
+    "main_test.go": {
+      "sha256": "88ac57e30e63f1cda6b702b9d433e8296e35acd1ee8b19a6af2556c5381bb7f9",
+      "bytes": 8411
+    },
+    "mate.go": {
+      "sha256": "728dc306664b92fb152ac59e1caa5385792d17354ec3cf3b13c89477d258d8aa",
+      "bytes": 1128
+    },
+    "mate_test.go": {
+      "sha256": "9ecd2653781aa3726066b19bbc4d05377baf37de7462169e10e9baa4cc10d563",
+      "bytes": 5033
+    },
+    "quiescence_test.go": {
+      "sha256": "f04df5ea6b01927b872a732d75f2d66dc8fa400e8d1214c555774ac712ea4999",
+      "bytes": 10661
+    },
+    "reference_exchange_test.go": {
+      "sha256": "27d85012b3324c3fdbb4eb21ef190706fb77c3ae0c33baa0f77c9c88855f26f5",
+      "bytes": 4805
+    },
+    "repetition.go": {
+      "sha256": "5cf04b5fbd69249fdb05a20450bc71769a83c4048dc02d66fd9ce1649ce252b6",
+      "bytes": 1540
+    },
+    "repetition_test.go": {
+      "sha256": "2dcc78bf2f3c55bb52d1775fddb7a0dab7655dd03236c6ea5f8596a5855b9fa2",
+      "bytes": 3030
+    },
+    "reporting.go": {
+      "sha256": "3d23f2890894e8bf869098f11597727e705038da1e256c05db4becb59fafb7b4",
+      "bytes": 576
+    },
+    "reporting_test.go": {
+      "sha256": "1d97fce816a28a4a0d4a805a37d569ec3a68b5f7c318203bb19054ebccf07dcd",
+      "bytes": 3953
+    },
+    "research_draw_policy_test.go": {
+      "sha256": "cc8b1da13152a2f24be987655e3f9ea8a1a79aca80b3aad735c0ec91f6f5814d",
+      "bytes": 2150
+    },
+    "research_independent_oracle_test.go": {
+      "sha256": "d5d1abf8ad205e1aa6d551a9569b60cbeb17db0d51f5cc81c79f0d4941fded65",
+      "bytes": 3555
+    },
+    "research_warm_test.go": {
+      "sha256": "764a0456c9b71921a080a4b21f52dce4a82326ce9b82bea270465885c8d4cfea",
+      "bytes": 5342
+    },
+    "search.go": {
+      "sha256": "3ee0637c57dafaa6fde0b8c1934f8f64aa715db215a3c2f1d6c29efd6c791e0c",
+      "bytes": 8802
+    },
+    "search_context.go": {
+      "sha256": "018c27d58db09aae6c9425dbb5c3dbee1a7ea9611575889313713b8b21e8d155",
+      "bytes": 1019
+    },
+    "search_core_test.go": {
+      "sha256": "0c083a7957ec72bf4f43c61e29d167b90582d0446d2d79753df312660ca0597c",
+      "bytes": 7960
+    },
+    "search_draw_test.go": {
+      "sha256": "b65644e910643e519c9f17ae089da299db86eb6e3a90b8d425d5f58e97f44cf9",
+      "bytes": 4245
+    },
+    "search_moves.go": {
+      "sha256": "46640fa325b0a1d1b6489a8bf43e08a6dbf350a49009b7394eddcaa44a9b5fca",
+      "bytes": 1914
+    },
+    "search_moves_test.go": {
+      "sha256": "d30fd143f1176bb0bb2440e6382e985ca4d3bc28c912ea7e59b5e98ec5e03908",
+      "bytes": 4037
+    },
+    "search_position.go": {
+      "sha256": "3e16f20b2fc217b36b2da914f3417b966ae5268c52dfe14faf7a159086156c4f",
+      "bytes": 659
+    },
+    "search_position_test.go": {
+      "sha256": "92c7e13583dc2ad4463d0c8a1ac532dc7466eb2a972ae2138803ca3c9c69f1dd",
+      "bytes": 5466
+    },
+    "search_rank_test.go": {
+      "sha256": "a256b1122aa2c6650beff61117ac7d6f39495d48df434ed9ca1f5ff722fde7d3",
+      "bytes": 2087
+    },
+    "search_test.go": {
+      "sha256": "3af32fd100a1f1ea91cf43d63de3bdd43b17e0acaff29d9699fc6ae29d0bcaf6",
+      "bytes": 6674
+    },
+    "search_update_test.go": {
+      "sha256": "362b2e7e1b28f5c5dedc197a80e3c18a050ce3a456b86cd264d135d1e61579cb",
+      "bytes": 2590
+    },
+    "source_policy_test.go": {
+      "sha256": "ed4876ca60d4fbf1734c4c1fbbc80adfeeb70becb227b8a0e9af8481197c0297",
+      "bytes": 1169
+    },
+    "symlink:/opt/homebrew/bin/stockfish": {
+      "sha256": "61884c50e6bb0fcf58d2dc6eaf4a125e82524cbb59864987206170949f1b99e6",
+      "bytes": 84
+    },
+    "third_party/chess/attacks.go": {
+      "sha256": "aec097114a7602d22d822260841481d668b1635782486f8c8ab94e34b31130a0",
+      "bytes": 1780
+    },
+    "third_party/chess/bitboard.go": {
+      "sha256": "fd50e7d3f9ed651fec4680b4ca3a3aac8c9da480f2a013cf760e331c5a50b559",
+      "bytes": 3646
+    },
+    "third_party/chess/board.go": {
+      "sha256": "ec49daf0eadd197c40c55d4acbd240bc899f96aaa4467fa91bf83f331f36d5ef",
+      "bytes": 16695
+    },
+    "third_party/chess/doc.go": {
+      "sha256": "66167e28cd54e84f2be0a0b1c27e77adef576f56cc316a14c0df098c18c9e086",
+      "bytes": 1135
+    },
+    "third_party/chess/engine.go": {
+      "sha256": "c3315506d5a93429059cf6c8b3428ca53a52d3dc40de28c4fb212f43f7e6383b",
+      "bytes": 23878
+    },
+    "third_party/chess/errors.go": {
+      "sha256": "ffa04d31f35baadef17916af48077d33f329c7c8e31b6851fd170b1ab71cbe83",
+      "bytes": 1389
+    },
+    "third_party/chess/eval_pieces.go": {
+      "sha256": "0dd720f9f72d0107f21d683153c1468c9098f2faf9f7344d432d6f8a7d98cba6",
+      "bytes": 613
+    },
+    "third_party/chess/fen.go": {
+      "sha256": "1e456f94107fffed32dce9afb227cb69bfafe92449d7f25bb7aca94e1f2994b9",
+      "bytes": 6556
+    },
+    "third_party/chess/game.go": {
+      "sha256": "888ad9bc09058325f9e87409584e464133bac3069bf78f119c38c8819a83536b",
+      "bytes": 33714
+    },
+    "third_party/chess/go.mod": {
+      "sha256": "22deffc85706821fefbcec402f6043e5a8a13c3544eaa1be49fdf06af8af8bce",
+      "bytes": 118
+    },
+    "third_party/chess/go.sum": {
+      "sha256": "2376db1e994f0ceb06e59095467b5ac3975e6e20fcce8070313b0004eb04fc45",
+      "bytes": 2973
+    },
+    "third_party/chess/hashes.go": {
+      "sha256": "84dabf2539aebc3a6ea1b0779fda651ecc4f4f2550224e6fbc122b21de4a578b",
+      "bytes": 17595
+    },
+    "third_party/chess/lexer.go": {
+      "sha256": "e2ca25fdff78d674801c07c51a6b21502a3b1ef719322ff84283745f46038f95",
+      "bytes": 15738
+    },
+    "third_party/chess/move.go": {
+      "sha256": "231996db0476f670b1f060d69c9c7788380000ea4e00e273c97bf653989b973e",
+      "bytes": 9605
+    },
+    "third_party/chess/notation.go": {
+      "sha256": "c678fbbdd43b6b25b7dcb5a0772c0c96e320032e0077512371e14762961763c5",
+      "bytes": 12158
+    },
+    "third_party/chess/pandafish_evasion_test.go": {
+      "sha256": "2bdc26dd5352ec7c4cf4ab0b6080cec390a61bca25576010285fa9ff8ae4e9be",
+      "bytes": 1442
+    },
+    "third_party/chess/pandafish_search_attack_test.go": {
+      "sha256": "660f8e9e22619c451b952cc4f95ab9639c227472022c684245423735c237bb3c",
+      "bytes": 2357
+    },
+    "third_party/chess/pandafish_search_draw_test.go": {
+      "sha256": "b9f601598d114d892a9c2109d055908a68979bd98b07b413a355f9c449d42ab7",
+      "bytes": 2341
+    },
+    "third_party/chess/pandafish_virtual_tags_test.go": {
+      "sha256": "47b9d22adbd16f4f097423ad7156601ed9ce804c78bd531bc8bcc543b4b48e1e",
+      "bytes": 2096
+    },
+    "third_party/chess/pgn.go": {
+      "sha256": "4521ad059ac7a9377b0b7daf1f513953ca9f08acb9480cccf842318d096aacb1",
+      "bytes": 17796
+    },
+    "third_party/chess/piece.go": {
+      "sha256": "fea562e18a9d11ca4d24e65d32540f93da84230491217a0e661d67be5ec2838b",
+      "bytes": 5624
+    },
+    "third_party/chess/polyglot.go": {
+      "sha256": "657c1e68595a53a405dc201921a6f5fc553b6c29a31fbe0ffb7c74460f5c6b04",
+      "bytes": 14137
+    },
+    "third_party/chess/position.go": {
+      "sha256": "737c7e341ff8c8351fdf8536966af98ef49a8d118690b58d9c3647ec7485138c",
+      "bytes": 19726
+    },
+    "third_party/chess/scanner.go": {
+      "sha256": "cf1127041adde32d23e1a9a786b2164dfd93fbc6b6952fec41c4a317af3ab3f8",
+      "bytes": 9687
+    },
+    "third_party/chess/search_attack.go": {
+      "sha256": "2160c9bf993bc9f819c2c0c51b3a0cd9e66606a42f3db85053d555e17d21bb81",
+      "bytes": 1351
+    },
+    "third_party/chess/search_draw.go": {
+      "sha256": "5668be450176e128d2354893e3098c819092289f8cd3daf81a97701dbfcecd4d",
+      "bytes": 925
+    },
+    "third_party/chess/search_evasion.go": {
+      "sha256": "ff3d6cb657c15c0483a15240c616071fc8d0baff9f37c2481278c4fcbb06a8fe",
+      "bytes": 2699
+    },
+    "third_party/chess/search_hint.go": {
+      "sha256": "58200c008e815c9f7fc465e60a6a8698d9cc179f3c9a9110bad1dc1522c2da9a",
+      "bytes": 1831
+    },
+    "third_party/chess/search_moves.go": {
+      "sha256": "38c836a076d041e7a8dc1c4ebbb72e22172a51ae4abb8ca22180f7b443dd8bb9",
+      "bytes": 3920
+    },
+    "third_party/chess/search_position.go": {
+      "sha256": "d80f38de9327fd3699a3d8f804d72accfe70b8fc3bbb45d9e897abcb93db268b",
+      "bytes": 1820
+    },
+    "third_party/chess/search_update.go": {
+      "sha256": "cd31078aa2e0869e111e4ecbbacac16c14e309350742b4cbbf6d1edd15e61647",
+      "bytes": 4272
+    },
+    "third_party/chess/search_virtual_tags.go": {
+      "sha256": "86f1ee17b5c5541f8ca6cc934c1250cb40b722b82d1d682763b28fc80d6f4566",
+      "bytes": 3247
+    },
+    "third_party/chess/square.go": {
+      "sha256": "71a9428d9009c17846e66c7f9d9744edf94981d37cc597146f94be1a6a95af16",
+      "bytes": 3514
+    },
+    "third_party/chess/stringer.go": {
+      "sha256": "1eeda5f7ef2b98eb693490f3d7f33eb4b178c427b4caac9616e7f358f040d211",
+      "bytes": 512
+    },
+    "third_party/chess/utils.go": {
+      "sha256": "81b1909e1ca1ce96b84f1d14a912e23c2caebf7898f23b09b1ad2dba32cacbcb",
+      "bytes": 787
+    },
+    "third_party/chess/zobrist.go": {
+      "sha256": "fc816261540b0a963280e3bfbfa2b17cb1a47c08e79c66bcead3e3de6f835d0e",
+      "bytes": 6011
+    },
+    "tools/benchmark/bin/pandafish-v0.23": {
+      "sha256": "88d78500a8996471322d8e282f69d704ab9aceca386ac1693cf2aca82d77e6be",
+      "bytes": 3812034
+    },
+    "tools/benchmark/bin/pandafish-v024-draw-semantics": {
+      "sha256": "daf742221cc09e5124092989cdcf45b8893fc67955eb17e28eb59eab3b230440",
+      "bytes": 3812114
+    },
+    "tools/benchmark/research/v0.24-draw-semantics/fresh-generation/inputs.json": {
+      "sha256": "629c1315a23f59b9d4832c1c48eaf93b098ba5011d4bdc1d35e835f9714330e4",
+      "bytes": 49443
+    },
+    "tools/research/archive.go": {
+      "sha256": "578a9d4ea777510750c048e02d19024f69178b7fe70268d389aca6c7efad334c",
+      "bytes": 8906
+    },
+    "tools/research/choices.go": {
+      "sha256": "b0aea9ecd0460d4eeb416009d9fe2a6ee9beac95e4519d2503dd0bf568ecec12",
+      "bytes": 18569
+    },
+    "tools/research/choices_test.go": {
+      "sha256": "94f87af18075483009630f53ab07889a3f5afc04b511bac7c818191e0286907b",
+      "bytes": 2698
+    },
+    "tools/research/confirm.go": {
+      "sha256": "b9fe2338e989efd6b3eb0fa178beea1760e876e0bab5fe775beafc4aeee296d9",
+      "bytes": 4168
+    },
+    "tools/research/confirm_test.go": {
+      "sha256": "365b7a17dde828c553af8911874cf7efa31848e5a5f817c581fdee5e3f4627d4",
+      "bytes": 658
+    },
+    "tools/research/context_fit.go": {
+      "sha256": "720deb653506a72d1f140e3a900efd964977f2ae8e8a3a821cd291c6b999def7",
+      "bytes": 15025
+    },
+    "tools/research/context_fit_test.go": {
+      "sha256": "d9b27d47ae8f82c73c713ab789fab25f0aa9a5fcb5f30bd4605a51e20a38b975",
+      "bytes": 4524
+    },
+    "tools/research/context_targets.go": {
+      "sha256": "b2a052282a6715d17cc42e9b608c41060dab5ec6a27c1451fd7d561983421890",
+      "bytes": 12237
+    },
+    "tools/research/context_targets_test.go": {
+      "sha256": "dc1415eef62db0cf5ab09215541fe6c1a9730d844ee52b85107a827213bad38a",
+      "bytes": 2851
+    },
+    "tools/research/decisions.go": {
+      "sha256": "566d2a10a2f615fb356ee6168925c38954a8c1448861378b9c63ddccbd7e9364",
+      "bytes": 7056
+    },
+    "tools/research/depth_review.go": {
+      "sha256": "260b56d4ad2bc55e000d77784079ab5710b8248c6564f18faabf4787a81fae78",
+      "bytes": 5355
+    },
+    "tools/research/depth_review_test.go": {
+      "sha256": "5b144d26427579df6aee4747740fa20a6f8d305a5929fe96f1d5b0e056b7ee93",
+      "bytes": 1158
+    },
+    "tools/research/document_map.go": {
+      "sha256": "1a9b79600f5a2a2470579243b8f6b12fb61051261029cb484483de6a58a66f75",
+      "bytes": 2521
+    },
+    "tools/research/document_map_test.go": {
+      "sha256": "04255c449276803d6f86efd402ff8ed7d41f5ac521ac32b06839fe93e1155ce2",
+      "bytes": 2229
+    },
+    "tools/research/evidence.go": {
+      "sha256": "d5d0c48f9e1532e48e6d7387f0b53c2e203f4c65d14770e4f27ff7ab9cf41ba9",
+      "bytes": 2494
+    },
+    "tools/research/generate.go": {
+      "sha256": "2ff9a7deae8265425980c9da501fb40cc0169859d8b4b38ecca9b735e4d6a520",
+      "bytes": 8521
+    },
+    "tools/research/generate_exclusions.go": {
+      "sha256": "b18762ebd03b633e4cb806e7171f5a4ac067c68057f2d90566cb7c56b2d96590",
+      "bytes": 2700
+    },
+    "tools/research/generate_exclusions_test.go": {
+      "sha256": "3221c332fec5c4f77c2196033634103f2870692f90b07c612c47dce784627820",
+      "bytes": 2004
+    },
+    "tools/research/main.go": {
+      "sha256": "f0558423f037a08c97b849ced95ded2a4d0363ee18cba8e757e35ba1e8456b45",
+      "bytes": 12467
+    },
+    "tools/research/main_test.go": {
+      "sha256": "58ebab96c86c9dba018b870de2a3152c16f018cd93f03a5f4d59710712c89ad2",
+      "bytes": 7156
+    },
+    "tools/research/native_plan.go": {
+      "sha256": "3c6e6cb8c86bcf17e98326ed61c350d311b48e7fc534b03581739f87fd535a38",
+      "bytes": 3066
+    },
+    "tools/research/parallel_report_test.go": {
+      "sha256": "5bb6e5320c5cec91a571b9dbc6b8ec0df06ce321e7928ba7c81f0bd7e6be9469",
+      "bytes": 2550
+    },
+    "tools/research/plan_test.go": {
+      "sha256": "081018b056f2f73045ce6fc8915a9fb70b29a3ec079019f17a12c93a8d111753",
+      "bytes": 3217
+    },
+    "tools/research/release.go": {
+      "sha256": "40101c1f5c8218d43fe7cdbffcf6382421591be7dd0b5a2a6b6426ce3e5dbf10",
+      "bytes": 4180
+    },
+    "tools/research/uci.go": {
+      "sha256": "f97272410b68162668d8bd7a621cde108a05d23edcd353eae259a12697b5439e",
+      "bytes": 4501
+    },
+    "tools/research/validation_plan.go": {
+      "sha256": "432b1577dfaacae4e45b13933f7362cccf8f9732417959b14bb98cd31bc38ed0",
+      "bytes": 1843
+    },
+    "tools/research/validation_plan_test.go": {
+      "sha256": "ef70740684fd67f0a97b4dc044cae9d8b400113f9c717bf07c3ac144ff5f7a92",
+      "bytes": 1401
+    },
+    "tools/research/warm_plan.go": {
+      "sha256": "7b0b29c4ca52916d2a33f0194c0ddc0e289f623e508474e97f2f0b998cf93949",
+      "bytes": 5932
+    },
+    "tools/research/warm_preflight_test.go": {
+      "sha256": "93ba87692e0190c517264a8cd48b08c545c62721085df98cd206493995f6ca45",
+      "bytes": 748
+    },
+    "tools/research/warm_report.go": {
+      "sha256": "581ea5793c6f5092b91dc6dfd8d3f84fb194695ba19db22d382668a89e8e6e28",
+      "bytes": 6263
+    },
+    "tools/research/warm_report_test.go": {
+      "sha256": "a33f80d3bb7dc1e16cd56477629274e223f2d63b604a54ec49c274f612d993eb",
+      "bytes": 4162
+    },
+    "tools/research/workflow.go": {
+      "sha256": "c02106b1067155f84109d74583a13b3cf77d637cd7a6f6f1b4349fbd4a37f3d4",
+      "bytes": 11238
+    },
+    "tools/research/workflow_process_other.go": {
+      "sha256": "bf69c777fb7555548839944abd53a24ee2b43b593304fc77f92a13ddb7e261c9",
+      "bytes": 539
+    },
+    "tools/research/workflow_process_unix.go": {
+      "sha256": "8290651ab51e647e1ce1f6cbaab5301ab52bfbc49dfd0b89062c1f32da8fb917",
+      "bytes": 760
+    },
+    "tools/research/workflow_test.go": {
+      "sha256": "5ca881f29cfe03c8fd5d28c6e406494cbf2f83e8bbdfcc2802a690203e1ba5f6",
+      "bytes": 5120
+    },
+    "transposition.go": {
+      "sha256": "add24d44eddd9a5e0fa9fd950f6f042aa6c3382e5ad5c5505fceb246c7df2a00",
+      "bytes": 3049
+    },
+    "transposition_test.go": {
+      "sha256": "688c4e7b5289d507870d8d521af572afad4e9dcf387d74aeda7782875b0dcf43",
+      "bytes": 7125
+    },
+    "uci_test.go": {
+      "sha256": "3a3d591acc4ba286ae12c4c813e70c2bc690311ba648fba208fe432429a6372c",
+      "bytes": 5742
+    }
+  },
+  "environment": {
+    "GOARCH": "",
+    "GODEBUG": "",
+    "GOFLAGS": "",
+    "GOGC": "",
+    "GOMAXPROCS": "",
+    "GOMEMLIMIT": "",
+    "GOOS": "",
+    "GOTOOLCHAIN": "",
+    "PATH": "/Users/philyawj/.codex/packages/app-server-daemon/releases/0.171.0-aarch64-apple-darwin/codex-path:/opt/homebrew/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0SKqY0w:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.171.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg04otxpZ:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.170.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0OWiWqj:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.169.1-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0rul5Dw:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.169.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0Y50qQb:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.168.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0ZAEBrb:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.167.2-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0TcmUM6:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.167.1-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0QWC5ul:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.167.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0lMLO5g:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.166.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0K6h5zL:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.165.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0aXn9td:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.164.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0pKWM9w:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.163.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0/codex-arg0ROBR1s:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.162.1-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0/codex-arg0YFFiHv:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.162.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0/codex-arg07ZzbjG:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.159.3-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0/codex-arg0EJoDiU:/opt/homebrew/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex-path:/opt/homebrew/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin"
+  },
+  "status": "passed",
+  "results": [
+    {
+      "name": "fresh-100",
+      "status": "passed",
+      "started_utc": "2026-11-22T04:47:56.322693Z",
+      "seconds": 82.266240042,
+      "exit": 0,
+      "files": {
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/brief.json": {
+          "sha256": "2c9c842db0ae2761edfd451a8af9362b5cc5aea97fdfa0ac6e1657feb8371bcd",
+          "bytes": 514
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/method.json": {
+          "sha256": "50812997c9f5c46658b43c3aac31e9bcdbb856149b355c19b2ad4820ec946b03",
+          "bytes": 777
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/native.json": {
+          "sha256": "65a79a2f6943e7dabd4c92b44f5beaf1116c9a063190f20cec758d02a6903a00",
+          "bytes": 1318006
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/native.jsonl": {
+          "sha256": "1f2709b73fafefdedc6495ed98906a4fc2a7d1fa45a00a50c65fe5d3e53bb832",
+          "bytes": 851731
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/quality-checkpoint.json": {
+          "sha256": "8e4a5ccbd463a3191d2d5d1a05fa59df69f47bbb286bdb3e570aa7e9a512a3a8",
+          "bytes": 84748
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/quality.json": {
+          "sha256": "b6a63b21693d2c0b6f5fbee8c20f3994844c534e89cd789a68accaa31d51c68b",
+          "bytes": 95205
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/references.jsonl": {
+          "sha256": "bf185d9ec904bb67b79e7d8da2023bac752cf6a98b6bed88e3d47e32380ecffa",
+          "bytes": 1548524
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-run/fresh-100.txt": {
+          "sha256": "4bd66f62cc6824306d84813014e3258c3f3cb72dac63e672be22979753b22363",
+          "bytes": 5050
+        }
+      },
+      "brief": {
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/brief.json/by_turn_mean_loss_cp": {
+          "b": {
+            "baseline": 36.03333333333333,
+            "candidate": 36.03333333333333
+          },
+          "w": {
+            "baseline": 38.18518518518518,
+            "candidate": 38.111111111111114
+          }
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/brief.json/finite_cases": 123,
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/brief.json/mean_loss_cp": {
+          "baseline": 37.13550135501355,
+          "candidate": 37.09756097560975
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/brief.json/new_candidate_losing_mate_cases": [],
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/brief.json/severe_over_300": {
+          "baseline": 2,
+          "candidate": 2
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/brief.json/timing_overruns": 0,
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-100/brief.json/worst_regressions": []
+      }
+    },
+    {
+      "name": "fresh-1000",
+      "status": "passed",
+      "started_utc": "2026-11-22T04:49:18.733642Z",
+      "seconds": 101.545172375,
+      "exit": 0,
+      "files": {
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/brief.json": {
+          "sha256": "982a0dba6b614fa7ea8369ce4fe84f37e174ef78c98e57cab7abc39c5264b2c6",
+          "bytes": 513
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/method.json": {
+          "sha256": "2db99198d3855b194cafdb90591f5d993dcc8414b8bc41bfc4268d0e4bae0da1",
+          "bytes": 778
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/native.json": {
+          "sha256": "628c76b1728e38086d129a0fe086e55a295fae0b31b6ee2e91d25bc7ceb4a00a",
+          "bytes": 479604
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/native.jsonl": {
+          "sha256": "aa3aec07a28602330bc2d99c3a7d9d7151ffe8bcc9b4f7c8dac635f0a9856b99",
+          "bytes": 319185
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/quality-checkpoint.json": {
+          "sha256": "2972002702a2fec5bb750f5c1f0b639b062b422068187ffa027789ff6fc9adb9",
+          "bytes": 84720
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/quality.json": {
+          "sha256": "7d25cdc0eadd6f79755dd1f480829a63a833d7e19985981c811cdfdcd0792bc8",
+          "bytes": 95176
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/reference-cache.json": {
+          "sha256": "6877aaba556853ea5b057af689ec912169474b7a0e31f76a630cbae07d037201",
+          "bytes": 171
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/references.jsonl": {
+          "sha256": "aef77d890a057c5215440a720a90e91e89369977f2efd5d58680da2c5106cd8a",
+          "bytes": 2987556
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-run/fresh-1000.txt": {
+          "sha256": "6e66420a6c2cb9c116300f89271f01e7e432f3a5c7bff9d17d1da46f96e745fc",
+          "bytes": 5049
+        }
+      },
+      "brief": {
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/brief.json/by_turn_mean_loss_cp": {
+          "b": {
+            "baseline": 35.88333333333333,
+            "candidate": 35.88333333333333
+          },
+          "w": {
+            "baseline": 36.06349206349206,
+            "candidate": 36.06349206349206
+          }
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/brief.json/finite_cases": 123,
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/brief.json/mean_loss_cp": {
+          "baseline": 35.97560975609756,
+          "candidate": 35.97560975609756
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/brief.json/new_candidate_losing_mate_cases": [],
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/brief.json/severe_over_300": {
+          "baseline": 3,
+          "candidate": 3
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/brief.json/timing_overruns": 0,
+        "tools/benchmark/research/v0.24-draw-semantics/fresh-1000/brief.json/worst_regressions": []
+      }
+    }
+  ]
+}

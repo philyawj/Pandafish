@@ -1,0 +1,85 @@
+{
+  "candidate_halfmove99_turns": 1,
+  "fifty_move_adjudications_verified": 2,
+  "games": 150,
+  "identities_sha256": {
+    "previous.pgn": "fd0e9e02c5c5e6c1b65841c73fe97764bf1faacd3707aa3c2d4742cf87ab68cc",
+    "sacrifice.pgn": "6d783460ba7b04559960214cb56ba6a1d5245c501b106d5bdfd3fa5fbdbced12",
+    "stockfish.pgn": "320436f595583d29de455edf4d9a404a45aadeb5cb09403b42df946e32f44088",
+    "summary.json": "c47514d2790d88b8562b35b738c0b2d2da8a15eff0a044187e244260c13a8545"
+  },
+  "matchups": [
+    {
+      "candidate_current_claim_turns": 0,
+      "candidate_halfmove99_turns": 0,
+      "candidate_halfmove_90_plus": {},
+      "candidate_qualifying_intended_moves": 0,
+      "games": 50,
+      "opponent": "v0.23",
+      "saved_stats": {
+        "Wins": 23,
+        "Draws": 2,
+        "Losses": 25,
+        "Unfinished": 0,
+        "Forfeits": 0
+      },
+      "termination_counts": {
+        "Checkmate": 48,
+        "ThreefoldRepetition": 2
+      }
+    },
+    {
+      "candidate_current_claim_turns": 0,
+      "candidate_halfmove99_turns": 0,
+      "candidate_halfmove_90_plus": {},
+      "candidate_qualifying_intended_moves": 0,
+      "games": 50,
+      "opponent": "Stockfish Skill 3",
+      "saved_stats": {
+        "Wins": 31,
+        "Draws": 1,
+        "Losses": 18,
+        "Unfinished": 0,
+        "Forfeits": 0
+      },
+      "termination_counts": {
+        "Checkmate": 49,
+        "ThreefoldRepetition": 1
+      }
+    },
+    {
+      "candidate_current_claim_turns": 0,
+      "candidate_halfmove99_turns": 1,
+      "candidate_halfmove_90_plus": {
+        "90": 2,
+        "91": 1,
+        "92": 2,
+        "93": 1,
+        "94": 2,
+        "95": 1,
+        "96": 2,
+        "97": 1,
+        "98": 1,
+        "99": 1
+      },
+      "candidate_qualifying_intended_moves": 1,
+      "games": 50,
+      "opponent": "Sacrifice v0.2.0 b528f0ba",
+      "saved_stats": {
+        "Wins": 27,
+        "Draws": 16,
+        "Losses": 7,
+        "Unfinished": 0,
+        "Forfeits": 0
+      },
+      "termination_counts": {
+        "Checkmate": 34,
+        "FiftyMoveRule": 2,
+        "InsufficientMaterial": 1,
+        "ThreefoldRepetition": 13
+      }
+    }
+  ],
+  "passed": true,
+  "scope": "Rule-boundary exposure and adjudication review; no counterfactual win attribution or Elo estimate."
+}

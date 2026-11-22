@@ -1,0 +1,101 @@
+{
+  "created_utc": "2026-11-22T15:37:52.27248Z",
+  "input_identities": {
+    "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-contact-threat/warm/warm-baseline-pair-1.json": {
+      "sha256": "7da7c2ce0ef6a60519ca3843fcc66bbdc92a72c25d08e0fbfdee92194f289682",
+      "bytes": 287831
+    },
+    "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-contact-threat/warm/warm-baseline-pair-2.json": {
+      "sha256": "6906b4b5ee7c9303f8649a6d5554a7e349129ff7763173c262946275e2dc5e59",
+      "bytes": 288187
+    },
+    "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-contact-threat/warm/warm-baseline-pair-3.json": {
+      "sha256": "095cf9a0af14c01ae25e9957dbc10de97bcc8e6fbfe993f15f4d77bef0587082",
+      "bytes": 288122
+    },
+    "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-contact-threat/warm/warm-candidate-pair-1.json": {
+      "sha256": "791418994c6e2f57ac307c70ecde402be1c3f9e36b764f8d5e7b50e8fc608dc9",
+      "bytes": 288003
+    },
+    "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-contact-threat/warm/warm-candidate-pair-2.json": {
+      "sha256": "9512c951d72bd58ed2c6362b84df42427623dc870877c294ccd1ef515b73820f",
+      "bytes": 288081
+    },
+    "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-contact-threat/warm/warm-candidate-pair-3.json": {
+      "sha256": "7c7dd7b0f20686afad0d5452c318db8f2f9ebb7bf3563973a07f00687e48068d",
+      "bytes": 288103
+    }
+  },
+  "issues": [],
+  "median_time_ratio": 1.0088327688889747,
+  "node_ratios": [
+    1,
+    1,
+    1
+  ],
+  "options": {
+    "Values": false,
+    "Parallel": false,
+    "Baseline": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-contact-threat/warm/warm-baseline-pair-[1-3].json",
+    "Candidate": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-contact-threat/warm/warm-candidate-pair-[1-3].json",
+    "Out": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-contact-threat/warm/warm-gate.json",
+    "Reference": "",
+    "Pairs": 3,
+    "Roots": 1145,
+    "Depth": 5,
+    "MaxTimeRatio": 1.1,
+    "MaxNodeRatio": 0,
+    "MinOpportunity": 0,
+    "Exact": true
+  },
+  "pairs": [
+    {
+      "baseline_ms": 18978.902493999987,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 19172.767316999994,
+      "candidate_nodes": 43118858,
+      "changed_roots": 0,
+      "contradictions": 0,
+      "node_ratio": 1,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 1,
+      "time_ratio": 1.0102147541493138
+    },
+    {
+      "baseline_ms": 18979.88242500004,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 19147.52733999998,
+      "candidate_nodes": 43118858,
+      "changed_roots": 0,
+      "contradictions": 0,
+      "node_ratio": 1,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 2,
+      "time_ratio": 1.0088327688889747
+    },
+    {
+      "baseline_ms": 19041.251592000004,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 19143.998351000013,
+      "candidate_nodes": 43118858,
+      "changed_roots": 0,
+      "contradictions": 0,
+      "node_ratio": 1,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 3,
+      "time_ratio": 1.0053960086869067
+    }
+  ],
+  "passed": true,
+  "time_ratios": [
+    1.0053960086869067,
+    1.0088327688889747,
+    1.0102147541493138
+  ]
+}

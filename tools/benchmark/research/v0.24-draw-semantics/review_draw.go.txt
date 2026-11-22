@@ -1,0 +1,55 @@
+package main
+import("crypto/sha256";"encoding/hex";"encoding/json";"fmt";"os";"path/filepath";"github.com/corentings/chess/v2")
+func fail(err error){if err!=nil {panic(err)}}
+func load(path string,v any)string{b,e:=os.ReadFile(path);fail(e);fail(json.Unmarshal(b,v));h:=sha256.Sum256(b);return hex.EncodeToString(h[:])}
+func hash(s string)string{h:=sha256.Sum256([]byte(s));return hex.EncodeToString(h[:])}
+type warmRow struct{Game,Ply,Depth,Score int;Best,FEN string;Nodes uint64;SearchMS float64}
+type warmFile struct{Rows []warmRow}
+type witnessRow struct{Root int;FENSHA256 string;Hits uint64;Witnesses map[string]uint64}
+type witnessFile struct{RootCount int `json:"root_count"`;Roots []witnessRow `json:"roots_with_draw_witness"`;PolicyScore int `json:"policy_score"`;PolicyHits uint64 `json:"policy_hits"`;PolicyWitness map[string]uint64 `json:"policy_witness"`}
+func main(){
+ d:=os.Args[1];identities:=map[string]string{}
+ var bw,cw witnessFile
+ identities["baseline-witness.json"]=load(filepath.Join(d,"baseline-witness.json"),&bw);identities["candidate-witness.json"]=load(filepath.Join(d,"candidate-witness.json"),&cw)
+ if bw.RootCount!=1145||cw.RootCount!=1145||bw.PolicyHits==0||cw.PolicyHits==0 {panic("witness coverage")}
+ witnesses:=map[string]bool{}
+ for _,w:=range []witnessFile{bw,cw}{for fen:=range w.PolicyWitness {witnesses[fen]=true};for _,r:=range w.Roots {for fen:=range r.Witnesses {witnesses[fen]=true}}}
+ for fen:=range witnesses{opt,e:=chess.FEN(fen);fail(e);g:=chess.NewGame(opt);if !g.Position().SearchDeadMaterial()||g.Outcome()!=chess.Draw {panic("non-draw witness: "+fen)}}
+ // Explicit legal path from the changed live control to the recorded dead child.
+ const policyFEN="6k1/8/8/8/3B4/8/2b5/K7 w - - 0 1"
+ opt,e:=chess.FEN(policyFEN);fail(e);g:=chess.NewGame(opt)
+ path:=[]string{"a1b2","g8f8","b2c2"}
+ for _,m:=range path {fail(g.PushNotationMove(m,chess.UCINotation{},nil))}
+ if g.Outcome()!=chess.Draw||bw.PolicyWitness[g.Position().String()]==0 {panic("legal policy path missing")}
+ type policy struct{Name,FEN,Outcome,Method,Status string;Static,Main,Quiet int}
+ var base,cand []policy
+ identities["baseline-policy.json"]=load(filepath.Join(d,"baseline-policy.json"),&base);identities["candidate-policy.json"]=load(filepath.Join(d,"candidate-policy.json"),&cand)
+ if len(base)!=25||len(cand)!=len(base) {panic("policy coverage")}
+ type delta struct{FEN,Kind string;Before,After int}
+ changes:=[]delta{};corrected:=0;liveExact:=0
+ dead:=map[string]bool{"kings":true,"bishop":true,"knight":true,"same-bishops":true}
+ for i,a:=range base {b:=cand[i];if a.FEN!=b.FEN||a.Static!=b.Static||a.Method!=b.Method||a.Status!=b.Status {panic("unrelated policy change")}
+  if dead[a.Name]{if b.Main!=0||b.Quiet!=0||b.Outcome!="1/2-1/2" {panic("dead not zero")};corrected++}
+  if a.Main!=b.Main {changes=append(changes,delta{a.FEN,"main",a.Main,b.Main})};if a.Quiet!=b.Quiet {changes=append(changes,delta{a.FEN,"q",a.Quiet,b.Quiet})}
+  if !dead[a.Name] {if a.Main==b.Main&&a.Quiet==b.Quiet {liveExact++}else if a.FEN!=policyFEN||a.Main!=bw.PolicyScore||b.Main!=cw.PolicyScore||a.Quiet!=b.Quiet {panic("unexplained live control")}}
+ }
+ bh,ch:=map[int]witnessRow{},map[int]witnessRow{};for _,r:=range bw.Roots{bh[r.Root]=r};for _,r:=range cw.Roots{ch[r.Root]=r}
+ type warmChange struct{Root,Game,Ply int;FEN,BeforeMove,AfterMove string;BeforeScore,AfterScore int;BeforeNodes,AfterNodes,BaselineDrawHits,CandidateDrawHits uint64}
+ warmChanges:=[]warmChange{};valueChanges,moveChanges:=0,0
+ var baseline,candidate []warmRow
+ for pair:=1;pair<=3;pair++ {
+  var a,b warmFile;an:=fmt.Sprintf("warm/warm-baseline-pair-%d.json",pair);bn:=fmt.Sprintf("warm/warm-candidate-pair-%d.json",pair)
+  identities[an]=load(filepath.Join(d,an),&a);identities[bn]=load(filepath.Join(d,bn),&b)
+  if len(a.Rows)!=1145||len(b.Rows)!=1145{panic("warm coverage")}
+  for i,x:=range a.Rows {y:=b.Rows[i];if x.FEN!=y.FEN||x.Game!=y.Game||x.Ply!=y.Ply||x.Depth!=5||y.Depth!=5 {panic("warm identity/depth")}
+   if pair==1&&(x.Best!=y.Best||x.Score!=y.Score||x.Nodes!=y.Nodes){u,v:=bh[i+1],ch[i+1];if u.Hits==0&&v.Hits==0 {panic(fmt.Sprintf("changed root %d lacks direct witness",i+1))};if u.Hits>0&&u.FENSHA256!=hash(x.FEN)||v.Hits>0&&v.FENSHA256!=hash(x.FEN){panic("witness root mismatch")};warmChanges=append(warmChanges,warmChange{i+1,x.Game,x.Ply,x.FEN,x.Best,y.Best,x.Score,y.Score,x.Nodes,y.Nodes,u.Hits,v.Hits});if x.Score!=y.Score{valueChanges++};if x.Best!=y.Best{moveChanges++}}
+   if pair>1 {u,v:=baseline[i],candidate[i];if x.Best!=u.Best||x.Score!=u.Score||x.Nodes!=u.Nodes||y.Best!=v.Best||y.Score!=v.Score||y.Nodes!=v.Nodes {panic("nondeterminism")}}
+  }
+  if pair==1 {baseline=a.Rows;candidate=b.Rows}
+ }
+ for i,path:=range []string{"/tmp/pandafish-draw-baseline-shadow-rows.json","/tmp/pandafish-draw-candidate-shadow-rows.json"} {
+  var shadow warmFile;identities[path]=load(path,&shadow);want:=baseline;if i==1 {want=candidate};if len(shadow.Rows)!=len(want){panic("shadow coverage")};for j,x:=range shadow.Rows {y:=want[j];if x.FEN!=y.FEN||x.Best!=y.Best||x.Score!=y.Score||x.Nodes!=y.Nodes {panic("shadow changed decisions/work")}}
+ }
+ result:=map[string]any{"passed":true,"policy_rows":len(base),"proved_dead_rows":corrected,"unrelated_live_controls_exact":liveExact,"policy_changes":changes,"legal_policy_witness_path":path,"legal_policy_witness_fen":g.Position().String(),"warm_roots":1145,"warm_changed_rows":warmChanges,"warm_changed_values":valueChanges,"warm_changed_moves":moveChanges,"unique_dead_witnesses":len(witnesses),"both_actors_deterministic":true,"shadow_same_decisions_and_nodes":true,"source_sha256":identities}
+ b,e:=json.MarshalIndent(result,"","  ");fail(e);fail(os.WriteFile(filepath.Join(d,"semantic-review.json"),append(b,'\n'),0644));fmt.Printf("passed: %d corrected policy rows, %d exact live controls, %d witnessed warm changes (%d values / %d choices), %d dead witness FENs\n",corrected,liveExact,len(warmChanges),valueChanges,moveChanges,len(witnesses))
+}

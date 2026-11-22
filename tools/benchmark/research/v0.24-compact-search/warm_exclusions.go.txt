@@ -1,0 +1,60 @@
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
+func main() {
+	if len(os.Args) != 2 && len(os.Args) != 3 {
+		panic("optional source and temporary case-file destination required")
+	}
+	source := "tools/benchmark/research/post-v0.23-audit/profile-roots.json"
+	destination := os.Args[len(os.Args)-1]
+	if len(os.Args) == 3 {
+		source = os.Args[1]
+	}
+	b, e := os.ReadFile(source)
+	if e != nil {
+		panic(e)
+	}
+	var input struct {
+		Rows []struct {
+			Game, Ply int
+			FEN       string
+		}
+		Cases []struct{ FEN string }
+	}
+	if e = json.Unmarshal(b, &input); e != nil {
+		panic(e)
+	}
+	if len(input.Rows) != 1145 && len(input.Cases) != 596 {
+		panic("source coverage")
+	}
+	type c struct{ ID, FEN string }
+	out := struct{ Cases []c }{}
+	for _, r := range input.Rows {
+		out.Cases = append(out.Cases, c{fmt.Sprintf("warm-game%d-ply%d", r.Game, r.Ply), r.FEN})
+	}
+	for i, r := range input.Cases {
+		out.Cases = append(out.Cases, c{fmt.Sprintf("oracle-%d", i), r.FEN})
+	}
+	encoded, e := json.MarshalIndent(out, "", "  ")
+	if e != nil {
+		panic(e)
+	}
+	encoded = append(encoded, '\n')
+	f, e := os.OpenFile(destination, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0644)
+	if e != nil {
+		panic(e)
+	}
+	if _, e = f.Write(encoded); e != nil {
+		panic(e)
+	}
+	if e = f.Close(); e != nil {
+		panic(e)
+	}
+	json.NewEncoder(os.Stdout).Encode(map[string]any{"source": source, "source_sha256": fmt.Sprintf("%x", sha256.Sum256(b)), "temporary_cases": destination, "temporary_sha256": fmt.Sprintf("%x", sha256.Sum256(encoded)), "cases": len(out.Cases), "purpose": "Adapt already preserved warm/oracle FENs to the existing generator's exclusion schema; avoid tracking another full copy."})
+}

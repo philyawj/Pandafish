@@ -1,0 +1,6 @@
+package main
+import("crypto/sha256";"encoding/json";"fmt";"os";"sort")
+func must(e error){if e!=nil{panic(e)}}
+func main(){source:="tools/benchmark/research/v0.24-contact-threat/warm-ledger.json";b,e:=os.ReadFile(source);must(e);var ledger struct{Witnesses map[string]json.RawMessage};must(json.Unmarshal(b,&ledger));fens:=[]string{};for fen:=range ledger.Witnesses{fens=append(fens,fen)};sort.Strings(fens)
+ for _,fen:=range []string{"7k/p7/5KQ1/8/8/8/8/8 b - - 0 1","7k/5p2/5KQ1/8/8/8/8/8 b - - 0 1","7k/8/5KQ1/r7/8/8/8/8 b - - 0 1","7k/8/5KQ1/8/8/8/8/8 b - - 0 1","8/8/8/8/8/5kq1/P7/7K w - - 0 1","8/8/8/8/8/5kq1/5P2/7K w - - 0 1","8/8/8/8/R7/5kq1/8/7K w - - 0 1"}{fens=append(fens,fen)}
+ type c struct{ID,FEN string};out:=struct{Cases []c}{};for i,fen:=range fens{out.Cases=append(out.Cases,c{fmt.Sprintf("contact-control-%d",i),fen})};encoded,e:=json.MarshalIndent(out,"","  ");must(e);encoded=append(encoded,'\n');f,e:=os.OpenFile(os.Args[1],os.O_CREATE|os.O_EXCL|os.O_WRONLY,0644);must(e);_,e=f.Write(encoded);must(e);must(f.Close());must(json.NewEncoder(os.Stdout).Encode(map[string]any{"source":source,"source_sha256":fmt.Sprintf("%x",sha256.Sum256(b)),"cases":len(out.Cases),"destination":os.Args[1],"output_sha256":fmt.Sprintf("%x",sha256.Sum256(encoded)),"duplicate_trajectories_tracked":false}))}

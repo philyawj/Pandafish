@@ -1,0 +1,9 @@
+package main
+import("bytes";"encoding/json";"os";"path/filepath")
+func must(e error){if e!=nil{panic(e)}}
+func main(){root:=os.Args[1];dir:="tools/benchmark/research/v0.24-contact-threat";b,e:=os.ReadFile(filepath.Join(root,"search.go"));must(e)
+ needle:=[]byte("type searcher struct {");if bytes.Count(b,needle)!=1{panic("worker patch")};b=bytes.Replace(b,needle,[]byte("type searcher struct {\n contactPass, contactChild chess.SearchPosition\n contactSink uint64"),1)
+ needle=[]byte("if best >= beta {\n\t\t\treturn best, !worker.stopped()");if bytes.Count(b,needle)!=1{panic("cutoff patch")};b=bytes.Replace(b,needle,[]byte("if best >= beta {\n if depth > 0 { worker.contactShadow(position) }\n\t\t\treturn best, !worker.stopped()"),1);must(os.WriteFile(filepath.Join(root,"search.go"),b,0644))
+ for _,name:=range []string{"contact_shadow.go","contact_shadow_test.go"}{b,e=os.ReadFile(filepath.Join(dir,name+".txt"));must(e);must(os.WriteFile(filepath.Join(root,name),b,0644))}
+ b,e=os.ReadFile(filepath.Join(dir,"primitive-source.json"));must(e);var source struct{BaseTag string `json:"base_tag"`;BaseCommit string `json:"base_commit"`;Files map[string]string `json:"files"`};must(json.Unmarshal(b,&source));for _,name:=range []string{"search.go","contact_shadow.go","contact_shadow_test.go"}{b,e=os.ReadFile(filepath.Join(root,name));must(e);source.Files[name]=string(b)};b,e=json.MarshalIndent(source,"","  ");must(e);must(os.WriteFile(filepath.Join(dir,"shadow-source.json"),append(b,'\n'),0644))
+}

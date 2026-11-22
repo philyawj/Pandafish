@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "plan_sha256": "53cfd85acaee9effc98aec6497565feec3e490ea0a42087ebcd37efbabb5bcd1",
+  "inputs": {
+    "/tmp/pandafish-v024-draw-baseline-shadow.test": {
+      "sha256": "eacebd31fb319b6726f7d11fc9856107b7a90e6d5f3a537db4ca1c14806d170c",
+      "bytes": 5754610
+    },
+    "/tmp/pandafish-v024-draw-candidate-shadow.test": {
+      "sha256": "c7f5e8d3673274bd8f7018b5492c22945da6e608f7a3596663ce2420baeba9a0",
+      "bytes": 5755282
+    },
+    "tools/benchmark/research/v0.24-draw-semantics/candidate-source.json": {
+      "sha256": "6c56ae26f3329d71a7945412b6a01274ef4b9db9f6ba7cb34ef8b273da592622",
+      "bytes": 493962
+    },
+    "tools/benchmark/research/v0.24-draw-semantics/instrument_witness.go.txt": {
+      "sha256": "bddd49376efe203a69bd7fe5fb0206254c8be4203c28376e732af34ae06a78a0",
+      "bytes": 1012
+    },
+    "tools/benchmark/research/v0.24-draw-semantics/witness_test.go.txt": {
+      "sha256": "094ef7b4c15cc68651c20fe87c4c4fbff90bf6b8478496f30669a65af901ab66",
+      "bytes": 1959
+    }
+  },
+  "environment": {
+    "GOARCH": "",
+    "GODEBUG": "",
+    "GOFLAGS": "",
+    "GOGC": "",
+    "GOMAXPROCS": "",
+    "GOMEMLIMIT": "",
+    "GOOS": "",
+    "GOTOOLCHAIN": "",
+    "PATH": "/Users/philyawj/.codex/packages/app-server-daemon/releases/0.171.0-aarch64-apple-darwin/codex-path:/opt/homebrew/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0SKqY0w:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.171.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg04otxpZ:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.170.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0OWiWqj:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.169.1-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0rul5Dw:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.169.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0Y50qQb:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.168.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0ZAEBrb:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.167.2-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0TcmUM6:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.167.1-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0QWC5ul:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.167.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0lMLO5g:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.166.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0K6h5zL:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.165.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0aXn9td:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.164.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0-macos/codex-arg0pKWM9w:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.163.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0/codex-arg0ROBR1s:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.162.1-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0/codex-arg0YFFiHv:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.162.0-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0/codex-arg07ZzbjG:/Users/philyawj/.codex/packages/app-server-daemon/releases/0.159.3-aarch64-apple-darwin/codex-path:/Users/philyawj/.codex/tmp/arg0/codex-arg0EJoDiU:/opt/homebrew/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/codex-path:/opt/homebrew/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin"
+  },
+  "status": "passed",
+  "results": [
+    {
+      "name": "baseline-shadow",
+      "status": "passed",
+      "started_utc": "2026-11-22T04:40:32.245394Z",
+      "seconds": 19.732973667,
+      "exit": 0,
+      "files": {
+        "/tmp/pandafish-draw-baseline-shadow-rows.json": {
+          "sha256": "3febfab5ea3cd8369daed244f243bb20bfd39fc9a0f20e70a4cd5e8711684c6f",
+          "bytes": 287952
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/baseline-witness.json": {
+          "sha256": "d376532efb6625da667478c55ec010c0edb8789ea4df6bc02206b3466a512478",
+          "bytes": 113117
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/witness-run/baseline-shadow.txt": {
+          "sha256": "909e13a8440fd8528cfd13a1cf001eab5bad9ed21d9b5fc85f123ce522d47d1d",
+          "bytes": 1016
+        }
+      }
+    },
+    {
+      "name": "candidate-shadow",
+      "status": "passed",
+      "started_utc": "2026-11-22T04:40:51.996639Z",
+      "seconds": 19.840351875,
+      "exit": 0,
+      "files": {
+        "/tmp/pandafish-draw-candidate-shadow-rows.json": {
+          "sha256": "2329ead899e8d107eec8eb692498d29b82dc10bcfc109de35fc53cedcf8c892b",
+          "bytes": 287950
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/candidate-witness.json": {
+          "sha256": "d32d7165ec677d7855fa37659214184fc014795586221f92b4b11acb3845ddde",
+          "bytes": 95154
+        },
+        "tools/benchmark/research/v0.24-draw-semantics/witness-run/candidate-shadow.txt": {
+          "sha256": "3a839bdde1dd63b1dc7457e976dbd691c90246f3c9e76cdae2ebb0e4c7a8b454",
+          "bytes": 1016
+        }
+      }
+    }
+  ]
+}

@@ -1,5 +1,10 @@
 # Engine improvement research workflow
 
+Active engine development is paused after the v1.0 milestone. This workflow
+applies when research is explicitly resumed; its existence does not start a new
+experiment, data collection or live session. See the
+[current checkpoint](RESEARCH_CHECKPOINT.md) for the preserved stopping point.
+
 “Find the next improvement” requests use this workflow unless the request states
 a different scope. Begin from the latest released engine on a research branch.
 Review recent results alongside earlier failed attempts and rank opportunities

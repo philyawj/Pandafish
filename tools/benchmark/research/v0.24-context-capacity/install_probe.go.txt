@@ -1,0 +1,6 @@
+package main
+import("bytes";"fmt";"os";"path/filepath")
+func must(err error){if err!=nil{panic(err)}}
+func main(){root:=os.Args[1];source:="tools/benchmark/research/v0.24-context-capacity";for _,name:=range []string{"nn_probe.go","nn_probe_test.go"}{b,e:=os.ReadFile(filepath.Join(source,name+".txt"));must(e);must(os.WriteFile(filepath.Join(root,name),b,0644))}
+ patches:=[]struct{file,old,new string}{{"search.go","type searcher struct {","type searcher struct {\n nnStates []*nnState\n nnObserved int64"},{"search.go","static := staticScore(position, position.Turn())","static := worker.nnStatic(position, ply)"},{"search_position.go","return worker.positionBuffers[ply].Update(parent, move)","child := worker.positionBuffers[ply].Update(parent, move)\n worker.nnChild(parent, child, move, ply)\n return child"}}
+ for _,p:=range patches {path:=filepath.Join(root,p.file);b,e:=os.ReadFile(path);must(e);if bytes.Count(b,[]byte(p.old))!=1{panic("patch not unique: "+p.file)};b=bytes.Replace(b,[]byte(p.old),[]byte(p.new),1);must(os.WriteFile(path,b,0644))};fmt.Println("Installed observational nonlinear inference; original static scores remain returned.")}

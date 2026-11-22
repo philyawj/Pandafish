@@ -95,13 +95,13 @@ reference alternatives are accepted by a declared 25cp band.
 
 ```sh
 go run ./tools/research choices \
-  --baseline tools/benchmark/bin/pandafish-v0.23 \
+  --baseline tools/benchmark/bin/pandafish-v1.0 \
   --candidate /absolute/path/to/candidate \
   --teacher /opt/homebrew/bin/stockfish \
   --out /tmp/pandafish-new-choice-run \
   --milliseconds 100 --trials 3 --workers 3
 go run ./tools/research generate \
-  --baseline tools/benchmark/bin/pandafish-v0.23 \
+  --baseline tools/benchmark/bin/pandafish-v1.0 \
   --teacher /opt/homebrew/bin/stockfish \
   --out /tmp/pandafish-new-development-inputs
 ```

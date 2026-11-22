@@ -40,14 +40,14 @@ and benchmark evidence together. Run commands from the repository root.
    Repeat `--file` for each changed mapped guide. Original hashes and raw evidence
    stay intact; do not regenerate old inventories to hide changed observations.
 
-   For example, while preparing v0.23:
+   For example, while preparing v1.0:
 
    ```sh
-   go run ./tools/benchmark --validate --race --version v0.23-release-smoke \
-     --previous tools/benchmark/bin/pandafish-v0.22 --previous-version v0.22 \
+   go run ./tools/benchmark --validate --race --version v1.0-release-smoke \
+     --previous tools/benchmark/bin/pandafish-v0.23 --previous-version v0.23 \
      --sequential --stage previous --pairs 1 --results /tmp/pandafish-release-smoke
    go run ./tools/benchmark --candidate tools/benchmark/bin/pandafish-candidate \
-     --version v0.23-release-smoke --stage external --parallel \
+     --version v1.0-release-smoke --stage external --parallel \
      --stockfish-skill 3 \
      --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
      --pairs 1 --results /tmp/pandafish-release-smoke
@@ -72,7 +72,7 @@ and benchmark evidence together. Run commands from the repository root.
 ## Tag and publish after merge
 
 Confirm the PR is merged and the version is unused, then fast-forward local
-`main` to the merged commit. For v0.23:
+`main` to the merged commit. For v1.0:
 
 ```sh
 git switch main
@@ -85,13 +85,13 @@ Check that the working tree is clean and HEAD is the intended release commit.
 Then create and push the tag:
 
 ```sh
-git tag -a v0.23 -m "v0.23: reuse search state and avoid temporary tag copies"
-git push origin v0.23
+git tag -a v1.0 -m "v1.0: stable engine milestone and development pause"
+git push origin v1.0
 ```
 
 Publish a GitHub release for that tag, through the GitHub UI or
 `gh release create`. Use the version alone as the release title, such as
-`v0.23`. Describe the engine or tooling change, remaining limits,
+`v1.0`. Describe the engine or tooling change, remaining limits,
 and validation, linking the candidate benchmark evidence. An engine release
 does not automatically advance the Stockfish skill target.
 
@@ -122,22 +122,44 @@ benchmark files do not need to be attached again as release assets.
 
 ## Build the next baseline
 
-Build from the tag rather than a development checkout. For v0.23:
+Build from the tag rather than a development checkout. For v1.0:
 
 ```sh
 mkdir -p tools/benchmark/bin
 benchmark_bin="$PWD/tools/benchmark/bin"
 build_dir=$(mktemp -d)
-git archive v0.23 | tar -x -C "$build_dir"
-(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.23" .)
+git archive v1.0 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v1.0" .)
 ```
 
-The tagged executable becomes the previous version for v0.24 development.
+The tagged executable becomes the previous version if engine development is explicitly resumed.
 Compiled binaries remain gitignored. Building this baseline does not require
 relabeling or rerunning the development benchmarks. A separate benchmark of
 the exact released binary is optional. Keep private bot greetings in sync
 when choosing to run the new engine through lichess-bot.
 
+
+## v1.0 milestone and release assets
+
+v1.0 marks a working, tested engine, reproducible benchmarks and preserved
+research, clear documentation/known limits, and stable scope. Active development
+is paused to focus on other efforts. GoPandaFish and other Panda Bots will use
+the engine on Lichess; publishing does not start a live client. Preserve the
+[original tactical candidate](tools/benchmark/research/v0.24-contact-threat/README.md)
+and [release validation](tools/research/v1.0-validation.md), including its narrow
+54% direct screen and adverse controls. No reliable Elo gain is claimed.
+
+Attach `.tar.gz` archives for macOS/Linux amd64 and arm64, and `.zip` archives
+for Windows amd64 and arm64. Include the executable, LICENSE and
+THIRD_PARTY_NOTICES.md in every archive. Keep binaries outside Git. Publish
+SHA256SUMS and build-manifest.json with source/Go/target/archive identities.
+Use CGO_ENABLED=0, trim paths and suppress local VCS metadata for portable
+reproducible builds. Record native-runtime versus cross-build validation honestly;
+this release host runtime-tests macOS arm64 only. Verify the merged source
+against the pre-merge source manifest before packaging/uploading prepared builds.
+
+The release ends with publication and a status check. No next candidate, larger
+confirmation, live game or bot deployment starts automatically.
 
 ## Tooling releases
 

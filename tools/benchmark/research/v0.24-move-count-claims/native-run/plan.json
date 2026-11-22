@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "inputs": [
+    "/tmp/pandafish-cleanup-research",
+    "tools/benchmark/bin/pandafish-v0.23",
+    "tools/benchmark/bin/pandafish-v024-move-count-claims",
+    "/opt/homebrew/bin/stockfish",
+    "tools/research/*.go",
+    "*.go",
+    "go.mod",
+    "go.sum",
+    "internal/telemetry/*.go",
+    "third_party/chess/*.go",
+    "third_party/chess/go.mod",
+    "third_party/chess/go.sum",
+    "tools/benchmark/research/v0.17-search-moves/inputs.json",
+    "tools/benchmark/research/v0.23-state-kernel/public-100/method.json",
+    "tools/benchmark/research/v0.23-state-kernel/public-100/quality.json",
+    "tools/benchmark/research/v0.23-state-kernel/public-100/references.jsonl",
+    "tools/benchmark/research/v0.17-search-moves/inputs.json",
+    "tools/benchmark/research/v0.23-state-kernel/public-1000/method.json",
+    "tools/benchmark/research/v0.23-state-kernel/public-1000/quality.json",
+    "tools/benchmark/research/v0.23-state-kernel/public-1000/references.jsonl",
+    "tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json",
+    "tools/benchmark/research/v0.23-state-kernel/newer-100/method.json",
+    "tools/benchmark/research/v0.23-state-kernel/newer-100/quality.json",
+    "tools/benchmark/research/v0.23-state-kernel/newer-100/references.jsonl",
+    "tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json",
+    "tools/benchmark/research/v0.23-state-kernel/newer-1000/method.json",
+    "tools/benchmark/research/v0.23-state-kernel/newer-1000/quality.json",
+    "tools/benchmark/research/v0.23-state-kernel/newer-1000/references.jsonl"
+  ],
+  "steps": [
+    {
+      "name": "public-100",
+      "command": [
+        "/tmp/pandafish-cleanup-research",
+        "choices",
+        "--baseline",
+        "tools/benchmark/bin/pandafish-v0.23",
+        "--candidate",
+        "tools/benchmark/bin/pandafish-v024-move-count-claims",
+        "--teacher",
+        "/opt/homebrew/bin/stockfish",
+        "--input",
+        "tools/benchmark/research/v0.17-search-moves/inputs.json",
+        "--out",
+        "tools/benchmark/research/v0.24-move-count-claims/public-100",
+        "--milliseconds",
+        "100",
+        "--trials",
+        "3",
+        "--workers",
+        "3",
+        "--cache",
+        "tools/benchmark/research/v0.23-state-kernel/public-100"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.24-move-count-claims/public-100/*.json",
+        "tools/benchmark/research/v0.24-move-count-claims/public-100/*.jsonl"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.24-move-count-claims/public-100/quality.json",
+          "pointer": "/passed",
+          "equals": true
+        },
+        {
+          "file": "tools/benchmark/research/v0.24-move-count-claims/public-100/brief.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/finite_cases",
+            "/mean_loss_cp",
+            "/by_turn_mean_loss_cp",
+            "/severe_over_300",
+            "/new_candidate_losing_mate_cases",
+            "/timing_overruns",
+            "/worst_regressions"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "public-1000",
+      "command": [
+        "/tmp/pandafish-cleanup-research",
+        "choices",
+        "--baseline",
+        "tools/benchmark/bin/pandafish-v0.23",
+        "--candidate",
+        "tools/benchmark/bin/pandafish-v024-move-count-claims",
+        "--teacher",
+        "/opt/homebrew/bin/stockfish",
+        "--input",
+        "tools/benchmark/research/v0.17-search-moves/inputs.json",
+        "--out",
+        "tools/benchmark/research/v0.24-move-count-claims/public-1000",
+        "--milliseconds",
+        "1000",
+        "--trials",
+        "1",
+        "--workers",
+        "3",
+        "--cache",
+        "tools/benchmark/research/v0.23-state-kernel/public-1000"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.24-move-count-claims/public-1000/*.json",
+        "tools/benchmark/research/v0.24-move-count-claims/public-1000/*.jsonl"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.24-move-count-claims/public-1000/quality.json",
+          "pointer": "/passed",
+          "equals": true
+        },
+        {
+          "file": "tools/benchmark/research/v0.24-move-count-claims/public-1000/brief.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/finite_cases",
+            "/mean_loss_cp",
+            "/by_turn_mean_loss_cp",
+            "/severe_over_300",
+            "/new_candidate_losing_mate_cases",
+            "/timing_overruns",
+            "/worst_regressions"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "newer-100",
+      "command": [
+        "/tmp/pandafish-cleanup-research",
+        "choices",
+        "--baseline",
+        "tools/benchmark/bin/pandafish-v0.23",
+        "--candidate",
+        "tools/benchmark/bin/pandafish-v024-move-count-claims",
+        "--teacher",
+        "/opt/homebrew/bin/stockfish",
+        "--input",
+        "tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json",
+        "--out",
+        "tools/benchmark/research/v0.24-move-count-claims/newer-100",
+        "--milliseconds",
+        "100",
+        "--trials",
+        "1",
+        "--workers",
+        "3",
+        "--by-turn",
+        "--cache",
+        "tools/benchmark/research/v0.23-state-kernel/newer-100"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.24-move-count-claims/newer-100/*.json",
+        "tools/benchmark/research/v0.24-move-count-claims/newer-100/*.jsonl"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.24-move-count-claims/newer-100/quality.json",
+          "pointer": "/passed",
+          "equals": true
+        },
+        {
+          "file": "tools/benchmark/research/v0.24-move-count-claims/newer-100/brief.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/finite_cases",
+            "/mean_loss_cp",
+            "/by_turn_mean_loss_cp",
+            "/severe_over_300",
+            "/new_candidate_losing_mate_cases",
+            "/timing_overruns",
+            "/worst_regressions"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "newer-1000",
+      "command": [
+        "/tmp/pandafish-cleanup-research",
+        "choices",
+        "--baseline",
+        "tools/benchmark/bin/pandafish-v0.23",
+        "--candidate",
+        "tools/benchmark/bin/pandafish-v024-move-count-claims",
+        "--teacher",
+        "/opt/homebrew/bin/stockfish",
+        "--input",
+        "tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json",
+        "--out",
+        "tools/benchmark/research/v0.24-move-count-claims/newer-1000",
+        "--milliseconds",
+        "1000",
+        "--trials",
+        "1",
+        "--workers",
+        "3",
+        "--by-turn",
+        "--cache",
+        "tools/benchmark/research/v0.23-state-kernel/newer-1000"
+      ],
+      "outputs": [
+        "tools/benchmark/research/v0.24-move-count-claims/newer-1000/*.json",
+        "tools/benchmark/research/v0.24-move-count-claims/newer-1000/*.jsonl"
+      ],
+      "gates": [
+        {
+          "file": "tools/benchmark/research/v0.24-move-count-claims/newer-1000/quality.json",
+          "pointer": "/passed",
+          "equals": true
+        },
+        {
+          "file": "tools/benchmark/research/v0.24-move-count-claims/newer-1000/brief.json",
+          "pointer": "/passed",
+          "equals": true,
+          "brief": [
+            "/finite_cases",
+            "/mean_loss_cp",
+            "/by_turn_mean_loss_cp",
+            "/severe_over_300",
+            "/new_candidate_losing_mate_cases",
+            "/timing_overruns",
+            "/worst_regressions"
+          ]
+        }
+      ]
+    }
+  ]
+}

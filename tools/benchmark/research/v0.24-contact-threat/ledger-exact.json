@@ -1,0 +1,53 @@
+{
+  "created_utc": "2026-11-22T15:42:47.902331Z",
+  "input_identities": {
+    "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-contact-threat/warm/warm-baseline-pair-1.json": {
+      "sha256": "7da7c2ce0ef6a60519ca3843fcc66bbdc92a72c25d08e0fbfdee92194f289682",
+      "bytes": 287831
+    },
+    "/tmp/pandafish-contact-ledger-rows.json": {
+      "sha256": "cf854294ae9e3c330aee7e6a2abff3a279a6d8651074334eb5b466832f8266b5",
+      "bytes": 288310
+    }
+  },
+  "issues": [],
+  "median_time_ratio": 1.0077226093577516,
+  "node_ratios": [
+    1
+  ],
+  "options": {
+    "Values": false,
+    "Parallel": false,
+    "Baseline": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-contact-threat/warm/warm-baseline-pair-1.json",
+    "Candidate": "/tmp/pandafish-contact-ledger-rows.json",
+    "Out": "tools/benchmark/research/v0.24-contact-threat/ledger-exact.json",
+    "Reference": "",
+    "Pairs": 1,
+    "Roots": 1145,
+    "Depth": 5,
+    "MaxTimeRatio": 0,
+    "MaxNodeRatio": 0,
+    "MinOpportunity": 0,
+    "Exact": true
+  },
+  "pairs": [
+    {
+      "baseline_ms": 18978.902493999987,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 19125.469144000006,
+      "candidate_nodes": 43118858,
+      "changed_roots": 0,
+      "contradictions": 0,
+      "node_ratio": 1,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 1,
+      "time_ratio": 1.0077226093577516
+    }
+  ],
+  "passed": true,
+  "time_ratios": [
+    1.0077226093577516
+  ]
+}

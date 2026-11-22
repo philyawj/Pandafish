@@ -1,0 +1,13 @@
+--- FAIL: TestQuietLeafUsesPlacement (0.00s)
+    evaluation_test.go:64: quiet leaf ignored knight placement
+--- FAIL: TestQuietMoveSelectionUsesPlacementForBothColors (0.00s)
+    evaluation_test.go:91: quiet choices [b1a3], want uniquely best b1c3
+--- FAIL: TestBestMoveFindsThirdPlyQueenCapture (0.00s)
+    search_test.go:196: depth 2 score = 0, want about 300 cp
+FAIL
+FAIL	github.com/philyawj/Pandafish	6.560s
+ok  	github.com/philyawj/Pandafish/internal/telemetry	(cached)
+ok  	github.com/philyawj/Pandafish/tools/benchmark	0.473s
+ok  	github.com/philyawj/Pandafish/tools/lichess	1.612s
+ok  	github.com/philyawj/Pandafish/tools/research	2.547s
+FAIL
