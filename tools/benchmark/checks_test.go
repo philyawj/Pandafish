@@ -31,13 +31,13 @@ func TestValidationDelegatesChecksAndSummarizes(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(checks) != 4 || len(calls) != 5 {
+	if len(checks) != 6 || len(calls) != 7 {
 		t.Fatalf("missing checks: %v", calls)
 	}
-	if !strings.Contains(calls[2], "go test -race ./...") || !strings.Contains(calls[4], "go build -o ") {
+	if !strings.Contains(calls[2], "go test -race ./...") || calls[4] != "go -C third_party/chess test -race ./..." || calls[5] != "go -C third_party/chess vet ./..." || !strings.Contains(calls[6], "go build -o ") {
 		t.Fatalf("wrong tools: %v", calls)
 	}
-	if output.String() != "PASS format\nPASS tests\nPASS vet\nPASS build\n" {
+	if output.String() != "PASS format\nPASS tests\nPASS vet\nPASS chess-tests\nPASS chess-vet\nPASS build\n" {
 		t.Fatalf("unexpected output: %q", output.String())
 	}
 	for _, check := range checks {
@@ -48,7 +48,7 @@ func TestValidationDelegatesChecksAndSummarizes(t *testing.T) {
 }
 
 func TestValidationStopsBeforeBuildOnFailure(t *testing.T) {
-	for _, failure := range []string{"format", "tests"} {
+	for _, failure := range []string{"format", "tests", "chess-tests", "chess-vet"} {
 		t.Run(failure, func(t *testing.T) {
 			dir := t.TempDir()
 			if err := os.WriteFile(filepath.Join(dir, "main.go"), nil, 0644); err != nil {
@@ -62,7 +62,8 @@ func TestValidationStopsBeforeBuildOnFailure(t *testing.T) {
 				if name == "gofmt" && failure == "format" {
 					return "main.go\n", nil
 				}
-				if name == "go" && args[0] == "test" {
+				if name == "go" && ((args[0] == "test" && failure == "tests") ||
+					(args[0] == "-C" && ((args[2] == "test" && failure == "chess-tests") || (args[2] == "vet" && failure == "chess-vet")))) {
 					return strings.Repeat("failure detail\n", 100), fmt.Errorf("test failure")
 				}
 				if name == "go" && args[0] == "build" {

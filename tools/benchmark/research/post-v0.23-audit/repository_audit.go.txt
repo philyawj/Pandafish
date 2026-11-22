@@ -1,0 +1,277 @@
+// Repository audit diagnostic. Reads tracked files; writes one report.
+package main
+
+import (
+	"bytes"
+	"compress/gzip"
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"io"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"regexp"
+	"sort"
+	"strings"
+)
+
+type total struct {
+	Files int
+	Bytes int64
+}
+type file struct {
+	Path   string
+	Bytes  int64
+	SHA256 string
+}
+type duplicate struct {
+	BytesPerCopy   int64
+	RedundantBytes int64
+	Paths          []string
+}
+type link struct {
+	File, Target string
+	Line         int
+}
+type counter int64
+
+func (c *counter) Write(b []byte) (int, error) { *c += counter(len(b)); return len(b), nil }
+func must(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+func git(args ...string) []byte { b, e := exec.Command("git", args...).Output(); must(e); return b }
+func main() {
+	if len(os.Args) != 2 {
+		panic("output JSON path required")
+	}
+	names := bytes.Split(bytes.TrimSuffix(git("ls-files", "-z"), []byte{0}), []byte{0})
+	groups := map[string]*total{}
+	hashes := map[string][]file{}
+	all := []file{}
+	missing := []link{}
+	subgroups := map[string]*total{}
+	formats := map[string]*total{}
+	var gzipBytes, compactSavings int64
+	gzipGroups := map[string]int64{}
+	goSources, archivedGo, markdown := 0, 0, 0
+	re := regexp.MustCompile(`\]\(([^\s)]+)(?:\s+"[^"]*")?\)`)
+	for _, n := range names {
+		p := string(n)
+		b, e := os.ReadFile(p)
+		must(e)
+		h := sha256.Sum256(b)
+		f := file{p, int64(len(b)), hex.EncodeToString(h[:])}
+		all = append(all, f)
+		hashes[f.SHA256] = append(hashes[f.SHA256], f)
+		key := strings.Split(p, "/")[0]
+		parts := strings.Split(p, "/")
+		if len(parts) >= 3 && parts[0] == "tools" {
+			key = strings.Join(parts[:3], "/")
+		}
+		if groups[key] == nil {
+			groups[key] = &total{}
+		}
+		groups[key].Files++
+		groups[key].Bytes += f.Bytes
+		if len(parts) > 3 && parts[0] == "tools" && parts[1] == "benchmark" {
+			key = strings.Join(parts[:4], "/")
+			if subgroups[key] == nil {
+				subgroups[key] = &total{}
+			}
+			subgroups[key].Files++
+			subgroups[key].Bytes += f.Bytes
+		}
+		category := "other"
+		base := filepath.Base(p)
+		switch {
+		case base == "native.json":
+			category = "native.json"
+		case base == "native.jsonl":
+			category = "native.jsonl"
+		case strings.HasPrefix(base, "quality"):
+			category = "quality reports and checkpoints"
+		case strings.HasPrefix(base, "warm-") && strings.HasSuffix(p, ".json"):
+			category = "warm JSON"
+		case strings.Contains(p, "/raw/"):
+			category = "live raw"
+		case base == "candidate-source.json":
+			category = "source snapshots"
+		case strings.HasSuffix(p, ".jsonl"):
+			category = "other JSONL"
+		case strings.HasSuffix(p, ".json"):
+			category = "other JSON"
+		}
+		if formats[category] == nil {
+			formats[category] = &total{}
+		}
+		formats[category].Files++
+		formats[category].Bytes += f.Bytes
+		if strings.HasPrefix(p, "tools/benchmark/research/") || strings.HasPrefix(p, "tools/benchmark/live/") || strings.HasPrefix(p, "tools/benchmark/results/") {
+			var c counter
+			z, e := gzip.NewWriterLevel(&c, gzip.BestSpeed)
+			must(e)
+			_, e = io.Copy(z, bytes.NewReader(b))
+			must(e)
+			must(z.Close())
+			gzipBytes += int64(c)
+			gzipGroups[strings.Join(parts[:3], "/")] += int64(c)
+			if strings.HasSuffix(p, ".json") {
+				var out bytes.Buffer
+				if json.Compact(&out, b) == nil {
+					compactSavings += int64(len(b) - out.Len())
+				}
+			}
+		}
+		if strings.HasSuffix(p, ".go") {
+			goSources++
+		}
+		if strings.HasSuffix(p, ".go.txt") {
+			archivedGo++
+		}
+		if !strings.HasSuffix(p, ".md") {
+			continue
+		}
+		markdown++
+		for _, m := range re.FindAllSubmatchIndex(b, -1) {
+			target := string(b[m[2]:m[3]])
+			if strings.Contains(target, "://") || strings.HasPrefix(target, "#") || strings.HasPrefix(target, "mailto:") {
+				continue
+			}
+			clean := strings.Split(target, "#")[0]
+			clean = strings.Trim(clean, "<>")
+			if clean == "" {
+				continue
+			}
+			dest := filepath.Join(filepath.Dir(p), clean)
+			if strings.HasPrefix(clean, "/") {
+				dest = strings.TrimPrefix(clean, "/")
+			}
+			if _, e := os.Stat(dest); os.IsNotExist(e) {
+				missing = append(missing, link{p, target, bytes.Count(b[:m[0]], []byte("\n")) + 1})
+			}
+		}
+	}
+	duplicates := []duplicate{}
+	var excess int64
+	for _, v := range hashes {
+		if len(v) < 2 || v[0].Bytes < 1024 {
+			continue
+		}
+		d := duplicate{BytesPerCopy: v[0].Bytes, RedundantBytes: int64(len(v)-1) * v[0].Bytes}
+		for _, f := range v {
+			d.Paths = append(d.Paths, f.Path)
+		}
+		sort.Strings(d.Paths)
+		excess += d.RedundantBytes
+		duplicates = append(duplicates, d)
+	}
+	sort.Slice(duplicates, func(i, j int) bool { return duplicates[i].RedundantBytes > duplicates[j].RedundantBytes })
+	sort.Slice(all, func(i, j int) bool {
+		if all[i].Bytes == all[j].Bytes {
+			return all[i].Path < all[j].Path
+		}
+		return all[i].Bytes > all[j].Bytes
+	})
+	release := bytes.Split(bytes.TrimSpace(git("diff", "--name-only", "v0.22..v0.23")), []byte("\n"))
+	added := bytes.Split(bytes.TrimSpace(git("diff", "--name-only", "--diff-filter=A", "v0.22..v0.23")), []byte("\n"))
+	var addedBytes int64
+	for _, n := range added {
+		s, e := os.Stat(string(n))
+		must(e)
+		addedBytes += s.Size()
+	}
+	releaseOnly := bytes.Split(bytes.TrimSpace(git("diff", "--name-only", "8b0109d..v0.23")), []byte("\n"))
+	releaseAdded := bytes.Split(bytes.TrimSpace(git("diff", "--name-only", "--diff-filter=A", "8b0109d..v0.23")), []byte("\n"))
+	var releaseBytes int64
+	for _, n := range releaseAdded {
+		s, e := os.Stat(string(n))
+		must(e)
+		releaseBytes += s.Size()
+	}
+	var snapshotBytes int64
+	snapshotCount := 0
+	snapshotDecodedBytes := int64(0)
+	payloads := map[string]int64{}
+	payloadCopies := 0
+	for _, f := range all {
+		if filepath.Base(f.Path) != "candidate-source.json" {
+			continue
+		}
+		b, e := os.ReadFile(f.Path)
+		must(e)
+		var s struct{ Files map[string]string }
+		must(json.Unmarshal(b, &s))
+		snapshotCount++
+		snapshotBytes += f.Bytes
+		for _, text := range s.Files {
+			h := sha256.Sum256([]byte(text))
+			payloads[hex.EncodeToString(h[:])] = int64(len(text))
+			snapshotDecodedBytes += int64(len(text))
+			payloadCopies++
+		}
+	}
+	var uniquePayloadBytes int64
+	for _, n := range payloads {
+		uniquePayloadBytes += n
+	}
+	report := map[string]any{"base_commit": strings.TrimSpace(string(git("rev-parse", "HEAD"))), "tracked": total{len(all), 0}, "groups": groups, "go_files": goSources, "archived_go_text_files": archivedGo, "markdown_files": markdown, "largest_files": all[:min(20, len(all))], "exact_duplicates_at_least_1024_bytes": duplicates, "duplicate_redundant_bytes": excess, "missing_local_markdown_paths": missing, "link_check_limits": "Inline Markdown path existence only; ignores URL links and fragment validity; historical and ignored/local paths may be intentional.", "v023_changed_files": len(release), "v023_added_files": len(added), "v023_added_bytes": addedBytes, "source_snapshots": map[string]any{"files": snapshotCount, "encoded_bytes": snapshotBytes, "decoded_file_copies": payloadCopies, "decoded_bytes": snapshotDecodedBytes, "unique_decoded_bytes": uniquePayloadBytes}, "tracked_files": all}
+	t := report["tracked"].(total)
+	for _, f := range all {
+		t.Bytes += f.Bytes
+	}
+	report["tracked"] = t
+	report["benchmark_subgroups"] = subgroups
+	report["format_categories"] = formats
+	report["benchmark_evidence_gzip_best_speed_bytes"] = gzipBytes
+	report["benchmark_json_whitespace_bytes"] = compactSavings
+	report["v023_release_only_changed_files"] = len(releaseOnly)
+	report["v023_release_only_added_files"] = len(releaseAdded)
+	report["v023_release_only_added_bytes"] = releaseBytes
+	delete(report, "tracked_files")
+	report["evidence_gzip_by_group"] = gzipGroups
+	b, e := json.MarshalIndent(report, "", "  ")
+	must(e)
+	must(os.WriteFile(os.Args[1], append(b, '\n'), 0644))
+	fmt.Printf("tracked=%d bytes=%d Go=%d archived-Go=%d Markdown=%d missing-paths=%d duplicate-extra-bytes=%d\n", t.Files, t.Bytes, goSources, archivedGo, markdown, len(missing), excess)
+	fmt.Printf("v0.23 added=%d bytes=%d changed=%d snapshots=%d encoded-bytes=%d decoded=%d unique-decoded=%d\n", len(added), addedBytes, len(release), snapshotCount, snapshotBytes, snapshotDecodedBytes, uniquePayloadBytes)
+	fmt.Printf("release-only changed=%d added=%d added-bytes=%d gzip-evidence-bytes=%d JSON-whitespace-bytes=%d\n", len(releaseOnly), len(releaseAdded), releaseBytes, gzipBytes, compactSavings)
+	for k, v := range formats {
+		fmt.Printf("format %s files=%d bytes=%d\n", k, v.Files, v.Bytes)
+	}
+	type groupRow struct {
+		Path  string
+		Files int
+		Bytes int64
+	}
+	orderedGroups := []groupRow{}
+	for p, v := range subgroups {
+		orderedGroups = append(orderedGroups, groupRow{p, v.Files, v.Bytes})
+	}
+	sort.Slice(orderedGroups, func(i, j int) bool { return orderedGroups[i].Bytes > orderedGroups[j].Bytes })
+	for _, v := range orderedGroups[:min(10, len(orderedGroups))] {
+		fmt.Printf("subgroup %d files=%d %s\n", v.Bytes, v.Files, v.Path)
+	}
+	for p, n := range gzipGroups {
+		fmt.Printf("gzip %s bytes=%d\n", p, n)
+	}
+	for k, v := range groups {
+		if v.Bytes > 1000000 {
+			fmt.Printf("group %s files=%d bytes=%d\n", k, v.Files, v.Bytes)
+		}
+	}
+	for _, f := range all[:min(8, len(all))] {
+		fmt.Printf("large %d %s\n", f.Bytes, f.Path)
+	}
+	for _, l := range missing {
+		if !strings.HasPrefix(l.File, "tools/benchmark/") && !strings.HasPrefix(l.File, "tools/research/validation/") {
+			fmt.Printf("missing %s:%d %s\n", l.File, l.Line, l.Target)
+		}
+	}
+	for _, d := range duplicates[:min(6, len(duplicates))] {
+		fmt.Printf("duplicate-extra %d copies=%d example=%s\n", d.RedundantBytes, len(d.Paths), d.Paths[0])
+	}
+}

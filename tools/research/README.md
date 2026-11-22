@@ -18,7 +18,10 @@ replace duplicated per-attempt orchestration. `generate` accepts fixed seed/
 stream and repeatable exclusion flags. `choices` also writes a compact
 `brief.json`; raw records and scientific gates remain unchanged.
 
-`validation-plan` orders normal/race/vet checks before test/engine builds.
+`validation-plan` orders normal/race/vet checks in both the root and nested chess
+modules before test/engine builds. Original frozen plans retain their old steps.
+Backend changes also need explicit independent-oracle inputs/output through
+`TestSearchMoveOracle`; normal `go test` skips that optional helper.
 `warm-plan` requires its passed source-matching state through `--preflight-state`.
 `depth-review` reconstructs changed native choices at observed depths; its
 `--flags-only` option selects saved new mate flags. `confirm-mates` checks every
@@ -32,6 +35,10 @@ go run ./tools/research decisions
 go run ./tools/research mates
 go run ./tools/research policy --base v0.18 --version v0.19
 ```
+
+The `policy` example and its defaults are historical v0.19 migration controls;
+pass explicit versions for another comparison. They do not validate current
+v0.23 parity by default.
 
 `audit` verifies every research inventory. Original raw observations retain
 their original hashes. The explicit [migration manifest](migration.json)
@@ -88,13 +95,13 @@ reference alternatives are accepted by a declared 25cp band.
 
 ```sh
 go run ./tools/research choices \
-  --baseline tools/benchmark/bin/pandafish-v0.19 \
+  --baseline tools/benchmark/bin/pandafish-v0.23 \
   --candidate /absolute/path/to/candidate \
   --teacher /opt/homebrew/bin/stockfish \
   --out /tmp/pandafish-new-choice-run \
   --milliseconds 100 --trials 3 --workers 3
 go run ./tools/research generate \
-  --baseline tools/benchmark/bin/pandafish-v0.19 \
+  --baseline tools/benchmark/bin/pandafish-v0.23 \
   --teacher /opt/homebrew/bin/stockfish \
   --out /tmp/pandafish-new-development-inputs
 ```

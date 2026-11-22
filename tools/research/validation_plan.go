@@ -22,6 +22,9 @@ func createValidationPlan(candidate, testBinary, out string) error {
 		{Name: "normal-tests", Command: []string{"go", "test", "./..."}, TimeoutSeconds: 180},
 		{Name: "race-tests", Command: []string{"go", "test", "-race", "./..."}, TimeoutSeconds: 300},
 		{Name: "vet", Command: []string{"go", "vet", "./..."}, TimeoutSeconds: 180},
+		{Name: "chess-normal", Command: []string{"go", "-C", "third_party/chess", "test", "./..."}, TimeoutSeconds: 180},
+		{Name: "chess-race", Command: []string{"go", "-C", "third_party/chess", "test", "-race", "./..."}, TimeoutSeconds: 300},
+		{Name: "chess-vet", Command: []string{"go", "-C", "third_party/chess", "vet", "./..."}, TimeoutSeconds: 180},
 		{Name: "build-warm-test", Command: []string{"go", "test", "-c", "-o", testBinary, "."}, Outputs: []string{testBinary}, TimeoutSeconds: 180},
 		{Name: "build-engine", Command: []string{"go", "build", "-buildvcs=false", "-o", candidate, "."}, Outputs: []string{candidate}, TimeoutSeconds: 180},
 	}}

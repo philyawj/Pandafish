@@ -1,5 +1,16 @@
 # Local benchmarks
 
+Current baseline: **v0.23**. Routine development screens use 25 color pairs
+against v0.23, Skill 3 and pinned Sacrifice, all three concurrent on a suitable
+host. Start with [the current checkpoint](../../docs/RESEARCH_CHECKPOINT.md),
+[ranked assessment](../../docs/NEXT_ENGINE_ASSESSMENT_V023.md) and
+[storage policy](../../docs/EVIDENCE_STORAGE.md). The release narratives and
+their former next-step recommendations below are historical records.
+
+The benchmark owns match execution and writes Markdown at the results root;
+matchup subdirectories contain game evidence. Validation checks both Go modules.
+Do not copy historical wrappers or start live play as part of a local screen.
+
 Track Pandafish against the previous release, pinned Sacrifice, and a
 Stockfish skill ladder starting at Level 1 and progressing toward Level 20.
 This Go program runs local UCI matches separately from the engine. It reuses the project's chess library.

@@ -1,0 +1,58 @@
+File: pandafish-v023-audit.test
+Type: cpu
+Time: 2026-11-21 16:40:51 PST
+Duration: 18.96s, Total samples = 16.97s (89.50%)
+Showing nodes accounting for 9.38s, 55.27% of 16.97s total
+Dropped 142 nodes (cum <= 0.08s)
+Showing top 50 nodes out of 116
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%     14.84s 87.45%  github.com/philyawj/Pandafish.TestResearchWarmWorkload
+         0     0%     0%     14.84s 87.45%  testing.tRunner
+         0     0%     0%     14.78s 87.09%  github.com/philyawj/Pandafish.iterativeSearchWithHistory
+         0     0%     0%     14.76s 86.98%  github.com/philyawj/Pandafish.(*searcher).iterate
+         0     0%     0%     14.75s 86.92%  github.com/philyawj/Pandafish.(*searcher).root
+     0.03s  0.18%  0.18%     14.72s 86.74%  github.com/philyawj/Pandafish.(*searcher).childSearch
+     0.19s  1.12%  1.30%     14.72s 86.74%  github.com/philyawj/Pandafish.(*searcher).searchAtPly
+     0.20s  1.18%  2.47%      9.66s 56.92%  github.com/philyawj/Pandafish.(*searcher).quietAtPly
+     0.03s  0.18%  2.65%      5.16s 30.41%  github.com/philyawj/Pandafish.(*searcher).childQuiet
+     1.23s  7.25%  9.90%      4.67s 27.52%  github.com/corentings/chess/v2.(*Position).searchMoves
+     0.27s  1.59% 11.49%      3.63s 21.39%  github.com/philyawj/Pandafish.(*searcher).searchMoves
+     0.07s  0.41% 11.90%      2.58s 15.20%  github.com/philyawj/Pandafish.(*mainMovePicker).next
+         0     0% 11.90%      2.56s 15.09%  github.com/corentings/chess/v2.(*Position).AppendSearchMoves (inline)
+     0.05s  0.29% 12.20%      2.15s 12.67%  github.com/philyawj/Pandafish.(*searcher).childPosition
+     0.28s  1.65% 13.85%      2.10s 12.37%  github.com/corentings/chess/v2.(*SearchPosition).Update
+     0.39s  2.30% 16.15%         2s 11.79%  github.com/corentings/chess/v2.searchMoveTags
+     0.84s  4.95% 21.10%      1.51s  8.90%  github.com/corentings/chess/v2.searchAttackedAfterOrdinary
+     1.06s  6.25% 27.34%      1.50s  8.84%  github.com/philyawj/Pandafish.staticScore
+     0.06s  0.35% 27.70%      1.47s  8.66%  github.com/philyawj/Pandafish.(*searcher).exchange
+         0     0% 27.70%      1.46s  8.60%  runtime.systemstack
+         0     0% 27.70%      1.41s  8.31%  runtime.(*mheap).alloc.func1
+         0     0% 27.70%      1.41s  8.31%  runtime.(*mheap).allocSpan
+     1.41s  8.31% 36.00%      1.41s  8.31%  runtime.madvise
+         0     0% 36.00%      1.41s  8.31%  runtime.sysUsed (inline)
+         0     0% 36.00%      1.41s  8.31%  runtime.sysUsedOS (inline)
+     1.24s  7.31% 43.31%      1.24s  7.31%  runtime.duffcopy
+     0.01s 0.059% 43.37%      1.20s  7.07%  github.com/corentings/chess/v2.(*Position).SearchStatus (inline)
+     0.02s  0.12% 43.49%      1.19s  7.01%  github.com/corentings/chess/v2.(*Position).HasLegalMove
+     0.10s  0.59% 44.08%         1s  5.89%  github.com/corentings/chess/v2.(*Position).updateHash
+         0     0% 44.08%      0.94s  5.54%  github.com/corentings/chess/v2.(*Position).AppendSearchQuietMoves (inline)
+         0     0% 44.08%      0.94s  5.54%  github.com/philyawj/Pandafish.(*searcher).quietSearchMoves
+     0.20s  1.18% 45.26%      0.90s  5.30%  runtime.mapaccess1
+     0.03s  0.18% 45.43%      0.73s  4.30%  github.com/philyawj/Pandafish.(*searcher).popPosition
+     0.10s  0.59% 46.02%      0.69s  4.07%  github.com/philyawj/Pandafish.(*searcher).pushKey
+         0     0% 46.02%      0.69s  4.07%  github.com/philyawj/Pandafish.(*searcher).pushPosition (inline)
+     0.32s  1.89% 47.91%      0.63s  3.71%  github.com/corentings/chess/v2.bbForPossibleMoves
+     0.10s  0.59% 48.50%      0.62s  3.65%  github.com/philyawj/Pandafish.(*exchangeBoard).leastAttacker
+         0     0% 48.50%      0.61s  3.59%  strings.Contains (inline)
+     0.01s 0.059% 48.56%      0.61s  3.59%  strings.Index (inline)
+     0.21s  1.24% 49.79%      0.60s  3.54%  internal/stringslite.Index
+         0     0% 49.79%      0.58s  3.42%  runtime.notewakeup
+     0.58s  3.42% 53.21%      0.58s  3.42%  runtime.pthread_cond_signal
+         0     0% 53.21%      0.58s  3.42%  runtime.semawakeup
+         0     0% 53.21%      0.58s  3.42%  runtime.startm
+         0     0% 53.21%      0.58s  3.42%  runtime.wakep
+         0     0% 53.21%      0.57s  3.36%  runtime.gopreempt_m (inline)
+         0     0% 53.21%      0.57s  3.36%  runtime.goschedImpl
+         0     0% 53.21%      0.57s  3.36%  runtime.morestack
+         0     0% 53.21%      0.57s  3.36%  runtime.newstack
+     0.35s  2.06% 55.27%      0.54s  3.18%  runtime.mapaccess1_fast64
