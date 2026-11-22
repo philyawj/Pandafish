@@ -1,0 +1,53 @@
+{
+  "created_utc": "2026-11-22T03:47:20.244972Z",
+  "input_identities": {
+    "/tmp/pandafish-compact-opportunity-rows.json": {
+      "sha256": "a38c4e009886d47ef315267a34cea317a3331a34d4f77928f6db9808fa79c213",
+      "bytes": 288375
+    },
+    "tools/benchmark/research/v0.23-state-kernel/warm/warm-candidate-pair-1.json": {
+      "sha256": "3084c8027fb10151aaebbb0e75beaa2a2d5dfb1db53fd45d564e7a21f39787e8",
+      "bytes": 288405
+    }
+  },
+  "issues": [],
+  "median_time_ratio": 1.0031635141645412,
+  "node_ratios": [
+    1
+  ],
+  "options": {
+    "Values": false,
+    "Parallel": false,
+    "Baseline": "tools/benchmark/research/v0.23-state-kernel/warm/warm-candidate-pair-1.json",
+    "Candidate": "/tmp/pandafish-compact-opportunity-rows.json",
+    "Out": "tools/benchmark/research/v0.24-compact-moves-opportunity/exactness.json",
+    "Reference": "",
+    "Pairs": 1,
+    "Roots": 1145,
+    "Depth": 5,
+    "MaxTimeRatio": 0,
+    "MaxNodeRatio": 0,
+    "MinOpportunity": 0,
+    "Exact": true
+  },
+  "pairs": [
+    {
+      "baseline_ms": 18772.180212000047,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 18831.56627000003,
+      "candidate_nodes": 43118858,
+      "changed_roots": 0,
+      "contradictions": 0,
+      "node_ratio": 1,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 1,
+      "time_ratio": 1.0031635141645412
+    }
+  ],
+  "passed": true,
+  "time_ratios": [
+    1.0031635141645412
+  ]
+}

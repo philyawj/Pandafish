@@ -1,0 +1,8 @@
+package main
+import "github.com/corentings/chess/v2"
+var contactObserver func(*chess.Position,bool,bool,chess.Move)
+func (w *searcher)contactShadow(p *chess.Position){
+ guard:=p.SearchHasProtectedQueenContact(p.Turn().Other());var m chess.Move;proof:=false
+ if guard{m,proof=passedContactThreat(p,&w.contactPass,&w.contactChild);if proof{w.contactSink^=uint64(encodeMove(m))}}
+ if contactObserver!=nil{contactObserver(p,guard,proof,m)}
+}

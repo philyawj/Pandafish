@@ -1,0 +1,24 @@
+package main
+
+import("os";"strings")
+func read(p string)string{b,e:=os.ReadFile(p);if e!=nil{panic(e)};return string(b)}
+func write(p,s string){if e:=os.WriteFile(p,[]byte(s),0644);e!=nil{panic(e)}}
+func replace(s,old,new string)string{if !strings.Contains(s,old){panic("missing integration boundary: "+old)};return strings.ReplaceAll(s,old,new)}
+func main(){
+ p:="third_party/chess/search_moves.go";s:=read(p);start:=strings.Index(s,"func (pos *Position) searchMoves(");if start<0{panic("generator")};head,body:=s[:start],s[start:]
+ body=replace(body,"func (pos *Position) searchMoves(dst []Move, tacticalOnly, first, quietOnly bool) ([]Move, bool)","func (pos *Position) searchCandidates(out *searchMoveOutput, tacticalOnly, first, quietOnly bool) bool")
+ body=replace(body,"dst = append(dst, m)","out.appendCached(m)");body=replace(body,"dst = append(dst, m.fullMove())","out.append(m)");body=replace(body,"dst = append(dst, castles...)","for _, castle := range castles { out.appendCached(castle) }")
+ for _,v:=range []string{"true","false","found"}{body=replace(body,"return dst, "+v,"return "+v)}
+ if strings.Contains(body,"dst"){panic("unconverted output")}
+ wrapper:="func (pos *Position) searchMoves(dst []Move, tacticalOnly, first, quietOnly bool) ([]Move, bool) {\n out := searchMoveOutput{full: dst}\n found := pos.searchCandidates(&out,tacticalOnly,first,quietOnly)\n return out.full,found\n}\n\n"
+ write(p,head+wrapper+body)
+ p="search_moves.go";s=read(p);start=strings.Index(s,"func (w *searcher) searchMoves(");end:=strings.Index(s,"// Each rank names");body=s[start:end];body=replace(body,"searchMoves(","searchCompactMoves(");body=replace(body,"chess.Move","chess.SearchMove");body=replace(body,"w.moveBuffers","w.compactMoveBuffers");body=replace(body,"p.AppendSearchMoves","p.AppendCompactMoves")
+ write("compact_search_moves.go","package main\nimport(\"slices\";\"github.com/corentings/chess/v2\")\n"+body)
+ s=replace(s,"func applyMoveOrder(moves []chess.Move, ranks []moveRank)","func applyMoveOrder[T any](moves []T, ranks []moveRank)");write(p,s)
+ p="main_move_picker.go";s=read(p);start=strings.Index(s,"func lookupHint(");end=strings.Index(s,"func (picker *mainMovePicker) used(");originalLookup:=s[start:end]
+ s=replace(s,"chess.Move","chess.SearchMove");s=replace(s,"lookupHint(","lookupCompactHint(");s=replace(s,"p.LookupSearchMove(","p.LookupCompactMove(");s=replace(s,"func (picker *mainMovePicker) next()","func (picker *mainMovePicker) nextCompact()")
+ s=replace(s,"worker.searchMoves(","worker.searchCompactMoves(");s=replace(s,"worker.killers.order(","worker.killers.orderCompact(");s=replace(s,"preferMove(","preferCompactMove(");s=replace(s,"encodeMove(","encodeSearchMove(");s=replace(s,"isQuietMove(","isQuietSearchMove(");s=replace(s,"quietSearchMoves(","quietCompactSearchMoves(");s=replace(s,"worker.moveBuffers","worker.compactMoveBuffers");s=replace(s,"p.AppendSearchQuietMoves(","p.AppendCompactQuietMoves(")
+ s+="\n"+originalLookup+"\nfunc (picker *mainMovePicker) next() (chess.Move,bool) { m,ok:=picker.nextCompact();return m.Move(),ok }\n";write(p,s)
+ p="search.go";s=read(p);s=replace(s,"moveBuffers     [][]chess.Move","moveBuffers     [][]chess.Move\n compactMoveBuffers [][]chess.SearchMove")
+ s=replace(s,"position.SearchStatus()","position.CompactStatus()");s=replace(s,"picker.next()","picker.nextCompact()");s=replace(s,"worker.childPosition(","worker.childCompactPosition(");s=replace(s,"worker.searchMoves(position, ply, !checked)","worker.searchCompactMoves(position, ply, !checked)");s=replace(s,"worker.killers.remember(","worker.killers.rememberCompact(");s=replace(s,"encodeMove(move)","encodeSearchMove(move)");s=replace(s,"captureValue(position, move)","captureSearchValue(position, move)");s=replace(s,"worker.exchange(position, move)","worker.exchange(position, move.Move())");write(p,s)
+}

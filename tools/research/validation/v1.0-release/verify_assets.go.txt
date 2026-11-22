@@ -1,0 +1,57 @@
+package main
+
+import (
+ "archive/tar"
+ "archive/zip"
+ "compress/gzip"
+ "crypto/sha256"
+ "encoding/json"
+ "fmt"
+ "io"
+ "os"
+ "path/filepath"
+ "strings"
+)
+
+func must(e error) { if e != nil { panic(e) } }
+func read(p string) []byte { b,e:=os.ReadFile(p);must(e);return b }
+func hash(b []byte) string { return fmt.Sprintf("%x",sha256.Sum256(b)) }
+func main() {
+ if len(os.Args)!=3 { panic("usage: verifier ASSET_DIRECTORY SOURCE_COMMIT") }
+ dir:=os.Args[1]
+ checked:=map[string]bool{}
+ for _,line:=range strings.Split(strings.TrimSpace(string(read(filepath.Join(dir,"SHA256SUMS")))),"\n") {
+  f:=strings.Fields(line);if len(f)!=2||filepath.Base(f[1])!=f[1]||checked[f[1]] { panic("invalid checksum entry") }
+  if hash(read(filepath.Join(dir,f[1])))!=f[0] { panic("checksum mismatch: "+f[1]) };checked[f[1]]=true
+ }
+ if len(checked)!=7||!checked["build-manifest.json"] { panic("expected six archives and manifest") }
+ var m struct { Version string `json:"version"`;Commit string `json:"source_commit"`;Licenses map[string]string `json:"license_sha256"`;Assets []struct{Name string `json:"name"`;SHA string `json:"sha256"`;BinarySHA string `json:"binary_sha256"`;Bytes int `json:"bytes"`;Native bool `json:"runtime_tested"`} `json:"assets"` }
+ must(json.Unmarshal(read(filepath.Join(dir,"build-manifest.json")),&m))
+ if m.Version!="v1.0"||m.Commit!=os.Args[2]||len(m.Assets)!=6||len(m.Licenses)!=2 { panic("manifest scope mismatch") }
+ native:=0
+ for _,a:=range m.Assets {
+  data:=read(filepath.Join(dir,a.Name));if !checked[a.Name]||hash(data)!=a.SHA||len(data)!=a.Bytes { panic("manifest archive mismatch") }
+  folder:=strings.TrimSuffix(strings.TrimSuffix(a.Name,".tar.gz"),".zip")
+  seen:=map[string]bool{}
+  check:=func(name string,mode os.FileMode,b []byte) {
+   if filepath.Dir(name)!=folder { panic("unexpected archive path") };base:=filepath.Base(name)
+   if seen[base] { panic("duplicate member") };seen[base]=true
+   if base=="pandafish"||base=="pandafish.exe" {
+    expected:="pandafish";if strings.Contains(a.Name,"windows-"){expected+=".exe"}
+    if base!=expected||hash(b)!=a.BinarySHA||mode.Perm()!=0755 { panic("binary member mismatch") }
+   } else if h,ok:=m.Licenses[base];!ok||hash(b)!=h||mode.Perm()!=0644 { panic("license member mismatch") }
+  }
+  if strings.HasSuffix(a.Name,".zip") {
+   z,e:=zip.OpenReader(filepath.Join(dir,a.Name));must(e)
+   for _,f:=range z.File { r,e:=f.Open();must(e);b,e:=io.ReadAll(r);must(e);must(r.Close());check(f.Name,f.Mode(),b) };must(z.Close())
+  } else {
+   f,e:=os.Open(filepath.Join(dir,a.Name));must(e);g,e:=gzip.NewReader(f);must(e);t:=tar.NewReader(g)
+   for { h,e:=t.Next();if e==io.EOF { break };must(e);if h.Typeflag!=tar.TypeReg { panic("nonregular member") };b,e:=io.ReadAll(t);must(e);check(h.Name,os.FileMode(h.Mode),b) };must(g.Close());must(f.Close())
+  }
+  if len(seen)!=3 { panic("archive member count") }
+  if a.Native { if !strings.Contains(a.Name,"darwin-arm64") { panic("unexpected runtime-tested target") };native++ }
+  fmt.Println("Verified",a.Name)
+ }
+ if native!=1 { panic("runtime coverage mismatch") }
+ fmt.Println("All seven checksums, six archives, executable modes, licenses and merged source identity verified")
+}

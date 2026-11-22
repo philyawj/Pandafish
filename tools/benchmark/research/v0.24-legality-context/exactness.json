@@ -1,0 +1,53 @@
+{
+  "created_utc": "2026-11-22T01:09:33.234763Z",
+  "input_identities": {
+    "/tmp/pandafish-v024-legality-rows.json": {
+      "sha256": "cd21a4eca53f43de399ccafe2a2f58ce64f17d356b8ba9b36602a8764a1b9915",
+      "bytes": 288532
+    },
+    "tools/benchmark/research/v0.23-state-kernel/warm/warm-candidate-pair-1.json": {
+      "sha256": "3084c8027fb10151aaebbb0e75beaa2a2d5dfb1db53fd45d564e7a21f39787e8",
+      "bytes": 288405
+    }
+  },
+  "issues": [],
+  "median_time_ratio": 1.3634019090461886,
+  "node_ratios": [
+    1
+  ],
+  "options": {
+    "Values": false,
+    "Parallel": false,
+    "Baseline": "tools/benchmark/research/v0.23-state-kernel/warm/warm-candidate-pair-1.json",
+    "Candidate": "/tmp/pandafish-v024-legality-rows.json",
+    "Out": "tools/benchmark/research/v0.24-legality-context/exactness.json",
+    "Reference": "",
+    "Pairs": 1,
+    "Roots": 1145,
+    "Depth": 5,
+    "MaxTimeRatio": 0,
+    "MaxNodeRatio": 0,
+    "MinOpportunity": 0,
+    "Exact": true
+  },
+  "pairs": [
+    {
+      "baseline_ms": 18772.180212000047,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 25594.02633799995,
+      "candidate_nodes": 43118858,
+      "changed_roots": 0,
+      "contradictions": 0,
+      "node_ratio": 1,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 1,
+      "time_ratio": 1.3634019090461886
+    }
+  ],
+  "passed": true,
+  "time_ratios": [
+    1.3634019090461886
+  ]
+}

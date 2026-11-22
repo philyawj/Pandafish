@@ -1,0 +1,101 @@
+{
+  "created_utc": "2026-11-22T03:52:44.37379Z",
+  "input_identities": {
+    "tools/benchmark/research/v0.24-compact-generation/warm/warm-baseline-pair-1.json": {
+      "sha256": "b163e997cbac5fa5d1713d823729aecc5c13ceaa344cd0b46c11ece5b07e4d03",
+      "bytes": 288050
+    },
+    "tools/benchmark/research/v0.24-compact-generation/warm/warm-baseline-pair-2.json": {
+      "sha256": "8d1f16f8b7d56d07e6990992b5a5944c95a83c524939188e984ec625e3143495",
+      "bytes": 287971
+    },
+    "tools/benchmark/research/v0.24-compact-generation/warm/warm-baseline-pair-3.json": {
+      "sha256": "a35e2b6fe79f81fc8067a3bb8bcecf86d7ca7a7b90582a3d8aec5d22e5085969",
+      "bytes": 288103
+    },
+    "tools/benchmark/research/v0.24-compact-generation/warm/warm-candidate-pair-1.json": {
+      "sha256": "aebec1512daac60f30b22f35ddbd5caf2aecbbe4cc53372f80887aeb4a34fcc1",
+      "bytes": 288065
+    },
+    "tools/benchmark/research/v0.24-compact-generation/warm/warm-candidate-pair-2.json": {
+      "sha256": "b6c6f733fcc844f68f6cfda152d1fae10bf5fead4b06e79699a82cfc9ced98ea",
+      "bytes": 287944
+    },
+    "tools/benchmark/research/v0.24-compact-generation/warm/warm-candidate-pair-3.json": {
+      "sha256": "1e5883af10c02b6f193825cd23e72c433c3ce0c4e308e13bbb79d2ec99af1f27",
+      "bytes": 287923
+    }
+  },
+  "issues": [],
+  "median_time_ratio": 0.9783361103144076,
+  "node_ratios": [
+    1,
+    1,
+    1
+  ],
+  "options": {
+    "Values": false,
+    "Parallel": false,
+    "Baseline": "tools/benchmark/research/v0.24-compact-generation/warm/warm-baseline-pair-[1-3].json",
+    "Candidate": "tools/benchmark/research/v0.24-compact-generation/warm/warm-candidate-pair-[1-3].json",
+    "Out": "tools/benchmark/research/v0.24-compact-generation/warm/warm-gate.json",
+    "Reference": "",
+    "Pairs": 3,
+    "Roots": 1145,
+    "Depth": 5,
+    "MaxTimeRatio": 0.92,
+    "MaxNodeRatio": 0,
+    "MinOpportunity": 0,
+    "Exact": true
+  },
+  "pairs": [
+    {
+      "baseline_ms": 18817.38307,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 18409.725358999985,
+      "candidate_nodes": 43118858,
+      "changed_roots": 0,
+      "contradictions": 0,
+      "node_ratio": 1,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 1,
+      "time_ratio": 0.9783361103144076
+    },
+    {
+      "baseline_ms": 19107.779155000004,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 18503.769517999994,
+      "candidate_nodes": 43118858,
+      "changed_roots": 0,
+      "contradictions": 0,
+      "node_ratio": 1,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 2,
+      "time_ratio": 0.9683893333652039
+    },
+    {
+      "baseline_ms": 18747.52082999998,
+      "baseline_nodes": 43118858,
+      "candidate_ms": 18393.43623600004,
+      "candidate_nodes": 43118858,
+      "changed_roots": 0,
+      "contradictions": 0,
+      "node_ratio": 1,
+      "opportunity_captures": 0,
+      "opportunity_fraction": 0,
+      "opportunity_nodes": 0,
+      "pair": 3,
+      "time_ratio": 0.981112991034349
+    }
+  ],
+  "passed": false,
+  "time_ratios": [
+    0.9683893333652039,
+    0.9783361103144076,
+    0.981112991034349
+  ]
+}

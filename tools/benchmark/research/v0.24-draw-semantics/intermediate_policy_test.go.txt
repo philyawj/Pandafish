@@ -1,0 +1,69 @@
+package main
+
+import (
+	"encoding/json"
+	"os"
+	"strconv"
+	"testing"
+
+	"github.com/corentings/chess/v2"
+)
+
+func TestResearchDrawPolicy(t *testing.T) {
+	output := os.Getenv("DRAW_POLICY_OUTPUT")
+	if output == "" {
+		t.Skip("explicit policy diagnosis required")
+	}
+	type row struct {
+		Name, FEN, Outcome, Method, Status string
+		Eligible                           []string
+		Static, Main, Quiet                int
+	}
+	rows := []row{}
+	for _, c := range []struct {
+		name, board string
+		clock       int
+	}{
+		{"kings", "8/7k/8/8/8/8/8/K7", 0},
+		{"bishop", "8/7k/8/8/3B4/8/8/K7", 0},
+		{"knight", "8/7k/8/8/3N4/8/8/K7", 0},
+		{"same-bishops", "8/7k/8/8/3B4/8/5b2/K7", 0},
+		{"opposite-bishops", "8/7k/8/8/3B4/8/2b5/K7", 0},
+		{"two-knights", "8/7k/8/8/3N4/8/2N5/K7", 0},
+		{"mixed-minors", "8/7k/8/8/3N4/8/2B5/K7", 0},
+		{"pawn", "8/7k/8/8/3P4/8/8/K7", 0},
+		{"rook99", "8/7k/8/8/3R4/8/8/K7", 99},
+		{"rook100", "8/7k/8/8/3R4/8/8/K7", 100},
+		{"rook149", "8/7k/8/8/3R4/8/8/K7", 149},
+		{"rook150", "8/7k/8/8/3R4/8/8/K7", 150},
+		{"mate150", "7k/6Q1/5K2/8/8/8/8/8", 150},
+	} {
+		for _, turn := range []string{"w", "b"} {
+			// The mate vector is legal only with Black to move.
+			if c.name == "mate150" && turn == "w" {
+				continue
+			}
+			fen := c.board + " " + turn + " - - " + strconv.Itoa(c.clock) + " 1"
+			opt, err := chess.FEN(fen)
+			if err != nil {
+				t.Fatal(err)
+			}
+			g := chess.NewGame(opt)
+			p := g.Position()
+			r := row{Name: c.name, FEN: fen, Outcome: g.Outcome().String(), Method: g.Method().String(), Status: p.SearchStatus().String(), Static: staticScore(p, p.Turn())}
+			for _, m := range g.EligibleDraws() {
+				r.Eligible = append(r.Eligible, m.String())
+			}
+			r.Main = search(p, 2, -searchInfinity, searchInfinity)
+			r.Quiet = quiescence(p, quiescenceDepth, -searchInfinity, searchInfinity)
+			rows = append(rows, r)
+		}
+	}
+	b, err := json.MarshalIndent(rows, "", "  ")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(output, append(b, '\n'), 0644); err != nil {
+		t.Fatal(err)
+	}
+}

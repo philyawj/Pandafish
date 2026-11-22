@@ -1,0 +1,13 @@
+package main
+import("encoding/json";"fmt";"os";"path/filepath";"sort")
+func must(e error){if e!=nil{panic(e)}}
+func main(){d:=os.Args[1];tool:="/tmp/pandafish-cleanup-research";base:="tools/benchmark/bin/pandafish-v0.23";teacher:="/opt/homebrew/bin/stockfish";out:=filepath.Join(d,"fresh-generation")
+ exclusions:=[]string{"tools/benchmark/research/v0.17-search-moves/inputs.json","tools/benchmark/research/v0.20-next-assessment/fresh-generation/inputs.json","tools/benchmark/research/v0.2[234]-*/fresh-generation*/inputs.json","/tmp/pandafish-v024-warm-exclusions.json","/tmp/pandafish-v024-oracle-exclusions.json","/tmp/pandafish-v024-all-screen-exclusions.json",filepath.Join(d,"policy-exclusions.json")};analyses:="tools/benchmark/live/*/analysis/stockfish-n100000/*.json"
+ patterns:=[]string{tool,base,teacher,filepath.Join(d,"FRESH_PLAN.md"),filepath.Join(d,"freeze_collection.go.txt"),"tools/research/*.go","tools/benchmark/research/v0.19-sharp-branches/blocked.json","tools/benchmark/research/v0.19-sharp-branches/unlabelled-roots.json","tools/benchmark/research/v0.19-sharp-branches/forest-leaves.json"};patterns=append(patterns,exclusions...);patterns=append(patterns,analyses)
+ set:=map[string]bool{};for _,pattern:=range patterns{paths,e:=filepath.Glob(pattern);must(e);if len(paths)==0{panic("no inputs: "+pattern)};for _,p:=range paths{set[p]=true}}
+ inputs:=[]string{};for p:=range set{inputs=append(inputs,p)};sort.Strings(inputs)
+ command:=[]string{tool,"generate","--baseline",base,"--teacher",teacher,"--out",out,"--seed","2026112204","--stream","126"};for _,p:=range exclusions{command=append(command,"--exclude-input",p)};command=append(command,"--exclude-analysis",analyses)
+ step:=map[string]any{"name":"frozen-fresh-collection","command":command,"timeout_seconds":1200,"outputs":[]string{filepath.Join(out,"*.json"),filepath.Join(out,"*.jsonl")}}
+ plan:=map[string]any{"version":1,"inputs":inputs,"steps":[]any{step}}
+ b,e:=json.MarshalIndent(plan,"","  ");must(e);path:=filepath.Join(d,"fresh-collection-plan.json");f,e:=os.OpenFile(path,os.O_CREATE|os.O_EXCL|os.O_WRONLY,0644);must(e);_,e=f.Write(append(b,'\n'));must(e);must(f.Close());fmt.Printf("Pinned %d pre-existing paths; future cohort is not an input. Plan %s\n",len(inputs),path)
+}

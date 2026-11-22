@@ -1,0 +1,6 @@
+package main
+import("bytes";"crypto/sha256";"encoding/json";"fmt";"os";"path/filepath")
+func must(e error){if e!=nil{panic(e)}}
+func main(){b,e:=os.ReadFile("tools/benchmark/research/v0.24-contact-threat/candidate-source.json");must(e);var s struct{Files map[string]string};must(json.Unmarshal(b,&s));checked:=map[string]string{};for p,want:=range s.Files{got,e:=os.ReadFile(p);must(e);actual:=append([]byte(nil),got...);if p=="main.go"||p=="main_test.go"{got=bytes.ReplaceAll(got,[]byte("v1.0"),[]byte("v0.23"))};if string(got)!=want{panic("non-version source change: "+p)};checked[p]=fmt.Sprintf("%x",sha256.Sum256(actual))}
+ for _,pattern:=range []string{"*.go","go.mod","go.sum","internal/telemetry/*.go","third_party/chess/*.go","third_party/chess/go.mod","third_party/chess/go.sum"}{paths,e:=filepath.Glob(pattern);must(e);for _,p:=range paths{if _,ok:=checked[filepath.ToSlash(p)];!ok{panic("uncaptured source "+p)}}}
+ result:=map[string]any{"passed":true,"candidate_source_sha256":fmt.Sprintf("%x",sha256.Sum256(b)),"core_files":len(checked),"only_version_substitutions":[]string{"main.go","main_test.go"},"current_version":"v1.0","source_sha256":checked};b,e=json.MarshalIndent(result,"","  ");must(e);must(os.WriteFile(os.Args[1],append(b,'\n'),0644));fmt.Printf("Version-only source boundary passes on %d files\n",len(checked))}

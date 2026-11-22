@@ -1,0 +1,248 @@
+package main
+
+import (
+	"github.com/corentings/chess/v2"
+	"math/bits"
+	"sync"
+)
+
+const nnWidth = 16
+const nnFeatures = 32 * 10 * 64
+const nnSeed = uint64(2026112203)
+
+type nnModel struct {
+	Input  [nnFeatures][nnWidth]int16
+	Bias   [nnWidth]int32
+	Output [2][nnWidth]int16
+}
+
+var nnWeights nnModel
+var nnOnce sync.Once
+
+func nnInit() {
+	nnOnce.Do(func() {
+		s := nnSeed
+		next := func() uint64 {
+			s += 0x9e3779b97f4a7c15
+			z := s
+			z = (z ^ (z >> 30)) * 0xbf58476d1ce4e5b9
+			z = (z ^ (z >> 27)) * 0x94d049bb133111eb
+			return z ^ (z >> 31)
+		}
+		for f := range nnWeights.Input {
+			for h := range nnWidth {
+				nnWeights.Input[f][h] = int16(next()%17) - 8
+			}
+		}
+		for h := range nnWidth {
+			nnWeights.Bias[h] = 32
+			for head := range 2 {
+				nnWeights.Output[head][h] = int16(next()%9) - 4
+			}
+		}
+	})
+}
+
+type nnState struct {
+	Values [2][nnWidth]int32
+	Kings  [2]int
+	Key    uint64
+	Valid  bool
+}
+
+func nnKing(p *chess.Position, side int) int {
+	sets := p.Board().EvaluationPieces()
+	mask := sets[side*6]
+	if bits.OnesCount64(mask) != 1 {
+		return -1
+	}
+	return bits.LeadingZeros64(mask)
+}
+func nnFeature(king, side, index, square int) int {
+	if side == 1 {
+		king ^= 56
+		square ^= 56
+	}
+	if king%8 >= 4 {
+		king ^= 7
+		square ^= 7
+	}
+	relative := index / 6
+	kind := index%6 - 1
+	if relative != side {
+		kind += 5
+	}
+	return ((king/8*4+king%8)*10+kind)*64 + square
+}
+func nnApply(values *[nnWidth]int32, feature int, sign int32) {
+	weights := &nnWeights.Input[feature]
+	for h := range nnWidth {
+		values[h] += sign * int32(weights[h])
+	}
+}
+func nnRefresh(p *chess.Position, side, king int) [nnWidth]int32 {
+	out := nnWeights.Bias
+	sets := p.Board().EvaluationPieces()
+	for index, mask := range sets {
+		if index%6 == 0 {
+			continue
+		}
+		for mask != 0 {
+			square := bits.LeadingZeros64(mask)
+			mask &^= uint64(1) << uint(63-square)
+			nnApply(&out, nnFeature(king, side, index, square), 1)
+		}
+	}
+	return out
+}
+func nnFull(p *chess.Position) nnState {
+	nnInit()
+	s := nnState{Kings: [2]int{nnKing(p, 0), nnKing(p, 1)}, Key: p.ZobristHash()}
+	if s.Kings[0] < 0 || s.Kings[1] < 0 {
+		return s
+	}
+	s.Valid = true
+	for side := range 2 {
+		s.Values[side] = nnRefresh(p, side, s.Kings[side])
+	}
+	return s
+}
+func nnPieceIndex(piece chess.Piece) int {
+	kind := -1
+	switch piece.Type() {
+	case chess.Queen:
+		kind = 1
+	case chess.Rook:
+		kind = 2
+	case chess.Bishop:
+		kind = 3
+	case chess.Knight:
+		kind = 4
+	case chess.Pawn:
+		kind = 5
+	}
+	if kind < 0 {
+		return -1
+	}
+	if piece.Color() == chess.Black {
+		kind += 6
+	}
+	return kind
+}
+func nnChange(s *nnState, piece chess.Piece, square chess.Square, sign int32, refreshSide int) {
+	index := nnPieceIndex(piece)
+	if index < 0 {
+		return
+	}
+	for side := range 2 {
+		if side != refreshSide {
+			nnApply(&s.Values[side], nnFeature(s.Kings[side], side, index, int(square)), sign)
+		}
+	}
+}
+func nnUpdate(parent *nnState, p, child *chess.Position, m *chess.Move) nnState {
+	if !parent.Valid {
+		return nnFull(child)
+	}
+	s := *parent
+	s.Key = child.ZobristHash()
+	piece := p.Board().Piece(m.S1())
+	side := 0
+	if piece.Color() == chess.Black {
+		side = 1
+	}
+	refresh := -1
+	if piece.Type() == chess.King {
+		refresh = side
+		s.Kings[side] = int(m.S2())
+	}
+	nnChange(&s, piece, m.S1(), -1, refresh)
+	victimSquare := m.S2()
+	if m.HasTag(chess.EnPassant) {
+		if side == 0 {
+			victimSquare -= 8
+		} else {
+			victimSquare += 8
+		}
+	}
+	nnChange(&s, p.Board().Piece(victimSquare), victimSquare, -1, refresh)
+	promoted := piece
+	if m.Promo() != chess.NoPieceType {
+		promoted = chess.NewPiece(m.Promo(), piece.Color())
+	}
+	nnChange(&s, promoted, m.S2(), 1, refresh)
+	if m.HasTag(chess.KingSideCastle) || m.HasTag(chess.QueenSideCastle) {
+		from, to := chess.H1, chess.F1
+		if m.HasTag(chess.QueenSideCastle) {
+			from, to = chess.A1, chess.D1
+		}
+		if side == 1 {
+			from += 56
+			to += 56
+		}
+		rook := p.Board().Piece(from)
+		nnChange(&s, rook, from, -1, refresh)
+		nnChange(&s, rook, to, 1, refresh)
+	}
+	if refresh >= 0 {
+		s.Values[refresh] = nnRefresh(child, refresh, s.Kings[refresh])
+	}
+	return s
+}
+func nnActivations(s *nnState, turn chess.Color) [2 * nnWidth]int32 {
+	var out [2 * nnWidth]int32
+	if !s.Valid {
+		return out
+	}
+	side := 0
+	if turn == chess.Black {
+		side = 1
+	}
+	for head := range 2 {
+		which := side
+		if head == 1 {
+			which = 1 - side
+		}
+		for h, v := range s.Values[which] {
+			out[head*nnWidth+h] = max(0, min(127, v))
+		}
+	}
+	return out
+}
+func nnOutput(s *nnState, turn chess.Color) int {
+	a := nnActivations(s, turn)
+	sum := int32(0)
+	for head := range 2 {
+		for h := range nnWidth {
+			sum += a[head*nnWidth+h] * int32(nnWeights.Output[head][h])
+		}
+	}
+	return int(sum) / 64
+}
+func (w *searcher) nnGet(p *chess.Position, ply int) *nnState {
+	for len(w.nnStates) <= ply {
+		w.nnStates = append(w.nnStates, nil)
+	}
+	if w.nnStates[ply] == nil {
+		w.nnStates[ply] = new(nnState)
+	}
+	s := w.nnStates[ply]
+	if s.Key != p.ZobristHash() || s.Key == 0 {
+		*s = nnFull(p)
+	}
+	return s
+}
+func (w *searcher) nnChild(p, child *chess.Position, m *chess.Move, ply int) {
+	parent := w.nnGet(p, ply-1)
+	for len(w.nnStates) <= ply {
+		w.nnStates = append(w.nnStates, nil)
+	}
+	if w.nnStates[ply] == nil {
+		w.nnStates[ply] = new(nnState)
+	}
+	*w.nnStates[ply] = nnUpdate(parent, p, child, m)
+}
+func (w *searcher) nnStatic(p *chess.Position, ply int) int {
+	w.nnObserved ^= int64(nnOutput(w.nnGet(p, ply), p.Turn()))
+	return staticScore(p, p.Turn())
+}

@@ -16,18 +16,19 @@ const checkEvasionDepth = 4
 // A zero-value searcher is unlimited, useful for fixed-depth comparisons.
 // Cancellation is distinct from a score, so unfinished nodes never affect ties.
 type searcher struct {
-	positionBuffers []*chess.SearchPosition
-	moveBuffers     [][]chess.Move
-	rankBuffers     [][]moveRank
-	repetitions     map[uint64]int
-	historyKey      uint64
-	nodes           uint64
-	table           *transpositionTable
-	killers         *killerTable
-	ctx             context.Context
-	deadline        time.Time
-	now             func() time.Time
-	unfiltered      bool // Internal reference mode for broader-quiescence ablations.
+	contactPass, contactChild chess.SearchPosition
+	positionBuffers           []*chess.SearchPosition
+	moveBuffers               [][]chess.Move
+	rankBuffers               [][]moveRank
+	repetitions               map[uint64]int
+	historyKey                uint64
+	nodes                     uint64
+	table                     *transpositionTable
+	killers                   *killerTable
+	ctx                       context.Context
+	deadline                  time.Time
+	now                       func() time.Time
+	unfiltered                bool // Internal reference mode for broader-quiescence ablations.
 }
 
 func (worker *searcher) clock() time.Time {
@@ -139,6 +140,12 @@ func (worker *searcher) quiet(position *chess.Position, depth, alpha, beta int, 
 }
 
 func (worker *searcher) quietAtPly(position *chess.Position, depth, alpha, beta int, checked bool, ply int) (int, bool) {
+	return worker.quietContactAtPly(position, depth, alpha, beta, checked, ply, 1, nil)
+}
+
+// One contact-threat event per q path uses a window-independent frontier.
+// A pending move is revalidated on the actual board after a legal defense.
+func (worker *searcher) quietContactAtPly(position *chess.Position, depth, alpha, beta int, checked bool, ply, budget int, pending *chess.Move) (int, bool) {
 	if worker.stopped() {
 		return 0, false
 	}
@@ -151,29 +158,41 @@ func (worker *searcher) quietAtPly(position *chess.Position, depth, alpha, beta 
 		return 0, !worker.stopped()
 	}
 	defer worker.popPosition(position)
+	if pending != nil && depth > 0 {
+		if m, ok := position.LookupSearchMove(pending.S1(), pending.S2(), pending.Promo()); ok && m.HasTag(chess.Check) {
+			if worker.contactChild.Update(position, &m).SearchStatus() == chess.Checkmate {
+				return mateScore - ply - 1, !worker.stopped()
+			}
+		}
+	}
 	static := staticScore(position, position.Turn())
 	if depth <= -checkEvasionDepth || (depth <= 0 && !checked) {
 		return static, !worker.stopped()
 	}
 	best := -searchInfinity
-	if !checked {
+	var threat chess.Move
+	defending := false
+	if !checked && depth >= 2 && budget > 0 {
+		threat, defending = passedContactThreat(position, &worker.contactPass, &worker.contactChild)
+	}
+	if !checked && !defending {
 		best = static
 		if best >= beta {
 			return best, !worker.stopped()
 		}
 		alpha = max(alpha, best)
 	}
-	moves := worker.searchMoves(position, ply, !checked)
+	moves := worker.searchMoves(position, ply, !checked && !defending)
 	for _, move := range moves {
 		if worker.stopped() {
 			return 0, false
 		}
-		if !checked && !move.HasTag(chess.Capture) && !move.HasTag(chess.EnPassant) && move.Promo() == chess.NoPieceType {
+		if !checked && !defending && !move.HasTag(chess.Capture) && !move.HasTag(chess.EnPassant) && move.Promo() == chess.NoPieceType {
 			continue
 		}
 		// Equal-or-cheaper attackers usually cannot lose a material exchange.
 		// Keep them without SEE, including recapture-promotion exceptions.
-		if !worker.unfiltered && !checked && !move.HasTag(chess.Check) && move.Promo() == chess.NoPieceType &&
+		if !worker.unfiltered && !checked && !defending && !move.HasTag(chess.Check) && move.Promo() == chess.NoPieceType &&
 			captureValue(position, move) < pieceValues[position.Board().Piece(move.S1()).Type()] {
 			gain, complete := worker.exchange(position, move)
 			if !complete {
@@ -183,7 +202,13 @@ func (worker *searcher) quietAtPly(position *chess.Position, depth, alpha, beta 
 				continue
 			}
 		}
-		score, complete := worker.childQuiet(worker.childPosition(position, &move, ply+1), depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1)
+		nextBudget := budget
+		var nextThreat *chess.Move
+		if defending {
+			nextBudget--
+			nextThreat = &threat
+		}
+		score, complete := worker.childContactQuiet(worker.childPosition(position, &move, ply+1), depth-1, -beta, -alpha, move.HasTag(chess.Check), ply+1, nextBudget, nextThreat)
 		if !complete {
 			return 0, false
 		}

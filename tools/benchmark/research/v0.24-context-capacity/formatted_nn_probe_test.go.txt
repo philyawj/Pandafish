@@ -1,0 +1,312 @@
+package main
+
+import (
+	"encoding/json"
+	"github.com/corentings/chess/v2"
+	"math"
+	"os"
+	"path/filepath"
+	"testing"
+	"unsafe"
+)
+
+func nnWrite(t *testing.T, path string, v any) {
+	t.Helper()
+	b, e := json.MarshalIndent(v, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile(path, append(b, '\n'), 0644); e != nil {
+		t.Fatal(e)
+	}
+}
+func nnRead(t *testing.T, path string, v any) {
+	t.Helper()
+	b, e := os.ReadFile(path)
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = json.Unmarshal(b, v); e != nil {
+		t.Fatal(e)
+	}
+}
+func nnMirror(t *testing.T, p *chess.Position, colour bool) *chess.Position {
+	t.Helper()
+	pieces := map[chess.Square]chess.Piece{}
+	for sq, piece := range p.Board().SquareMap() {
+		mask := chess.Square(7)
+		if colour {
+			mask = 56
+			piece = chess.NewPiece(piece.Type(), piece.Color().Other())
+		}
+		pieces[sq^mask] = piece
+	}
+	b, e := chess.NewBoard(pieces)
+	if e != nil {
+		t.Fatal(e)
+	}
+	turn := p.Turn()
+	if colour {
+		turn = turn.Other()
+	}
+	return evalFEN(t, b.String()+" "+turn.String()+" - - 0 1")
+}
+func TestNNIncrementalParity(t *testing.T) {
+	if unsafe.Sizeof(nnModel{}) > 1<<20 {
+		t.Fatal("model memory cap")
+	}
+	fens := []string{chess.StartingPosition().String(), "r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1", "4k3/8/8/3pP3/8/8/8/4K3 w - d6 0 1", "7k/P7/8/8/8/8/8/7K w - - 0 1", "7k/8/8/8/8/8/7p/K7 b - - 0 1", "7k/8/8/8/3N4/8/8/K7 w - - 0 1"}
+	if path := os.Getenv("ORACLE_INPUT"); path != "" {
+		var input struct{ Cases []struct{ FEN string } }
+		nnRead(t, path, &input)
+		if len(input.Cases) != 596 {
+			t.Fatal("oracle coverage")
+		}
+		for _, c := range input.Cases {
+			fens = append(fens, c.FEN)
+		}
+	}
+	comparisons := 0
+	special := map[string]int{}
+	for _, fen := range fens {
+		p := evalFEN(t, fen)
+		s := nnFull(p)
+		if s.Valid {
+			for _, colour := range []bool{false, true} {
+				q := nnMirror(t, p, colour)
+				other := nnFull(q)
+				if nnOutput(&s, p.Turn()) != nnOutput(&other, q.Turn()) {
+					t.Fatal("mirror output", fen, colour)
+				}
+				for side := range 2 {
+					which := side
+					if colour {
+						which = 1 - side
+					}
+					if s.Values[side] != other.Values[which] {
+						t.Fatal("mirror accumulator", fen, colour)
+					}
+				}
+			}
+		}
+		w := searcher{}
+		root := w.nnGet(p, 0)
+		before := *root
+		for _, m := range p.AppendSearchMoves(nil, false) {
+			child := w.childPosition(p, &m, 1)
+			full := nnFull(child)
+			got := *w.nnGet(child, 1)
+			if got != full || nnOutput(&got, child.Turn()) != nnOutput(&full, child.Turn()) {
+				t.Fatal("child parity", fen, m.String())
+			}
+			comparisons++
+			if m.HasTag(chess.EnPassant) {
+				special["ep"]++
+			}
+			if m.HasTag(chess.Capture) {
+				special["capture"]++
+			}
+			if m.Promo() != chess.NoPieceType {
+				special["promotion"]++
+			}
+			if m.HasTag(chess.KingSideCastle) || m.HasTag(chess.QueenSideCastle) {
+				special["castle"]++
+			}
+			for i, n := range child.AppendSearchMoves(nil, false) {
+				if i >= 2 {
+					break
+				}
+				grand := w.childPosition(child, &n, 2)
+				if *w.nnGet(grand, 2) != nnFull(grand) {
+					t.Fatal("grandchild parity", fen, m.String(), n.String())
+				}
+				comparisons++
+			}
+			if *root != before {
+				t.Fatal("ancestor accumulator overwritten")
+			}
+		}
+	}
+	for _, fen := range []string{"8/8/8/8/8/8/8/4K3 w - - 0 1", "8/8/8/8/8/8/8/4k3 b - - 0 1"} {
+		if s := nnFull(evalFEN(t, fen)); s.Valid || nnOutput(&s, chess.White) != 0 {
+			t.Fatal("missing king")
+		}
+	}
+	result := map[string]any{"passed": true, "positions": len(fens), "full_incremental_comparisons": comparisons, "special_transitions": special, "model_bytes": unsafe.Sizeof(nnModel{}), "accumulator_bytes": unsafe.Sizeof(nnState{}), "seed": nnSeed}
+	if out := os.Getenv("NN_PARITY_OUTPUT"); out != "" {
+		nnWrite(t, out, result)
+	}
+	t.Log(result)
+}
+func TestNNCapacityCertificate(t *testing.T) {
+	out := os.Getenv("NN_CAPACITY_OUTPUT")
+	if out == "" {
+		t.Skip("explicit bounded capacity proof")
+	}
+	dir := os.Getenv("NN_CORPUS")
+	type pair struct {
+		Root, Good, Bad string
+		Strict          bool `json:"robustly_cannot_rank_good_above_bad"`
+		Identical       bool `json:"identical_base_and_feature_vector"`
+	}
+	var diagnosis struct {
+		Splits map[string]struct {
+			Pairs []pair `json:"pair_checks"`
+		}
+	}
+	nnRead(t, filepath.Join(dir, "capacity-diagnosis-robust.json"), &diagnosis)
+	type alt struct {
+		Move      string
+		Base      int
+		Learnable bool
+	}
+	type root struct {
+		ID, Split, Turn string
+		Alternatives    []alt
+	}
+	var dataset struct{ Roots []root }
+	nnRead(t, filepath.Join(dir, "fit-data.json"), &dataset)
+	roots := map[string]root{}
+	for _, r := range dataset.Roots {
+		if r.Split == "train" {
+			roots[r.ID] = r
+		}
+	}
+	var leaves []struct {
+		ID, Move string
+		Witness  struct{ FEN string }
+	}
+	nnRead(t, filepath.Join(dir, "leaves.json"), &leaves)
+	fens := map[string]string{}
+	for _, r := range leaves {
+		if _, ok := roots[r.ID]; ok {
+			fens[r.ID+"/"+r.Move] = r.Witness.FEN
+		}
+	}
+	type constraint struct {
+		Root, Good, Bad           string
+		BaseGap                   int
+		GoodFeatures, BadFeatures [32]int32
+		GoodSign, BadSign         int
+		X                         [32]float64
+	}
+	constraints := []constraint{}
+	strict, identical := 0, 0
+	for _, p := range diagnosis.Splits["train"].Pairs {
+		if !p.Strict && !p.Identical {
+			continue
+		}
+		r, ok := roots[p.Root]
+		if !ok {
+			t.Fatal("not a training root")
+		}
+		c := constraint{Root: p.Root, Good: p.Good, Bad: p.Bad}
+		vectors := []*[32]int32{&c.GoodFeatures, &c.BadFeatures}
+		signs := []*int{&c.GoodSign, &c.BadSign}
+		bases := [2]int{}
+		for i, move := range []string{p.Good, p.Bad} {
+			found := false
+			for _, a := range r.Alternatives {
+				if a.Move == move {
+					if !a.Learnable {
+						t.Fatal("unlearnable selected constraint")
+					}
+					bases[i] = a.Base
+					found = true
+				}
+			}
+			if !found {
+				t.Fatal("missing alternative")
+			}
+			q := evalFEN(t, fens[p.Root+"/"+move])
+			s := nnFull(q)
+			if !s.Valid {
+				t.Fatal("invalid capacity kings")
+			}
+			*vectors[i] = nnActivations(&s, q.Turn())
+			sign := 1
+			rootColour := chess.White
+			if r.Turn == "b" {
+				rootColour = chess.Black
+			}
+			if q.Turn() != rootColour {
+				sign = -1
+			}
+			*signs[i] = sign
+			if staticScore(q, rootColour) != bases[i] {
+				t.Fatal("base/FEN link", p.Root, move)
+			}
+		}
+		norm := 0.
+		for h := range 32 {
+			c.X[h] = float64(c.GoodSign*int(c.GoodFeatures[h])-c.BadSign*int(c.BadFeatures[h])) / 64
+			norm += c.X[h] * c.X[h]
+		}
+		if norm == 0 {
+			nnWrite(t, out, map[string]any{"passed": false, "reason": "activated pair collision", "pair": p})
+			t.Fatal("capacity collision")
+		}
+		c.BaseGap = bases[0] - bases[1]
+		constraints = append(constraints, c)
+		if p.Strict {
+			strict++
+		}
+		if p.Identical {
+			identical++
+		}
+	}
+	if strict != 15 || identical != 1 || len(constraints) != 16 {
+		t.Fatal("frozen selected coverage", strict, identical, len(constraints))
+	}
+	weights := [32]float64{}
+	passes := 0
+	for ; passes < 20000; passes++ {
+		violations := 0
+		for _, c := range constraints {
+			value := float64(c.BaseGap)
+			norm := 0.
+			for h, x := range c.X {
+				value += weights[h] * x
+				norm += x * x
+			}
+			if value < 232 {
+				violations++
+				step := (232 - value) / norm
+				for h, x := range c.X {
+					weights[h] = max(-4096, min(4096, weights[h]+step*x))
+				}
+			}
+		}
+		if violations == 0 {
+			break
+		}
+	}
+	quantized := [32]int16{}
+	for h, w := range weights {
+		quantized[h] = int16(math.Round(w))
+	}
+	type result struct {
+		Root, Good, Bad       string
+		BaseGap, CorrectedGap int
+		Passed                bool
+	}
+	results := []result{}
+	passed := true
+	for _, c := range constraints {
+		eval := func(a [32]int32, sign int) int {
+			sum := int32(0)
+			for h, v := range a {
+				sum += v * int32(quantized[h])
+			}
+			return sign * (int(sum) / 64)
+		}
+		gap := c.BaseGap + eval(c.GoodFeatures, c.GoodSign) - eval(c.BadFeatures, c.BadSign)
+		ok := gap >= 200
+		passed = passed && ok
+		results = append(results, result{c.Root, c.Good, c.Bad, c.BaseGap, gap, ok})
+	}
+	nnWrite(t, out, map[string]any{"passed": passed, "scope": "Training-only capacity certificate; not a learned playing evaluator or generalization result.", "seed": nnSeed, "strict_constraints": strict, "identical_constraints": identical, "passes": passes, "output_head": quantized, "results": results})
+	if !passed {
+		t.Fatal("bounded capacity certificate failed")
+	}
+}

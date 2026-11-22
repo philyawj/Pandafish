@@ -1,0 +1,39 @@
+package main
+
+import (
+ "context"
+ "crypto/sha256"
+ "encoding/json"
+ "os"
+ "testing"
+ "time"
+ "github.com/corentings/chess/v2"
+)
+var drawWitnessHits uint64
+var drawWitnessLocal map[string]uint64
+func researchDrawObserve(p *chess.Position){
+ if p.SearchDeadMaterial(){drawWitnessHits++;drawWitnessLocal[p.String()]++}
+}
+func TestResearchDrawWitness(t *testing.T){
+ output:=os.Getenv("DRAW_WITNESS_OUTPUT");if output=="" {t.Skip("explicit shadow diagnosis")}
+ type row struct{Root int;FENSHA256 string;Hits uint64;Witnesses map[string]uint64}
+ rows:=[]row{};root:=0
+ collect:=func(p *chess.Position){
+  root++;if drawWitnessHits>0 {rows=append(rows,row{root,fmtDrawHash(p.String()),drawWitnessHits,drawWitnessLocal})}
+ }
+ researchSearchOverride=func(ctx context.Context,p *chess.Position,l goLimits,b timeBudget,start time.Time,tt *transpositionTable,h []uint64)searchResult{
+  drawWitnessHits=0;drawWitnessLocal=map[string]uint64{}
+  r:=iterativeSearchWithHistory(ctx,p,l,b,start,tt,h);collect(p);return r
+ }
+ defer func(){researchSearchOverride=nil}()
+ // This live root can reach KB/K after a king captures a bishop. Its value may
+ // change through a draw descendant even though its own material is not dead.
+ p:=evalFEN(t,"6k1/8/8/8/3B4/8/2b5/K7 w - - 0 1")
+ drawWitnessLocal=map[string]uint64{};drawWitnessHits=0
+ policyScore:=search(p,2,-searchInfinity,searchInfinity)
+ policyHits,policyWitness:=drawWitnessHits,drawWitnessLocal
+ TestResearchWarmWorkload(t)
+ b,e:=json.MarshalIndent(map[string]any{"root_count":root,"roots_with_draw_witness":rows,"policy_score":policyScore,"policy_hits":policyHits,"policy_witness":policyWitness,"timing_is_instrumented":true},"","  ");if e!=nil {t.Fatal(e)}
+ if e=os.WriteFile(output,append(b,'\n'),0644);e!=nil {t.Fatal(e)}
+}
+func fmtDrawHash(s string)string {h:=sha256.Sum256([]byte(s));const digits="0123456789abcdef";b:=make([]byte,64);for i,v:=range h {b[2*i]=digits[v>>4];b[2*i+1]=digits[v&15]};return string(b)}

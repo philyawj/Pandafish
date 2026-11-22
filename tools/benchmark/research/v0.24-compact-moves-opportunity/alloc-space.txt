@@ -1,0 +1,32 @@
+File: pandafish-v023-audit.test
+Type: alloc_space
+Time: 2026-11-21 19:45:51 PST
+Showing nodes accounting for 263.29MB, 98.13% of 268.31MB total
+Dropped 28 nodes (cum <= 1.34MB)
+Showing top 25 nodes out of 65
+      flat  flat%   sum%        cum   cum%
+   76.76MB 28.61% 28.61%   118.77MB 44.27%  github.com/corentings/chess/v2.(*Position).searchMoves
+   63.02MB 23.49% 52.10%    66.52MB 24.79%  github.com/corentings/chess/v2.castleMoves
+   58.37MB 21.75% 73.85%    58.37MB 21.75%  github.com/philyawj/Pandafish.newTable (inline)
+   19.50MB  7.27% 81.12%    19.50MB  7.27%  strings.(*Builder).grow
+    8.03MB  2.99% 84.11%     8.03MB  2.99%  github.com/corentings/chess/v2.(*Position).ValidMoves (inline)
+    6.52MB  2.43% 86.54%     7.54MB  2.81%  github.com/corentings/chess/v2.standardMoves
+    5.50MB  2.05% 88.59%    39.53MB 14.73%  github.com/philyawj/Pandafish.(*searcher).searchMoves
+    5.50MB  2.05% 90.64%    12.53MB  4.67%  github.com/corentings/chess/v2.(*Parser).parseMove
+    4.65MB  1.73% 92.38%     4.65MB  1.73%  bytes.growSlice
+    3.80MB  1.42% 93.80%    10.67MB  3.98%  encoding/json.MarshalIndent
+    3.50MB  1.30% 95.10%    12.50MB  4.66%  github.com/philyawj/Pandafish.(*searcher).childPosition
+    2.21MB  0.82% 95.92%     6.86MB  2.56%  encoding/json.Marshal
+       2MB  0.75% 96.67%        2MB  0.75%  runtime.allocm
+    1.84MB  0.69% 97.36%     1.84MB  0.69%  os.readFileContents
+    1.01MB  0.38% 97.73%    18.55MB  6.91%  github.com/corentings/chess/v2.engine.CalcMoves
+    0.56MB  0.21% 97.94%   265.80MB 99.07%  github.com/philyawj/Pandafish.TestResearchWarmWorkload
+    0.50MB  0.19% 98.13%   169.79MB 63.28%  github.com/philyawj/Pandafish.(*searcher).root
+         0     0% 98.13%     4.14MB  1.54%  bytes.(*Buffer).Write
+         0     0% 98.13%     4.65MB  1.73%  bytes.(*Buffer).grow
+         0     0% 98.13%     4.65MB  1.73%  encoding/json.(*encodeState).marshal
+         0     0% 98.13%     4.65MB  1.73%  encoding/json.(*encodeState).reflectValue
+         0     0% 98.13%     4.65MB  1.73%  encoding/json.arrayEncoder.encode
+         0     0% 98.13%     2.54MB  0.95%  encoding/json.floatEncoder.encode
+         0     0% 98.13%     4.65MB  1.73%  encoding/json.sliceEncoder.encode
+         0     0% 98.13%     1.60MB  0.59%  encoding/json.stringEncoder

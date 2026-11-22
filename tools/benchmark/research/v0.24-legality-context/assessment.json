@@ -1,0 +1,25 @@
+{
+  "correctness_passed": true,
+  "decision": "Do not activate this full per-position pin-context/own-check shortcut under the frozen 8% objective. Preserve the safe opportunity result; reassess a materially cheaper or broader mechanism before another implementation.",
+  "eligible_fraction_of_all_ordinary_attack_queries": 0.26016437912247364,
+  "eligible_fraction_of_ordinary_own_queries": 0.4062074450103264,
+  "estimated_full_context_cost_fraction": 0.1563403618149676,
+  "estimated_net_saving_fraction": -0.1065238606497134,
+  "limits": [
+    "Call-count weighting and root legal-move microcosts approximate descendant CPU costs; this is not a rigorous ceiling or a measured whole-engine speed difference.",
+    "Gross proxy credits complete removal of later-reused status calls, although no such implementation exists; status/tag costs overlap and may be double credited.",
+    "Context estimate omits lookup/eligibility overhead but includes the tested full ray context; cheaper lazy contexts could differ.",
+    "Instrumented warm elapsed ratio is not cost evidence. All sampled data are inspected development controls; no game strength claim."
+  ],
+  "optimistic_attack_saving_fraction": 0.02430229572117293,
+  "optimistic_duplicate_status_saving_fraction": 0.025514205444081273,
+  "optimistic_gross_saving_fraction": 0.0498165011652542,
+  "profile_sampled_cpu_seconds": 16.97,
+  "profile_shares": {
+    "SearchStatus": 0.0707,
+    "searchAttackedAfterOrdinary": 0.08900000000000001
+  },
+  "prospective_minimum_net_saving_fraction": 0.08,
+  "status_followed_by_generation_fraction": 0.36087985069421885,
+  "supports_implementation_under_frozen_gate": false
+}

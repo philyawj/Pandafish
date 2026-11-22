@@ -1,7 +1,19 @@
 # Local benchmarks
 
-Current baseline: **v0.23**. Routine development screens use 25 color pairs
-against v0.23, Skill 3 and pinned Sacrifice, all three concurrent on a suitable
+v1.0 marks the stable-engine milestone and development pause. It promotes
+[protected queen-contact defense](research/v0.24-contact-threat/README.md):
+24W/6D/20L (54%) vs v0.23, 33W/0D/17L (66%) vs Skill 3, and35W/7D/8L (77%)
+vs pinned Sacrifice,50 games each, all three concurrent. All150 finish without
+forfeits and replay legally. Cost rises5.180% on the fixed workload. The narrow
+direct lead is not a reliable general-strength or Elo estimate. All prior
+failures remain in the [investigation summary](../../docs/RESEARCH_V024.md).
+[Release validation](../research/v1.0-validation.md) records version-only smokes
+and platform build limits. No new experiment, larger confirmation or live play
+starts during the development pause.
+
+
+Current baseline: **v1.0**. Routine development screens use 25 color pairs
+against v1.0, Skill 3 and pinned Sacrifice, all three concurrent on a suitable
 host. Start with [the current checkpoint](../../docs/RESEARCH_CHECKPOINT.md),
 [ranked assessment](../../docs/NEXT_ENGINE_ASSESSMENT_V023.md) and
 [storage policy](../../docs/EVIDENCE_STORAGE.md). The release narratives and
@@ -320,6 +332,10 @@ git archive v0.22 | tar -x -C "$build_dir"
 build_dir=$(mktemp -d)
 git archive v0.23 | tar -x -C "$build_dir"
 (cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v0.23" .)
+
+build_dir=$(mktemp -d)
+git archive v1.0 | tar -x -C "$build_dir"
+(cd "$build_dir" && go build -o "$benchmark_bin/pandafish-v1.0" .)
 ```
 
 These commands assume a macOS/Linux shell. Temporary source directories can be
@@ -402,12 +418,12 @@ supply executables; validation mode builds the working candidate automatically.
 source or change an engine's UCI name. The runner records the actual UCI name
 and binary SHA-256 alongside each label.
 
-Build the v0.23 tagged baseline as above for the next engine change. Then run
+If development resumes, build the v1.0 tagged baseline as above for the next engine change. Then run
 one command from the repository root:
 
 ```sh
 go run ./tools/benchmark --validate --race --version candidate-dev --pairs 25 \
-  --previous tools/benchmark/bin/pandafish-v0.23 --previous-version v0.23 \
+  --previous tools/benchmark/bin/pandafish-v1.0 --previous-version v1.0 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine
 ```
 
@@ -573,7 +589,7 @@ When more evidence is needed, explicitly request a broader, longer comparison:
 
 ```sh
 go run ./tools/benchmark --validate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.23 --previous-version v0.23 \
+  --previous tools/benchmark/bin/pandafish-v1.0 --previous-version v1.0 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --pairs 500 --openings tools/benchmark/openings-confirmation-50-v1.txt
 ```
@@ -810,7 +826,7 @@ current Skill 3 comparison:
 ```sh
 tools/benchmark/bin/benchmark \
   --candidate tools/benchmark/bin/pandafish-candidate --version candidate-dev \
-  --previous tools/benchmark/bin/pandafish-v0.23 --previous-version v0.23 \
+  --previous tools/benchmark/bin/pandafish-v1.0 --previous-version v1.0 \
   --sacrifice tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine \
   --stockfish-skill 3
 ```

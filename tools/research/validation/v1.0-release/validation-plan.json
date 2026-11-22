@@ -1,0 +1,113 @@
+{
+  "inputs": [
+    "/tmp/pandafish-cleanup-research",
+    "tools/research/*.go",
+    "testdata/*.json",
+    "*.go",
+    "go.mod",
+    "go.sum",
+    "internal/telemetry/*.go",
+    "third_party/chess/*.go",
+    "third_party/chess/go.mod",
+    "third_party/chess/go.sum"
+  ],
+  "steps": [
+    {
+      "command": [
+        "go",
+        "test",
+        "./..."
+      ],
+      "name": "normal-tests",
+      "timeout_seconds": 180
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "./..."
+      ],
+      "name": "race-tests",
+      "timeout_seconds": 300
+    },
+    {
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "name": "vet",
+      "timeout_seconds": 180
+    },
+    {
+      "command": [
+        "go",
+        "-C",
+        "third_party/chess",
+        "test",
+        "./..."
+      ],
+      "name": "chess-normal",
+      "timeout_seconds": 180
+    },
+    {
+      "command": [
+        "go",
+        "-C",
+        "third_party/chess",
+        "test",
+        "-race",
+        "./..."
+      ],
+      "name": "chess-race",
+      "timeout_seconds": 300
+    },
+    {
+      "command": [
+        "go",
+        "-C",
+        "third_party/chess",
+        "vet",
+        "./..."
+      ],
+      "name": "chess-vet",
+      "timeout_seconds": 180
+    },
+    {
+      "command": [
+        "go",
+        "test",
+        "-c",
+        "-o",
+        "/tmp/pandafish-v1.0.test",
+        "."
+      ],
+      "name": "build-warm-test",
+      "outputs": [
+        "/tmp/pandafish-v1.0.test"
+      ],
+      "timeout_seconds": 180
+    },
+    {
+      "command": [
+        "go",
+        "build",
+        "-trimpath",
+        "-buildvcs=false",
+        "-o",
+        "/tmp/pandafish-v1.0-assets/bin/darwin-arm64/pandafish",
+        "."
+      ],
+      "env": {
+        "CGO_ENABLED": "0"
+      },
+      "name": "build-engine",
+      "outputs": [
+        "/tmp/pandafish-v1.0-assets/bin/darwin-arm64/pandafish"
+      ],
+      "timeout_seconds": 180
+    }
+  ],
+  "version": 1
+}

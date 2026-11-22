@@ -1,0 +1,23 @@
+package main
+
+import("crypto/sha256";"encoding/json";"fmt";"os";"path/filepath")
+func must(e error){if e!=nil{panic(e)}}
+func digest(p string)string{b,e:=os.ReadFile(p);must(e);return fmt.Sprintf("%x",sha256.Sum256(b))}
+func main(){
+ if len(os.Args)!=2{panic("new review JSON required")}
+ dir:="tools/benchmark/research/v0.24-draw-semantics"
+ b,e:=os.ReadFile(filepath.Join(dir,"candidate-source.json"));must(e);var source struct{Files map[string]string};must(json.Unmarshal(b,&source))
+ for p,want:=range source.Files{got,e:=os.ReadFile(p);must(e);if string(got)!=want{panic("changed frozen source: "+p)}}
+ patterns:=[]string{"*.go","go.mod","go.sum","internal/telemetry/*.go","third_party/chess/*.go","third_party/chess/go.mod","third_party/chess/go.sum"};count:=0
+ for _,pattern:=range patterns{paths,e:=filepath.Glob(pattern);must(e);for _,p:=range paths{if _,ok:=source.Files[p];!ok{panic("uncaptured core file: "+p)};count++}}
+ identities:=map[string]string{}
+ for _,p:=range []string{"tools/benchmark/bin/pandafish-v0.23","tools/benchmark/bin/pandafish-v024-draw-semantics","/opt/homebrew/bin/stockfish","tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine"}{identities[p]=digest(p)}
+ expected:=map[string]string{"tools/benchmark/bin/pandafish-v0.23":"88d78500a8996471322d8e282f69d704ab9aceca386ac1693cf2aca82d77e6be","tools/benchmark/bin/pandafish-v024-draw-semantics":"daf742221cc09e5124092989cdcf45b8893fc67955eb17e28eb59eab3b230440","/opt/homebrew/bin/stockfish":"dc2f18c34ae962dff591b66147d220ec06e61d756b93d8a4f5e04fd8e55c251f","tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine":"5c2c63f19ff6f8be65aaa127a7cbe884f6cb52d7c4daee6967b1da7a7f8fa0e5"}
+ for p,want:=range expected{if identities[p]!=want {panic("unexpected binary identity: "+p)}}
+ for _,name:=range []string{"semantic-review.json","collection-identity-review.json"}{var v struct{Passed bool `json:"passed"`};b,e:=os.ReadFile(filepath.Join(dir,name));must(e);must(json.Unmarshal(b,&v));if !v.Passed{panic("failed semantic/collection review")}}
+ suites:=[]string{"public-100","public-1000","newer-100","newer-1000","fresh-100","fresh-1000"};passed:=map[string]bool{}
+ for _,s:=range suites{var v struct{Passed bool `json:"passed"`};b,e:=os.ReadFile(filepath.Join(dir,s,"brief.json"));must(e);must(json.Unmarshal(b,&v));if !v.Passed{panic("failed native prerequisite: "+s)};passed[s]=v.Passed;var m struct{IDs map[string]string `json:"identities_sha256"`};b,e=os.ReadFile(filepath.Join(dir,s,"method.json"));must(e);must(json.Unmarshal(b,&m));if m.IDs["candidate"]!=identities["tools/benchmark/bin/pandafish-v024-draw-semantics"]{panic("candidate binary differs from native tests")}}
+ var warm struct{Passed bool `json:"passed"`;Ratio float64 `json:"median_time_ratio"`};b,e=os.ReadFile(filepath.Join(dir,"warm/warm-gate.json"));must(e);must(json.Unmarshal(b,&warm));if !warm.Passed{panic("failed warm prerequisite")}
+ result:=map[string]any{"passed":true,"captured_core_files":count,"source_snapshot_sha256":digest(filepath.Join(dir,"candidate-source.json")),"binaries":identities,"native_gates":passed,"warm_median_ratio":warm.Ratio,"warm_overhead_percent":100*(warm.Ratio-1),"released_base":"v0.23","research_commit_authorized":false}
+ b,e=json.MarshalIndent(result,"","  ");must(e);f,e:=os.OpenFile(os.Args[1],os.O_CREATE|os.O_EXCL|os.O_WRONLY,0644);must(e);_,e=f.Write(append(b,'\n'));must(e);must(f.Close());fmt.Println(string(b))
+}

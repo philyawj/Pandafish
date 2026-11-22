@@ -1,0 +1,32 @@
+package main
+
+import (
+	"reflect"
+	"testing"
+
+	"github.com/corentings/chess/v2"
+)
+
+func TestCompactSearchOrderAndActivePlyIsolation(t *testing.T) {
+	for _, fen := range pickerFixtures {
+		p := evalFEN(t, fen)
+		w := searcher{}
+		for _, tactical := range []bool{false, true} {
+			want := w.searchMoves(p, 0, tactical)
+			got := w.searchCompactMoves(p, 1, tactical)
+			if len(got) != len(want) {
+				t.Fatal("size", fen)
+			}
+			for i, m := range got {
+				if !reflect.DeepEqual(m.Move(), want[i]) || encodeSearchMove(m) != encodeMove(want[i]) || isQuietSearchMove(m) != isQuietMove(want[i]) {
+					t.Fatal("move/order/encoding", fen, i)
+				}
+			}
+			before := append([]chess.SearchMove(nil), got...)
+			w.searchCompactMoves(chess.StartingPosition(), 30, false)
+			if !reflect.DeepEqual(got, before) {
+				t.Fatal("descendant overwrote active parent")
+			}
+		}
+	}
+}

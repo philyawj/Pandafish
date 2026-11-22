@@ -1,0 +1,21 @@
+package main
+import("crypto/sha256";"encoding/json";"fmt";"os";"path/filepath";"sort";"strings")
+func must(err error){if err!=nil{panic(err)}}
+type entry struct{SHA string `json:"sha256"`;Bytes int64 `json:"bytes"`}
+func identity(path string)entry{var b []byte;var e error;if strings.HasPrefix(path,"symlink:"){path=strings.TrimPrefix(path,"symlink:");link,err:=os.Readlink(path);must(err);resolved,err:=filepath.EvalSymlinks(path);must(err);resolved,err=filepath.Abs(resolved);must(err);b=[]byte(link+"\n"+resolved)}else{b,e=os.ReadFile(path);must(e)};return entry{fmt.Sprintf("%x",sha256.Sum256(b)),int64(len(b))}}
+func read(path string,v any){b,e:=os.ReadFile(path);must(e);must(json.Unmarshal(b,v))}
+func main(){
+ d:=os.Args[1];var plan struct{Inputs []string};var state struct{Status string;Inputs map[string]entry}
+ read(filepath.Join(d,"fresh-collection-plan.json"),&plan);read(filepath.Join(d,"fresh-collection-run/state.json"),&state)
+ if state.Status!="identity-failed"{panic("unexpected original state")}
+ for path,want:=range state.Inputs{if got:=identity(path);got!=want{panic("original source changed: "+path)}}
+ current:=map[string]bool{};for _,pattern:=range plan.Inputs{paths,e:=filepath.Glob(pattern);must(e);if len(paths)==0{panic("empty input pattern")};for _,path:=range paths{current[filepath.Clean(path)]=true}}
+ added:=[]string{};for path:=range current{if _,ok:=state.Inputs[path];!ok{added=append(added,path)}};sort.Strings(added)
+ only:=filepath.Join(d,"fresh-generation/inputs.json");if len(added)!=1||added[0]!=only{panic(fmt.Sprintf("unexpected identity expansion %v",added))}
+ var inputs struct{Cases []struct{ID,FEN string}};read(only,&inputs);if len(inputs.Cases)<100{panic("unexpected cohort shape")}
+ seen:=map[string]bool{};byTurn:=map[string]int{};families:=map[string]int{};for _,c:=range inputs.Cases{if c.ID==""||seen[c.ID]{panic("duplicate case")};seen[c.ID]=true;fields:=strings.Fields(c.FEN);if len(fields)!=6{panic("FEN shape")};byTurn[fields[1]]++;id:=strings.Split(c.ID,"-");if len(id)!=4 {panic("family shape")};families[id[2]]++}
+ var generation struct{Completed int `json:"completed_families"`};read(filepath.Join(d,"fresh-generation/generation.json"),&generation)
+ if generation.Completed!=16||len(families)!=16 {panic("family coverage")}
+ result:=map[string]any{"passed":true,"original_workflow_status":state.Status,"original_sources_unchanged":len(state.Inputs),"sole_added_glob_match":added[0],"output_identity":identity(only),"cohort_cases":len(inputs.Cases),"by_turn":byTurn,"family_counts":families,"queries_repeated":false,"explanation":"The input glob expanded to include the newly generated output only after collection. All original sources are byte-identical; no actual input changed and no query was repeated. Original identity-failed state stays preserved."}
+ b,e:=json.MarshalIndent(result,"","  ");must(e);must(os.WriteFile(filepath.Join(d,"collection-identity-review.json"),append(b,'\n'),0644));fmt.Println(string(b))
+}

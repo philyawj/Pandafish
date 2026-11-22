@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "inputs": [
+    "/tmp/pandafish-cleanup-research",
+    "/tmp/pandafish-v024-legality-diag.test",
+    "/tmp/pandafish-v024-legality-diag/third_party/chess/*.go",
+    "tools/benchmark/research/v0.24-legality-context/PLAN.md",
+    "tools/benchmark/research/v0.24-legality-context/diagnostic-source.json",
+    "tools/benchmark/research/v0.24-legality-context/*.go.txt",
+    "tools/benchmark/research/v0.17-search-moves/oracle-inputs.json",
+    "tools/benchmark/research/post-v0.23-audit/profile-roots.json",
+    "tools/benchmark/research/v0.23-state-kernel/warm/warm-candidate-pair-1.json",
+    "tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/summary.json",
+    "tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/previous.pgn"
+  ],
+  "steps": [
+    {
+      "name": "transition-oracles",
+      "command": ["go", "-C", "/tmp/pandafish-v024-legality-diag/third_party/chess", "test", "-run", "^TestLegalityDiagnosticTransitionControls$", "-count=1", "-v"],
+      "env": {"LEGALITY_CONTROL_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-legality-context/transition-controls.json"},
+      "timeout_seconds": 120,
+      "outputs": ["tools/benchmark/research/v0.24-legality-context/transition-controls.json"],
+      "gates": [{"file": "tools/benchmark/research/v0.24-legality-context/transition-controls.json", "pointer": "/Contradictions", "equals": 0}]
+    },
+    {
+      "name": "transition-oracles-race",
+      "command": ["go", "-C", "/tmp/pandafish-v024-legality-diag/third_party/chess", "test", "-race", "-run", "^TestLegalityDiagnosticTransitionControls$", "-count=1", "-v"],
+      "env": {"LEGALITY_CONTROL_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-legality-context/transition-race.json"},
+      "timeout_seconds": 180,
+      "outputs": ["tools/benchmark/research/v0.24-legality-context/transition-race.json"],
+      "gates": [{"file": "tools/benchmark/research/v0.24-legality-context/transition-race.json", "pointer": "/Contradictions", "equals": 0}]
+    },
+    {
+      "name": "independent-vectors",
+      "command": ["/tmp/pandafish-v024-legality-diag.test", "-test.run=^TestLegalityContextIndependentDiagnostic$", "-test.count=1", "-test.v"],
+      "env": {
+        "LEGALITY_OUTPUT": "tools/benchmark/research/v0.24-legality-context/independent-counters.json",
+        "ORACLE_INPUT": "tools/benchmark/research/v0.17-search-moves/oracle-inputs.json",
+        "ORACLE_OUTPUT": "tools/benchmark/research/v0.24-legality-context/independent-oracle.json"
+      },
+      "timeout_seconds": 120,
+      "outputs": ["tools/benchmark/research/v0.24-legality-context/independent-*.json"],
+      "gates": [
+        {"file": "tools/benchmark/research/v0.24-legality-context/independent-counters.json", "pointer": "/Contradictions", "equals": 0},
+        {"file": "tools/benchmark/research/v0.24-legality-context/independent-oracle.json", "pointer": "/positions", "equals": 596},
+        {"file": "tools/benchmark/research/v0.24-legality-context/independent-oracle.json", "pointer": "/passed", "equals": 596}
+      ]
+    },
+    {
+      "name": "warm-shadow",
+      "command": ["/tmp/pandafish-v024-legality-diag.test", "-test.run=^TestLegalityContextWarmDiagnostic$", "-test.count=1", "-test.v"],
+      "env": {
+        "LEGALITY_OUTPUT": "tools/benchmark/research/v0.24-legality-context/warm-counters.json",
+        "WARM_INPUT": "tools/benchmark/research/v0.21-rank-order/screen/v0.21-rank-order-dev-vs-v0.20-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba",
+        "WARM_OUTPUT": "/tmp/pandafish-v024-legality-rows.json",
+        "WARM_MODE": "search",
+        "WARM_DEPTH": "5"
+      },
+      "timeout_seconds": 300,
+      "outputs": ["tools/benchmark/research/v0.24-legality-context/warm-counters.json", "/tmp/pandafish-v024-legality-rows.json"],
+      "gates": [{"file": "tools/benchmark/research/v0.24-legality-context/warm-counters.json", "pointer": "/Contradictions", "equals": 0}]
+    },
+    {
+      "name": "exactness",
+      "command": ["/tmp/pandafish-cleanup-research", "warm-report", "--baseline", "tools/benchmark/research/v0.23-state-kernel/warm/warm-candidate-pair-1.json", "--candidate", "/tmp/pandafish-v024-legality-rows.json", "--out", "tools/benchmark/research/v0.24-legality-context/exactness.json", "--pairs", "1", "--roots", "1145", "--depth", "5", "--exact"],
+      "timeout_seconds": 30,
+      "outputs": ["tools/benchmark/research/v0.24-legality-context/exactness.json"],
+      "gates": [{"file": "tools/benchmark/research/v0.24-legality-context/exactness.json", "pointer": "/passed", "equals": true}]
+    },
+    {
+      "name": "root-cost-sample",
+      "command": ["go", "-C", "/tmp/pandafish-v024-legality-diag/third_party/chess", "test", "-run", "^TestLegalityDiagnosticCost$", "-count=1", "-benchtime=200ms", "-v"],
+      "env": {
+        "LEGALITY_COST_INPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/post-v0.23-audit/profile-roots.json",
+        "LEGALITY_COST_OUTPUT": "/Users/philyawj/projects/Pandafish/tools/benchmark/research/v0.24-legality-context/root-cost.json"
+      },
+      "timeout_seconds": 60,
+      "outputs": ["tools/benchmark/research/v0.24-legality-context/root-cost.json"]
+    }
+  ]
+}

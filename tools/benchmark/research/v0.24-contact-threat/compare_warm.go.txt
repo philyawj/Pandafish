@@ -1,0 +1,8 @@
+package main
+import("encoding/json";"fmt";"os";"path/filepath")
+func must(e error){if e!=nil{panic(e)}}
+type row struct{Game,Ply,Depth,Score int;Best,FEN string;Nodes uint64}
+func read(p string)[]row{b,e:=os.ReadFile(p);must(e);var x struct{Rows []row};must(json.Unmarshal(b,&x));return x.Rows}
+func main(){d:=os.Args[1];var base,cand []row;changes:=[]any{};scores,moves:=0,0
+ for pair:=1;pair<=3;pair++{a:=read(filepath.Join(d,fmt.Sprintf("warm-baseline-pair-%d.json",pair)));b:=read(filepath.Join(d,fmt.Sprintf("warm-candidate-pair-%d.json",pair)));if len(a)!=1145||len(b)!=1145{panic("coverage")};for i,x:=range a{y:=b[i];if x.FEN!=y.FEN||x.Depth!=5||y.Depth!=5{panic("identity/depth")};if pair==1 {if x.Score!=y.Score{scores++};if x.Best!=y.Best{moves++};if x.Score!=y.Score||x.Best!=y.Best||x.Nodes!=y.Nodes{changes=append(changes,map[string]any{"root":i+1,"baseline":x,"candidate":y})}}else{if x!=base[i]||y!=cand[i]{panic("nondeterminism")}}};if pair==1{base=a;cand=b}}
+ b,e:=json.MarshalIndent(map[string]any{"passed":true,"roots":1145,"changed_scores":scores,"changed_moves":moves,"changed_rows":changes,"both_actors_deterministic":true},"","  ");must(e);must(os.WriteFile(filepath.Join(d,"changes.json"),append(b,'\n'),0644));fmt.Printf("Deterministic: %d changed scores, %d choices, %d changed rows\n",scores,moves,len(changes))}

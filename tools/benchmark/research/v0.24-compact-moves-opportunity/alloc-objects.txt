@@ -1,0 +1,27 @@
+File: pandafish-v023-audit.test
+Type: alloc_objects
+Time: 2026-11-21 19:45:51 PST
+Showing nodes accounting for 1852879, 98.69% of 1877548 total
+Dropped 54 nodes (cum <= 9387)
+Showing top 20 nodes out of 39
+      flat  flat%   sum%        cum   cum%
+   1277956 68.07% 68.07%    1277956 68.07%  strings.(*Builder).grow
+    258077 13.75% 81.81%     487453 25.96%  github.com/corentings/chess/v2.castleMoves
+    100351  5.34% 87.16%     164184  8.74%  github.com/philyawj/Pandafish.(*searcher).searchMoves
+     76908  4.10% 91.25%     801922 42.71%  github.com/corentings/chess/v2.(*Position).searchMoves
+     45061  2.40% 93.65%      48790  2.60%  github.com/corentings/chess/v2.(*Parser).parseMove
+     32768  1.75% 95.40%      32768  1.75%  github.com/corentings/chess/v2.(*Position).String
+     32768  1.75% 97.14%    1764507 93.98%  github.com/philyawj/Pandafish.(*searcher).root
+     19112  1.02% 98.16%     608937 32.43%  github.com/philyawj/Pandafish.(*searcher).childPosition
+      9764  0.52% 98.68%      10237  0.55%  github.com/corentings/chess/v2.standardMoves
+       110 0.0059% 98.69%      82029  4.37%  github.com/corentings/chess/v2.engine.CalcMoves
+         4 0.00021% 98.69%    1868330 99.51%  github.com/philyawj/Pandafish.TestResearchWarmWorkload
+         0     0% 98.69%      59714  3.18%  github.com/corentings/chess/v2.(*Parser).Parse
+         0     0% 98.69%      10924  0.58%  github.com/corentings/chess/v2.(*Parser).addMove
+         0     0% 98.69%      59714  3.18%  github.com/corentings/chess/v2.(*Parser).parseMoveText
+         0     0% 98.69%      63833  3.40%  github.com/corentings/chess/v2.(*Position).AppendSearchMoves (inline)
+         0     0% 98.69%     738089 39.31%  github.com/corentings/chess/v2.(*Position).AppendSearchQuietMoves (inline)
+         0     0% 98.69%     149512  7.96%  github.com/corentings/chess/v2.(*Position).LookupSearchMove
+         0     0% 98.69%      78300  4.17%  github.com/corentings/chess/v2.(*Position).Status (inline)
+         0     0% 98.69%     589825 31.41%  github.com/corentings/chess/v2.(*Position).updateCastleRights
+         0     0% 98.69%      60212  3.21%  github.com/corentings/chess/v2.(*Scanner).ParseNext

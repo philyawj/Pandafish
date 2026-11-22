@@ -1,0 +1,205 @@
+{
+  "passed": true,
+  "purpose": "Version/build-only integration checks; original candidate strength evidence remains unchanged.",
+  "stages": [
+    {
+      "candidate_sha256": "085346c77e8d4e0040a9002e4182714a9ff3cab950b6ed4e88b654ffa01624e3",
+      "command": [
+        "/tmp/pandafish-v024-benchmark",
+        "--candidate",
+        "/tmp/pandafish-v1.0-assets/bin/darwin-arm64/pandafish",
+        "--version",
+        "v1.0-release-smoke",
+        "--pairs",
+        "1",
+        "--move-ms",
+        "100",
+        "--grace-ms",
+        "50",
+        "--max-plies",
+        "400",
+        "--revision",
+        "68ef54b08ef9b63d66332243d148ed2044c80e38-dirty",
+        "--results",
+        "tools/research/validation/v1.0-release/previous",
+        "--machine",
+        "Apple M2; 8 logical CPUs; AC power; integration smoke only; no deliberate competing workload",
+        "--previous",
+        "tools/benchmark/bin/pandafish-v0.23",
+        "--previous-version",
+        "v0.23",
+        "--previous-revision",
+        "28948e7473251d950003ec1f966f0cf26369b817",
+        "--sequential",
+        "--stage",
+        "previous"
+      ],
+      "integration_passed": true,
+      "matches": [
+        {
+          "Engine": {
+            "Label": "v0.23"
+          },
+          "Stats": {
+            "Wins": 1,
+            "Draws": 0,
+            "Losses": 1,
+            "Unfinished": 0,
+            "Forfeits": 0
+          }
+        }
+      ],
+      "previous_gate": "",
+      "raw_runner_exit": 0,
+      "stage": "previous",
+      "strength_gate_used": false,
+      "summary": "tools/research/validation/v1.0-release/previous/v1.0-release-smoke-vs-v0.23/summary.json"
+    },
+    {
+      "candidate_sha256": "085346c77e8d4e0040a9002e4182714a9ff3cab950b6ed4e88b654ffa01624e3",
+      "command": [
+        "/tmp/pandafish-v024-benchmark",
+        "--candidate",
+        "/tmp/pandafish-v1.0-assets/bin/darwin-arm64/pandafish",
+        "--version",
+        "v1.0-release-smoke",
+        "--pairs",
+        "1",
+        "--move-ms",
+        "100",
+        "--grace-ms",
+        "50",
+        "--max-plies",
+        "400",
+        "--revision",
+        "68ef54b08ef9b63d66332243d148ed2044c80e38-dirty",
+        "--results",
+        "tools/research/validation/v1.0-release/external",
+        "--machine",
+        "Apple M2; 8 logical CPUs; AC power; integration smoke only; no deliberate competing workload",
+        "--stage",
+        "external",
+        "--parallel",
+        "--stockfish",
+        "/opt/homebrew/bin/stockfish",
+        "--stockfish-skill",
+        "3",
+        "--sacrifice",
+        "tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine"
+      ],
+      "integration_passed": true,
+      "matches": [
+        {
+          "Engine": {
+            "Label": "Stockfish Skill 3"
+          },
+          "Stats": {
+            "Wins": 1,
+            "Draws": 0,
+            "Losses": 1,
+            "Unfinished": 0,
+            "Forfeits": 0
+          }
+        },
+        {
+          "Engine": {
+            "Label": "Sacrifice v0.2.0 b528f0ba"
+          },
+          "Stats": {
+            "Wins": 2,
+            "Draws": 0,
+            "Losses": 0,
+            "Unfinished": 0,
+            "Forfeits": 0
+          }
+        }
+      ],
+      "previous_gate": "",
+      "raw_runner_exit": 0,
+      "stage": "external",
+      "strength_gate_used": false,
+      "summary": "tools/research/validation/v1.0-release/external/v1.0-release-smoke-vs-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/summary.json"
+    },
+    {
+      "candidate_sha256": "085346c77e8d4e0040a9002e4182714a9ff3cab950b6ed4e88b654ffa01624e3",
+      "command": [
+        "/tmp/pandafish-v024-benchmark",
+        "--candidate",
+        "/tmp/pandafish-v1.0-assets/bin/darwin-arm64/pandafish",
+        "--version",
+        "v1.0-release-smoke",
+        "--pairs",
+        "1",
+        "--move-ms",
+        "100",
+        "--grace-ms",
+        "50",
+        "--max-plies",
+        "400",
+        "--revision",
+        "68ef54b08ef9b63d66332243d148ed2044c80e38-dirty",
+        "--results",
+        "tools/research/validation/v1.0-release/concurrent",
+        "--machine",
+        "Apple M2; 8 logical CPUs; AC power; integration smoke only; no deliberate competing workload",
+        "--previous",
+        "tools/benchmark/bin/pandafish-v0.23",
+        "--previous-version",
+        "v0.23",
+        "--previous-revision",
+        "28948e7473251d950003ec1f966f0cf26369b817",
+        "--parallel-all",
+        "--stockfish",
+        "/opt/homebrew/bin/stockfish",
+        "--stockfish-skill",
+        "3",
+        "--sacrifice",
+        "tools/benchmark/bin/sacrifice-source/target/release/Sacrifice-Engine"
+      ],
+      "integration_passed": true,
+      "matches": [
+        {
+          "Engine": {
+            "Label": "v0.23"
+          },
+          "Stats": {
+            "Wins": 1,
+            "Draws": 0,
+            "Losses": 1,
+            "Unfinished": 0,
+            "Forfeits": 0
+          }
+        },
+        {
+          "Engine": {
+            "Label": "Stockfish Skill 3"
+          },
+          "Stats": {
+            "Wins": 1,
+            "Draws": 0,
+            "Losses": 1,
+            "Unfinished": 0,
+            "Forfeits": 0
+          }
+        },
+        {
+          "Engine": {
+            "Label": "Sacrifice v0.2.0 b528f0ba"
+          },
+          "Stats": {
+            "Wins": 1,
+            "Draws": 1,
+            "Losses": 0,
+            "Unfinished": 0,
+            "Forfeits": 0
+          }
+        }
+      ],
+      "previous_gate": "blocked: no favorable previous-release screen or forfeits; concurrent results retained",
+      "raw_runner_exit": 1,
+      "stage": "concurrent",
+      "strength_gate_used": false,
+      "summary": "tools/research/validation/v1.0-release/concurrent/v1.0-release-smoke-vs-v0.23-and-stockfish-3-and-sacrifice-v0.2.0-b528f0ba/summary.json"
+    }
+  ]
+}

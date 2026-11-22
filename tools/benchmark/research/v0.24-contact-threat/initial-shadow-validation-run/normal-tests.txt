@@ -1,0 +1,10 @@
+# github.com/philyawj/Pandafish [github.com/philyawj/Pandafish.test]
+./contact_shadow_test.go:12:5: contactObserver redeclared in this block
+	./contact_shadow.go:5:5: other declaration of contactObserver
+./contact_shadow_test.go:14:20: method searcher.contactShadow already declared at ./contact_shadow.go:7:20
+FAIL	github.com/philyawj/Pandafish [build failed]
+ok  	github.com/philyawj/Pandafish/internal/telemetry	0.249s
+ok  	github.com/philyawj/Pandafish/tools/benchmark	0.481s
+ok  	github.com/philyawj/Pandafish/tools/lichess	1.967s
+ok  	github.com/philyawj/Pandafish/tools/research	2.707s
+FAIL

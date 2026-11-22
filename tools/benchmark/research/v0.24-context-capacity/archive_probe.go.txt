@@ -1,0 +1,4 @@
+package main
+import("encoding/json";"os";"path/filepath")
+func must(err error){if err!=nil{panic(err)}}
+func main(){files:=map[string]string{};for _,name:=range []string{"search.go","search_position.go","nn_probe.go","nn_probe_test.go"}{b,e:=os.ReadFile(filepath.Join(os.Args[1],name));must(e);files[name]=string(b)};b,e:=json.MarshalIndent(map[string]any{"base_tag":"v0.23","base_commit":"28948e7473251d950003ec1f966f0cf26369b817","files":files},"","  ");must(e);must(os.WriteFile(os.Args[2],append(b,'\n'),0644))}

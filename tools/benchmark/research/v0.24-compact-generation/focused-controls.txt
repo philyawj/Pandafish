@@ -1,0 +1,14 @@
+=== RUN   TestSearchEvasionMaskChecksAndFallbacks
+--- PASS: TestSearchEvasionMaskChecksAndFallbacks (0.00s)
+=== RUN   TestSearchAttackMatchesOriginalAndMailbox
+    pandafish_search_attack_test.go:99: Matched attack predicates: 128000
+--- PASS: TestSearchAttackMatchesOriginalAndMailbox (0.05s)
+=== RUN   TestSearchCandidateRepresentationAndCachedMetadata
+--- PASS: TestSearchCandidateRepresentationAndCachedMetadata (0.00s)
+=== RUN   TestSearchCastlePrefilterAndBlockedPathAllocation
+--- PASS: TestSearchCastlePrefilterAndBlockedPathAllocation (0.00s)
+=== RUN   TestVirtualTagsMatchBothTransitionOracles
+    pandafish_virtual_tags_test.go:76: pseudo-legal tag comparisons 140778
+--- PASS: TestVirtualTagsMatchBothTransitionOracles (0.06s)
+PASS
+ok  	github.com/corentings/chess/v2	0.466s

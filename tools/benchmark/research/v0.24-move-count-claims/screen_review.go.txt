@@ -1,0 +1,21 @@
+package main
+import("crypto/sha256";"encoding/json";"fmt";"os";"path/filepath";"strconv";"github.com/corentings/chess/v2")
+func must(e error){if e!=nil{panic(e)}}
+func main(){
+ dir:=os.Args[1];b,e:=os.ReadFile(filepath.Join(dir,"summary.json"));must(e);identities:=map[string]string{"summary.json":fmt.Sprintf("%x",sha256.Sum256(b))}
+ type meta struct{White bool `json:"candidate_white"`;Opening []string `json:"opening"`;Result string `json:"result"`;Termination string `json:"termination"`;Plies int `json:"plies"`}
+ var sum struct{Complete bool `json:"complete"`;Matches []struct{PGN string `json:"pgn_file"`;Engine struct{Label string `json:"label"`};Stats struct{Wins,Draws,Losses,Unfinished,Forfeits int};Games []meta}}
+ must(json.Unmarshal(b,&sum));if !sum.Complete||len(sum.Matches)!=3{panic("incomplete screen")}
+ records:=[]any{};total:=0;all50:=0;allCandidate99:=0
+ for _,match:=range sum.Matches{
+  path:=filepath.Join(dir,match.PGN);b,e=os.ReadFile(path);must(e);identities[match.PGN]=fmt.Sprintf("%x",sha256.Sum256(b));f,e:=os.Open(path);must(e);sc:=chess.NewScanner(f);i:=0;terms:=map[string]int{};high:=map[string]int{};candidate99,qualified,currentClaims:=0,0,0
+  for sc.HasNext(){g,e:=sc.ParseNext();must(e);if i>=len(match.Games){panic("extra game")};m:=match.Games[i];positions:=g.Positions();if len(positions)!=m.Plies+1||g.GetTagPair("Result")!=m.Result{panic("game identity")};terms[m.Termination]++
+   for ply:=len(m.Opening);ply<m.Plies;ply++{p:=positions[ply];if (p.Turn()==chess.White)!=m.White{continue};clock:=p.HalfMoveClock();if clock>=90{high[strconv.Itoa(clock)]++};if clock==99{candidate99++;if positions[ply+1].HalfMoveClock()>=100{qualified++}};if clock>=100{currentClaims++}}
+   if m.Termination=="FiftyMoveRule"{p:=positions[len(positions)-1];eligible:=false;for _,d:=range g.EligibleDraws(){if d==chess.FiftyMoveRule{eligible=true}};if !eligible||p.HalfMoveClock()<100||p.SearchStatus()==chess.Checkmate||m.Result!="1/2-1/2"{panic("invalid fifty-move adjudication")};all50++}
+   i++;total++
+  };must(f.Close());if i!=50||i!=len(match.Games){panic("match coverage")};allCandidate99+=candidate99
+  records=append(records,map[string]any{"opponent":match.Engine.Label,"games":i,"termination_counts":terms,"candidate_halfmove_90_plus":high,"candidate_halfmove99_turns":candidate99,"candidate_qualifying_intended_moves":qualified,"candidate_current_claim_turns":currentClaims,"saved_stats":match.Stats})
+ }
+ result:=map[string]any{"passed":true,"games":total,"matchups":records,"fifty_move_adjudications_verified":all50,"candidate_halfmove99_turns":allCandidate99,"identities_sha256":identities,"scope":"Rule-boundary exposure and adjudication review; no counterfactual win attribution or Elo estimate."}
+ b,e=json.MarshalIndent(result,"","  ");must(e);must(os.WriteFile(os.Args[2],append(b,'\n'),0644));fmt.Println(string(b))
+}

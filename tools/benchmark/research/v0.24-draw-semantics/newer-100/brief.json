@@ -1,0 +1,35 @@
+{
+  "by_turn_mean_loss_cp": {
+    "b": {
+      "baseline": 25.43076923076923,
+      "candidate": 25.2
+    },
+    "w": {
+      "baseline": 36.303030303030305,
+      "candidate": 36.378787878787875
+    }
+  },
+  "finite_cases": 131,
+  "mean_loss_cp": {
+    "baseline": 30.908396946564885,
+    "candidate": 30.83206106870229
+  },
+  "new_candidate_losing_mate_cases": [],
+  "passed": true,
+  "severe_over_300": {
+    "baseline": 3,
+    "candidate": 3
+  },
+  "timing_overruns": 0,
+  "worst_regressions": [
+    {
+      "id": "proof-fresh-01-ply36",
+      "mean_loss_cp": {
+        "baseline": 52,
+        "candidate": 57
+      },
+      "regression_cp": 5,
+      "turn": "w"
+    }
+  ]
+}

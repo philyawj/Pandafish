@@ -1,0 +1,54 @@
+// Scratch-only instrumentation setup; no engine command is executed here.
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+	"strings"
+)
+
+func must(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+func main() {
+	if len(os.Args) != 3 {
+		panic("scratch directory and evidence directory required")
+	}
+	scratch, evidence := os.Args[1], os.Args[2]
+	overlay := map[string]string{}
+	for _, change := range []struct{ path, old, new string }{
+		{"third_party/chess/search_virtual_tags.go", "func searchMoveTags(", "func releasedDiagnosticMoveTags("},
+		{"third_party/chess/search_moves.go", "func (pos *Position) searchMoves(", "func (pos *Position) releasedDiagnosticSearchMoves("},
+		{"third_party/chess/search_moves.go", "func (pos *Position) SearchStatus() Method {", "func (pos *Position) SearchStatus() Method {\n diagnosticStatus(pos)"},
+	} {
+		path := filepath.Join(scratch, change.path)
+		b, e := os.ReadFile(path)
+		must(e)
+		if strings.Count(string(b), change.old) != 1 {
+			panic("unexpected base source: " + change.path)
+		}
+		text := strings.Replace(string(b), change.old, change.new, 1)
+		must(os.WriteFile(path, []byte(text), 0644))
+		overlay[change.path] = text
+	}
+	for source, dest := range map[string]string{"diagnostic.go.txt": "third_party/chess/legality_diagnostic.go", "diagnostic_test.go.txt": "third_party/chess/legality_diagnostic_test.go", "root_test.go.txt": "legality_diagnostic_test.go"} {
+		b, e := os.ReadFile(filepath.Join(evidence, source))
+		must(e)
+		must(os.WriteFile(filepath.Join(scratch, dest), b, 0644))
+		overlay[dest] = string(b)
+	}
+	b, e := json.MarshalIndent(map[string]any{"base_tag": "v0.23", "base_commit": "28948e7473251d950003ec1f966f0cf26369b817", "files": overlay}, "", "  ")
+	must(e)
+	out := filepath.Join(evidence, "diagnostic-source.json")
+	f, e := os.OpenFile(out, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0644)
+	must(e)
+	_, e = f.Write(append(b, '\n'))
+	must(e)
+	must(f.Close())
+	fmt.Printf("shadow overlay: %d Go files sha256=%x\n", len(overlay), sha256.Sum256(b))
+}

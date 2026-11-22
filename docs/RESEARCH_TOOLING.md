@@ -1,5 +1,10 @@
 # Repeatable research with bounded model involvement
 
+Pandafish v1.0 marks the stable milestone and development pause. These tools
+remain available for evidence verification and explicitly resumed research;
+historical examples do not start new work. The
+[checkpoint](RESEARCH_CHECKPOINT.md) records the preserved stopping point.
+
 Start with the current branch's compact checkpoint and
 [research workflow](RESEARCH_WORKFLOW.md). Use the Go tools for deterministic
 execution, comparison and evidence handling. Model reasoning belongs at hypothesis

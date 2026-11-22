@@ -25,3 +25,13 @@ func (w *searcher) childQuiet(p *chess.Position, d, a, b int, c bool, ply int) (
 	defer func() { w.historyKey = key }()
 	return w.quietAtPly(p, d, a, b, c, ply)
 }
+
+func (w *searcher) childContactQuiet(p *chess.Position, d, a, b int, c bool, ply, budget int, pending *chess.Move) (int, bool) {
+	if p.HalfMoveClock() != 0 {
+		return w.quietContactAtPly(p, d, a, b, c, ply, budget, pending)
+	}
+	key := w.historyKey
+	w.historyKey = 0
+	defer func() { w.historyKey = key }()
+	return w.quietContactAtPly(p, d, a, b, c, ply, budget, pending)
+}
